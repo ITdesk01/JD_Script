@@ -46,6 +46,7 @@ wget $url/jd_rankingList.js -O $dir_file/jd_rankingList.js
 wget $url/jd_speed.js -O $dir_file/jd_speed.js
 #wget $url/jd_dreamFactory.js -O $dir_file/jd_dreamFactory.js 京东京喜工厂未完成
 sed -i "s/|| 0/|| 20/g" $dir_file/jd_blueCoin.js
+sed -i "s/|| 20/|| 50/g" $dir_file/jd_unsubscribe.js
 }
 
 update_script() {
