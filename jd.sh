@@ -40,6 +40,11 @@ wget $url/jd_joy_feedPets.js -O $dir_file/jd_joy_feedPets.js
 wget $url/jd_joy_reward.js -O $dir_file/jd_joy_reward.js 
 wget $url/jd_club_lottery.js -O $dir_file/jd_club_lottery.js 
 wget $url/jd_unsubscribe.js -O $dir_file/jd_unsubscribe.js 
+wget $url/jd_collectProduceScore.js -O $dir_file/jd_collectProduceScore.js
+wget $url/jd_lotteryMachine.js -O $dir_file/jd_lotteryMachine.js
+wget $url/jd_rankingList.js -O $dir_file/jd_rankingList.js
+wget $url/jd_speed.js -O $dir_file/jd_speed.js
+#wget $url/jd_dreamFactory.js -O $dir_file/jd_dreamFactory.js 京东京喜工厂未完成
 sed -i "s/|| 0/|| 20/g" $dir_file/jd_blueCoin.js
 }
 
@@ -53,8 +58,10 @@ echo "开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`"
 $node $dir_file/jd_xtg.js #星推官0点开搞
 $node $dir_file/jd_redPacket.js #京东全民开红包，没时间要求
 $node $dir_file/jd_moneyTree.js #京东摇钱树，没时间要求
-$node $dir_file/jd_club_lottery.js 摇京豆，没时间要求
-$node $dir_file/jd_unsubscribe.js 取关店铺，没时间要求
+$node $dir_file/jd_club_lottery.js #摇京豆，没时间要求
+$node $dir_file/jd_unsubscribe.js #取关店铺，没时间要求
+$node $dir_file/jd_lotteryMachine.js #京东抽奖机
+$node $dir_file/jd_rankingList.js #京东排行榜签到领京豆
 run_06_18
 run_01
 echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white"
@@ -64,6 +71,8 @@ run_01() {
 echo "开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`"
 $node $dir_file/jd_joy_feedPets.js #宠汪汪喂食一个小时喂一次
 $node $dir_file/jd_joy_reward.js #宠汪汪积分兑换奖品，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
+$node $dir_file/jd_collectProduceScore.js #京东全民营业一个小时领金币
+#$node $dir_file/jd_dreamFactory.js 京东京喜工厂未完成
 echo "脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 }
 
@@ -106,7 +115,7 @@ echo -e "$yellow 3.计划任务可以这么写（自己修改手动复制填到�
 echo " 00 22 * * * $jd update_script >/tmp/jd_update_script.log 2>&1"
 echo " 30 22 * * * $jd update >/tmp/jd_update.log 2>&1"
 echo " 1 0 * * * $jd run_0  >/tmp/jd_run_0.log 2>&1"
-echo " 10 1-23/1 * * * $jd run_01 >/tmp/jd_run_01.log 2>&1"
+echo " 10 2-23/1 * * * $jd run_01 >/tmp/jd_run_01.log 2>&1"
 echo " 1 6-18/6 * * * $jd run_06_18 >/tmp/jd_run_06_18.log 2>&1"
 echo
 echo -e "$yellow 4.JD_Script报错你可以反馈到这里：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)$white"
