@@ -20,9 +20,17 @@ npm install -g request got tough-cookie
 #2.开始下载脚本
 ```sh
 git clone git://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
-cd /usr/share/JD_Script && chmod 777 jd.sh && sh jd.sh
+cd /usr/share/JD_Script && chmod 777 jd.sh 
 ```
-未完待补充
+#需要重启一次，所以做好准备
+sh jd.sh 
+
+重启完成以后
+sh $jd #直接调用代码
+cd $jd_file # 可以直接进入代码所在文件夹
+
+
+3.问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)
 
 
 ## 特别声明:
