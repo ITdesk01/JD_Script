@@ -15,11 +15,11 @@ opkg install node
 opkg install node-npm
 npm install -g request got tough-cookie
 ```
-注意:node版本一定要大于10，安装node以后可以用 opkg list-installed | grep node 查看node版
+注意:node版本一定要大于10，安装node以后可以用 opkg list-installed | grep node 查看node版本
 
 #2.开始下载脚本
 ```sh
-git clone https://github.com/ITdesk01/JD_Script.git
+git clone git://github.com/ITdesk01/JD_Script.git
 cd JD_Script && chmod 777 jd.sh && sh jd.sh
 ```
 未完待补充
