@@ -1,7 +1,7 @@
 # JD_Scripts
 
 ## 序言
-   调用https://github.com/lxk0301/scripts进行测试学习，在X86机器使用正常，其他机器满足依赖应该问题不大
+   调用https://github.com/lxk0301/scripts 进行测试学习，在X86机器使用正常，其他机器满足依赖应该问题不大
 
 ## 支持系统
 openwrt X86
@@ -9,14 +9,20 @@ openwrt X86
 
 ## Usage 使用方法
 #1.openwrt安装依赖
+
 opkg update && opkg install git #先安装openwrt依赖
+
 opkg update && opkg install node
+
 opkg install node-npm
+
 npm install -g request got tough-cookie
+
 注意:node版本一定要大于10，安装node以后可以用 opkg list-installed | grep node 查看node版
 
 #2.开始下载脚本
 git clone https://github.com/ITdesk01/JD_Script.git
+
 cd JD_Script && chmod 777 jd.sh && sh jd.sh
 
 未完待补充
