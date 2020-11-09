@@ -8,7 +8,7 @@
 version="1.4"
 CRON_FILE=/etc/crontabs/root
 url=https://raw.githubusercontent.com/lxk0301/scripts/master
-dir_file=/usr/share/jd
+dir_file=/usr/share/JD_Script
 node=/usr/bin/node
 red="\033[31m"
 green="\033[32m"
@@ -39,6 +39,9 @@ wget $url/jd_unsubscribe.js -O $dir_file/jd_unsubscribe.js
 sed -i "s/|| 0/|| 20/g" $dir_file/jd_blueCoin.js
 }
 
+update_script() {
+	cd $dir_file && git pull
+}
 
 
 run_0() {
@@ -95,6 +98,7 @@ echo
 echo -e "$red注意：$white别忘了jdCookie.js  和sendNotify.js也要放进$dir_file，不然会报错"
 echo
 echo -e "$yellow 3.计划任务可以这么写（自己修改手动复制填到计划任务里去）$white"
+echo "00 22 * * * $dir_file/jd.sh update_script >/tmp/jd_update_script.log 2>&1"
 echo "30 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1"
 echo "1 0 * * * $dir_file/jd.sh run_0  >/tmp/jd_run_0.log 2>&1"
 echo "10 1-23/1 * * * $dir_file/jd.sh run_01 >/tmp/jd_run_01.log 2>&1"
@@ -111,6 +115,9 @@ action1="$1"
 case "$action1" in
 		update)
 		update
+		;;
+		update_script)
+		update_script
 		;;
 		run_0)
 		run_0

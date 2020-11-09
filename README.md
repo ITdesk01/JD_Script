@@ -19,8 +19,8 @@ npm install -g request got tough-cookie
 
 #2.开始下载脚本
 ```sh
-git clone git://github.com/ITdesk01/JD_Script.git
-cd JD_Script && chmod 777 jd.sh && sh jd.sh
+git clone git://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
+cd /usr/share/JD_Script && chmod 777 jd.sh && sh jd.sh
 ```
 未完待补充
 
