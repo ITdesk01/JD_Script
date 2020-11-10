@@ -7,7 +7,7 @@
 #
 version="1.5"
 CRON_FILE=/etc/crontabs/root
-url=https://raw.githubusercontent.com/lxk0301/scripts/master
+url=https://raw.githubusercontent.com/lxk0301/jd_scripts/master
 dir_file=/usr/share/JD_Script
 node=/usr/bin/node
 red="\033[31m"
