@@ -50,7 +50,9 @@ sed -i "s/|| 20/|| 50/g" $dir_file/jd_unsubscribe.js
 }
 
 update_script() {
-	cd $dir_file && git pull
+echo "开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`"
+cd $dir_file && git pull
+echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white"
 }
 
 
@@ -63,6 +65,8 @@ $node $dir_file/jd_club_lottery.js #摇京豆，没时间要求
 $node $dir_file/jd_unsubscribe.js #取关店铺，没时间要求
 $node $dir_file/jd_lotteryMachine.js #京东抽奖机
 $node $dir_file/jd_rankingList.js #京东排行榜签到领京豆
+$node $dir_file/jd_blueCoin.js #京小超兑换，有次数限制，没时间要求
+$node $dir_file/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 run_06_18
 run_01
 echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white"
@@ -71,7 +75,6 @@ echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white"
 run_01() {
 echo "开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`"
 $node $dir_file/jd_joy_feedPets.js #宠汪汪喂食一个小时喂一次
-$node $dir_file/jd_joy_reward.js #宠汪汪积分兑换奖品，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 $node $dir_file/jd_collectProduceScore.js #京东全民营业一个小时领金币
 #$node $dir_file/jd_dreamFactory.js 京东京喜工厂未完成
 echo "脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
@@ -80,8 +83,6 @@ echo "脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 run_06_18() {
 echo "开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`"
 $node $dir_file/jd_818.js #手机商城 每天0/6/12/18
-$node $dir_file/jd_superMarket.js #京小超，没时间要求，跟着手机商城吧
-$node $dir_file/jd_blueCoin.js #京小超兑换，没时间要求
 $node $dir_file/jd_fruit.js #东东水果，没时间要求，一天可以执行两次
 $node $dir_file/jd_plantBean.js #种豆得豆，没时间要求，一天也可以执行两次以上
 $node $dir_file/jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
@@ -89,6 +90,10 @@ $node $dir_file/jd_joy.js #jd宠汪汪，零点开始，一天也可以执行两
 $node $dir_file/jd_pet.js #东东萌宠，跟手机商城同一时间
 $node $dir_file/jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
 echo "脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
+}
+
+run_10_15_20() {
+$node $dir_file/jd_superMarket.js #京小超,0 10 15 20四场补货加劵
 }
 
 help() {
@@ -109,6 +114,7 @@ echo -e "$green sh \$jd.sh update_script $white #更新JD_Script"
 echo -e "$green sh \$jd.sh run_0 $white #运行run_0模块里的命令"
 echo -e "$green sh \$jd.sh run_01 $white #运行run_01模块里的命令"
 echo -e "$green sh \$jd.sh run_06_18 $white #运行run_06_18模块里的命令"
+echo -e "$green sh \$jd.sh run_10_15_20 $white #运行run_10_15_20模块里的命令"
 echo ""
 echo " 如果不喜欢这样，你也可以直接cd $jd_file,然后用node 脚本名字.js "
 echo ""
@@ -118,6 +124,7 @@ echo " 30 22 * * * $jd update >/tmp/jd_update.log 2>&1"
 echo " 1 0 * * * $jd run_0  >/tmp/jd_run_0.log 2>&1"
 echo " 10 2-23/1 * * * $jd run_01 >/tmp/jd_run_01.log 2>&1"
 echo " 1 6-18/6 * * * $jd run_06_18 >/tmp/jd_run_06_18.log 2>&1"
+echo " 5 10,15,20 * * * $jd run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"
 echo
 echo -e "$yellow 4.JD_Script报错你可以反馈到这里：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)$white"
 echo ""
