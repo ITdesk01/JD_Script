@@ -67,6 +67,7 @@ $node $dir_file/jd_lotteryMachine.js #京东抽奖机
 $node $dir_file/jd_rankingList.js #京东排行榜签到领京豆
 $node $dir_file/jd_blueCoin.js #京小超兑换，有次数限制，没时间要求
 $node $dir_file/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
+run_10_15_20
 run_06_18
 run_01
 echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white"
