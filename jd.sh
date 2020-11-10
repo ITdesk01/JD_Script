@@ -149,9 +149,15 @@ description_if() {
 	if [[ -f "/usr/share/JD_Script/jdCookie.js" ]]; then
 		echo "jdCookie.js存在"
 	else 
-		wget $url/jdCookie.js -O $dir_file/jdCookie.js 
+		wget $url/jdCookie.js -O $dir_file/jdCookie.js
+	fi
+
+	if [[ -f "/usr/share/JD_Script/sendNotify.js" ]]; then
+		echo "sendNotify.js存在"
+	else
 		wget $url/sendNotify.js -O $dir_file/sendNotify.js	
 	fi
+
 	#添加系统变量
 	openwrt_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
 	if [[ "$jd_script_path" == "0" ]]; then
