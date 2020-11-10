@@ -70,6 +70,7 @@ $node $dir_file/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制�
 run_10_15_20
 run_06_18
 run_01
+run_03
 echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white"
 }
 
@@ -81,11 +82,14 @@ $node $dir_file/jd_collectProduceScore.js #京东全民营业一个小时领金�
 echo "脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 }
 
+run_03() {
+$node $dir_file/jd_plantBean.js #种豆得豆，没时间要求，三个小时收一次瓶子
+}
+
 run_06_18() {
 echo "开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`"
 $node $dir_file/jd_818.js #手机商城 每天0/6/12/18
 $node $dir_file/jd_fruit.js #东东水果，没时间要求，一天可以执行两次
-$node $dir_file/jd_plantBean.js #种豆得豆，没时间要求，一天也可以执行两次以上
 $node $dir_file/jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
 $node $dir_file/jd_joy.js #jd宠汪汪，零点开始，一天也可以执行两次以上
 $node $dir_file/jd_pet.js #东东萌宠，跟手机商城同一时间
@@ -114,6 +118,7 @@ echo -e "$green sh \$jd.sh update #下载js脚本 $yellow#第一次安装运行�
 echo -e "$green sh \$jd.sh update_script $white #更新JD_Script"
 echo -e "$green sh \$jd.sh run_0 $white #运行run_0模块里的命令"
 echo -e "$green sh \$jd.sh run_01 $white #运行run_01模块里的命令"
+echo -e "$green sh \$jd.sh run_03 $white #运行run_03模块里的命令"
 echo -e "$green sh \$jd.sh run_06_18 $white #运行run_06_18模块里的命令"
 echo -e "$green sh \$jd.sh run_10_15_20 $white #运行run_10_15_20模块里的命令"
 echo ""
@@ -126,6 +131,7 @@ echo " 1 0 * * * $jd run_0  >/tmp/jd_run_0.log 2>&1"
 echo " 10 2-23/1 * * * $jd run_01 >/tmp/jd_run_01.log 2>&1"
 echo " 1 6-18/6 * * * $jd run_06_18 >/tmp/jd_run_06_18.log 2>&1"
 echo " 5 10,15,20 * * * $jd run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"
+echo " 40 2-23/3 * * * $jd run_03 >/tmp/jd_run_03.log 2>&1"
 echo
 echo -e "$yellow 4.JD_Script报错你可以反馈到这里：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)$white"
 echo ""
@@ -188,6 +194,9 @@ else
 			;;
 			run_10_15_20)
 			run_10_15_20
+			;;
+			run_03)
+			run_03
 			;;
 			*)
 			help
