@@ -62,7 +62,6 @@ $node $dir_file/jd_xtg.js #星推官0点开搞
 $node $dir_file/jd_redPacket.js #京东全民开红包，没时间要求
 $node $dir_file/jd_moneyTree.js #京东摇钱树，没时间要求
 $node $dir_file/jd_club_lottery.js #摇京豆，没时间要求
-$node $dir_file/jd_unsubscribe.js #取关店铺，没时间要求
 $node $dir_file/jd_lotteryMachine.js #京东抽奖机
 $node $dir_file/jd_rankingList.js #京东排行榜签到领京豆
 $node $dir_file/jd_blueCoin.js #京小超兑换，有次数限制，没时间要求
@@ -71,6 +70,7 @@ run_10_15_20
 run_06_18
 run_01
 run_03
+$node $dir_file/jd_unsubscribe.js #取关店铺，没时间要求
 echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white"
 }
 
