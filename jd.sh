@@ -146,7 +146,7 @@ description_if() {
 	fi
 	
 	if [[ ! -d "$dir_file/js" ]]; then
-		mdkir $dir_file/js
+		mdkir -p $dir_file/js
 		update
 	fi
 	
