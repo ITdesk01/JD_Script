@@ -168,7 +168,7 @@ description_if() {
 		echo -e "$green添加jd变量成功,重启系统以后无论在那个目录输入 bash \$jd 都可以运行脚本$white"
 		echo ""
 		echo ""
-		echo -e "                    $green回车重启你的操作系统!!!$white"
+		echo -e "          $green直接回车会重启你的系统!!!，如果不需要马上重启ctrl+c取消$white"
 		echo "-----------------------------------------------------------------------"
 		read a
 		reboot	
