@@ -19,8 +19,6 @@ white="\033[0m"
 
 
 update() {
-wget $url/jd_xtg.js -O $dir_file_js/jd_xtg.js
-wget $url/jd_818.js -O $dir_file_js/jd_818.js
 wget $url/jd_superMarket.js -O $dir_file_js/jd_superMarket.js 
 wget $url/jdSuperMarketShareCodes.js -O $dir_file_js/jdSuperMarketShareCodes.js 
 wget $url/jd_blueCoin.js -O $dir_file_js/jd_blueCoin.js 
@@ -96,7 +94,6 @@ echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white"
 
 run_0() {
 echo "开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`"
-$node $dir_file_js/jd_xtg.js #星推官0点开搞
 $node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 $node $dir_file_js/jd_moneyTree.js #京东摇钱树，没时间要求
 $node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
@@ -128,7 +125,6 @@ $node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，三个小�
 
 run_06_18() {
 echo "开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`"
-$node $dir_file_js/jd_818.js #手机商城 每天0/6/12/18
 $node $dir_file_js/jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
 $node $dir_file_js/jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
 $node $dir_file_js/jd_joy.js #jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
@@ -154,13 +150,13 @@ echo ""
 echo -e "$yellow JS脚本作用请查询：https://github.com/lxk0301/jd_scripts $white"
 echo ""
 echo -e "$yellow 2.jd.sh脚本命令$white"
-echo -e "$green sh \$jd.sh update #下载js脚本"
-echo -e "$green sh \$jd.sh update_script $white #更新JD_Script "
-echo -e "$green sh \$jd.sh run_0 $white         #运行run_0模块里的命令 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
-echo -e "$green sh \$jd.sh run_01 $white        #运行run_01模块里的命令 "
-echo -e "$green sh \$jd.sh run_03 $white        #运行run_03模块里的命令"
-echo -e "$green sh \$jd.sh run_06_18 $white     #运行run_06_18模块里的命令"
-echo -e "$green sh \$jd.sh run_10_15_20 $white  #运行run_10_15_20模块里的命令"
+echo -e "$green sh \$jd update #下载js脚本"
+echo -e "$green sh \$jd update_script $white #更新JD_Script "
+echo -e "$green sh \$jd run_0 $white         #运行run_0模块里的命令 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
+echo -e "$green sh \$jd run_01 $white        #运行run_01模块里的命令 "
+echo -e "$green sh \$jd run_03 $white        #运行run_03模块里的命令"
+echo -e "$green sh \$jd run_06_18 $white     #运行run_06_18模块里的命令"
+echo -e "$green sh \$jd run_10_15_20 $white  #运行run_10_15_20模块里的命令"
 echo ""
 echo " 如果不喜欢这样，你也可以直接cd $jd_file,然后用node 脚本名字.js "
 echo ""
