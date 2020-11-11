@@ -1,7 +1,7 @@
 # JD_Scripts
 
 ## 序言
-   调用https://github.com/lxk0301/scripts 进行测试学习，在X86机器使用正常，其他机器满足依赖应该问题不大
+   调用https://github.com/lxk0301/jd_scripts 进行测试学习，在X86机器使用正常，其他机器满足依赖应该问题不大
 
 ## 支持系统
 openwrt X86
@@ -27,7 +27,7 @@ cd /usr/share/JD_Script && chmod 777 jd.sh
 
 sh jd.sh 
 
-重启完成以后
+#重启完成以后
 
 sh $jd #直接调用代码
 

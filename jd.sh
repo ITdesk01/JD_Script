@@ -110,16 +110,16 @@ echo -e "$green jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有�
 echo -e "$green sendNotify.js $white 在此脚本内填写推送服务的KEY，也可以不填"
 echo -e "$green jd.sh $white JD_Script的本体（作用就是帮忙下载js脚本，js脚本是核心）"
 echo ""
-echo -e "$yellow JS脚本作用请查询：https://github.com/lxk0301/scripts $white"
+echo -e "$yellow JS脚本作用请查询：https://github.com/lxk0301/jd_scripts $white"
 echo ""
 echo -e "$yellow 2.jd.sh脚本命令$white"
-echo -e "$green sh \$jd.sh update #下载js脚本 
-echo -e "$green sh \$jd.sh update_script $white #更新JD_Script"
-echo -e "$green sh \$jd.sh run_0 $white #运行run_0模块里的命令" $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
-echo -e "$green sh \$jd.sh run_01 $white #运行run_01模块里的命令"
-echo -e "$green sh \$jd.sh run_03 $white #运行run_03模块里的命令"
-echo -e "$green sh \$jd.sh run_06_18 $white #运行run_06_18模块里的命令"
-echo -e "$green sh \$jd.sh run_10_15_20 $white #运行run_10_15_20模块里的命令"
+echo -e "$green sh \$jd.sh update #下载js脚本"
+echo -e "$green sh \$jd.sh update_script $white #更新JD_Script "
+echo -e "$green sh \$jd.sh run_0 $white         #运行run_0模块里的命令 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
+echo -e "$green sh \$jd.sh run_01 $white        #运行run_01模块里的命令 "
+echo -e "$green sh \$jd.sh run_03 $white        #运行run_03模块里的命令"
+echo -e "$green sh \$jd.sh run_06_18 $white     #运行run_06_18模块里的命令"
+echo -e "$green sh \$jd.sh run_10_15_20 $white  #运行run_10_15_20模块里的命令"
 echo ""
 echo " 如果不喜欢这样，你也可以直接cd $jd_file,然后用node 脚本名字.js "
 echo ""
@@ -146,6 +146,7 @@ description_if() {
 	fi
 	
 	if [[ ! -d "$dir_file/js" ]]; then
+		echo -e "$green开始下载JS脚本，请稍等$white"
 		mkdir -p $dir_file/js
 		update
 	fi
