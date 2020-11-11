@@ -53,7 +53,7 @@ old_fruit3="6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6@9c
 new_fruit="6632c8135d5c4e2c9ad7f4aa964d4d11@31a2097b10db48429013103077f2f037@5aa64e466c0e43a98cbfbbafcc3ecd02"
 sed -i "s/$old_fruit1/$new_fruit/g" $dir_file_js/jd_fruit.js
 sed -i "s/$old_fruit2/$new_fruit/g" $dir_file_js/jd_fruit.js
-sed -i "s/$old_fruit2/$new_fruit/g" $dir_file_js/jdFruitShareCodes.js
+sed -i "s/$old_fruit1/$new_fruit/g" $dir_file_js/jdFruitShareCodes.js
 sed -i "s/$old_fruit3/$new_fruit/g" $dir_file_js/jdFruitShareCodes.js
 
 old_pet1="MTAxODc2NTEzNTAwMDAwMDAwMjg3MDg2MA==@MTAxODc2NTEzMzAwMDAwMDAyNzUwMDA4MQ==@MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODc2NTEzNDAwMDAwMDAzMDI2MDI4MQ==@MTAxODcxOTI2NTAwMDAwMDAxOTQ3MjkzMw=="
