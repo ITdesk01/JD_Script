@@ -44,6 +44,9 @@ wget $url/jd_lotteryMachine.js -O $dir_file_js/jd_lotteryMachine.js
 wget $url/jd_rankingList.js -O $dir_file_js/jd_rankingList.js
 wget $url/jd_speed.js -O $dir_file_js/jd_speed.js
 #wget $url/jd_dreamFactory.js -O $dir_file_js/jd_dreamFactory.js 京东京喜工厂未完成
+wget $url/jd_daily_egg.js -O $dir_file_js/jd_daily_egg.js
+wget $url/jd_pigPet.js -O $dir_file_js/jd_pigPet.js
+
 sed -i "s/|| 0/|| 20/g" $dir_file_js/jd_blueCoin.js
 sed -i "s/|| 20/|| 50/g" $dir_file_js/jd_unsubscribe.js
 
@@ -56,6 +59,8 @@ sed -i "s/$old_fruit1/$new_fruit/g" $dir_file_js/jd_fruit.js
 sed -i "s/$old_fruit2/$new_fruit/g" $dir_file_js/jd_fruit.js
 sed -i "s/$old_fruit1/$new_fruit/g" $dir_file_js/jdFruitShareCodes.js
 sed -i "s/$old_fruit3/$new_fruit/g" $dir_file_js/jdFruitShareCodes.js
+sed -i "s/randomCount = 20/randomCount = 0/g" $dir_file_js/jd_fruit.js
+
 
 #萌宠
 old_pet1="MTAxODc2NTEzNTAwMDAwMDAwMjg3MDg2MA==@MTAxODc2NTEzMzAwMDAwMDAyNzUwMDA4MQ==@MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODc2NTEzNDAwMDAwMDAzMDI2MDI4MQ==@MTAxODcxOTI2NTAwMDAwMDAxOTQ3MjkzMw=="
@@ -101,6 +106,8 @@ run_10_15_20
 run_06_18
 run_01
 run_03
+$node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
+$node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
 $node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white"
 }
