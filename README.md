@@ -10,7 +10,8 @@ openwrt X86
 ## Usage 使用方法
 #1.openwrt安装依赖
 ```sh
-opkg update && opkg install git #先安装openwrt依赖
+opkg update
+opkg install git 
 opkg install node
 opkg install node-npm
 npm install -g request got tough-cookie
