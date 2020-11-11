@@ -155,12 +155,14 @@ description_if() {
 		echo "jdCookie.js存在"
 	else 
 		wget $url/jdCookie.js -O $dir_file/jdCookie.js
+		ln -s $dir_file/jdCookie.js $dir_file_js/jdCookie.js
 	fi
 
 	if [[ -f "/usr/share/JD_Script/sendNotify.js" ]]; then
 		echo "sendNotify.js存在"
 	else
 		wget $url/sendNotify.js -O $dir_file/sendNotify.js	
+		ln -s $dir_file/sendNotify.js $dir_file_js/sendNotify.js
 	fi
 
 	#添加系统变量
