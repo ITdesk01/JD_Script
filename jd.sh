@@ -63,8 +63,8 @@ sed -i "s/$old_pet2/$new_pet/g" $dir_file_js/jd_pet.js
 old_plantBean1="66j4yt3ebl5ierjljoszp7e4izzbzaqhi5k2unz2afwlyqsgnasq@olmijoxgmjutyrsovl2xalt2tbtfmg6sqldcb3q@e7lhibzb3zek27amgsvywffxx7hxgtzstrk2lba@e7lhibzb3zek32e72n4xesxmgc2m76eju62zk3y"
 old_plantBean2="4npkonnsy7xi3p6pjfxg6ct5gll42gmvnz7zgoy@6dygkptofggtp6ffhbowku3xgu@mlrdw3aw26j3wgzjipsxgonaoyr2evrdsifsziy"
 new_plantBean="4npkonnsy7xi3n46rivf5vyrszud7yvj7hcdr5a@mlrdw3aw26j3xeqso5asaq6zechwcl76uojnpha@nkvdrkoit5o65lgaousaj4dqrfmnij2zyntizsa"
-sed -i "s/$plantBean1/$new_plantBean/g" $dir_file_js/jd_plantBean.js
-sed -i "s/$plantBean2/$new_plantBean/g" $dir_file_js/jd_plantBean.js
+sed -i "s/$old_plantBean1/$new_plantBean/g" $dir_file_js/jd_plantBean.js
+sed -i "s/$old_plantBean2/$new_plantBean/g" $dir_file_js/jd_plantBean.js
 
 }
 
