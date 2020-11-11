@@ -39,7 +39,7 @@ wget $url/jd_joy_feedPets.js -O $dir_file_js/jd_joy_feedPets.js
 wget $url/jd_joy_reward.js -O $dir_file_js/jd_joy_reward.js 
 wget $url/jd_club_lottery.js -O $dir_file_js/jd_club_lottery.js 
 wget $url/jd_unsubscribe.js -O $dir_file_js/jd_unsubscribe.js 
-wget $url/jd_collectProduceScore.js -O $dir_file_js/jd_collectProduceScore.js
+rm -rf $dir_file_js/jd_collectProduceScore.js
 wget $url/jd_lotteryMachine.js -O $dir_file_js/jd_lotteryMachine.js
 wget $url/jd_rankingList.js -O $dir_file_js/jd_rankingList.js
 wget $url/jd_speed.js -O $dir_file_js/jd_speed.js
@@ -116,7 +116,6 @@ echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white"
 run_01() {
 echo "开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`"
 $node $dir_file_js/jd_joy_feedPets.js #宠汪汪喂食一个小时喂一次
-$node $dir_file_js/jd_collectProduceScore.js #京东全民营业一个小时领金币
 #$node $dir_file_js/jd_dreamFactory.js 京东京喜工厂未完成
 echo "脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 }
