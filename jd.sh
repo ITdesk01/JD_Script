@@ -71,6 +71,7 @@ sed -i "s/$old_pet1/$new_pet/g" $dir_file_js/jd_pet.js
 sed -i "s/$old_pet2/$new_pet/g" $dir_file_js/jd_pet.js
 sed -i "s/$old_pet2/$new_pet/g" $dir_file_js/jdPetShareCodes.js
 sed -i "s/$old_pet3/$new_pet/g" $dir_file_js/jdPetShareCodes.js
+sed -i "s/randomCount = 20/randomCount = 0/g" $dir_file_js/jd_pet.js
 
 #种豆
 old_plantBean1="66j4yt3ebl5ierjljoszp7e4izzbzaqhi5k2unz2afwlyqsgnasq@olmijoxgmjutyrsovl2xalt2tbtfmg6sqldcb3q@e7lhibzb3zek27amgsvywffxx7hxgtzstrk2lba@e7lhibzb3zek32e72n4xesxmgc2m76eju62zk3y"
@@ -82,6 +83,7 @@ sed -i "s/$old_plantBean1/$new_plantBean/g" $dir_file_js/jd_plantBean.js
 sed -i "s/$old_plantBean2/$new_plantBean/g" $dir_file_js/jd_plantBean.js
 sed -i "s/$old_plantBean3/$new_plantBean/g" $dir_file_js/jdPlantBeanShareCodes.js
 sed -i "s/$old_plantBean4/$new_plantBean/g" $dir_file_js/jdPlantBeanShareCodes.js
+sed -i "s/randomCount = 20/randomCount = 0/g" $dir_file_js/jd_plantBean.js
 
 }
 
