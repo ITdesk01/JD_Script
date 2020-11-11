@@ -46,6 +46,26 @@ wget $url/jd_speed.js -O $dir_file_js/jd_speed.js
 #wget $url/jd_dreamFactory.js -O $dir_file_js/jd_dreamFactory.js 京东京喜工厂未完成
 sed -i "s/|| 0/|| 20/g" $dir_file_js/jd_blueCoin.js
 sed -i "s/|| 20/|| 50/g" $dir_file_js/jd_unsubscribe.js
+
+old_fruit1="0a74407df5df4fa99672a037eec61f7e@dbb21614667246fabcfd9685b6f448f3@6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6"
+old_fruit2="b1638a774d054a05a30a17d3b4d364b8@f92cb56c6a1349f5a35f0372aa041ea0@9c52670d52ad4e1a812f894563c746ea@8175509d82504e96828afc8b1bbb9cb3"
+new_fruit="6632c8135d5c4e2c9ad7f4aa964d4d11@31a2097b10db48429013103077f2f037@5aa64e466c0e43a98cbfbbafcc3ecd02"
+sed -i "s/$old_fruit1/$new_fruit/g" $dir_file_js/jd_fruit.js
+sed -i "s/$old_fruit2/$new_fruit/g" $dir_file_js/jd_fruit.js
+
+old_pet1="MTAxODc2NTEzNTAwMDAwMDAwMjg3MDg2MA==@MTAxODc2NTEzMzAwMDAwMDAyNzUwMDA4MQ==@MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODc2NTEzNDAwMDAwMDAzMDI2MDI4MQ==@MTAxODcxOTI2NTAwMDAwMDAxOTQ3MjkzMw=="
+old_pet2="MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODcxOTI2NTAwMDAwMDAyNjA4ODQyMQ==@MTAxODc2NTEzOTAwMDAwMDAyNzE2MDY2NQ=="
+new_pet="MTE1NDAxNzcwMDAwMDAwMzk1OTQ4Njk==@MTE1NDQ5OTUwMDAwMDAwMzk3NDgyMDE==@MTAxODEyOTI4MDAwMDAwMDQwMTIzMzcx=="
+sed -i "s/$old_pet1/$new_pet/g" $dir_file_js/jd_pet.js
+sed -i "s/$old_pet2/$new_pet/g" $dir_file_js/jd_pet.js
+
+
+old_plantBean1="66j4yt3ebl5ierjljoszp7e4izzbzaqhi5k2unz2afwlyqsgnasq@olmijoxgmjutyrsovl2xalt2tbtfmg6sqldcb3q@e7lhibzb3zek27amgsvywffxx7hxgtzstrk2lba@e7lhibzb3zek32e72n4xesxmgc2m76eju62zk3y"
+old_plantBean2="4npkonnsy7xi3p6pjfxg6ct5gll42gmvnz7zgoy@6dygkptofggtp6ffhbowku3xgu@mlrdw3aw26j3wgzjipsxgonaoyr2evrdsifsziy"
+new_plantBean="4npkonnsy7xi3n46rivf5vyrszud7yvj7hcdr5a@mlrdw3aw26j3xeqso5asaq6zechwcl76uojnpha@nkvdrkoit5o65lgaousaj4dqrfmnij2zyntizsa"
+sed -i "s/$plantBean1/$new_plantBean/g" $dir_file_js/jd_plantBean.js
+sed -i "s/$plantBean2/$new_plantBean/g" $dir_file_js/jd_plantBean.js
+
 }
 
 update_script() {
