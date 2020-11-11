@@ -19,6 +19,8 @@ white="\033[0m"
 
 
 update() {
+rm -rf $dir_file_js/jd_xtg.js
+rm -rf $dir_file_js/jd_818.js
 wget $url/jd_superMarket.js -O $dir_file_js/jd_superMarket.js 
 wget $url/jdSuperMarketShareCodes.js -O $dir_file_js/jdSuperMarketShareCodes.js 
 wget $url/jd_blueCoin.js -O $dir_file_js/jd_blueCoin.js 
