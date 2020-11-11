@@ -159,7 +159,7 @@ description_if() {
 	fi
 
 	#添加系统变量
-	openwrt_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
+	jd_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
 	if [[ "$jd_script_path" == "0" ]]; then
 		echo "export jd_file=/usr/share/JD_Script" |  tee -a /etc/profile
 		echo "export jd=/usr/share/JD_Script/jd.sh" |  tee -a /etc/profile
