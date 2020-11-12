@@ -208,6 +208,7 @@ description_if() {
 
 	if [[ -f "/usr/share/JD_Script/sendNotify.js" ]]; then
 		echo "sendNotify.js存在"
+		clear
 	else
 		wget $url/sendNotify.js -O $dir_file/sendNotify.js	
 		ln -s $dir_file/sendNotify.js $dir_file_js/sendNotify.js
@@ -225,9 +226,9 @@ description_if() {
 	clear
 	git_branch=$(git branch -v | grep -o behind )
 	if [[ "$git_branch" == "behind" ]]; then
-		Script_status="echo -e "$red建议更新,可以运行$green sh \$jd update_script 和sh \$jd update 更新 $white$white""
+		Script_status=$(echo -e "$red建议更新 (可以运行$green sh \$jd update_script 和sh \$jd update 更新) $white$white"
 	else
-		Script_status="echo -e "$green最新$white""
+		Script_status=$(echo -e "$green最新$white")
 	fi
 
 	#添加系统变量
