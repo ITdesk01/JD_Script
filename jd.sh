@@ -226,9 +226,9 @@ description_if() {
 	clear
 	git_branch=$(git branch -v | grep -o behind )
 	if [[ "$git_branch" == "behind" ]]; then
-		Script_status=$(echo -e "$red建议更新 (可以运行$green sh \$jd update_script 和sh \$jd update 更新) $white$white"
+		Script_status="$red建议更新 可以运行$green sh \$jd update_script 和sh \$jd update 更新 $white$white"
 	else
-		Script_status=$(echo -e "$green最新$white")
+		Script_status="$green最新$white"
 	fi
 
 	#添加系统变量
@@ -282,3 +282,4 @@ else
 			;;
 esac
 fi
+
