@@ -12,6 +12,7 @@ openwrt X86
 ```sh
 opkg update
 opkg install git 
+opkg install git-http
 opkg install node
 opkg install node-npm
 npm install -g request got tough-cookie
@@ -20,7 +21,7 @@ npm install -g request got tough-cookie
 
 #2.开始下载脚本
 ```sh
-git clone git://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
+git clone https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
 cd /usr/share/JD_Script && chmod 777 jd.sh 
 ```
 #需要重启一次，所以做好准备
