@@ -16,6 +16,9 @@ green="\033[32m"
 yellow="\033[33m"
 white="\033[0m"
 
+start_script="echo -e "$green开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`$white""
+stop_script="echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white""
+
 
 
 update() {
@@ -88,14 +91,14 @@ sed -i "s/randomCount = 20/randomCount = 0/g" $dir_file_js/jd_plantBean.js
 }
 
 update_script() {
-echo "开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`"
+$start_script
 cd $dir_file && git pull
-echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white"
+$stop_script
 }
 
 
 run_0() {
-echo "开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`"
+$start_script
 $node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 $node $dir_file_js/jd_moneyTree.js #京东摇钱树，没时间要求
 $node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
@@ -110,32 +113,36 @@ run_03
 $node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
 $node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
 $node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
-echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white"
+$stop_script
 }
 
 run_01() {
-echo "开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`"
+$start_script
 $node $dir_file_js/jd_joy_feedPets.js #宠汪汪喂食一个小时喂一次
 #$node $dir_file_js/jd_dreamFactory.js 京东京喜工厂未完成
-echo "脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
+$stop_script
 }
 
-run_03() {
+run_02() {
+$start_script
 $node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，三个小时收一次瓶子
+$stop_script
 }
 
 run_06_18() {
-echo "开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`"
+$start_script
 $node $dir_file_js/jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
 $node $dir_file_js/jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
 $node $dir_file_js/jd_joy.js #jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
 $node $dir_file_js/jd_pet.js #东东萌宠，跟手机商城同一时间
 $node $dir_file_js/jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
-echo "脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
+$stop_script
 }
 
 run_10_15_20() {
+$start_script
 $node $dir_file_js/jd_superMarket.js #京小超,0 10 15 20四场补货加劵
+$stop_script
 }
 
 help() {
@@ -155,7 +162,7 @@ echo -e "$green sh \$jd update #下载js脚本"
 echo -e "$green sh \$jd update_script $white #更新JD_Script "
 echo -e "$green sh \$jd run_0 $white         #运行run_0模块里的命令 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
 echo -e "$green sh \$jd run_01 $white        #运行run_01模块里的命令 "
-echo -e "$green sh \$jd run_03 $white        #运行run_03模块里的命令"
+echo -e "$green sh \$jd run_02 $white        #运行run_02模块里的命令"
 echo -e "$green sh \$jd run_06_18 $white     #运行run_06_18模块里的命令"
 echo -e "$green sh \$jd run_10_15_20 $white  #运行run_10_15_20模块里的命令"
 echo ""
@@ -168,7 +175,7 @@ echo " 1 0 * * * $jd run_0  >/tmp/jd_run_0.log 2>&1"
 echo " 10 2-23/1 * * * $jd run_01 >/tmp/jd_run_01.log 2>&1"
 echo " 1 6-18/6 * * * $jd run_06_18 >/tmp/jd_run_06_18.log 2>&1"
 echo " 5 10,15,20 * * * $jd run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"
-echo " 40 2-23/3 * * * $jd run_03 >/tmp/jd_run_03.log 2>&1"
+echo " 40 2-23/2 * * * $jd run_02 >/tmp/jd_run_02.log 2>&1"
 echo
 echo -e "$yellow 4.JD_Script报错你可以反馈到这里：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)$white"
 echo ""
