@@ -224,7 +224,7 @@ description_if() {
 	clear
 	git_branch=$(git branch -v | grep -o 落后 )
 	if [[ "$git_branch" == "落后" ]]; then
-		Script_status=`echo -e "$red建议更新$white"`
+		Script_status=`echo -e "$red建议更新,可以运行$green sh \$jd update_script 和sh \$jd update 更新 $white$white"`
 	else
 		Script_status=`echo -e "$green最新$white"`
 	fi
