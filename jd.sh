@@ -22,6 +22,7 @@ stop_script="echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M
 
 
 update() {
+echo -e "$green开始下载JS脚本，请稍等$white"
 rm -rf $dir_file_js/jd_xtg.js
 rm -rf $dir_file_js/jd_818.js
 wget $url/jd_superMarket.js -O $dir_file_js/jd_superMarket.js 
@@ -158,7 +159,7 @@ echo ""
 echo -e "$yellow JS脚本作用请查询：https://github.com/lxk0301/jd_scripts $white"
 echo ""
 echo -e "$yellow 2.jd.sh脚本命令$white"
-echo -e "$green sh \$jd update #下载js脚本"
+echo -e "$green sh \$jd update $white        #下载js脚本"
 echo -e "$green sh \$jd update_script $white #更新JD_Script "
 echo -e "$green sh \$jd run_0 $white         #运行run_0模块里的命令 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
 echo -e "$green sh \$jd run_01 $white        #运行run_01模块里的命令 "
@@ -177,9 +178,10 @@ echo " 1 6-18/6 * * * $jd run_06_18 >/tmp/jd_run_06_18.log 2>&1"
 echo " 5 10,15,20 * * * $jd run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"
 echo " 40 2-22/2 * * * $jd run_02 >/tmp/jd_run_02.log 2>&1"
 echo
-echo "检测脚本是否最新： $Script_status "
 echo ""
 echo -e "$yellow 4.JD_Script报错你可以反馈到这里：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)$white"
+echo ""
+echo -e "$yellow 5.检测脚本是否最新：$white $Script_status "
 echo ""
 echo -e "本脚本基于$green x86主机测试$white，一切正常，其他的机器自行测试，满足依赖一般问题不大"
 echo ----------------------------------------------------
@@ -193,7 +195,6 @@ description_if() {
 	fi
 	
 	if [[ ! -d "$dir_file/js" ]]; then
-		echo -e "$green开始下载JS脚本，请稍等$white"
 		mkdir -p $dir_file/js
 		update
 	fi
