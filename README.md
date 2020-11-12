@@ -34,7 +34,7 @@ sh $jd #直接调用代码
 
 cd $jd_file # 可以直接进入代码所在文件夹
 
-
+**吹水群** :**667491026** 
 
 3.问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)
 
