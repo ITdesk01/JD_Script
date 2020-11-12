@@ -110,7 +110,7 @@ $node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限�
 run_10_15_20
 run_06_18
 run_01
-run_03
+run_02
 $node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
 $node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
 $node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
@@ -274,8 +274,8 @@ else
 			run_10_15_20)
 			run_10_15_20
 			;;
-			run_03)
-			run_03
+			run_02)
+			run_02
 			;;
 			*)
 			help
