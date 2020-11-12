@@ -1,5 +1,5 @@
 # JD_Script
-![JD_Script](doc/JD_Script.PNG)
+![JD_Script](doc/JD_Script.png)
 ## 序言
    调用https://github.com/lxk0301/jd_scripts 进行测试学习，在X86机器使用正常，其他机器满足依赖应该问题不大
 
