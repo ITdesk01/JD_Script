@@ -177,6 +177,8 @@ echo " 1 6-18/6 * * * $jd run_06_18 >/tmp/jd_run_06_18.log 2>&1"
 echo " 5 10,15,20 * * * $jd run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"
 echo " 40 2-22/2 * * * $jd run_02 >/tmp/jd_run_02.log 2>&1"
 echo
+echo "检测脚本是否最新： $Script_status "
+echo ""
 echo -e "$yellow 4.JD_Script报错你可以反馈到这里：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)$white"
 echo ""
 echo -e "本脚本基于$green x86主机测试$white，一切正常，其他的机器自行测试，满足依赖一般问题不大"
@@ -208,6 +210,23 @@ description_if() {
 	else
 		wget $url/sendNotify.js -O $dir_file/sendNotify.js	
 		ln -s $dir_file/sendNotify.js $dir_file_js/sendNotify.js
+	fi
+
+	echo "稍等一下，正在取回远端脚本源码，用于比较现在脚本源码，速度看你网络"
+	cd $dir_file_js
+	git fetch
+	if [[ $? -eq 0 ]]; then
+		echo ""
+	else
+		echo -e "$red>> 取回分支没有成功，重新执行代码$white"
+		description_if
+	fi
+	clear
+	git_branch=$(git branch -v | grep -o 落后 )
+	if [[ "$git_branch" == "落后" ]]; then
+		Script_status=`echo -e "$red建议更新$white"`
+	else
+		Script_status=`echo -e "$green最新$white"`
 	fi
 
 	#添加系统变量
