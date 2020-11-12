@@ -175,7 +175,7 @@ echo " 1 0 * * * $jd run_0  >/tmp/jd_run_0.log 2>&1"
 echo " 10 2-23/1 * * * $jd run_01 >/tmp/jd_run_01.log 2>&1"
 echo " 1 6-18/6 * * * $jd run_06_18 >/tmp/jd_run_06_18.log 2>&1"
 echo " 5 10,15,20 * * * $jd run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"
-echo " 40 2-23/2 * * * $jd run_02 >/tmp/jd_run_02.log 2>&1"
+echo " 40 2-22/2 * * * $jd run_02 >/tmp/jd_run_02.log 2>&1"
 echo
 echo -e "$yellow 4.JD_Script报错你可以反馈到这里：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)$white"
 echo ""
