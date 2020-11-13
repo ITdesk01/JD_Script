@@ -102,7 +102,6 @@ $stop_script
 run_0() {
 $start_script
 $node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
-$node $dir_file_js/jd_moneyTree.js #京东摇钱树，没时间要求
 $node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
 $node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 $node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
@@ -127,6 +126,7 @@ $stop_script
 run_02() {
 $start_script
 $node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，两个小时收一次瓶子
+$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到
 $stop_script
 }
 
