@@ -126,7 +126,6 @@ $stop_script
 run_02() {
 $start_script
 $node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，两个小时收一次瓶子
-$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到
 $stop_script
 }
 
@@ -140,6 +139,10 @@ $node $dir_file_js/jd_joy_steal.js #可偷好友积分，零点开始，六点�
 $node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
 $node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
 $stop_script
+}
+
+run_08() {
+$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每8分钟收一次
 }
 
 run_10_15_20() {
@@ -167,6 +170,7 @@ echo -e "$green sh \$jd run_0 $white         #运行run_0模块里的命令 $yel
 echo -e "$green sh \$jd run_01 $white        #运行run_01模块里的命令 "
 echo -e "$green sh \$jd run_02 $white        #运行run_02模块里的命令"
 echo -e "$green sh \$jd run_06_18 $white     #运行run_06_18模块里的命令"
+echo -e "$green sh \$jd run_08 $white        #运行run_8模块里的命令"
 echo -e "$green sh \$jd run_10_15_20 $white  #运行run_10_15_20模块里的命令"
 echo ""
 echo " 如果不喜欢这样，你也可以直接cd $jd_file_js,然后用node 脚本名字.js "
@@ -179,6 +183,7 @@ echo " 10 2-23/1 * * * $jd run_01 >/tmp/jd_run_01.log 2>&1"
 echo " 1 6-18/6 * * * $jd run_06_18 >/tmp/jd_run_06_18.log 2>&1"
 echo " 5 10,15,20 * * * $jd run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"
 echo " 40 2-22/2 * * * $jd run_02 >/tmp/jd_run_02.log 2>&1"
+echo " */8 1-23 * * * $jd run_08 >/tmp/jd_run_08.log 2>&1"
 echo
 echo ""
 echo -e "$yellow 4.JD_Script报错你可以反馈到这里：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)$white"
@@ -278,6 +283,9 @@ else
 			;;
 			run_02)
 			run_02
+			;;
+			run_08)
+			run_08
 			;;
 			*)
 			help
