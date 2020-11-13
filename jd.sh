@@ -111,8 +111,6 @@ run_10_15_20
 run_06_18
 run_01
 run_02
-$node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
-$node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
 $node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 $stop_script
 }
@@ -126,7 +124,7 @@ $stop_script
 
 run_02() {
 $start_script
-$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，三个小时收一次瓶子
+$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，两个小时收一次瓶子
 $stop_script
 }
 
@@ -137,6 +135,8 @@ $node $dir_file_js/jd_shop.js #进店领豆，早点领，一天也可以执行�
 $node $dir_file_js/jd_joy.js #jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
 $node $dir_file_js/jd_pet.js #东东萌宠，跟手机商城同一时间
 $node $dir_file_js/jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
+$node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
+$node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
 $stop_script
 }
 
