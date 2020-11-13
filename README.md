@@ -8,16 +8,25 @@ openwrt X86
 其他机型未测试
 
 ## Usage 使用方法
-#1.openwrt安装依赖
+#1.openwrt安装依赖(重要，不好好看，报错自行处理)
+1.1开始安装git
 ```sh
 opkg update
 opkg install git 
 opkg install git-http
+```
+1.2开始安装node(重要 重要 重要)
+```sh
 opkg install node
 opkg install node-npm
+```
+##node版本一定要大于10，安装node以后用 opkg list-installed | grep node 查看node版本，两个都要大于10
+
+1.3执行npm
+```sh
 npm install -g request got tough-cookie
 ```
-注意:node版本一定要大于10，安装node以后可以用 opkg list-installed | grep node 查看node版本
+
 
 #2.开始下载脚本
 ```sh
@@ -25,18 +34,21 @@ git clone https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
 cd /usr/share/JD_Script && chmod 777 jd.sh 
 ```
 #需要重启一次，所以做好准备
-
+```sh
 sh jd.sh 
-
+```
 #重启完成以后
-
+```sh
 sh $jd #直接调用代码
 
 cd $jd_file # 可以直接进入代码所在文件夹
-
-**吹水群** :**667491026** 
+```
 
 3.问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)
+
+**吹水群** :**667491026** (公子大爷请绕道，白嫖可能没人理)
+
+##你们可以不好好看安装依赖，我也可以拒绝回答任何问题。
 
 
 ## 特别声明:
