@@ -50,6 +50,7 @@ wget $url/jd_speed.js -O $dir_file_js/jd_speed.js
 #wget $url/jd_dreamFactory.js -O $dir_file_js/jd_dreamFactory.js 京东京喜工厂未完成
 wget $url/jd_daily_egg.js -O $dir_file_js/jd_daily_egg.js
 wget $url/jd_pigPet.js -O $dir_file_js/jd_pigPet.js
+wget $url/jd_bean_change.js -O $dir_file_js/jd_bean_change.js
 
 sed -i "s/|| 0/|| 20/g" $dir_file_js/jd_blueCoin.js
 sed -i "s/|| 20/|| 50/g" $dir_file_js/jd_unsubscribe.js
@@ -112,6 +113,7 @@ run_06_18
 run_01
 run_02
 $node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
+$node $dir_file_js/jd_bean_change.js #京豆变更
 $stop_script
 }
 
