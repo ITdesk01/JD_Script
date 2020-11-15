@@ -90,6 +90,10 @@ sed -i "s/$old_plantBean3/$new_plantBean/g" $dir_file_js/jdPlantBeanShareCodes.j
 sed -i "s/$old_plantBean4/$new_plantBean/g" $dir_file_js/jdPlantBeanShareCodes.js
 sed -i "s/randomCount = 20/randomCount = 0/g" $dir_file_js/jd_plantBean.js
 
+sed -i "s/40/#40/g" /etc/crontabs/root
+/etc/init.d/cron restart
+
+
 }
 
 update_script() {
@@ -119,13 +123,14 @@ $stop_script
 run_01() {
 $start_script
 $node $dir_file_js/jd_joy_feedPets.js #宠汪汪喂食一个小时喂一次
+$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
 #$node $dir_file_js/jd_dreamFactory.js 京东京喜工厂未完成
 $stop_script
 }
 
 run_02() {
 $start_script
-$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，两个小时收一次瓶子
+#$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，两个小时收一次瓶子
 $stop_script
 }
 
