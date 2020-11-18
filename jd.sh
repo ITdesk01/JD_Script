@@ -126,8 +126,7 @@ $stop_script
 
 run_02() {
 $start_script
-echo "将收瓶子移动到run_01"
-#$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，两个小时收一次瓶子
+$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每两小时收一次
 $stop_script
 }
 
@@ -140,11 +139,12 @@ $node $dir_file_js/jd_pet.js #东东萌宠，跟手机商城同一时间
 $node $dir_file_js/jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
 $node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
 $node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
+$node $dir_file_js/jd_superMarket.js #京小超,0 10 15 20四场补货加劵
 $stop_script
 }
 
 run_08() {
-$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每8分钟收一次
+echo "将京东摇钱树移到了run_02"
 }
 
 run_10_15_20() {
