@@ -19,6 +19,15 @@ white="\033[0m"
 start_script="echo -e "$green开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`$white""
 stop_script="echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white""
 
+#计划任务
+new_task1="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
+new_task2="30 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点30分更新lxk0301脚本
+new_task3="1 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点1分执行全部脚本
+new_task4="10 2-23/1 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #每一个小时10分运行一次run_01
+new_task5="1 6-18/6 * * * /usr/share/JD_Script/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" #6点 12点18点执行一次run_06_18
+new_task6="5 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"  #10点,15点,20点执行一次run_10_15_20
+new_task7="40 2-22/2 * * * /usr/share/JD_Script/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" #每两个小时执行一次run_02
+new_task8="*/8 1-23 * * * /usr/share/JD_Script/jd.sh run_08 >/tmp/jd_run_08.log 2>&1" #每8分钟执行一次
 
 
 update() {
@@ -89,6 +98,7 @@ sed -i "s/$old_plantBean2/$new_plantBean/g" $dir_file_js/jd_plantBean.js
 sed -i "s/$old_plantBean3/$new_plantBean/g" $dir_file_js/jdPlantBeanShareCodes.js
 sed -i "s/$old_plantBean4/$new_plantBean/g" $dir_file_js/jdPlantBeanShareCodes.js
 sed -i "s/randomCount = 20/randomCount = 0/g" $dir_file_js/jd_plantBean.js
+
 
 }
 
