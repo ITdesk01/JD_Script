@@ -1,7 +1,7 @@
 # JD_Script
 ![JD_Script](doc/JD_Script.png)
 ## 序言
-   调用https://github.com/lxk0301/jd_scripts 进行测试学习，在X86机器使用正常，其他机器满足依赖应该问题不大
+   调用https://github.com/lxk0301/jd_scripts 进行测试学习，在X86机器使用正常，其他机器满足依赖应该问题不大,lxk0301的JS脚本里面的助力码替换成我的了，默认会给我助力，如果你不需要自行删除代码或者禁用他
 
 ## 支持系统
 openwrt X86 （基于x86编写）
