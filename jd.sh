@@ -56,10 +56,11 @@ rm -rf $dir_file_js/jd_collectProduceScore.js
 wget $url/jd_lotteryMachine.js -O $dir_file_js/jd_lotteryMachine.js
 wget $url/jd_rankingList.js -O $dir_file_js/jd_rankingList.js
 wget $url/jd_speed.js -O $dir_file_js/jd_speed.js
-#wget $url/jd_dreamFactory.js -O $dir_file_js/jd_dreamFactory.js 京东京喜工厂未完成
 wget $url/jd_daily_egg.js -O $dir_file_js/jd_daily_egg.js
 wget $url/jd_pigPet.js -O $dir_file_js/jd_pigPet.js
 wget $url/jd_bean_change.js -O $dir_file_js/jd_bean_change.js
+wget $url/jd_dreamFactory.js -O $dir_file_js/jd_dreamFactory.js
+wget $url/jd_necklace.js -O $dir_file_js/jd_necklace.js
 
 sed -i "s/|| 0/|| 20/g" $dir_file_js/jd_blueCoin.js
 sed -i "s/|| 20/|| 50/g" $dir_file_js/jd_unsubscribe.js
@@ -155,11 +156,13 @@ $stop_script
 
 run_08() {
 echo "将京东摇钱树移到了run_02"
+$node $dir_file_js/jd_dreamFactory.js #京喜工厂 20分钟运行一次，后面再改
 }
 
 run_10_15_20() {
 $start_script
 $node $dir_file_js/jd_superMarket.js #京小超,0 10 15 20四场补货加劵
+$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
 $stop_script
 }
 
