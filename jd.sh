@@ -279,29 +279,8 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update)
-			update
-			;;
-			update_script)
-			update_script
-			;;
-			run_0)
-			run_0
-			;;
-			run_01)
-			run_01
-			;;
-			run_06_18)
-			run_06_18
-			;;
-			run_10_15_20)
-			run_10_15_20
-			;;
-			run_02)
-			run_02
-			;;
-			run_08)
-			run_08
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_08)
+			$action1
 			;;
 			*)
 			help
