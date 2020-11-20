@@ -52,7 +52,6 @@ wget $url/jd_joy_feedPets.js -O $dir_file_js/jd_joy_feedPets.js
 wget $url/jd_joy_reward.js -O $dir_file_js/jd_joy_reward.js 
 wget $url/jd_club_lottery.js -O $dir_file_js/jd_club_lottery.js 
 wget $url/jd_unsubscribe.js -O $dir_file_js/jd_unsubscribe.js 
-rm -rf $dir_file_js/jd_collectProduceScore.js
 wget $url/jd_lotteryMachine.js -O $dir_file_js/jd_lotteryMachine.js
 wget $url/jd_rankingList.js -O $dir_file_js/jd_rankingList.js
 wget $url/jd_speed.js -O $dir_file_js/jd_speed.js
@@ -173,10 +172,9 @@ echo ----------------------------------------------------
 echo "	     JD.sh $version 使用说明"
 echo ----------------------------------------------------
 echo -e "$yellow 1.文件说明$white"
-echo -e "$green jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
-echo -e "$green sendNotify.js $white 在此脚本内填写推送服务的KEY，也可以不填"
-echo -e "$green jd.sh $white JD_Script的本体（作用就是帮忙下载js脚本，js脚本是核心）"
-echo ""
+echo -e "$green $dir_file/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
+echo -e "$green $dir_file/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
+echo -e "$green $dir_file/jd.sh $white JD_Script的本体（作用就是帮忙下载js脚本，js脚本是核心）"
 echo -e "$yellow JS脚本作用请查询：$white $green https://github.com/lxk0301/jd_scripts $white"
 echo -e "$yellow 浏览器获取京东cookie教程：$white $green https://github.com/lxk0301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
 echo ""
