@@ -122,6 +122,7 @@ run_10_15_20
 run_06_18
 run_01
 run_02
+run_08
 $node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 $node $dir_file_js/jd_bean_change.js #京豆变更
 $stop_script
