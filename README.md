@@ -37,11 +37,10 @@ npm install -g request got tough-cookie
 ```sh
 git clone https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
 cd /usr/share/JD_Script && chmod 777 jd.sh 
-```
-**需要重启一次，所以做好准备**
-```sh
 sh jd.sh 
 ```
+**执行sh jd.sh以后会重启一次，所以做好准备**
+
 **重启完成以后**
 ```sh
 sh $jd #直接调用代码
