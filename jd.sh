@@ -58,9 +58,8 @@ task() {
 }
 
 update() {
+$start_script
 echo -e "$green开始下载JS脚本，请稍等$white"
-rm -rf $dir_file_js/jd_xtg.js
-rm -rf $dir_file_js/jd_818.js
 wget $url/jd_superMarket.js -O $dir_file_js/jd_superMarket.js 
 wget $url/jdSuperMarketShareCodes.js -O $dir_file_js/jdSuperMarketShareCodes.js 
 wget $url/jd_blueCoin.js -O $dir_file_js/jd_blueCoin.js 
@@ -88,6 +87,7 @@ wget $url/jd_bean_change.js -O $dir_file_js/jd_bean_change.js
 wget $url/jd_dreamFactory.js -O $dir_file_js/jd_dreamFactory.js
 wget $url/jd_necklace.js -O $dir_file_js/jd_necklace.js
 additional_settings
+$stop_script
 }
 
 
@@ -194,7 +194,9 @@ $stop_script
 }
 
 run_08() {
+$start_script
 $node $dir_file_js/jd_dreamFactory.js #京喜工厂 20分钟运行一次，后面再改
+$stop_script
 }
 
 run_10_15_20() {
