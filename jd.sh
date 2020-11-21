@@ -5,8 +5,8 @@
 # This is free software, licensed under the GNU General Public License v3.
 # See /LICENSE for more information.
 #
-version="1.6"
-CRON_FILE=/etc/crontabs/root
+version="1.7"
+cron_file=/etc/crontabs/root
 url=https://raw.githubusercontent.com/lxk0301/jd_scripts/master
 dir_file=/usr/share/JD_Script
 dir_file_js=/usr/share/JD_Script/js
@@ -20,15 +20,42 @@ start_script="echo -e "$green开始运行脚本，当前时间：`date "+%Y-%m-%
 stop_script="echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white""
 
 #计划任务
-new_task1="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
-new_task2="30 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点30分更新lxk0301脚本
-new_task3="1 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点1分执行全部脚本
-new_task4="10 2-23/1 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #每一个小时10分运行一次run_01
-new_task5="1 6-18/6 * * * /usr/share/JD_Script/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" #6点 12点18点执行一次run_06_18
-new_task6="5 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"  #10点,15点,20点执行一次run_10_15_20
-new_task7="40 2-22/2 * * * /usr/share/JD_Script/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" #每两个小时执行一次run_02
-new_task8="*/8 1-23 * * * /usr/share/JD_Script/jd.sh run_08 >/tmp/jd_run_08.log 2>&1" #每8分钟执行一次
+new_task1="###########这里是JD_Script的定时任务1.0版本###########"
+new_task2="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
+new_task3="30 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点30分更新lxk0301脚本
+new_task4="0 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点0分执行全部脚本
+new_task5="10 2-23/1 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #每一个小时10分运行一次run_01
+new_task6="1 6-18/6 * * * /usr/share/JD_Script/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" #6点 12点18点执行一次run_06_18
+new_task7="5 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"  #10点,15点,20点执行一次run_10_15_20
+new_task8="40 2-22/2 * * * /usr/share/JD_Script/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" #每两个小时执行一次run_02
+new_task9="*/8 1-23 * * * /usr/share/JD_Script/jd.sh run_08 >/tmp/jd_run_08.log 2>&1" #每8分钟执行一次
+new_task10="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
 
+task() {
+	if [[ -e /etc/crontabs/root_back ]]; then
+		echo ""
+	else
+		cp /etc/crontabs/root /etc/crontabs/root_back
+	fi
+
+	if [[ `grep -o $new_task1 $cron_file |wc -l` == "1" ]]; then
+		cron_help="$green定时任务与设定一致$white"
+	else
+		sed -i '1,10d' $cron_file
+		sed -i "1i ${new_task1}" $cron_file
+		sed -i "1a ${new_task2}" $cron_file
+		sed -i "2a ${new_task3}" $cron_file
+		sed -i "3a ${new_task4}" $cron_file
+		sed -i "4a ${new_task5}" $cron_file
+		sed -i "5a ${new_task6}" $cron_file
+		sed -i "6a ${new_task7}" $cron_file
+		sed -i "7a ${new_task8}" $cron_file
+		sed -i "8a ${new_task9}" $cron_file
+		sed -i "9a ${new_task10}" $cron_file
+		/etc/init.d/cron restart
+		cron_help="$yellow定时任务更新完成，如果有问题可以参考/etc/crontabs/root_back恢复$white"
+	fi
+}
 
 update() {
 echo -e "$green开始下载JS脚本，请稍等$white"
@@ -144,7 +171,6 @@ run_01() {
 $start_script
 $node $dir_file_js/jd_joy_feedPets.js #宠汪汪喂食一个小时喂一次
 $node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
-#$node $dir_file_js/jd_dreamFactory.js 京东京喜工厂未完成
 $stop_script
 }
 
@@ -168,7 +194,6 @@ $stop_script
 }
 
 run_08() {
-echo "将京东摇钱树移到了run_02"
 $node $dir_file_js/jd_dreamFactory.js #京喜工厂 20分钟运行一次，后面再改
 }
 
@@ -194,29 +219,29 @@ echo ""
 echo -e "$yellow 2.jd.sh脚本命令$white"
 echo -e "$green sh \$jd update $white        #下载js脚本"
 echo -e "$green sh \$jd update_script $white #更新JD_Script "
-echo -e "$green sh \$jd run_0 $white         #运行run_0模块里的命令 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
+echo -e "$green sh \$jd run_0 $white         #运行全部脚本 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
 echo -e "$green sh \$jd run_01 $white        #运行run_01模块里的命令 "
 echo -e "$green sh \$jd run_02 $white        #运行run_02模块里的命令"
 echo -e "$green sh \$jd run_06_18 $white     #运行run_06_18模块里的命令"
 echo -e "$green sh \$jd run_08 $white        #运行run_8模块里的命令"
 echo -e "$green sh \$jd run_10_15_20 $white  #运行run_10_15_20模块里的命令"
+echo " 如果不喜欢这样，你也可以直接cd $jd_file/js,然后用node 脚本名字.js "
 echo ""
-echo " 如果不喜欢这样，你也可以直接cd $jd_file_js,然后用node 脚本名字.js "
 echo ""
-echo -e "$yellow 3.计划任务可以这么写（自己修改手动复制填到计划任务里去）$white"
-echo " 00 22 * * * $jd update_script >/tmp/jd_update_script.log 2>&1"
-echo " 30 22 * * * $jd update >/tmp/jd_update.log 2>&1"
-echo " 1 0 * * * $jd run_0  >/tmp/jd_run_0.log 2>&1"
-echo " 10 2-23/1 * * * $jd run_01 >/tmp/jd_run_01.log 2>&1"
-echo " 1 6-18/6 * * * $jd run_06_18 >/tmp/jd_run_06_18.log 2>&1"
-echo " 5 10,15,20 * * * $jd run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"
-echo " 40 2-22/2 * * * $jd run_02 >/tmp/jd_run_02.log 2>&1"
-echo " */8 1-23 * * * $jd run_08 >/tmp/jd_run_08.log 2>&1"
-echo
+echo -e "$yellow 3.本脚本的计划任务$white"
+echo " $new_task2"
+echo " $new_task3"
+echo " $new_task4"
+echo " $new_task5"
+echo " $new_task6"
+echo " $new_task7"
+echo " $new_task8"
+echo " $new_task9"
+echo -e "$yellow 检测定时任务:$white $cron_help"
 echo ""
-echo -e "$yellow 4.JD_Script报错你可以反馈到这里：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)$white"
+echo -e "$yellow 4.检测脚本是否最新:$white $Script_status "
 echo ""
-echo -e "$yellow 5.检测脚本是否最新：$white $Script_status "
+echo -e "$yellow 5.JD_Script报错你可以反馈到这里:$white$green https://github.com/ITdesk01/JD_Script/issues$white"
 echo ""
 echo -e "本脚本基于$green x86主机测试$white，一切正常，其他的机器自行测试，满足依赖一般问题不大"
 echo ----------------------------------------------------
@@ -283,6 +308,7 @@ description_if() {
 	else
 			echo "变量已经添加"
 	fi
+	task
 	help
 }
 
@@ -291,7 +317,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_08)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_08|task)
 			$action1
 			;;
 			*)
