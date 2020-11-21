@@ -16,8 +16,8 @@ green="\033[32m"
 yellow="\033[33m"
 white="\033[0m"
 
-start_script="echo -e "$green开始运行脚本，当前时间：`date "+%Y-%m-%d %H:%M"`$white""
-stop_script="echo -e "$green脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`$white""
+start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
+stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
 new_task1="###########这里是JD_Script的定时任务1.0版本###########"
@@ -58,197 +58,196 @@ task() {
 }
 
 update() {
-$start_script
-echo -e "$green开始下载JS脚本，请稍等$white"
-wget $url/jd_superMarket.js -O $dir_file_js/jd_superMarket.js 
-wget $url/jdSuperMarketShareCodes.js -O $dir_file_js/jdSuperMarketShareCodes.js 
-wget $url/jd_blueCoin.js -O $dir_file_js/jd_blueCoin.js 
-wget $url/jd_redPacket.js -O $dir_file_js/jd_redPacket.js 
-wget $url/jd_moneyTree.js -O $dir_file_js/jd_moneyTree.js 
-wget $url/jd_fruit.js -O $dir_file_js/jd_fruit.js 
-wget $url/jdFruitShareCodes.js -O $dir_file_js/jdFruitShareCodes.js 
-wget $url/jd_pet.js -O $dir_file_js/jd_pet.js 
-wget $url/jdPetShareCodes.js -O $dir_file_js/jdPetShareCodes.js 
-wget $url/jd_plantBean.js -O $dir_file_js/jd_plantBean.js 
-wget $url/jdPlantBeanShareCodes.js -O $dir_file_js/jdPlantBeanShareCodes.js 
-wget $url/jd_shop.js -O $dir_file_js/jd_shop.js 
-wget $url/jd_joy.js -O $dir_file_js/jd_joy.js 
-wget $url/jd_joy_steal.js -O $dir_file_js/jd_joy_steal.js 
-wget $url/jd_joy_feedPets.js -O $dir_file_js/jd_joy_feedPets.js 
-wget $url/jd_joy_reward.js -O $dir_file_js/jd_joy_reward.js 
-wget $url/jd_club_lottery.js -O $dir_file_js/jd_club_lottery.js 
-wget $url/jd_unsubscribe.js -O $dir_file_js/jd_unsubscribe.js 
-wget $url/jd_lotteryMachine.js -O $dir_file_js/jd_lotteryMachine.js
-wget $url/jd_rankingList.js -O $dir_file_js/jd_rankingList.js
-wget $url/jd_speed.js -O $dir_file_js/jd_speed.js
-wget $url/jd_daily_egg.js -O $dir_file_js/jd_daily_egg.js
-wget $url/jd_pigPet.js -O $dir_file_js/jd_pigPet.js
-wget $url/jd_bean_change.js -O $dir_file_js/jd_bean_change.js
-wget $url/jd_dreamFactory.js -O $dir_file_js/jd_dreamFactory.js
-wget $url/jd_necklace.js -O $dir_file_js/jd_necklace.js
-additional_settings
-$stop_script
+	echo -e "$green update$start_script $white"
+	echo -e "$green开始下载JS脚本，请稍等$white"
+	wget $url/jd_superMarket.js -O $dir_file_js/jd_superMarket.js
+	wget $url/jdSuperMarketShareCodes.js -O $dir_file_js/jdSuperMarketShareCodes.js
+	wget $url/jd_blueCoin.js -O $dir_file_js/jd_blueCoin.js
+	wget $url/jd_redPacket.js -O $dir_file_js/jd_redPacket.js
+	wget $url/jd_moneyTree.js -O $dir_file_js/jd_moneyTree.js
+	wget $url/jd_fruit.js -O $dir_file_js/jd_fruit.js
+	wget $url/jdFruitShareCodes.js -O $dir_file_js/jdFruitShareCodes.js
+	wget $url/jd_pet.js -O $dir_file_js/jd_pet.js
+	wget $url/jdPetShareCodes.js -O $dir_file_js/jdPetShareCodes.js
+	wget $url/jd_plantBean.js -O $dir_file_js/jd_plantBean.js
+	wget $url/jdPlantBeanShareCodes.js -O $dir_file_js/jdPlantBeanShareCodes.js
+	wget $url/jd_shop.js -O $dir_file_js/jd_shop.js
+	wget $url/jd_joy.js -O $dir_file_js/jd_joy.js
+	wget $url/jd_joy_steal.js -O $dir_file_js/jd_joy_steal.js
+	wget $url/jd_joy_feedPets.js -O $dir_file_js/jd_joy_feedPets.js
+	wget $url/jd_joy_reward.js -O $dir_file_js/jd_joy_reward.js
+	wget $url/jd_club_lottery.js -O $dir_file_js/jd_club_lottery.js
+	wget $url/jd_unsubscribe.js -O $dir_file_js/jd_unsubscribe.js
+	wget $url/jd_lotteryMachine.js -O $dir_file_js/jd_lotteryMachine.js
+	wget $url/jd_rankingList.js -O $dir_file_js/jd_rankingList.js
+	wget $url/jd_speed.js -O $dir_file_js/jd_speed.js
+	wget $url/jd_daily_egg.js -O $dir_file_js/jd_daily_egg.js
+	wget $url/jd_pigPet.js -O $dir_file_js/jd_pigPet.js
+	wget $url/jd_bean_change.js -O $dir_file_js/jd_bean_change.js
+	wget $url/jd_dreamFactory.js -O $dir_file_js/jd_dreamFactory.js
+	wget $url/jd_necklace.js -O $dir_file_js/jd_necklace.js
+	additional_settings
+	echo -e "$green update$stop_script $white"
 }
 
 
 additional_settings() {
-#京小超默认兑换20豆子
-sed -i "s/|| 0/|| 20/g" $dir_file_js/jd_blueCoin.js
+	#京小超默认兑换20豆子
+	sed -i "s/|| 0/|| 20/g" $dir_file_js/jd_blueCoin.js
 
-#取消店铺从20个改成50个(没有星推官先默认20吧)
-#sed -i "s/|| 20/|| 50/g" $dir_file_js/jd_unsubscribe.js
+	#取消店铺从20个改成50个(没有星推官先默认20吧)
+	#sed -i "s/|| 20/|| 50/g" $dir_file_js/jd_unsubscribe.js
 
-#宠汪汪积分兑换奖品改成兑换500豆子，个别人会兑换错误
-sed -i "s/let joyRewardName = 20/let joyRewardName = 500/g" $dir_file_js/jd_joy_reward.js
+	#宠汪汪积分兑换奖品改成兑换500豆子，个别人会兑换错误
+	sed -i "s/let joyRewardName = 20/let joyRewardName = 500/g" $dir_file_js/jd_joy_reward.js
 
-#水果
-old_fruit1="0a74407df5df4fa99672a037eec61f7e@dbb21614667246fabcfd9685b6f448f3@6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6"
-old_fruit2="b1638a774d054a05a30a17d3b4d364b8@f92cb56c6a1349f5a35f0372aa041ea0@9c52670d52ad4e1a812f894563c746ea@8175509d82504e96828afc8b1bbb9cb3"
-old_fruit3="6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6@9c52670d52ad4e1a812f894563c746ea@8175509d82504e96828afc8b1bbb9cb3"
+	#水果
+	old_fruit1="0a74407df5df4fa99672a037eec61f7e@dbb21614667246fabcfd9685b6f448f3@6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6"
+	old_fruit2="b1638a774d054a05a30a17d3b4d364b8@f92cb56c6a1349f5a35f0372aa041ea0@9c52670d52ad4e1a812f894563c746ea@8175509d82504e96828afc8b1bbb9cb3"
+	old_fruit3="6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6@9c52670d52ad4e1a812f894563c746ea@8175509d82504e96828afc8b1bbb9cb3"
 new_fruit="6632c8135d5c4e2c9ad7f4aa964d4d11@31a2097b10db48429013103077f2f037@5aa64e466c0e43a98cbfbbafcc3ecd02@9046fbd8945f48cb8e36a17fff9b0983@d4e3080b06ed47d884e4ef9852cad568@72abb03ca91a4569933c6c8a62a5622c@ed2b2d28151a482eae49dff2e5a588f8@304b39f17d6c4dac87933882d4dec6bc@3e6f0b7a2d054331a0b5b956f36645a9@5e54362c4a294f66853d14e777584598"
-sed -i "s/$old_fruit1/$new_fruit/g" $dir_file_js/jd_fruit.js
-sed -i "s/$old_fruit2/$new_fruit/g" $dir_file_js/jd_fruit.js
-sed -i "s/$old_fruit1/$new_fruit/g" $dir_file_js/jdFruitShareCodes.js
-sed -i "s/$old_fruit3/$new_fruit/g" $dir_file_js/jdFruitShareCodes.js
-sed -i "s/randomCount = 20/randomCount = 0/g" $dir_file_js/jd_fruit.js
+	sed -i "s/$old_fruit1/$new_fruit/g" $dir_file_js/jd_fruit.js
+	sed -i "s/$old_fruit2/$new_fruit/g" $dir_file_js/jd_fruit.js
+	sed -i "s/$old_fruit1/$new_fruit/g" $dir_file_js/jdFruitShareCodes.js
+	sed -i "s/$old_fruit3/$new_fruit/g" $dir_file_js/jdFruitShareCodes.js
+	sed -i "s/randomCount = 20/randomCount = 0/g" $dir_file_js/jd_fruit.js
 
 
-#萌宠
-old_pet1="MTAxODc2NTEzNTAwMDAwMDAwMjg3MDg2MA==@MTAxODc2NTEzMzAwMDAwMDAyNzUwMDA4MQ==@MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODc2NTEzNDAwMDAwMDAzMDI2MDI4MQ==@MTAxODcxOTI2NTAwMDAwMDAxOTQ3MjkzMw=="
-old_pet2="MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODcxOTI2NTAwMDAwMDAyNjA4ODQyMQ==@MTAxODc2NTEzOTAwMDAwMDAyNzE2MDY2NQ=="
-old_pet3="MTAxODc2NTEzNTAwMDAwMDAwMjg3MDg2MA==@MTAxODc2NTEzMzAwMDAwMDAyNzUwMDA4MQ==@MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODc2NTEzNDAwMDAwMDAzMDI2MDI4MQ=="
-new_pet="MTE1NDAxNzcwMDAwMDAwMzk1OTQ4Njk==@MTE1NDQ5OTUwMDAwMDAwMzk3NDgyMDE==@MTAxODEyOTI4MDAwMDAwMDQwMTIzMzcx==@MTEzMzI0OTE0NTAwMDAwMDAzOTk5ODU1MQ==@MTAxODc2NTEzMzAwMDAwMDAxOTkzMzM1MQ==@MTAxODEyOTI4MDAwMDAwMDM5NzM3Mjk5@MTAxODc2NTEzMDAwMDAwMDAxOTcyMTM3Mw==@MTE1NDQ5MzYwMDAwMDAwMzk2NTY2MTE==@MTE1NDQ5OTUwMDAwMDAwMzk2NTY2MTk==@MTE1NDQ5OTUwMDAwMDAwNDAyNTYyMjM=="
-sed -i "s/$old_pet1/$new_pet/g" $dir_file_js/jd_pet.js
-sed -i "s/$old_pet2/$new_pet/g" $dir_file_js/jd_pet.js
-sed -i "s/$old_pet2/$new_pet/g" $dir_file_js/jdPetShareCodes.js
-sed -i "s/$old_pet3/$new_pet/g" $dir_file_js/jdPetShareCodes.js
-sed -i "s/randomCount = 20/randomCount = 0/g" $dir_file_js/jd_pet.js
+	#萌宠
+	old_pet1="MTAxODc2NTEzNTAwMDAwMDAwMjg3MDg2MA==@MTAxODc2NTEzMzAwMDAwMDAyNzUwMDA4MQ==@MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODc2NTEzNDAwMDAwMDAzMDI2MDI4MQ==@MTAxODcxOTI2NTAwMDAwMDAxOTQ3MjkzMw=="
+	old_pet2="MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODcxOTI2NTAwMDAwMDAyNjA4ODQyMQ==@MTAxODc2NTEzOTAwMDAwMDAyNzE2MDY2NQ=="
+	old_pet3="MTAxODc2NTEzNTAwMDAwMDAwMjg3MDg2MA==@MTAxODc2NTEzMzAwMDAwMDAyNzUwMDA4MQ==@MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODc2NTEzNDAwMDAwMDAzMDI2MDI4MQ=="	new_pet="MTE1NDAxNzcwMDAwMDAwMzk1OTQ4Njk==@MTE1NDQ5OTUwMDAwMDAwMzk3NDgyMDE==@MTAxODEyOTI4MDAwMDAwMDQwMTIzMzcx==@MTEzMzI0OTE0NTAwMDAwMDAzOTk5ODU1MQ==@MTAxODc2NTEzMzAwMDAwMDAxOTkzMzM1MQ==@MTAxODEyOTI4MDAwMDAwMDM5NzM3Mjk5@MTAxODc2NTEzMDAwMDAwMDAxOTcyMTM3Mw==@MTE1NDQ5MzYwMDAwMDAwMzk2NTY2MTE==@MTE1NDQ5OTUwMDAwMDAwMzk2NTY2MTk==@MTE1NDQ5OTUwMDAwMDAwNDAyNTYyMjM=="
+	sed -i "s/$old_pet1/$new_pet/g" $dir_file_js/jd_pet.js
+	sed -i "s/$old_pet2/$new_pet/g" $dir_file_js/jd_pet.js
+	sed -i "s/$old_pet2/$new_pet/g" $dir_file_js/jdPetShareCodes.js
+	sed -i "s/$old_pet3/$new_pet/g" $dir_file_js/jdPetShareCodes.js
+	sed -i "s/randomCount = 20/randomCount = 0/g" $dir_file_js/jd_pet.js
 
-#种豆
-old_plantBean1="66j4yt3ebl5ierjljoszp7e4izzbzaqhi5k2unz2afwlyqsgnasq@olmijoxgmjutyrsovl2xalt2tbtfmg6sqldcb3q@e7lhibzb3zek27amgsvywffxx7hxgtzstrk2lba@e7lhibzb3zek32e72n4xesxmgc2m76eju62zk3y"
-old_plantBean2="4npkonnsy7xi3p6pjfxg6ct5gll42gmvnz7zgoy@6dygkptofggtp6ffhbowku3xgu@mlrdw3aw26j3wgzjipsxgonaoyr2evrdsifsziy"
-old_plantBean3="66j4yt3ebl5ierjljoszp7e4izzbzaqhi5k2unz2afwlyqsgnasq@olmijoxgmjutyrsovl2xalt2tbtfmg6sqldcb3q@e7lhibzb3zek27amgsvywffxx7hxgtzstrk2lba"
-old_plantBean4="4npkonnsy7xi3p6pjfxg6ct5gll42gmvnz7zgoy@6dygkptofggtp6ffhbowku3xgu@mlrdw3aw26j3wgzjipsxgonaoyr2evrdsifsziy@mlrdw3aw26j3wgzjipsxgonaoyr2evrdsifsziy"
+	#种豆
+	old_plantBean1="66j4yt3ebl5ierjljoszp7e4izzbzaqhi5k2unz2afwlyqsgnasq@olmijoxgmjutyrsovl2xalt2tbtfmg6sqldcb3q@e7lhibzb3zek27amgsvywffxx7hxgtzstrk2lba@e7lhibzb3zek32e72n4xesxmgc2m76eju62zk3y"
+	old_plantBean2="4npkonnsy7xi3p6pjfxg6ct5gll42gmvnz7zgoy@6dygkptofggtp6ffhbowku3xgu@mlrdw3aw26j3wgzjipsxgonaoyr2evrdsifsziy"
+	old_plantBean3="66j4yt3ebl5ierjljoszp7e4izzbzaqhi5k2unz2afwlyqsgnasq@olmijoxgmjutyrsovl2xalt2tbtfmg6sqldcb3q@e7lhibzb3zek27amgsvywffxx7hxgtzstrk2lba"
+	old_plantBean4="4npkonnsy7xi3p6pjfxg6ct5gll42gmvnz7zgoy@6dygkptofggtp6ffhbowku3xgu@mlrdw3aw26j3wgzjipsxgonaoyr2evrdsifsziy@mlrdw3aw26j3wgzjipsxgonaoyr2evrdsifsziy"
 new_plantBean="4npkonnsy7xi3n46rivf5vyrszud7yvj7hcdr5a@mlrdw3aw26j3xeqso5asaq6zechwcl76uojnpha@nkvdrkoit5o65lgaousaj4dqrfmnij2zyntizsa@3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@olmijoxgmjutyy7u5s57pouxi5teo3r4r2mt36i@chcdw36mwfu6bh72u7gtvev6em@olmijoxgmjutzh77gykzjkyd6zwvkvm6oszb5ni@4npkonnsy7xi3smz2qmjorpg6ldw5otnabrmlei@e7lhibzb3zek2zin4gnao3gynqwqgrzjyopvbua@e7lhibzb3zek234ckc2fm2yvkj5cbsdpe7y6p2a"
-sed -i "s/$old_plantBean1/$new_plantBean/g" $dir_file_js/jd_plantBean.js
-sed -i "s/$old_plantBean2/$new_plantBean/g" $dir_file_js/jd_plantBean.js
-sed -i "s/$old_plantBean3/$new_plantBean/g" $dir_file_js/jdPlantBeanShareCodes.js
-sed -i "s/$old_plantBean4/$new_plantBean/g" $dir_file_js/jdPlantBeanShareCodes.js
-sed -i "s/randomCount = 20/randomCount = 0/g" $dir_file_js/jd_plantBean.js
+	sed -i "s/$old_plantBean1/$new_plantBean/g" $dir_file_js/jd_plantBean.js
+	sed -i "s/$old_plantBean2/$new_plantBean/g" $dir_file_js/jd_plantBean.js
+	sed -i "s/$old_plantBean3/$new_plantBean/g" $dir_file_js/jdPlantBeanShareCodes.js
+	sed -i "s/$old_plantBean4/$new_plantBean/g" $dir_file_js/jdPlantBeanShareCodes.js
+	sed -i "s/randomCount = 20/randomCount = 0/g" $dir_file_js/jd_plantBean.js
 
 
 
 }
 
 update_script() {
-$start_script
-cd $dir_file
-git fetch --all
-git reset --hard origin/main
-$stop_script
+	echo -e "$green update_script$start_script $white"
+	cd $dir_file
+	git fetch --all
+	git reset --hard origin/main
+	echo -e "$green update_script$stop_script $white"
 }
 
 
 run_0() {
-$start_script
-$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
-$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
-$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
-$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
-$node $dir_file_js/jd_blueCoin.js #京小超兑换，有次数限制，没时间要求
-$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
-run_10_15_20
-run_06_18
-run_01
-run_02
-run_08
-$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
-$node $dir_file_js/jd_bean_change.js #京豆变更
-$stop_script
+	echo -e "$green run_0$start_script $white"
+	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
+	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
+	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
+	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
+	$node $dir_file_js/jd_blueCoin.js #京小超兑换，有次数限制，没时间要求
+	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
+	run_10_15_20
+	run_06_18
+	run_01
+	run_02
+	run_08
+	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
+	$node $dir_file_js/jd_bean_change.js #京豆变更
+	echo -e "$green run_0$stop_script $white"
 }
 
 run_01() {
-$start_script
-$node $dir_file_js/jd_joy_feedPets.js #宠汪汪喂食一个小时喂一次
-$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
-$stop_script
+	echo -e "$green run_1$start_script $white"
+	$node $dir_file_js/jd_joy_feedPets.js #宠汪汪喂食一个小时喂一次
+	$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
+	echo -e "$green run_01$stop_script $white"
 }
 
 run_02() {
-$start_script
-$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每两小时收一次
-$stop_script
+	echo -e "$green run_2$start_script $white"
+	$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每两小时收一次
+	echo -e "$green run_02$stop_script $white"
 }
 
 run_06_18() {
-$start_script
-$node $dir_file_js/jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
-$node $dir_file_js/jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
-$node $dir_file_js/jd_joy.js #jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
-$node $dir_file_js/jd_pet.js #东东萌宠，跟手机商城同一时间
-$node $dir_file_js/jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
-$node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
-$node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
-$node $dir_file_js/jd_superMarket.js #京小超,0 10 15 20四场补货加劵
-$stop_script
+	echo -e "$green run_06_18$start_script $white"
+	$node $dir_file_js/jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
+	$node $dir_file_js/jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
+	$node $dir_file_js/jd_joy.js #jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
+	$node $dir_file_js/jd_pet.js #东东萌宠，跟手机商城同一时间
+	$node $dir_file_js/jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
+	$node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
+	$node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
+	$node $dir_file_js/jd_superMarket.js #京小超,0 10 15 20四场补货加劵
+	echo -e "$green run_06_18$stop_script $white"
 }
 
 run_08() {
-$start_script
-$node $dir_file_js/jd_dreamFactory.js #京喜工厂 20分钟运行一次，后面再改
-$stop_script
+	echo -e "$green run_08$start_script $white"
+	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 20分钟运行一次，后面再改
+	echo -e "$green run_08$stop_script $white"
 }
 
 run_10_15_20() {
-$start_script
-$node $dir_file_js/jd_superMarket.js #京小超,0 10 15 20四场补货加劵
-$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
-$stop_script
+	echo -e "$green run_10_15_20$start_script $white"
+	$node $dir_file_js/jd_superMarket.js #京小超,0 10 15 20四场补货加劵
+	$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
+	echo -e "$green run_10_15_20$stop_script $white"
 }
 
 help() {
-clear
-echo ----------------------------------------------------
-echo "	     JD.sh $version 使用说明"
-echo ----------------------------------------------------
-echo -e "$yellow 1.文件说明$white"
-echo -e "$green $dir_file/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
-echo -e "$green $dir_file/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
-echo -e "$green $dir_file/jd.sh $white JD_Script的本体（作用就是帮忙下载js脚本，js脚本是核心）"
-echo -e "$yellow JS脚本作用请查询：$white $green https://github.com/lxk0301/jd_scripts $white"
-echo -e "$yellow 浏览器获取京东cookie教程：$white $green https://github.com/lxk0301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
-echo ""
-echo -e "$yellow 2.jd.sh脚本命令$white"
-echo -e "$green sh \$jd update $white        #下载js脚本"
-echo -e "$green sh \$jd update_script $white #更新JD_Script "
-echo -e "$green sh \$jd run_0 $white         #运行全部脚本 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
-echo -e "$green sh \$jd run_01 $white        #运行run_01模块里的命令 "
-echo -e "$green sh \$jd run_02 $white        #运行run_02模块里的命令"
-echo -e "$green sh \$jd run_06_18 $white     #运行run_06_18模块里的命令"
-echo -e "$green sh \$jd run_08 $white        #运行run_8模块里的命令"
-echo -e "$green sh \$jd run_10_15_20 $white  #运行run_10_15_20模块里的命令"
-echo " 如果不喜欢这样，你也可以直接cd $jd_file/js,然后用node 脚本名字.js "
-echo ""
-echo ""
-echo -e "$yellow 3.本脚本的计划任务$white"
-echo " $new_task2"
-echo " $new_task3"
-echo " $new_task4"
-echo " $new_task5"
-echo " $new_task6"
-echo " $new_task7"
-echo " $new_task8"
-echo " $new_task9"
-echo -e "$yellow 检测定时任务:$white $cron_help"
-echo ""
-echo -e "$yellow 4.检测脚本是否最新:$white $Script_status "
-echo ""
-echo -e "$yellow 5.JD_Script报错你可以反馈到这里:$white$green https://github.com/ITdesk01/JD_Script/issues$white"
-echo ""
-echo -e "本脚本基于$green x86主机测试$white，一切正常，其他的机器自行测试，满足依赖一般问题不大"
-echo ----------------------------------------------------
-echo " 		by：ITdesk"
-echo ----------------------------------------------------
+	clear
+	echo ----------------------------------------------------
+	echo "	     JD.sh $version 使用说明"
+	echo ----------------------------------------------------
+	echo -e "$yellow 1.文件说明$white"
+	echo -e "$green $dir_file/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
+	echo -e "$green $dir_file/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
+	echo -e "$green $dir_file/jd.sh $white JD_Script的本体（作用就是帮忙下载js脚本，js脚本是核心）"
+	echo -e "$yellow JS脚本作用请查询：$white $green https://github.com/lxk0301/jd_scripts $white"
+	echo -e "$yellow 浏览器获取京东cookie教程：$white $green https://github.com/lxk0301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
+	echo ""
+	echo -e "$yellow 2.jd.sh脚本命令$white"
+	echo -e "$green sh \$jd update $white        #下载js脚本"
+	echo -e "$green sh \$jd update_script $white #更新JD_Script "
+	echo -e "$green sh \$jd run_0 $white         #运行全部脚本 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
+	echo -e "$green sh \$jd run_01 $white        #运行run_01模块里的命令 "
+	echo -e "$green sh \$jd run_02 $white        #运行run_02模块里的命令"
+	echo -e "$green sh \$jd run_06_18 $white     #运行run_06_18模块里的命令"
+	echo -e "$green sh \$jd run_08 $white        #运行run_8模块里的命令"
+	echo -e "$green sh \$jd run_10_15_20 $white  #运行run_10_15_20模块里的命令"
+	echo " 如果不喜欢这样，你也可以直接cd $jd_file/js,然后用node 脚本名字.js "
+	echo ""
+	echo ""
+	echo -e "$yellow 3.本脚本的计划任务$white"
+	echo " $new_task2"
+	echo " $new_task3"
+	echo " $new_task4"
+	echo " $new_task5"
+	echo " $new_task6"
+	echo " $new_task7"
+	echo " $new_task8"
+	echo " $new_task9"
+	echo -e "$yellow 检测定时任务:$white $cron_help"
+	echo ""
+	echo -e "$yellow 4.检测脚本是否最新:$white $Script_status "
+	echo ""
+	echo -e "$yellow 5.JD_Script报错你可以反馈到这里:$white$green https://github.com/ITdesk01/JD_Script/issues$white"
+	echo ""
+	echo -e "本脚本基于$green x86主机测试$white，一切正常，其他的机器自行测试，满足依赖一般问题不大"
+	echo ----------------------------------------------------
+	echo " 		by：ITdesk"
+	echo ----------------------------------------------------
 }
 
 description_if() {
