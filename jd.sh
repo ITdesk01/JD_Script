@@ -20,7 +20,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
-new_task1="###########这里是JD_Script的定时任务1.1版本###########"
+new_task1="###########这里是JD_Script的定时任务1.2版本###########"
 new_task2="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
 new_task3="30 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点30分更新lxk0301脚本
 new_task4="0 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点0分执行全部脚本
@@ -52,10 +52,10 @@ task() {
 		sed -i "6a ${new_task7}" $cron_file
 		sed -i "7a ${new_task8}" $cron_file
 		sed -i "8a ${new_task9}" $cron_file
-		sed -i "9a #预留位置方便后期增加" $cron_file
-		sed -i "10a #预留位置方便后期增加" $cron_file
-		sed -i "11a #预留位置方便后期增加 " $cron_file
-		sed -i "12a #预留位置方便后期增加" $cron_file
+		sed -i "9a #预留位置方便后期增加（不要删除）" $cron_file
+		sed -i "10a #预留位置方便后期增加（不要删除）" $cron_file
+		sed -i "11a #预留位置方便后期增加（不要删除） " $cron_file
+		sed -i "12a #预留位置方便后期增加（不要删除）" $cron_file
 		sed -i "13a ${new_task10}" $cron_file
 		/etc/init.d/cron restart
 		cron_help="$yellow定时任务更新完成，记得看下你的定时任务，如果有问题可以参考/etc/crontabs/root_back恢复$white"
