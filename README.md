@@ -39,7 +39,7 @@ git clone https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
 cd /usr/share/JD_Script && chmod 777 jd.sh 
 sh jd.sh 
 ```
-**执行sh jd.sh以后会重启一次，所以做好准备**
+**执行sh jd.sh以后会重启一次，所以做好准备（首次运行脚本会这样，以后都不会）**
 
 **重启完成以后**
 ```sh
