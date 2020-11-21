@@ -41,7 +41,8 @@ task() {
 	if [[ `grep -o $new_task1 $cron_file |wc -l` == "1" ]]; then
 		cron_help="$green定时任务与设定一致$white"
 	else
-		sed -i '1,10d' $cron_file
+		sed -i '1,14d' $cron_file
+		echo " " >> $cron_file
 		sed -i "1i ${new_task1}" $cron_file
 		sed -i "1a ${new_task2}" $cron_file
 		sed -i "2a ${new_task3}" $cron_file
@@ -51,9 +52,13 @@ task() {
 		sed -i "6a ${new_task7}" $cron_file
 		sed -i "7a ${new_task8}" $cron_file
 		sed -i "8a ${new_task9}" $cron_file
-		sed -i "9a ${new_task10}" $cron_file
+		sed -i "9a #预留位置方便后期增加" $cron_file
+		sed -i "10a #预留位置方便后期增加" $cron_file
+		sed -i "11a #预留位置方便后期增加 " $cron_file
+		sed -i "12a #预留位置方便后期增加" $cron_file
+		sed -i "13a ${new_task10}" $cron_file
 		/etc/init.d/cron restart
-		cron_help="$yellow定时任务更新完成，如果有问题可以参考/etc/crontabs/root_back恢复$white"
+		cron_help="$yellow定时任务更新完成，记得看下你的定时任务，如果有问题可以参考/etc/crontabs/root_back恢复$white"
 	fi
 }
 
