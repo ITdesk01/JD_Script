@@ -60,9 +60,19 @@ wget $url/jd_pigPet.js -O $dir_file_js/jd_pigPet.js
 wget $url/jd_bean_change.js -O $dir_file_js/jd_bean_change.js
 wget $url/jd_dreamFactory.js -O $dir_file_js/jd_dreamFactory.js
 wget $url/jd_necklace.js -O $dir_file_js/jd_necklace.js
+additional_settings
+}
 
+
+additional_settings() {
+#京小超默认兑换20豆子
 sed -i "s/|| 0/|| 20/g" $dir_file_js/jd_blueCoin.js
-sed -i "s/|| 20/|| 50/g" $dir_file_js/jd_unsubscribe.js
+
+#取消店铺从20个改成50个(没有星推官先默认20吧)
+#sed -i "s/|| 20/|| 50/g" $dir_file_js/jd_unsubscribe.js
+
+#宠汪汪积分兑换奖品改成兑换500豆子，个别人会兑换错误
+sed -i "s/let joyRewardName = 20/let joyRewardName = 500/g" $dir_file_js/jd_joy_reward.js
 
 #水果
 old_fruit1="0a74407df5df4fa99672a037eec61f7e@dbb21614667246fabcfd9685b6f448f3@6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6"
@@ -100,11 +110,14 @@ sed -i "s/$old_plantBean4/$new_plantBean/g" $dir_file_js/jdPlantBeanShareCodes.j
 sed -i "s/randomCount = 20/randomCount = 0/g" $dir_file_js/jd_plantBean.js
 
 
+
 }
 
 update_script() {
 $start_script
-cd $dir_file && git pull
+cd $dir_file
+git fetch --all
+git reset --hard origin/main
 $stop_script
 }
 
