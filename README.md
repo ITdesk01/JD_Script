@@ -14,6 +14,9 @@ N1（群友极地阳光测试）
 
 ## Usage 使用方法
 ## 1.openwrt安装依赖(重要，不好好看，报错自行处理)
+
+**注意（rom小于128M别折腾了，你装不下依赖）**
+
 **1.1开始安装git**
 ```sh
 opkg update
@@ -25,7 +28,10 @@ opkg install git-http
 opkg install node
 opkg install node-npm
 ```
-**node版本一定要大于10，安装node以后用 opkg list-installed | grep node 查看node版本，两个都要大于10**
+**已知问题node-npm经常找不到，需要更换下载源（源我这边也没有）或者通过ipk方式安装，实在不行考虑重新编译固件，编译的时候加进去**
+
+**node和node-npm版本一定要大于10，安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10**
+
 
 **1.3执行npm**
 ```sh
