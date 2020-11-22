@@ -304,7 +304,7 @@ description_if() {
 	clear
 	git_branch=$(git branch -v | grep -o behind )
 	if [[ "$git_branch" == "behind" ]]; then
-		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script  && sh \$jd update && sh \$jd$white更新)"
+		Script_status="$red建议更新 $green(可以运行 sh \$jd update_script  && sh \$jd update && sh \$jd更新,这句代码的意思是先更新JD_Script脚本，再去下载lxk0301的脚本，再运行使用说明，如果确定没有问题，你可以随便执行一个sh \$jd run_06_18测试一下)$white$white"
 	else
 		Script_status="$green最新$white"
 	fi
