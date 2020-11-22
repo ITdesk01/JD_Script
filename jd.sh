@@ -96,6 +96,7 @@ update() {
 	wget $url/jd_bean_change.js -O $dir_file_js/jd_bean_change.js
 	wget $url/jd_dreamFactory.js -O $dir_file_js/jd_dreamFactory.js
 	wget $url/jd_necklace.js -O $dir_file_js/jd_necklace.js
+	wget $url/jd_small_home.js -O $dir_file_js/jd_small_home.js
 	additional_settings
 	echo -e "$green update$stop_script $white"
 }
@@ -173,7 +174,7 @@ update_script() {
 
 run_0() {
 	echo -e "$green run_0$start_script $white"
-	$node $dir_file_js/jd_blueCoin.js #京小超兑换，有次数限制，没时间要求
+	$node $dir_file_js/jd_blueCoin.js #东东超市兑换，有次数限制，没时间要求
 	run_08_12_16
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
@@ -211,7 +212,7 @@ run_06_18() {
 	$node $dir_file_js/jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
 	$node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
 	$node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
-	$node $dir_file_js/jd_superMarket.js #京小超,0 10 15 20四场补货加劵
+	$node $dir_file_js/jd_superMarket.js #东东超市,6点 18点多加两场用于收金币
 	echo -e "$green run_06_18$stop_script $white"
 }
 
@@ -224,12 +225,13 @@ echo -e "$green run_08_12_16$stop_script $white"
 run_020() {
 	echo -e "$green run_020$start_script $white"
 	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 20分钟运行一次
+	$node $dir_file_js/jd_small_home.js #东东小窝
 	echo -e "$green run_020$stop_script $white"
 }
 
 run_10_15_20() {
 	echo -e "$green run_10_15_20$start_script $white"
-	$node $dir_file_js/jd_superMarket.js #京小超,0 10 15 20四场补货加劵
+	$node $dir_file_js/jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
 	$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
 	echo -e "$green run_10_15_20$stop_script $white"
 }
