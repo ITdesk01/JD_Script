@@ -268,6 +268,7 @@ help() {
 	echo " $new_task7"
 	echo " $new_task8"
 	echo " $new_task9"
+	echo " $new_task10"
 	echo -e "$yellow 检测定时任务:$white $cron_help"
 	echo ""
 	echo -e "$yellow 4.检测脚本是否最新:$white $Script_status "
