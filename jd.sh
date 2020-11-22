@@ -102,8 +102,8 @@ update() {
 
 
 additional_settings() {
-	#京小超默认兑换20豆子
-	sed -i "s/|| 0/|| 20/g" $dir_file_js/jd_blueCoin.js
+	#京小超默认兑换20豆子(JS已经默认兑换20了)
+	#sed -i "s/|| 0/|| 20/g" $dir_file_js/jd_blueCoin.js
 
 	#取消店铺从20个改成50个(没有星推官先默认20吧)
 	#sed -i "s/|| 20/|| 50/g" $dir_file_js/jd_unsubscribe.js
@@ -163,7 +163,6 @@ run_0() {
 	$node $dir_file_js/jd_blueCoin.js #京小超兑换，有次数限制，没时间要求
 	run_08_12_16
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
-	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
 	run_10_15_20
@@ -186,6 +185,7 @@ run_01() {
 run_02() {
 	echo -e "$green run_2$start_script $white"
 	$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每两小时收一次
+	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
 	echo -e "$green run_02$stop_script $white"
 }
 
