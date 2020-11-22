@@ -20,7 +20,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
-new_task1="###########这里是JD_Script的定时任务1.2版本###########"
+new_task1="###########这里是JD_Script的定时任务1.3版本###########"
 new_task2="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
 new_task3="30 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点30分更新lxk0301脚本
 new_task4="0 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点0分执行全部脚本
@@ -29,7 +29,11 @@ new_task6="1 6-18/6 * * * /usr/share/JD_Script/jd.sh run_06_18 >/tmp/jd_run_06_1
 new_task7="5 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"  #10点,15点,20点执行一次run_10_15_20
 new_task8="40 2-22/2 * * * /usr/share/JD_Script/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" #每两个小时执行一次run_02
 new_task9="*/20 1-23 * * * /usr/share/JD_Script/jd.sh run_020 >/tmp/jd_run_020.log 2>&1" #每20分钟执行一次
-new_task10="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
+new_task10="0 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #8点，12点，16点执行一次
+new_task11="#预留位置方便后期增加（不要删除）"
+new_task12="#预留位置方便后期增加（不要删除）"
+new_task13="#预留位置方便后期增加（不要删除）"
+new_task14="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
 
 task() {
 	if [[ -e /etc/crontabs/root_back ]]; then
@@ -52,11 +56,12 @@ task() {
 		sed -i "6a ${new_task7}" $cron_file
 		sed -i "7a ${new_task8}" $cron_file
 		sed -i "8a ${new_task9}" $cron_file
-		sed -i "9a #预留位置方便后期增加（不要删除）" $cron_file
-		sed -i "10a #预留位置方便后期增加（不要删除）" $cron_file
-		sed -i "11a #预留位置方便后期增加（不要删除） " $cron_file
-		sed -i "12a #预留位置方便后期增加（不要删除）" $cron_file
-		sed -i "13a ${new_task10}" $cron_file
+		sed -i "9a ${new_task10}" $cron_file
+		sed -i "10a ${new_task11}" $cron_file
+		sed -i "11a ${new_task12}" $cron_file
+		sed -i "12a ${new_task13}" $cron_file
+		sed -i "13a ${new_task14}" $cron_file
+		sed '$s/ //' filename $cron_file
 		/etc/init.d/cron restart
 		cron_help="$yellow定时任务更新完成，记得看下你的定时任务，如果有问题可以参考/etc/crontabs/root_back恢复$white"
 	fi
@@ -155,12 +160,12 @@ update_script() {
 
 run_0() {
 	echo -e "$green run_0$start_script $white"
+	$node $dir_file_js/jd_blueCoin.js #京小超兑换，有次数限制，没时间要求
+	run_08_12_16
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
-	$node $dir_file_js/jd_blueCoin.js #京小超兑换，有次数限制，没时间要求
-	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	run_10_15_20
 	run_06_18
 	run_01
@@ -197,6 +202,12 @@ run_06_18() {
 	echo -e "$green run_06_18$stop_script $white"
 }
 
+run_08_12_16() {
+echo -e "$green run_08_12_16$start_script $white"
+$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
+echo -e "$green run_08_12_16$stop_script $white"
+}
+
 run_020() {
 	echo -e "$green run_020$start_script $white"
 	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 20分钟运行一次
@@ -229,6 +240,7 @@ help() {
 	echo -e "$green sh \$jd run_01 $white        #运行run_01模块里的命令 "
 	echo -e "$green sh \$jd run_02 $white        #运行run_02模块里的命令"
 	echo -e "$green sh \$jd run_06_18 $white     #运行run_06_18模块里的命令"
+	echo -e "$green sh \$jd run_08_12_16 $white     #运行run_08_12_16模块里的命令"
 	echo -e "$green sh \$jd run_020 $white        #运行run_20模块里的命令"
 	echo -e "$green sh \$jd run_10_15_20 $white  #运行run_10_15_20模块里的命令"
 	echo " 如果不喜欢这样，你也可以直接cd $jd_file/js,然后用node 脚本名字.js "
@@ -323,7 +335,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_020|task)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_020|task|run_08_12_16)
 			$action1
 			;;
 			*)
