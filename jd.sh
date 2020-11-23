@@ -61,7 +61,7 @@ task() {
 		sed -i "11a ${new_task12}" $cron_file
 		sed -i "12a ${new_task13}" $cron_file
 		sed -i "13a ${new_task14}" $cron_file
-		sed '$s/ //' filename $cron_file
+		sed '$s/ //' $cron_file
 		/etc/init.d/cron restart
 		cron_help="$yellow定时任务更新完成，记得看下你的定时任务，如果有问题可以参考/etc/crontabs/root_back恢复$white"
 	fi
