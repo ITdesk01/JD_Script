@@ -180,6 +180,7 @@ run_0() {
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
+	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_10_15_20
 	run_06_18
 	run_01
@@ -226,7 +227,6 @@ echo -e "$green run_08_12_16$stop_script $white"
 run_020() {
 	echo -e "$green run_020$start_script $white"
 	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 20分钟运行一次
-	$node $dir_file_js/jd_small_home.js #东东小窝
 	echo -e "$green run_020$stop_script $white"
 }
 
