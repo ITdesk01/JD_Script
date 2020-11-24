@@ -108,10 +108,10 @@ additional_settings() {
 	#sed -i "s/|| 0/|| 20/g" $dir_file_js/jd_blueCoin.js
 
 	#取消店铺从20个改成50个(没有星推官先默认20吧)
-	#sed -i "s/|| 20/|| 50/g" $dir_file_js/jd_unsubscribe.js
+	sed -i "s/|| 20/|| 50/g" $dir_file_js/jd_unsubscribe.js
 
-	#宠汪汪积分兑换奖品改成兑换500豆子，个别人会兑换错误
-	sed -i "s/let joyRewardName = 20/let joyRewardName = 500/g" $dir_file_js/jd_joy_reward.js
+	#宠汪汪积分兑换奖品改成兑换500豆子，个别人会兑换错误(350积分兑换20豆子，8000积分兑换500豆子要求等级16级，16000积分兑换1000京豆16级以后不能兑换)
+	#sed -i "s/let joyRewardName = 20/let joyRewardName = 500/g" $dir_file_js/jd_joy_reward.js
 
 	#水果
 	old_fruit1="0a74407df5df4fa99672a037eec61f7e@dbb21614667246fabcfd9685b6f448f3@6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6"
