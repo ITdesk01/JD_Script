@@ -30,7 +30,7 @@ opkg install node-npm
 ```
 **已知问题**node-npm经常找不到，需要更换下载源（源我这边也没有）或者通过ipk方式安装，实在不行考虑重新编译固件，编译的时候加进去
 
-**node和node-npm版本一定要大于10，**安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10
+**node和node-npm版本一定要大于10**，安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10
 
 
 **1.3执行npm**
