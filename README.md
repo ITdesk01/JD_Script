@@ -28,14 +28,20 @@ opkg install git-http
 opkg install node
 opkg install node-npm
 ```
-**已知问题node-npm经常找不到，需要更换下载源（源我这边也没有）或者通过ipk方式安装，实在不行考虑重新编译固件，编译的时候加进去**
+**已知问题**node-npm经常找不到，需要更换下载源（源我这边也没有）或者通过ipk方式安装，实在不行考虑重新编译固件，编译的时候加进去
 
-**node和node-npm版本一定要大于10，安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10**
+**node和node-npm版本一定要大于10，**安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10
 
 
 **1.3执行npm**
 ```sh
 npm install -g request got tough-cookie
+```
+如果你执行安装npm install -g request got tough-cookie报错，你也可以用以下代码安装
+```sh
+wget https://raw.githubusercontent.com/lxk0301/jd_scripts/master/package.json
+
+npm install
 ```
 
 **注意**：当你使用一般Linux发行版（如Ubuntu）时，请将```jd.sh```首行的```#!/bin/sh```改为```#!/bin/bash```并修改运行方式为```bash $jd```以避免不同系统shell语法不兼容的情况
