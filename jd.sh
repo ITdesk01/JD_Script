@@ -97,6 +97,10 @@ update() {
 	wget $url/jd_dreamFactory.js -O $dir_file_js/jd_dreamFactory.js
 	wget $url/jd_necklace.js -O $dir_file_js/jd_necklace.js
 	wget $url/jd_small_home.js -O $dir_file_js/jd_small_home.js
+	wget $url/package.json -O $dir_file_js/package.json
+	cd $dir_file_js
+	npm install
+	cd ..
 	additional_settings
 	task #更新完全部脚本顺便检查一下计划任务是否有变
 	echo -e "$green update$stop_script $white"
