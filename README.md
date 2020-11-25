@@ -38,6 +38,8 @@ opkg install node-npm
 npm install -g request got tough-cookie
 ```
 
+**注意**：当你使用一般Linux发行版（如Ubuntu）时，请将```jd.sh```首行的```#!/bin/sh```改为```#!/bin/bash```并修改运行方式为```bash $jd```以避免不同系统shell语法不兼容的情况
+
 
 **2.开始下载脚本**
 ```sh
