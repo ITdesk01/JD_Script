@@ -161,6 +161,14 @@ additional_settings() {
 	sed -i "s/$old_plantBean4/$new_plantBean_set/g" $dir_file_js/jdPlantBeanShareCodes.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_plantBean.js
 
+	#东东工厂
+	old_jdfactory="P04z54XCjVWnYaS5u2ak7ZCdan1Bdd2GGiWvC6_uERj"
+	old_jdfactory1="P04z54XCjVWnYaS5m9cZ2ariXVJwHf0bgkG7Uo"
+	new_jdfactory="P04z54XCjVWnYaS5m9cZ2f83X0Zl_Dd8CqABxo"
+	new_jdfactory1="P04z54XCjVWnYaS5m9cZ2Wui31Oxg3QPwI97G0"
+	sed -i "s/$old_jdfactory/$new_jdfactory/g" $dir_file_js/jd_jdfactory.js
+	sed -i "s/$old_jdfactory1/$new_jdfactory1/g" $dir_file_js/jd_jdfactory.js
+
 
 
 }
