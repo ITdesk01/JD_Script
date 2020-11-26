@@ -163,22 +163,17 @@ additional_settings() {
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_plantBean.js
 
 	#京喜工厂
-	old_dreamFactory="gB99tYLjvPcEFloDgamoBw=="
-	old_dreamFactory1="V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k="
-	new_dreamFactory="4HL35B_v85-TsEGQbQTfFg=="
-	new_jdreamFactory1="q3X6tiRYVGYuAO4OD1-Fcg=="
+	old_dreamFactory="'gB99tYLjvPcEFloDgamoBw==', 'V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k=', '1uzRU5HkaUgvy0AB5Q9VUg=='"
+	new_dreamFactory="'4HL35B_v85-TsEGQbQTfFg==', 'q3X6tiRYVGYuAO4OD1-Fcg==',"
 	sed -i "s/$old_dreamFactory/$new_dreamFactory/g" $dir_file_js/jd_dreamFactory.js
-	sed -i "s/$old_dreamFactory1/$new_dreamFactory1/g" $dir_file_js/jd_dreamFactory.js
 
 	#东东工厂
 	old_jdfactory="P04z54XCjVWnYaS5u2ak7ZCdan1Bdd2GGiWvC6_uERj"
-	old_jdfactory1="P04z54XCjVWnYaS5m9cZ2ariXVJwHf0bgkG7Uo"
+	old_jdfactory1="'P04z54XCjVWnYaS5m9cZ2ariXVJwHf0bgkG7Uo'"
 	new_jdfactory="P04z54XCjVWnYaS5m9cZ2f83X0Zl_Dd8CqABxo"
-	new_jdfactory1="P04z54XCjVWnYaS5m9cZ2Wui31Oxg3QPwI97G0"
+	new_jdfactory1="'P04z54XCjVWnYaS5m9cZ2Wui31Oxg3QPwI97G0',"
 	sed -i "s/$old_jdfactory/$new_jdfactory/g" $dir_file_js/jd_jdfactory.js
 	sed -i "s/$old_jdfactory1/$new_jdfactory1/g" $dir_file_js/jd_jdfactory.js
-
-
 
 }
 
