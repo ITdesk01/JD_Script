@@ -98,6 +98,7 @@ update() {
 	wget $url/jd_necklace.js -O $dir_file_js/jd_necklace.js
 	wget $url/jd_small_home.js -O $dir_file_js/jd_small_home.js
 	wget $url/jd_jdfactory.js  -O $dir_file_js/jd_jdfactory.js
+	wget $url/jdFactoryShareCodes.js -O $dir_file_js/jdFactoryShareCodes.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	additional_settings
 	task #更新完全部脚本顺便检查一下计划任务是否有变
@@ -171,6 +172,7 @@ additional_settings() {
 	old_jdfactory="\`P04z54XCjVWnYaS5u2ak7ZCdan1Bdd2GGiWvC6_uERj\`, 'P04z54XCjVWnYaS5m9cZ2ariXVJwHf0bgkG7Uo'"
 	new_jdfactory="'P04z54XCjVWnYaS5m9cZ2f83X0Zl_Dd8CqABxo', 'P04z54XCjVWnYaS5m9cZ2Wui31Oxg3QPwI97G0', 'P04z54XCjVWnYaS5m9cZ2T8jntInKkhvhlkIu4', 'P04z54XCjVWnYaS5m9cZ2eq2S1OxAqmz-x3vbg',"
 	sed -i "s/$old_jdfactory/$new_jdfactory/g" $dir_file_js/jd_jdfactory.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_jdfactory.js
 	if [[ -f "/usr/share/JD_Script/1.txt" ]]; then
 		sed -i "s/let wantProduct = \`\`/let wantProduct = \`灵蛇机械键盘\`/g" $dir_file_js/jd_jdfactory.js
 	elif [[ -f "/usr/share/JD_Script/2.txt" ]]; then
