@@ -20,7 +20,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
-new_task1="###########这里是JD_Script的定时任务1.7版本###########"
+new_task1="###########这里是JD_Script的定时任务1.8版本###########"
 new_task2="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
 new_task3="30 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点30分更新lxk0301脚本
 new_task4="2 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点2分执行全部脚本
@@ -28,7 +28,7 @@ new_task5="0 7-23 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>
 new_task6="1 6-18/6 * * * /usr/share/JD_Script/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" #6点 12点18点执行一次run_06_18
 new_task7="5 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"  #10点,15点,20点执行一次run_10_15_20
 new_task8="40 2-22/2 * * * /usr/share/JD_Script/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" #每两个小时执行一次run_02
-new_task9="*/30 1-23 * * * /usr/share/JD_Script/jd.sh run_020 >/tmp/jd_run_020.log 2>&1" #1点-23点每20分钟执行一次
+new_task9="*/30 1-23 * * * /usr/share/JD_Script/jd.sh run_030 >/tmp/jd_run_030.log 2>&1" #1点-23点每30分钟执行一次run_030
 new_task10="10 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #8点，12点，16点的第10分钟执行一次
 new_task11="#预留位置方便后期增加（不要删除）"
 new_task12="#预留位置方便后期增加（不要删除）"
@@ -98,6 +98,7 @@ update() {
 	wget $url/jd_necklace.js -O $dir_file_js/jd_necklace.js
 	wget $url/jd_small_home.js -O $dir_file_js/jd_small_home.js
 	wget $url/jd_jdfactory.js  -O $dir_file_js/jd_jdfactory.js
+	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	additional_settings
 	task #更新完全部脚本顺便检查一下计划任务是否有变
 	echo -e "$green update$stop_script $white"
@@ -194,7 +195,7 @@ run_0() {
 	run_06_18
 	run_01
 	run_02
-	run_020
+	run_030
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_bean_change.js #京豆变更
 	echo -e "$green run_0$stop_script $white"
@@ -233,11 +234,12 @@ $node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限�
 echo -e "$green run_08_12_16$stop_script $white"
 }
 
-run_020() {
-	echo -e "$green run_020$start_script $white"
-	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 20分钟运行一次
+run_030() {
+	echo -e "$green run_030$start_script $white"
+	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 30分钟运行一次
 	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
-	echo -e "$green run_020$stop_script $white"
+	$node $dir_file_js/jd_paopao.js #京东泡泡大战,未知时间先扔这里
+	echo -e "$green run_030$stop_script $white"
 }
 
 run_10_15_20() {
@@ -267,7 +269,7 @@ help() {
 	echo -e "$green sh \$jd run_02 $white        #运行run_02模块里的命令"
 	echo -e "$green sh \$jd run_06_18 $white     #运行run_06_18模块里的命令"
 	echo -e "$green sh \$jd run_08_12_16 $white     #运行run_08_12_16模块里的命令"
-	echo -e "$green sh \$jd run_020 $white        #运行run_20模块里的命令"
+	echo -e "$green sh \$jd run_030 $white        #运行run_20模块里的命令"
 	echo -e "$green sh \$jd run_10_15_20 $white  #运行run_10_15_20模块里的命令"
 	echo " 如果不喜欢这样，你也可以直接cd $jd_file/js,然后用node 脚本名字.js "
 	echo ""
@@ -361,7 +363,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_020|task|run_08_12_16)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_030|task|run_08_12_16)
 			$action1
 			;;
 			*)
