@@ -168,12 +168,16 @@ additional_settings() {
 	sed -i "s/$old_dreamFactory/$new_dreamFactory/g" $dir_file_js/jd_dreamFactory.js
 
 	#东东工厂
-	old_jdfactory="P04z54XCjVWnYaS5u2ak7ZCdan1Bdd2GGiWvC6_uERj"
-	old_jdfactory1="'P04z54XCjVWnYaS5m9cZ2ariXVJwHf0bgkG7Uo'"
-	new_jdfactory="P04z54XCjVWnYaS5m9cZ2f83X0Zl_Dd8CqABxo"
-	new_jdfactory1="'P04z54XCjVWnYaS5m9cZ2Wui31Oxg3QPwI97G0',"
+	old_jdfactory="\`P04z54XCjVWnYaS5u2ak7ZCdan1Bdd2GGiWvC6_uERj\`, 'P04z54XCjVWnYaS5m9cZ2ariXVJwHf0bgkG7Uo'"
+	new_jdfactory="'P04z54XCjVWnYaS5m9cZ2f83X0Zl_Dd8CqABxo', 'P04z54XCjVWnYaS5m9cZ2Wui31Oxg3QPwI97G0',"
 	sed -i "s/$old_jdfactory/$new_jdfactory/g" $dir_file_js/jd_jdfactory.js
-	sed -i "s/$old_jdfactory1/$new_jdfactory1/g" $dir_file_js/jd_jdfactory.js
+	if [[ -f "/usr/share/JD_Script/1.txt" ]]; then
+		sed -i "s/let wantProduct = \`\`/let wantProduct = \`灵蛇机械键盘\`/g" $dir_file_js/jd_jdfactory.js
+	elif [[ -f "/usr/share/JD_Script/2.txt" ]]; then
+		sed -i "s/let wantProduct = \`\`/let wantProduct = \`电视\`/g" $dir_file_js/jd_jdfactory.js
+	else
+		echo ""
+	fi
 
 }
 
