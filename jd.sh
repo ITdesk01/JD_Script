@@ -164,12 +164,12 @@ additional_settings() {
 
 	#京喜工厂
 	old_dreamFactory="'gB99tYLjvPcEFloDgamoBw==', 'V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k=', '1uzRU5HkaUgvy0AB5Q9VUg=='"
-	new_dreamFactory="'4HL35B_v85-TsEGQbQTfFg==', 'q3X6tiRYVGYuAO4OD1-Fcg==',"
+	new_dreamFactory="'4HL35B_v85-TsEGQbQTfFg==', 'q3X6tiRYVGYuAO4OD1-Fcg==', 'w8B9d4EVh3e3eskOT5PR1A==', 'FyYWfETygv_4XjGtnl2YSg==',"
 	sed -i "s/$old_dreamFactory/$new_dreamFactory/g" $dir_file_js/jd_dreamFactory.js
 
 	#东东工厂
 	old_jdfactory="\`P04z54XCjVWnYaS5u2ak7ZCdan1Bdd2GGiWvC6_uERj\`, 'P04z54XCjVWnYaS5m9cZ2ariXVJwHf0bgkG7Uo'"
-	new_jdfactory="'P04z54XCjVWnYaS5m9cZ2f83X0Zl_Dd8CqABxo', 'P04z54XCjVWnYaS5m9cZ2Wui31Oxg3QPwI97G0',"
+	new_jdfactory="'P04z54XCjVWnYaS5m9cZ2f83X0Zl_Dd8CqABxo', 'P04z54XCjVWnYaS5m9cZ2Wui31Oxg3QPwI97G0', 'P04z54XCjVWnYaS5m9cZ2T8jntInKkhvhlkIu4', 'P04z54XCjVWnYaS5m9cZ2eq2S1OxAqmz-x3vbg',"
 	sed -i "s/$old_jdfactory/$new_jdfactory/g" $dir_file_js/jd_jdfactory.js
 	if [[ -f "/usr/share/JD_Script/1.txt" ]]; then
 		sed -i "s/let wantProduct = \`\`/let wantProduct = \`灵蛇机械键盘\`/g" $dir_file_js/jd_jdfactory.js
