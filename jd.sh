@@ -99,6 +99,7 @@ update() {
 	wget $url/jd_small_home.js -O $dir_file_js/jd_small_home.js
 	wget $url/jd_jdfactory.js  -O $dir_file_js/jd_jdfactory.js
 	wget $url/jdFactoryShareCodes.js -O $dir_file_js/jdFactoryShareCodes.js
+	wget $url/jd_syj.js -O $dir_file_js/jd_syj.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	additional_settings
 	task #更新完全部脚本顺便检查一下计划任务是否有变
@@ -207,6 +208,7 @@ run_0() {
 	run_01
 	run_02
 	run_030
+	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_bean_change.js #京豆变更
 	echo -e "$green run_0$stop_script $white"
