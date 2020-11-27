@@ -20,7 +20,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
-new_task1="###########这里是JD_Script的定时任务2.21版本###########"
+new_task1="###########这里是JD_Script的定时任务2.22版本###########"
 new_task2="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
 new_task3="30 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点30分更新lxk0301脚本
 new_task4="0 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点0分执行全部脚本
@@ -30,7 +30,7 @@ new_task7="5 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_run
 new_task8="40 2-22/2 * * * /usr/share/JD_Script/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" #每两个小时执行一次run_02
 new_task9="*/30 1-23 * * * /usr/share/JD_Script/jd.sh run_030 >/tmp/jd_run_030.log 2>&1" #1点-23点每30分钟执行一次run_030
 new_task10="10 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #8点，12点，16点的第10分钟执行一次
-new_task11="#预留位置方便后期增加（不要删除）"
+new_task11="10 1-22/3 * * * /usr/share/JD_Script/jd.sh run_03 >/tmp/jd_run_03.log 2>&1" #每三个小时执行一次run_03
 new_task12="#预留位置方便后期增加（不要删除）"
 new_task13="#预留位置方便后期增加（不要删除）"
 new_task14="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
@@ -214,6 +214,7 @@ run_0() {
 	run_06_18
 	run_01
 	run_02
+	run_03
 	run_030
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
@@ -223,17 +224,24 @@ run_0() {
 }
 
 run_01() {
-	echo -e "$green run_1$start_script $white"
+	echo -e "$green run_01$start_script $white"
 	$node $dir_file_js/jd_plantBean.js & $node $dir_file_js/jd_joy_feedPets.js #种豆得豆，没时间要求，一个小时收一次瓶子 & #宠汪汪喂食一个小时喂一次
 	echo -e "$green run_01$stop_script $white"
 }
 
 run_02() {
-	echo -e "$green run_2$start_script $white"
+	echo -e "$green run_02$start_script $white"
 	$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每两小时收一次
 	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
 	echo -e "$green run_02$stop_script $white"
 }
+
+run_03() {
+	echo -e "$green run_03$start_script $white"
+	$node $dir_file_js/jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
+	echo -e "$green run_03$stop_script $white"
+}
+
 
 run_06_18() {
 	echo -e "$green run_06_18$start_script $white"
@@ -287,9 +295,10 @@ help() {
 	echo -e "$green sh \$jd run_0 $white         #运行全部脚本 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
 	echo -e "$green sh \$jd run_01 $white        #运行run_01模块里的命令 "
 	echo -e "$green sh \$jd run_02 $white        #运行run_02模块里的命令"
+	echo -e "$green sh \$jd run_03 $white        #运行run_03模块里的命令"
 	echo -e "$green sh \$jd run_06_18 $white     #运行run_06_18模块里的命令"
 	echo -e "$green sh \$jd run_08_12_16 $white     #运行run_08_12_16模块里的命令"
-	echo -e "$green sh \$jd run_030 $white        #运行run_20模块里的命令"
+	echo -e "$green sh \$jd run_030 $white        #运行run_030模块里的命令"
 	echo -e "$green sh \$jd run_10_15_20 $white  #运行run_10_15_20模块里的命令"
 	echo " 如果不喜欢这样，你也可以直接cd $jd_file/js,然后用node 脚本名字.js "
 	echo ""
@@ -383,7 +392,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_030|task|run_08_12_16)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_030|task|run_08_12_16)
 			$action1
 			;;
 			*)
