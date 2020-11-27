@@ -35,9 +35,9 @@ opkg install node-npm
 
 **1.3执行npm**
 ```sh
-npm install -g request got tough-cookie
+npm install -g crypto-js got http-server tough-cookie download request tunnel
 ```
-如果你执行安装npm install -g request got tough-cookie报错，你也可以用以下代码安装
+如果你执行安装npm install -g crypto-js got http-server tough-cookie download request tunnel报错，你也可以用以下代码安装
 ```sh
 wget https://raw.githubusercontent.com/lxk0301/jd_scripts/master/package.json
 
