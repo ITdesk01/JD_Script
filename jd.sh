@@ -164,7 +164,7 @@ additional_settings() {
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_plantBean.js
 
 	#京喜工厂
-	old_dreamFactory="'gB99tYLjvPcEFloDgamoBw==', 'V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k=', '1uzRU5HkaUgvy0AB5Q9VUg=='"
+	old_dreamFactory="'V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k='"
 	new_dreamFactory="'4HL35B_v85-TsEGQbQTfFg==', 'q3X6tiRYVGYuAO4OD1-Fcg==', 'Gkf3Upy3YwQn2K3kO1hFFg==', 'w8B9d4EVh3e3eskOT5PR1A==', 'FyYWfETygv_4XjGtnl2YSg==', 'us6se4fFC6cSjHDSS_ScMw==',"
 	sed -i "s/$old_dreamFactory/$new_dreamFactory/g" $dir_file_js/jd_dreamFactory.js
 
