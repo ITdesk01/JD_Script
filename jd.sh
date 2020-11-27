@@ -20,9 +20,9 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
-new_task1="###########这里是JD_Script的定时任务2.2版本###########"
+new_task1="###########这里是JD_Script的定时任务2.21版本###########"
 new_task2="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
-new_task3="#30 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点30分更新lxk0301脚本
+new_task3="30 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点30分更新lxk0301脚本
 new_task4="0 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点0分执行全部脚本
 new_task5="0 7-23 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #一个小时第0分运行一次run_01
 new_task6="1 6-18/6 * * * /usr/share/JD_Script/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" #6点 12点18点执行一次run_06_18
@@ -274,7 +274,7 @@ help() {
 	echo -e "$yellow 浏览器获取京东cookie教程：$white $green https://github.com/lxk0301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
 	echo ""
 	echo -e "$yellow 2.jd.sh脚本命令$white"
-	echo -e "$green sh \$jd update $white        #下载js脚本(先不要更新，大佬的库又炸了)"
+	echo -e "$green sh \$jd update $white        #下载js脚本"
 	echo -e "$green sh \$jd update_script $white #更新JD_Script "
 	echo -e "$green sh \$jd run_0 $white         #运行全部脚本 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
 	echo -e "$green sh \$jd run_01 $white        #运行run_01模块里的命令 "
@@ -345,7 +345,7 @@ description_if() {
 	clear
 	git_branch=$(git branch -v | grep -o behind )
 	if [[ "$git_branch" == "behind" ]]; then
-		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script  && sh \$jd$white更新 )"
+		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script  && sh \$jd update && sh \$jd$white更新 )"
 	else
 		Script_status="$green最新$white"
 	fi
@@ -375,9 +375,8 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_030|task|run_08_12_16)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_030|task|run_08_12_16)
 			$action1
-			#update|
 			;;
 			*)
 			help
