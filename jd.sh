@@ -133,10 +133,19 @@ deng_20201120_fr="bc26d0bdc442421aa92cafcf26a1e148@57cf86ce18ca4f4987ce54fae6182
 
 	new_fruit_set="'$new_fruit1@$new_fruit2@$new_fruit3@$zuoyou_20190516_fr@$liandao_20201010_fr@$deng_20201120_fr',"
 	sed -i "s/$old_fruit1/$new_fruit_set/g" $dir_file_js/jd_fruit.js
-	sed -i "s/$old_fruit2/$new_fruit_set $new_fruit_set $new_fruit_set $new_fruit_set/g" $dir_file_js/jd_fruit.js
-	sed -i "s/$old_fruit1/$new_fruit_set/g" $dir_file_js/jdFruitShareCodes.js
-	sed -i "s/$old_fruit3/$new_fruit_set $new_fruit_set $new_fruit_set $new_fruit_set/g" $dir_file_js/jdFruitShareCodes.js
+	sed -i "s/$old_fruit2/$new_fruit_set/g" $dir_file_js/jd_fruit.js
+	sed -i "34a $new_fruit_set" $dir_file_js/jd_fruit.js
+	sed -i "35a $new_fruit_set" $dir_file_js/jd_fruit.js
+	sed -i "36a $new_fruit_set" $dir_file_js/jd_fruit.js
+	sed -i "37a $new_fruit_set" $dir_file_js/jd_fruit.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_fruit.js
+
+	sed -i "s/$old_fruit1/$new_fruit_set/g" $dir_file_js/jdFruitShareCodes.js
+	sed -i "s/$old_fruit3/$new_fruit_set/g" $dir_file_js/jdFruitShareCodes.js
+	sed -i "12a $new_fruit_set" $dir_file_js/jdFruitShareCodes.js
+	sed -i "13a $new_fruit_set" $dir_file_js/jdFruitShareCodes.js
+	sed -i "14a $new_fruit_set" $dir_file_js/jdFruitShareCodes.js
+	sed -i "15a $new_fruit_set" $dir_file_js/jdFruitShareCodes.js
 
 
 	#萌宠
@@ -153,14 +162,20 @@ deng_20201120_pet="MTE1NDUwMTI0MDAwMDAwMDM4MzAwMTI5@MTE1NDQ5OTUwMDAwMDAwMzkxMTY3
 
 	new_pet_set="'$new_pet1@$new_pet2@$new_pet3@$zuoyou_20190516_pet@$liandao_20201010_pet@$deng_20201120_pet',"
 	sed -i "s/$old_pet1/$new_pet_set/g" $dir_file_js/jd_pet.js
-	sed -i "s/$old_pet2/$new_pet_set $new_pet_set $new_pet_set $new_pet_set $new_pet_set/g" $dir_file_js/jd_pet.js
+	sed -i "s/$old_pet2/$new_pet_set/g" $dir_file_js/jd_pet.js
+	sed -i "35a $new_pet_set" $dir_file_js/jd_pet.js
+	sed -i "36a $new_pet_set" $dir_file_js/jd_pet.js
+	sed -i "37a $new_pet_set" $dir_file_js/jd_pet.js
+	sed -i "38a $new_pet_set" $dir_file_js/jd_pet.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_pet.js
+
 	sed -i "s/$old_pet2/$new_pet_set/g" $dir_file_js/jdPetShareCodes.js
 	sed -i "s/$old_pet3/$new_pet_set/g" $dir_file_js/jdPetShareCodes.js
-	sed -i "11a $new_pet_set" $dir_file_js/jdPetShareCodes.js
 	sed -i "12a $new_pet_set" $dir_file_js/jdPetShareCodes.js
 	sed -i "13a $new_pet_set" $dir_file_js/jdPetShareCodes.js
 	sed -i "14a $new_pet_set" $dir_file_js/jdPetShareCodes.js
-	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_pet.js
+	sed -i "15a $new_pet_set" $dir_file_js/jdPetShareCodes.js
+
 
 	#种豆
 	old_plantBean1="'66j4yt3ebl5ierjljoszp7e4izzbzaqhi5k2unz2afwlyqsgnasq@olmijoxgmjutyrsovl2xalt2tbtfmg6sqldcb3q@e7lhibzb3zek27amgsvywffxx7hxgtzstrk2lba@e7lhibzb3zek32e72n4xesxmgc2m76eju62zk3y',"
@@ -177,10 +192,20 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 
 	new_plantBean_set="'$new_plantBean1@$new_plantBean2@$new_plantBean3@$zuoyou_20190516_pb@$liandao_20201010_pb@$deng_20201120_pb',"
 	sed -i "s/$old_plantBean1/$new_plantBean_set/g" $dir_file_js/jd_plantBean.js
-	sed -i "s/$old_plantBean2/$new_plantBean_set $new_plantBean_set $new_plantBean_set $new_plantBean_set/g" $dir_file_js/jd_plantBean.js
+	sed -i "s/$old_plantBean2/$new_plantBean_set/g" $dir_file_js/jd_plantBean.js
+	sed -i "39a $new_plantBean_set" $dir_file_js/jd_plantBean.js
+	sed -i "40a $new_plantBean_set" $dir_file_js/jd_plantBean.js
+	sed -i "41a $new_plantBean_set" $dir_file_js/jd_plantBean.js
+	sed -i "42a $new_plantBean_set" $dir_file_js/jd_plantBean.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_plantBean.js
+
 	sed -i "s/$old_plantBean3/$new_plantBean_set/g" $dir_file_js/jdPlantBeanShareCodes.js
 	sed -i "s/$old_plantBean4/$new_plantBean_set/g" $dir_file_js/jdPlantBeanShareCodes.js
-	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_plantBean.js
+	sed -i "12a $new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
+	sed -i "13a $new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
+	sed -i "14a $new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
+	sed -i "15a $new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
+
 
 	#京喜工厂
 	old_dreamFactory="V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k=@Bo-jnVs_m9uBvbRzraXcSA=="
