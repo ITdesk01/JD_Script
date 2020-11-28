@@ -208,11 +208,18 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 
 
 	#京喜工厂
-	old_dreamFactory="V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k=@Bo-jnVs_m9uBvbRzraXcSA=="
-	new_dreamFactory="4HL35B_v85-TsEGQbQTfFg==@q3X6tiRYVGYuAO4OD1-Fcg==@Gkf3Upy3YwQn2K3kO1hFFg==@w8B9d4EVh3e3eskOT5PR1A==@FyYWfETygv_4XjGtnl2YSg==@us6se4fFC6cSjHDSS_ScMw==@oWcboKZa9XxTSWd28tCEPA==@sboe5PFeXgL2EWpxucrKYw==@rm-j1efPyFU50GBjacgEsw=="
+	old_dreamFactory="'V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k=@Bo-jnVs_m9uBvbRzraXcSA==',"
+	new_dreamFactory="'4HL35B_v85-TsEGQbQTfFg==@q3X6tiRYVGYuAO4OD1-Fcg==@Gkf3Upy3YwQn2K3kO1hFFg==@w8B9d4EVh3e3eskOT5PR1A==@FyYWfETygv_4XjGtnl2YSg==@us6se4fFC6cSjHDSS_ScMw==@oWcboKZa9XxTSWd28tCEPA==@sboe5PFeXgL2EWpxucrKYw==@rm-j1efPyFU50GBjacgEsw==',"
+
 	sed -i "s/'PDPM257r_KuQhil2Y7koNw=='/'4HL35B_v85-TsEGQbQTfFg=='/g" $dir_file_js/jd_dreamFactory.js
 	sed -i "s/randomCount = 1/randomCount = 0/g" $dir_file_js/jd_dreamFactory.js
+
 	sed -i "s/$old_dreamFactory/$new_dreamFactory/g" $dir_file_js/jdDreamFactoryShareCodes.js
+	sed -i "12a $new_dreamFactory" $dir_file_js/jdDreamFactoryShareCodes.js
+	sed -i "13a $new_dreamFactory" $dir_file_js/jdDreamFactoryShareCodes.js
+	sed -i "14a $new_dreamFactory" $dir_file_js/jdDreamFactoryShareCodes.js
+	sed -i "15a $new_dreamFactory" $dir_file_js/jdDreamFactoryShareCodes.js
+
 
 	#东东工厂
 	old_jdfactory="\`P04z54XCjVWnYaS5u2ak7ZCdan1Bdd2GGiWvC6_uERj\`, 'P04z54XCjVWnYaS5m9cZ2ariXVJwHf0bgkG7Uo'"
