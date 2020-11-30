@@ -263,6 +263,7 @@ run_0() {
 	run_030
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
+	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_bean_change.js #京豆变更
 	echo -e "$green run_0$stop_script $white"
@@ -311,7 +312,6 @@ run_030() {
 	echo -e "$green run_030$start_script $white"
 	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 30分钟运行一次
 	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
-	$node $dir_file_js/jd_paopao.js #京东泡泡大战,未知时间先扔这里
 	echo -e "$green run_030$stop_script $white"
 }
 
