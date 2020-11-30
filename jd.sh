@@ -21,16 +21,16 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
 new_task1="###########这里是JD_Script的定时任务2.22版本###########"
-new_task2="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
-new_task3="30 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点30分更新lxk0301脚本
-new_task4="0 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点0分执行全部脚本
-new_task5="0 7-23 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #一个小时第0分运行一次run_01
-new_task6="1 6-18/6 * * * /usr/share/JD_Script/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" #6点 12点18点执行一次run_06_18
-new_task7="5 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"  #10点,15点,20点执行一次run_10_15_20
-new_task8="40 2-22/2 * * * /usr/share/JD_Script/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" #每两个小时执行一次run_02
-new_task9="*/30 1-23 * * * /usr/share/JD_Script/jd.sh run_030 >/tmp/jd_run_030.log 2>&1" #1点-23点每30分钟执行一次run_030
-new_task10="10 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #8点，12点，16点的第10分钟执行一次
-new_task11="10 1-22/3 * * * /usr/share/JD_Script/jd.sh run_03 >/tmp/jd_run_03.log 2>&1" #每三个小时执行一次run_03
+new_task2="0 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点0分执行全部脚本
+new_task3="*/30 1-23 * * * /usr/share/JD_Script/jd.sh run_030 >/tmp/jd_run_030.log 2>&1" #1点-23点每30分钟执行一次run_030
+new_task4="0 7-23 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #一个小时第0分运行一次run_01
+new_task5="40 2-22/2 * * * /usr/share/JD_Script/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" #每两个小时执行一次run_02
+new_task6="10 1-22/3 * * * /usr/share/JD_Script/jd.sh run_03 >/tmp/jd_run_03.log 2>&1" #每三个小时执行一次run_03
+new_task7="1 6-18/6 * * * /usr/share/JD_Script/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" #6点 12点18点执行一次run_06_18
+new_task8="5 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"  #10点,15点,20点执行一次run_10_15_20
+new_task9="10 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #8点，12点，16点的第10分钟执行一次
+new_task10="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
+new_task11="30 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点30分更新lxk0301脚本
 new_task12="#预留位置方便后期增加（不要删除）"
 new_task13="#预留位置方便后期增加（不要删除）"
 new_task14="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
@@ -269,6 +269,13 @@ run_0() {
 	echo -e "$green run_0$stop_script $white"
 }
 
+run_030() {
+	echo -e "$green run_030$start_script $white"
+	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 30分钟运行一次
+	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
+	echo -e "$green run_030$stop_script $white"
+}
+
 run_01() {
 	echo -e "$green run_01$start_script $white"
 	$node $dir_file_js/jd_plantBean.js & $node $dir_file_js/jd_joy_feedPets.js #种豆得豆，没时间要求，一个小时收一次瓶子 & #宠汪汪喂食一个小时喂一次
@@ -308,12 +315,6 @@ $node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限�
 echo -e "$green run_08_12_16$stop_script $white"
 }
 
-run_030() {
-	echo -e "$green run_030$start_script $white"
-	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 30分钟运行一次
-	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
-	echo -e "$green run_030$stop_script $white"
-}
 
 run_10_15_20() {
 	echo -e "$green run_10_15_20$start_script $white"
@@ -338,12 +339,12 @@ help() {
 	echo -e "$green sh \$jd update $white        #下载js脚本"
 	echo -e "$green sh \$jd update_script $white #更新JD_Script "
 	echo -e "$green sh \$jd run_0 $white         #运行全部脚本 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
+	echo -e "$green sh \$jd run_030 $white        #运行run_030模块里的命令"
 	echo -e "$green sh \$jd run_01 $white        #运行run_01模块里的命令 "
 	echo -e "$green sh \$jd run_02 $white        #运行run_02模块里的命令"
 	echo -e "$green sh \$jd run_03 $white        #运行run_03模块里的命令"
 	echo -e "$green sh \$jd run_06_18 $white     #运行run_06_18模块里的命令"
 	echo -e "$green sh \$jd run_08_12_16 $white     #运行run_08_12_16模块里的命令"
-	echo -e "$green sh \$jd run_030 $white        #运行run_030模块里的命令"
 	echo -e "$green sh \$jd run_10_15_20 $white  #运行run_10_15_20模块里的命令"
 	echo " 如果不喜欢这样，你也可以直接cd $jd_file/js,然后用node 脚本名字.js "
 	echo ""
@@ -358,6 +359,7 @@ help() {
 	echo " $new_task8"
 	echo " $new_task9"
 	echo " $new_task10"
+	echo " $new_task11"
 	echo -e "$yellow 检测定时任务:$white $cron_help"
 	echo ""
 	echo -e "$yellow 4.检测脚本是否最新:$white $Script_status "
