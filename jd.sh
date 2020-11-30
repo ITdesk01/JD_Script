@@ -102,7 +102,8 @@ update() {
 	wget $url/jdFactoryShareCodes.js -O $dir_file_js/jdFactoryShareCodes.js
 	wget $url/jd_syj.js -O $dir_file_js/jd_syj.js
 	wget $url/jd_bean_sign.js -O $dir_file_js/jd_bean_sign.js
-	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
+	wget https://raw.githubusercontent.com/799953468/Quantumult-X/8172b0b273904e679e9a3c53dcfeee63191f19a4/Scripts/JD/jd_paopao.js  -O $dir_file_js/jd_paopao.js
+	#wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	additional_settings
 	task #更新完全部脚本顺便检查一下计划任务是否有变
 	echo -e "$green update$stop_script $white"
