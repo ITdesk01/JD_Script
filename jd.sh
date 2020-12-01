@@ -219,6 +219,7 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 
 	sed -i "s/'PDPM257r_KuQhil2Y7koNw==', "gB99tYLjvPcEFloDgamoBw=="/'4HL35B_v85-TsEGQbQTfFg=='/g" $dir_file_js/jd_dreamFactory.js
 	sed -i "s/randomCount = 1/randomCount = 0/g" $dir_file_js/jd_dreamFactory.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_dreamFactory.js
 
 	sed -i "s/$old_dreamFactory/$new_dreamFactory/g" $dir_file_js/jdDreamFactoryShareCodes.js
 	sed -i "12a $new_dreamFactory" $dir_file_js/jdDreamFactoryShareCodes.js
