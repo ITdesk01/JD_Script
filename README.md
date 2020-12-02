@@ -34,17 +34,22 @@ opkg install node-npm
 
 
 **1.3执行npm**
+方案1（首选）
 ```sh
 npm install -g crypto-js got http-server tough-cookie download request tunnel
 ```
+**成功了就不用理方案2,3，直接到2.开始下载脚本**
+
+
+方案2
+
 如果你执行安装npm install -g crypto-js got http-server tough-cookie download request tunnel报错，你也可以用以下代码安装
 ```sh
 wget https://raw.githubusercontent.com/lxk0301/jd_scripts/master/package.json
 
 npm install
 ```
-
-如果继续失败那么采用方案3（痴雨提供）
+方案3（痴雨提供）
 设置NPM 下载源为淘宝 
 ```sh
 npm config set registry https://registry.npm.taobao.org
