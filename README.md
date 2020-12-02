@@ -44,8 +44,19 @@ wget https://raw.githubusercontent.com/lxk0301/jd_scripts/master/package.json
 npm install
 ```
 
-**注意**：当你使用一般Linux发行版（如Ubuntu）时，请将```jd.sh```首行的```#!/bin/sh```改为```#!/bin/bash```并修改运行方式为```bash $jd```以避免不同系统shell语法不兼容的情况
-
+如果继续失败那么采用方案3（痴雨提供）
+设置NPM 下载源为淘宝 
+```sh
+npm config set registry https://registry.npm.taobao.org
+```
+查看当前NPM下载源
+```sh
+npm config get registry
+```
+然后再执行
+```sh
+npm install -g crypto-js got http-server tough-cookie download request tunnel
+```
 
 **2.开始下载脚本**
 ```sh
@@ -61,6 +72,9 @@ sh $jd #直接调用代码
 
 cd $jd_file # 可以直接进入代码所在文件夹
 ```
+
+**注意**：当你使用一般Linux发行版（如Ubuntu）时，请将```jd.sh```首行的```#!/bin/sh```改为```#!/bin/bash```并修改运行方式为```bash $jd```以避免不同系统shell语法不兼容的情况
+
 
 **3.问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)**
 
