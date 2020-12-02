@@ -268,17 +268,17 @@ update_script() {
 run_0() {
 	echo -e "$green run_0$start_script $white"
 	run_08_12_16
+	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
-	$node $dir_file_js/jd_small_home.js #东东小窝
-	run_10_15_20
 	run_06_18
+	run_10_15_20
 	run_01
 	run_02
 	run_03
 	run_030
-	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
+	$node $dir_file_js/jd_small_home.js #东东小窝
 	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
 	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
@@ -315,8 +315,8 @@ run_03() {
 
 run_06_18() {
 	echo -e "$green run_06_18$start_script $white"
-	$node $dir_file_js/jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
 	$node $dir_file_js/jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
+	$node $dir_file_js/jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
 	$node $dir_file_js/jd_joy.js #jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
 	$node $dir_file_js/jd_pet.js #东东萌宠，跟手机商城同一时间
 	$node $dir_file_js/jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
