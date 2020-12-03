@@ -237,7 +237,7 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 
 
 	#京喜工厂-金牌厂长
-	new_jdJxStoryShareCodes="xTlGGIL-9JvzV694GpP6Gba8_zk0emJWtyQkQK0otrw=@ijeY8Ncm2eztoQMx4j3LPHswvSkak4Tq3uIuIRzLwcI=@VxcUisKVRxroaObG1_S9WOa-M2odzvod3T2C8i08KQE="
+	new_jdJxStoryShareCodes="'xTlGGIL-9JvzV694GpP6Gba8_zk0emJWtyQkQK0otrw=@ijeY8Ncm2eztoQMx4j3LPHswvSkak4Tq3uIuIRzLwcI=@VxcUisKVRxroaObG1_S9WOa-M2odzvod3T2C8i08KQE=',"
 
 	sed -i "s/'qSDHMwUOz7onHcMyaju4KmdSXWf0dlv7LVnTt1Wzemo='/'xTlGGIL-9JvzV694GpP6Gba8_zk0emJWtyQkQK0otrw=', 'ijeY8Ncm2eztoQMx4j3LPHswvSkak4Tq3uIuIRzLwcI=', 'VxcUisKVRxroaObG1_S9WOa-M2odzvod3T2C8i08KQE='/g" $dir_file_js/jd_jxstory.js
 	sed -i "s/randomCount = 3/randomCount = 0/g" $dir_file_js/jd_jxstory.js
