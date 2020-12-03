@@ -102,8 +102,9 @@ update() {
 	wget $url/jdFactoryShareCodes.js -O $dir_file_js/jdFactoryShareCodes.js
 	wget $url/jd_syj.js -O $dir_file_js/jd_syj.js
 	wget $url/jd_bean_sign.js -O $dir_file_js/jd_bean_sign.js
+	wget $url/jd_bean_sign.js -O $dir_file_js/jd_jxstory.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
-	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_story.js -O $dir_file_js/jx_story.js
+	rm -rf $dir_file_js/jx_story.js
 	additional_settings
 	task #更新完全部脚本顺便检查一下计划任务是否有变
 	echo -e "$green update$stop_script $white"
@@ -326,7 +327,6 @@ run_06_18() {
 	$node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
 	$node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
 	$node $dir_file_js/jd_superMarket.js #东东超市,6点 18点多加两场用于收金币
-	$node $dir_file_js/jx_story.js #京喜金牌厂长
 	echo -e "$green run_06_18$stop_script $white"
 }
 
@@ -334,6 +334,7 @@ run_08_12_16() {
 	echo -e "$green run_08_12_16$start_script $white"
 	$node $dir_file_js/jd_blueCoin.js #东东超市兑换，有次数限制，没时间要求
 	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
+	$node $dir_file_js/jd_jxstory.js #京喜金牌厂长
 	echo -e "$green run_08_12_16$stop_script $white"
 }
 
