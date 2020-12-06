@@ -298,7 +298,6 @@ run_0() {
 	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
 	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
-	$node $dir_file_js/jx_cfd.js #京东财富岛
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_bean_change.js #京豆变更
 	echo -e "$green run_0$stop_script $white"
@@ -357,6 +356,7 @@ run_10_15_20() {
 	echo -e "$green run_10_15_20$start_script $white"
 	$node $dir_file_js/jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
 	$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
+	$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
 	echo -e "$green run_10_15_20$stop_script $white"
 }
 
