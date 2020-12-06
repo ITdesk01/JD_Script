@@ -104,6 +104,7 @@ update() {
 	wget $url/jd_bean_sign.js -O $dir_file_js/jd_bean_sign.js
 	wget $url/jd_jxstory.js -O $dir_file_js/jd_jxstory.js
 	wget $url/jdJxStoryShareCodes.js -O $dir_file_js/jdJxStoryShareCodes.js
+	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	rm -rf $dir_file_js/jx_story.js
 	additional_settings
@@ -284,7 +285,6 @@ update_script() {
 run_0() {
 	echo -e "$green run_0$start_script $white"
 	run_08_12_16
-	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
@@ -297,6 +297,8 @@ run_0() {
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
 	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
+	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
+	$node $dir_file_js/jx_cfd.js #京东财富岛
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_bean_change.js #京豆变更
 	echo -e "$green run_0$stop_script $white"
