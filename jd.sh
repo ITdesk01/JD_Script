@@ -104,6 +104,7 @@ update() {
 	wget $url/jd_bean_sign.js -O $dir_file_js/jd_bean_sign.js
 	wget $url/jd_jxstory.js -O $dir_file_js/jd_jxstory.js
 	wget $url/jdJxStoryShareCodes.js -O $dir_file_js/jdJxStoryShareCodes.js
+	wget $url/jd_split.js -O $dir_file_js/jd_split.js    #金榜年终奖
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	rm -rf $dir_file_js/jx_story.js
@@ -271,6 +272,13 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "s/eU9Ya-y2N_5z9DvXwyIV0A/eU9YabrkZ_h1-GrcmiJB0A/g" $dir_file_js/jd_superMarket.js
 	sed -i "s/eU9YaeS3Z6ol8zrRmnMb1Q/eU9YabrkZ_h1-GrcmiJB0A/g" $dir_file_js/jd_superMarket.js
 
+
+	#金榜年终奖
+	old_jdsplit="\`P04z54XCjVUnIaW5nJcXCCyoR8C6p8txXBH\`, 'P04z54XCjVUnIaW5m9cZ2T6jChKki0Hfndla5k', 'P04z54XCjVUnIaW5u2ak7ZCdan1BT0NlbBGZ1-rnMYj', 'P04z54XCjVUnIaW5m9cZ2ariXVJwI64DaVTNXQ'"
+	new_jdsplit="'P04z54XCjVUnIaW5m9cZ2f83X0Zl5Q3j7iYXJY', 'P04z54XCjVUnIaW5m9cZ2Wui31Oxvlnad1eTuE', 'P04z54XCjVUnIaW5m9cZz-inDgt5sQ4KtrDjw'"
+	sed -i "s/$old_jdsplit/$new_jdsplit/g" $dir_file_js/jd_split.js
+
+
 }
 
 update_script() {
@@ -297,6 +305,7 @@ run_0() {
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
 	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
+	$node $dir_file_js/jd_split.js #金榜年终奖
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_bean_change.js #京豆变更
