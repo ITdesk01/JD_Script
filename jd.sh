@@ -111,6 +111,7 @@ update() {
 	wget $url/jd_car.js -O $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	wget $url/jd_kd.js -O $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
 	wget $url/jd_digital_floor.js -O $dir_file_js/jd_digital_floor.js #数码加购京豆共计25京豆，一天运行一次即可
+	wget $url/jd_live_redrain.js -O $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	rm -rf $dir_file_js/jx_story.js
@@ -359,6 +360,7 @@ run_02() {
 	echo -e "$green run_02$start_script $white"
 	$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每两小时收一次
 	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
+	$node $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
 	echo -e "$green run_02$stop_script $white"
 }
 
