@@ -105,6 +105,7 @@ update() {
 	wget $url/jd_jxstory.js -O $dir_file_js/jd_jxstory.js
 	wget $url/jdJxStoryShareCodes.js -O $dir_file_js/jdJxStoryShareCodes.js
 	wget $url/jd_split.js -O $dir_file_js/jd_split.js    #金榜年终奖
+	wget $url/jd_ms_redrain.js -O $dir_file_js/jd_ms_redrain.js #秒杀红包雨
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	rm -rf $dir_file_js/jx_story.js
@@ -305,6 +306,7 @@ run_0() {
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
 	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
+	$node $dir_file_js/jd_ms_redrain.js #秒杀红包雨
 	$node $dir_file_js/jd_split.js #金榜年终奖
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
