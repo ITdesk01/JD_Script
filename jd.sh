@@ -110,6 +110,7 @@ update() {
 	wget $url/jd_health.js -O $dir_file_js/jd_health.js #健康抽奖机 ，活动于2020-12-31日结束
 	wget $url/jd_car.js -O $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	wget $url/jd_kd.js -O $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
+	wget $url/jd_digital_floor.js -O $dir_file_js/jd_digital_floor.js #数码加购京豆共计25京豆，一天运行一次即可
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	rm -rf $dir_file_js/jx_story.js
@@ -294,6 +295,13 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	new_jdhealth="'P04z54XCjVUnoaW5m9cZ2f83X0Zl9nlF826jjE', 'P04z54XCjVUnoaW5m9cZ2Wui31Oxj26WlIf23s', 'P04z54XCjVUnoaW5m9cZz-inDgt5kxStfLzOw'"
 	sed -i "s/$old_jdhealth/$new_jdhealth/g" $dir_file_js/jd_health.js
 
+	#数码加购京豆
+	old_jd_digital="\`40cd108f-9eed-4897-b795-45a5b221cd6b\`,'9d4262a5-1a02-4ae7-8a86-8d070d531464'"
+	new_jd_digital="'6e606555-91c0-4bb3-838e-b38b98b643d5', 'd8e3dc32-8693-47b3-99eb-ffc2b1c26967', '54d2990b-b4f2-4af3-85dd-4fda94e1a70e'"
+	sed -i "s/$old_jd_digital/$new_jd_digital/g" $dir_file_js/jd_digital_floor.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_digital_floor.js
+
+
 
 }
 
@@ -327,6 +335,7 @@ run_0() {
 	$node $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	$node $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
 	$node $dir_file_js/jd_bean_home.js #领京豆额外奖励
+	$node $dir_file_js/jd_digital_floor.js #数码加购京豆共计25京豆，一天运行一次即可
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_bean_change.js #京豆变更
