@@ -107,6 +107,7 @@ update() {
 	wget $url/jd_bean_home.js -O $dir_file_js/jd_bean_home.js #领京豆额外奖励
 	wget $url/jd_split.js -O $dir_file_js/jd_split.js    #金榜年终奖 活动2020-12-12日结束
 	wget $url/jd_ms_redrain.js -O $dir_file_js/jd_ms_redrain.js #秒杀红包雨 12月1-31日
+	wget $url/jd_health.js -O $dir_file_js/jd_health.js #健康抽奖机 ，活动于2020-12-31日结束
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	rm -rf $dir_file_js/jx_story.js
@@ -280,6 +281,11 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	new_jdsplit="'P04z54XCjVUnIaW5m9cZ2f83X0Zl5Q3j7iYXJY', 'P04z54XCjVUnIaW5m9cZ2Wui31Oxvlnad1eTuE', 'P04z54XCjVUnIaW5m9cZz-inDgt5sQ4KtrDjw'"
 	sed -i "s/$old_jdsplit/$new_jdsplit/g" $dir_file_js/jd_split.js
 
+	#健康抽奖机 ，活动于2020-12-31日结束
+	old_jdhealth="\`P04z54XCjVUnoaW5nJcXCCyoR8C6i9QR16e\`, 'P04z54XCjVUnoaW5m9cZ2T6jChKkh8FWbFAplQ', `P04z54XCjVUnoaW5u2ak7ZCdan1Bdbpik_F9ud7lznm`, `P04z54XCjVUnoaW5m9cZ2ariXVJwFN5uKHNqnc`"
+	new_jdhealth="'P04z54XCjVUnoaW5m9cZ2f83X0Zl9nlF826jjE', 'P04z54XCjVUnoaW5m9cZ2Wui31Oxj26WlIf23s', 'P04z54XCjVUnoaW5m9cZz-inDgt5kxStfLzOw'"
+	sed -i "s/$old_jdhealth/$new_jdhealth/g" $dir_file_js/jd_health.js
+
 
 }
 
@@ -309,6 +315,7 @@ run_0() {
 	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
 	$node $dir_file_js/jd_ms_redrain.js #秒杀红包雨 12月1-31日
 	$node $dir_file_js/jd_split.js  #金榜年终奖 活动2020-12-12日结束
+	$node $dir_file_js/jd_health.js #健康抽奖机 ，活动于2020-12-31日结束
 	$node $dir_file_js/jd_bean_home.js #领京豆额外奖励
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
