@@ -20,7 +20,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
-new_task1="###########这里是JD_Script的定时任务2.27版本###########"
+new_task1="###########这里是JD_Script的定时任务2.28版本###########"
 new_task2="1 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点1分执行全部脚本
 new_task3="*/30 2-23 * * * /usr/share/JD_Script/jd.sh run_030 >/tmp/jd_run_030.log 2>&1" #1点-23点每30分钟执行一次run_030
 new_task4="0 7-23 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #一个小时第0分运行一次run_01
@@ -31,7 +31,7 @@ new_task8="5 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_run
 new_task9="10 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #8点，12点，16点的第10分钟执行一次
 new_task10="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
 new_task11="30 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点30分更新lxk0301脚本
-new_task12="1 9,11,13,15,17,19,20,21,23 * * * /usr/share/JD_Script/jd.sh run_09_23 >/tmp/jd_run_09_23.log 2>&1 "
+new_task12="0 9,11,13,15,17,19,20,21,23 * * * /usr/share/JD_Script/jd.sh run_09_23 >/tmp/jd_run_09_23.log 2>&1 "
 new_task13="#预留位置方便后期增加（不要删除）"
 new_task14="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
 
