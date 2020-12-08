@@ -31,7 +31,7 @@ new_task8="5 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_run
 new_task9="10 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #8点，12点，16点的第10分钟执行一次
 new_task10="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
 new_task11="30 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点30分更新lxk0301脚本
-new_task12="#预留位置方便后期增加（不要删除）"
+new_task12="1 9,11,13,15,17,19,20,21,23 * * * /usr/share/JD_Script/jd.sh run_09_23 >/tmp/jd_run_09_23.log 2>&1 "
 new_task13="#预留位置方便后期增加（不要删除）"
 new_task14="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
 
@@ -321,6 +321,7 @@ run_0() {
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
+	run_09_23
 	run_06_18
 	run_10_15_20
 	run_01
@@ -360,7 +361,6 @@ run_02() {
 	echo -e "$green run_02$start_script $white"
 	$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每两小时收一次
 	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
-	$node $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
 	echo -e "$green run_02$stop_script $white"
 }
 
@@ -390,6 +390,10 @@ run_08_12_16() {
 	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	$node $dir_file_js/jd_jxstory.js #京喜金牌厂长
 	echo -e "$green run_08_12_16$stop_script $white"
+}
+
+run_09_23() {
+	$node $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
 }
 
 
@@ -518,7 +522,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_030|task|run_08_12_16)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_030|task|run_08_12_16|run_09_23)
 			$action1
 			;;
 			*)
