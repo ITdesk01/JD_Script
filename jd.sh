@@ -297,9 +297,9 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "s/$old_jdhealth/$new_jdhealth/g" $dir_file_js/jd_health.js
 
 	#数码加购京豆
-	old_jd_digital="\`40cd108f-9eed-4897-b795-45a5b221cd6b\`,'9d4262a5-1a02-4ae7-8a86-8d070d531464'"
-	new_jd_digital="'6e606555-91c0-4bb3-838e-b38b98b643d5', 'd8e3dc32-8693-47b3-99eb-ffc2b1c26967', '54d2990b-b4f2-4af3-85dd-4fda94e1a70e'"
-	sed -i "s/$old_jd_digital/$new_jd_digital/g" $dir_file_js/jd_digital_floor.js
+	old_jd_digital="[\`40cd108f-9eed-4897-b795-45a5b221cd6b@49efb480-d6d7-456b-a4e0-14b170b161e0@\`,'9d4262a5-1a02-4ae7-8a86-8d070d531464@687b14e0-ce0a-45eb-bf46-71aa0da05f18'"
+	new_jd_digital="'6e606555-91c0-4bb3-838e-b38b98b643d5@d8e3dc32-8693-47b3-99eb-ffc2b1c26967@54d2990b-b4f2-4af3-85dd-4fda94e1a70e', "
+	sed -i "s/$old_jd_digital/$new_jd_digital $new_jd_digital $new_jd_digital/g" $dir_file_js/jd_digital_floor.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_digital_floor.js
 
 
