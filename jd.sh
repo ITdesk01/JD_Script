@@ -292,13 +292,14 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "s/$old_jdsplit/$new_jdsplit/g" $dir_file_js/jd_split.js
 
 	#健康抽奖机 ，活动于2020-12-31日结束
-	old_jdhealth="\`P04z54XCjVUnoaW5nJcXCCyoR8C6i9QR16e\`, 'P04z54XCjVUnoaW5m9cZ2T6jChKkh8FWbFAplQ', `P04z54XCjVUnoaW5u2ak7ZCdan1Bdbpik_F9ud7lznm`, `P04z54XCjVUnoaW5m9cZ2ariXVJwFN5uKHNqnc`"
+	old_jdhealth="\`P04z54XCjVUnoaW5nJcXCCyoR8C6i9QR16e\`, 'P04z54XCjVUnoaW5m9cZ2T6jChKkh8FWbFAplQ', \`P04z54XCjVUnoaW5u2ak7ZCdan1Bdbpik_F9ud7lznm\`, \`P04z54XCjVUnoaW5m9cZ2ariXVJwFN5uKHNqnc\`"
 	new_jdhealth="'P04z54XCjVUnoaW5m9cZ2f83X0Zl9nlF826jjE', 'P04z54XCjVUnoaW5m9cZ2Wui31Oxj26WlIf23s', 'P04z54XCjVUnoaW5m9cZz-inDgt5kxStfLzOw'"
 	sed -i "s/$old_jdhealth/$new_jdhealth/g" $dir_file_js/jd_health.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_health.js
 
 	#数码加购京豆
-	old_jd_digital="[\`40cd108f-9eed-4897-b795-45a5b221cd6b@49efb480-d6d7-456b-a4e0-14b170b161e0@\`,'9d4262a5-1a02-4ae7-8a86-8d070d531464@687b14e0-ce0a-45eb-bf46-71aa0da05f18'"
-	new_jd_digital="'6e606555-91c0-4bb3-838e-b38b98b643d5@d8e3dc32-8693-47b3-99eb-ffc2b1c26967@54d2990b-b4f2-4af3-85dd-4fda94e1a70e', "
+	old_jd_digital="\`40cd108f-9eed-4897-b795-45a5b221cd6b@49efb480-d6d7-456b-a4e0-14b170b161e0@\`,'9d4262a5-1a02-4ae7-8a86-8d070d531464@687b14e0-ce0a-45eb-bf46-71aa0da05f18'"
+	new_jd_digital="'f346e90c-8f43-43b2-ad2d-7324ff2adb19@aaf978b6-750a-47af-875b-ac3178b526d5@7125ebb1-e904-4fc1-8d75-fde80f94da47', "
 	sed -i "s/$old_jd_digital/$new_jd_digital $new_jd_digital $new_jd_digital/g" $dir_file_js/jd_digital_floor.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_digital_floor.js
 
