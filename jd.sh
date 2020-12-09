@@ -112,6 +112,7 @@ update() {
 	wget $url/jd_kd.js -O $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
 	wget $url/jd_digital_floor.js -O $dir_file_js/jd_digital_floor.js #数码加购京豆共计25京豆，一天运行一次即可
 	wget $url/jd_live_redrain.js -O $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
+	wget $url/jd_apple_live.js -O $dir_file_js/jd_apple_live.js #苹果抽奖机活动于2020-12-14日结束
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -303,6 +304,11 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "s/$old_jd_digital/$new_jd_digital $new_jd_digital $new_jd_digital/g" $dir_file_js/jd_digital_floor.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_digital_floor.js
 
+	#苹果抽奖机
+	old_jd_apple_live="\`P04z54XCjVUm4aW5nJcXCCyoR8C6s-kRmWs@P04z54XCjVUm4aW5m9cZ2bx3y5Ow\`, \`P04z54XCjVUm4aW5nJcXCCyoR8C6s-kRmWs@P04z54XCjVUm4aW5m9cZ2bx3y5Ow\`"
+	new_jd_apple_live="'P04z54XCjVUm4aW5m9cZ2f83X0Zl1HduH3UiZ4@P04z54XCjVUm4aW5m9cZ2Wui31Oxh9xXOmM3g8@P04z54XCjVUm4aW5m9cZz-inDgt5q9WfH2N9Q',"
+	sed -i "s/$old_jd_digital/$new_jd_digital $new_jd_digital $new_jd_digital/g" $dir_file_js/jd_apple_live.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_apple_live.js
 
 
 }
@@ -339,6 +345,7 @@ run_0() {
 	$node $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
 	$node $dir_file_js/jd_bean_home.js #领京豆额外奖励
 	$node $dir_file_js/jd_digital_floor.js #数码加购京豆共计25京豆，一天运行一次即可
+	$node $dir_file_js/jd_apple_live.js #苹果抽奖机
 	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
