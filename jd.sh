@@ -114,6 +114,7 @@ update() {
 	wget $url/jd_live_redrain.js -O $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
 	wget $url/jd_apple_live.js -O $dir_file_js/jd_apple_live.js #苹果抽奖机活动于2020-12-14日结束
 	wget $url/jd_live_redrain2.js -O $dir_file_js/jd_live_redrain2.js #超级直播间红包雨每天20-23半点可领，每日上限未知,活动时间未知
+	wget $url/jd_pubg.js -O $dir_file_js/jd_pubg.js #PUBG ,运行时间会比较久活动于2020-12-13日结束
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -308,8 +309,14 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	#苹果抽奖机
 	old_jd_apple_live="\`P04z54XCjVUm4aW5nJcXCCyoR8C6s-kRmWs@P04z54XCjVUm4aW5m9cZ2bx3y5Ow\`, \`P04z54XCjVUm4aW5nJcXCCyoR8C6s-kRmWs@P04z54XCjVUm4aW5m9cZ2bx3y5Ow\`"
 	new_jd_apple_live="'P04z54XCjVUm4aW5m9cZ2f83X0Zl1HduH3UiZ4@P04z54XCjVUm4aW5m9cZ2Wui31Oxh9xXOmM3g8@P04z54XCjVUm4aW5m9cZz-inDgt5q9WfH2N9Q',"
-	sed -i "s/$old_jd_digital/$new_jd_digital $new_jd_digital $new_jd_digital/g" $dir_file_js/jd_apple_live.js
+	sed -i "s/$old_jd_apple_live/$new_jd_apple_live $new_jd_apple_live $new_jd_apple_live/g" $dir_file_js/jd_apple_live.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_apple_live.js
+
+	#PUBG ,运行时间会比较久活动于2020-12-13日结束
+	old_jd_pubg="'65561ad5-af72-4d1c-a5be-37b3de372b67@2d5f579d-e6d1-479e-931f-c275d602caf5@a3551e1d-fb07-40f0-b9ad-d50e4b480098@696cfa20-3719-442a-a331-0e07beaeb375@718868ed-2202-465d-b3a4-54e76b30d02a','65561ad5-af72-4d1c-a5be-37b3de372b67@2d5f579d-e6d1-479e-931f-c275d602caf5'"
+	new_jd_pubg="'cf99bdf0-1d78-48cf-bb81-41f1915ff741@fbbd36aa-e746-4bf8-8bab-aff5d693611b@5e71aec7-1492-499a-a946-629056988cfc',"
+	sed -i "s/$old_jd_pubg/$new_jd_pubg $new_jd_pubg $new_jd_pubg/g" $dir_file_js/jd_pubg.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_pubg.js
 
 
 }
@@ -348,6 +355,7 @@ run_0() {
 	$node $dir_file_js/jd_digital_floor.js #数码加购京豆共计25京豆，一天运行一次即可
 	$node $dir_file_js/jd_apple_live.js #苹果抽奖机
 	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
+	$node $dir_file_js/jd_pubg.js #PUBG ,运行时间会比较久
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_bean_change.js #京豆变更
