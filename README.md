@@ -86,9 +86,13 @@ cd $jd_file # 可以直接进入代码所在文件夹
 
 **3.已知问题**
 
-1.下载下来的js都是空的，建议强制代理raw.githubusercontent.com
+   1.下载下来的js都是空的，建议强制代理raw.githubusercontent.com
 
-2.互助码怎么找，两个办法，1.等一天以后去/tmp/找到jd_run_0.log  2. sh $jd run_0 >0.log 然后找到0.log文件（运行过程像卡住，不用理）
+2.互助码怎么找，两个办法
+   
+    1.等一天以后去/tmp/找到jd_run_0.log 
+   
+    2. sh $jd run_0 >0.log 然后找到0.log文件（运行过程像卡住，不用理）
 
 
 **4.问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)**
