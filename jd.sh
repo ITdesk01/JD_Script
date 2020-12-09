@@ -307,7 +307,7 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_digital_floor.js
 
 	#苹果抽奖机
-	old_jd_apple_live="\`P04z54XCjVUm4aW5nJcXCCyoR8C6s-kRmWs@P04z54XCjVUm4aW5m9cZ2bx3y5Ow\`, \`P04z54XCjVUm4aW5nJcXCCyoR8C6s-kRmWs@P04z54XCjVUm4aW5m9cZ2bx3y5Ow\`"
+	old_jd_apple_live="\`P04z54XCjVUm4aW5nJcXCCyoR8C6s-kRmWs@P04z54XCjVUm4aW5m9cZ2bx3y5Ow@P04z54XCjVUm4aW5u2ak7ZCdan1BeYMuZ9HwF34gJjW@P04z54XCjVUm4aW5m9cZ2T6jChKkkjZEdhiKUY\`, \`P04z54XCjVUm4aW5nJcXCCyoR8C6s-kRmWs@P04z54XCjVUm4aW5m9cZ2bx3y5Ow\`"
 	new_jd_apple_live="'P04z54XCjVUm4aW5m9cZ2f83X0Zl1HduH3UiZ4@P04z54XCjVUm4aW5m9cZ2Wui31Oxh9xXOmM3g8@P04z54XCjVUm4aW5m9cZz-inDgt5q9WfH2N9Q',"
 	sed -i "s/$old_jd_apple_live/$new_jd_apple_live $new_jd_apple_live $new_jd_apple_live/g" $dir_file_js/jd_apple_live.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_apple_live.js
