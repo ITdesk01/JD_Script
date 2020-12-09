@@ -393,7 +393,9 @@ run_08_12_16() {
 }
 
 run_09_23() {
+	echo -e "$green run_09_23$start_script $white"
 	$node $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
+	echo -e "$green run_09_23$stop_script $white"
 }
 
 
