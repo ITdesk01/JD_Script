@@ -354,7 +354,8 @@ run_045() {
 
 run_01() {
 	echo -e "$green run_01$start_script $white"
-	$node $dir_file_js/jd_plantBean.js & $node $dir_file_js/jd_joy_feedPets.js #种豆得豆，没时间要求，一个小时收一次瓶子 & #宠汪汪喂食一个小时喂一次
+	$node $dir_file_js/jd_plantBean.js 
+	$node $dir_file_js/jd_joy_feedPets.js #种豆得豆，没时间要求，一个小时收一次瓶子 & #宠汪汪喂食一个小时喂一次
 	echo -e "$green run_01$stop_script $white"
 }
 
