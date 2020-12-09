@@ -20,15 +20,15 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
-new_task1="###########这里是JD_Script的定时任务2.29版本###########"
+new_task1="###########这里是JD_Script的定时任务2.30版本###########"
 new_task2="1 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点1分执行全部脚本
-new_task3="*/30 2-23 * * * /usr/share/JD_Script/jd.sh run_030 >/tmp/jd_run_030.log 2>&1" #1点-23点每30分钟执行一次run_030
-new_task4="0 7-23 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #一个小时第0分运行一次run_01
-new_task5="2 2-22/2 * * * /usr/share/JD_Script/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" #每两个小时执行一次run_02
-new_task6="10 2-22/3 * * * /usr/share/JD_Script/jd.sh run_03 >/tmp/jd_run_03.log 2>&1" #每三个小时执行一次run_03
-new_task7="1 6-18/6 * * * /usr/share/JD_Script/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" #6点 12点18点执行一次run_06_18
-new_task8="5 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"  #10点,15点,20点执行一次run_10_15_20
-new_task9="10 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #8点，12点，16点的第10分钟执行一次
+new_task3="45 2-23 * * * /usr/share/JD_Script/jd.sh run_045 >/tmp/jd_run_045.log 2>&1" #两个工厂
+new_task4="3 7-23 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #种豆得豆收瓶子
+new_task5="50 2-22/2 * * * /usr/share/JD_Script/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" #京东摇钱树 每两个小时收一次
+new_task6="10 2-22/3 * * * /usr/share/JD_Script/jd.sh run_03 >/tmp/jd_run_03.log 2>&1" #天天加速 3小时运行一次，打卡时间间隔是6小时
+new_task7="40 6-18/6 * * * /usr/share/JD_Script/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" #不是很重要的，错开运行
+new_task8="35 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"  #不是很重要的，错开运行
+new_task9="10 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #超市旺旺兑换礼品
 new_task10="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
 new_task11="5 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点05分更新lxk0301脚本
 new_task12="0 9,11,13,15,17,19,20,21,23 * * * /usr/share/JD_Script/jd.sh run_09_23 >/tmp/jd_run_09_23.log 2>&1 "
@@ -327,7 +327,7 @@ run_0() {
 	run_01
 	run_02
 	run_03
-	run_030
+	run_045
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
 	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
@@ -338,17 +338,18 @@ run_0() {
 	$node $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
 	$node $dir_file_js/jd_bean_home.js #领京豆额外奖励
 	$node $dir_file_js/jd_digital_floor.js #数码加购京豆共计25京豆，一天运行一次即可
+	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_bean_change.js #京豆变更
 	echo -e "$green run_0$stop_script $white"
 }
 
-run_030() {
-	echo -e "$green run_030$start_script $white"
-	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 30分钟运行一次
+run_045() {
+	echo -e "$green run_045$start_script $white"
+	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 45分钟运行一次
 	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
-	echo -e "$green run_030$stop_script $white"
+	echo -e "$green run_045$stop_script $white"
 }
 
 run_01() {
@@ -360,7 +361,6 @@ run_01() {
 run_02() {
 	echo -e "$green run_02$start_script $white"
 	$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每两小时收一次
-	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
 	echo -e "$green run_02$stop_script $white"
 }
 
@@ -430,7 +430,7 @@ help() {
 	echo -e "$green sh \$jd update $white        #下载js脚本"
 	echo -e "$green sh \$jd update_script $white #更新JD_Script "
 	echo -e "$green sh \$jd run_0 $white         #运行全部脚本 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
-	echo -e "$green sh \$jd run_030 $white        #运行run_030模块里的命令"
+	echo -e "$green sh \$jd run_045 $white        #运行run_045模块里的命令"
 	echo -e "$green sh \$jd run_01 $white        #运行run_01模块里的命令 "
 	echo -e "$green sh \$jd run_02 $white        #运行run_02模块里的命令"
 	echo -e "$green sh \$jd run_03 $white        #运行run_03模块里的命令"
@@ -531,7 +531,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_030|task|run_08_12_16|run_09_23|jx)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx)
 			$action1
 			;;
 			*)
