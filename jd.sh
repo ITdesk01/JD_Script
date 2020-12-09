@@ -20,7 +20,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
-new_task1="###########这里是JD_Script的定时任务2.30版本###########"
+new_task1="###########这里是JD_Script的定时任务2.31版本###########"
 new_task2="1 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点1分执行全部脚本
 new_task3="45 2-23 * * * /usr/share/JD_Script/jd.sh run_045 >/tmp/jd_run_045.log 2>&1" #两个工厂
 new_task4="3 7-23 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #种豆得豆收瓶子
@@ -31,8 +31,8 @@ new_task8="35 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_ru
 new_task9="10 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #超市旺旺兑换礼品
 new_task10="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
 new_task11="5 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点05分更新lxk0301脚本
-new_task12="0 9,11,13,15,17,19,20,21,23 * * * /usr/share/JD_Script/jd.sh run_09_23 >/tmp/jd_run_09_23.log 2>&1 "
-new_task13="#预留位置方便后期增加（不要删除）"
+new_task12="0 9,11,13,15,17,19,20,21,23 * * * /usr/share/JD_Script/jd.sh run_09_23 >/tmp/jd_run_09_23.log 2>&1 " #直播红包雨
+new_task13="30 20-23 * * * /usr/share/JD_Script/jd.sh run_20-23 >/tmp/jd_run_20-23.log 2>&1" #超级直播红包雨
 new_task14="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
 
 task() {
@@ -113,6 +113,7 @@ update() {
 	wget $url/jd_digital_floor.js -O $dir_file_js/jd_digital_floor.js #数码加购京豆共计25京豆，一天运行一次即可
 	wget $url/jd_live_redrain.js -O $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
 	wget $url/jd_apple_live.js -O $dir_file_js/jd_apple_live.js #苹果抽奖机活动于2020-12-14日结束
+	wget $url/jd_live_redrain2.js -O $dir_file_js/jd_live_redrain2.js #超级直播间红包雨每天20-23半点可领，每日上限未知,活动时间未知
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -416,6 +417,12 @@ run_10_15_20() {
 	echo -e "$green run_10_15_20$stop_script $white"
 }
 
+run_20_23() {
+	echo -e "$green run_20_23$start_script $white"
+	$node $dir_file_js/jd_live_redrain2.js #超级直播间红包雨每天20-23半点可领，每日上限未知,活动时间未知
+	echo -e "$green run_20_23$stop_script $white"
+}
+
 jx() {
 	echo -e "$green 查询京喜商品生产所用时间$start_script $white"
 	$node $dir_file_js/jx_products_detail.js
@@ -540,7 +547,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx|run_20_23)
 			$action1
 			;;
 			*)
