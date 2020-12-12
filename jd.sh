@@ -114,6 +114,7 @@ update() {
 	wget $url/jd_apple_live.js -O $dir_file_js/jd_apple_live.js #苹果抽奖机活动于2020-12-14日结束
 	wget $url/jd_pubg.js -O $dir_file_js/jd_pubg.js #PUBG ,运行时间会比较久活动于2020-12-13日结束
 	wget $url/jd_live.js -O $dir_file_js/jd_live.js #直播抢京豆
+	wget $url/jr_sign.js -O $dir_file_js/jr_sign.js #金融打卡领年终奖活动时间：2020-12-8 到 2020-12-31
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -397,6 +398,7 @@ run_07() {
 	$node $dir_file_js/jd_live.js #直播抢京豆 （需要执行三次，不然没有18豆子）
 	$node $dir_file_js/jd_live.js #直播抢京豆
 	$node $dir_file_js/jd_live.js #直播抢京豆
+	$node $dir_file_js/jr_sign.js #金融打卡领年终奖活动时间：2020-12-8 到 2020-12-31
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_bean_change.js #京豆变更
