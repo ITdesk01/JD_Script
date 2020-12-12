@@ -102,7 +102,6 @@ update() {
 	wget $url/jdFactoryShareCodes.js -O $dir_file_js/jdFactoryShareCodes.js
 	wget $url/jd_syj.js -O $dir_file_js/jd_syj.js
 	wget $url/jd_bean_sign.js -O $dir_file_js/jd_bean_sign.js
-	wget $url/jd_jxstory.js -O $dir_file_js/jd_jxstory.js
 	wget $url/jdJxStoryShareCodes.js -O $dir_file_js/jdJxStoryShareCodes.js
 	wget $url/jd_bean_home.js -O $dir_file_js/jd_bean_home.js #领京豆额外奖励
 	wget $url/jd_ms_redrain.js -O $dir_file_js/jd_ms_redrain.js #秒杀红包雨 12月1-31日
@@ -253,17 +252,6 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "15a $new_dreamFactory" $dir_file_js/jdDreamFactoryShareCodes.js
 
 
-	#京喜工厂-金牌厂长
-	new_jdJxStoryShareCodes="'xTlGGIL-9JvzV694GpP6Gba8_zk0emJWtyQkQK0otrw=@ijeY8Ncm2eztoQMx4j3LPHswvSkak4Tq3uIuIRzLwcI=@VxcUisKVRxroaObG1_S9WOa-M2odzvod3T2C8i08KQE=@mPQKBbK0GKzKQuiZJr2JWt_p64iCef8g6lu0y2xNFLU=@jrXVUabGAPM3g2ia6CP_8omSeCOuVDuc8WtTTH-P5tA=',"
-
-	sed -i "s/'qSDHMwUOz7onHcMyaju4KmdSXWf0dlv7LVnTt1Wzemo=@iuGNoGYvk9YdEImUAz25Wyzm7oeggrm0JSIYgZdHJGI=', 'iuGNoGYvk9YdEImUAz25Wyzm7oeggrm0JSIYgZdHJGI='/'xTlGGIL-9JvzV694GpP6Gba8_zk0emJWtyQkQK0otrw=', 'ijeY8Ncm2eztoQMx4j3LPHswvSkak4Tq3uIuIRzLwcI=', 'VxcUisKVRxroaObG1_S9WOa-M2odzvod3T2C8i08KQE='/g" $dir_file_js/jd_jxstory.js
-	sed -i "s/randomCount = 3/randomCount = 0/g" $dir_file_js/jd_jxstory.js
-	sed -i "s/'',/$new_jdJxStoryShareCodes/g" $dir_file_js/jdJxStoryShareCodes.js
-	sed -i "12a $new_jdJxStoryShareCodes" $dir_file_js/jdJxStoryShareCodes.js
-	sed -i "13a $new_jdJxStoryShareCodes" $dir_file_js/jdJxStoryShareCodes.js
-	sed -i "14a $new_jdJxStoryShareCodes" $dir_file_js/jdJxStoryShareCodes.js
-	sed -i "15a $new_jdJxStoryShareCodes" $dir_file_js/jdJxStoryShareCodes.js
-
 	#东东工厂
 	old_jdfactory="\`P04z54XCjVWnYaS5u2ak7ZCdan1Bdd2GGiWvC6_uERj\`, 'P04z54XCjVWnYaS5m9cZ2ariXVJwHf0bgkG7Uo'"
 	#new_jdfactory="'P04z54XCjVWnYaS5m9cZ2f83X0Zl_Dd8CqABxo', 'P04z54XCjVWnYaS5m9cZ2Wui31Oxg3QPwI97G0', 'P04z54XCjVWnYaS5m9cZz-inDgt5gUTV9zVCg', 'P04z54XCjVWnYaS5m9cZ2T8jntInKkhvhlkIu4', 'P04z54XCjVWnYaS5m9cZ2eq2S1OxAqmz-x3vbg',"
@@ -325,7 +313,6 @@ run_0() {
 	$node $dir_file_js/jd_ms_redrain.js #秒杀红包雨 12月1-31日
 	run_09_23
 	$node $dir_file_js/jd_small_home.js #东东小窝
-	$node $dir_file_js/jd_jxstory.js #京喜金牌厂长
 	$node $dir_file_js/jd_pubg.js #PUBG ,运行时间会比较久
 	run_06_18
 	run_10_15_20
