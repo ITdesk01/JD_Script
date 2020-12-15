@@ -281,8 +281,8 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_health.js
 
 	# 京东健康APP
-	github_url="https://gitee.com/shylocks/updateTeam/raw/main/jd_jdh.json"
-	my_github="https://raw.githubusercontent.com/ITdesk01/JD_Script/main/JSON/jd_jdh.json"
+	github_url="https:\/\/gitee.com\/shylocks\/updateTeam\/raw\/main\/jd_jdh.json"
+	my_github="https:\/\/raw.githubusercontent.com\/ITdesk01\/JD_Script\/main\/JSON\/jd_jdh.json"
 	sed -i "s/$github_url/$my_github/g" $dir_file_js/jd_jdh.js
 
 
@@ -531,7 +531,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx|run_07)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx|run_07|additional_settings)
 			$action1
 			;;
 			*)
