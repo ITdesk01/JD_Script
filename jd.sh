@@ -280,7 +280,10 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "s/$old_jdhealth/$new_jdhealth/g" $dir_file_js/jd_health.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_health.js
 
-
+	# 京东健康APP
+	github_url="https://gitee.com/shylocks/updateTeam/raw/main/jd_jdh.json"
+	my_github="https://raw.githubusercontent.com/ITdesk01/JD_Script/main/JSON/jd_jdh.json"
+	sed -i "s/$github_url/$my_github/g" $dir_file_js/jd_jdh.js
 
 
 }
