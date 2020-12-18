@@ -5,7 +5,7 @@
 # This is free software, licensed under the GNU General Public License v3.
 # See /LICENSE for more information.
 #
-version="1.7"
+version="1.8"
 cron_file=/etc/crontabs/root
 url=https://raw.githubusercontent.com/lxk0301/jd_scripts/master
 dir_file=/usr/share/JD_Script
