@@ -20,7 +20,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
-new_task1="###########这里是JD_Script的定时任务2.33版本###########"
+new_task1="###########这里是JD_Script的定时任务2.34版本###########"
 new_task2="1 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点1分执行全部脚本
 new_task3="45 2-23 * * * /usr/share/JD_Script/jd.sh run_045 >/tmp/jd_run_045.log 2>&1" #两个工厂
 new_task4="3 7-23 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #种豆得豆收瓶子
@@ -31,9 +31,10 @@ new_task8="35 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_ru
 new_task9="10 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #超市旺旺兑换礼品
 new_task10="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
 new_task11="5 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点05分更新lxk0301脚本
-new_task12="1 9,11,13,15,17,19,20,21,23 * * * /usr/share/JD_Script/jd.sh run_09_23 >/tmp/jd_run_09_23.log 2>&1 " #直播红包雨
+new_task12="1-5 9,11,13,15,17,19,20,21,23 * * * /usr/share/JD_Script/jd.sh run_09_23 >/tmp/jd_run_09_23.log 2>&1 " #直播红包雨
 new_task13="5 7 * * * /usr/share/JD_Script/jd.sh run_07 >/tmp/jd_run_07.log 2>&1" #不需要在零点运行的脚本
-new_task14="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
+new_task14="59 * * * * /usr/share/JD_Script/jd.sh download_jdlive >/tmp/download_jdlive.log 2>&1" #每个小时都更新一下红包雨脚本
+new_task15="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
 
 task() {
 	if [[ -e /etc/crontabs/root_back ]]; then
@@ -61,6 +62,7 @@ task() {
 		sed -i "11a ${new_task12}" $cron_file
 		sed -i "12a ${new_task13}" $cron_file
 		sed -i "13a ${new_task14}" $cron_file
+		sed -i "14a ${new_task15}" $cron_file
 		sed '$s/ //' $cron_file
 		/etc/init.d/cron restart
 		cron_help="$yellow定时任务更新完成，记得看下你的定时任务，如果有问题可以参考/etc/crontabs/root_back恢复$white"
@@ -402,6 +404,10 @@ run_08_12_16() {
 	echo -e "$green run_08_12_16$stop_script $white"
 }
 
+download_jdlive() {
+	wget $url/jd_live_redrain.js -O $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
+}
+
 run_09_23() {
 	echo -e "$green run_09_23$start_script $white"
 	$node $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
@@ -551,7 +557,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx|run_07|additional_settings)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx|run_07|additional_settings|download_jdlive)
 			$action1
 			;;
 			*)
