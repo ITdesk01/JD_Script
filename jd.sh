@@ -112,6 +112,7 @@ update() {
 	wget $url/jd_live.js -O $dir_file_js/jd_live.js #直播抢京豆
 	wget $url/jr_sign.js -O $dir_file_js/jr_sign.js #金融打卡领年终奖活动时间：2020-12-8 到 2020-12-31
 	wget $url/jd_jdh.js  -O $dir_file_js/jd_jdh.js # 京东健康APP集汪汪卡瓜分百万红包没写到期时间但应该是短期
+	wget $url/ jd_jdzz.js  -O $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -288,6 +289,19 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	my_github="https:\/\/raw.githubusercontent.com\/ITdesk01\/JD_Script\/main\/JSON\/jd_jdh.json"
 	sed -i "s/$github_url/$my_github/g" $dir_file_js/jd_jdh.js
 
+	#京东赚赚长期活动
+	old_jdzz="\`ATGEC3-fsrn13aiaEqiM@AUWE5maSSnzFeDmH4iH0elA@ATGEC3-fsrn13aiaEqiM@AUWE5m6WUmDdZC2mr1XhJlQ@AUWE5m_jEzjJZDTKr3nwfkg@A06fNSRc4GIqY38pMBeLKQE2InZA@AUWE5mf7ExDZdDmH7j3wfkA\`,"
+	old_jdzz1="\`ATGEC3-fsrn13aiaEqiM@AUWE5maSSnzFeDmH4iH0elA@ATGEC3-fsrn13aiaEqiM@AUWE5m6WUmDdZC2mr1XhJlQ@AUWE5m_jEzjJZDTKr3nwfkg@A06fNSRc4GIqY38pMBeLKQE2InZA@AUWE5m6_BmTUPAGH42SpOkg\`"
+	new_jdzz="'AUWE5mKmQzGYKXGT8j38cwA@AUWE5mvvGzDFbAWTxjC0Ykw@AUWE5wPfRiVJ7SxKOuQY0',"
+	sed -i "s/$old_jdzz/$new_jdzz/g" $dir_file_js/jd_jdzz.js
+	sed -i "s/$old_jdzz1/$new_jdzz/g" $dir_file_js/jd_jdzz.js
+	sed -i "48a $new_jdzz" $dir_file_js/jd_jdzz.js
+	sed -i "49a $new_jdzz" $dir_file_js/jd_jdzz.js
+	sed -i "50a $new_jdzz" $dir_file_js/jd_jdzz.js
+	sed -i "51a $new_jdzz" $dir_file_js/jd_jdzz.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_jdzz.js
+	sed -i "s/helpAuthor=true/helpAuthor=false/g" $dir_file_js/jd_jdzz.js
+
 
 }
 
@@ -372,6 +386,7 @@ run_07() {
 	$node $dir_file_js/jd_live.js #直播抢京豆
 	$node $dir_file_js/jr_sign.js #金融打卡领年终奖活动时间：2020-12-8 到 2020-12-31
 	$node $dir_file_js/jd_jdh.js # 京东健康APP集汪汪卡瓜分百万红包没写到期时间但应该是短期
+	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_bean_change.js #京豆变更
