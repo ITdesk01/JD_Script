@@ -113,6 +113,7 @@ update() {
 	wget $url/jr_sign.js -O $dir_file_js/jr_sign.js #金融打卡领年终奖活动时间：2020-12-8 到 2020-12-31
 	wget $url/jd_jdh.js  -O $dir_file_js/jd_jdh.js # 京东健康APP集汪汪卡瓜分百万红包没写到期时间但应该是短期
 	wget $url/ jd_jdzz.js  -O $dir_file_js/jd_jdzz.js #京东赚赚长期活动
+	wget $url/jd_watch.js -O $dir_file_js/jd_watch.js #发现-看一看活动结束时间未知
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -387,6 +388,7 @@ run_07() {
 	$node $dir_file_js/jr_sign.js #金融打卡领年终奖活动时间：2020-12-8 到 2020-12-31
 	$node $dir_file_js/jd_jdh.js # 京东健康APP集汪汪卡瓜分百万红包没写到期时间但应该是短期
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
+	$node $dir_file_js/jd_watch.js #发现-看一看活动结束时间未知
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_bean_change.js #京豆变更
