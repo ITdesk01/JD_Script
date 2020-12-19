@@ -104,7 +104,6 @@ update() {
 	wget $url/jdFactoryShareCodes.js -O $dir_file_js/jdFactoryShareCodes.js
 	wget $url/jd_syj.js -O $dir_file_js/jd_syj.js
 	wget $url/jd_bean_sign.js -O $dir_file_js/jd_bean_sign.js
-	wget $url/jdJxStoryShareCodes.js -O $dir_file_js/jdJxStoryShareCodes.js
 	wget $url/jd_bean_home.js -O $dir_file_js/jd_bean_home.js #领京豆额外奖励
 	wget $url/jd_ms_redrain.js -O $dir_file_js/jd_ms_redrain.js #秒杀红包雨 12月1-31日
 	wget $url/jd_health.js -O $dir_file_js/jd_health.js #健康抽奖机 ，活动于2020-12-31日结束
