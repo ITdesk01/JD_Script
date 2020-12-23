@@ -46,7 +46,7 @@ task() {
 	if [[ `grep -o $new_task1 $cron_file |wc -l` == "1" ]]; then
 		cron_help="$green定时任务与设定一致$white"
 	else
-		sed -i '1,15d' $cron_file
+		sed -i '1,16d' $cron_file
 		echo " " >> $cron_file
 		sed -i "1i ${new_task1}" $cron_file
 		sed -i "1a ${new_task2}" $cron_file
@@ -121,10 +121,6 @@ update() {
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
 	additional_settings
 	task #更新完全部脚本顺便检查一下计划任务是否有变
-	#删除不存在或者过期脚本
-	rm -rf $dir_file_js/jdJxStoryShareCodes.js
-	rm -rf $dir_file_js/jd_pubg.js
-	rm -rf $dir_file_js/jd_apple_live.js
 
 	echo -e "$green update$stop_script $white"
 }
