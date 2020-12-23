@@ -117,6 +117,7 @@ update() {
 	wget $url/jd_watch.js -O $dir_file_js/jd_watch.js #发现-看一看活动结束时间未知 看40个视频领80京豆（非常耗时）
 	wget $url/jd_unbind.js -O $dir_file_js/jd_unbind.js #注销京东会员卡
 	wget $url/jd_crazy_joy.js -O $dir_file_js/jd_crazy_joy.js #crazyJoy任务
+	wget $url/jd_crazy_joy_coin.js -O $dir_file_js/jd_crazy_joy_coin.js #crazy joy挂机领金币/宝箱专用
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -345,6 +346,7 @@ run_0() {
 	run_03
 	run_045
 	$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
+	$node $dir_file_js/jd_crazy_joy_coin.js #crazy joy挂机领金币/宝箱专用
 	echo -e "$green run_0$stop_script $white"
 }
 
