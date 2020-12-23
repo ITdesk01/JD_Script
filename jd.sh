@@ -46,7 +46,7 @@ task() {
 	if [[ `grep -o $new_task1 $cron_file |wc -l` == "1" ]]; then
 		cron_help="$green定时任务与设定一致$white"
 	else
-		sed -i '1,14d' $cron_file
+		sed -i '1,15d' $cron_file
 		echo " " >> $cron_file
 		sed -i "1i ${new_task1}" $cron_file
 		sed -i "1a ${new_task2}" $cron_file
@@ -323,10 +323,11 @@ update_script() {
 
 run_0() {
 	echo -e "$green run_0$start_script $white"
-	run_08_12_16
+	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_ms_redrain.js #秒杀红包雨 12月1-31日
+	run_08_12_16
 	run_09_23
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_06_18
@@ -375,6 +376,7 @@ run_06_18() {
 	$node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
 	$node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
 	$node $dir_file_js/jd_superMarket.js #东东超市,6点 18点多加两场用于收金币
+	$node $dir_file_js/jd_watch.js #发现-看一看活动结束时间未知看40个视频领80京豆（非常耗时）
 	echo -e "$green run_06_18$stop_script $white"
 }
 
@@ -394,7 +396,6 @@ run_07() {
 	$node $dir_file_js/jr_sign.js #金融打卡领年终奖活动时间：2020-12-8 到 2020-12-31
 	$node $dir_file_js/jd_jdh.js # 京东健康APP集汪汪卡瓜分百万红包没写到期时间但应该是短期
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
-	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_bean_change.js #京豆变更
 	echo -e "$green run_07$stop_script $white"
@@ -404,7 +405,6 @@ run_08_12_16() {
 	echo -e "$green run_08_12_16$start_script $white"
 	$node $dir_file_js/jd_blueCoin.js #东东超市兑换，有次数限制，没时间要求
 	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
-	$node $dir_file_js/jd_watch.js #发现-看一看活动结束时间未知看40个视频领80京豆（非常耗时）
 	echo -e "$green run_08_12_16$stop_script $white"
 }
 
