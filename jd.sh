@@ -46,7 +46,7 @@ task() {
 	if [[ `grep -o $new_task1 $cron_file |wc -l` == "1" ]]; then
 		cron_help="$green定时任务与设定一致$white"
 	else
-		sed -i '1,16d' $cron_file
+		sed -i '1,15d' $cron_file
 		echo " " >> $cron_file
 		sed -i "1i ${new_task1}" $cron_file
 		sed -i "1a ${new_task2}" $cron_file
