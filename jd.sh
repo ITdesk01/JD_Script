@@ -34,7 +34,8 @@ new_task11="5 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&
 new_task12="1-5 9,11,13,15,17,19,20,21,23 * * * /usr/share/JD_Script/jd.sh run_09_23 >/tmp/jd_run_09_23.log 2>&1 " #直播红包雨
 new_task13="5 7 * * * /usr/share/JD_Script/jd.sh run_07 >/tmp/jd_run_07.log 2>&1" #不需要在零点运行的脚本
 new_task14="59 * * * * /usr/share/JD_Script/jd.sh download_jdlive >/tmp/download_jdlive.log 2>&1" #每个小时都更新一下红包雨脚本
-new_task15="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
+new_task15="5 2 * * * /usr/share/JD_Script/jd.sh joy >/tmp/jd_joy.log 2>&1" #两点运行一次joy挂机
+new_task16="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
 
 task() {
 	if [[ -e /etc/crontabs/root_back ]]; then
@@ -46,7 +47,7 @@ task() {
 	if [[ `grep -o $new_task1 $cron_file |wc -l` == "1" ]]; then
 		cron_help="$green定时任务与设定一致$white"
 	else
-		sed -i '1,15d' $cron_file
+		sed -i '1,16d' $cron_file
 		echo " " >> $cron_file
 		sed -i "1i ${new_task1}" $cron_file
 		sed -i "1a ${new_task2}" $cron_file
@@ -63,6 +64,7 @@ task() {
 		sed -i "12a ${new_task13}" $cron_file
 		sed -i "13a ${new_task14}" $cron_file
 		sed -i "14a ${new_task15}" $cron_file
+		sed -i "15a ${new_task16}" $cron_file
 		sed '$s/ //' $cron_file
 		/etc/init.d/cron restart
 		cron_help="$yellow定时任务更新完成，记得看下你的定时任务，如果有问题可以参考/etc/crontabs/root_back恢复$white"
@@ -346,8 +348,13 @@ run_0() {
 	run_03
 	run_045
 	$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
-	$node $dir_file_js/jd_crazy_joy_coin.js #crazy joy挂机领金币/宝箱专用
 	echo -e "$green run_0$stop_script $white"
+}
+
+joy(){
+	rm -rf /tmp/jd_joy.log
+	#crazy joy挂机领金币/宝箱专用
+	$node $dir_file_js/jd_crazy_joy_coin.js  &
 }
 
 run_045() {
@@ -576,7 +583,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx|run_07|additional_settings|download_jdlive)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx|run_07|additional_settings|download_jdlive|joy)
 			$action1
 			;;
 			*)
