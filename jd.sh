@@ -352,7 +352,6 @@ run_0() {
 }
 
 joy(){
-	rm -rf /tmp/jd_joy.log
 	#crazy joy挂机领金币/宝箱专用
 	$node $dir_file_js/jd_crazy_joy_coin.js  &
 }
