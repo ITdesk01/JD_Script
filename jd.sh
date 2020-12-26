@@ -326,6 +326,7 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "38a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
 	sed -i "39a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
 	sed -i "40a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_crazy_joy.js
 
 }
 
@@ -354,6 +355,7 @@ run_0() {
 	run_03
 	run_045
 	$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
+	stop_notice
 	echo -e "$green run_0$stop_script $white"
 }
 
@@ -457,6 +459,12 @@ jx() {
 	echo -e "$green 查询京喜商品生产所用时间$start_script $white"
 	$node $dir_file_js/jx_products_detail.js
 	echo -e "$green 查询京喜商品生产所用时间$stop_script $white"
+}
+
+stop_notice() {
+	#农场和萌宠提示太多次了，所用每天提示一次即可
+	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
+	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
 }
 
 help() {
