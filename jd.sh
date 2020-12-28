@@ -313,7 +313,7 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "49a $new_jdzz" $dir_file_js/jd_jdzz.js
 	sed -i "50a $new_jdzz" $dir_file_js/jd_jdzz.js
 	sed -i "51a $new_jdzz" $dir_file_js/jd_jdzz.js
-	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_jdzz.js
+	sed -i "s/const randomCount = 5/const randomCount = 0/g" $dir_file_js/jd_jdzz.js
 	sed -i "s/helpAuthor=true/helpAuthor=false/g" $dir_file_js/jd_jdzz.js
 
 	#crazyJoy任务
