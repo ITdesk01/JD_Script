@@ -313,7 +313,7 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "49a $new_jdzz" $dir_file_js/jd_jdzz.js
 	sed -i "50a $new_jdzz" $dir_file_js/jd_jdzz.js
 	sed -i "51a $new_jdzz" $dir_file_js/jd_jdzz.js
-	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_jdzz.js
+	sed -i "s/const randomCount = 5/const randomCount = 0/g" $dir_file_js/jd_jdzz.js
 	sed -i "s/helpAuthor=true/helpAuthor=false/g" $dir_file_js/jd_jdzz.js
 
 	#crazyJoy任务
@@ -342,6 +342,7 @@ update_script() {
 run_0() {
 	echo -e "$green run_0$start_script $white"
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
+	$node $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_ms_redrain.js #秒杀红包雨 12月1-31日
@@ -411,7 +412,6 @@ run_07() {
 	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
 	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
 	$node $dir_file_js/jd_health.js #健康抽奖机 ，活动于2020-12-31日结束
-	$node $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	$node $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
 	$node $dir_file_js/jd_bean_home.js #领京豆额外奖励
 	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
