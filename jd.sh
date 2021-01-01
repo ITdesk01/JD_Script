@@ -409,6 +409,7 @@ run_06_18() {
 
 run_07() {
 	echo -e "$green run_07$start_script $white"
+	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
 	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
 	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
