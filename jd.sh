@@ -119,6 +119,7 @@ update() {
 	wget $url/jd_unbind.js -O $dir_file_js/jd_unbind.js #注销京东会员卡
 	wget $url/jd_crazy_joy.js -O $dir_file_js/jd_crazy_joy.js #crazyJoy任务
 	wget $url/jd_crazy_joy_coin.js -O $dir_file_js/jd_crazy_joy_coin.js #crazy joy挂机领金币/宝箱专用
+	wget $url/jd_get_share_code.js -O $dir_file_js/jd_get_share_code.js #获取jd所有助力码脚本
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -459,7 +460,13 @@ run_10_15_20() {
 jx() {
 	echo -e "$green 查询京喜商品生产所用时间$start_script $white"
 	$node $dir_file_js/jx_products_detail.js
-	echo -e "$green 查询京喜商品生产所用时间$stop_script $white"
+	echo -e "$green 查询完成$stop_script $white"
+}
+
+jd_sharecode() {
+	echo -e "$green 查询京东助力码$start_script $white"
+	$node $dir_file_js/jd_get_share_code.js #获取jd所有助力码脚本
+	echo -e "$green 查询完成$start_script $white"
 }
 
 stop_notice() {
@@ -493,6 +500,7 @@ help() {
 	echo -e "$green sh \$jd run_08_12_16 $white     #运行run_08_12_16模块里的命令"
 	echo -e "$green sh \$jd run_10_15_20 $white  #运行run_10_15_20模块里的命令"
 	echo -e "$green sh \$jd jx $white            #查询京喜商品生产使用时间"
+	echo -e "$green sh \$jd jd_sharecode $white            #查询京东所有助力码"
 	echo " 如果不喜欢这样，你也可以直接cd $jd_file/js,然后用node 脚本名字.js "
 	echo ""
 	echo -e "$yellow 3.检测定时任务:$white $cron_help"
@@ -583,7 +591,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx|run_07|additional_settings|download_jdlive|joy)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx|run_07|additional_settings|download_jdlive|joy|jd_sharecode)
 			$action1
 			;;
 			*)
