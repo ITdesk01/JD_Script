@@ -364,7 +364,7 @@ run_0() {
 
 joy(){
 	#crazy joy挂机领金币/宝箱专用
-	$node $dir_file_js/jd_crazy_joy_coin.js  &
+	$node $dir_file_js/jd_crazy_joy_coin.js  
 }
 
 run_045() {
