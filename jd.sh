@@ -119,6 +119,7 @@ update() {
 	wget $url/jd_unbind.js -O $dir_file_js/jd_unbind.js #注销京东会员卡
 	wget $url/jd_crazy_joy.js -O $dir_file_js/jd_crazy_joy.js #crazyJoy任务
 	wget $url/jd_crazy_joy_coin.js -O $dir_file_js/jd_crazy_joy_coin.js #crazy joy挂机领金币/宝箱专用
+	wget $url/jd_get_share_code.js -O $dir_file_js/jd_get_share_code.js #获取jd所有助力码脚本
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -141,8 +142,8 @@ additional_settings() {
 	#sed -i "s/let joyRewardName = 20/let joyRewardName = 500/g" $dir_file_js/jd_joy_reward.js
 
 	#京东农场
-	old_fruit1="'0a74407df5df4fa99672a037eec61f7e@dbb21614667246fabcfd9685b6f448f3@6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6@56db8e7bc5874668ba7d5195230d067a',"
-	old_fruit2="'b1638a774d054a05a30a17d3b4d364b8@f92cb56c6a1349f5a35f0372aa041ea0@9c52670d52ad4e1a812f894563c746ea@8175509d82504e96828afc8b1bbb9cb3',"
+	old_fruit1="'0a74407df5df4fa99672a037eec61f7e@dbb21614667246fabcfd9685b6f448f3@6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6@56db8e7bc5874668ba7d5195230d067a@',"
+	old_fruit2="'b1638a774d054a05a30a17d3b4d364b8@f92cb56c6a1349f5a35f0372aa041ea0@9c52670d52ad4e1a812f894563c746ea@8175509d82504e96828afc8b1bbb9cb3@2673c3777d4443829b2a635059953a28',"
 	old_fruit3="'6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6@9c52670d52ad4e1a812f894563c746ea@8175509d82504e96828afc8b1bbb9cb3',"
 
 	new_fruit1="0763443f7d6f4f5ea5e54adc1c6112ed@e61135aa1963447fa136f293a9d161c1@f9e6a916ad634475b8e77a7704b5c3d8@6632c8135d5c4e2c9ad7f4aa964d4d11@31a2097b10db48429013103077f2f037@5aa64e466c0e43a98cbfbbafcc3ecd02@9046fbd8945f48cb8e36a17fff9b0983"
@@ -361,7 +362,7 @@ run_0() {
 
 joy(){
 	#crazy joy挂机领金币/宝箱专用
-	$node $dir_file_js/jd_crazy_joy_coin.js  &
+	$node $dir_file_js/jd_crazy_joy_coin.js  
 }
 
 run_045() {
@@ -457,7 +458,13 @@ run_10_15_20() {
 jx() {
 	echo -e "$green 查询京喜商品生产所用时间$start_script $white"
 	$node $dir_file_js/jx_products_detail.js
-	echo -e "$green 查询京喜商品生产所用时间$stop_script $white"
+	echo -e "$green 查询完成$stop_script $white"
+}
+
+jd_sharecode() {
+	echo -e "$green 查询京东助力码$start_script $white"
+	$node $dir_file_js/jd_get_share_code.js #获取jd所有助力码脚本
+	echo -e "$green 查询完成$start_script $white"
 }
 
 stop_notice() {
@@ -491,6 +498,7 @@ help() {
 	echo -e "$green sh \$jd run_08_12_16 $white     #运行run_08_12_16模块里的命令"
 	echo -e "$green sh \$jd run_10_15_20 $white  #运行run_10_15_20模块里的命令"
 	echo -e "$green sh \$jd jx $white            #查询京喜商品生产使用时间"
+	echo -e "$green sh \$jd jd_sharecode $white            #查询京东所有助力码"
 	echo " 如果不喜欢这样，你也可以直接cd $jd_file/js,然后用node 脚本名字.js "
 	echo ""
 	echo -e "$yellow 3.检测定时任务:$white $cron_help"
@@ -581,7 +589,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx|run_07|additional_settings|download_jdlive|joy)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx|run_07|additional_settings|download_jdlive|joy|jd_sharecode)
 			$action1
 			;;
 			*)
