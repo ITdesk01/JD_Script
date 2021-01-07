@@ -112,10 +112,8 @@ update() {
 	wget $url/jd_kd.js -O $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
 	wget $url/jd_live_redrain.js -O $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
 	wget $url/jd_live.js -O $dir_file_js/jd_live.js #直播抢京豆
-	rm -rf $dir_file_js/jr_sign.js #金融打卡领年终奖活动时间：2020-12-8 到 2020-12-31
-	wget $url/jd_jdh.js  -O $dir_file_js/jd_jdh.js # 京东健康APP集汪汪卡瓜分百万红包没写到期时间但应该是短期
+	rm -rf $dir_file_js/jd_jdh.js # 京东健康APP集汪汪卡瓜分百万红包没写到期时间但应该是短期
 	wget $url/jd_jdzz.js  -O $dir_file_js/jd_jdzz.js #京东赚赚长期活动
-	rm -rf $dir_file_js/jd_watch.js #发现-看一看活动结束时间未知 看40个视频领80京豆（非常耗时）
 	wget $url/jd_unbind.js -O $dir_file_js/jd_unbind.js #注销京东会员卡
 	wget $url/jd_crazy_joy.js -O $dir_file_js/jd_crazy_joy.js #crazyJoy任务
 	wget $url/jd_crazy_joy_coin.js -O $dir_file_js/jd_crazy_joy_coin.js #crazy joy挂机领金币/宝箱专用
@@ -301,11 +299,6 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "s/$old_jdhealth/$new_jdhealth/g" $dir_file_js/jd_health.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_health.js
 
-	# 京东健康APP
-	github_url="https:\/\/gitee.com\/shylocks\/updateTeam\/raw\/main\/jd_jdh.json"
-	my_github="https:\/\/raw.githubusercontent.com\/ITdesk01\/JD_Script\/main\/JSON\/jd_jdh.json"
-	sed -i "s/$github_url/$my_github/g" $dir_file_js/jd_jdh.js
-
 	#京东赚赚长期活动
 	old_jdzz="\`ATGEC3-fsrn13aiaEqiM@AUWE5maSSnzFeDmH4iH0elA@ATGEC3-fsrn13aiaEqiM@AUWE5m6WUmDdZC2mr1XhJlQ@AUWE5m_jEzjJZDTKr3nwfkg@A06fNSRc4GIqY38pMBeLKQE2InZA@AUWE5mf7ExDZdDmH7j3wfkA@AUWE5m6jBy2cNAWX7j31Pxw@AUWE5mK2UnDddDTX61S1Mkw@AUWE5mavGyGZdWzP5iCoZwQ\`,"
 	old_jdzz1="\`ATGEC3-fsrn13aiaEqiM@AUWE5maSSnzFeDmH4iH0elA@ATGEC3-fsrn13aiaEqiM@AUWE5m6WUmDdZC2mr1XhJlQ@AUWE5m_jEzjJZDTKr3nwfkg@A06fNSRc4GIqY38pMBeLKQE2InZA@AUWE5m6_BmTUPAGH42SpOkg@AUWE53NTIs3V8YBqthQMI\`"
@@ -420,7 +413,6 @@ run_07() {
 	$node $dir_file_js/jd_live.js #直播抢京豆 （需要执行三次，不然没有18豆子）
 	$node $dir_file_js/jd_live.js #直播抢京豆
 	$node $dir_file_js/jd_live.js #直播抢京豆
-	$node $dir_file_js/jd_jdh.js # 京东健康APP集汪汪卡瓜分百万红包没写到期时间但应该是短期
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	$node $dir_file_js/jx_nc.js #京喜农场
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
