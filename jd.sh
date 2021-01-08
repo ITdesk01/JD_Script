@@ -107,7 +107,7 @@ update() {
 	wget $url/jd_syj.js -O $dir_file_js/jd_syj.js
 	wget $url/jd_bean_sign.js -O $dir_file_js/jd_bean_sign.js
 	wget $url/jd_bean_home.js -O $dir_file_js/jd_bean_home.js #领京豆额外奖励
-	wget $url/jd_health.js -O $dir_file_js/jd_health.js #健康抽奖机 ，活动于2020-12-31日结束
+	rm -rf $dir_file_js/jd_health.js #健康抽奖机 ，活动于2020-12-31日结束
 	wget $url/jd_car.js -O $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	wget $url/jd_kd.js -O $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
 	wget $url/jd_live_redrain.js -O $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
@@ -296,11 +296,6 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "s/eU9Ya-y2N_5z9DvXwyIV0A/eU9YabrkZ_h1-GrcmiJB0A/g" $dir_file_js/jd_superMarket.js
 	sed -i "s/eU9YaeS3Z6ol8zrRmnMb1Q/eU9YabrkZ_h1-GrcmiJB0A/g" $dir_file_js/jd_superMarket.js
 
-	#健康抽奖机 ，活动于2020-12-31日结束
-	old_jdhealth="\`P04z54XCjVUnoaW5nJcXCCyoR8C6i9QR16e\`, 'P04z54XCjVUnoaW5m9cZ2T6jChKkh8FWbFAplQ', \`P04z54XCjVUnoaW5u2ak7ZCdan1Bdbpik_F9ud7lznm\`, \`P04z54XCjVUnoaW5m9cZ2ariXVJwFN5uKHNqnc\`"
-	new_jdhealth="'P04z54XCjVUnoaW5m9cZ2f83X0Zl9nlF826jjE', 'P04z54XCjVUnoaW5m9cZ2Wui31Oxj26WlIf23s', 'P04z54XCjVUnoaW5m9cZz-inDgt5kxStfLzOw'"
-	sed -i "s/$old_jdhealth/$new_jdhealth/g" $dir_file_js/jd_health.js
-	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_health.js
 
 	#京东赚赚长期活动
 	old_jdzz="\`ATGEC3-fsrn13aiaEqiM@AUWE5maSSnzFeDmH4iH0elA@ATGEC3-fsrn13aiaEqiM@AUWE5m6WUmDdZC2mr1XhJlQ@AUWE5m_jEzjJZDTKr3nwfkg@A06fNSRc4GIqY38pMBeLKQE2InZA@AUWE5mf7ExDZdDmH7j3wfkA@AUWE5m6jBy2cNAWX7j31Pxw@AUWE5mK2UnDddDTX61S1Mkw@AUWE5mavGyGZdWzP5iCoZwQ\`,"
@@ -410,7 +405,6 @@ run_07() {
 	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
 	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
 	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
-	$node $dir_file_js/jd_health.js #健康抽奖机 ，活动于2020-12-31日结束
 	$node $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
 	$node $dir_file_js/jd_bean_home.js #领京豆额外奖励
 	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
