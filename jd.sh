@@ -358,6 +358,8 @@ run_0() {
 
 joy(){
 	#crazy joy挂机领金币/宝箱专用
+	pid=$(ps -ef | grep "/usr/share/JD_Script/js/jd_crazy_joy_coin.js" |grep -v grep |awk '{print $1}')
+	kill -9 $pid
 	$node $dir_file_js/jd_crazy_joy_coin.js &
 }
 
