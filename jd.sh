@@ -20,7 +20,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
-new_task1="###########这里是JD_Script的定时任务2.36版本###########"
+new_task1="###########这里是JD_Script的定时任务2.37版本###########"
 new_task2="0 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点0分执行全部脚本
 new_task3="45 2-23 * * * /usr/share/JD_Script/jd.sh run_045 >/tmp/jd_run_045.log 2>&1" #两个工厂
 new_task4="3 7-23 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #种豆得豆收瓶子
@@ -31,9 +31,9 @@ new_task8="35 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_ru
 new_task9="10 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #超市旺旺兑换礼品
 new_task10="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
 new_task11="5 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点05分更新lxk0301脚本
-new_task12="1-5 9,11,13,15,17,19,20,21,23 * * * /usr/share/JD_Script/jd.sh run_09_23 >/tmp/jd_run_09_23.log 2>&1 " #直播红包雨
+new_task12=""
 new_task13="5 7 * * * /usr/share/JD_Script/jd.sh run_07 >/tmp/jd_run_07.log 2>&1" #不需要在零点运行的脚本
-new_task14="59 * * * * /usr/share/JD_Script/jd.sh download_jdlive >/tmp/download_jdlive.log 2>&1" #每个小时都更新一下红包雨脚本
+new_task14=""
 new_task15="5 2 * * * /usr/share/JD_Script/jd.sh joy >/tmp/jd_joy.log 2>&1" #两点运行一次joy挂机
 new_task16="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
 
@@ -107,12 +107,10 @@ update() {
 	wget $url/jd_syj.js -O $dir_file_js/jd_syj.js
 	wget $url/jd_bean_sign.js -O $dir_file_js/jd_bean_sign.js
 	wget $url/jd_bean_home.js -O $dir_file_js/jd_bean_home.js #领京豆额外奖励
-	rm -rf $dir_file_js/jd_health.js #健康抽奖机 ，活动于2020-12-31日结束
 	wget $url/jd_car.js -O $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	wget $url/jd_kd.js -O $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
-	wget $url/jd_live_redrain.js -O $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
+	rm -rf $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
 	wget $url/jd_live.js -O $dir_file_js/jd_live.js #直播抢京豆
-	rm -rf $dir_file_js/jd_jdh.js # 京东健康APP集汪汪卡瓜分百万红包没写到期时间但应该是短期
 	wget $url/jd_jdzz.js  -O $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	wget $url/jd_unbind.js -O $dir_file_js/jd_unbind.js #注销京东会员卡
 	wget $url/jd_crazy_joy.js -O $dir_file_js/jd_crazy_joy.js #crazyJoy任务
@@ -123,9 +121,15 @@ update() {
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_nc.js -O $dir_file_js/jx_nc.js
+	if [ $? -eq 0 ]; then
+		echo -e ">>$green脚本下载完成$white"
+	else
+		clear
+		echo "脚本下载没有成功，重新执行代码"
+		update
+	fi
 	additional_settings
 	task #更新完全部脚本顺便检查一下计划任务是否有变
-
 	echo -e "$green update$stop_script $white"
 }
 
@@ -340,7 +344,6 @@ run_0() {
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	run_08_12_16
-	run_09_23
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_06_18
 	run_10_15_20
@@ -424,16 +427,6 @@ run_08_12_16() {
 	$node $dir_file_js/jd_blueCoin.js #东东超市兑换，有次数限制，没时间要求
 	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	echo -e "$green run_08_12_16$stop_script $white"
-}
-
-download_jdlive() {
-	wget $url/jd_live_redrain.js -O $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
-}
-
-run_09_23() {
-	echo -e "$green run_09_23$start_script $white"
-	$node $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
-	echo -e "$green run_09_23$stop_script $white"
 }
 
 
@@ -581,7 +574,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx|run_07|additional_settings|download_jdlive|joy|jd_sharecode)
+			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode)
 			$action1
 			;;
 			*)
