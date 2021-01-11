@@ -118,6 +118,7 @@ update() {
 	wget $url/jd_car_exchange.js -O $dir_file_js/jd_car_exchange.js #京东汽车兑换，500赛点兑换500京豆
 	wget $url/jd_bookshop.js -O $dir_file_js/jd_bookshop.js #口袋书店
 	wget $url/jd_jxnc.js -O $dir_file_js/jd_jxnc.js #京喜农场
+	wget $url/jdJxncTokens.js -O $dir_file_js/jdJxncTokens.js #京喜农场token
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -327,6 +328,15 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "40a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_crazy_joy.js
 
+	#口袋书店
+	old_jdbook="'28a699ac78d74aa3b31f7103597f8927@2f14ee9c92954cf79829320dd482bf49@fdf827db272543d88dbb51a505c2e869'"
+	new_jdbook="'d6d73edddaa64cbda1ec42dd496591d0@e50f362dbf8e4e8891c18d0a6fc9d04d@40cb5da84f0448a695dd5b9643592cfa@3ef061eb9b244b3cbdc9904a0297c3f5',"
+	sed -i "s/$old_jdbook,/$new_jdbook/g" $dir_file_js/jd_bookshop.js
+	sed -i "s/$old_jdbook/$new_jdbook/g" $dir_file_js/jd_bookshop.js
+	sed -i "31a $new_jdbook" $dir_file_js/jd_bookshop.js
+	sed -i "32a $new_jdbook" $dir_file_js/jd_bookshop.js
+	sed -i "33a $new_jdbook" $dir_file_js/jd_bookshop.js
+	sed -i "34a $new_jdbook" $dir_file_js/jd_bookshop.js
 }
 
 update_script() {
