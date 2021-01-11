@@ -569,7 +569,11 @@ description_if() {
 	else
 		Script_status="$green最新$white"
 	fi
+	system_variable
+	help
+}
 
+system_variable() {
 	#添加系统变量
 	jd_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
 	if [[ "$jd_script_path" == "0" ]]; then
@@ -580,14 +584,11 @@ description_if() {
 		echo -e "$green添加jd变量成功,重启系统以后无论在那个目录输入 bash \$jd 都可以运行脚本$white"
 		echo ""
 		echo ""
-		echo -e "          $green直接回车会重启你的系统!!!，如果不需要马上重启ctrl+c取消$white"
+		echo -e "          $green重启以后就可以看到效果了$white"
 		echo "-----------------------------------------------------------------------"
-		read a
-		reboot	
 	else
 			echo "变量已经添加"
 	fi
-	help
 }
 
 action1="$1"
@@ -595,7 +596,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode)
+			system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode)
 			$action1
 			;;
 			*)
