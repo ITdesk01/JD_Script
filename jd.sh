@@ -109,7 +109,6 @@ update() {
 	wget $url/jd_bean_home.js -O $dir_file_js/jd_bean_home.js #领京豆额外奖励
 	wget $url/jd_car.js -O $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	wget $url/jd_kd.js -O $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
-	rm -rf $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
 	wget $url/jd_live.js -O $dir_file_js/jd_live.js #直播抢京豆
 	wget $url/jd_jdzz.js  -O $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	wget $url/jd_unbind.js -O $dir_file_js/jd_unbind.js #注销京东会员卡
@@ -118,10 +117,11 @@ update() {
 	wget $url/jd_get_share_code.js -O $dir_file_js/jd_get_share_code.js #获取jd所有助力码脚本
 	wget $url/jd_car_exchange.js -O $dir_file_js/jd_car_exchange.js #京东汽车兑换，500赛点兑换500京豆
 	wget $url/jd_bookshop.js -O $dir_file_js/jd_bookshop.js #口袋书店
+	wget $url/jd_jxnc.js -O $dir_file_js/jd_jxnc.js #京喜农场
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
-	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_nc.js -O $dir_file_js/jx_nc.js
+	rm -rf $dir_file_js/jx_nc.js
 	if [ $? -eq 0 ]; then
 		echo -e ">>$green脚本下载完成$white"
 	else
@@ -419,7 +419,7 @@ run_07() {
 	$node $dir_file_js/jd_live.js #直播抢京豆
 	$node $dir_file_js/jd_live.js #直播抢京豆
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
-	$node $dir_file_js/jx_nc.js #京喜农场
+	$node $dir_file_js/jd_jxnc.js #京喜农场
 	$node $dir_file_js/jd_bookshop.js #口袋书店
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_unbind.js #注销京东会员卡
