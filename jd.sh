@@ -20,7 +20,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
-new_task1="###########这里是JD_Script的定时任务2.36版本###########"
+new_task1="###########这里是JD_Script的定时任务2.38版本###########"
 new_task2="1 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点1分执行全部脚本
 new_task3="45 2-23 * * * /usr/share/JD_Script/jd.sh run_045 >/tmp/jd_run_045.log 2>&1" #两个工厂
 new_task4="3 7-23 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #种豆得豆收瓶子
@@ -31,10 +31,10 @@ new_task8="35 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_ru
 new_task9="10 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #超市旺旺兑换礼品
 new_task10="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
 new_task11="5 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点05分更新lxk0301脚本
-new_task12="1-5 9,11,13,15,17,19,20,21,23 * * * /usr/share/JD_Script/jd.sh run_09_23 >/tmp/jd_run_09_23.log 2>&1 " #直播红包雨
+new_task12=""
 new_task13="5 7 * * * /usr/share/JD_Script/jd.sh run_07 >/tmp/jd_run_07.log 2>&1" #不需要在零点运行的脚本
-new_task14="59 * * * * /usr/share/JD_Script/jd.sh download_jdlive >/tmp/download_jdlive.log 2>&1" #每个小时都更新一下红包雨脚本
-new_task15="5 2 * * * /usr/share/JD_Script/jd.sh joy >/tmp/jd_joy.log 2>&1" #两点运行一次joy挂机
+new_task14=""
+new_task15="5 1-23 * * * /usr/share/JD_Script/jd.sh joy >/tmp/jd_joy.log 2>&1" #1-23,每1个小时运行一次joy挂机
 new_task16="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
 
 task() {
@@ -107,26 +107,32 @@ update() {
 	wget $url/jd_syj.js -O $dir_file_js/jd_syj.js
 	wget $url/jd_bean_sign.js -O $dir_file_js/jd_bean_sign.js
 	wget $url/jd_bean_home.js -O $dir_file_js/jd_bean_home.js #领京豆额外奖励
-	rm -rf $dir_file_js/jd_health.js #健康抽奖机 ，活动于2020-12-31日结束
 	wget $url/jd_car.js -O $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	wget $url/jd_kd.js -O $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
-	wget $url/jd_live_redrain.js -O $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
 	wget $url/jd_live.js -O $dir_file_js/jd_live.js #直播抢京豆
-	rm -rf $dir_file_js/jr_sign.js #金融打卡领年终奖活动时间：2020-12-8 到 2020-12-31
-	wget $url/jd_jdh.js  -O $dir_file_js/jd_jdh.js # 京东健康APP集汪汪卡瓜分百万红包没写到期时间但应该是短期
 	wget $url/jd_jdzz.js  -O $dir_file_js/jd_jdzz.js #京东赚赚长期活动
-	rm -rf $dir_file_js/jd_watch.js #发现-看一看活动结束时间未知 看40个视频领80京豆（非常耗时）
 	wget $url/jd_unbind.js -O $dir_file_js/jd_unbind.js #注销京东会员卡
 	wget $url/jd_crazy_joy.js -O $dir_file_js/jd_crazy_joy.js #crazyJoy任务
 	wget $url/jd_crazy_joy_coin.js -O $dir_file_js/jd_crazy_joy_coin.js #crazy joy挂机领金币/宝箱专用
 	wget $url/jd_get_share_code.js -O $dir_file_js/jd_get_share_code.js #获取jd所有助力码脚本
+	wget $url/jd_car_exchange.js -O $dir_file_js/jd_car_exchange.js #京东汽车兑换，500赛点兑换500京豆
+	wget $url/jd_bookshop.js -O $dir_file_js/jd_bookshop.js #口袋书店
+	wget $url/jd_jxnc.js -O $dir_file_js/jd_jxnc.js #京喜农场
+	wget $url/jdJxncTokens.js -O $dir_file_js/jdJxncTokens.js #京喜农场token
+	wget $url/jdJxncShareCodes.js -O $dir_file_js/jdJxncShareCodes.js #京喜农场ShareCodes
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
-	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_nc.js -O $dir_file_js/jx_nc.js
+	rm -rf $dir_file_js/jx_nc.js
+	if [ $? -eq 0 ]; then
+		echo -e ">>$green脚本下载完成$white"
+	else
+		clear
+		echo "脚本下载没有成功，重新执行代码"
+		update
+	fi
 	additional_settings
 	task #更新完全部脚本顺便检查一下计划任务是否有变
-
 	echo -e "$green update$stop_script $white"
 }
 
@@ -180,9 +186,10 @@ deng_20201120_fr="bc26d0bdc442421aa92cafcf26a1e148@57cf86ce18ca4f4987ce54fae6182
 
 	#萌宠
 old_pet1="'MTAxODc2NTEzNTAwMDAwMDAwMjg3MDg2MA==@MTAxODc2NTEzMzAwMDAwMDAyNzUwMDA4MQ==@MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODc2NTEzNDAwMDAwMDAzMDI2MDI4MQ==@MTAxODcxOTI2NTAwMDAwMDAxOTQ3MjkzMw==',"
-	old_pet2="'MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODcxOTI2NTAwMDAwMDAyNjA4ODQyMQ==@MTAxODc2NTEzOTAwMDAwMDAyNzE2MDY2NQ==',"
+old_pet2="'MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODcxOTI2NTAwMDAwMDAyNjA4ODQyMQ==@MTAxODc2NTEzOTAwMDAwMDAyNzE2MDY2NQ==@MTE1NDUyMjEwMDAwMDAwNDI0MDM2MDc=',"
 	old_pet3="'MTAxODc2NTEzNTAwMDAwMDAwMjg3MDg2MA==@MTAxODc2NTEzMzAwMDAwMDAyNzUwMDA4MQ==@MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODc2NTEzNDAwMDAwMDAzMDI2MDI4MQ==',"
-
+	old_pet4="'MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODcxOTI2NTAwMDAwMDAyNjA4ODQyMQ==@MTAxODc2NTEzOTAwMDAwMDAyNzE2MDY2NQ==',"
+	
 	new_pet1="MTE1NDUyMjEwMDAwMDAwNDI4ODA5NDU=@MTE1NDQ5OTUwMDAwMDAwNDI4ODA5NTE=@MTE1NDAxNzcwMDAwMDAwMzk1OTQ4Njk==@MTE1NDQ5OTUwMDAwMDAwMzk3NDgyMDE==@MTAxODEyOTI4MDAwMDAwMDQwMTIzMzcx@MTEzMzI0OTE0NTAwMDAwMDAzOTk5ODU1MQ==@MTAxODc2NTEzMzAwMDAwMDAxOTkzMzM1MQ=="
 	new_pet2="MTAxODEyOTI4MDAwMDAwMDM5NzM3Mjk5@MTAxODc2NTEzMDAwMDAwMDAxOTcyMTM3Mw==@MTE1NDQ5MzYwMDAwMDAwMzk2NTY2MTE==@MTE1NDQ5OTUwMDAwMDAwMzk2NTY2MTk==@MTE1NDQ5OTUwMDAwMDAwNDAyNTYyMjM=="
 	new_pet3="MTAxODEyOTI4MDAwMDAwMDQwNzYxOTUx@MTE1NDAxNzcwMDAwMDAwNDA4MzcyOTU==@MTE1NDQ5OTIwMDAwMDAwNDIxMDIzMzM="
@@ -207,7 +214,7 @@ deng_20201120_pet="MTE1NDUwMTI0MDAwMDAwMDM4MzAwMTI5@MTE1NDQ5OTUwMDAwMDAwMzkxMTY3
 	sed -i "38a $new_pet_set" $dir_file_js/jd_pet.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_pet.js
 
-	sed -i "s/$old_pet2/$new_pet_set/g" $dir_file_js/jdPetShareCodes.js
+	sed -i "s/$old_pet4/$new_pet_set/g" $dir_file_js/jdPetShareCodes.js
 	sed -i "s/$old_pet3/$new_pet_set/g" $dir_file_js/jdPetShareCodes.js
 	sed -i "12a $new_pet_set" $dir_file_js/jdPetShareCodes.js
 	sed -i "13a $new_pet_set" $dir_file_js/jdPetShareCodes.js
@@ -293,12 +300,6 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "s/eU9Ya-y2N_5z9DvXwyIV0A/eU9YabrkZ_h1-GrcmiJB0A/g" $dir_file_js/jd_superMarket.js
 	sed -i "s/eU9YaeS3Z6ol8zrRmnMb1Q/eU9YabrkZ_h1-GrcmiJB0A/g" $dir_file_js/jd_superMarket.js
 
-
-	# 京东健康APP
-	github_url="https:\/\/gitee.com\/shylocks\/updateTeam\/raw\/main\/jd_jdh.json"
-	my_github="https:\/\/raw.githubusercontent.com\/ITdesk01\/JD_Script\/main\/JSON\/jd_jdh.json"
-	sed -i "s/$github_url/$my_github/g" $dir_file_js/jd_jdh.js
-
 	#京东赚赚长期活动
 	old_jdzz="\`ATGEC3-fsrn13aiaEqiM@AUWE5maSSnzFeDmH4iH0elA@ATGEC3-fsrn13aiaEqiM@AUWE5m6WUmDdZC2mr1XhJlQ@AUWE5m_jEzjJZDTKr3nwfkg@A06fNSRc4GIqY38pMBeLKQE2InZA@AUWE5mf7ExDZdDmH7j3wfkA@AUWE5m6jBy2cNAWX7j31Pxw@AUWE5mK2UnDddDTX61S1Mkw@AUWE5mavGyGZdWzP5iCoZwQ\`,"
 	old_jdzz1="\`ATGEC3-fsrn13aiaEqiM@AUWE5maSSnzFeDmH4iH0elA@ATGEC3-fsrn13aiaEqiM@AUWE5m6WUmDdZC2mr1XhJlQ@AUWE5m_jEzjJZDTKr3nwfkg@A06fNSRc4GIqY38pMBeLKQE2InZA@AUWE5m6_BmTUPAGH42SpOkg@AUWE53NTIs3V8YBqthQMI\`"
@@ -323,7 +324,21 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "39a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
 	sed -i "40a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_crazy_joy.js
-
+	
+	#口袋书店
+	old_jdbook="'28a699ac78d74aa3b31f7103597f8927@2f14ee9c92954cf79829320dd482bf49@fdf827db272543d88dbb51a505c2e869'"
+	new_jdbook="'d6d73edddaa64cbda1ec42dd496591d0@e50f362dbf8e4e8891c18d0a6fc9d04d@40cb5da84f0448a695dd5b9643592cfa@3ef061eb9b244b3cbdc9904a0297c3f5',"
+	sed -i "s/$old_jdbook,/$new_jdbook/g" $dir_file_js/jd_bookshop.js
+	sed -i "s/$old_jdbook/$new_jdbook/g" $dir_file_js/jd_bookshop.js
+	sed -i "31a $new_jdbook" $dir_file_js/jd_bookshop.js
+	sed -i "32a $new_jdbook" $dir_file_js/jd_bookshop.js
+	sed -i "33a $new_jdbook" $dir_file_js/jd_bookshop.js
+	sed -i "34a $new_jdbook" $dir_file_js/jd_bookshop.js
+	
+	#京喜农场
+	old_jxnc="'22bd6fbbabbaa770a45ab2607e7a1e8a@197c6094e965fdf3d33621b47719e0b1'"
+	new_jxnc="'019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df'"
+	sed -i "s/$old_jxnc/$new_jxnc/g" $dir_file_js/jd_jxnc.js
 }
 
 update_script() {
@@ -337,12 +352,12 @@ update_script() {
 
 run_0() {
 	echo -e "$green run_0$start_script $white"
-	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
+	$node $dir_file_js/jd_car_exchange.js #京东汽车兑换，500赛点兑换500京豆
 	$node $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
+	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	run_08_12_16
-	run_09_23
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_06_18
 	run_10_15_20
@@ -357,7 +372,10 @@ run_0() {
 
 joy(){
 	#crazy joy挂机领金币/宝箱专用
-	$node $dir_file_js/jd_crazy_joy_coin.js  
+	pid=$(ps -ef | grep "/usr/share/JD_Script/js/jd_crazy_joy_coin.js" |grep -v grep |awk '{print $1}')
+	kill -9 $pid
+	sleep 2m
+	$node $dir_file_js/jd_crazy_joy_coin.js &
 }
 
 run_045() {
@@ -377,6 +395,7 @@ run_01() {
 run_02() {
 	echo -e "$green run_02$start_script $white"
 	$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每两小时收一次
+	$node $dir_file_js/jd_bookshop.js #口袋书店
 	echo -e "$green run_02$stop_script $white"
 }
 
@@ -412,9 +431,8 @@ run_07() {
 	$node $dir_file_js/jd_live.js #直播抢京豆 （需要执行三次，不然没有18豆子）
 	$node $dir_file_js/jd_live.js #直播抢京豆
 	$node $dir_file_js/jd_live.js #直播抢京豆
-	$node $dir_file_js/jd_jdh.js # 京东健康APP集汪汪卡瓜分百万红包没写到期时间但应该是短期
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
-	$node $dir_file_js/jx_nc.js #京喜农场
+	$node $dir_file_js/jd_jxnc.js #京喜农场
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
@@ -426,16 +444,6 @@ run_08_12_16() {
 	$node $dir_file_js/jd_blueCoin.js #东东超市兑换，有次数限制，没时间要求
 	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	echo -e "$green run_08_12_16$stop_script $white"
-}
-
-download_jdlive() {
-	wget $url/jd_live_redrain.js -O $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
-}
-
-run_09_23() {
-	echo -e "$green run_09_23$start_script $white"
-	$node $dir_file_js/jd_live_redrain.js #直播红包雨每天0,9,11,13,15,17,19,20,21,23可领，每日上限未知
-	echo -e "$green run_09_23$stop_script $white"
 }
 
 
@@ -557,7 +565,11 @@ description_if() {
 	else
 		Script_status="$green最新$white"
 	fi
+	system_variable
+	help
+}
 
+system_variable() {
 	#添加系统变量
 	jd_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
 	if [[ "$jd_script_path" == "0" ]]; then
@@ -568,14 +580,12 @@ description_if() {
 		echo -e "$green添加jd变量成功,重启系统以后无论在那个目录输入 bash \$jd 都可以运行脚本$white"
 		echo ""
 		echo ""
-		echo -e "          $green直接回车会重启你的系统!!!，如果不需要马上重启ctrl+c取消$white"
+		echo -e "          $green重启以后就可以看到效果了$white"
 		echo "-----------------------------------------------------------------------"
-		read a
-		reboot	
+
 	else
 			echo "变量已经添加"
 	fi
-	help
 }
 
 action1="$1"
@@ -583,7 +593,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|run_09_23|jx|run_07|additional_settings|download_jdlive|joy|jd_sharecode)
+			system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode)
 			$action1
 			;;
 			*)
