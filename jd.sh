@@ -529,6 +529,28 @@ help() {
 }
 
 description_if() {
+	system_variable
+	echo "稍等一下，正在取回远端脚本源码，用于比较现在脚本源码，速度看你网络"
+	cd $dir_file_js
+	git fetch
+	if [[ $? -eq 0 ]]; then
+		echo ""
+	else
+		echo -e "$red>> 取回分支没有成功，重新执行代码$white"
+		description_if
+	fi
+	clear
+	git_branch=$(git branch -v | grep -o behind )
+	if [[ "$git_branch" == "behind" ]]; then
+		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script && sh \$jd update && sh \$jd$white更新 )"
+	else
+		Script_status="$green最新$white"
+	fi
+
+	help
+}
+
+system_variable() {
 	if [[ ! -d "$dir_file" ]]; then
 		cp -r $(pwd)  $dir_file && chmod 777 $dir_file/jd.sh
 	fi
@@ -552,28 +574,6 @@ description_if() {
 		wget $url/sendNotify.js -O $dir_file/sendNotify.js	
 		ln -s $dir_file/sendNotify.js $dir_file_js/sendNotify.js
 	fi
-
-	echo "稍等一下，正在取回远端脚本源码，用于比较现在脚本源码，速度看你网络"
-	cd $dir_file_js
-	git fetch
-	if [[ $? -eq 0 ]]; then
-		echo ""
-	else
-		echo -e "$red>> 取回分支没有成功，重新执行代码$white"
-		description_if
-	fi
-	clear
-	git_branch=$(git branch -v | grep -o behind )
-	if [[ "$git_branch" == "behind" ]]; then
-		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script && sh \$jd update && sh \$jd$white更新 )"
-	else
-		Script_status="$green最新$white"
-	fi
-	system_variable
-	help
-}
-
-system_variable() {
 	#添加系统变量
 	jd_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
 	if [[ "$jd_script_path" == "0" ]]; then
