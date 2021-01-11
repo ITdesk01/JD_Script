@@ -338,6 +338,11 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "32a $new_jdbook" $dir_file_js/jd_bookshop.js
 	sed -i "33a $new_jdbook" $dir_file_js/jd_bookshop.js
 	sed -i "34a $new_jdbook" $dir_file_js/jd_bookshop.js
+	
+	#京喜农场
+	old_jxnc="'22bd6fbbabbaa770a45ab2607e7a1e8a@197c6094e965fdf3d33621b47719e0b1'"
+	new_jxnc="'019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df'"
+	sed -i "s/$old_jxnc/$new_jxnc/g" $dir_file_js/jd_jxnc.js
 }
 
 update_script() {
