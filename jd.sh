@@ -20,7 +20,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
-new_task1="###########这里是JD_Script的定时任务2.37版本###########"
+new_task1="###########这里是JD_Script的定时任务2.38版本###########"
 new_task2="0 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点0分执行全部脚本
 new_task3="45 2-23 * * * /usr/share/JD_Script/jd.sh run_045 >/tmp/jd_run_045.log 2>&1" #两个工厂
 new_task4="3 7-23 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #种豆得豆收瓶子
@@ -34,7 +34,7 @@ new_task11="5 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&
 new_task12=""
 new_task13="5 7 * * * /usr/share/JD_Script/jd.sh run_07 >/tmp/jd_run_07.log 2>&1" #不需要在零点运行的脚本
 new_task14=""
-new_task15="5 2 * * * /usr/share/JD_Script/jd.sh joy >/tmp/jd_joy.log 2>&1" #两点运行一次joy挂机
+new_task15="5 1-23/2 * * * /usr/share/JD_Script/jd.sh joy >/tmp/jd_joy.log 2>&1" #1-23,每两个小时运行一次joy挂机
 new_task16="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
 
 task() {
