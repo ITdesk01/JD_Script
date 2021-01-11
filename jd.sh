@@ -117,6 +117,7 @@ update() {
 	wget $url/jd_crazy_joy_coin.js -O $dir_file_js/jd_crazy_joy_coin.js #crazy joy挂机领金币/宝箱专用
 	wget $url/jd_get_share_code.js -O $dir_file_js/jd_get_share_code.js #获取jd所有助力码脚本
 	wget $url/jd_car_exchange.js -O $dir_file_js/jd_car_exchange.js #京东汽车兑换，500赛点兑换500京豆
+	wget $url/jd_bookshop.js -O $dir_file_js/jd_bookshop.js #口袋书店
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -340,6 +341,7 @@ update_script() {
 run_0() {
 	echo -e "$green run_0$start_script $white"
 	$node $dir_file_js/jd_car_exchange.js #京东汽车兑换，500赛点兑换500京豆
+	$node $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
@@ -406,7 +408,6 @@ run_06_18() {
 
 run_07() {
 	echo -e "$green run_07$start_script $white"
-	$node $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
 	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
@@ -419,6 +420,7 @@ run_07() {
 	$node $dir_file_js/jd_live.js #直播抢京豆
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	$node $dir_file_js/jx_nc.js #京喜农场
+	$node $dir_file_js/jd_bookshop.js #口袋书店
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
