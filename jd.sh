@@ -119,6 +119,7 @@ update() {
 	wget $url/jd_bookshop.js -O $dir_file_js/jd_bookshop.js #口袋书店
 	wget $url/jd_jxnc.js -O $dir_file_js/jd_jxnc.js #京喜农场
 	wget $url/jdJxncTokens.js -O $dir_file_js/jdJxncTokens.js #京喜农场token
+	wget $url/jdJxncShareCodes.js -O $dir_file_js/jdJxncShareCodes.js #京喜农场ShareCodes
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
