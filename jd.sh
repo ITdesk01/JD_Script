@@ -30,7 +30,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
-new_task1="###########这里是JD_Script的定时任务2.38版本###########"
+new_task1="###########这里是JD_Script的定时任务2.39版本###########"
 new_task2="0 0 * * * $dir_file/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点0分执行全部脚本
 new_task3="45 2-23 * * * $dir_file/jd.sh run_045 >/tmp/jd_run_045.log 2>&1" #两个工厂
 new_task4="3 7-23 * * * $dir_file/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #种豆得豆收瓶子
