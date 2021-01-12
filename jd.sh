@@ -614,7 +614,7 @@ system_variable() {
 }
 
 action1="$1"
-action1="$2"
+action2="$2"
 if [[ -z $action1 ]]; then
 	description_if
 else
