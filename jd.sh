@@ -133,6 +133,7 @@ update() {
 	wget $url/jd_cash.js -O $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	wget $url/jx_sign.js -O $dir_file_js/jx_sign.js #京喜app签到长期
 	wget $url/jd_nh.js -O $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
+	wget $url/USER_AGENTS.js -O $dir_file_js/USER_AGENTS.js
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
