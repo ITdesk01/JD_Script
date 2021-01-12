@@ -377,8 +377,15 @@ run_0() {
 joy(){
 	#crazy joy挂机领金币/宝箱专用
 	pid=$(ps -ef | grep "/usr/share/JD_Script/js/jd_crazy_joy_coin.js" |grep -v grep |awk '{print $1}')
-	kill -9 $pid
-	sleep 2m
+	if [ $(echo $pid |wc -l ) -ge 1 ];then
+		echo -e "$yellow发现joy后台程序开始清理，请稍等$white"
+		for i in $pid
+		do
+			kill -9 $i
+		done
+	else
+		echo "$green没有运行的joy后台，直接运行$white"
+	fi
 	$node $dir_file_js/jd_crazy_joy_coin.js &
 }
 
