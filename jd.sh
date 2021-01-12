@@ -6,11 +6,21 @@
 # See /LICENSE for more information.
 #
 version="1.8"
-cron_file=/etc/crontabs/root
+cron_file="/etc/crontabs/root"
 url=https://raw.githubusercontent.com/lxk0301/jd_scripts/master
-dir_file=/usr/share/JD_Script
-dir_file_js=/usr/share/JD_Script/js
-node=/usr/bin/node
+
+#获取当前脚本目录copy脚本之家
+Source="$0"
+while [ -h "$Source"  ]; do
+    dir_file="$( cd -P "$( dirname "$Source"  )" && pwd  )"
+    Source="$(readlink "$Source")"
+    [[ $Source != /*  ]] && Source="$dir_file/$Source"
+done
+dir_file="$( cd -P "$( dirname "$Source"  )" && pwd  )"
+dir_file_js="$dir_file/js"
+
+node="/usr/bin/node"
+
 red="\033[31m"
 green="\033[32m"
 yellow="\033[33m"
@@ -21,20 +31,20 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 #计划任务
 new_task1="###########这里是JD_Script的定时任务2.39版本###########"
-new_task2="0 0 * * * /usr/share/JD_Script/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点0分执行全部脚本
-new_task3="45 2-23 * * * /usr/share/JD_Script/jd.sh run_045 >/tmp/jd_run_045.log 2>&1" #两个工厂
-new_task4="3 7-23 * * * /usr/share/JD_Script/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #种豆得豆收瓶子
-new_task5="50 2-22/2 * * * /usr/share/JD_Script/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" #京东摇钱树 每两个小时收一次
-new_task6="10 2-22/3 * * * /usr/share/JD_Script/jd.sh run_03 >/tmp/jd_run_03.log 2>&1" #天天加速 3小时运行一次，打卡时间间隔是6小时
-new_task7="40 6-18/6 * * * /usr/share/JD_Script/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" #不是很重要的，错开运行
-new_task8="35 10,15,20 * * * /usr/share/JD_Script/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"  #不是很重要的，错开运行
-new_task9="10 8,12,16 * * * /usr/share/JD_Script/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #超市旺旺兑换礼品
-new_task10="00 22 * * * /usr/share/JD_Script/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
-new_task11="5 22 * * * /usr/share/JD_Script/jd.sh update >/tmp/jd_update.log 2>&1" #22点05分更新lxk0301脚本
+new_task2="0 0 * * * $dir_file/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点0分执行全部脚本
+new_task3="45 2-23 * * * $dir_file/jd.sh run_045 >/tmp/jd_run_045.log 2>&1" #两个工厂
+new_task4="3 7-23 * * * $dir_file/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #种豆得豆收瓶子
+new_task5="50 2-22/2 * * * $dir_file/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" #京东摇钱树 每两个小时收一次
+new_task6="10 2-22/3 * * * $dir_file/jd.sh run_03 >/tmp/jd_run_03.log 2>&1" #天天加速 3小时运行一次，打卡时间间隔是6小时
+new_task7="40 6-18/6 * * * $dir_file/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" #不是很重要的，错开运行
+new_task8="35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"  #不是很重要的，错开运行
+new_task9="10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #超市旺旺兑换礼品
+new_task10="00 22 * * * $dir_file/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
+new_task11="5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1" #22点05分更新lxk0301脚本
 new_task12=""
-new_task13="5 7 * * * /usr/share/JD_Script/jd.sh run_07 >/tmp/jd_run_07.log 2>&1" #不需要在零点运行的脚本
+new_task13="5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1" #不需要在零点运行的脚本
 new_task14=""
-new_task15="5 1-23 * * * /usr/share/JD_Script/jd.sh joy >/tmp/jd_joy.log 2>&1" #1-23,每一个小时运行一次joy挂机
+new_task15="5 1-23 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1" #1-23,每一个小时运行一次joy挂机
 new_task16="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
 
 task() {
@@ -287,9 +297,9 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "s/'',/$new_jdfactory1 $new_jdfactory1 $new_jdfactory1/g" $dir_file_js/jdFactoryShareCodes.js
 	sed -i "s/$old_jdfactory/$new_jdfactory1/g" $dir_file_js/jd_jdfactory.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_jdfactory.js
-	if [[ -f "/usr/share/JD_Script/1.txt" ]]; then
+	if [[ -f "$dir_file/1.txt" ]]; then
 		sed -i "s/let wantProduct = \`\`/let wantProduct = \`灵蛇机械键盘\`/g" $dir_file_js/jd_jdfactory.js
-	elif [[ -f "/usr/share/JD_Script/2.txt" ]]; then
+	elif [[ -f "$dir_file/2.txt" ]]; then
 		sed -i "s/let wantProduct = \`\`/let wantProduct = \`电视\`/g" $dir_file_js/jd_jdfactory.js
 	else
 		echo ""
@@ -376,13 +386,15 @@ run_0() {
 
 joy(){
 	#crazy joy挂机领金币/宝箱专用
-	pid=$(ps -ef | grep "/usr/share/JD_Script/js/jd_crazy_joy_coin.js" |grep -v grep |awk '{print $1}')
+	pid=$(ps -ef | grep "$dir_file/js/jd_crazy_joy_coin.js" |grep -v grep |awk '{print $1}')
 	if [ $(echo $pid |wc -l ) -ge 1 ];then
 		echo -e "$yellow发现joy后台程序开始清理，请稍等$white"
 		for i in $pid
 		do
 			kill -9 $i
 		done
+		sleep 5
+		echo -e "$green\joy后台程序清理完成$white"
 	else
 		echo "$green没有运行的joy后台，直接运行$white"
 	fi
@@ -558,23 +570,19 @@ description_if() {
 }
 
 system_variable() {
-	if [[ ! -d "$dir_file" ]]; then
-		cp -r $(pwd)  $dir_file && chmod 777 $dir_file/jd.sh
-	fi
-	
 	if [[ ! -d "$dir_file/js" ]]; then
 		mkdir -p $dir_file/js
 		update
 	fi
 	
-	if [[ -f "/usr/share/JD_Script/jdCookie.js" ]]; then
+	if [[ -f "$dir_file/jdCookie.js" ]]; then
 		echo "jdCookie.js存在"
 	else 
 		wget $url/jdCookie.js -O $dir_file/jdCookie.js
 		ln -s $dir_file/jdCookie.js $dir_file_js/jdCookie.js
 	fi
 
-	if [[ -f "/usr/share/JD_Script/sendNotify.js" ]]; then
+	if [[ -f "$dir_file/sendNotify.js" ]]; then
 		echo "sendNotify.js存在"
 		clear
 	else
@@ -584,8 +592,8 @@ system_variable() {
 	#添加系统变量
 	jd_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
 	if [[ "$jd_script_path" == "0" ]]; then
-		echo "export jd_file=/usr/share/JD_Script" |  tee -a /etc/profile
-		echo "export jd=/usr/share/JD_Script/jd.sh" |  tee -a /etc/profile
+		echo "export jd_file=$dir_file" |  tee -a /etc/profile
+		echo "export jd=$dir_file/jd.sh" |  tee -a /etc/profile
 		echo "-----------------------------------------------------------------------"
 		echo ""
 		echo -e "$green添加jd变量成功,重启系统以后无论在那个目录输入 bash \$jd 都可以运行脚本$white"
