@@ -614,16 +614,30 @@ system_variable() {
 }
 
 action1="$1"
+action1="$2"
 if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-			system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode)
-			$action1
-			;;
-			*)
-			help
-			;;
-esac
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode)
+		$action1
+		;;
+		*)
+		help
+		;;
+	esac
+
+	if [[ -z $action2 ]]; then
+		echo ""
+	else
+		case "$action2" in
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode)
+		$action2
+		;;
+		*)
+		help
+		;;
+	esac
+	fi
 fi
 
