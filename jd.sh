@@ -130,6 +130,7 @@ update() {
 	wget $url/jd_jxnc.js -O $dir_file_js/jd_jxnc.js #京喜农场
 	wget $url/jdJxncTokens.js -O $dir_file_js/jdJxncTokens.js #京喜农场token
 	wget $url/jdJxncShareCodes.js -O $dir_file_js/jdJxncShareCodes.js #京喜农场ShareCodes
+	wget $url/jd_cash.js -O $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -371,6 +372,7 @@ run_0() {
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
+	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛
 	run_08_12_16
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_06_18
