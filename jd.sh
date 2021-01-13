@@ -72,12 +72,12 @@ task_delete() {
 }
 
 ds_setup() {
-	echo "删除定时任务设置"
+	echo "JD_Script删除定时任务设置"
 	task_delete
-	echo "删除全局变量"
+	echo "JD_Script删除全局变量"
 	sed -i '/JD_Script/d' /etc/profile >/dev/null 2>&1
 	. /etc/profile
-	echo "定时任务和全局变量删除完成，脚本不会自动运行了"
+	echo "JD_Script定时任务和全局变量删除完成，脚本不会自动运行了"
 }
 
 
@@ -601,6 +601,7 @@ system_variable() {
 	if [[ "$jd_script_path" == "0" ]]; then
 		echo "export jd_file=$dir_file" |  tee -a /etc/profile
 		echo "export jd=$dir_file/jd.sh" |  tee -a /etc/profile
+		. /etc/profile
 	fi
 }
 
