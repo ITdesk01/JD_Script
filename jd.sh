@@ -55,12 +55,15 @@ task() {
 	fi
 
 	if [[ `grep -o $new_task16 $cron_file |wc -l` == "0" ]]; then
+		echo "不存在计划任务开始设置"
 		task_add
 	fi
 
 	if [[ `grep -o $new_task1 $cron_file |wc -l` == "1" ]]; then
+		echo "计划任务与设定一致，不做改变"
 		cron_help="$green定时任务与设定一致$white"
 	else
+		echo "计划任务存在但与最新不同，开始设置更新"
 		sed -i '1,16d' $cron_file
 		task_add
 	fi
