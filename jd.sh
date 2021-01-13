@@ -37,6 +37,7 @@ task() {
 		echo "不存在计划任务开始设置"
 		task_delete
 		task_add
+		echo "计划任务设置完成"
 	elif [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "1" ]]; then
 			echo "计划任务与设定一致，不做改变"
 			cron_help="$green定时任务与设定一致$white"
@@ -44,28 +45,41 @@ task() {
 }
 
 task_add() {
-		echo "###########这里是JD_Script的定时任务$cron_version版本###########" >>/etc/crontabs/root
-		echo "0 0 * * * $dir_file/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" >>/etc/crontabs/root #0点0分执行全部脚本
-		echo "45 2-23 * * * $dir_file/jd.sh run_045 >/tmp/jd_run_045.log 2>&1" >>/etc/crontabs/root #两个工厂
-		echo "3 7-23 * * * $dir_file/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" >>/etc/crontabs/root #种豆得豆收瓶子
-		echo "50 2-22/2 * * * $dir_file/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" >>/etc/crontabs/root #京东摇钱树 每两个小时收一次
-		echo "10 2-22/3 * * * $dir_file/jd.sh run_03 >/tmp/jd_run_03.log 2>&1" >>/etc/crontabs/root #天天加速 3小时运行一次，打卡时间间隔是6小时
-		echo "40 6-18/6 * * * $dir_file/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" >>/etc/crontabs/root #不是很重要的，错开运行
-		echo "35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1" >>/etc/crontabs/root #不是很重要的，错开运行
-		echo "10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" >>/etc/crontabs/root #超市旺旺兑换礼品
-		echo "00 22 * * * $dir_file/jd.sh update_script >/tmp/jd_update_script.log 2>&1" >>/etc/crontabs/root #22点更新JD_Script脚本
-		echo "5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1" >>/etc/crontabs/root #22点05分更新lxk0301脚本
-		echo "5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1" >>/etc/crontabs/root #不需要在零点运行的脚本
-		echo "5 1-23 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1" >>/etc/crontabs/root #1-23,每一个小时运行一次joy挂机
-		echo "###############请将其他定时任务放到底下###############" >>/etc/crontabs/root
-		/etc/init.d/cron restart
-		cron_help="$yellow定时任务更新完成，记得看下你的定时任务$white"
+cat >>/etc/crontabs/root <<EOF
+###########这里是JD_Script的定时任务$cron_version版本###########
+0 0 * * * $dir_file/jd.sh run_0  >/tmp/jd_run_0.log 2>&1 #0点0分执行全部脚本
+45 2-23 * * * $dir_file/jd.sh run_045 >/tmp/jd_run_045.log 2>&1 #两个工厂
+3 7-23 * * * $dir_file/jd.sh run_01 >/tmp/jd_run_01.log 2>&1 #种豆得豆收瓶子
+50 2-22/2 * * * $dir_file/jd.sh run_02 >/tmp/jd_run_02.log 2>&1 #京东摇钱树 每两个小时收一次
+10 2-22/3 * * * $dir_file/jd.sh run_03 >/tmp/jd_run_03.log 2>&1 #天天加速 3小时运行一次，打卡时间间隔是6小时
+40 6-18/6 * * * $dir_file/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1 #不是很重要的，错开运行
+35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1 #不是很重要的，错开运行
+10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #超市旺旺兑换礼品
+00 22 * * * $dir_file/jd.sh update_script >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本
+5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #22点05分更新lxk0301脚本
+5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本
+5 1-23 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-23,每一个小时运行一次joy挂机
+###########100##########请将其他定时任务放到底下###############
+EOF
+
+	/etc/init.d/cron restart
+	cron_help="$yellow定时任务更新完成，记得看下你的定时任务$white"
 }
 
 task_delete() {
 	sed -i '/JD_Script/d' /etc/crontabs/root >/dev/null 2>&1
 	sed -i '/####/d' /etc/crontabs/root >/dev/null 2>&1
 }
+
+ds_setup() {
+	echo "删除定时任务设置"
+	task_delete
+	echo "删除全局变量"
+	sed -i '/JD_Script/d' /etc/profile >/dev/null 2>&1
+	. /etc/profile
+	echo "定时任务和全局变量删除完成，脚本不会自动运行了"
+}
+
 
 update() {
 	echo -e "$green update$start_script $white"
@@ -587,15 +601,6 @@ system_variable() {
 	if [[ "$jd_script_path" == "0" ]]; then
 		echo "export jd_file=$dir_file" |  tee -a /etc/profile
 		echo "export jd=$dir_file/jd.sh" |  tee -a /etc/profile
-		echo "-----------------------------------------------------------------------"
-		echo ""
-		echo -e "$green添加jd变量成功,重启系统以后无论在那个目录输入 bash \$jd 都可以运行脚本$white"
-		echo ""
-		echo ""
-		echo -e "          $green重启以后就可以看到效果了$white"
-		echo "-----------------------------------------------------------------------"
-	else
-			echo "变量已经添加"
 	fi
 }
 
@@ -605,7 +610,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode|ds_setup)
 		$action1
 		;;
 		*)
@@ -617,7 +622,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode|ds_setup)
 		$action2
 		;;
 		*)
