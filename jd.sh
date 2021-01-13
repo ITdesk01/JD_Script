@@ -5,6 +5,8 @@
 # This is free software, licensed under the GNU General Public License v3.
 # See /LICENSE for more information.
 #
+#set -x
+
 version="1.8"
 cron_file="/etc/crontabs/root"
 url=https://raw.githubusercontent.com/lxk0301/jd_scripts/master
@@ -29,65 +31,40 @@ white="\033[0m"
 start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
-#计划任务
-new_task1="###########这里是JD_Script的定时任务2.39版本###########"
-new_task2="0 0 * * * $dir_file/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" #0点0分执行全部脚本
-new_task3="45 2-23 * * * $dir_file/jd.sh run_045 >/tmp/jd_run_045.log 2>&1" #两个工厂
-new_task4="3 7-23 * * * $dir_file/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" #种豆得豆收瓶子
-new_task5="50 2-22/2 * * * $dir_file/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" #京东摇钱树 每两个小时收一次
-new_task6="10 2-22/3 * * * $dir_file/jd.sh run_03 >/tmp/jd_run_03.log 2>&1" #天天加速 3小时运行一次，打卡时间间隔是6小时
-new_task7="40 6-18/6 * * * $dir_file/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" #不是很重要的，错开运行
-new_task8="35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1"  #不是很重要的，错开运行
-new_task9="10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" #超市旺旺兑换礼品
-new_task10="00 22 * * * $dir_file/jd.sh update_script >/tmp/jd_update_script.log 2>&1" #22点更新JD_Script脚本
-new_task11="5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1" #22点05分更新lxk0301脚本
-new_task12=""
-new_task13="5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1" #不需要在零点运行的脚本
-new_task14=""
-new_task15="5 1-23 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1" #1-23,每一个小时运行一次joy挂机
-new_task16="###########请将其他定时任务放到说明底下，不要放到说明里面或者上面，防止误删###########"
-
 task() {
-	if [[ -e /etc/crontabs/root_back ]]; then
-		echo ""
-	else
-		cp /etc/crontabs/root /etc/crontabs/root_back
-	fi
-
-	if [[ `grep -o $new_task16 $cron_file |wc -l` == "0" ]]; then
+	cron_version="2.40"
+	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
+		task_delete
 		task_add
-	fi
-
-	if [[ `grep -o $new_task1 $cron_file |wc -l` == "1" ]]; then
-		echo "计划任务与设定一致，不做改变"
-		cron_help="$green定时任务与设定一致$white"
-	else
-		echo "计划任务存在但与最新不同，开始设置更新"
-		sed -i '1,16d' $cron_file
-		task_add
+	elif [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "1" ]]; then
+			echo "计划任务与设定一致，不做改变"
+			cron_help="$green定时任务与设定一致$white"
 	fi
 }
 
 task_add() {
-		sed -i "1i ${new_task1}" $cron_file
-		sed -i "1a ${new_task2}" $cron_file
-		sed -i "2a ${new_task3}" $cron_file
-		sed -i "3a ${new_task4}" $cron_file
-		sed -i "4a ${new_task5}" $cron_file
-		sed -i "5a ${new_task6}" $cron_file
-		sed -i "6a ${new_task7}" $cron_file
-		sed -i "7a ${new_task8}" $cron_file
-		sed -i "8a ${new_task9}" $cron_file
-		sed -i "9a ${new_task10}" $cron_file
-		sed -i "10a ${new_task11}" $cron_file
-		sed -i "11a ${new_task12}" $cron_file
-		sed -i "12a ${new_task13}" $cron_file
-		sed -i "13a ${new_task14}" $cron_file
-		sed -i "14a ${new_task15}" $cron_file
-		sed -i "15a ${new_task16}" $cron_file
+		echo "###########这里是JD_Script的定时任务$cron_version版本###########" >>/etc/crontabs/root
+		echo "0 0 * * * $dir_file/jd.sh run_0  >/tmp/jd_run_0.log 2>&1" >>/etc/crontabs/root #0点0分执行全部脚本
+		echo "45 2-23 * * * $dir_file/jd.sh run_045 >/tmp/jd_run_045.log 2>&1" >>/etc/crontabs/root #两个工厂
+		echo "3 7-23 * * * $dir_file/jd.sh run_01 >/tmp/jd_run_01.log 2>&1" >>/etc/crontabs/root #种豆得豆收瓶子
+		echo "50 2-22/2 * * * $dir_file/jd.sh run_02 >/tmp/jd_run_02.log 2>&1" >>/etc/crontabs/root #京东摇钱树 每两个小时收一次
+		echo "10 2-22/3 * * * $dir_file/jd.sh run_03 >/tmp/jd_run_03.log 2>&1" >>/etc/crontabs/root #天天加速 3小时运行一次，打卡时间间隔是6小时
+		echo "40 6-18/6 * * * $dir_file/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1" >>/etc/crontabs/root #不是很重要的，错开运行
+		echo "35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1" >>/etc/crontabs/root #不是很重要的，错开运行
+		echo "10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1" >>/etc/crontabs/root #超市旺旺兑换礼品
+		echo "00 22 * * * $dir_file/jd.sh update_script >/tmp/jd_update_script.log 2>&1" >>/etc/crontabs/root #22点更新JD_Script脚本
+		echo "5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1" >>/etc/crontabs/root #22点05分更新lxk0301脚本
+		echo "5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1" >>/etc/crontabs/root #不需要在零点运行的脚本
+		echo "5 1-23 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1" >>/etc/crontabs/root #1-23,每一个小时运行一次joy挂机
+		echo "###############请将其他定时任务放到底下###############" >>/etc/crontabs/root
 		/etc/init.d/cron restart
-		cron_help="$yellow定时任务更新完成，记得看下你的定时任务，如果有问题可以参考/etc/crontabs/root_back恢复$white"
+		cron_help="$yellow定时任务更新完成，记得看下你的定时任务$white"
+}
+
+task_delete() {
+	sed -i '/JD_Script/d' /etc/crontabs/root >/dev/null 2>&1
+	sed -i '/####/d' /etc/crontabs/root >/dev/null 2>&1
 }
 
 update() {
