@@ -56,7 +56,7 @@ cat >>/etc/crontabs/root <<EOF
 35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1 #不是很重要的，错开运行
 10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #超市旺旺兑换礼品
 00 22 * * * $dir_file/jd.sh update_script >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本
-5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #22点05分更新lxk0301脚本
+#5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #22点05分更新lxk0301脚本
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本
 5 1-23 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-23,每一个小时运行一次joy挂机
 ###########100##########请将其他定时任务放到底下###############
@@ -568,7 +568,7 @@ description_if() {
 	clear
 	git_branch=$(git branch -v | grep -o behind )
 	if [[ "$git_branch" == "behind" ]]; then
-		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script update && sh \$jd $white更新 )"
+		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script  && sh \$jd $white更新 )"
 	else
 		Script_status="$green最新$white"
 	fi
@@ -611,7 +611,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode|ds_setup)
+		system_variable|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode|ds_setup)
 		$action1
 		;;
 		*)
@@ -623,7 +623,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode|ds_setup)
+		system_variable|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode|ds_setup)
 		$action2
 		;;
 		*)
