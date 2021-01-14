@@ -143,6 +143,9 @@ update() {
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/e864e3f995ac474cf2bb6dda8984b2be89e041f0/Me/jx_cfd_exchange.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
+	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_mh.js -O $dir_file_js/jd_mh.js #京东盲盒
+	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_ms.js -O $dir_file_js/jd_ms.js #京东秒秒币
+	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_bj.js -O $dir_file_js/jd_bj.js #宝洁美发屋
 
 	if [ $? -eq 0 ]; then
 		echo -e ">>$green脚本下载完成$white"
@@ -477,8 +480,14 @@ run_07() {
 	$node $dir_file_js/jd_live.js #直播抢京豆
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	$node $dir_file_js/jd_jxnc.js #京喜农场
+	$node $dir_file_js/jd_mh.js #京东盲盒
+	$node $dir_file_js/jd_ms.js #京东秒秒币 一个号大概60秒
+	$node $dir_file_js/jd_bj.js #宝洁美发屋
+	$node $dir_file_js/jd_bj.js #宝洁美发屋
+	$node $dir_file_js/jd_bj.js #宝洁美发屋
+	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
-	$node $dir_file_js/jd_unbind.js #注销京东会员卡
+	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
 	echo -e "$green run_07$stop_script $white"
 }
