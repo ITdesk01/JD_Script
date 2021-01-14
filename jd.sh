@@ -9,7 +9,8 @@
 
 version="1.9"
 cron_file="/etc/crontabs/root"
-url=https://raw.githubusercontent.com/lxk0301/jd_scripts/master
+#url=https://raw.githubusercontent.com/lxk0301/jd_scripts/master
+url=https://gitee.com/lxk0301/jd_scripts/blob/master
 
 #获取当前脚本目录copy脚本之家
 Source="$0"
@@ -32,7 +33,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 task() {
-	cron_version="2.43"
+	cron_version="2.44"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -56,7 +57,7 @@ cat >>/etc/crontabs/root <<EOF
 35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1 #不是很重要的，错开运行
 10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #超市旺旺兑换礼品
 00 22 * * * $dir_file/jd.sh update_script >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本
-#5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #22点05分更新lxk0301脚本
+5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #22点05分更新lxk0301脚本
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本
 5 1-23 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-23,每一个小时运行一次joy挂机
 ###########100##########请将其他定时任务放到底下###############
@@ -82,7 +83,6 @@ ds_setup() {
 
 
 update() {
-:<<'COMMENT'
 	echo -e "$green update$start_script $white"
 	echo -e "$green开始下载JS脚本，请稍等$white"
 	wget $url/jd_superMarket.js -O $dir_file_js/jd_superMarket.js
@@ -134,11 +134,12 @@ update() {
 	wget $url/jd_cash.js -O $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	wget $url/jx_sign.js -O $dir_file_js/jx_sign.js #京喜app签到长期
 	wget $url/jd_nh.js -O $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
+	wget $url/jd_family.js -O $dir_file_js/jd_family.js #京东家庭号
 	wget $url/USER_AGENTS.js -O $dir_file_js/USER_AGENTS.js
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
-	rm -rf $dir_file_js/jx_nc.js
+
 	if [ $? -eq 0 ]; then
 		echo -e ">>$green脚本下载完成$white"
 	else
@@ -148,7 +149,7 @@ update() {
 	fi
 	additional_settings
 	echo -e "$green update$stop_script $white"
-COMMENT
+
 	task #更新完全部脚本顺便检查一下计划任务是否有变
 
 }
@@ -381,6 +382,7 @@ run_0() {
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
+	$node $dir_file_js/jd_family.js #京东家庭号
 	run_08_12_16
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_06_18
