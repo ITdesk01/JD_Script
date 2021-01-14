@@ -32,7 +32,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 task() {
-	cron_version="2.41"
+	cron_version="2.42"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -82,6 +82,7 @@ ds_setup() {
 
 
 update() {
+:<<'COMMENT'
 	echo -e "$green update$start_script $white"
 	echo -e "$green开始下载JS脚本，请稍等$white"
 	wget $url/jd_superMarket.js -O $dir_file_js/jd_superMarket.js
@@ -146,8 +147,10 @@ update() {
 		update
 	fi
 	additional_settings
-	task #更新完全部脚本顺便检查一下计划任务是否有变
 	echo -e "$green update$stop_script $white"
+COMMENT
+	task #更新完全部脚本顺便检查一下计划任务是否有变
+
 }
 
 
@@ -568,7 +571,7 @@ description_if() {
 	clear
 	git_branch=$(git branch -v | grep -o behind )
 	if [[ "$git_branch" == "behind" ]]; then
-		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script  && sh \$jd $white更新 )"
+		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script update && sh \$jd $white更新 )"
 	else
 		Script_status="$green最新$white"
 	fi
@@ -611,7 +614,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-		system_variable|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode|ds_setup)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode|ds_setup)
 		$action1
 		;;
 		*)
@@ -623,7 +626,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode|ds_setup)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|jd_sharecode|ds_setup)
 		$action2
 		;;
 		*)
@@ -632,4 +635,3 @@ else
 	esac
 	fi
 fi
-
