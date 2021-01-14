@@ -414,9 +414,10 @@ kill_joy() {
 		echo -e "$yellow发现joy后台程序开始清理，请稍等$white"
 		for i in $pid
 		do
+			echo "kill $i"
 			kill -9 $i
+			sleep 2			
 		done
-		sleep 5
 		echo -e "$green joy后台程序清理完成$white"
 	else
 		echo "$green没有运行的joy后台$white"
