@@ -85,67 +85,80 @@ ds_setup() {
 	echo "JD_Script定时任务和全局变量删除完成，脚本不会自动运行了"
 }
 
-
 update() {
 	echo -e "$green update$start_script $white"
 	echo -e "$green开始下载JS脚本，请稍等$white"
-	wget $url/jd_superMarket.js -O $dir_file_js/jd_superMarket.js
-	wget $url/jdSuperMarketShareCodes.js -O $dir_file_js/jdSuperMarketShareCodes.js
-	wget $url/jd_blueCoin.js -O $dir_file_js/jd_blueCoin.js
-	wget $url/jd_redPacket.js -O $dir_file_js/jd_redPacket.js
-	wget $url/jd_moneyTree.js -O $dir_file_js/jd_moneyTree.js
-	wget $url/jd_fruit.js -O $dir_file_js/jd_fruit.js
-	wget $url/jdFruitShareCodes.js -O $dir_file_js/jdFruitShareCodes.js
-	wget $url/jd_pet.js -O $dir_file_js/jd_pet.js
-	wget $url/jdPetShareCodes.js -O $dir_file_js/jdPetShareCodes.js
-	wget $url/jd_plantBean.js -O $dir_file_js/jd_plantBean.js
-	wget $url/jdPlantBeanShareCodes.js -O $dir_file_js/jdPlantBeanShareCodes.js
-	wget $url/jd_shop.js -O $dir_file_js/jd_shop.js
-	wget $url/jd_joy.js -O $dir_file_js/jd_joy.js
-	wget $url/jd_joy_steal.js -O $dir_file_js/jd_joy_steal.js
-	wget $url/jd_joy_feedPets.js -O $dir_file_js/jd_joy_feedPets.js
-	wget $url/jd_joy_reward.js -O $dir_file_js/jd_joy_reward.js
-	wget $url/jd_club_lottery.js -O $dir_file_js/jd_club_lottery.js
-	wget $url/jd_unsubscribe.js -O $dir_file_js/jd_unsubscribe.js
-	wget $url/jd_lotteryMachine.js -O $dir_file_js/jd_lotteryMachine.js
-	wget $url/jd_rankingList.js -O $dir_file_js/jd_rankingList.js
-	wget $url/jd_speed.js -O $dir_file_js/jd_speed.js
-	wget $url/jd_daily_egg.js -O $dir_file_js/jd_daily_egg.js
-	wget $url/jd_pigPet.js -O $dir_file_js/jd_pigPet.js
-	wget $url/jd_bean_change.js -O $dir_file_js/jd_bean_change.js
-	wget $url/jd_dreamFactory.js -O $dir_file_js/jd_dreamFactory.js
-	wget $url/jdDreamFactoryShareCodes.js -O $dir_file_js/jdDreamFactoryShareCodes.js
-	wget $url/jd_necklace.js -O $dir_file_js/jd_necklace.js
-	wget $url/jd_small_home.js -O $dir_file_js/jd_small_home.js
-	wget $url/jd_jdfactory.js  -O $dir_file_js/jd_jdfactory.js
-	wget $url/jdFactoryShareCodes.js -O $dir_file_js/jdFactoryShareCodes.js
-	wget $url/jd_syj.js -O $dir_file_js/jd_syj.js
-	wget $url/jd_bean_sign.js -O $dir_file_js/jd_bean_sign.js
-	wget $url/jd_bean_home.js -O $dir_file_js/jd_bean_home.js #领京豆额外奖励
-	wget $url/jd_car.js -O $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
-	wget $url/jd_kd.js -O $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
-	wget $url/jd_live.js -O $dir_file_js/jd_live.js #直播抢京豆
-	wget $url/jd_jdzz.js  -O $dir_file_js/jd_jdzz.js #京东赚赚长期活动
-	wget $url/jd_unbind.js -O $dir_file_js/jd_unbind.js #注销京东会员卡
-	wget $url/jd_crazy_joy.js -O $dir_file_js/jd_crazy_joy.js #crazyJoy任务
-	wget $url/jd_crazy_joy_coin.js -O $dir_file_js/jd_crazy_joy_coin.js #crazy joy挂机领金币/宝箱专用
-	wget $url/jd_get_share_code.js -O $dir_file_js/jd_get_share_code.js #获取jd所有助力码脚本
-	wget $url/jd_car_exchange.js -O $dir_file_js/jd_car_exchange.js #京东汽车兑换，500赛点兑换500京豆
-	wget $url/jd_bookshop.js -O $dir_file_js/jd_bookshop.js #口袋书店
-	wget $url/jd_jxnc.js -O $dir_file_js/jd_jxnc.js #京喜农场
-	wget $url/jdJxncTokens.js -O $dir_file_js/jdJxncTokens.js #京喜农场token
-	wget $url/jdJxncShareCodes.js -O $dir_file_js/jdJxncShareCodes.js #京喜农场ShareCodes
-	wget $url/jd_cash.js -O $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
-	wget $url/jx_sign.js -O $dir_file_js/jx_sign.js #京喜app签到长期
-	wget $url/jd_nh.js -O $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
-	wget $url/jd_family.js -O $dir_file_js/jd_family.js #京东家庭号
-	wget $url/USER_AGENTS.js -O $dir_file_js/USER_AGENTS.js
+#cat script_name.txt | awk '{print length, $0}' | sort -rn | sed 's/^[0-9]\+ //'按照文件名长度降序：
+#cat script_name.txt | awk '{print length, $0}' | sort -n | sed 's/^[0-9]\+ //' 按照文件名长度升序
+
+cat >$dir_file/lxk0301_script.txt <<EOF
+	jd_bean_sign.js			#京东多合一签到
+	jx_sign.js			#京喜app签到长期
+	jd_fruit.js			#东东农场
+	jdFruitShareCodes.js		#东东农场ShareCodes
+	jd_jxnc.js			#京喜农场
+	jdJxncTokens.js			#京喜农场token
+	jdJxncShareCodes.js		#京喜农场ShareCodes
+	jd_pet.js			#东东萌宠
+	jdPetShareCodes.js		#东东萌宠ShareCodes
+	jd_plantBean.js			#种豆得豆
+	jdPlantBeanShareCodes.js	#种豆得豆ShareCodes
+	jd_superMarket.js		#东东超市
+	jd_blueCoin.js			#东东超市兑换奖品
+	jdSuperMarketShareCodes.js	#东东超市ShareCodes(暂时没用)
+	jd_dreamFactory.js		#京喜工厂
+	jdDreamFactoryShareCodes.js	#京喜工厂ShareCodes
+	jd_jdfactory.js			#东东工厂
+	jdFactoryShareCodes.js		#东东工厂ShareCodes
+	jd_joy_feedPets.js 		#宠汪汪单独喂食
+	jd_joy.js			#宠汪汪
+	jd_joy_reward.js 		#宠汪汪兑换奖品
+	jd_joy_steal.js			#宠汪汪偷好友狗粮与积分
+	jd_crazy_joy.js			#crazyJoy任务
+	jd_crazy_joy_coin.js		#crazy joy挂机领金币/宝箱专用
+	jd_car_exchange.js		#京东汽车兑换，500赛点兑换500京豆
+	jd_car.js			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
+	jd_redPacket.js			#全民开红包
+	jd_club_lottery.js		#摇京豆
+	jd_shop.js			#进店领豆
+	jd_live.js			#直播抢京豆
+	jd_bean_home.js			#领京豆额外奖励
+	jd_rankingList.js		#京东排行榜签到得京豆
+	jd_cash.js			#签到领现金，每日2毛～5毛长期
+	jd_jdzz.js			#京东赚赚长期活动
+	jd_lotteryMachine.js 		#京东抽奖机
+	jd_necklace.js			#点点券
+	jd_syj.js			#十元街
+	jd_bookshop.js			#口袋书店
+	jd_family.js			#京东家庭号
+	jd_kd.js			#京东快递签到 一天运行一次即可
+	jd_small_home.js		#东东小窝
+	jd_speed.js			#天天加速
+	jd_moneyTree.js 		#摇钱树
+	jd_pigPet.js			#金融养猪
+	jd_daily_egg.js 		#京东金融-天天提鹅
+	jd_nh.js			#京东年货节2021年1月9日-2021年2月9日
+	jd_get_share_code.js		#获取jd所有助力码脚本
+	jd_bean_change.js		#京豆变动通知(长期)
+	jd_unbind.js			#注销京东会员卡
+	jd_unsubscribe.js		#取关京东店铺和商品
+	USER_AGENTS.js			#UA设置
+
+EOF
+
+for script_name in `cat $dir_file/lxk0301_script.txt | awk '{print $1}'`
+do
+	wget $url/$script_name -O $dir_file_js/$script_name
+done
+
+
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/e864e3f995ac474cf2bb6dda8984b2be89e041f0/Me/jx_cfd_exchange.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_mh.js -O $dir_file_js/jd_mh.js #京东盲盒
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_ms.js -O $dir_file_js/jd_ms.js #京东秒秒币
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_bj.js -O $dir_file_js/jd_bj.js #宝洁美发屋
+	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_super_coupon.js -O $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 
 	if [ $? -eq 0 ]; then
 		echo -e ">>$green脚本下载完成$white"
@@ -487,6 +500,7 @@ run_07() {
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
+	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
