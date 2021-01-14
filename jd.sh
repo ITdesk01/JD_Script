@@ -10,7 +10,9 @@
 version="1.9"
 cron_file="/etc/crontabs/root"
 #url=https://raw.githubusercontent.com/lxk0301/jd_scripts/master
-url=https://gitee.com/lxk0301/jd_scripts/blob/master
+#url=https://gitee.com/lxk0301/jd_scripts/blob/master #wget 拿不到gitee的cookie，下载请求被gitee重定向到登陆页面了，而不是你想下载的文件
+url=https://raw.githubusercontent.com/zy2021/JD/master/USER_AGENTS.js
+
 
 #获取当前脚本目录copy脚本之家
 Source="$0"
