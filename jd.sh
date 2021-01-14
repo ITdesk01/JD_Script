@@ -136,7 +136,7 @@ update() {
 	wget $url/jd_nh.js -O $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
 	wget $url/jd_family.js -O $dir_file_js/jd_family.js #京东家庭号
 	wget $url/USER_AGENTS.js -O $dir_file_js/USER_AGENTS.js
-	wget https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
+	wget https://raw.githubusercontent.com/MoPoQAQ/Script/e864e3f995ac474cf2bb6dda8984b2be89e041f0/Me/jx_cfd_exchange.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
 
