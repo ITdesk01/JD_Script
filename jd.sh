@@ -604,8 +604,8 @@ system_variable() {
 	#添加系统变量
 	jd_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
 	if [[ "$jd_script_path" == "0" ]]; then
-		echo "export jd_file=$dir_file" |  tee -a /etc/profile
-		echo "export jd=$dir_file/jd.sh" |  tee -a /etc/profile
+		echo "export jd_file=$dir_file" >> /etc/profile
+		echo "export jd=$dir_file/jd.sh" >> /etc/profile
 		. /etc/profile
 	fi
 }
