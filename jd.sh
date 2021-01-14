@@ -591,7 +591,7 @@ description_if() {
 	clear
 	git_branch=$(git branch -v | grep -o behind )
 	if [[ "$git_branch" == "behind" ]]; then
-		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script update && sh \$jd $white更新 )"
+		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script && sh \$jd update && sh \$jd $white更新 )"
 	else
 		Script_status="$green最新$white"
 	fi
