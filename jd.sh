@@ -36,7 +36,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 task() {
-	cron_version="2.45"
+	cron_version="2.46"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -64,6 +64,7 @@ cat >>/etc/crontabs/root <<EOF
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本
 5 1-22 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每一个小时运行一次joy挂机
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机
+30 * * * * $dir_file/jd.sh run_030 >/tmp/jd_run_030.log 2>&1 #工业爱消除
 ###########100##########请将其他定时任务放到底下###############
 EOF
 
@@ -159,6 +160,7 @@ done
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_ms.js -O $dir_file_js/jd_ms.js #京东秒秒币
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_bj.js -O $dir_file_js/jd_bj.js #宝洁美发屋
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_super_coupon.js -O $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
+	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_gyec.js -O $dir_file_js/jd_gyec.js #工业爱消除
 
 	if [ $? -eq 0 ]; then
 		echo -e ">>$green脚本下载完成$white"
@@ -439,6 +441,10 @@ kill_joy() {
 	else
 		echo "$green没有运行的joy后台$white"
 	fi
+}
+
+run_030() {
+	$node $dir_file_js/jd_gyec.js #工业爱消除
 }
 
 run_045() {
