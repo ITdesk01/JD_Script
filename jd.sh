@@ -397,6 +397,7 @@ update_script() {
 
 run_0() {
 	echo -e "$green run_0$start_script $white"
+	$node $dir_file_js/cfdtx.js #财富岛提取
 	$node $dir_file_js/jd_car_exchange.js #京东汽车兑换，500赛点兑换500京豆
 	$node $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
