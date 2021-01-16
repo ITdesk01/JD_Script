@@ -91,7 +91,7 @@ update() {
 #cat script_name.txt | awk '{print length, $0}' | sort -rn | sed 's/^[0-9]\+ //'按照文件名长度降序：
 #cat script_name.txt | awk '{print length, $0}' | sort -n | sed 's/^[0-9]\+ //' 按照文件名长度升序
 
-cat >$dir_file/lxk0301_script.txt <<EOF
+cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_bean_sign.js			#京东多合一签到
 	jx_sign.js			#京喜app签到长期
 	jd_fruit.js			#东东农场
@@ -146,7 +146,7 @@ cat >$dir_file/lxk0301_script.txt <<EOF
 
 EOF
 
-for script_name in `cat $dir_file/lxk0301_script.txt | awk '{print $1}'`
+for script_name in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
 do
 	wget $url/$script_name -O $dir_file_js/$script_name
 done
@@ -618,25 +618,41 @@ description_if() {
 }
 
 system_variable() {
-	if [[ ! -d "$dir_file/js" ]]; then
-		mkdir -p $dir_file/js
-		update
+	if [[ ! -d "$dir_file/config" ]]; then
+		mkdir  $dir_file/config
 	fi
 	
-	if [[ -f "$dir_file/jdCookie.js" ]]; then
-		echo "jdCookie.js存在"
-	else 
-		wget $url/jdCookie.js -O $dir_file/jdCookie.js
-		ln -s $dir_file/jdCookie.js $dir_file_js/jdCookie.js
+	if [[ ! -d "$dir_file/js" ]]; then
+		mkdir  $dir_file/js
+		update
 	fi
 
-	if [[ -f "$dir_file/sendNotify.js" ]]; then
-		echo "sendNotify.js存在"
-		clear
+	install_script="/usr/share/Install_script"
+	if [ "$dir_file" == "$install_script/JD_Script"];then
+		if [ ! -f "$install_script/config/jdCookie.js" ]; then
+			wget $url/jdCookie.js -O $install_script/config/jdCookie.js
+			ln -s $install_script/config/jdCookie.js $dir_file_js/jdCookie.js
+		fi
+
+		if [ ! -f "$install_script/config/sendNotify.js" ]; then
+			wget $url/sendNotify.js -O $dir_file/sendNotify.js
+			ln -s $install_script/config/sendNotify.js $dir_file_js/sendNotify.js
+		fi
+
 	else
-		wget $url/sendNotify.js -O $dir_file/sendNotify.js	
-		ln -s $dir_file/sendNotify.js $dir_file_js/sendNotify.js
+		if [ ! -f "$dir_file/jdCookie.js" ]; then
+			wget $url/jdCookie.js -O $dir_file/jdCookie.js
+			ln -s $dir_file/jdCookie.js $dir_file_js/jdCookie.js
+		fi
+
+		if [ ! -f "$dir_file/sendNotify.js" ]; then
+			wget $url/sendNotify.js -O $dir_file/sendNotify.js
+			ln -s $dir_file/sendNotify.js $dir_file_js/sendNotify.js
+		fi
+
 	fi
+
+
 	#添加系统变量
 	jd_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
 	if [[ "$jd_script_path" == "0" ]]; then
