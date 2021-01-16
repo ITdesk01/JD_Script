@@ -628,15 +628,28 @@ system_variable() {
 	fi
 
 	install_script="/usr/share/Install_script"
-	if [ "$dir_file" == "$install_script/JD_Script"];then
-		if [ ! -f "$install_script/config/jdCookie.js" ]; then
-			wget $url/jdCookie.js -O $install_script/config/jdCookie.js
-			ln -s $install_script/config/jdCookie.js $dir_file_js/jdCookie.js
+	install_script_config="/usr/share/Install_script/script_config"
+	if [ "$dir_file" == "$install_script/JD_Script" ];then
+		if [ ! -f "$install_script_config/jdCookie.js" ]; then
+			wget $url/jdCookie.js -O $install_script_config/jdCookie.js
+			rm -rf $dir_file_js/jdCookie.js #用于删除旧的链接
+			ln -s $install_script_config/jdCookie.js $dir_file_js/jdCookie.js
+		fi
+		
+		#用于升级以后恢复链接
+		if [ ! -f "$dir_file_js/jdCookie.js" ]; then
+			ln -s $install_script_config/jdCookie.js $dir_file_js/jdCookie.js
 		fi
 
-		if [ ! -f "$install_script/config/sendNotify.js" ]; then
-			wget $url/sendNotify.js -O $dir_file/sendNotify.js
-			ln -s $install_script/config/sendNotify.js $dir_file_js/sendNotify.js
+		if [ ! -f "$install_script_config/sendNotify.js" ]; then
+			wget $url/sendNotify.js -O $install_script_config/sendNotify.js
+			rm -rf $dir_file_js/sendNotify.js  #用于删除旧的链接
+			ln -s $install_script_config/sendNotify.js $dir_file_js/sendNotify.js
+		fi
+
+		#用于升级以后恢复链接
+		if [ ! -f "$dir_file_js/sendNotify.js" ]; then
+			ln -s $install_script_config/sendNotify.js $dir_file_js/sendNotify.js
 		fi
 
 	else
