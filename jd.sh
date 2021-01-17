@@ -359,6 +359,7 @@ COMMENT
 	sed -i "51a $new_jdzz" $dir_file_js/jd_jdzz.js
 	sed -i "s/const randomCount = 5/const randomCount = 0/g" $dir_file_js/jd_jdzz.js
 	sed -i "s/helpAuthor=true/helpAuthor=false/g" $dir_file_js/jd_jdzz.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_jdzz.js
 
 	#crazyJoy任务
 	old_crazyJoy="'EdLPh8A6X5G1iWXu-uPYfA==@0gUO7F7N-4HVDh9mdQC2hg==@fUJTgR9z26fXdQgTvt_bgqt9zd5YaBeE@nCQQXQHKGjPCb7jkd8q2U-aCTjZMxL3s@2boGLV7TonMex8-nrT6EGat9zd5YaBeE',"
@@ -372,10 +373,11 @@ COMMENT
 	sed -i "40a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
 	sed -i "s/$.isNode() ? 10 : 5/0/g" $dir_file_js/jd_crazy_joy.js
 
+
 	#口袋书店
 	old_jdbook="'28a699ac78d74aa3b31f7103597f8927@2f14ee9c92954cf79829320dd482bf49@fdf827db272543d88dbb51a505c2e869'"
 	new_jdbook="'d6d73edddaa64cbda1ec42dd496591d0@e50f362dbf8e4e8891c18d0a6fc9d04d@40cb5da84f0448a695dd5b9643592cfa@3ef061eb9b244b3cbdc9904a0297c3f5',"
-	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_crazy_joy.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_bookshop.js
 	sed -i "s/$old_jdbook,/$new_jdbook/g" $dir_file_js/jd_bookshop.js
 	sed -i "s/$old_jdbook/$new_jdbook/g" $dir_file_js/jd_bookshop.js
 	sed -i "31a $new_jdbook" $dir_file_js/jd_bookshop.js
@@ -392,7 +394,7 @@ COMMENT
 	sed -i "13a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
 	sed -i "14a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
 	sed -i "15a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
-	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_crazy_joy.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_jxnc.js
 
 	#签到领现金
 	old_jdcash="\`-4msulYas0O2JsRhE-2TA5XZmBQ@eU9Yar_mb_9z92_WmXNG0w@eU9YaO7jMvwh-W_VzyUX0Q\`"
@@ -403,7 +405,18 @@ COMMENT
 	sed -i "34a $new_jdcash" $dir_file_js/jd_cash.js
 	sed -i "35a $new_jdcash" $dir_file_js/jd_cash.js
 	sed -i "36a $new_jdcash" $dir_file_js/jd_cash.js
-	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_crazy_joy.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_cash.js
+
+	#工业爱消除
+	old_jdgyec="'840266@2583822@2585219@2586018@1556311@2583822@2585256@2586023@2728968',"
+	new_jdgyec="743359@2753077@2759122@2759259@2337978"
+	sed -i "s/$old_jdgyec,/$new_jdgyec/g" $dir_file_js/jd_gyec.js
+	sed -i "s/$old_jdgyec/$new_jdgyec/g" $dir_file_js/jd_gyec.js
+	sed -i "35a $new_jdgyec" $dir_file_js/jd_gyec.js
+	sed -i "36a $new_jdgyec" $dir_file_js/jd_gyec.js
+	sed -i "37a $new_jdgyec" $dir_file_js/jd_gyec.js
+	sed -i "38a $new_jdgyec" $dir_file_js/jd_gyec.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_gyec.js
 }
 
 update_script() {
