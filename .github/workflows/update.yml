@@ -1,0 +1,39 @@
+name: Update_Rules
+on:
+  # push:
+  #  branches: 
+  #    - master
+  schedule:
+    - cron: 0 0 * * *
+  # release:
+  #   types: [published]
+  watch:
+    types: started
+    
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@main
+      
+      - name: update
+        run: |
+
+          chmod 0755 ./2.sh
+          ./2.sh
+      
+      - name: Push Commits
+        continue-on-error : true
+        run : |
+          cd JDScript
+          git config --global user.email "136000981@qq.com"
+          git config --global user.name "firkerword"
+          git add . || echo "up"
+          git commit -m "github_actions" -a;
+          git push "https://firkerword:$GITHUBTOKEN@github.com/firkerword/JD_Script.git" main
