@@ -711,18 +711,15 @@ system_variable() {
 
 	fi
 
-	node_if="opkg list-installed | grep "node -" | awk -F "." '{print $1}' | awk -F v '{print $2}'"
-	node_npm="opkg list-installed | grep "node-npm" | awk -F "." '{print $1}' | awk -F v '{print $2}'"
-	if [  $node_if -ge "10" ];then
-		echo "node 版本大于10，正常"
-	else
+	#判断node版本是大于10
+	node_if=$(opkg list-installed | grep 'node -' | awk -F "." '{print $1}' | awk -F v '{print $2}')
+	node_npm=$(opkg list-installed | grep 'node-npm' | awk -F "." '{print $1}' | awk -F v '{print $2}')
+	if [ ! $node_if -ge "10" ];then
 		echo "node 版本小于10，请升级以后再使用本脚本"
 		exit 0
 	fi
 
-	if [  $node_if -ge "10" ];then
-		echo "node-npm 版本大于10，正常"
-	else
+	if [ ! $node_if -ge "10" ];then
 		echo "node-npm 版本小于10，请升级以后再使用本脚本"
 		exit 0
 	fi
