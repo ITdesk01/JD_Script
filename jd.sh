@@ -219,10 +219,10 @@ deng_20201120_fr="bc26d0bdc442421aa92cafcf26a1e148@57cf86ce18ca4f4987ce54fae6182
 
 	sed -i "s/$old_fruit1/$new_fruit_set/g" $dir_file_js/jdFruitShareCodes.js
 	sed -i "s/$old_fruit3/$new_fruit_set/g" $dir_file_js/jdFruitShareCodes.js
+	sed -i "11a $new_fruit_set" $dir_file_js/jdFruitShareCodes.js
 	sed -i "12a $new_fruit_set" $dir_file_js/jdFruitShareCodes.js
 	sed -i "13a $new_fruit_set" $dir_file_js/jdFruitShareCodes.js
 	sed -i "14a $new_fruit_set" $dir_file_js/jdFruitShareCodes.js
-	sed -i "15a $new_fruit_set" $dir_file_js/jdFruitShareCodes.js
 
 
 	#萌宠
@@ -259,10 +259,10 @@ deng_20201120_pet="MTE1NDUwMTI0MDAwMDAwMDM4MzAwMTI5@MTE1NDQ5OTUwMDAwMDAwMzkxMTY3
 
 	sed -i "s/$old_pet3/$new_pet_set/g" $dir_file_js/jdPetShareCodes.js
 	sed -i "s/$old_pet4/$new_pet_set/g" $dir_file_js/jdPetShareCodes.js
+	sed -i "11a $new_pet_set" $dir_file_js/jdPetShareCodes.js
 	sed -i "12a $new_pet_set" $dir_file_js/jdPetShareCodes.js
 	sed -i "13a $new_pet_set" $dir_file_js/jdPetShareCodes.js
 	sed -i "14a $new_pet_set" $dir_file_js/jdPetShareCodes.js
-	sed -i "15a $new_pet_set" $dir_file_js/jdPetShareCodes.js
 
 
 	#种豆
