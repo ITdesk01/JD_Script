@@ -34,6 +34,6 @@ jobs:
           cd JD_Script
           git config --global user.email "136000981@qq.com"
           git config --global user.name "firkerword"
-          git add . || echo "up"
-          git commit -m "github_actions" -a;
+          git add . 
+          git commit -m "up1"
           git push "https://firkerword:$MMTANK@github.com/firkerword/JD_Script.git" main
