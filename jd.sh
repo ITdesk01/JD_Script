@@ -341,8 +341,8 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 :<<'COMMENT'
 	#东东超市
 	sed -i '323,338d' jd_superMarket.js
-	sed -i "s/eU9Ya-y2N_5z9DvXwyIV0A/eU9Ya-iyZ68kpWrRmXBFgw/g" $dir_file_js/jd_superMarket.js
-	sed -i "s/aURoM7PtY_Q/eU9Ya-iyZ68kpWrRmXBFgw/g" $dir_file_js/jd_superMarket.js
+	sed -i "s/eU9Ya-y2N_5z9DvXwyIV0A/95OquUc_sFugJO5_E_2dAgm-@eU9YELv7P4thhw6utCVw@eU9YaOjnbvx1-Djdz3UUgw@eU9Ya-iyZ68kpWrRmXBFgw/g" $dir_file_js/jd_superMarket.js
+	sed -i "s/aURoM7PtY_Q/95OquUc_sFugJO5_E_2dAgm-@eU9YELv7P4thhw6utCVw@eU9YaOjnbvx1-Djdz3UUgw@eU9Ya-iyZ68kpWrRmXBFgw/g" $dir_file_js/jd_superMarket.js
 	sed -i "s/eU9Ya-y2N_5z9DvXwyIV0A/eU9YabrkZ_h1-GrcmiJB0A/g" $dir_file_js/jd_superMarket.js
 	sed -i "s/eU9YaeS3Z6ol8zrRmnMb1Q/eU9YabrkZ_h1-GrcmiJB0A/g" $dir_file_js/jd_superMarket.js
 COMMENT
@@ -398,7 +398,7 @@ COMMENT
 
 	#签到领现金
 	old_jdcash="\`-4msulYas0O2JsRhE-2TA5XZmBQ@eU9Yar_mb_9z92_WmXNG0w@eU9YaO7jMvwh-W_VzyUX0Q\`"
-	new_jdcash="'eU9Ya-iyZ68kpWrRmXBFgw@eU9YabrkZ_h1-GrcmiJB0A@eU9YM7bzIptVshyjrwlteU9YCLTrH5VesRWnvw5t',"
+	new_jdcash="'95OquUc_sFugJO5_E_2dAgm-@eU9YELv7P4thhw6utCVw@eU9YaOjnbvx1-Djdz3UUgw@eU9Ya-iyZ68kpWrRmXBFgw@eU9YabrkZ_h1-GrcmiJB0A@eU9YM7bzIptVshyjrwlteU9YCLTrH5VesRWnvw5t',"
 	sed -i "s/$old_jdcash,/$new_jdcash/g" $dir_file_js/jd_cash.js 
 	sed -i "s/$old_jdcash/$new_jdcash/g" $dir_file_js/jd_cash.js 
 	sed -i "33a $new_jdcash" $dir_file_js/jd_cash.js
@@ -409,7 +409,7 @@ COMMENT
 
 	#工业爱消除
 	old_jdgyec="'840266@2583822@2585219@2586018@1556311@2583822@2585256@2586023@2728968',"
-	new_jdgyec="'743359@2753077@2759122@2759259@2337978',"
+	new_jdgyec="'互助码填写位置@743359@2753077@2759122@2759259@2337978',"
 	sed -i "s/$old_jdgyec,/$new_jdgyec/g" $dir_file_js/jd_gyec.js
 	sed -i "s/$old_jdgyec/$new_jdgyec/g" $dir_file_js/jd_gyec.js
 	sed -i "35a $new_jdgyec" $dir_file_js/jd_gyec.js
