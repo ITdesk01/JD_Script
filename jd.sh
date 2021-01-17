@@ -7,7 +7,7 @@
 #
 #set -x
 
-version="1.91"
+version="1.9"
 cron_file="/etc/crontabs/root"
 #url=https://raw.githubusercontent.com/lxk0301/jd_scripts/master
 url=https://gitee.com/lxk0301/jd_scripts/raw/master
@@ -122,7 +122,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_redPacket.js			#全民开红包
 	jd_club_lottery.js		#摇京豆
 	jd_shop.js			#进店领豆
-	jd_live.js			#���播抢京豆
+	jd_live.js			#直播抢京豆
 	jd_bean_home.js			#领京豆额外奖励
 	jd_rankingList.js		#京东排行榜签到得京豆
 	jd_cash.js			#签到领现金，每日2毛～5毛长期
@@ -387,7 +387,7 @@ COMMENT
 	
 	#京喜农场
 	old_jxnc="'22bd6fbbabbaa770a45ab2607e7a1e8a@197c6094e965fdf3d33621b47719e0b1'"
-	new_jxnc="'互助码填写位置@019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df'"
+	new_jxnc="'互助码填写位置@2@019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df'"
 	sed -i "s/$old_jxnc/$new_jxnc/g" $dir_file_js/jd_jxnc.js
 	sed -i "s/'',/$new_jxnc/g" $dir_file_js/jdJxncShareCodes.js
 	sed -i "12a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
