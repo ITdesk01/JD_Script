@@ -298,10 +298,10 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 
 	sed -i "s/$old_plantBean3/$new_plantBean_set/g" $dir_file_js/jdPlantBeanShareCodes.js
 	sed -i "s/$old_plantBean4/$new_plantBean_set/g" $dir_file_js/jdPlantBeanShareCodes.js
+	sed -i "11a $new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
 	sed -i "12a $new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
 	sed -i "13a $new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
 	sed -i "14a $new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
-	sed -i "15a $new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
 
 
 	#京喜工厂
