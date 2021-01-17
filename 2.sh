@@ -1,7 +1,10 @@
 #!/bin/sh
 #
 git clone https://github.com/ITdesk01/JD_Script.git JDScript
-
+git clone https://github.com/firkerword/JD_Script.git
+cd JDScript
+cp -r `ls /home/JDScript | grep -v ccc | xargs` /home/JD_Script
+cd ..
 	#京东农场
         new_fruit="0763443f7d6f4f5ea5e54adc1c6112ed@e61135aa1963447fa136f293a9d161c1@f9e6a916ad634475b8e77a7704b5c3d8@"
         #互助码填写格式：@+互助码    例如：@sd452a41ds2af1a1
