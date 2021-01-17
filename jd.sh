@@ -317,10 +317,10 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 
 	sed -i "s/$old_dreamFactory/$new_dreamFactory/g" $dir_file_js/jdDreamFactoryShareCodes.js
 	sed -i "s/$old_dreamFactory1/$new_dreamFactory/g" $dir_file_js/jdDreamFactoryShareCodes.js
+	sed -i "11a $new_dreamFactory" $dir_file_js/jdDreamFactoryShareCodes.js
 	sed -i "12a $new_dreamFactory" $dir_file_js/jdDreamFactoryShareCodes.js
 	sed -i "13a $new_dreamFactory" $dir_file_js/jdDreamFactoryShareCodes.js
 	sed -i "14a $new_dreamFactory" $dir_file_js/jdDreamFactoryShareCodes.js
-	sed -i "15a $new_dreamFactory" $dir_file_js/jdDreamFactoryShareCodes.js
 
 
 	#东东工厂
