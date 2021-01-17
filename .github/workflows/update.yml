@@ -36,4 +36,4 @@ jobs:
           git config --global user.name "firkerword"
           git add . || echo "up"
           git commit -m "github_actions" -a;
-          git push "https://136000981@qq.com:$MIMA@github.com/firkerword/JD_Script.git" main
+          git push "https://firkerword:$MIMA@github.com/firkerword/JD_Script.git" main
