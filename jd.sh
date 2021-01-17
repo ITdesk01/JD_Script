@@ -7,7 +7,7 @@
 #
 #set -x
 
-version="1.9"
+version="1.91"
 cron_file="/etc/crontabs/root"
 #url=https://raw.githubusercontent.com/lxk0301/jd_scripts/master
 url=https://gitee.com/lxk0301/jd_scripts/raw/master
@@ -122,7 +122,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_redPacket.js			#全民开红包
 	jd_club_lottery.js		#摇京豆
 	jd_shop.js			#进店领豆
-	jd_live.js			#直播抢京豆
+	jd_live.js			#���播抢京豆
 	jd_bean_home.js			#领京豆额外奖励
 	jd_rankingList.js		#京东排行榜签到得京豆
 	jd_cash.js			#签到领现金，每日2毛～5毛长期
