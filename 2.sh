@@ -47,7 +47,7 @@ cd ..
         sed -i "s/d6d73edddaa64cbd/$new_jdbook&/" JD_Script/jd.sh
 
 	#京喜农场
-        new_jxnc="互助码填写位置@"
+        new_jxnc="互助码填写位置@2@"
         #互助码填写格式：@+互助码    例如：@sd452a41ds2af1a1
         sed -i "s/019cffd91086/$new_jxnc&/" JD_Script/jd.sh
 
