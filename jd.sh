@@ -370,7 +370,7 @@ COMMENT
 	sed -i "38a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
 	sed -i "39a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
 	sed -i "40a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
-	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_crazy_joy.js
+	sed -i "s/$.isNode() ? 10 : 5/0/g" $dir_file_js/jd_crazy_joy.js
 
 	#口袋书店
 	old_jdbook="'28a699ac78d74aa3b31f7103597f8927@2f14ee9c92954cf79829320dd482bf49@fdf827db272543d88dbb51a505c2e869'"
@@ -387,6 +387,11 @@ COMMENT
 	old_jxnc="'22bd6fbbabbaa770a45ab2607e7a1e8a@197c6094e965fdf3d33621b47719e0b1'"
 	new_jxnc="'019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df'"
 	sed -i "s/$old_jxnc/$new_jxnc/g" $dir_file_js/jd_jxnc.js
+	sed -i "s/'',/$new_jxnc/g" $dir_file_js/jdJxncShareCodes.js
+	sed -i "12a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
+	sed -i "13a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
+	sed -i "14a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
+	sed -i "15a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_crazy_joy.js
 
 	#签到领现金
