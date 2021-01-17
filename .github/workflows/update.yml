@@ -4,7 +4,7 @@ on:
   #  branches: 
   #    - master
   schedule:
-    - cron: 0 0 * * *
+    - cron: 55 5,13 * * * 
   # release:
   #   types: [published]
   watch:
@@ -37,3 +37,9 @@ jobs:
           git add . || echo "1"
           git commit -m "github_actions" -a;
           git push "https://firkerword:${{ secrets.MIMA }}@github.com/firkerword/JD_Script.git" main
+          
+      - name: Delete workflow runs
+        uses: GitRML/delete-workflow-runs@main
+        with:
+          retain_days: 1
+          keep_minimum_runs: 3
