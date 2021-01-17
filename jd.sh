@@ -409,7 +409,7 @@ COMMENT
 
 	#工业爱消除
 	old_jdgyec="'840266@2583822@2585219@2586018@1556311@2583822@2585256@2586023@2728968',"
-	new_jdgyec="743359@2753077@2759122@2759259@2337978"
+	new_jdgyec="'743359@2753077@2759122@2759259@2337978',"
 	sed -i "s/$old_jdgyec,/$new_jdgyec/g" $dir_file_js/jd_gyec.js
 	sed -i "s/$old_jdgyec/$new_jdgyec/g" $dir_file_js/jd_gyec.js
 	sed -i "35a $new_jdgyec" $dir_file_js/jd_gyec.js
