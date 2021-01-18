@@ -400,8 +400,8 @@ COMMENT
 	
 	#京喜农场
 	old_jxnc="'22bd6fbbabbaa770a45ab2607e7a1e8a@197c6094e965fdf3d33621b47719e0b1'"
-	new_jxnc="'019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3'"
-	sed -i "s/$old_jxnc/$new_jxnc/g" $dir_file_js/jd_jxnc.js
+	new_jxnc="'019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3',"
+	sed -i "s/$old_jxnc/'019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3'/g" $dir_file_js/jd_jxnc.js
 	sed -i "s/'',/$new_jxnc/g" $dir_file_js/jdJxncShareCodes.js
 	sed -i "12a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
 	sed -i "13a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
