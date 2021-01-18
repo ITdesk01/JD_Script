@@ -174,6 +174,7 @@ done
 		echo "脚本下载没有成功，重新执行代码"
 		update
 	fi
+	chmod 755 $dir_file_js/*
 	additional_settings
 	echo -e "$green update$stop_script $white"
 
