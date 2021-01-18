@@ -388,6 +388,7 @@ COMMENT
 	sed -i "39a $new_crazyJoy_set" $dir_file_js/jd_crazy_joy.js
 	sed -i "40a $new_crazyJoy_set" $dir_file_js/jd_crazy_joy.js
 	sed -i "s/$.isNode() ? 10 : 5/0/g" $dir_file_js/jd_crazy_joy.js
+	sed -i "s/applyJdBean = 0/applyJdBean = 2000/g" $dir_file_js/jd_crazy_joy.js #默认兑换2000豆子
 
 
 	#口袋书店
