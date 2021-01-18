@@ -25,13 +25,12 @@ N1（群友极地阳光测试）
 
 安装办法1
 
-通过opkg update 再 opkg install git git-http node node-npm
+         通过opkg update 再 opkg install git git-http node node-npm
 
 安装办法2
 
-编译固件的时候加上
-
-不会编译的可以采用我的编译辅助脚本编译： https://github.com/openwrtcompileshell/OpenwrtCompileScript
+        编译固件的时候加上
+        不会编译的可以采用我的编译辅助脚本编译： https://github.com/openwrtcompileshell/OpenwrtCompileScript
 
 **node和node-npm版本一定要大于10**，安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10
 
