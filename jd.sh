@@ -165,6 +165,8 @@ done
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_super_coupon.js -O $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_gyec.js -O $dir_file_js/jd_gyec.js #工业爱消除
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_live_redrain2.js  -O $dir_file_js/jd_live_redrain2.js #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
+	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_xg.js  -O $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
+	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_xxl.js -O $dir_file_js/jd_xxl.js #东东爱消除
 	rm -rf $dir_file_js/jdSuperMarketShareCodes.js	#东东超市ShareCodes(暂时没用)
 
 	if [ $? -eq 0 ]; then
@@ -582,6 +584,8 @@ run_07() {
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
+	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
+	$node $dir_file_js/jd_xxl.js #东东爱消除
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
