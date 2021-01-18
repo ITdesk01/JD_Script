@@ -108,7 +108,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jdPlantBeanShareCodes.js	#种豆得豆ShareCodes
 	jd_superMarket.js		#东东超市
 	jd_blueCoin.js			#东东超市兑换奖品
-	jdSuperMarketShareCodes.js	#东东超市ShareCodes(暂时没用)
 	jd_dreamFactory.js		#京喜工厂
 	jdDreamFactoryShareCodes.js	#京喜工厂ShareCodes
 	jd_jdfactory.js			#东东工厂
@@ -164,6 +163,7 @@ done
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_super_coupon.js -O $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_gyec.js -O $dir_file_js/jd_gyec.js #工业爱消除
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_live_redrain2.js  -O $dir_file_js/jd_live_redrain2.js #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
+	rm -rf $dir_file_js/jdSuperMarketShareCodes.js	#东东超市ShareCodes(暂时没用)
 
 	if [ $? -eq 0 ]; then
 		echo -e ">>$green脚本下载完成$white"
