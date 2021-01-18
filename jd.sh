@@ -469,7 +469,6 @@ run_0() {
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
-	$node $dir_file_js/jd_nian.js #京东炸年兽
 	run_08_12_16
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_06_18
@@ -479,6 +478,12 @@ run_0() {
 	run_03
 	run_045
 	$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
+	$node $dir_file_js/jd_nian.js #京东炸年兽
+	$node $dir_file_js/jd_nian.js #京东炸年兽
+	$node $dir_file_js/jd_nian.js #京东炸年兽
+	$node $dir_file_js/jd_nian.js #京东炸年兽
+	$node $dir_file_js/jd_nian.js #京东炸年兽
+	$node $dir_file_js/jd_nian.js #京东炸年兽
 	stop_notice
 	echo -e "$green run_0$stop_script $white"
 }
