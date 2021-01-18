@@ -42,44 +42,44 @@ N1（群友极地阳光测试）
 
 
 **2.安装完依赖以后用npm安装一些模块**
-```sh
-        npm install -g crypto-js got http-server tough-cookie download request tunnel
-```
+
+         npm install -g crypto-js got http-server tough-cookie download request tunnel
+
 
 **如果你执行安装npm install -g crypto-js got http-server tough-cookie download request tunnel报错，你也可以用以下代码安装**
-```sh
-        wget https://raw.githubusercontent.com/LXK9301/jd_scripts/master/package.json
 
-        npm install
-```
+         wget https://raw.githubusercontent.com/LXK9301/jd_scripts/master/package.json
+        
+         npm install
+
 **还不行可以采用最后一个办法（痴雨提供）**
 设置NPM 下载源为淘宝 
-```sh
-       npm config set registry https://registry.npm.taobao.org
-```
+
+         npm config set registry https://registry.npm.taobao.org
+
 查看当前NPM下载源
-```sh
-       npm config get registry
-```
+
+         npm config get registry
+
 然后再执行
-```sh
-       npm install -g crypto-js got http-server tough-cookie download request tunnel
-```
+
+          npm install -g crypto-js got http-server tough-cookie download request tunnel
+
 
 **3.开始下载脚本**
-```sh
-       git clone https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
-       cd /usr/share/JD_Script && chmod 777 jd.sh 
-       sh jd.sh 
-```
+
+         git clone https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
+         cd /usr/share/JD_Script && chmod 777 jd.sh 
+         sh jd.sh 
+
 **执行sh jd.sh以后会重启一次，所以做好准备（首次运行脚本会这样，以后都不会）**
 
 **重启完成以后**
-```sh
-      sh $jd #直接调用代码
 
-      cd $jd_file # 可以直接进入代码所在文件夹
-```
+         sh $jd #直接调用代码
+
+         cd $jd_file # 可以直接进入代码所在文件夹
+
 
 ##3.已知问题!!!
 
@@ -87,7 +87,7 @@ N1（群友极地阳光测试）
 
 2.互助码怎么找
 
-        sh $jd jd_sharecode
+         sh $jd jd_sharecode
 
 
 **4.问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)**
