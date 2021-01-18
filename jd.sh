@@ -131,6 +131,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_lotteryMachine.js 		#京东抽奖机
 	jd_necklace.js			#点点券
 	jd_nian.js			#京东炸年兽
+	jd_nianCollect.js		#炸年兽专门收集爆竹
 	jd_syj.js			#十元街
 	jd_bookshop.js			#口袋书店
 	jd_family.js			#京东家庭号
@@ -154,7 +155,7 @@ do
 	wget $url/$script_name -O $dir_file_js/$script_name
 done
 
-	wget https://raw.githubusercontent.com/LXK9301/jd_scripts/master/activity/jd_collectProduceScore.js -O $dir_file_js/jd_collectProduceScore.js #京东炸年兽领爆竹
+	rm -rf $dir_file_js/jd_collectProduceScore.js #京东炸年兽领爆竹
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/e864e3f995ac474cf2bb6dda8984b2be89e041f0/Me/jx_cfd_exchange.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -491,8 +492,7 @@ kill_joy() {
 }
 
 run_020() {
-	sed -i "s/..\/jdCookie.js/.\/jdCookie.js/g" jd_collectProduceScore.js
-	$node $dir_file_js/jd_collectProduceScore.js #京东炸年兽领爆竹
+	$node $dir_file_js/jd_nianCollect.js #京东炸年兽领爆竹
 }
 
 run_030() {
