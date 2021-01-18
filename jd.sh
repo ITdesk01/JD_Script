@@ -36,7 +36,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 task() {
-	cron_version="2.47"
+	cron_version="2.48"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -66,6 +66,7 @@ cat >>/etc/crontabs/root <<EOF
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机
 30 * * * * $dir_file/jd.sh run_030 >/tmp/jd_run_030.log 2>&1 #工业爱消除
 0,1 19-21/1 $dir_file/jd.sh run_19_20_21 >/tmp/jd_run_19_20_21.log 2>&1 #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
+20 * $dir_file/jd.sh run_020 >/tmp/jd_run_020.log 2>&1 #京东炸年兽领爆竹
 ###########100##########请将其他定时任务放到底下###############
 EOF
 
@@ -153,7 +154,7 @@ do
 	wget $url/$script_name -O $dir_file_js/$script_name
 done
 
-
+	wget https://raw.githubusercontent.com/LXK9301/jd_scripts/master/activity/jd_collectProduceScore.js -O $dir_file_js/jd_collectProduceScore.js #京东炸年兽领爆竹
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/e864e3f995ac474cf2bb6dda8984b2be89e041f0/Me/jx_cfd_exchange.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
@@ -476,6 +477,10 @@ kill_joy() {
 	fi
 }
 
+run_020() {
+	$node $dir_file_js/jd_collectProduceScore.js #京东炸年兽领爆竹
+}
+
 run_030() {
 	$node $dir_file_js/jd_gyec.js #工业爱消除
 }
@@ -739,7 +744,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020)
 		$action1
 		;;
 		*)
@@ -751,7 +756,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020)
 		$action2
 		;;
 		*)
