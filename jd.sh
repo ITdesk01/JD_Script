@@ -378,12 +378,12 @@ COMMENT
 
 	Jhone_Potte_20200824_cj="R0_iwyMT_LeF5osbxYCNwKt9zd5YaBeE@LVKLzARN7ub-xqKdK_upZ6t9zd5YaBeE"
 	new_crazyJoy_set="'$new_crazyJoy@$Jhone_Potte_20200824_cj',"
-	sed -i "s/$old_crazyJoy/$new_crazyJoy/g" $dir_file_js/jd_crazy_joy.js
-	sed -i "s/$old_crazyJoy1/$new_crazyJoy/g" $dir_file_js/jd_crazy_joy.js
-	sed -i "37a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
-	sed -i "38a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
-	sed -i "39a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
-	sed -i "40a $new_crazyJoy" $dir_file_js/jd_crazy_joy.js
+	sed -i "s/$old_crazyJoy/$new_crazyJoy_set/g" $dir_file_js/jd_crazy_joy.js
+	sed -i "s/$old_crazyJoy1/$new_crazyJoy_set/g" $dir_file_js/jd_crazy_joy.js
+	sed -i "37a $new_crazyJoy_set" $dir_file_js/jd_crazy_joy.js
+	sed -i "38a $new_crazyJoy_set" $dir_file_js/jd_crazy_joy.js
+	sed -i "39a $new_crazyJoy_set" $dir_file_js/jd_crazy_joy.js
+	sed -i "40a $new_crazyJoy_set" $dir_file_js/jd_crazy_joy.js
 	sed -i "s/$.isNode() ? 10 : 5/0/g" $dir_file_js/jd_crazy_joy.js
 
 
