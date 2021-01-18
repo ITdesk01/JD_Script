@@ -130,6 +130,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_lotteryMachine.js 		#京东抽奖机
 	jd_necklace.js			#点点券
+	jd_nian.js			#京东炸年兽
 	jd_syj.js			#十元街
 	jd_bookshop.js			#口袋书店
 	jd_family.js			#京东家庭号
@@ -420,6 +421,17 @@ COMMENT
 	sed -i "37a $new_jdgyec" $dir_file_js/jd_gyec.js
 	sed -i "38a $new_jdgyec" $dir_file_js/jd_gyec.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_gyec.js
+
+	#京东炸年兽
+	old_jdnian="\`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0\`,"
+	new_jdnian="'cgxZdTXtI77a613LXAGtvfpsw8rraLgBTtRR8gtVXzz6qQixKVxvi1jGQt4@cgxZdTXtIeyM6wqaAQGgvhd59Mwz4nvxYSLgIRFrXHtC9Ij-x8O-uY98Rmc@cgxZdTXte-Cbrmm6S3ffi4dB6WNg_mNfNBNnMI122s8KkpZ8PS2o7cM@cgxZdTXtQOKDk2exSH7bm1yqE9lH3OVjhKsFb1yndmZ5KgUbv7F2-X8',"
+	sed -i "s/$old_jdnian,/$new_jdnian/g" $dir_file_js/jd_nian.js
+	sed -i "s/$old_jdnian/$new_jdnian/g" $dir_file_js/jd_nian.js
+	sed -i "47a $new_jdnian" $dir_file_js/jd_nian.js
+	sed -i "48a $new_jdnian" $dir_file_js/jd_nian.js
+	sed -i "49a $new_jdnian" $dir_file_js/jd_nian.js
+	sed -i "50a $new_jdnian" $dir_file_js/jd_nian.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_nian.js
 }
 
 update_script() {
@@ -442,6 +454,7 @@ run_0() {
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
+	$node $dir_file_js/jd_nian.js #京东炸年兽
 	run_08_12_16
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_06_18
