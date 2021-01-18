@@ -432,14 +432,15 @@ COMMENT
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_gyec.js
 
 	#京东炸年兽
-	old_jdnian="\`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0\`,"
+	old_jdnian="\`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZ9_MZ8gByP7FZ368dN8oTZBwGieaH5HvtnvXuK1Epn_KK8yol8OYGw7h3M2j_PxSZvYA\`,"
+	old_jdnian1=" \`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZdTXtIumO4w2cDgSqvYcqHwjaAzLxu0S371Dh_fctFJtN0tXYzdR7JaY\`"
 	new_jdnian="'cgxZdTXtI77a613LXAGtvfpsw8rraLgBTtRR8gtVXzz6qQixKVxvi1jGQt4@cgxZdTXtIeyM6wqaAQGgvhd59Mwz4nvxYSLgIRFrXHtC9Ij-x8O-uY98Rmc@cgxZdTXte-Cbrmm6S3ffi4dB6WNg_mNfNBNnMI122s8KkpZ8PS2o7cM@cgxZdTXtQOKDk2exSH7bm1yqE9lH3OVjhKsFb1yndmZ5KgUbv7F2-X8',"
-	sed -i "s/$old_jdnian,/$new_jdnian/g" $dir_file_js/jd_nian.js
 	sed -i "s/$old_jdnian/$new_jdnian/g" $dir_file_js/jd_nian.js
-	sed -i "47a $new_jdnian" $dir_file_js/jd_nian.js
-	sed -i "48a $new_jdnian" $dir_file_js/jd_nian.js
-	sed -i "49a $new_jdnian" $dir_file_js/jd_nian.js
+	sed -i "s/$old_jdnian1/$new_jdnian/g" $dir_file_js/jd_nian.js
 	sed -i "50a $new_jdnian" $dir_file_js/jd_nian.js
+	sed -i "51a $new_jdnian" $dir_file_js/jd_nian.js
+	sed -i "52a $new_jdnian" $dir_file_js/jd_nian.js
+	sed -i "53a $new_jdnian" $dir_file_js/jd_nian.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_nian.js
 }
 
