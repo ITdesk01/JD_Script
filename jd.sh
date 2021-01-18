@@ -478,6 +478,7 @@ kill_joy() {
 }
 
 run_020() {
+	sed -i "s/..\/jdCookie.js/.\/jdCookie.js/g" jd_collectProduceScore.js
 	$node $dir_file_js/jd_collectProduceScore.js #京东炸年兽领爆竹
 }
 
