@@ -17,22 +17,27 @@ N1（群友极地阳光测试）
 **注意2（linux底子太薄的，建议好好学习一下，这不是无脑脚本，最起码你要看懂底下操作是做啥的）**
 
 ## Usage 使用方法
-## 1.openwrt需要的依赖(重要，不好好看，报错自行处理)
+**1.openwrt需要的依赖(重要，不好好看，报错自行处理)**
  1.git
  2.git-http
  3.node
  4.node-npm
 
 安装办法1
+
 通过opkg update 再 opkg install git git-http node node-npm
 
 安装办法2
+
 编译固件的时候加上
-不会编译的可以采用我的编译辅助脚本编译：https://github.com/openwrtcompileshell/OpenwrtCompileScript
+
+不会编译的可以采用我的编译辅助脚本编译： https://github.com/openwrtcompileshell/OpenwrtCompileScript
 
 **node和node-npm版本一定要大于10**，安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10
 
-**安装完依赖以后用npm安装一些模块**
+
+
+**2.安装完依赖以后用npm安装一些模块**
 ```sh
 npm install -g crypto-js got http-server tough-cookie download request tunnel
 ```
@@ -57,7 +62,7 @@ npm config get registry
 npm install -g crypto-js got http-server tough-cookie download request tunnel
 ```
 
-##2.开始下载脚本
+**3.开始下载脚本**
 ```sh
 git clone https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
 cd /usr/share/JD_Script && chmod 777 jd.sh 
