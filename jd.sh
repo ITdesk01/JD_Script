@@ -165,6 +165,8 @@ done
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_super_coupon.js -O $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_gyec.js -O $dir_file_js/jd_gyec.js #工业爱消除
 	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_live_redrain2.js  -O $dir_file_js/jd_live_redrain2.js #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
+	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_xg.js  -O $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
+	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_xxl.js -O $dir_file_js/jd_xxl.js #东东爱消除
 	rm -rf $dir_file_js/jdSuperMarketShareCodes.js	#东东超市ShareCodes(暂时没用)
 
 	if [ $? -eq 0 ]; then
@@ -436,6 +438,16 @@ COMMENT
 	sed -i "38a $new_jdgyec" $dir_file_js/jd_gyec.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_gyec.js
 
+	#东东爱消除
+	old_jdxxl="'840266@2585219@2586018@1556311@2583822@2585256',"
+	new_jdxxl="'1900455@2771801@2771913@743359@2753077@2759122@2759259@2337978',"
+	sed -i "s/$old_jdxxl/$new_jdxxl/g" $dir_file_js/jd_xxl.js
+	sed -i "37a $new_jdxxl" $dir_file_js/jd_xxl.js
+	sed -i "38a $new_jdxxl" $dir_file_js/jd_xxl.js
+	sed -i "39a $new_jdxxl" $dir_file_js/jd_xxl.js
+	sed -i "40a $new_jdxxl" $dir_file_js/jd_xxl.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_xxl.js
+
 	#京东炸年兽
 	old_jdnian="\`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZ9_MZ8gByP7FZ368dN8oTZBwGieaH5HvtnvXuK1Epn_KK8yol8OYGw7h3M2j_PxSZvYA\`,"
 	old_jdnian1=" \`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZdTXtIumO4w2cDgSqvYcqHwjaAzLxu0S371Dh_fctFJtN0tXYzdR7JaY\`"
@@ -469,7 +481,6 @@ run_0() {
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
-	$node $dir_file_js/jd_nian.js #京东炸年兽
 	run_08_12_16
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_06_18
@@ -479,6 +490,12 @@ run_0() {
 	run_03
 	run_045
 	$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
+	$node $dir_file_js/jd_nian.js #京东炸年兽
+	$node $dir_file_js/jd_nian.js #京东炸年兽
+	$node $dir_file_js/jd_nian.js #京东炸年兽
+	$node $dir_file_js/jd_nian.js #京东炸年兽
+	$node $dir_file_js/jd_nian.js #京东炸年兽
+	$node $dir_file_js/jd_nian.js #京东炸年兽
 	stop_notice
 	echo -e "$green run_0$stop_script $white"
 }
@@ -506,11 +523,16 @@ kill_joy() {
 }
 
 run_020() {
+	echo -e "$green run_020$start_script $white"
 	$node $dir_file_js/jd_nianCollect.js #京东炸年兽领爆竹
+	echo -e "$green run_020$stop_script $white"
 }
 
 run_030() {
+	echo -e "$green run_030$start_script $white"
 	$node $dir_file_js/jd_gyec.js #工业爱消除
+	$node $dir_file_js/jd_xxl.js #东东爱消除
+	echo -e "$green run_030$stop_script $white"
 }
 
 run_045() {
@@ -577,6 +599,7 @@ run_07() {
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
+	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
