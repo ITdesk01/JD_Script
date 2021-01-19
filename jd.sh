@@ -782,6 +782,15 @@ system_variable() {
 		exit 0
 	fi
 
+	#判断JS文件夹是否为空
+	if [ ! -f "$dir_file_js/Detect.txt" ]; then
+		echo -e "$green js文件夹缺少一个Detect.txt，现在开始更新请稍等很快$white"
+		sleep 3
+		echo "我是作者写来应付检查的文件，不要理我，我很忙，老板加饭！！！再来半只白切鸡，不吃饱那里有力气应付检查。。。。。" > $dir_file_js/Detect.txt
+		update_script
+		update
+	fi
+
 	#添加系统变量
 	jd_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
 	if [[ "$jd_script_path" == "0" ]]; then
