@@ -642,6 +642,9 @@ stop_notice() {
 	#农场和萌宠提示太多次了，所用每天提示一次即可
 	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
 	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
+	echo "开始关闭农场和萌宠提示请稍等"
+	sleep 5
+	echo -e "$green农场和萌宠提示关闭成功$white"
 }
 
 help() {
@@ -662,10 +665,15 @@ help() {
 	echo -e "$green sh \$jd run_0  run_07			#运行全部脚本(除个别脚本不运行)$white"
 	echo ""
 	echo -e "$yellow个别脚本有以下："
+	echo ""
 	echo -e "$green sh \$jd joy $white				#运行疯狂的JOY"
+	echo ""
 	echo -e "$green sh \$jd jx $white 				#查询京喜商品生产使用时间"
+	echo ""
 	echo -e "$green sh \$jd jd_sharecode $white 			#查询京东所有助力码"
-	echo -e "$green sh \$jd stop_notice $white  			#关掉萌宠 农场 种豆 多次提醒"
+	echo ""
+	echo -e "$green sh \$jd stop_notice $white  			#关掉萌宠 农场  多次提醒"
+	echo ""
 	echo -e "$green sh \$jd update_script && sh \$jd update $white	#更新jd.sh并下载js脚本"
 	echo ""
 	echo -e " 如果不喜欢这样，你也可以直接$green cd \$jd_file/js$white,然后用$green node 脚本名字.js$white "
@@ -789,7 +797,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice)
 		$action1
 		;;
 		*)
@@ -801,7 +809,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice)
 		$action2
 		;;
 		*)
