@@ -789,6 +789,7 @@ system_variable() {
 		echo "我是作者写来应付检查的文件，不要理我，我很忙，老板加饭！！！再来半只白切鸡，不吃饱那里有力气应付检查。。。。。" > $dir_file_js/Detect.txt
 		update_script
 		update
+		description_if
 	fi
 
 	#添加系统变量
