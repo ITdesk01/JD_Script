@@ -542,7 +542,7 @@ run_01() {
 	echo -e "$green run_01$start_script $white"
 	$node $dir_file_js/jd_plantBean.js 
 	$node $dir_file_js/jd_joy_feedPets.js #种豆得豆，没时间要求，一个小时收一次瓶子 & #宠汪汪喂食一个小时喂一次
-	$node $dir_file_js/jd_family.js #京东家庭号
+	#$node $dir_file_js/jd_family.js #京东家庭号
 	echo -e "$green run_01$stop_script $white"
 }
 
@@ -642,6 +642,9 @@ stop_notice() {
 	#农场和萌宠提示太多次了，所用每天提示一次即可
 	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
 	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
+	echo "开始关闭农场和萌宠提示请稍等"
+	sleep 5
+	echo -e "$green农场和萌宠提示关闭成功$white"
 }
 
 help() {
@@ -654,32 +657,35 @@ help() {
 	echo -e "$green $dir_file/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
 	echo -e "$green $dir_file/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
 	echo -e "$green $dir_file/jd.sh $white JD_Script的本体（作用就是帮忙下载js脚本，js脚本是核心）"
-	echo -e "$yellow JS脚本作用请查询：$white $green https://github.com/lxk0301/jd_scripts $white"
-	echo -e "$yellow 浏览器获取京东cookie教程：$white $green https://github.com/lxk0301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
+	echo -e "$yellow JS脚本作用请查询：$green https://github.com/LXK9301/jd_scripts/tree/master $white"
+	echo -e "$yellow 浏览器获取京东cookie教程：$green https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
 	echo ""
 	echo -e "$yellow 2.jd.sh脚本命令$white"
-	echo -e "$green sh \$jd update $white        #下载js脚本"
-	echo -e "$green sh \$jd update_script $white #更新JD_Script "
-	echo -e "$green sh \$jd run_0 $white         #运行全部脚本 $yellow#第一次安装完成运行这句，前提你把jdCookie.js填完整$white"
-	echo -e "$green sh \$jd run_045 $white        #运行run_045模块里的命令"
-	echo -e "$green sh \$jd run_01 $white        #运行run_01模块里的命令 "
-	echo -e "$green sh \$jd run_02 $white        #运行run_02模块里的命令"
-	echo -e "$green sh \$jd run_03 $white        #运行run_03模块里的命令"
-	echo -e "$green sh \$jd run_06_18 $white     #运行run_06_18模块里的命令"
-	echo -e "$green sh \$jd run_08_12_16 $white     #运行run_08_12_16模块里的命令"
-	echo -e "$green sh \$jd run_10_15_20 $white  #运行run_10_15_20模块里的命令"
-	echo -e "$green sh \$jd jx $white            #查询京喜商品生产使用时间"
-	echo -e "$green sh \$jd jd_sharecode $white            #查询京东所有助力码"
-	echo " 如果不喜欢这样，你也可以直接cd $jd_file/js,然后用node 脚本名字.js "
+	echo ""
+	echo -e "$green sh \$jd run_0  run_07			#运行全部脚本(除个别脚本不运行)$white"
+	echo ""
+	echo -e "$yellow个别脚本有以下："
+	echo ""
+	echo -e "$green sh \$jd joy $white				#运行疯狂的JOY"
+	echo ""
+	echo -e "$green sh \$jd jx $white 				#查询京喜商品生产使用时间"
+	echo ""
+	echo -e "$green sh \$jd jd_sharecode $white 			#查询京东所有助力码"
+	echo ""
+	echo -e "$green sh \$jd stop_notice $white  			#关掉萌宠 农场  多次提醒"
+	echo ""
+	echo -e "$green sh \$jd update_script && sh \$jd update $white	#更新jd.sh并下载js脚本"
+	echo ""
+	echo -e " 如果不喜欢这样，你也可以直接$green cd \$jd_file/js$white,然后用$green node 脚本名字.js$white "
 	echo ""
 	echo -e "$yellow 3.检测定时任务:$white $cron_help"
-	echo -e "$yellow 定时任务路径:$white$green/etc/crontabs/root$white"
+	echo -e "$yellow   定时任务路径:$white$green/etc/crontabs/root$white"
 	echo ""
 	echo -e "$yellow 4.如何排错或者你想要的互助码:$white"
 	echo ""
 	echo "  答1：如何排错有种东西叫更新，如sh \$jd update_script 和sh \$jd update"
 	echo "  答2：如何排错有种东西叫查日志，如/tmp/里面的jd开头.log结果的日志文件"
-	echo "  答3：你想要的互助码有种东西叫查日志，如/tmp/里面的jd开头.log结果的日志文件"
+	echo "  答3：你想要的互助码 sh \$jd jd_sharecode"
 	echo ""
 	echo "  看不懂代码又想白嫖，你还是洗洗睡吧，梦里啥都有，当然你可以用钞能力解决多数问题（你可以忽略这句，继续做梦）"
 	echo ""
@@ -776,6 +782,16 @@ system_variable() {
 		exit 0
 	fi
 
+	#判断JS文件夹是否为空
+	if [ ! -f "$dir_file_js/Detect.txt" ]; then
+		echo -e "$green js文件夹缺少一个Detect.txt，现在开始更新请稍等很快$white"
+		sleep 3
+		echo "我是作者写来应付检查的文件，不要理我，我很忙，老板加饭！！！再来半只白切鸡，不吃饱那里有力气应付检查。。。。。" > $dir_file_js/Detect.txt
+		update_script
+		update
+		description_if
+	fi
+
 	#添加系统变量
 	jd_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
 	if [[ "$jd_script_path" == "0" ]]; then
@@ -791,7 +807,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice)
 		$action1
 		;;
 		*)
@@ -803,7 +819,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice)
 		$action2
 		;;
 		*)
