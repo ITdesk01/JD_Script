@@ -163,9 +163,10 @@ cat >$dir_file/config/shylocks_script.txt <<EOF
 	jd_ms.js			#京东秒秒币
 	jd_bj.js			#宝洁美发屋
 	jd_super_coupon.js		#玩一玩-神券驾到,少于三个账号别玩
-	jd_gyec.js			#工业爱消除
 	jd_xg.js			#小鸽有礼 2021年1月15日至2021年2月19日
+	jd_gyec.js			#工业爱消除
 	jd_xxl.js			#东东爱消除
+	jd_xxl_gh.js			#个护爱消除，完成所有任务+每日挑战
 	jd_live_redrain2.js		#直播间红包雨 1月17日-2月5日，每天19点、20点、21点
 	jd_live_redrain_nian.js		#年货直播雨 2021年1月20日-2021年1月30日、2月3日、2月5日每天0,9,11,13,15,17,19,20,21,23点可领
 EOF
@@ -465,6 +466,16 @@ COMMENT
 	sed -i "40a $new_jdxxl" $dir_file_js/jd_xxl.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_xxl.js
 
+	#个护爱消除
+	old_jdxxlgh="'840266@2585219@2586018@1556311@2583822@2585256',"
+	new_jdxxlgh="'743359@2753077@2759122@2759259@2337978',"
+	sed -i "s/$old_jdxxlgh/$new_jdxxlgh/g" $dir_file_js/jd_xxl_gh.js
+	sed -i "39a $new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
+	sed -i "40a $new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
+	sed -i "41a $new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
+	sed -i "42a $new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_xxl_gh.js
+
 	#京东炸年兽
 	old_jdnian="\`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZ9_MZ8gByP7FZ368dN8oTZBwGieaH5HvtnvXuK1Epn_KK8yol8OYGw7h3M2j_PxSZvYA\`,"
 	old_jdnian1=" \`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZdTXtIumO4w2cDgSqvYcqHwjaAzLxu0S371Dh_fctFJtN0tXYzdR7JaY\`"
@@ -544,6 +555,7 @@ run_030() {
 	echo -e "$green run_030$start_script $white"
 	$node $dir_file_js/jd_gyec.js #工业爱消除
 	$node $dir_file_js/jd_xxl.js #东东爱消除
+	$node $dir_file_js/jd_xxl_gh.js	#个护爱消除，完成所有任务+每日挑战
 	echo -e "$green run_030$stop_script $white"
 }
 
