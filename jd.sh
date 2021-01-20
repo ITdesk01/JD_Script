@@ -577,7 +577,7 @@ run_01() {
 run_02() {
 	echo -e "$green run_02$start_script $white"
 	$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每两小时收一次
-	$node $dir_file_js/jd_bookshop.js #口袋书店
+	#$node $dir_file_js/jd_bookshop.js #口袋书店
 	echo -e "$green run_02$stop_script $white"
 }
 
