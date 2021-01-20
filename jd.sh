@@ -36,7 +36,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 task() {
-	cron_version="2.49"
+	cron_version="2.50"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -67,6 +67,7 @@ cat >>/etc/crontabs/root <<EOF
 30 * * * * $dir_file/jd.sh run_030 >/tmp/jd_run_030.log 2>&1 #工业爱消除
 0,1 19-21/1 * * * $dir_file/jd.sh run_19_20_21 >/tmp/jd_run_19_20_21.log 2>&1 #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
 20 * * * * $dir_file/jd.sh run_020 >/tmp/jd_run_020.log 2>&1 #京东炸年兽领爆竹
+0 0,9,11,13,15,17,19,20,21,23 3,5,20-30/1 1,2 * $dir_file/jd.sh nian_live >/tmp/jd_nian_live.log 2>&1 #年货直播雨
 ###########100##########请将其他定时任务放到底下###############
 EOF
 
@@ -155,19 +156,33 @@ do
 	wget $url/$script_name -O $dir_file_js/$script_name
 done
 
-	rm -rf $dir_file_js/jd_collectProduceScore.js #京东炸年兽领爆竹
+
+url2="https://raw.githubusercontent.com/shylocks/Loon/main"
+cat >$dir_file/config/shylocks_script.txt <<EOF
+	jd_mh.js			#京东盲盒
+	jd_ms.js			#京东秒秒币
+	jd_bj.js			#宝洁美发屋
+	jd_super_coupon.js		#玩一玩-神券驾到,少于三个账号别玩
+	jd_xg.js			#小鸽有礼 2021年1月15日至2021年2月19日
+	jd_gyec.js			#工业爱消除
+	jd_xxl.js			#东东爱消除
+	jd_xxl_gh.js			#个护爱消除，完成所有任务+每日挑战
+	jd_live_redrain2.js		#直播间红包雨 1月17日-2月5日，每天19点、20点、21点
+	jd_live_redrain_nian.js		#年货直播雨 2021年1月20日-2021年1月30日、2月3日、2月5日每天0,9,11,13,15,17,19,20,21,23点可领
+	jd_vote.js			#京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
+EOF
+
+for script_name in `cat $dir_file/config/shylocks_script.txt | awk '{print $1}'`
+do
+	wget $url2/$script_name -O $dir_file_js/$script_name
+done
+
+
+
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/e864e3f995ac474cf2bb6dda8984b2be89e041f0/Me/jx_cfd_exchange.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_mh.js -O $dir_file_js/jd_mh.js #京东盲盒
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_ms.js -O $dir_file_js/jd_ms.js #京东秒秒币
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_bj.js -O $dir_file_js/jd_bj.js #宝洁美发屋
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_super_coupon.js -O $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_gyec.js -O $dir_file_js/jd_gyec.js #工业爱消除
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_live_redrain2.js  -O $dir_file_js/jd_live_redrain2.js #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_xg.js  -O $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_xxl.js -O $dir_file_js/jd_xxl.js #东东爱消除
-	rm -rf $dir_file_js/jdSuperMarketShareCodes.js	#东东超市ShareCodes(暂时没用)
+
 
 	if [ $? -eq 0 ]; then
 		echo -e ">>$green脚本下载完成$white"
@@ -452,6 +467,16 @@ COMMENT
 	sed -i "40a $new_jdxxl" $dir_file_js/jd_xxl.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_xxl.js
 
+	#个护爱消除
+	old_jdxxlgh="'840266@2585219@2586018@1556311@2583822@2585256',"
+	new_jdxxlgh="'1900455@2771801@2771913@743359@2753077@2759122@2759259@2337978',"
+	sed -i "s/$old_jdxxlgh/$new_jdxxlgh/g" $dir_file_js/jd_xxl_gh.js
+	sed -i "39a $new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
+	sed -i "40a $new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
+	sed -i "41a $new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
+	sed -i "42a $new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_xxl_gh.js
+
 	#京东炸年兽
 	old_jdnian="\`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZ9_MZ8gByP7FZ368dN8oTZBwGieaH5HvtnvXuK1Epn_KK8yol8OYGw7h3M2j_PxSZvYA\`,"
 	old_jdnian1=" \`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZdTXtIumO4w2cDgSqvYcqHwjaAzLxu0S371Dh_fctFJtN0tXYzdR7JaY\`"
@@ -485,7 +510,7 @@ run_0() {
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
-	$node $dir_file_js/jd_nian.js #京东炸年兽
+	nian
 	run_08_12_16
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_06_18
@@ -495,7 +520,6 @@ run_0() {
 	run_03
 	run_045
 	$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
-	stop_notice
 	echo -e "$green run_0$stop_script $white"
 }
 
@@ -531,6 +555,7 @@ run_030() {
 	echo -e "$green run_030$start_script $white"
 	$node $dir_file_js/jd_gyec.js #工业爱消除
 	$node $dir_file_js/jd_xxl.js #东东爱消除
+	$node $dir_file_js/jd_xxl_gh.js	#个护爱消除，完成所有任务+每日挑战
 	echo -e "$green run_030$stop_script $white"
 }
 
@@ -597,6 +622,8 @@ run_07() {
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
+	nian
+	$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
@@ -627,6 +654,17 @@ run_10_15_20() {
 	echo -e "$green run_10_15_20$stop_script $white"
 }
 
+nian() {
+	echo -e "$green炸年兽$start_script $white"
+	$node $dir_file_js/jd_nian.js #京东炸年兽
+	echo -e "$green 炸年兽$stop_script $white"
+}
+
+nian_live() {
+	echo -e "$green年货直播雨$start_script $white"
+	$node $dir_file_js/jd_live_redrain_nian.js		#年货直播雨 2021年1月20日-2021年1月30日、2月3日、2月5日每天0,9,11,13,15,17,19,20,21,23点可领
+	echo -e "$green 年货直播雨$stop_script $white"
+}
 
 
 jx() {
@@ -645,8 +683,7 @@ stop_notice() {
 	#农场和萌宠提示太多次了，所用每天提示一次即可
 	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
 	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
-	echo "开始关闭农场和萌宠提示请稍等"
-	sleep 5
+	echo "时间大于两点开始关闭农场和萌宠提示请稍等"
 	echo -e "$green农场和萌宠提示关闭成功$white"
 }
 
@@ -669,7 +706,9 @@ help() {
 	echo ""
 	echo -e "$yellow个别脚本有以下："
 	echo ""
-	echo -e "$green sh \$jd joy $white				#运行疯狂的JOY"
+	echo -e "$green sh \$jd nian $white				#运行炸年兽"
+	echo ""
+	echo -e "$green sh \$jd joy $white				#运行疯狂的JOY(两个号需要1G以上，sh \$jd kill_joy 杀掉进程，彻底关闭需要先杀进程再禁用定时任务的代码)"
 	echo ""
 	echo -e "$green sh \$jd jx $white 				#查询京喜商品生产使用时间"
 	echo ""
@@ -705,7 +744,7 @@ help() {
 description_if() {
 	system_variable
 	echo "稍等一下，正在取回远端脚本源码，用于比较现在脚本源码，速度看你网络"
-	cd $dir_file_js
+	cd $dir_file
 	git fetch
 	if [[ $? -eq 0 ]]; then
 		echo ""
@@ -795,6 +834,11 @@ system_variable() {
 		description_if
 	fi
 
+	#判断时间大于两点关掉萌宠和农场通知
+	if [ $(date +%H) -ge "2" ]; then
+		stop_notice
+	fi
+
 	#添加系统变量
 	jd_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
 	if [[ "$jd_script_path" == "0" ]]; then
@@ -810,7 +854,7 @@ if [[ -z $action1 ]]; then
 	description_if
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian)
 		$action1
 		;;
 		*)
@@ -822,7 +866,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian)
 		$action2
 		;;
 		*)
