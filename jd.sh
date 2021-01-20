@@ -173,7 +173,7 @@ cat >$dir_file/config/shylocks_script.txt <<EOF
 	jd_live_redrain2.js		#直播间红包雨 1月17日-2月5日，每天19点、20点、21点
 	jd_live_redrain_nian.js		#年货直播雨 2021年1月20日-2021年1月30日、2月3日、2月5日每天0,9,11,13,15,17,19,20,21,23点可领
 	jd_live_redrain_half.js		#半点红包雨 2021年1月20日-2021年2月5日每天12~23每个半点
-	jd_live_redrain_offical.log	#官方号直播红包雨
+	jd_live_redrain_offical.js	#官方号直播红包雨
 	jd_vote.js			#京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	jd_sx.js			#海产新年抽奖，欧皇可中实物
 EOF
