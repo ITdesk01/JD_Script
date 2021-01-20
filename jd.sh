@@ -683,8 +683,7 @@ stop_notice() {
 	#农场和萌宠提示太多次了，所用每天提示一次即可
 	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
 	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
-	echo "开始关闭农场和萌宠提示请稍等"
-	sleep 5
+	echo "时间大于两点开始关闭农场和萌宠提示请稍等"
 	echo -e "$green农场和萌宠提示关闭成功$white"
 }
 
