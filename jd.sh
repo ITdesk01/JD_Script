@@ -709,7 +709,7 @@ help() {
 	echo ""
 	echo -e "$green sh \$jd nian $white				#运行炸年兽"
 	echo ""
-	echo -e "$green sh \$jd joy $white				#运行疯狂的JOY"
+	echo -e "$green sh \$jd joy $white				#运行疯狂的JOY(两个号需要1G以上，sh \$jd kill_joy 杀掉进程，彻底关闭需要先杀进程再禁用定时任务的代码)"
 	echo ""
 	echo -e "$green sh \$jd jx $white 				#查询京喜商品生产使用时间"
 	echo ""
