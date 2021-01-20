@@ -520,7 +520,6 @@ run_0() {
 	run_03
 	run_045
 	$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
-	stop_notice
 	echo -e "$green run_0$stop_script $white"
 }
 
@@ -834,6 +833,11 @@ system_variable() {
 		update_script
 		update
 		description_if
+	fi
+
+	#判断时间大于两点关掉萌宠和农场通知
+	if [ $(date +%H) -ge "2" ]; then
+		stop_notice
 	fi
 
 	#添加系统变量
