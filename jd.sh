@@ -173,8 +173,9 @@ cat >$dir_file/config/shylocks_script.txt <<EOF
 	jd_live_redrain2.js		#直播间红包雨 1月17日-2月5日，每天19点、20点、21点
 	jd_live_redrain_nian.js		#年货直播雨 2021年1月20日-2021年1月30日、2月3日、2月5日每天0,9,11,13,15,17,19,20,21,23点可领
 	jd_live_redrain_half.js		#半点红包雨 2021年1月20日-2021年2月5日每天12~23每个半点
-	jd_live_redrain_offical.log	#官方号直播红包雨
+	jd_live_redrain_offical.js	#官方号直播红包雨
 	jd_vote.js			#京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
+	jd_sx.js			#海产新年抽奖，欧皇可中实物
 EOF
 
 for script_name in `cat $dir_file/config/shylocks_script.txt | awk '{print $1}'`
@@ -496,6 +497,19 @@ COMMENT
 	sed -i "52a $new_jdnian" $dir_file_js/jd_nian.js
 	sed -i "53a $new_jdnian" $dir_file_js/jd_nian.js
 	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_nian.js
+
+	#京东神仙书院
+		old_jdimmortal="\`39xIs4YwE5Z7CPQQ0baz9jNWO6PSZHsNWqfOwWyqScbJBGhg4v7HbuBg63TJ4@27xIs4YwE5Z7FGzJqrMmavC_vWKtbEaJxbz0Vahw@43xIs4YwE5Z7DsWOzDSP_N6WTDnbA0wBjjof6cA9FzcbHMcZB9wE1R3ToSluCgxAzEXQ@43xIs4YwE5Z7DsWOzDSEuRWEOROpnDjMx_VvSs5ikYQ8XgcZB9whEHjDmPKQoL16TZ8w@50xIs4YwE5Z7FTId9W-KibDgxxx6AEa7189V1zSxSf2HP6681IXPQ81aJEP77WoHXLcK7QzlxGqsGqfU@43xIs4YwE5Z7DsWOzDSPKFWdkRe2Ae6h0jAdlhuSmuwcfUcZB9wBcHhj0_zyZDNK4Rhg\`,"
+	old_jdimmortal1="\`39xIs4YwE5Z7CPQQ0baz9jNWO6PSZHsNWqfOwWyqScbJBGhg4v7HbuBg63TJ4@27xIs4YwE5Z7FGzJqrMmavC_vWKtbEaJxbz0Vahw@43xIs4YwE5Z7DsWOzDSP_N6WTDnbA0wBjjof6cA9FzcbHMcZB9wE1R3ToSluCgxAzEXQ@43xIs4YwE5Z7DsWOzDSEuRWEOROpnDjMx_VvSs5ikYQ8XgcZB9whEHjDmPKQoL16TZ8w@43xIs4YwE5Z7DsWOzDSFehRRs_UaNcqkiU7BrrzDTKHScMcZB9wkYC2z6K-QOsQy1S3A@43xIs4YwE5Z7DsWOzDSFcl8RjNxfrQquzeGQQtkQOUbyqscZB9wkxX2jw2HhM7TczeqA\`"
+	new_jdimmortal="'43xIs4YwE5Z7DsWOzDSL_9CEGF8QjcKrGKFEUZqKB1WklAcZB9wUBTjm2pNOZkO1C8ew@43xIs4YwE5Z7DsWOzDSAvhIEJtWP7xzngvIUYtd1sw1JxIcZB9wxIFjjol6A2DOPxahQ@40xIs4YwE5Z7DsWOzDIZ8JBWj2nwoTJJBQQIYNpex1AcZB9mR4Sy1n0tWVpaoPC@40xIs4YwE5Z7DsWOzDKEspZQ0F-aIyW1stJDO2fu-9rcZB9ohwK9lcfpPTN0sBR',"
+	sed -i "s/$old_jdimmortal/$new_jdimmortal/g" $dir_file_js/jd_immortal.js
+	sed -i "s/$old_jdimmortal1/$new_jdimmortal/g" $dir_file_js/jd_immortal.js
+	sed -i "53a $new_jdimmortal" $dir_file_js/jd_immortal.js
+	sed -i "54a $new_jdimmortal" $dir_file_js/jd_immortal.js
+	sed -i "55a $new_jdimmortal" $dir_file_js/jd_immortal.js
+	sed -i "56a $new_jdimmortal" $dir_file_js/jd_immortal.js
+	sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/jd_immortal.js
+
 }
 
 update_script() {
@@ -632,6 +646,7 @@ run_07() {
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	nian
 	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
+	$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
 	$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
