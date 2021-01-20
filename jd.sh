@@ -175,6 +175,7 @@ cat >$dir_file/config/shylocks_script.txt <<EOF
 	jd_live_redrain_half.js		#半点红包雨 2021年1月20日-2021年2月5日每天12~23每个半点
 	jd_live_redrain_offical.log	#官方号直播红包雨
 	jd_vote.js			#京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
+	jd_sx.js			#海产新年抽奖，欧皇可中实物
 EOF
 
 for script_name in `cat $dir_file/config/shylocks_script.txt | awk '{print $1}'`
@@ -645,6 +646,7 @@ run_07() {
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	nian
 	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
+	$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
 	$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
