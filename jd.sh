@@ -136,6 +136,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_nian.js			#京东炸年兽
 	jd_nianCollect.js		#炸年兽专门收集爆竹
 	jd_immortal.js			#京东神仙书院 2021-1-20至2021-2-5
+	jd_firecrackers.js		#集鞭炮赢京豆
 	jd_syj.js			#十元街
 	jd_bookshop.js			#口袋书店
 	jd_family.js			#京东家庭号
@@ -647,6 +648,7 @@ run_07() {
 	nian
 	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
 	$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
+	$node $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
 	$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
