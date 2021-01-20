@@ -36,7 +36,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 task() {
-	cron_version="2.51"
+	cron_version="2.52"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -68,6 +68,8 @@ cat >>/etc/crontabs/root <<EOF
 0,1 19-21/1 * * * $dir_file/jd.sh run_19_20_21 >/tmp/jd_run_19_20_21.log 2>&1 #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
 20 * * * * $dir_file/jd.sh run_020 >/tmp/jd_run_020.log 2>&1 #京东炸年兽领爆竹
 0 0,9,11,13,15,17,19,20,21,23 3,5,20-30/1 1,2 * $dir_file/jd.sh nian_live >/tmp/jd_nian_live.log 2>&1 #年货直播雨
+30,31 12-23/1 * * * $node $dir_file_js/jd_live_redrain_half.js >/tmp/jd_live_redrain_half.log #半点直播雨
+0 0,9,11,13,15,17,19,20,21,23 * * * $node $dir_file_js/jd_live_redrain_offical.js >/tmp/jd_live_redrain_offical.log #官方号直播红包雨
 ###########100##########请将其他定时任务放到底下###############
 EOF
 
@@ -133,6 +135,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_necklace.js			#点点券
 	jd_nian.js			#京东炸年兽
 	jd_nianCollect.js		#炸年兽专门收集爆竹
+	jd_immortal.js			#京东神仙书院 2021-1-20至2021-2-5
 	jd_syj.js			#十元街
 	jd_bookshop.js			#口袋书店
 	jd_family.js			#京东家庭号
@@ -169,6 +172,8 @@ cat >$dir_file/config/shylocks_script.txt <<EOF
 	jd_xxl_gh.js			#个护爱消除，完成所有任务+每日挑战
 	jd_live_redrain2.js		#直播间红包雨 1月17日-2月5日，每天19点、20点、21点
 	jd_live_redrain_nian.js		#年货直播雨 2021年1月20日-2021年1月30日、2月3日、2月5日每天0,9,11,13,15,17,19,20,21,23点可领
+	jd_live_redrain_half.js		#半点红包雨 2021年1月20日-2021年2月5日每天12~23每个半点
+	jd_live_redrain_offical.log	#官方号直播红包雨
 	jd_vote.js			#京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 EOF
 
@@ -234,7 +239,8 @@ deng_20201120_fr="bc26d0bdc442421aa92cafcf26a1e148@57cf86ce18ca4f4987ce54fae6182
 	yiji_20201125_fr="df3ae0b59ca74e7a8567cdfb8c383f02@e3ec63e3ba65424881469526d8964657"
 	JDnailao_20201230_fr="daec421fb1d745148c0ae9bb298f1157"
 	zy2021_fr="7fe23f78c77a47b0aba16b302eedbd3c@3e0769f3bb2042d993194db32513e1b9"
-	new_fruit_set="'$new_fruit1@$new_fruit2@$new_fruit3@$zuoyou_20190516_fr@$Javon_20201224_fr@$cainiao5_20190516_fr@$whiteboy__20190711_fr@$jiu_20210110_fr@$shisan_20200213_fr@$JOSN_20200807_fr@$Jhone_Potte_20200824_fr@$liandao_20201010_fr@$adong_20201108_fr@$deng_20201120_fr@$gomail_20201125_fr@$baijiezi_20201126_fr@$yiji_20201125_fr@$JDnailao_20201230_fr@$zy2021_fr',"
+	Oyeah_20200104_fr="5e54362c4a294f66853d14e777584598"
+	new_fruit_set="'$new_fruit1@$new_fruit2@$new_fruit3@$zuoyou_20190516_fr@$Javon_20201224_fr@$cainiao5_20190516_fr@$whiteboy__20190711_fr@$jiu_20210110_fr@$shisan_20200213_fr@$JOSN_20200807_fr@$Jhone_Potte_20200824_fr@$liandao_20201010_fr@$adong_20201108_fr@$deng_20201120_fr@$gomail_20201125_fr@$baijiezi_20201126_fr@$yiji_20201125_fr@$JDnailao_20201230_fr@$zy2021_fr@$Oyeah_20200104_fr',"
 	sed -i "s/$old_fruit1/$new_fruit_set/g" $dir_file_js/jd_fruit.js
 	sed -i "s/$old_fruit2/$new_fruit_set/g" $dir_file_js/jd_fruit.js
 	sed -i "34a $new_fruit_set" $dir_file_js/jd_fruit.js
@@ -276,7 +282,8 @@ deng_20201120_pet="MTE1NDUwMTI0MDAwMDAwMDM4MzAwMTI5@MTE1NDQ5OTUwMDAwMDAwMzkxMTY3
 	yiji_20201125_pet="MTE1NDUwMTI0MDAwMDAwMDQyODExMzU1@MTEzMzI0OTE0NTAwMDAwMDA0Mjg4NTczOQ=="
 	JDnailao_20201230_pet="MTEzMzI0OTE0NTAwMDAwMDA0MzEzMjkzNw=="
 	zy2021_pet="MTAxODc2NTEzNTAwMDAwMDAyMjc1OTY1NQ==@MTEzMzI0OTE0NTAwMDAwMDA0MzQ1OTI1MQ=="
-	new_pet_set="'$new_pet1@$new_pet2@$new_pet3@$zuoyou_20190516_pet@$Javon_20201224_pet@$cainiao5_20190516_pet@$whiteboy_20190711_pet@$jiu_20210110_pet@$shisan_20200213_pet@$JOSN_20200807_pet@$Jhone_Potte_20200824_pet@$liandao_20201010_pet@$adong_20201108_pet@$deng_20201120_pet@$gomail_20201125_pet@$baijiezi_20201126_pet@$yiji_20201125_pet@$JDnailao_20201230_pet@$zy2021_pet',"
+	Oyeah_20200104_pet="MTE1NDQ5OTUwMDAwMDAwNDAyNTYyMjM="
+	new_pet_set="'$new_pet1@$new_pet2@$new_pet3@$zuoyou_20190516_pet@$Javon_20201224_pet@$cainiao5_20190516_pet@$whiteboy_20190711_pet@$jiu_20210110_pet@$shisan_20200213_pet@$JOSN_20200807_pet@$Jhone_Potte_20200824_pet@$liandao_20201010_pet@$adong_20201108_pet@$deng_20201120_pet@$gomail_20201125_pet@$baijiezi_20201126_pet@$yiji_20201125_pet@$JDnailao_20201230_pet@$zy2021_pet@$Oyeah_20200104_pet',"
 
 	sed -i "s/$old_pet1/$new_pet_set/g" $dir_file_js/jd_pet.js
 	sed -i "s/$old_pet2/$new_pet_set/g" $dir_file_js/jd_pet.js
@@ -319,7 +326,8 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	yiji_20201125_pb="qm7basnqm6wnqtoyefmgh65nby@mnuvelsb76r27b4ovdbtrrl2u5a53z543epg7hi"
 	JDnailao_20201230_pb="nijojgywxnignilnryycfs6pau"
 	zy2021_pb="advwde6ogv6oya4md5eieexlfi@ubn2ft6u6wnfxwt6eyxsbcvj44"
-	new_plantBean_set="'$new_plantBean1@$new_plantBean2@$new_plantBean3@$zuoyou_20190516_pb@$Javon_20201224_pb@$cainiao5_20190516_pb@$whiteboy_20190711_pb@$jiu_20210110_pb@$shisan_20200213_pb@$JOSN_20200807_pb@$Jhone_Potte_20200824_pb@$@$liandao_20201010_pb@$adong_20201108_pb@$deng_20201120_pb@$gomail_20201125_pb@$baijiezi_20201126_pb@$yiji_20201125_pb@$JDnailao_20201230_pb@$zy2021_pb',"
+	Oyeah_20200104_pb="e7lhibzb3zek234ckc2fm2yvkj5cbsdpe7y6p2a"
+	new_plantBean_set="'$new_plantBean1@$new_plantBean2@$new_plantBean3@$zuoyou_20190516_pb@$Javon_20201224_pb@$cainiao5_20190516_pb@$whiteboy_20190711_pb@$jiu_20210110_pb@$shisan_20200213_pb@$JOSN_20200807_pb@$Jhone_Potte_20200824_pb@$@$liandao_20201010_pb@$adong_20201108_pb@$deng_20201120_pb@$gomail_20201125_pb@$baijiezi_20201126_pb@$yiji_20201125_pb@$JDnailao_20201230_pb@$zy2021_pb@$Oyeah_20200104_pb',"
 	sed -i "s/$old_plantBean1/$new_plantBean_set/g" $dir_file_js/jd_plantBean.js
 	sed -i "s/$old_plantBean2/$new_plantBean_set/g" $dir_file_js/jd_plantBean.js
 	sed -i "39a $new_plantBean_set" $dir_file_js/jd_plantBean.js
@@ -623,6 +631,7 @@ run_07() {
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	nian
+	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
 	$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
