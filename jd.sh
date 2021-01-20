@@ -745,7 +745,7 @@ help() {
 description_if() {
 	system_variable
 	echo "稍等一下，正在取回远端脚本源码，用于比较现在脚本源码，速度看你网络"
-	cd $dir_file_js
+	cd $dir_file
 	git fetch
 	if [[ $? -eq 0 ]]; then
 		echo ""
