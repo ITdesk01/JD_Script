@@ -36,7 +36,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 task() {
-	cron_version="2.49"
+	cron_version="2.50"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -67,6 +67,7 @@ cat >>/etc/crontabs/root <<EOF
 30 * * * * $dir_file/jd.sh run_030 >/tmp/jd_run_030.log 2>&1 #工业爱消除
 0,1 19-21/1 * * * $dir_file/jd.sh run_19_20_21 >/tmp/jd_run_19_20_21.log 2>&1 #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
 20 * * * * $dir_file/jd.sh run_020 >/tmp/jd_run_020.log 2>&1 #京东炸年兽领爆竹
+0 0,9,11,13,15,17,19,20,21,23 3,5,20-30/1 1,2 * $dir_file/jd.sh nian_live >/tmp/jd_nian_live.log 2>&1 #年货直播雨
 ###########100##########请将其他定时任务放到底下###############
 EOF
 
@@ -155,17 +156,31 @@ do
 	wget $url/$script_name -O $dir_file_js/$script_name
 done
 
+
+url2="https://raw.githubusercontent.com/shylocks/Loon/main"
+cat >$dir_file/config/shylocks_script.txt <<EOF
+	jd_mh.js			#京东盲盒
+	jd_ms.js			#京东秒秒币
+	jd_bj.js			#宝洁美发屋
+	jd_super_coupon.js		#玩一玩-神券驾到,少于三个账号别玩
+	jd_gyec.js			#工业爱消除
+	jd_xg.js			#小鸽有礼 2021年1月15日至2021年2月19日
+	jd_xxl.js			#东东爱消除
+	jd_live_redrain2.js		#直播间红包雨 1月17日-2月5日，每天19点、20点、21点
+	jd_live_redrain_nian.js		#年货直播雨 2021年1月20日-2021年1月30日、2月3日、2月5日每天0,9,11,13,15,17,19,20,21,23点可领
+EOF
+
+for script_name in `cat $dir_file/config/shylocks_script.txt | awk '{print $1}'`
+do
+	wget $url2/$script_name -O $dir_file_js/$script_name
+done
+
+
+
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/e864e3f995ac474cf2bb6dda8984b2be89e041f0/Me/jx_cfd_exchange.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_mh.js -O $dir_file_js/jd_mh.js #京东盲盒
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_ms.js -O $dir_file_js/jd_ms.js #京东秒秒币
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_bj.js -O $dir_file_js/jd_bj.js #宝洁美发屋
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_super_coupon.js -O $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_gyec.js -O $dir_file_js/jd_gyec.js #工业爱消除
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_live_redrain2.js  -O $dir_file_js/jd_live_redrain2.js #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_xg.js  -O $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
-	wget https://raw.githubusercontent.com/shylocks/Loon/main/jd_xxl.js -O $dir_file_js/jd_xxl.js #东东爱消除
+
 
 	if [ $? -eq 0 ]; then
 		echo -e ">>$green脚本下载完成$white"
@@ -627,9 +642,15 @@ run_10_15_20() {
 }
 
 nian() {
-	echo -e "$green炸年兽0$start_script $white"
+	echo -e "$green炸年兽$start_script $white"
 	$node $dir_file_js/jd_nian.js #京东炸年兽
 	echo -e "$green 炸年兽$stop_script $white"
+}
+
+nian_live() {
+	echo -e "$green年货直播雨$start_script $white"
+	$node $dir_file_js/jd_live_redrain_nian.js		#年货直播雨 2021年1月20日-2021年1月30日、2月3日、2月5日每天0,9,11,13,15,17,19,20,21,23点可领
+	echo -e "$green 年货直播雨$stop_script $white"
 }
 
 
