@@ -516,17 +516,11 @@ deng_20201120_fr="bc26d0bdc442421aa92cafcf26a1e148@57cf86ce18ca4f4987ce54fae6182
 	new_fruit_set="'$new_fruit1@$new_fruit2@$new_fruit3@$zuoyou_20190516_fr@$Javon_20201224_fr@$cainiao5_20190516_fr@$whiteboy__20190711_fr@$jiu_20210110_fr@$Oyeah_20200104_fr@$shisan_20200213_fr@$JOSN_20200807_fr@$Jhone_Potte_20200824_fr@$liandao_20201010_fr@$adong_20201108_fr@$deng_20201120_fr@$gomail_20201125_fr@$baijiezi_20201126_fr@$yiji_20201125_fr@$JDnailao_20201230_fr@$zy2021_fr',"
 	sed -i "s/$old_fruit1/$new_fruit_set/g" $dir_file_js/jd_fruit.js
 	sed -i "s/$old_fruit2/$new_fruit_set/g" $dir_file_js/jd_fruit.js
-	sed -i "34a $new_fruit_set" $dir_file_js/jd_fruit.js
-	sed -i "35a $new_fruit_set" $dir_file_js/jd_fruit.js
-	sed -i "36a $new_fruit_set" $dir_file_js/jd_fruit.js
-	sed -i "37a $new_fruit_set" $dir_file_js/jd_fruit.js
+	sed -i "34a $new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set" $dir_file_js/jd_fruit.js
 
 	sed -i "s/$old_fruit1/$new_fruit_set/g" $dir_file_js/jdFruitShareCodes.js
 	sed -i "s/$old_fruit3/$new_fruit_set/g" $dir_file_js/jdFruitShareCodes.js
-	sed -i "11a $new_fruit_set" $dir_file_js/jdFruitShareCodes.js
-	sed -i "12a $new_fruit_set" $dir_file_js/jdFruitShareCodes.js
-	sed -i "13a $new_fruit_set" $dir_file_js/jdFruitShareCodes.js
-	sed -i "14a $new_fruit_set" $dir_file_js/jdFruitShareCodes.js
+	sed -i "11a $new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set" $dir_file_js/jd_fruit.js
 
 
 	#萌宠
@@ -560,17 +554,11 @@ deng_20201120_pet="MTE1NDUwMTI0MDAwMDAwMDM4MzAwMTI5@MTE1NDQ5OTUwMDAwMDAwMzkxMTY3
 
 	sed -i "s/$old_pet1/$new_pet_set/g" $dir_file_js/jd_pet.js
 	sed -i "s/$old_pet2/$new_pet_set/g" $dir_file_js/jd_pet.js
-	sed -i "35a $new_pet_set" $dir_file_js/jd_pet.js
-	sed -i "36a $new_pet_set" $dir_file_js/jd_pet.js
-	sed -i "37a $new_pet_set" $dir_file_js/jd_pet.js
-	sed -i "38a $new_pet_set" $dir_file_js/jd_pet.js
+	sed -i "35a $new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set" $dir_file_js/jd_pet.js
 
 	sed -i "s/$old_pet3/$new_pet_set/g" $dir_file_js/jdPetShareCodes.js
 	sed -i "s/$old_pet4/$new_pet_set/g" $dir_file_js/jdPetShareCodes.js
-	sed -i "11a $new_pet_set" $dir_file_js/jdPetShareCodes.js
-	sed -i "12a $new_pet_set" $dir_file_js/jdPetShareCodes.js
-	sed -i "13a $new_pet_set" $dir_file_js/jdPetShareCodes.js
-	sed -i "14a $new_pet_set" $dir_file_js/jdPetShareCodes.js
+	sed -i "11a $new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set" $dir_file_js/jdPetShareCodes.js
 
 
 	#种豆
@@ -603,17 +591,11 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	new_plantBean_set="'$new_plantBean1@$new_plantBean2@$new_plantBean3@$zuoyou_20190516_pb@$Javon_20201224_pb@$cainiao5_20190516_pb@$whiteboy_20190711_pb@$jiu_20210110_pb@$Oyeah_20200104_pb@$shisan_20200213_pb@$JOSN_20200807_pb@$Jhone_Potte_20200824_pb@$@$liandao_20201010_pb@$adong_20201108_pb@$deng_20201120_pb@$gomail_20201125_pb@$baijiezi_20201126_pb@$yiji_20201125_pb@$JDnailao_20201230_pb@$zy2021_pb',"
 	sed -i "s/$old_plantBean1/$new_plantBean_set/g" $dir_file_js/jd_plantBean.js
 	sed -i "s/$old_plantBean2/$new_plantBean_set/g" $dir_file_js/jd_plantBean.js
-	sed -i "39a $new_plantBean_set" $dir_file_js/jd_plantBean.js
-	sed -i "40a $new_plantBean_set" $dir_file_js/jd_plantBean.js
-	sed -i "41a $new_plantBean_set" $dir_file_js/jd_plantBean.js
-	sed -i "42a $new_plantBean_set" $dir_file_js/jd_plantBean.js
+	sed -i "39a $new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set" $dir_file_js/jd_plantBean.js
 
 	sed -i "s/$old_plantBean3/$new_plantBean_set/g" $dir_file_js/jdPlantBeanShareCodes.js
 	sed -i "s/$old_plantBean4/$new_plantBean_set/g" $dir_file_js/jdPlantBeanShareCodes.js
-	sed -i "11a $new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
-	sed -i "12a $new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
-	sed -i "13a $new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
-	sed -i "14a $new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
+	sed -i "11a $new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
 
 
 	#京喜工厂
@@ -629,10 +611,7 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 
 	sed -i "s/$old_dreamFactory/$new_dreamFactory_set/g" $dir_file_js/jdDreamFactoryShareCodes.js
 	sed -i "s/$old_dreamFactory1/$new_dreamFactory_set/g" $dir_file_js/jdDreamFactoryShareCodes.js
-	sed -i "11a $new_dreamFactory_set" $dir_file_js/jdDreamFactoryShareCodes.js
-	sed -i "12a $new_dreamFactory_set" $dir_file_js/jdDreamFactoryShareCodes.js
-	sed -i "13a $new_dreamFactory_set" $dir_file_js/jdDreamFactoryShareCodes.js
-	sed -i "14a $new_dreamFactory_set" $dir_file_js/jdDreamFactoryShareCodes.js
+	sed -i "11a $new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set" $dir_file_js/jdDreamFactoryShareCodes.js
 
 :<<'COMMENT'
 	#东东工厂
@@ -665,10 +644,7 @@ COMMENT
 	new_jdzz="'AUWE5mKmQzGYKXGT8j38cwA@AUWE5mvvGzDFbAWTxjC0Ykw@AUWE5wPfRiVJ7SxKOuQY0@S5KkcJEZAjD2vYGGG4Ip0@S7aUqCVsc91U@S5KkcREsZ_QXWIx31wKJZcA@S5KkcRUwe81LRIR_3xaNedw@Suvp2RBcY_VHKKBn3k_MMdNw',"
 	sed -i "s/$old_jdzz/$new_jdzz/g" $dir_file_js/jd_jdzz.js
 	sed -i "s/$old_jdzz1/$new_jdzz/g" $dir_file_js/jd_jdzz.js
-	sed -i "48a $new_jdzz" $dir_file_js/jd_jdzz.js
-	sed -i "49a $new_jdzz" $dir_file_js/jd_jdzz.js
-	sed -i "50a $new_jdzz" $dir_file_js/jd_jdzz.js
-	sed -i "51a $new_jdzz" $dir_file_js/jd_jdzz.js
+	sed -i "48a $new_jdzz\n$new_jdzz\n$new_jdzz\n$new_jdzz" $dir_file_js/jd_jdzz.js
 	sed -i "s/const randomCount = 5/const randomCount = 0/g" $dir_file_js/jd_jdzz.js
 	sed -i "s/helpAuthor=true/helpAuthor=false/g" $dir_file_js/jd_jdzz.js
 
@@ -681,10 +657,7 @@ COMMENT
 	new_crazyJoy_set="'$new_crazyJoy@$Jhone_Potte_20200824_cj',"
 	sed -i "s/$old_crazyJoy/$new_crazyJoy_set/g" $dir_file_js/jd_crazy_joy.js
 	sed -i "s/$old_crazyJoy1/$new_crazyJoy_set/g" $dir_file_js/jd_crazy_joy.js
-	sed -i "37a $new_crazyJoy_set" $dir_file_js/jd_crazy_joy.js
-	sed -i "38a $new_crazyJoy_set" $dir_file_js/jd_crazy_joy.js
-	sed -i "39a $new_crazyJoy_set" $dir_file_js/jd_crazy_joy.js
-	sed -i "40a $new_crazyJoy_set" $dir_file_js/jd_crazy_joy.js
+	sed -i "37a $new_crazyJoy_set\n$new_crazyJoy_set\n$new_crazyJoy_set\n$new_crazyJoy_set" $dir_file_js/jd_crazy_joy.js
 	sed -i "s/$.isNode() ? 10 : 5/0/g" $dir_file_js/jd_crazy_joy.js
 	sed -i "s/applyJdBean = 0/applyJdBean = 2000/g" $dir_file_js/jd_crazy_joy.js #默认兑换2000豆子
 
@@ -695,58 +668,40 @@ COMMENT
 	new_jdbook="'d6d73edddaa64cbda1ec42dd496591d0@e50f362dbf8e4e8891c18d0a6fc9d04d@40cb5da84f0448a695dd5b9643592cfa@3ef061eb9b244b3cbdc9904a0297c3f5@99f8c73daa9f488b8cb7a2ed585aa34d',"
 	sed -i "s/$old_jdbook/$new_jdbook/g" $dir_file_js/jd_bookshop.js
 	sed -i "s/$old_jdbook1/$new_jdbook/g" $dir_file_js/jd_bookshop.js
-	sed -i "34a $new_jdbook" $dir_file_js/jd_bookshop.js
-	sed -i "35a $new_jdbook" $dir_file_js/jd_bookshop.js
-	sed -i "36a $new_jdbook" $dir_file_js/jd_bookshop.js
-	sed -i "37a $new_jdbook" $dir_file_js/jd_bookshop.js
+	sed -i "34a $new_jdbook\n$new_jdbook\n$new_jdbook\n$new_jdbook" $dir_file_js/jd_bookshop.js
 	
 	#京喜农场
 	old_jxnc="'22bd6fbbabbaa770a45ab2607e7a1e8a@197c6094e965fdf3d33621b47719e0b1'"
 	new_jxnc="'019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3',"
 	sed -i "s/$old_jxnc/'019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3'/g" $dir_file_js/jd_jxnc.js
 	sed -i "s/'',/$new_jxnc/g" $dir_file_js/jdJxncShareCodes.js
-	sed -i "12a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
-	sed -i "13a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
-	sed -i "14a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
-	sed -i "15a $new_jxnc" $dir_file_js/jdJxncShareCodes.js
+	sed -i "12a $new_jxnc\n$new_jxnc\n$new_jxnc\n$new_jxnc" $dir_file_js/jdJxncShareCodes.js
 
 	#签到领现金
 	old_jdcash="\`-4msulYas0O2JsRhE-2TA5XZmBQ@eU9Yar_mb_9z92_WmXNG0w@eU9YaO7jMvwh-W_VzyUX0Q\`"
 	new_jdcash="'eU9Ya-iyZ68kpWrRmXBFgw@eU9YabrkZ_h1-GrcmiJB0A@eU9YM7bzIptVshyjrwlteU9YCLTrH5VesRWnvw5t@P2nGgK6JgLtCqJBeQJ0f27XXLQwYAFHrKmA2siZTuj8=@LTyKtCPGU6v0uv-n1GSwfQ==@y7KhVRopnOwB1qFo2vIefg==@WnaDbsWYwImvOD1CpkeVWA==@Y4r32JTAKNBpMoCXvBf7oA==@JuMHWNtZt4Ny_0ltvG6Ipg==',"
 	sed -i "s/$old_jdcash,/$new_jdcash/g" $dir_file_js/jd_cash.js 
-	sed -i "s/$old_jdcash/$new_jdcash/g" $dir_file_js/jd_cash.js 
-	sed -i "33a $new_jdcash" $dir_file_js/jd_cash.js
-	sed -i "34a $new_jdcash" $dir_file_js/jd_cash.js
-	sed -i "35a $new_jdcash" $dir_file_js/jd_cash.js
-	sed -i "36a $new_jdcash" $dir_file_js/jd_cash.js
+	sed -i "s/$old_jdcash/$new_jdcash/g" $dir_file_js/jd_cash.js
+	sed -i "33a $new_jdcash\n$new_jdcash\n$new_jdcash\n$new_jdcash" $dir_file_js/jd_cash.js
 
 	#工业爱消除
 	old_jdgyec="'840266@2583822@2585219@2586018@1556311@2583822@2585256@2586023@2728968',"
 	new_jdgyec="'743359@2753077@2759122@2759259@2337978',"
 	sed -i "s/$old_jdgyec,/$new_jdgyec/g" $dir_file_js/jd_gyec.js
 	sed -i "s/$old_jdgyec/$new_jdgyec/g" $dir_file_js/jd_gyec.js
-	sed -i "35a $new_jdgyec" $dir_file_js/jd_gyec.js
-	sed -i "36a $new_jdgyec" $dir_file_js/jd_gyec.js
-	sed -i "37a $new_jdgyec" $dir_file_js/jd_gyec.js
-	sed -i "38a $new_jdgyec" $dir_file_js/jd_gyec.js
+	sed -i "35a $new_jdgyec\n$new_jdgyec\n$new_jdgyec\n$new_jdgyec" $dir_file_js/jd_gyec.js
 
 	#东东爱消除
 	old_jdxxl="'840266@2585219@2586018@1556311@2583822@2585256',"
 	new_jdxxl="'743359@2753077@2759122@2759259@2337978',"
 	sed -i "s/$old_jdxxl/$new_jdxxl/g" $dir_file_js/jd_xxl.js
-	sed -i "37a $new_jdxxl" $dir_file_js/jd_xxl.js
-	sed -i "38a $new_jdxxl" $dir_file_js/jd_xxl.js
-	sed -i "39a $new_jdxxl" $dir_file_js/jd_xxl.js
-	sed -i "40a $new_jdxxl" $dir_file_js/jd_xxl.js
+	sed -i "37a $new_jdxxl\n$new_jdxxl\n$new_jdxxl\n$new_jdxxl" $dir_file_js/jd_xxl.js
 
 	#个护爱消除
 	old_jdxxlgh="'840266@2585219@2586018@1556311@2583822@2585256',"
 	new_jdxxlgh="'743359@2753077@2759122@2759259@2337978',"
 	sed -i "s/$old_jdxxlgh/$new_jdxxlgh/g" $dir_file_js/jd_xxl_gh.js
-	sed -i "39a $new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
-	sed -i "40a $new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
-	sed -i "41a $new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
-	sed -i "42a $new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
+	sed -i "39a $new_jdxxlgh\n$new_jdxxlgh\n$new_jdxxlgh\n$new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
 
 
 	#京东炸年兽
@@ -755,10 +710,7 @@ COMMENT
 	new_jdnian="'cgxZdTXtI77a613LXAGtvfpsw8rraLgBTtRR8gtVXzz6qQixKVxvi1jGQt4@cgxZdTXtIeyM6wqaAQGgvhd59Mwz4nvxYSLgIRFrXHtC9Ij-x8O-uY98Rmc@cgxZdTXte-Cbrmm6S3ffi4dB6WNg_mNfNBNnMI122s8KkpZ8PS2o7cM@cgxZdTXtQOKDk2exSH7bm1yqE9lH3OVjhKsFb1yndmZ5KgUbv7F2-X8@cgxZfDnbbf_f6A-FRGauvmGGso1xqGtgAg@cgxZLmmEIbzc4gnMDgPGr2LOJQOfYtSzbdQggbo_ZBZvg1w-tA@cgxZ-twV_BNksFmeREnKvs1gJGa3wzPX6AQP@cgxZdTXtIr6L7g3JWQGguQl0fv8raw1YoF7_nbo39oCIWqSoltmEM42UVdM@cgxZdTXtIumM7g7MXVb_vf5sKfV37FuksxazeYcqfB4lV7yYY6SNJf1K9qo',"
 	sed -i "s/$old_jdnian/$new_jdnian/g" $dir_file_js/jd_nian.js
 	sed -i "s/$old_jdnian1/$new_jdnian/g" $dir_file_js/jd_nian.js
-	sed -i "50a $new_jdnian" $dir_file_js/jd_nian.js
-	sed -i "51a $new_jdnian" $dir_file_js/jd_nian.js
-	sed -i "52a $new_jdnian" $dir_file_js/jd_nian.js
-	sed -i "53a $new_jdnian" $dir_file_js/jd_nian.js
+	sed -i "50a $new_jdnian\n$new_jdnian\n$new_jdnian\n$new_jdnian" $dir_file_js/jd_nian.js
 
 	#京东炸年兽AR
 	old_jdnianar="\`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZ9_MZ8gByP7FZ368dN8oTZBwGieaH5HvtnvXuK1Epn_KK8yol8OYGw7h3M2j_PxSZvYA\`,"
@@ -766,10 +718,7 @@ COMMENT
 	new_jdnianar="'cgxZdTXtI77a613LXAGtvfpsw8rraLgBTtRR8gtVXzz6qQixKVxvi1jGQt4@cgxZdTXtIeyM6wqaAQGgvhd59Mwz4nvxYSLgIRFrXHtC9Ij-x8O-uY98Rmc@cgxZdTXte-Cbrmm6S3ffi4dB6WNg_mNfNBNnMI122s8KkpZ8PS2o7cM@cgxZdTXtQOKDk2exSH7bm1yqE9lH3OVjhKsFb1yndmZ5KgUbv7F2-X8@cgxZfDnbbf_f6A-FRGauvmGGso1xqGtgAg@cgxZLmmEIbzc4gnMDgPGr2LOJQOfYtSzbdQggbo_ZBZvg1w-tA@cgxZ-twV_BNksFmeREnKvs1gJGa3wzPX6AQP@cgxZdTXtIr6L7g3JWQGguQl0fv8raw1YoF7_nbo39oCIWqSoltmEM42UVdM@cgxZdTXtIumM7g7MXVb_vf5sKfV37FuksxazeYcqfB4lV7yYY6SNJf1K9qo',"
 	sed -i "s/$old_jdnianar/$new_jdnianar/g" $dir_file_js/jd_nian_ar.js
 	sed -i "s/$old_jdnianar1/$new_jdnianar/g" $dir_file_js/jd_nian_ar.js
-	sed -i "50a $new_jdnianar" $dir_file_js/jd_nian_ar.js
-	sed -i "51a $new_jdnianar" $dir_file_js/jd_nian_ar.js
-	sed -i "52a $new_jdnianar" $dir_file_js/jd_nian_ar.js
-	sed -i "53a $new_jdnianar" $dir_file_js/jd_nian_ar.js
+	sed -i "50a $new_jdnianar\n$new_jdnianar\n$new_jdnianar\n$new_jdnianar" $dir_file_js/jd_nian_ar.js
 
 	#京东神仙书院
 		old_jdimmortal="\`39xIs4YwE5Z7CPQQ0baz9jNWO6PSZHsNWqfOwWyqScbJBGhg4v7HbuBg63TJ4@27xIs4YwE5Z7FGzJqrMmavC_vWKtbEaJxbz0Vahw@43xIs4YwE5Z7DsWOzDSP_N6WTDnbA0wBjjof6cA9FzcbHMcZB9wE1R3ToSluCgxAzEXQ@43xIs4YwE5Z7DsWOzDSEuRWEOROpnDjMx_VvSs5ikYQ8XgcZB9whEHjDmPKQoL16TZ8w@50xIs4YwE5Z7FTId9W-KibDgxxx6AEa7189V1zSxSf2HP6681IXPQ81aJEP77WoHXLcK7QzlxGqsGqfU@43xIs4YwE5Z7DsWOzDSPKFWdkRe2Ae6h0jAdlhuSmuwcfUcZB9wBcHhj0_zyZDNK4Rhg\`,"
@@ -777,10 +726,7 @@ COMMENT
 	new_jdimmortal="'43xIs4YwE5Z7DsWOzDSL_9CEGF8QjcKrGKFEUZqKB1WklAcZB9wUBTjm2pNOZkO1C8ew@43xIs4YwE5Z7DsWOzDSAvhIEJtWP7xzngvIUYtd1sw1JxIcZB9wxIFjjol6A2DOPxahQ@40xIs4YwE5Z7DsWOzDIZ8JBWj2nwoTJJBQQIYNpex1AcZB9mR4Sy1n0tWVpaoPC@40xIs4YwE5Z7DsWOzDKEspZQ0F-aIyW1stJDO2fu-9rcZB9ohwK9lcfpPTN0sBR',"
 	sed -i "s/$old_jdimmortal/$new_jdimmortal/g" $dir_file_js/jd_immortal.js
 	sed -i "s/$old_jdimmortal1/$new_jdimmortal/g" $dir_file_js/jd_immortal.js
-	sed -i "53a $new_jdimmortal" $dir_file_js/jd_immortal.js
-	sed -i "54a $new_jdimmortal" $dir_file_js/jd_immortal.js
-	sed -i "55a $new_jdimmortal" $dir_file_js/jd_immortal.js
-	sed -i "56a $new_jdimmortal" $dir_file_js/jd_immortal.js
+	sed -i "53a $new_jdimmortal\n$new_jdimmortal\n$new_jdimmortal\n$new_jdimmortal" $dir_file_js/jd_immortal.js
 
 }
 
