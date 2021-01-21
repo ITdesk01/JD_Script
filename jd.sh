@@ -135,6 +135,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_necklace.js			#点点券
 	jd_nian.js			#京东炸年兽
 	jd_nianCollect.js		#炸年兽专门收集爆竹
+	jd_nian_sign.js			#年兽签到
 	jd_immortal.js			#京东神仙书院 2021-1-20至2021-2-5
 	jd_firecrackers.js		#集鞭炮赢京豆
 	jd_syj.js			#十元街
@@ -177,6 +178,7 @@ cat >$dir_file/config/shylocks_script.txt <<EOF
 	jd_live_redrain_offical.js	#官方号直播红包雨
 	jd_vote.js			#京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	jd_sx.js			#海产新年抽奖，欧皇可中实物
+	jd_opencard.js			#开卡活动，一次性活动，运行完脚本获得53京豆，进入入口还可以开卡领30都
 EOF
 
 for script_name in `cat $dir_file/config/shylocks_script.txt | awk '{print $1}'`
@@ -533,6 +535,7 @@ run_0() {
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
+	$node $dir_file_js/jd_nian_sign.js #年兽签到
 	nian
 	run_08_12_16
 	$node $dir_file_js/jd_small_home.js #东东小窝
@@ -648,7 +651,7 @@ run_07() {
 	nian
 	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
 	$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
-	$node $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
+	#$node $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
 	$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
