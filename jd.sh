@@ -36,7 +36,7 @@ start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
 task() {
-	cron_version="2.52"
+	cron_version="2.53"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -64,7 +64,7 @@ cat >>/etc/crontabs/root <<EOF
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本
 5 1-22/30 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机
-30 * * * * $dir_file/jd.sh run_030 >/tmp/jd_run_030.log 2>&1 #工业爱消除
+#30 * * * * $dir_file/jd.sh run_030 >/tmp/jd_run_030.log 2>&1 #工业爱消除
 0,1 19-21/1 * * * $dir_file/jd.sh run_19_20_21 >/tmp/jd_run_19_20_21.log 2>&1 #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
 20 * * * * $dir_file/jd.sh run_020 >/tmp/jd_run_020.log 2>&1 #京东炸年兽领爆竹
 0 0,9,11,13,15,17,19,20,21,23 3,5,20-30/1 1,2 * $dir_file/jd.sh nian_live >/tmp/jd_nian_live.log 2>&1 #年货直播雨
@@ -188,7 +188,7 @@ done
 
 
 
-	wget https://raw.githubusercontent.com/MoPoQAQ/Script/e864e3f995ac474cf2bb6dda8984b2be89e041f0/Me/jx_cfd_exchange.js -O $dir_file_js/jx_cfd.js
+	wget https://raw.githubusercontent.com/MoPoQAQ/Script/e864e3f995ac474cf2bb6dda8984b2be89e041f0/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
 
@@ -640,7 +640,7 @@ run_07() {
 	$node $dir_file_js/jd_live.js #直播抢京豆 （需要执行三次，不然没有18豆子）
 	$node $dir_file_js/jd_live.js #直播抢京豆
 	$node $dir_file_js/jd_live.js #直播抢京豆
-	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
+	#$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	$node $dir_file_js/jd_jxnc.js #京喜农场
 	$node $dir_file_js/jd_mh.js #京东盲盒
 	$node $dir_file_js/jd_ms.js #京东秒秒币 一个号大概60秒
@@ -652,7 +652,7 @@ run_07() {
 	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
 	$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
 	#$node $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
-	$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
+	#$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
@@ -679,7 +679,7 @@ run_10_15_20() {
 	echo -e "$green run_10_15_20$start_script $white"
 	$node $dir_file_js/jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
 	$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
-	#$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
+	$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
 	echo -e "$green run_10_15_20$stop_script $white"
 }
 
