@@ -137,6 +137,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_nianCollect.js		#炸年兽专门收集爆竹
 	jd_nian_sign.js			#年兽签到
 	jd_nian_ar.js			#年兽ar
+	jd_nian_wechat.js		#京东炸年兽小程序
 	jd_immortal.js			#京东神仙书院 2021-1-20至2021-2-5
 	jd_firecrackers.js		#集鞭炮赢京豆
 	jd_syj.js			#十元街
@@ -344,6 +345,7 @@ run_07() {
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	nian
 	$node $dir_file_js/jd_nian_ar.js #年兽ar
+	$node $dir_file_js/jd_nian_wechat.js #京东炸年兽小程序
 	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
 	$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
 	#$node $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
