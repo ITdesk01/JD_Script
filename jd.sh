@@ -178,6 +178,7 @@ cat >$dir_file/config/shylocks_script.txt <<EOF
 	jd_live_redrain_offical.js	#官方号直播红包雨
 	jd_vote.js			#京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	jd_sx.js			#海产新年抽奖，欧皇可中实物
+	jd_opencard.js			#开卡活动，一次性活动，运行完脚本获得53京豆，进入入口还可以开卡领30都
 EOF
 
 for script_name in `cat $dir_file/config/shylocks_script.txt | awk '{print $1}'`
