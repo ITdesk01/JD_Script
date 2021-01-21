@@ -135,6 +135,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_necklace.js			#点点券
 	jd_nian.js			#京东炸年兽
 	jd_nianCollect.js		#炸年兽专门收集爆竹
+	jd_nian_sign.js			#年兽签到
 	jd_immortal.js			#京东神仙书院 2021-1-20至2021-2-5
 	jd_firecrackers.js		#集鞭炮赢京豆
 	jd_syj.js			#十元街
@@ -533,6 +534,7 @@ run_0() {
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
+	$node $dir_file_js/jd_nian_sign.js #年兽签到
 	nian
 	run_08_12_16
 	$node $dir_file_js/jd_small_home.js #东东小窝
