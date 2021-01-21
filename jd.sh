@@ -604,9 +604,11 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	old_dreamFactory="'V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k=@Bo-jnVs_m9uBvbRzraXcSA==@-OvElMzqeyeGBWazWYjI1Q==',"
 	old_dreamFactory1="'1uzRU5HkaUgvy0AB5Q9VUg==@PDPM257r_KuQhil2Y7koNw==@-OvElMzqeyeGBWazWYjI1Q==',"
 	new_dreamFactory="4HL35B_v85-TsEGQbQTfFg==@q3X6tiRYVGYuAO4OD1-Fcg==@Gkf3Upy3YwQn2K3kO1hFFg==@w8B9d4EVh3e3eskOT5PR1A==@1s8ZZnxD6DVDyjdEUu-zXA==@FyYWfETygv_4XjGtnl2YSg==@us6se4fFC6cSjHDSS_ScMw==@oWcboKZa9XxTSWd28tCEPA==@sboe5PFeXgL2EWpxucrKYw==@rm-j1efPyFU50GBjacgEsw==@1rQLjMF_eWMiQ-RAWARW_w==@bHIVoTmS-fHA6G9ixqnOxfjRNGe1YfJzIbBoF-NEAOw=@6h514zWW6JNRE_Kp-L4cjA==@WFlk160B_Byd-xNNEyRPJQ==@bxUPiWroac-c9PLIPSjnNQ==@P2nGgK6JgLtCqJBeQJ0f27XXLQwYAFHrKmA2siZTuj8=@LTyKtCPGU6v0uv-n1GSwfQ==@y7KhVRopnOwB1qFo2vIefg==@WnaDbsWYwImvOD1CpkeVWA==@Y4r32JTAKNBpMoCXvBf7oA=="
+	zuoyou_20190516_df="oWcboKZa9XxTSWd28tCEPA==@sboe5PFeXgL2EWpxucrKYw==@rm-j1efPyFU50GBjacgEsw=="
 	Jhone_Potte_20200824_df="Q4Rij5_6085kuANMaAvBMA==@gTLa05neWl8UFTGKpFLeog=="
+	whiteboy_20190711_df="U_NgGvEUnbU6IblJUTMQV3F7G5ihingk9kVobx99yrY=@BXXbkqJN7sr-0Qkid6v27A=="
 	
-	new_dreamFactory_set="'$new_dreamFactory@$Jhone_Potte_20200824_df',"
+	new_dreamFactory_set="'$new_dreamFactory@$zuoyou_20190516_df@$Jhone_Potte_20200824_df@$whiteboy_20190711_df',"
 	sed -i "s/6S9y4sJUfA2vPQP6TLdVIQ==/4HL35B_v85-TsEGQbQTfFg==/g" $dir_file_js/jd_dreamFactory.js
 	sed -i "s/"gB99tYLjvPcEFloDgamoBw==",/'gB99tYLjvPcEFloDgamoBw==',/g" $dir_file_js/jd_dreamFactory.js
 	sed -i "s/'V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k=@0WtCMPNq7jekehT6d3AbFw==', 'PDPM257r_KuQhil2Y7koNw==', 'gB99tYLjvPcEFloDgamoBw==', '-OvElMzqeyeGBWazWYjI1Q==', 'GFwo6PntxDHH95ZRzZ5uAg=='/$new_dreamFactory/g" $dir_file_js/jd_dreamFactory.js
@@ -655,8 +657,9 @@ COMMENT
 	old_crazyJoy1="'EdLPh8A6X5G1iWXu-uPYfA==@0gUO7F7N-4HVDh9mdQC2hg==@fUJTgR9z26fXdQgTvt_bgqt9zd5YaBeE@nCQQXQHKGjPCb7jkd8q2U-aCTjZMxL3s@2boGLV7TonMex8-nrT6EGat9zd5YaBeE'"
 	new_crazyJoy="rHYmFm9wQAUb1S9FJUrMB6t9zd5YaBeE@7P1a-YqssNzEUo2yzMjkKat9zd5YaBeE@5z24ds6URIn_QEyGetqaHg==@C5vbyHg-mOmrfc3eWGgXhA==@KgkXpuBiTwm918sV3j4cmA==@CCxsXuB_kLhf6HV1LsZZ3GXGvf5Si_Xe"
 
+	zuoyou_20190516_cj="4GfMxIH581M=@xIA07jnZuHg=@BxewpcJDIAwJqfAkvKwcwKt9zd5YaBeE"
 	Jhone_Potte_20200824_cj="R0_iwyMT_LeF5osbxYCNwKt9zd5YaBeE@LVKLzARN7ub-xqKdK_upZ6t9zd5YaBeE"
-	new_crazyJoy_set="'$new_crazyJoy@$Jhone_Potte_20200824_cj',"
+	new_crazyJoy_set="'$new_crazyJoy@$zuoyou_20190516_cj@$Jhone_Potte_20200824_cj',"
 	sed -i "s/$old_crazyJoy/$new_crazyJoy_set/g" $dir_file_js/jd_crazy_joy.js
 	sed -i "s/$old_crazyJoy1/$new_crazyJoy_set/g" $dir_file_js/jd_crazy_joy.js
 	sed -i "37a $new_crazyJoy_set\n$new_crazyJoy_set\n$new_crazyJoy_set\n$new_crazyJoy_set" $dir_file_js/jd_crazy_joy.js
