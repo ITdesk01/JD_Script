@@ -208,6 +208,260 @@ done
 
 }
 
+update_script() {
+	echo -e "$green update_script$start_script $white"
+	cd $dir_file
+	git fetch --all
+	git reset --hard origin/main
+	echo -e "$green update_script$stop_script $white"
+}
+
+
+run_0() {
+	echo -e "$green run_0$start_script $white"
+	$node $dir_file_js/cfdtx.js #财富岛提取
+	$node $dir_file_js/jd_car_exchange.js #京东汽车兑换，500赛点兑换500京豆
+	$node $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
+	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
+	$node $dir_file_js/jx_sign.js #京喜app签到长期
+	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
+	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
+	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
+	$node $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
+	$node $dir_file_js/jd_nian_sign.js #年兽签到
+	nian
+	run_08_12_16
+	$node $dir_file_js/jd_small_home.js #东东小窝
+	run_06_18
+	run_10_15_20
+	run_01
+	run_02
+	run_03
+	run_045
+	$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
+	echo -e "$green run_0$stop_script $white"
+}
+
+joy(){
+	#crazy joy挂机领金币/宝箱专用
+	kill_joy
+	$node $dir_file_js/jd_crazy_joy_coin.js &
+}
+
+kill_joy() {
+	pid=$(ps -ef | grep "$dir_file/js/jd_crazy_joy_coin.js" |grep -v grep |awk '{print $1}')
+	if [ $(echo $pid |wc -l ) -ge 1 ];then
+		echo -e "$yellow发现joy后台程序开始清理，请稍等$white"
+		for i in $pid
+		do
+			echo "kill $i"
+			kill -9 $i
+			sleep 2
+		done
+		echo -e "$green joy后台程序清理完成$white"
+	else
+		echo "$green没有运行的joy后台$white"
+	fi
+}
+
+run_020() {
+	echo -e "$green run_020$start_script $white"
+	$node $dir_file_js/jd_nianCollect.js #京东炸年兽领爆竹
+	echo -e "$green run_020$stop_script $white"
+}
+
+run_030() {
+	echo -e "$green run_030$start_script $white"
+	$node $dir_file_js/jd_gyec.js #工业爱消除
+	$node $dir_file_js/jd_xxl.js #东东爱消除
+	$node $dir_file_js/jd_xxl_gh.js	#个护爱消除，完成所有任务+每日挑战
+	echo -e "$green run_030$stop_script $white"
+}
+
+run_045() {
+	echo -e "$green run_045$start_script $white"
+	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 45分钟运行一次
+	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
+	echo -e "$green run_045$stop_script $white"
+}
+
+run_01() {
+	echo -e "$green run_01$start_script $white"
+	$node $dir_file_js/jd_plantBean.js
+	$node $dir_file_js/jd_joy_feedPets.js #种豆得豆，没时间要求，一个小时收一次瓶子 & #宠汪汪喂食一个小时喂一次
+	#$node $dir_file_js/jd_family.js #京东家庭号
+	echo -e "$green run_01$stop_script $white"
+}
+
+run_02() {
+	echo -e "$green run_02$start_script $white"
+	$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每两小时收一次
+	#$node $dir_file_js/jd_bookshop.js #口袋书店
+	echo -e "$green run_02$stop_script $white"
+}
+
+run_03() {
+	echo -e "$green run_03$start_script $white"
+	$node $dir_file_js/jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
+	echo -e "$green run_03$stop_script $white"
+}
+
+
+run_06_18() {
+	echo -e "$green run_06_18$start_script $white"
+	$node $dir_file_js/jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
+	$node $dir_file_js/jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
+	$node $dir_file_js/jd_joy.js #jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
+	$node $dir_file_js/jd_pet.js #东东萌宠，跟手机商城同一时间
+	$node $dir_file_js/jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
+	$node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
+	$node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
+	$node $dir_file_js/jd_superMarket.js #东东超市,6点 18点多加两场用于收金币
+	echo -e "$green run_06_18$stop_script $white"
+}
+
+run_07() {
+	echo -e "$green run_07$start_script $white"
+	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
+	$node $dir_file_js/jx_sign.js #京喜app签到长期
+	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
+	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
+	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
+	$node $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
+	$node $dir_file_js/jd_bean_home.js #领京豆额外奖励
+	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
+	$node $dir_file_js/jd_live.js #直播抢京豆 （需要执行三次，不然没有18豆子）
+	$node $dir_file_js/jd_live.js #直播抢京豆
+	$node $dir_file_js/jd_live.js #直播抢京豆
+	#$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
+	$node $dir_file_js/jd_jxnc.js #京喜农场
+	$node $dir_file_js/jd_mh.js #京东盲盒
+	$node $dir_file_js/jd_ms.js #京东秒秒币 一个号大概60秒
+	$node $dir_file_js/jd_bj.js #宝洁美发屋
+	$node $dir_file_js/jd_bj.js #宝洁美发屋
+	$node $dir_file_js/jd_bj.js #宝洁美发屋
+	$node $dir_file_js/jd_bj.js #宝洁美发屋
+	nian
+	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
+	$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
+	#$node $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
+	#$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
+	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
+	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
+	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
+	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
+	$node $dir_file_js/jd_bean_change.js #京豆变更
+	echo -e "$green run_07$stop_script $white"
+}
+
+run_08_12_16() {
+	echo -e "$green run_08_12_16$start_script $white"
+	$node $dir_file_js/jd_blueCoin.js #东东超市兑换，有次数限制，没时间要求
+	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
+	echo -e "$green run_08_12_16$stop_script $white"
+}
+
+run_19_20_21() {
+	echo -e "$green run_19_20_21$start_script $white"
+	$node $dir_file_js/jd_live_redrain2.js #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
+	echo -e "$green run_19_20_21$stop_script $white"
+}
+
+
+run_10_15_20() {
+	echo -e "$green run_10_15_20$start_script $white"
+	$node $dir_file_js/jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
+	$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
+	$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
+	echo -e "$green run_10_15_20$stop_script $white"
+}
+
+nian() {
+	echo -e "$green炸年兽$start_script $white"
+	$node $dir_file_js/jd_nian.js #京东炸年兽
+	echo -e "$green 炸年兽$stop_script $white"
+}
+
+nian_live() {
+	echo -e "$green年货直播雨$start_script $white"
+	$node $dir_file_js/jd_live_redrain_nian.js		#年货直播雨 2021年1月20日-2021年1月30日、2月3日、2月5日每天0,9,11,13,15,17,19,20,21,23点可领
+	echo -e "$green 年货直播雨$stop_script $white"
+}
+
+
+jx() {
+	echo -e "$green 查询京喜商品生产所用时间$start_script $white"
+	$node $dir_file_js/jx_products_detail.js
+	echo -e "$green 查询完成$stop_script $white"
+}
+
+jd_sharecode() {
+	echo -e "$green 查询京东助力码$start_script $white"
+	$node $dir_file_js/jd_get_share_code.js #获取jd所有助力码脚本
+	echo -e "$green 查询完成$start_script $white"
+}
+
+stop_notice() {
+	#农场和萌宠提示太多次了，所用每天提示一次即可
+	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
+	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
+	echo "时间大于两点开始关闭农场和萌宠提示请稍等"
+	echo -e "$green农场和萌宠提示关闭成功$white"
+}
+
+help() {
+	task
+	clear
+	echo ----------------------------------------------------
+	echo "	     JD.sh $version 使用说明"
+	echo ----------------------------------------------------
+	echo -e "$yellow 1.文件说明$white"
+	echo -e "$green $dir_file/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
+	echo -e "$green $dir_file/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
+	echo -e "$green $dir_file/jd.sh $white JD_Script的本体（作用就是帮忙下载js脚本，js脚本是核心）"
+	echo -e "$yellow JS脚本作用请查询：$green https://github.com/LXK9301/jd_scripts/tree/master $white"
+	echo -e "$yellow 浏览器获取京东cookie教程：$green https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
+	echo ""
+	echo -e "$yellow 2.jd.sh脚本命令$white"
+	echo ""
+	echo -e "$green sh \$jd run_0  run_07			#运行全部脚本(除个别脚本不运行)$white"
+	echo ""
+	echo -e "$yellow个别脚本有以下："
+	echo ""
+	echo -e "$green sh \$jd nian $white				#运行炸年兽"
+	echo ""
+	echo -e "$green sh \$jd joy $white				#运行疯狂的JOY(两个号需要1G以上，sh \$jd kill_joy 杀掉进程，彻底关闭需要先杀进程再禁用定时任务的代码)"
+	echo ""
+	echo -e "$green sh \$jd jx $white 				#查询京喜商品生产使用时间"
+	echo ""
+	echo -e "$green sh \$jd jd_sharecode $white 			#查询京东所有助力码"
+	echo ""
+	echo -e "$green sh \$jd stop_notice $white  			#关掉萌宠 农场  多次提醒"
+	echo ""
+	echo -e "$green sh \$jd update_script && sh \$jd update $white	#更新jd.sh并下载js脚本"
+	echo ""
+	echo -e " 如果不喜欢这样，你也可以直接$green cd \$jd_file/js$white,然后用$green node 脚本名字.js$white "
+	echo ""
+	echo -e "$yellow 3.检测定时任务:$white $cron_help"
+	echo -e "$yellow   定时任务路径:$white$green/etc/crontabs/root$white"
+	echo ""
+	echo -e "$yellow 4.如何排错或者你想要的互助码:$white"
+	echo ""
+	echo "  答1：如何排错有种东西叫更新，如sh \$jd update_script 和sh \$jd update"
+	echo "  答2：如何排错有种东西叫查日志，如/tmp/里面的jd开头.log结果的日志文件"
+	echo "  答3：你想要的互助码 sh \$jd jd_sharecode"
+	echo ""
+	echo "  看不懂代码又想白嫖，你还是洗洗睡吧，梦里啥都有，当然你可以用钞能力解决多数问题（你可以忽略这句，继续做梦）"
+	echo ""
+	echo -e "$yellow 5.检测脚本是否最新:$white $Script_status "
+	echo ""
+	echo -e "$yellow 6.JD_Script报错你可以反馈到这里:$white$green https://github.com/ITdesk01/JD_Script/issues$white"
+	echo ""
+	echo -e "本脚本基于$green x86主机测试$white，一切正常，其他的机器自行测试，满足依赖一般问题不大"
+	echo ----------------------------------------------------
+	echo " 		by：ITdesk"
+	echo ----------------------------------------------------
+}
 
 additional_settings() {
 	#京小超默认兑换20豆子(JS已经默认兑换20了)
@@ -518,260 +772,6 @@ COMMENT
 
 }
 
-update_script() {
-	echo -e "$green update_script$start_script $white"
-	cd $dir_file
-	git fetch --all
-	git reset --hard origin/main
-	echo -e "$green update_script$stop_script $white"
-}
-
-
-run_0() {
-	echo -e "$green run_0$start_script $white"
-	$node $dir_file_js/cfdtx.js #财富岛提取
-	$node $dir_file_js/jd_car_exchange.js #京东汽车兑换，500赛点兑换500京豆
-	$node $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
-	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
-	$node $dir_file_js/jx_sign.js #京喜app签到长期
-	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
-	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
-	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
-	$node $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
-	$node $dir_file_js/jd_nian_sign.js #年兽签到
-	nian
-	run_08_12_16
-	$node $dir_file_js/jd_small_home.js #东东小窝
-	run_06_18
-	run_10_15_20
-	run_01
-	run_02
-	run_03
-	run_045
-	$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
-	echo -e "$green run_0$stop_script $white"
-}
-
-joy(){
-	#crazy joy挂机领金币/宝箱专用
-	kill_joy
-	$node $dir_file_js/jd_crazy_joy_coin.js &
-}
-
-kill_joy() {
-	pid=$(ps -ef | grep "$dir_file/js/jd_crazy_joy_coin.js" |grep -v grep |awk '{print $1}')
-	if [ $(echo $pid |wc -l ) -ge 1 ];then
-		echo -e "$yellow发现joy后台程序开始清理，请稍等$white"
-		for i in $pid
-		do
-			echo "kill $i"
-			kill -9 $i
-			sleep 2
-		done
-		echo -e "$green joy后台程序清理完成$white"
-	else
-		echo "$green没有运行的joy后台$white"
-	fi
-}
-
-run_020() {
-	echo -e "$green run_020$start_script $white"
-	$node $dir_file_js/jd_nianCollect.js #京东炸年兽领爆竹
-	echo -e "$green run_020$stop_script $white"
-}
-
-run_030() {
-	echo -e "$green run_030$start_script $white"
-	$node $dir_file_js/jd_gyec.js #工业爱消除
-	$node $dir_file_js/jd_xxl.js #东东爱消除
-	$node $dir_file_js/jd_xxl_gh.js	#个护爱消除，完成所有任务+每日挑战
-	echo -e "$green run_030$stop_script $white"
-}
-
-run_045() {
-	echo -e "$green run_045$start_script $white"
-	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 45分钟运行一次
-	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
-	echo -e "$green run_045$stop_script $white"
-}
-
-run_01() {
-	echo -e "$green run_01$start_script $white"
-	$node $dir_file_js/jd_plantBean.js 
-	$node $dir_file_js/jd_joy_feedPets.js #种豆得豆，没时间要求，一个小时收一次瓶子 & #宠汪汪喂食一个小时喂一次
-	#$node $dir_file_js/jd_family.js #京东家庭号
-	echo -e "$green run_01$stop_script $white"
-}
-
-run_02() {
-	echo -e "$green run_02$start_script $white"
-	$node $dir_file_js/jd_moneyTree.js #京东摇钱树，7-9 11-13 18-20签到 每两小时收一次
-	#$node $dir_file_js/jd_bookshop.js #口袋书店
-	echo -e "$green run_02$stop_script $white"
-}
-
-run_03() {
-	echo -e "$green run_03$start_script $white"
-	$node $dir_file_js/jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
-	echo -e "$green run_03$stop_script $white"
-}
-
-
-run_06_18() {
-	echo -e "$green run_06_18$start_script $white"
-	$node $dir_file_js/jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
-	$node $dir_file_js/jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
-	$node $dir_file_js/jd_joy.js #jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
-	$node $dir_file_js/jd_pet.js #东东萌宠，跟手机商城同一时间
-	$node $dir_file_js/jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
-	$node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
-	$node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
-	$node $dir_file_js/jd_superMarket.js #东东超市,6点 18点多加两场用于收金币
-	echo -e "$green run_06_18$stop_script $white"
-}
-
-run_07() {
-	echo -e "$green run_07$start_script $white"
-	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
-	$node $dir_file_js/jx_sign.js #京喜app签到长期
-	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
-	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
-	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
-	$node $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
-	$node $dir_file_js/jd_bean_home.js #领京豆额外奖励
-	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
-	$node $dir_file_js/jd_live.js #直播抢京豆 （需要执行三次，不然没有18豆子）
-	$node $dir_file_js/jd_live.js #直播抢京豆
-	$node $dir_file_js/jd_live.js #直播抢京豆
-	#$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
-	$node $dir_file_js/jd_jxnc.js #京喜农场
-	$node $dir_file_js/jd_mh.js #京东盲盒
-	$node $dir_file_js/jd_ms.js #京东秒秒币 一个号大概60秒
-	$node $dir_file_js/jd_bj.js #宝洁美发屋
-	$node $dir_file_js/jd_bj.js #宝洁美发屋
-	$node $dir_file_js/jd_bj.js #宝洁美发屋
-	$node $dir_file_js/jd_bj.js #宝洁美发屋
-	nian
-	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
-	$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
-	#$node $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
-	#$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
-	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
-	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
-	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
-	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
-	$node $dir_file_js/jd_bean_change.js #京豆变更
-	echo -e "$green run_07$stop_script $white"
-}
-
-run_08_12_16() {
-	echo -e "$green run_08_12_16$start_script $white"
-	$node $dir_file_js/jd_blueCoin.js #东东超市兑换，有次数限制，没时间要求
-	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
-	echo -e "$green run_08_12_16$stop_script $white"
-}
-
-run_19_20_21() {
-	echo -e "$green run_19_20_21$start_script $white"
-	$node $dir_file_js/jd_live_redrain2.js #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
-	echo -e "$green run_19_20_21$stop_script $white"
-}
-
-
-run_10_15_20() {
-	echo -e "$green run_10_15_20$start_script $white"
-	$node $dir_file_js/jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
-	$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
-	$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
-	echo -e "$green run_10_15_20$stop_script $white"
-}
-
-nian() {
-	echo -e "$green炸年兽$start_script $white"
-	$node $dir_file_js/jd_nian.js #京东炸年兽
-	echo -e "$green 炸年兽$stop_script $white"
-}
-
-nian_live() {
-	echo -e "$green年货直播雨$start_script $white"
-	$node $dir_file_js/jd_live_redrain_nian.js		#年货直播雨 2021年1月20日-2021年1月30日、2月3日、2月5日每天0,9,11,13,15,17,19,20,21,23点可领
-	echo -e "$green 年货直播雨$stop_script $white"
-}
-
-
-jx() {
-	echo -e "$green 查询京喜商品生产所用时间$start_script $white"
-	$node $dir_file_js/jx_products_detail.js
-	echo -e "$green 查询完成$stop_script $white"
-}
-
-jd_sharecode() {
-	echo -e "$green 查询京东助力码$start_script $white"
-	$node $dir_file_js/jd_get_share_code.js #获取jd所有助力码脚本
-	echo -e "$green 查询完成$start_script $white"
-}
-
-stop_notice() {
-	#农场和萌宠提示太多次了，所用每天提示一次即可
-	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
-	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
-	echo "时间大于两点开始关闭农场和萌宠提示请稍等"
-	echo -e "$green农场和萌宠提示关闭成功$white"
-}
-
-help() {
-	task
-	clear
-	echo ----------------------------------------------------
-	echo "	     JD.sh $version 使用说明"
-	echo ----------------------------------------------------
-	echo -e "$yellow 1.文件说明$white"
-	echo -e "$green $dir_file/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
-	echo -e "$green $dir_file/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
-	echo -e "$green $dir_file/jd.sh $white JD_Script的本体（作用就是帮忙下载js脚本，js脚本是核心）"
-	echo -e "$yellow JS脚本作用请查询：$green https://github.com/LXK9301/jd_scripts/tree/master $white"
-	echo -e "$yellow 浏览器获取京东cookie教程：$green https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
-	echo ""
-	echo -e "$yellow 2.jd.sh脚本命令$white"
-	echo ""
-	echo -e "$green sh \$jd run_0  run_07			#运行全部脚本(除个别脚本不运行)$white"
-	echo ""
-	echo -e "$yellow个别脚本有以下："
-	echo ""
-	echo -e "$green sh \$jd nian $white				#运行炸年兽"
-	echo ""
-	echo -e "$green sh \$jd joy $white				#运行疯狂的JOY(两个号需要1G以上，sh \$jd kill_joy 杀掉进程，彻底关闭需要先杀进程再禁用定时任务的代码)"
-	echo ""
-	echo -e "$green sh \$jd jx $white 				#查询京喜商品生产使用时间"
-	echo ""
-	echo -e "$green sh \$jd jd_sharecode $white 			#查询京东所有助力码"
-	echo ""
-	echo -e "$green sh \$jd stop_notice $white  			#关掉萌宠 农场  多次提醒"
-	echo ""
-	echo -e "$green sh \$jd update_script && sh \$jd update $white	#更新jd.sh并下载js脚本"
-	echo ""
-	echo -e " 如果不喜欢这样，你也可以直接$green cd \$jd_file/js$white,然后用$green node 脚本名字.js$white "
-	echo ""
-	echo -e "$yellow 3.检测定时任务:$white $cron_help"
-	echo -e "$yellow   定时任务路径:$white$green/etc/crontabs/root$white"
-	echo ""
-	echo -e "$yellow 4.如何排错或者你想要的互助码:$white"
-	echo ""
-	echo "  答1：如何排错有种东西叫更新，如sh \$jd update_script 和sh \$jd update"
-	echo "  答2：如何排错有种东西叫查日志，如/tmp/里面的jd开头.log结果的日志文件"
-	echo "  答3：你想要的互助码 sh \$jd jd_sharecode"
-	echo ""
-	echo "  看不懂代码又想白嫖，你还是洗洗睡吧，梦里啥都有，当然你可以用钞能力解决多数问题（你可以忽略这句，继续做梦）"
-	echo ""
-	echo -e "$yellow 5.检测脚本是否最新:$white $Script_status "
-	echo ""
-	echo -e "$yellow 6.JD_Script报错你可以反馈到这里:$white$green https://github.com/ITdesk01/JD_Script/issues$white"
-	echo ""
-	echo -e "本脚本基于$green x86主机测试$white，一切正常，其他的机器自行测试，满足依赖一般问题不大"
-	echo ----------------------------------------------------
-	echo " 		by：ITdesk"
-	echo ----------------------------------------------------
-}
 
 description_if() {
 	system_variable
