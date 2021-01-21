@@ -34,7 +34,23 @@ N1（群友极地阳光测试）
 
 安装办法2
 
-        编译固件的时候加上
+       可以采用我的openwrt插件"Install_script"（不带luci界面）
+          https://github.com/openwrtcompileshell/OpenwrtCompileScript/tree/master/package/Install_script
+       
+        Install_script插件使用办法
+          
+          1.编译完成以后刷机，开机的等5分钟连上网等自动安装脚本与依赖,是否完成可以查看/usr/share/Install_script/
+          
+          2.完成以后/usr/share/Install_script/script_config填上cookie
+          
+          3.sh $jd && sh $jd run_0 run_07 #运行全部脚本
+        
+        如果安装失败可以用以下命令控制插件安装
+          /etc/init.d/Install_script start
+        
+        删除插件安装的所有脚本
+          /etc/init.d/Install_script stop
+        
         不会编译的可以采用我的编译辅助脚本编译： https://github.com/openwrtcompileshell/OpenwrtCompileScript
 
 **node和node-npm版本一定要大于10**，安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10
