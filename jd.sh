@@ -754,29 +754,6 @@ COMMENT
 
 }
 
-
-description_if() {
-	system_variable
-	echo "稍等一下，正在取回远端脚本源码，用于比较现在脚本源码，速度看你网络"
-	cd $dir_file
-	git fetch
-	if [[ $? -eq 0 ]]; then
-		echo ""
-	else
-		echo -e "$red>> 取回分支没有成功，重新执行代码$white"
-		description_if
-	fi
-	clear
-	git_branch=$(git branch -v | grep -o behind )
-	if [[ "$git_branch" == "behind" ]]; then
-		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script && sh \$jd update && sh \$jd $white更新 )"
-	else
-		Script_status="$green最新$white"
-	fi
-
-	help
-}
-
 system_variable() {
 	if [[ ! -d "$dir_file/config" ]]; then
 		mkdir  $dir_file/config
@@ -845,7 +822,7 @@ system_variable() {
 		echo "我是作者写来应付检查的文件，不要理我，我很忙，老板加饭！！！再来半只白切鸡，不吃饱那里有力气应付检查。。。。。" > $dir_file_js/Detect.txt
 		update_script
 		update
-		description_if
+		system_variable
 	fi
 
 	#判断时间大于两点关掉萌宠和农场通知
@@ -860,12 +837,32 @@ system_variable() {
 		echo "export jd=$dir_file/jd.sh" >> /etc/profile
 		. /etc/profile
 	fi
+
+	#检查脚本是否最新
+	echo "稍等一下，正在取回远端脚本源码，用于比较现在脚本源码，速度看你网络"
+	cd $dir_file
+	git fetch
+	if [[ $? -eq 0 ]]; then
+		echo ""
+	else
+		echo -e "$red>> 取回分支没有成功，重新执行代码$white"
+		system_variable
+	fi
+	clear
+	git_branch=$(git branch -v | grep -o behind )
+	if [[ "$git_branch" == "behind" ]]; then
+		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script && sh \$jd update && sh \$jd $white更新 )"
+	else
+		Script_status="$green最新$white"
+	fi
+
+	help
 }
 
 action1="$1"
 action2="$2"
 if [[ -z $action1 ]]; then
-	description_if
+	system_variable
 else
 	case "$action1" in
 		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian)
