@@ -163,8 +163,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unbind.js			#注销京东会员卡
 	jd_unsubscribe.js		#取关京东店铺和商品
-	USER_AGENTS.js			#UA设置
-
 EOF
 
 for script_name in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
@@ -433,9 +431,8 @@ help() {
 	echo ""
 	echo -e "$green  $script_dir/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
 	echo -e "$green  $script_dir/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
-	echo -e "$green  $script_dir/USER_AGENTS.js $white 自定义UA ，需要手动下载这个文件(然后抓包本机UA，最后放在这个路径)，然后更新脚本"
+	echo -e "$green  $script_dir/USER_AGENTS.js $white UA文件可以自定义也可以默认 ，自定义需要抓包本机UA，然后修改删掉里面的UA，改成自己的"
 	echo ""
-	echo -e "$yellow UA文件：$green https://raw.githubusercontent.com/LXK9301/jd_scripts/master/USER_AGENTS.js $white"
 	echo -e "$yellow JS脚本活动列表：$green https://github.com/LXK9301/jd_scripts/blob/master/README.md $white"
 	echo -e "$yellow 浏览器获取京东cookie教程：$green https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
 	echo ""
@@ -487,21 +484,6 @@ help() {
 
 
 additional_settings() {
-
-	#判断是否有自定义的User_agents
-	if [ "$dir_file" == "$install_script/JD_Script" ];then
-		if [ -f $install_script_config/USER_AGENTS.js  ];then
-			echo "替换user_agents为自己的"
-			cp $install_script_config/USER_AGENTS.js $dir_file/js/USER_AGENTS.js
-		fi
-
-	else
-		if [ -f $install_script_config/USER_AGENTS.js  ];then
-			echo "替换user_agents为自己的"
-			cp $dir_file/USER_AGENTS.js $dir_file/js/USER_AGENTS.js
-		fi
-	fi
-
 
 	for i in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
 	do
@@ -819,26 +801,40 @@ system_variable() {
 
 
 	if [ "$dir_file" == "$install_script/JD_Script" ];then
+		#jdCookie.js
 		if [ ! -f "$install_script_config/jdCookie.js" ]; then
 			wget $url/jdCookie.js -O $install_script_config/jdCookie.js
 			rm -rf $dir_file_js/jdCookie.js #用于删除旧的链接
 			ln -s $install_script_config/jdCookie.js $dir_file_js/jdCookie.js
 		fi
 		
-		#用于升级以后恢复链接
+		#jdCookie.js用于升级以后恢复链接
 		if [ ! -f "$dir_file_js/jdCookie.js" ]; then
 			ln -s $install_script_config/jdCookie.js $dir_file_js/jdCookie.js
 		fi
 
+		#sendNotify.js
 		if [ ! -f "$install_script_config/sendNotify.js" ]; then
 			wget $url/sendNotify.js -O $install_script_config/sendNotify.js
 			rm -rf $dir_file_js/sendNotify.js  #用于删除旧的链接
 			ln -s $install_script_config/sendNotify.js $dir_file_js/sendNotify.js
 		fi
 
-		#用于升级以后恢复链接
+		#sendNotify.js用于升级以后恢复链接
 		if [ ! -f "$dir_file_js/sendNotify.js" ]; then
 			ln -s $install_script_config/sendNotify.js $dir_file_js/sendNotify.js
+		fi
+
+		#USER_AGENTS.js
+		if [ ! -f "$install_script_config/USER_AGENTS.js" ]; then
+			wget $url/USER_AGENTS.js -O $install_script_config/USER_AGENTS.js
+			rm -rf $dir_file_js/USER_AGENTS.js #用于删除旧的链接
+			ln -s $install_script_config/USER_AGENTS.js $dir_file_js/USER_AGENTS.js
+		fi
+
+		#USER_AGENTS.js用于升级以后恢复链接
+		if [ ! -f "$dir_file_js/USER_AGENTS.js" ]; then
+			ln -s $install_script_config/USER_AGENTS.js $dir_file_js/USER_AGENTS.js
 		fi
 
 	else
@@ -850,6 +846,11 @@ system_variable() {
 		if [ ! -f "$dir_file/sendNotify.js" ]; then
 			wget $url/sendNotify.js -O $dir_file/sendNotify.js
 			ln -s $dir_file/sendNotify.js $dir_file_js/sendNotify.js
+		fi
+
+		if [ ! -f "$dir_file/USER_AGENTS.js" ]; then
+			wget $url/USER_AGENTS.js -O $dir_file/USER_AGENTS.js
+			ln -s $dir_file/USER_AGENTS.js $dir_file_js/USER_AGENTS.js
 		fi
 
 	fi
