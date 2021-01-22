@@ -26,6 +26,8 @@ dir_file="$( cd -P "$( dirname "$Source"  )" && pwd  )"
 dir_file_js="$dir_file/js"
 
 node="/usr/bin/node"
+install_script="/usr/share/Install_script"
+install_script_config="/usr/share/Install_script/script_config"
 
 red="\033[31m"
 green="\033[32m"
@@ -417,13 +419,18 @@ stop_notice() {
 
 help() {
 	task
+	if [ "$dir_file" == "$install_script/JD_Script" ];then
+		script_dir="$install_script_config"
+	else
+		script_dir="$install_script"
+	fi
 	clear
 	echo ----------------------------------------------------
 	echo "	     JD.sh $version 使用说明"
 	echo ----------------------------------------------------
 	echo -e "$yellow 1.文件说明$white"
-	echo -e "$green $dir_file/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
-	echo -e "$green $dir_file/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
+	echo -e "$green $script_dir/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
+	echo -e "$green $script_dir/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
 	echo ""
 	echo -e "$yellow JS脚本作用请查询：$green https://github.com/LXK9301/jd_scripts/tree/master $white"
 	echo -e "$yellow 浏览器获取京东cookie教程：$green https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
@@ -789,8 +796,7 @@ system_variable() {
 		update
 	fi
 
-	install_script="/usr/share/Install_script"
-	install_script_config="/usr/share/Install_script/script_config"
+
 	if [ "$dir_file" == "$install_script/JD_Script" ];then
 		if [ ! -f "$install_script_config/jdCookie.js" ]; then
 			wget $url/jdCookie.js -O $install_script_config/jdCookie.js
