@@ -28,6 +28,11 @@ dir_file_js="$dir_file/js"
 node="/usr/bin/node"
 install_script="/usr/share/Install_script"
 install_script_config="/usr/share/Install_script/script_config"
+if [ "$dir_file" == "$install_script/JD_Script" ];then
+	script_dir="$install_script_config"
+else
+	script_dir="$dir_file"
+fi
 
 red="\033[31m"
 green="\033[32m"
@@ -420,11 +425,6 @@ stop_notice() {
 
 help() {
 	task
-	if [ "$dir_file" == "$install_script/JD_Script" ];then
-		script_dir="$install_script_config"
-	else
-		script_dir="$install_script"
-	fi
 	clear
 	echo ----------------------------------------------------
 	echo "	     JD.sh $version 使用说明"
@@ -485,6 +485,21 @@ help() {
 
 
 additional_settings() {
+
+	#判断是否有自定义的User_agents
+	if [ "$dir_file" == "$install_script/JD_Script" ];then
+		if [ -f $install_script_config/USER_AGENTS.js  ];then
+			echo "替换user_agents为自己的"
+			cp $install_script_config/USER_AGENTS.js $dir_file/js/USER_AGENTS.js
+		fi
+
+	else
+		if [ -f $install_script_config/USER_AGENTS.js  ];then
+			echo "替换user_agents为自己的"
+			cp $dir_file/USER_AGENTS.js $dir_file/js/USER_AGENTS.js
+		fi
+	fi
+
 
 	for i in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
 	do
