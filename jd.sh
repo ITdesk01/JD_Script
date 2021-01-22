@@ -35,6 +35,8 @@ white="\033[0m"
 start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 
+script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
+
 task() {
 	cron_version="2.53"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
@@ -422,7 +424,7 @@ help() {
 	echo -e "$yellow 1.文件说明$white"
 	echo -e "$green $dir_file/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
 	echo -e "$green $dir_file/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
-	echo -e "$green $dir_file/jd.sh $white JD_Script的本体（作用就是帮忙下载js脚本，js脚本是核心）"
+	echo ""
 	echo -e "$yellow JS脚本作用请查询：$green https://github.com/LXK9301/jd_scripts/tree/master $white"
 	echo -e "$yellow 浏览器获取京东cookie教程：$green https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
 	echo ""
@@ -465,7 +467,11 @@ help() {
 	echo ----------------------------------------------------
 	echo " 		by：ITdesk"
 	echo ----------------------------------------------------
+
+	time &
+
 }
+
 
 additional_settings() {
 
@@ -752,6 +758,25 @@ COMMENT
 	sed -i "s/$old_jdimmortal1/$new_jdimmortal_set/g" $dir_file_js/jd_immortal.js
 	sed -i "53a $new_jdimmortal_set\n$new_jdimmortal_set\n$new_jdimmortal_set\n$new_jdimmortal_set" $dir_file_js/jd_immortal.js
 
+}
+
+time() {
+	if [ $script_read == "0" ];then
+		echo ""
+		echo -e  "$green你是第一次使用脚本，请好好阅读以上脚本说明$white"
+		echo ""
+		mv $dir_file/js $dir_file/0js
+		seconds_left=120
+		while [[ ${seconds_left} -gt 0 ]]; do
+			echo -ne "$green${seconds_left}秒以后才能正常使用脚本，不要想结束我。我无处不在。。。$white"
+			sleep 1
+			seconds_left=$(($seconds_left - 1))
+			echo -ne "\r"
+		done
+		mv $dir_file/0js $dir_file/js
+		echo -e "$green恭喜你阅读完成，祝玩的愉快，我也不想搞这波，但太多小白不愿意看说明然后一大堆问题，请你也体谅一下$white"
+		echo "我已经阅读脚本说明" > $dir_file/script_read.txt
+	fi
 }
 
 system_variable() {
