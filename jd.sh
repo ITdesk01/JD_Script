@@ -26,6 +26,13 @@ dir_file="$( cd -P "$( dirname "$Source"  )" && pwd  )"
 dir_file_js="$dir_file/js"
 
 node="/usr/bin/node"
+install_script="/usr/share/Install_script"
+install_script_config="/usr/share/Install_script/script_config"
+if [ "$dir_file" == "$install_script/JD_Script" ];then
+	script_dir="$install_script_config"
+else
+	script_dir="$dir_file"
+fi
 
 red="\033[31m"
 green="\033[32m"
@@ -34,6 +41,8 @@ white="\033[0m"
 
 start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
+
+script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
 	cron_version="2.53"
@@ -181,6 +190,7 @@ cat >$dir_file/config/shylocks_script.txt <<EOF
 	jd_vote.js			#京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	jd_sx.js			#海产新年抽奖，欧皇可中实物
 	jd_opencard.js			#开卡活动，一次性活动，运行完脚本获得53京豆，进入入口还可以开卡领30都
+	jd_friend.js			#JOY总动员 一期的活动
 EOF
 
 for script_name in `cat $dir_file/config/shylocks_script.txt | awk '{print $1}'`
@@ -420,29 +430,34 @@ help() {
 	echo "	     JD.sh $version 使用说明"
 	echo ----------------------------------------------------
 	echo -e "$yellow 1.文件说明$white"
-	echo -e "$green $dir_file/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
-	echo -e "$green $dir_file/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
-	echo -e "$green $dir_file/jd.sh $white JD_Script的本体（作用就是帮忙下载js脚本，js脚本是核心）"
-	echo -e "$yellow JS脚本作用请查询：$green https://github.com/LXK9301/jd_scripts/tree/master $white"
+	echo ""
+	echo -e "$green  $script_dir/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
+	echo -e "$green  $script_dir/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
+	echo -e "$green  $script_dir/USER_AGENTS.js $white 自定义UA ，需要手动下载这个文件(然后抓包本机UA，最后放在这个路径)，然后更新脚本"
+	echo ""
+	echo -e "$yellow UA文件：$green https://raw.githubusercontent.com/LXK9301/jd_scripts/master/USER_AGENTS.js $white"
+	echo -e "$yellow JS脚本活动列表：$green https://github.com/LXK9301/jd_scripts/blob/master/README.md $white"
 	echo -e "$yellow 浏览器获取京东cookie教程：$green https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
+	echo ""
+	echo -e "$red 注意：$white请停掉你之前运行的其他jd脚本，然后把$green JS脚本活动列表$white的活动全部手动点开一次，不知活动入口的，作者js脚本里有写"
 	echo ""
 	echo -e "$yellow 2.jd.sh脚本命令$white"
 	echo ""
-	echo -e "$green sh \$jd run_0  run_07			#运行全部脚本(除个别脚本不运行)$white"
+	echo -e "$green  sh \$jd run_0  run_07			#运行全部脚本(除个别脚本不运行)$white"
 	echo ""
 	echo -e "$yellow个别脚本有以下："
 	echo ""
-	echo -e "$green sh \$jd nian $white				#运行炸年兽"
+	echo -e "$green  sh \$jd nian $white				#运行炸年兽"
 	echo ""
-	echo -e "$green sh \$jd joy $white				#运行疯狂的JOY(两个号需要1G以上，sh \$jd kill_joy 杀掉进程，彻底关闭需要先杀进程再禁用定时任务的代码)"
+	echo -e "$green  sh \$jd joy $white				#运行疯狂的JOY(两个号需要1G以上，sh \$jd kill_joy 杀掉进程，彻底关闭需要先杀进程再禁用定时任务的代码)"
 	echo ""
-	echo -e "$green sh \$jd jx $white 				#查询京喜商品生产使用时间"
+	echo -e "$green  sh \$jd jx $white 				#查询京喜商品生产使用时间"
 	echo ""
-	echo -e "$green sh \$jd jd_sharecode $white 			#查询京东所有助力码"
+	echo -e "$green  sh \$jd jd_sharecode $white 			#查询京东所有助力码"
 	echo ""
-	echo -e "$green sh \$jd stop_notice $white  			#关掉萌宠 农场  多次提醒"
+	echo -e "$green  sh \$jd stop_notice $white  			#关掉萌宠 农场  多次提醒"
 	echo ""
-	echo -e "$green sh \$jd update_script && sh \$jd update $white	#更新jd.sh并下载js脚本"
+	echo -e "$green  sh \$jd update_script && sh \$jd update $white	#更新jd.sh并下载js脚本"
 	echo ""
 	echo -e " 如果不喜欢这样，你也可以直接$green cd \$jd_file/js$white,然后用$green node 脚本名字.js$white "
 	echo ""
@@ -465,9 +480,28 @@ help() {
 	echo ----------------------------------------------------
 	echo " 		by：ITdesk"
 	echo ----------------------------------------------------
+
+	time &
+
 }
 
+
 additional_settings() {
+
+	#判断是否有自定义的User_agents
+	if [ "$dir_file" == "$install_script/JD_Script" ];then
+		if [ -f $install_script_config/USER_AGENTS.js  ];then
+			echo "替换user_agents为自己的"
+			cp $install_script_config/USER_AGENTS.js $dir_file/js/USER_AGENTS.js
+		fi
+
+	else
+		if [ -f $install_script_config/USER_AGENTS.js  ];then
+			echo "替换user_agents为自己的"
+			cp $dir_file/USER_AGENTS.js $dir_file/js/USER_AGENTS.js
+		fi
+	fi
+
 
 	for i in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
 	do
@@ -615,7 +649,6 @@ deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7x
 	sed -i "s/6S9y4sJUfA2vPQP6TLdVIQ==/X2poJVLcLoygZX0TgGmkl8EiBIkQe_zrMAZqtgL24-M=@5MIEocu93aHBEq_1DLOFFA==@4HL35B_v85-TsEGQbQTfFg==/g" $dir_file_js/jd_dreamFactory.js
 	sed -i "s/"gB99tYLjvPcEFloDgamoBw==",/'gB99tYLjvPcEFloDgamoBw==',/g" $dir_file_js/jd_dreamFactory.js
 	sed -i "s/'V5LkjP4WRyjeCKR9VRwcRX0bBuTz7MEK0-E99EJ7u0k=@0WtCMPNq7jekehT6d3AbFw==', 'PDPM257r_KuQhil2Y7koNw==', 'gB99tYLjvPcEFloDgamoBw==', '-OvElMzqeyeGBWazWYjI1Q==', 'GFwo6PntxDHH95ZRzZ5uAg=='/$new_dreamFactory/g" $dir_file_js/jd_dreamFactory.js
-
 	sed -i "s/$old_dreamFactory/$new_dreamFactory_set/g" $dir_file_js/jdDreamFactoryShareCodes.js
 	sed -i "s/$old_dreamFactory1/$new_dreamFactory_set/g" $dir_file_js/jdDreamFactoryShareCodes.js
 	sed -i "11a $new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set" $dir_file_js/jdDreamFactoryShareCodes.js
@@ -648,10 +681,12 @@ COMMENT
 	#京东赚赚长期活动
 	old_jdzz="\`ATGEC3-fsrn13aiaEqiM@AUWE5maSSnzFeDmH4iH0elA@ATGEC3-fsrn13aiaEqiM@AUWE5m6WUmDdZC2mr1XhJlQ@AUWE5m_jEzjJZDTKr3nwfkg@A06fNSRc4GIqY38pMBeLKQE2InZA@AUWE5mf7ExDZdDmH7j3wfkA@AUWE5m6jBy2cNAWX7j31Pxw@AUWE5mK2UnDddDTX61S1Mkw@AUWE5mavGyGZdWzP5iCoZwQ\`,"
 	old_jdzz1="\`ATGEC3-fsrn13aiaEqiM@AUWE5maSSnzFeDmH4iH0elA@ATGEC3-fsrn13aiaEqiM@AUWE5m6WUmDdZC2mr1XhJlQ@AUWE5m_jEzjJZDTKr3nwfkg@A06fNSRc4GIqY38pMBeLKQE2InZA@AUWE5m6_BmTUPAGH42SpOkg@AUWE53NTIs3V8YBqthQMI\`"
-	new_jdzz="'95OquUc_sFugJO5_E_2dAgm-@eU9YELv7P4thhw6utCVw@eU9YaOjnbvx1-Djdz3UUgw@AUWE5mKmQzGYKXGT8j38cwA@AUWE5mvvGzDFbAWTxjC0Ykw@AUWE5wPfRiVJ7SxKOuQY0@S5KkcJEZAjD2vYGGG4Ip0@S7aUqCVsc91U@S5KkcREsZ_QXWIx31wKJZcA@S5KkcRUwe81LRIR_3xaNedw@Suvp2RBcY_VHKKBn3k_MMdNw',"
-	sed -i "s/$old_jdzz/$new_jdzz/g" $dir_file_js/jd_jdzz.js
-	sed -i "s/$old_jdzz1/$new_jdzz/g" $dir_file_js/jd_jdzz.js
-	sed -i "48a $new_jdzz\n$new_jdzz\n$new_jdzz\n$new_jdzz" $dir_file_js/jd_jdzz.js
+	new_jdzz="95OquUc_sFugJO5_E_2dAgm-@eU9YELv7P4thhw6utCVw@eU9YaOjnbvx1-Djdz3UUgw@AUWE5mKmQzGYKXGT8j38cwA@AUWE5mvvGzDFbAWTxjC0Ykw@AUWE5wPfRiVJ7SxKOuQY0@S5KkcJEZAjD2vYGGG4Ip0@S7aUqCVsc91U@S5KkcREsZ_QXWIx31wKJZcA@S5KkcRUwe81LRIR_3xaNedw@Suvp2RBcY_VHKKBn3k_MMdNw"
+
+	new_jdzz_set="'$new_jdzz',"
+	sed -i "s/$old_jdzz/$new_jdzz_set/g" $dir_file_js/jd_jdzz.js
+	sed -i "s/$old_jdzz1/$new_jdzz_set/g" $dir_file_js/jd_jdzz.js
+	sed -i "48a $new_jdzz_set\n$new_jdzz_set\n$new_jdzz_set\n$new_jdzz_set" $dir_file_js/jd_jdzz.js
 	sed -i "s/const randomCount = 5/const randomCount = 0/g" $dir_file_js/jd_jdzz.js
 	sed -i "s/helpAuthor=true/helpAuthor=false/g" $dir_file_js/jd_jdzz.js
 
@@ -659,9 +694,9 @@ COMMENT
 	old_crazyJoy="'EdLPh8A6X5G1iWXu-uPYfA==@0gUO7F7N-4HVDh9mdQC2hg==@fUJTgR9z26fXdQgTvt_bgqt9zd5YaBeE@nCQQXQHKGjPCb7jkd8q2U-aCTjZMxL3s@2boGLV7TonMex8-nrT6EGat9zd5YaBeE',"
 	old_crazyJoy1="'EdLPh8A6X5G1iWXu-uPYfA==@0gUO7F7N-4HVDh9mdQC2hg==@fUJTgR9z26fXdQgTvt_bgqt9zd5YaBeE@nCQQXQHKGjPCb7jkd8q2U-aCTjZMxL3s@2boGLV7TonMex8-nrT6EGat9zd5YaBeE'"
 	new_crazyJoy="2wgkflmSL-eOLT3n1sPRIKGLdMmSR-i1@uahlHElOqVadmIuLt6yoeg==@wVO5hjOkRcsuqL_wHuhERqt9zd5YaBeE@rHYmFm9wQAUb1S9FJUrMB6t9zd5YaBeE@7P1a-YqssNzEUo2yzMjkKat9zd5YaBeE@5z24ds6URIn_QEyGetqaHg==@C5vbyHg-mOmrfc3eWGgXhA==@KgkXpuBiTwm918sV3j4cmA==@CCxsXuB_kLhf6HV1LsZZ3GXGvf5Si_Xe"
-
 	zuoyou_20190516_cj="4GfMxIH581M=@xIA07jnZuHg=@BxewpcJDIAwJqfAkvKwcwKt9zd5YaBeE"
 	Jhone_Potte_20200824_cj="R0_iwyMT_LeF5osbxYCNwKt9zd5YaBeE@LVKLzARN7ub-xqKdK_upZ6t9zd5YaBeE"
+
 	new_crazyJoy_set="'$new_crazyJoy@$zuoyou_20190516_cj@$Jhone_Potte_20200824_cj',"
 	sed -i "s/$old_crazyJoy/$new_crazyJoy_set/g" $dir_file_js/jd_crazy_joy.js
 	sed -i "s/$old_crazyJoy1/$new_crazyJoy_set/g" $dir_file_js/jd_crazy_joy.js
@@ -673,92 +708,103 @@ COMMENT
 	#口袋书店
 	old_jdbook="'28a699ac78d74aa3b31f7103597f8927@2f14ee9c92954cf79829320dd482bf49@fdf827db272543d88dbb51a505c2e869@ce2536153a8742fb9e8754a9a7d361da@38ba4e7ba8074b78851e928af2b4f6b2',"
 	old_jdbook1="'28a699ac78d74aa3b31f7103597f8927@2f14ee9c92954cf79829320dd482bf49@fdf827db272543d88dbb51a505c2e869'"
-	new_jdbook="'2c25276cb61741d98f767884856ebcd4@f68cdec737564d929946ff64c76374cb@1ebabd3990a3499daab4397d09cd723b@d6d73edddaa64cbda1ec42dd496591d0@e50f362dbf8e4e8891c18d0a6fc9d04d@40cb5da84f0448a695dd5b9643592cfa@3ef061eb9b244b3cbdc9904a0297c3f5@99f8c73daa9f488b8cb7a2ed585aa34d',"
-	sed -i "s/$old_jdbook/$new_jdbook/g" $dir_file_js/jd_bookshop.js
-	sed -i "s/$old_jdbook1/$new_jdbook/g" $dir_file_js/jd_bookshop.js
-	sed -i "34a $new_jdbook\n$new_jdbook\n$new_jdbook\n$new_jdbook" $dir_file_js/jd_bookshop.js
+	new_jdbook="2c25276cb61741d98f767884856ebcd4@f68cdec737564d929946ff64c76374cb@1ebabd3990a3499daab4397d09cd723b@d6d73edddaa64cbda1ec42dd496591d0@e50f362dbf8e4e8891c18d0a6fc9d04d@40cb5da84f0448a695dd5b9643592cfa@3ef061eb9b244b3cbdc9904a0297c3f5@99f8c73daa9f488b8cb7a2ed585aa34d"
+
+	new_jdbook_set="'$new_jdbook',"
+	sed -i "s/$old_jdbook/$new_jdbook_set/g" $dir_file_js/jd_bookshop.js
+	sed -i "s/$old_jdbook1/$new_jdbook_set/g" $dir_file_js/jd_bookshop.js
+	sed -i "34a $new_jdbook_set\n$new_jdbook_set\n$new_jdbook_set\n$new_jdbook_set" $dir_file_js/jd_bookshop.js
 	
 	#京喜农场
 	old_jxnc="'22bd6fbbabbaa770a45ab2607e7a1e8a@197c6094e965fdf3d33621b47719e0b1'"
-	new_jxnc="'6210b7cb41e01b14d92b2d91eed78384@9455922013cf0f704ee6fc9416ec05df@df0165aa52755c3a5337bc789552d9a8@019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3',"
+	new_jxnc="6210b7cb41e01b14d92b2d91eed78384@9455922013cf0f704ee6fc9416ec05df@df0165aa52755c3a5337bc789552d9a8@019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3"
+
+	new_jxnc_set="'$new_jxnc',"
 	sed -i "s/$old_jxnc/'6210b7cb41e01b14d92b2d91eed78384@9455922013cf0f704ee6fc9416ec05df@df0165aa52755c3a5337bc789552d9a8@019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3'/g" $dir_file_js/jd_jxnc.js
-	sed -i "s/'',/$new_jxnc/g" $dir_file_js/jdJxncShareCodes.js
-	sed -i "12a $new_jxnc\n$new_jxnc\n$new_jxnc\n$new_jxnc" $dir_file_js/jdJxncShareCodes.js
+	sed -i "s/'',/$new_jxnc_set/g" $dir_file_js/jdJxncShareCodes.js
+	sed -i "12a $new_jxnc_set\n$new_jxnc_set\n$new_jxnc_set\n$new_jxnc_set" $dir_file_js/jdJxncShareCodes.js
 
 	#签到领现金
 	old_jdcash="\`-4msulYas0O2JsRhE-2TA5XZmBQ@eU9Yar_mb_9z92_WmXNG0w@eU9YaO7jMvwh-W_VzyUX0Q\`"
-	new_jdcash="'95OquUc_sFugJO5_E_2dAgm-@eU9YELv7P4thhw6utCVw@eU9YaOjnbvx1-Djdz3UUgw@eU9Ya-iyZ68kpWrRmXBFgw@eU9YabrkZ_h1-GrcmiJB0A@eU9YM7bzIptVshyjrwlteU9YCLTrH5VesRWnvw5t@P2nGgK6JgLtCqJBeQJ0f27XXLQwYAFHrKmA2siZTuj8=@LTyKtCPGU6v0uv-n1GSwfQ==@y7KhVRopnOwB1qFo2vIefg==@WnaDbsWYwImvOD1CpkeVWA==@Y4r32JTAKNBpMoCXvBf7oA==@JuMHWNtZt4Ny_0ltvG6Ipg==',"
-	sed -i "s/$old_jdcash,/$new_jdcash/g" $dir_file_js/jd_cash.js 
-	sed -i "s/$old_jdcash/$new_jdcash/g" $dir_file_js/jd_cash.js
-	sed -i "33a $new_jdcash\n$new_jdcash\n$new_jdcash\n$new_jdcash" $dir_file_js/jd_cash.js
+	new_jdcash="95OquUc_sFugJO5_E_2dAgm-@eU9YELv7P4thhw6utCVw@eU9YaOjnbvx1-Djdz3UUgw@eU9Ya-iyZ68kpWrRmXBFgw@eU9YabrkZ_h1-GrcmiJB0A@eU9YM7bzIptVshyjrwlteU9YCLTrH5VesRWnvw5t@P2nGgK6JgLtCqJBeQJ0f27XXLQwYAFHrKmA2siZTuj8=@LTyKtCPGU6v0uv-n1GSwfQ==@y7KhVRopnOwB1qFo2vIefg==@WnaDbsWYwImvOD1CpkeVWA==@Y4r32JTAKNBpMoCXvBf7oA==@JuMHWNtZt4Ny_0ltvG6Ipg=="
+
+	new_jdcash_set="'$new_jdcash',"
+	sed -i "s/$old_jdcash,/$new_jdcash_set/g" $dir_file_js/jd_cash.js
+	sed -i "s/$old_jdcash/$new_jdcash_set/g" $dir_file_js/jd_cash.js
+	sed -i "33a $new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set" $dir_file_js/jd_cash.js
 
 	#工业爱消除
 	old_jdgyec="'840266@2583822@2585219@2586018@1556311@2583822@2585256@2586023@2728968',"
 	new_jdgyec="'1900455@2771801@2771913@743359@2753077@2759122@2759259@2337978',"
-	sed -i "s/$old_jdgyec,/$new_jdgyec/g" $dir_file_js/jd_gyec.js
-	sed -i "s/$old_jdgyec/$new_jdgyec/g" $dir_file_js/jd_gyec.js
-	sed -i "35a $new_jdgyec\n$new_jdgyec\n$new_jdgyec\n$new_jdgyec" $dir_file_js/jd_gyec.js
+
+	new_jdgyec_set="'$new_jdgyec',"
+	sed -i "s/$old_jdgyec,/$new_jdgyec_set/g" $dir_file_js/jd_gyec.js
+	sed -i "s/$old_jdgyec/$new_jdgyec_set/g" $dir_file_js/jd_gyec.js
+	sed -i "35a $new_jdgyec_set\n$new_jdgyec_set\n$new_jdgyec_set\n$new_jdgyec_set" $dir_file_js/jd_gyec.js
 
 	#东东爱消除
 	old_jdxxl="'840266@2585219@2586018@1556311@2583822@2585256',"
-	new_jdxxl="'1900455@2771801@2771913@743359@2753077@2759122@2759259@2337978',"
-	sed -i "s/$old_jdxxl/$new_jdxxl/g" $dir_file_js/jd_xxl.js
-	sed -i "37a $new_jdxxl\n$new_jdxxl\n$new_jdxxl\n$new_jdxxl" $dir_file_js/jd_xxl.js
+	new_jdxxl="1900455@2771801@2771913@743359@2753077@2759122@2759259@2337978"
+
+	new_jdxxl_set="'$new_jdxxl',"
+	sed -i "s/$old_jdxxl/$new_jdxxl_set/g" $dir_file_js/jd_xxl.js
+	sed -i "37a $new_jdxxl_set\n$new_jdxxl_set\n$new_jdxxl_set\n$new_jdxxl_set" $dir_file_js/jd_xxl.js
 
 	#个护爱消除
 	old_jdxxlgh="'840266@2585219@2586018@1556311@2583822@2585256',"
-	new_jdxxlgh="'1900455@2771801@2771913@743359@2753077@2759122@2759259@2337978',"
-	sed -i "s/$old_jdxxlgh/$new_jdxxlgh/g" $dir_file_js/jd_xxl_gh.js
-	sed -i "39a $new_jdxxlgh\n$new_jdxxlgh\n$new_jdxxlgh\n$new_jdxxlgh" $dir_file_js/jd_xxl_gh.js
+	new_jdxxlgh="1900455@2771801@2771913@743359@2753077@2759122@2759259@2337978"
+
+	new_jdxxlgh_set="'$new_jdxxlgh',"
+	sed -i "s/$old_jdxxlgh/$new_jdxxlgh_set/g" $dir_file_js/jd_xxl_gh.js
+	sed -i "39a $new_jdxxlgh_set\n$new_jdxxlgh_set\n$new_jdxxlgh_set\n$new_jdxxlgh_set" $dir_file_js/jd_xxl_gh.js
 
 
 	#京东炸年兽
 	old_jdnian="\`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZ9_MZ8gByP7FZ368dN8oTZBwGieaH5HvtnvXuK1Epn_KK8yol8OYGw7h3M2j_PxSZvYA\`,"
 	old_jdnian1=" \`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZdTXtIumO4w2cDgSqvYcqHwjaAzLxu0S371Dh_fctFJtN0tXYzdR7JaY\`"
-	new_jdnian="'cgxZ--kf8RFXPKlP3YUDN9N7qbopP-VtOxRA57Cp3GReD-a9yJi3ezZDqwBUqZz5@cgxZdTXtWO2Ts3mOfmXSkLTAnQUGuJKjSoHMwahkfs9SUuxc0x0N4sU@cgxZdTXtIL6P4g6aAVOh6xbLlZJoC29uIGgW846gj3vFI7ZqODDgGU6gAwA@cgxZdTXtI77a613LXAGtvfpsw8rraLgBTtRR8gtVXzz6qQixKVxvi1jGQt4@cgxZdTXtIeyM6wqaAQGgvhd59Mwz4nvxYSLgIRFrXHtC9Ij-x8O-uY98Rmc@cgxZdTXte-Cbrmm6S3ffi4dB6WNg_mNfNBNnMI122s8KkpZ8PS2o7cM@cgxZdTXtQOKDk2exSH7bm1yqE9lH3OVjhKsFb1yndmZ5KgUbv7F2-X8@cgxZfDnbbf_f6A-FRGauvmGGso1xqGtgAg@cgxZLmmEIbzc4gnMDgPGr2LOJQOfYtSzbdQggbo_ZBZvg1w-tA@cgxZ-twV_BNksFmeREnKvs1gJGa3wzPX6AQP@cgxZdTXtIr6L7g3JWQGguQl0fv8raw1YoF7_nbo39oCIWqSoltmEM42UVdM@cgxZdTXtIumM7g7MXVb_vf5sKfV37FuksxazeYcqfB4lV7yYY6SNJf1K9qo',"
-	sed -i "s/$old_jdnian/$new_jdnian/g" $dir_file_js/jd_nian.js
-	sed -i "s/$old_jdnian1/$new_jdnian/g" $dir_file_js/jd_nian.js
-	sed -i "50a $new_jdnian\n$new_jdnian\n$new_jdnian\n$new_jdnian" $dir_file_js/jd_nian.js
+	new_jdnian="cgxZ--kf8RFXPKlP3YUDN9N7qbopP-VtOxRA57Cp3GReD-a9yJi3ezZDqwBUqZz5@cgxZdTXtWO2Ts3mOfmXSkLTAnQUGuJKjSoHMwahkfs9SUuxc0x0N4sU@cgxZdTXtIL6P4g6aAVOh6xbLlZJoC29uIGgW846gj3vFI7ZqODDgGU6gAwA@cgxZdTXtI77a613LXAGtvfpsw8rraLgBTtRR8gtVXzz6qQixKVxvi1jGQt4@cgxZdTXtIeyM6wqaAQGgvhd59Mwz4nvxYSLgIRFrXHtC9Ij-x8O-uY98Rmc@cgxZdTXte-Cbrmm6S3ffi4dB6WNg_mNfNBNnMI122s8KkpZ8PS2o7cM@cgxZdTXtQOKDk2exSH7bm1yqE9lH3OVjhKsFb1yndmZ5KgUbv7F2-X8@cgxZfDnbbf_f6A-FRGauvmGGso1xqGtgAg@cgxZLmmEIbzc4gnMDgPGr2LOJQOfYtSzbdQggbo_ZBZvg1w-tA@cgxZ-twV_BNksFmeREnKvs1gJGa3wzPX6AQP@cgxZdTXtIr6L7g3JWQGguQl0fv8raw1YoF7_nbo39oCIWqSoltmEM42UVdM@cgxZdTXtIumM7g7MXVb_vf5sKfV37FuksxazeYcqfB4lV7yYY6SNJf1K9qo"
+
+	new_jdnian_set="'$new_jdnian',"
+	sed -i "s/$old_jdnian/$new_jdnian_set/g" $dir_file_js/jd_nian.js
+	sed -i "s/$old_jdnian1/$new_jdnian_set/g" $dir_file_js/jd_nian.js
+	sed -i "50a $new_jdnian_set\n$new_jdnian_set\n$new_jdnian_set\n$new_jdnian_set" $dir_file_js/jd_nian.js
 
 	#京东炸年兽AR
-	old_jdnianar="\`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZ9_MZ8gByP7FZ368dN8oTZBwGieaH5HvtnvXuK1Epn_KK8yol8OYGw7h3M2j_PxSZvYA\`,"
-	old_jdnianar1="\`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZdTXtIumO4w2cDgSqvYcqHwjaAzLxu0S371Dh_fctFJtN0tXYzdR7JaY\`"
-	new_jdnianar="'cgxZ--kf8RFXPKlP3YUDN9N7qbopP-VtOxRA57Cp3GReD-a9yJi3ezZDqwBUqZz5@cgxZdTXtWO2Ts3mOfmXSkLTAnQUGuJKjSoHMwahkfs9SUuxc0x0N4sU@cgxZdTXtIL6P4g6aAVOh6xbLlZJoC29uIGgW846gj3vFI7ZqODDgGU6gAwA@cgxZdTXtI77a613LXAGtvfpsw8rraLgBTtRR8gtVXzz6qQixKVxvi1jGQt4@cgxZdTXtIeyM6wqaAQGgvhd59Mwz4nvxYSLgIRFrXHtC9Ij-x8O-uY98Rmc@cgxZdTXte-Cbrmm6S3ffi4dB6WNg_mNfNBNnMI122s8KkpZ8PS2o7cM@cgxZdTXtQOKDk2exSH7bm1yqE9lH3OVjhKsFb1yndmZ5KgUbv7F2-X8@cgxZfDnbbf_f6A-FRGauvmGGso1xqGtgAg@cgxZLmmEIbzc4gnMDgPGr2LOJQOfYtSzbdQggbo_ZBZvg1w-tA@cgxZ-twV_BNksFmeREnKvs1gJGa3wzPX6AQP@cgxZdTXtIr6L7g3JWQGguQl0fv8raw1YoF7_nbo39oCIWqSoltmEM42UVdM@cgxZdTXtIumM7g7MXVb_vf5sKfV37FuksxazeYcqfB4lV7yYY6SNJf1K9qo',"
-	sed -i "s/$old_jdnianar/$new_jdnianar/g" $dir_file_js/jd_nian_ar.js
-	sed -i "s/$old_jdnianar1/$new_jdnianar/g" $dir_file_js/jd_nian_ar.js
-	sed -i "50a $new_jdnianar\n$new_jdnianar\n$new_jdnianar\n$new_jdnianar" $dir_file_js/jd_nian_ar.js
+	sed -i "s/$old_jdnian/$new_jdnian_set/g" $dir_file_js/jd_nian_ar.js
+	sed -i "s/$old_jdnian1/$new_jdnian_set/g" $dir_file_js/jd_nian_ar.js
+	sed -i "50a $new_jdnian_set\n$new_jdnian_set\n$new_jdnian_set\n$new_jdnian_set" $dir_file_js/jd_nian_ar.js
+
+
 
 	#京东神仙书院
 		old_jdimmortal="\`39xIs4YwE5Z7CPQQ0baz9jNWO6PSZHsNWqfOwWyqScbJBGhg4v7HbuBg63TJ4@27xIs4YwE5Z7FGzJqrMmavC_vWKtbEaJxbz0Vahw@46xIs4YwE5Z7G9g7VXXVQVAj1XaPuxnp42KWW3VHkbUCSyjZA_0yPE-_eWZkyLRGQewhtvF47@40xIs4YwE5Z7DsWOzDQEvxJW4_Gu_rEEGejqss1NHaWcZB9uhMa1knD7NF3t1DS@43xIs4YwE5Z7DsWOzDSFeBVdsn8wMSAqZUdmm4Ino9y4jMcZB9wkAGhz4L9-SqwpvWCg@43xIs4YwE5Z7DsWOzDSP_N6WTDnbA0wBjjof6cA9FzcbHMcZB9wE1R3ToSluCgxAzEXQ@43xIs4YwE5Z7DsWOzDSEuRWEOROpnDjMx_VvSs5ikYQ8XgcZB9whEHjDmPKQoL16TZ8w@50xIs4YwE5Z7FTId9W-KibDgxxx6AEa7189V1zSxSf2HP6681IXPQ81aJEP77WoHXLcK7QzlxGqsGqfU@43xIs4YwE5Z7DsWOzDSPKFWdkRe2Ae6h0jAdlhuSmuwcfUcZB9wBcHhj0_zyZDNK4Rhg\`,"
 	old_jdimmortal1="\`39xIs4YwE5Z7CPQQ0baz9jNWO6PSZHsNWqfOwWyqScbJBGhg4v7HbuBg63TJ4@27xIs4YwE5Z7FGzJqrMmavC_vWKtbEaJxbz0Vahw@46xIs4YwE5Z7G9g7VXXVQVAj1XaPuxnp42KWW3VHkbUCSyjZA_0yPE-_eWZkyLRGQewhtvF47@40xIs4YwE5Z7DsWOzDQEvxJW4_Gu_rEEGejqss1NHaWcZB9uhMa1knD7NF3t1DS@43xIs4YwE5Z7DsWOzDSFeBVdsn8wMSAqZUdmm4Ino9y4jMcZB9wkAGhz4L9-SqwpvWCg@43xIs4YwE5Z7DsWOzDSP_N6WTDnbA0wBjjof6cA9FzcbHMcZB9wE1R3ToSluCgxAzEXQ@43xIs4YwE5Z7DsWOzDSEuRWEOROpnDjMx_VvSs5ikYQ8XgcZB9whEHjDmPKQoL16TZ8w@43xIs4YwE5Z7DsWOzDSFehRRs_UaNcqkiU7BrrzDTKHScMcZB9wkYC2z6K-QOsQy1S3A@43xIs4YwE5Z7DsWOzDSFcl8RjNxfrQquzeGQQtkQOUbyqscZB9wkxX2jw2HhM7TczeqA\`"
-	new_jdimmortal="'46xIs4YwE5Z7G9g7VXXVQVAj1XaPuxnp42KWW3VHkbUCSyjZA_0yPE-_eWZkyLRGQewhtvF47@40xIs4YwE5Z7DsWOzDQEvxJW4_Gu_rEEGejqss1NHaWcZB9uhMa1knD7NF3t1DS@43xIs4YwE5Z7DsWOzDSFeBVdsn8wMSAqZUdmm4Ino9y4jMcZB9wkAGhz4L9-SqwpvWCg@43xIs4YwE5Z7DsWOzDSL_9CEGF8QjcKrGKFEUZqKB1WklAcZB9wUBTjm2pNOZkO1C8ew@43xIs4YwE5Z7DsWOzDSAvhIEJtWP7xzngvIUYtd1sw1JxIcZB9wxIFjjol6A2DOPxahQ@40xIs4YwE5Z7DsWOzDIZ8JBWj2nwoTJJBQQIYNpex1AcZB9mR4Sy1n0tWVpaoPC@40xIs4YwE5Z7DsWOzDKEspZQ0F-aIyW1stJDO2fu-9rcZB9ohwK9lcfpPTN0sBR',"
-	sed -i "s/$old_jdimmortal/$new_jdimmortal/g" $dir_file_js/jd_immortal.js
-	sed -i "s/$old_jdimmortal1/$new_jdimmortal/g" $dir_file_js/jd_immortal.js
-	sed -i "53a $new_jdimmortal\n$new_jdimmortal\n$new_jdimmortal\n$new_jdimmortal" $dir_file_js/jd_immortal.js
+	new_jdimmortal="46xIs4YwE5Z7G9g7VXXVQVAj1XaPuxnp42KWW3VHkbUCSyjZA_0yPE-_eWZkyLRGQewhtvF47@40xIs4YwE5Z7DsWOzDQEvxJW4_Gu_rEEGejqss1NHaWcZB9uhMa1knD7NF3t1DS@43xIs4YwE5Z7DsWOzDSFeBVdsn8wMSAqZUdmm4Ino9y4jMcZB9wkAGhz4L9-SqwpvWCg@43xIs4YwE5Z7DsWOzDSL_9CEGF8QjcKrGKFEUZqKB1WklAcZB9wUBTjm2pNOZkO1C8ew@43xIs4YwE5Z7DsWOzDSAvhIEJtWP7xzngvIUYtd1sw1JxIcZB9wxIFjjol6A2DOPxahQ@40xIs4YwE5Z7DsWOzDIZ8JBWj2nwoTJJBQQIYNpex1AcZB9mR4Sy1n0tWVpaoPC@40xIs4YwE5Z7DsWOzDKEspZQ0F-aIyW1stJDO2fu-9rcZB9ohwK9lcfpPTN0sBR"
+
+	new_jdimmortal_set="'$new_jdimmortal',"
+	sed -i "s/$old_jdimmortal/$new_jdimmortal_set/g" $dir_file_js/jd_immortal.js
+	sed -i "s/$old_jdimmortal1/$new_jdimmortal_set/g" $dir_file_js/jd_immortal.js
+	sed -i "53a $new_jdimmortal_set\n$new_jdimmortal_set\n$new_jdimmortal_set\n$new_jdimmortal_set" $dir_file_js/jd_immortal.js
 
 }
 
-
-description_if() {
-	system_variable
-	echo "稍等一下，正在取回远端脚本源码，用于比较现在脚本源码，速度看你网络"
-	cd $dir_file
-	git fetch
-	if [[ $? -eq 0 ]]; then
+time() {
+	if [ $script_read == "0" ];then
 		echo ""
-	else
-		echo -e "$red>> 取回分支没有成功，重新执行代码$white"
-		description_if
+		echo -e  "$green你是第一次使用脚本，请好好阅读以上脚本说明$white"
+		echo ""
+		mv $dir_file/js $dir_file/0js
+		seconds_left=120
+		while [[ ${seconds_left} -gt 0 ]]; do
+			echo -ne "$green${seconds_left}秒以后才能正常使用脚本，不要想结束我。我无处不在。。。$white"
+			sleep 1
+			seconds_left=$(($seconds_left - 1))
+			echo -ne "\r"
+		done
+		mv $dir_file/0js $dir_file/js
+		echo -e "$green恭喜你阅读完成，祝玩的愉快，我也不想搞这波，但太多小白不愿意看说明然后一大堆问题，请你也体谅一下$white"
+		echo "我已经阅读脚本说明" > $dir_file/script_read.txt
 	fi
-	clear
-	git_branch=$(git branch -v | grep -o behind )
-	if [[ "$git_branch" == "behind" ]]; then
-		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script && sh \$jd update && sh \$jd $white更新 )"
-	else
-		Script_status="$green最新$white"
-	fi
-
-	help
 }
 
 system_variable() {
@@ -771,8 +817,7 @@ system_variable() {
 		update
 	fi
 
-	install_script="/usr/share/Install_script"
-	install_script_config="/usr/share/Install_script/script_config"
+
 	if [ "$dir_file" == "$install_script/JD_Script" ];then
 		if [ ! -f "$install_script_config/jdCookie.js" ]; then
 			wget $url/jdCookie.js -O $install_script_config/jdCookie.js
@@ -829,7 +874,7 @@ system_variable() {
 		echo "我是作者写来应付检查的文件，不要理我，我很忙，老板加饭！！！再来半只白切鸡，不吃饱那里有力气应付检查。。。。。" > $dir_file_js/Detect.txt
 		update_script
 		update
-		description_if
+		system_variable
 	fi
 
 	#判断时间大于两点关掉萌宠和农场通知
@@ -844,12 +889,32 @@ system_variable() {
 		echo "export jd=$dir_file/jd.sh" >> /etc/profile
 		. /etc/profile
 	fi
+
+	#检查脚本是否最新
+	echo "稍等一下，正在取回远端脚本源码，用于比较现在脚本源码，速度看你网络"
+	cd $dir_file
+	git fetch
+	if [[ $? -eq 0 ]]; then
+		echo ""
+	else
+		echo -e "$red>> 取回分支没有成功，重新执行代码$white"
+		system_variable
+	fi
+	clear
+	git_branch=$(git branch -v | grep -o behind )
+	if [[ "$git_branch" == "behind" ]]; then
+		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script && sh \$jd update && sh \$jd $white更新 )"
+	else
+		Script_status="$green最新$white"
+	fi
+
+	help
 }
 
 action1="$1"
 action2="$2"
 if [[ -z $action1 ]]; then
-	description_if
+	system_variable
 else
 	case "$action1" in
 		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian)
