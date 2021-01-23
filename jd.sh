@@ -5,7 +5,7 @@
 # This is free software, licensed under the GNU General Public License v3.
 # See /LICENSE for more information.
 #
-#set -x
+set -x
 
 version="1.9"
 cron_file="/etc/crontabs/root"
@@ -33,6 +33,10 @@ if [ "$dir_file" == "$install_script/JD_Script" ];then
 else
 	script_dir="$dir_file"
 fi
+
+wrap="%0D%0A%0D%0A" #Server酱换行
+wrap_tab="     "
+SCKEY=$(cat $script_dir/sendNotify.js | awk 'NR==12 {print $4}' | sed "s/'//g" | sed "s/;//g")
 
 red="\033[31m"
 green="\033[32m"
@@ -421,6 +425,64 @@ stop_notice() {
 	echo -e "$green农场和萌宠提示关闭成功$white"
 }
 
+checklog() {
+	log1="checkjs_jd.log" #用来查看tmp有多少jd log文件
+	log2="checkjs_jd_eeror.log" #筛选jd log 里面有几个是带错误的
+	log3="checkjs_jd_eeror_detailed.log" #将错误的都输出在这里
+	by="#### 脚本仓库地址:https://github.com/ITdesk01/JD_Script"
+
+	cd /tmp
+	rm -rf $log3
+
+	#用来查看tmp有多少jd log文件
+	ls ./ | grep -E "^j" | sort >$log1
+
+	#筛选jd log 里面有几个是带错误的
+	echo "#### 检测到错误日志的文件" >>$log3
+	for i in `cat $log1`
+	do
+		grep -lrn  "错误" $i >> $log2
+		grep -lrn  "错误" $i >> $log3
+	done
+	cat_log=$(cat $log2 | wc -l)
+	if [ $cat_log -ge "1" ];then
+		num="JD_Script发现有$cat_log个日志包含错误信息"
+	else
+		num="no_eeror"
+	fi
+
+	#将详细错误信息输出log3
+	echo "#### 日志文件内详细的错误信息" >> $log3
+	for i in `cat $log2`
+	do
+		grep  "错误" $i  >> $log3
+	done
+
+	#sort_log3=$(sed "s/$/$wrap$sort_log/" $log3 |  sed ':t;N;s/\n//;b t' | sed "s/$wrap_tab####/####/g" )
+
+
+	if [ $num = "no_eeror" ]; then
+		echo "**********************************************"
+		echo -e "$green log日志没有发现错误，一切风平浪静$white"
+		echo "**********************************************"
+	else
+		if [ ! $SCKEY ];then
+			echo "没找到Server酱key不做操作"
+		else
+			echo "**********************************************"
+			echo -e "$yellow检测$cat_log个包含错误的日志，已推送到你的接收设备$white"
+			echo "**********************************************"
+			log_sort=$(cat ${log3} | sed "s/$/$wrap$wrap_tab$sort_log/g" |  sed ':t;N;s/\n//;b t' )
+			log_sort1=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
+			curl -s "http://sc.ftqq.com/$SCKEY.send?text=$num" -d "&desp=${log_sort1}" >/dev/null 2>&1
+		fi
+
+	fi
+
+	rm -rf $log1
+	rm -rf $log2
+}
+
 help() {
 	task
 	clear
@@ -778,66 +840,6 @@ COMMENT
 
 }
 
-checklog() {
-	SCKEY=$(cat $script_dir/sendNotify.js | awk 'NR==12 {print $4}' | sed "s/'//g" | sed "s/;//g")
-	Wrap="%0D%0A%0D%0A%0D%0A%0D%0A" #Server酱换行
-	log1="checkjs_jd.log" #用来查看tmp有多少jd log文件
-	log2="checkjs_jd_eeror.log" #筛选jd log 里面有几个是带错误的
-	log3="checkjs_jd_eeror_detailed.log" #将错误的都输出在这里
-	by="$Wrap脚本仓库地址:https://github.com/ITdesk01/JD_Script"
-
-	cd /tmp
-	rm -rf $log2
-	rm -rf $log3
-
-	#用来查看tmp有多少jd log文件
-	ls ./ | grep -E "^j" | sort >$log1
-
-	#筛选jd log 里面有几个是带错误的
-	for i in `cat $log1`
-	do
-		grep -lrn  "错误" $i >> $log2
-	done
-	cat_log=$(cat $log2 | wc -l)
-	if [ $cat_log -ge "1" ];then
-		sed -i "s/log/log$Wrap/g" $log2
-		sort_log=$(sed ':t;N;s/\n//;b t' $log2)
-		num="发现$cat_log个日志有错误信息"
-		content="《检测到错误日志的文件》$Wrap$sort_log"
-	else
-		content="no_eeror"
-	fi
-
-	#将详细错误信息输出log3
-	sed -i "s/log$Wrap/log/g" $log2
-	for i in `cat $log2`
-	do
-		grep  "错误" $i  >> $log3
-	done
-
-	num3="$Wrap《日志文件内详细的错误信息》$Wrap"
-	sort_log3=$(sed 's/$/%0D%0A%0D%0A%0D%0A%0D%0A/' $log3 | sed 's/ /_/g' | sed ':t;N;s/\n//;b t')
-
-
-	if [ $content = "no_eeror" ]; then
-		echo "**********************************************"
-		echo -e "$green log日志没有发现错误，一切风平浪静$white"
-		echo "**********************************************"
-	else
-		if [ ! $SCKEY ];then
-			echo "没找到Server酱key不做操作"
-		else
-			echo "**********************************************"
-			echo -e "$yellow检测$cat_log个包含错误的日志，已推送到你的接收设备$white"
-			echo "**********************************************"
-			curl "http://sc.ftqq.com/$SCKEY.send?text=$num&desp=${content}${num3}${sort_log3}${by}" >/dev/null 2>&1 &
-		fi
-
-	fi
-
-	rm -rf $log1
-}
-
 time() {
 	if [ $script_read == "0" ];then
 		echo ""
@@ -986,7 +988,7 @@ if [[ -z $action1 ]]; then
 	system_variable
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live)
 		$action1
 		;;
 		*)
@@ -998,7 +1000,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live)
 		$action2
 		;;
 		*)
