@@ -5,7 +5,7 @@
 # This is free software, licensed under the GNU General Public License v3.
 # See /LICENSE for more information.
 #
-set -x
+#set -x
 
 version="1.9"
 cron_file="/etc/crontabs/root"
