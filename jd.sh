@@ -519,13 +519,18 @@ that_day() {
 		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
 	fi
 
-	echo -e "$green开始推送JD_Script仓库状态$white"
+
 
 	log_sort=$(cat  $dir_file/git_log/${current_time}.log | sed "s/${current_time}//g" |sed "s/$/$wrap$wrap_tab/" | sed ':t;N;s/\n//;b t' | sed "s/$wrap_tab####/####/g")
 	log_sort1=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
-	curl -s "http://sc.ftqq.com/$SCKEY.send?text=JD_Script仓库状态" -d "&desp=$log_sort1" >/dev/null 2>&1
-	sleep 3
-	echo -e "$green 推送完成$white"
+	if [ ! $log_sort ];then
+		echo -e "$red 推送失败$white，请检查 $dir_file/git_log/${current_time}.log是否存在"
+	else
+		echo -e "$green开始推送JD_Script仓库状态$white"
+		curl -s "http://sc.ftqq.com/$SCKEY.send?text=JD_Script仓库状态" -d "&desp=$log_sort1" >/dev/null 2>&1
+		sleep 3
+		echo -e "$green 推送完成$white"
+	fi
 
 }
 
