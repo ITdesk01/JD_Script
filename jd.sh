@@ -51,7 +51,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.54"
+	cron_version="2.55"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -77,7 +77,7 @@ cat >>/etc/crontabs/root <<EOF
 00 22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本
 5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #22点05分更新lxk0301脚本
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本
-5 1-22/30 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机
+*/30 1-22 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机
 #30 * * * * $dir_file/jd.sh run_030 >/tmp/jd_run_030.log 2>&1 #工业爱消除
 0,1 19-21/1 * * * $dir_file/jd.sh run_19_20_21 >/tmp/jd_run_19_20_21.log 2>&1 #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
@@ -467,14 +467,19 @@ checklog() {
 		if [ ! $SCKEY ];then
 			echo "没找到Server酱key不做操作"
 		else
-			echo "**********************************************"
-			echo -e "$yellow检测$cat_log个包含错误的日志，已推送到你的接收设备$white"
-			echo "**********************************************"
 			log_sort=$(cat ${log3} | sed "s/$/$wrap$wrap_tab$sort_log/g" |  sed ':t;N;s/\n//;b t' )
 			log_sort1=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
-			curl -s "http://sc.ftqq.com/$SCKEY.send?text=$num" -d "&desp=${log_sort1}" >/dev/null 2>&1
+			if [ ! $log_sort1 ];then
+				echo -e "$red 推送失败$white，请检查 $log3是否存在"
+			else
+				echo "**********************************************"
+				echo -e "$yellow检测$cat_log个包含错误的日志，已推送到你的接收设备$white"
+				echo "**********************************************"
+				curl -s "http://sc.ftqq.com/$SCKEY.send?text=$num" -d "&desp=${log_sort1}" >/dev/null 2>&1
+				sleep 3
+				echo -e "$green 推送完成$white"
+			fi
 		fi
-
 	fi
 
 	rm -rf $log1
@@ -483,30 +488,58 @@ checklog() {
 
 #检测当天更新情况并推送
 that_day() {
-	echo > $dir_file/git_log/${current_time}.log
+	cd $dir_file
+	git fetch
+	if [[ $? -eq 0 ]]; then
+		echo ""
+	else
+		echo -e "$red>> 取回分支没有成功，重新执行代码$white"
+		that_day
+	fi
+	clear
+	git_branch=$(git branch -v | grep -o behind )
+	if [[ "$git_branch" == "behind" ]]; then
+		Script_status="建议更新"
+	else
+		Script_status="最新"
+	fi
 
 	if [ ! -d $dir_file/git_log ];then
 		mkdir 	$dir_file/git_log
 	fi
 
-	cd $dir_file
+	echo > $dir_file/git_log/${current_time}.log
+
 
 	git_log=$(git log --format=format:"%ai %an %s" --since="$current_time 00:00:00" --before="$current_time 23:59:59" | sed "s/+0800//g" | sed "s/$current_time //g" | sed "s/ /+/g")
 
 	if [ $(echo $git_log |wc -l) == "0"  ];then
 		echo "#### JD_Script+$current_time" >>$dir_file/git_log/${current_time}.log
 		echo "作者泡妹子或者干饭去了，今天没有任何更新，不要催佛系玩。。。" >>$dir_file/git_log/${current_time}.log
+		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
 	else
 		echo "#### JD_Script+$current_time+更新日志" >> $dir_file/git_log/${current_time}.log
 		echo "  时间       +作者          +操作" >> $dir_file/git_log/${current_time}.log
 		echo "$git_log" >> $dir_file/git_log/${current_time}.log
+		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
 	fi
 
-	echo "开始推送JD_Script仓库状态"
 
-	log_sort=$(cat  $dir_file/git_log/${current_time}.log  | sed "s/${current_time}//g" |sed "s/$/$wrap$wrap_tab/" | sed ':t;N;s/\n//;b t' | sed "s/$wrap_tab####/####/g")
+
+	log_sort=$(cat  $dir_file/git_log/${current_time}.log | sed "s/${current_time}//g" |sed "s/$/$wrap$wrap_tab/" | sed ':t;N;s/\n//;b t' | sed "s/$wrap_tab####/####/g")
 	log_sort1=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
-	curl -s "http://sc.ftqq.com/$SCKEY.send?text=JD_Script仓库状态" -d "&desp=$log_sort1" >/dev/null 2>&1
+	if [ ! $SCKEY ];then
+			echo "没找到Server酱key不做操作"
+	else
+		if [ ! $log_sort1 ];then
+			echo -e "$red 推送失败$white，请检查 $dir_file/git_log/${current_time}.log是否存在"
+		else
+			echo -e "$green开始推送JD_Script仓库状态$white"
+			curl -s "http://sc.ftqq.com/$SCKEY.send?text=JD_Script仓库状态" -d "&desp=$log_sort1" >/dev/null 2>&1
+			sleep 3
+			echo -e "$green 推送完成$white"
+		fi
+	fi
 
 }
 
@@ -751,6 +784,18 @@ additional_settings() {
 	sed -i "s/aURoM7PtY_Q/95OquUc_sFugJO5_E_2dAgm-@eU9YELv7P4thhw6utCVw@eU9YaOjnbvx1-Djdz3UUgw@eU9Ya-iyZ68kpWrRmXBFgw/g" $dir_file_js/jd_superMarket.js
 	sed -i "s/eU9Ya-y2N_5z9DvXwyIV0A/eU9YabrkZ_h1-GrcmiJB0A/g" $dir_file_js/jd_superMarket.js
 	sed -i "s/eU9YaeS3Z6ol8zrRmnMb1Q/eU9YabrkZ_h1-GrcmiJB0A/g" $dir_file_js/jd_superMarket.js
+
+	#京喜农场
+	old_jxnc="'22bd6fbbabbaa770a45ab2607e7a1e8a@197c6094e965fdf3d33621b47719e0b1'"
+	new_jxnc="6210b7cb41e01b14d92b2d91eed78384@9455922013cf0f704ee6fc9416ec05df@df0165aa52755c3a5337bc789552d9a8@019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3"
+	zuoyou_20190516_jxnc="8476543ed84f16c6446d48bbe8f769d4@ed92326cbc2013dfc769c5e813599b7c@74e57e9c14b59e8f11baa46d83f5f145"
+	jidiyangguang_20190516_jxnc="ba177c5a5cbfdf43ea517cd21c0c6250@01a09a00572befec4edb60e9d39f7ba1"
+
+	new_jxnc_set="'$new_jxnc@$zuoyou_20190516_jxnc@$jidiyangguang_20190516_jxnc',"
+	sed -i "s/$old_jxnc/'6210b7cb41e01b14d92b2d91eed78384@9455922013cf0f704ee6fc9416ec05df@df0165aa52755c3a5337bc789552d9a8@019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3'/g" $dir_file_js/jd_jxnc.js
+	sed -i "s/'',/$new_jxnc_set/g" $dir_file_js/jdJxncShareCodes.js
+	sed -i "12a $new_jxnc_set\n$new_jxnc_set\n$new_jxnc_set\n$new_jxnc_set" $dir_file_js/jdJxncShareCodes.js
+
 COMMENT
 
 	#京东赚赚长期活动
@@ -791,17 +836,6 @@ COMMENT
 	sed -i "s/$old_jdbook1/$new_jdbook_set/g" $dir_file_js/jd_bookshop.js
 	sed -i "34a $new_jdbook_set\n$new_jdbook_set\n$new_jdbook_set\n$new_jdbook_set" $dir_file_js/jd_bookshop.js
 	
-	#京喜农场
-	old_jxnc="'22bd6fbbabbaa770a45ab2607e7a1e8a@197c6094e965fdf3d33621b47719e0b1'"
-	new_jxnc="6210b7cb41e01b14d92b2d91eed78384@9455922013cf0f704ee6fc9416ec05df@df0165aa52755c3a5337bc789552d9a8@019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3"
-	zuoyou_20190516_jxnc="8476543ed84f16c6446d48bbe8f769d4@ed92326cbc2013dfc769c5e813599b7c@74e57e9c14b59e8f11baa46d83f5f145"
-	jidiyangguang_20190516_jxnc="ba177c5a5cbfdf43ea517cd21c0c6250@01a09a00572befec4edb60e9d39f7ba1"
-
-	new_jxnc_set="'$new_jxnc@$zuoyou_20190516_jxnc@$jidiyangguang_20190516_jxnc',"
-	sed -i "s/$old_jxnc/'6210b7cb41e01b14d92b2d91eed78384@9455922013cf0f704ee6fc9416ec05df@df0165aa52755c3a5337bc789552d9a8@019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3'/g" $dir_file_js/jd_jxnc.js
-	sed -i "s/'',/$new_jxnc_set/g" $dir_file_js/jdJxncShareCodes.js
-	sed -i "12a $new_jxnc_set\n$new_jxnc_set\n$new_jxnc_set\n$new_jxnc_set" $dir_file_js/jdJxncShareCodes.js
-
 	#签到领现金
 	old_jdcash="\`-4msulYas0O2JsRhE-2TA5XZmBQ@eU9Yar_mb_9z92_WmXNG0w@eU9YaO7jMvwh-W_VzyUX0Q\`"
 	new_jdcash="95OquUc_sFugJO5_E_2dAgm-@eU9YELv7P4thhw6utCVw@eU9YaOjnbvx1-Djdz3UUgw@eU9Ya-iyZ68kpWrRmXBFgw@eU9YabrkZ_h1-GrcmiJB0A@eU9YM7bzIptVshyjrwlteU9YCLTrH5VesRWnvw5t@P2nGgK6JgLtCqJBeQJ0f27XXLQwYAFHrKmA2siZTuj8=@LTyKtCPGU6v0uv-n1GSwfQ==@y7KhVRopnOwB1qFo2vIefg==@WnaDbsWYwImvOD1CpkeVWA==@Y4r32JTAKNBpMoCXvBf7oA==@JuMHWNtZt4Ny_0ltvG6Ipg=="
@@ -859,8 +893,9 @@ COMMENT
 		old_jdimmortal="\`39xIs4YwE5Z7CPQQ0baz9jNWO6PSZHsNWqfOwWyqScbJBGhg4v7HbuBg63TJ4@27xIs4YwE5Z7FGzJqrMmavC_vWKtbEaJxbz0Vahw@43xIs4YwE5Z7DsWOzDSP_N6WTDnbA0wBjjof6cA9FzcbHMcZB9wE1R3ToSluCgxAzEXQ@43xIs4YwE5Z7DsWOzDSEuRWEOROpnDjMx_VvSs5ikYQ8XgcZB9whEHjDmPKQoL16TZ8w@50xIs4YwE5Z7FTId9W-KibDgxxx6AEa7189V1zSxSf2HP6681IXPQ81aJEP77WoHXLcK7QzlxGqsGqfU@43xIs4YwE5Z7DsWOzDSPKFWdkRe2Ae6h0jAdlhuSmuwcfUcZB9wBcHhj0_zyZDNK4Rhg\`,"
 	old_jdimmortal1="\`39xIs4YwE5Z7CPQQ0baz9jNWO6PSZHsNWqfOwWyqScbJBGhg4v7HbuBg63TJ4@27xIs4YwE5Z7FGzJqrMmavC_vWKtbEaJxbz0Vahw@43xIs4YwE5Z7DsWOzDSP_N6WTDnbA0wBjjof6cA9FzcbHMcZB9wE1R3ToSluCgxAzEXQ@43xIs4YwE5Z7DsWOzDSEuRWEOROpnDjMx_VvSs5ikYQ8XgcZB9whEHjDmPKQoL16TZ8w@43xIs4YwE5Z7DsWOzDSFehRRs_UaNcqkiU7BrrzDTKHScMcZB9wkYC2z6K-QOsQy1S3A@43xIs4YwE5Z7DsWOzDSFcl8RjNxfrQquzeGQQtkQOUbyqscZB9wkxX2jw2HhM7TczeqA\`"
 	new_jdimmortal="46xIs4YwE5Z7G9g7VXXVQVAj1XaPuxnp42KWW3VHkbUCSyjZA_0yPE-_eWZkyLRGQewhtvF47@40xIs4YwE5Z7DsWOzDQEvxJW4_Gu_rEEGejqss1NHaWcZB9uhMa1knD7NF3t1DS@43xIs4YwE5Z7DsWOzDSFeBVdsn8wMSAqZUdmm4Ino9y4jMcZB9wkAGhz4L9-SqwpvWCg@43xIs4YwE5Z7DsWOzDSL_9CEGF8QjcKrGKFEUZqKB1WklAcZB9wUBTjm2pNOZkO1C8ew@43xIs4YwE5Z7DsWOzDSAvhIEJtWP7xzngvIUYtd1sw1JxIcZB9wxIFjjol6A2DOPxahQ@40xIs4YwE5Z7DsWOzDIZ8JBWj2nwoTJJBQQIYNpex1AcZB9mR4Sy1n0tWVpaoPC@40xIs4YwE5Z7DsWOzDKEspZQ0F-aIyW1stJDO2fu-9rcZB9ohwK9lcfpPTN0sBR"
+	chiyu="28xIs4YwE5Z7Dm46PNfntL3F3pXbHtieJxLjwFWjT8"
 
-	new_jdimmortal_set="'$new_jdimmortal',"
+	new_jdimmortal_set="'$new_jdimmortal@$chiyu',"
 	sed -i "s/$old_jdimmortal/$new_jdimmortal_set/g" $dir_file_js/jd_immortal.js
 	sed -i "s/$old_jdimmortal1/$new_jdimmortal_set/g" $dir_file_js/jd_immortal.js
 	sed -i "53a $new_jdimmortal_set\n$new_jdimmortal_set\n$new_jdimmortal_set\n$new_jdimmortal_set" $dir_file_js/jd_immortal.js
