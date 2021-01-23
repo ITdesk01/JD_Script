@@ -483,30 +483,49 @@ checklog() {
 
 #检测当天更新情况并推送
 that_day() {
+
+	cd $dir_file
+	git fetch
+	if [[ $? -eq 0 ]]; then
+		echo ""
+	else
+		echo -e "$red>> 取回分支没有成功，重新执行代码$white"
+		that_day
+	fi
+	clear
+	git_branch=$(git branch -v | grep -o behind )
+	if [[ "$git_branch" == "behind" ]]; then
+		Script_status="建议更新"
+	else
+		Script_status="最新"
+	fi
+
 	echo > $dir_file/git_log/${current_time}.log
 
 	if [ ! -d $dir_file/git_log ];then
 		mkdir 	$dir_file/git_log
 	fi
 
-	cd $dir_file
-
 	git_log=$(git log --format=format:"%ai %an %s" --since="$current_time 00:00:00" --before="$current_time 23:59:59" | sed "s/+0800//g" | sed "s/$current_time //g" | sed "s/ /+/g")
 
 	if [ $(echo $git_log |wc -l) == "0"  ];then
 		echo "#### JD_Script+$current_time" >>$dir_file/git_log/${current_time}.log
 		echo "作者泡妹子或者干饭去了，今天没有任何更新，不要催佛系玩。。。" >>$dir_file/git_log/${current_time}.log
+		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
 	else
 		echo "#### JD_Script+$current_time+更新日志" >> $dir_file/git_log/${current_time}.log
 		echo "  时间       +作者          +操作" >> $dir_file/git_log/${current_time}.log
 		echo "$git_log" >> $dir_file/git_log/${current_time}.log
+		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
 	fi
 
-	echo "开始推送JD_Script仓库状态"
+	echo -e "$green开始推送JD_Script仓库状态$white"
 
-	log_sort=$(cat  $dir_file/git_log/${current_time}.log  | sed "s/${current_time}//g" |sed "s/$/$wrap$wrap_tab/" | sed ':t;N;s/\n//;b t' | sed "s/$wrap_tab####/####/g")
+	log_sort=$(cat  $dir_file/git_log/${current_time}.log | sed "s/${current_time}//g" |sed "s/$/$wrap$wrap_tab/" | sed ':t;N;s/\n//;b t' | sed "s/$wrap_tab####/####/g")
 	log_sort1=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
 	curl -s "http://sc.ftqq.com/$SCKEY.send?text=JD_Script仓库状态" -d "&desp=$log_sort1" >/dev/null 2>&1
+	sleep 3
+	echo -e "$green 推送完成$white"
 
 }
 
