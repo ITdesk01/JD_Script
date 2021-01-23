@@ -34,6 +34,12 @@ else
 	script_dir="$dir_file"
 fi
 
+wrap="%0D%0A%0D%0A" #Server酱换行
+wrap_tab="     "
+current_time=$(date +"%Y-%m-%d")
+by="#### 脚本仓库地址:https://github.com/ITdesk01/JD_Script"
+SCKEY=$(cat $script_dir/sendNotify.js | awk 'NR==12 {print $4}' | sed "s/'//g" | sed "s/;//g")
+
 red="\033[31m"
 green="\033[32m"
 yellow="\033[33m"
@@ -45,7 +51,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.53"
+	cron_version="2.54"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -68,7 +74,7 @@ cat >>/etc/crontabs/root <<EOF
 40 6-18/6 * * * $dir_file/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1 #不是很重要的，错开运行
 35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1 #不是很重要的，错开运行
 10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #超市旺旺兑换礼品
-00 22 * * * $dir_file/jd.sh update_script >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本
+00 22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本
 5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #22点05分更新lxk0301脚本
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本
 5 1-22/30 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机
@@ -239,7 +245,6 @@ run_0() {
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
 	$node $dir_file_js/jd_nian_sign.js #年兽签到
-	nian
 	run_08_12_16
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_06_18
@@ -351,7 +356,6 @@ run_07() {
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
-	nian
 	$node $dir_file_js/jd_nian_ar.js #年兽ar
 	$node $dir_file_js/jd_nian_wechat.js #京东炸年兽小程序
 	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
@@ -369,6 +373,7 @@ run_07() {
 
 run_08_12_16() {
 	echo -e "$green run_08_12_16$start_script $white"
+	nian
 	$node $dir_file_js/jd_blueCoin.js #东东超市兑换，有次数限制，没时间要求
 	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	echo -e "$green run_08_12_16$stop_script $white"
@@ -422,6 +427,89 @@ stop_notice() {
 	echo -e "$green农场和萌宠提示关闭成功$white"
 }
 
+checklog() {
+	log1="checkjs_jd.log" #用来查看tmp有多少jd log文件
+	log2="checkjs_jd_eeror.log" #筛选jd log 里面有几个是带错误的
+	log3="checkjs_jd_eeror_detailed.log" #将错误的都输出在这里
+
+	cd /tmp
+	rm -rf $log3
+
+	#用来查看tmp有多少jd log文件
+	ls ./ | grep -E "^j" | sort >$log1
+
+	#筛选jd log 里面有几个是带错误的
+	echo "#### 检测到错误日志的文件" >>$log3
+	for i in `cat $log1`
+	do
+		grep -lrn  "错误" $i >> $log2
+		grep -lrn  "错误" $i >> $log3
+	done
+	cat_log=$(cat $log2 | wc -l)
+	if [ $cat_log -ge "1" ];then
+		num="JD_Script发现有$cat_log个日志包含错误信息"
+	else
+		num="no_eeror"
+	fi
+
+	#将详细错误信息输出log3
+	echo "#### 日志文件内详细的错误信息" >> $log3
+	for i in `cat $log2`
+	do
+		grep  "错误" $i  >> $log3
+	done
+
+	if [ $num = "no_eeror" ]; then
+		echo "**********************************************"
+		echo -e "$green log日志没有发现错误，一切风平浪静$white"
+		echo "**********************************************"
+	else
+		if [ ! $SCKEY ];then
+			echo "没找到Server酱key不做操作"
+		else
+			echo "**********************************************"
+			echo -e "$yellow检测$cat_log个包含错误的日志，已推送到你的接收设备$white"
+			echo "**********************************************"
+			log_sort=$(cat ${log3} | sed "s/$/$wrap$wrap_tab$sort_log/g" |  sed ':t;N;s/\n//;b t' )
+			log_sort1=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
+			curl -s "http://sc.ftqq.com/$SCKEY.send?text=$num" -d "&desp=${log_sort1}" >/dev/null 2>&1
+		fi
+
+	fi
+
+	rm -rf $log1
+	rm -rf $log2
+}
+
+#检测当天更新情况并推送
+that_day() {
+	echo > $dir_file/git_log/${current_time}.log
+
+	if [ ! -d $dir_file/git_log ];then
+		mkdir 	$dir_file/git_log
+	fi
+
+	cd $dir_file
+
+	git_log=$(git log --format=format:"%ai %an %s" --since="$current_time 00:00:00" --before="$current_time 23:59:59" | sed "s/+0800//g" | sed "s/$current_time //g" | sed "s/ /+/g")
+
+	if [ $(echo $git_log |wc -l) == "0"  ];then
+		echo "#### JD_Script+$current_time" >>$dir_file/git_log/${current_time}.log
+		echo "作者泡妹子或者干饭去了，今天没有任何更新，不要催佛系玩。。。" >>$dir_file/git_log/${current_time}.log
+	else
+		echo "#### JD_Script+$current_time+更新日志" >> $dir_file/git_log/${current_time}.log
+		echo "  时间       +作者          +操作" >> $dir_file/git_log/${current_time}.log
+		echo "$git_log" >> $dir_file/git_log/${current_time}.log
+	fi
+
+	echo "开始推送JD_Script仓库状态"
+
+	log_sort=$(cat  $dir_file/git_log/${current_time}.log  | sed "s/${current_time}//g" |sed "s/$/$wrap$wrap_tab/" | sed ':t;N;s/\n//;b t' | sed "s/$wrap_tab####/####/g")
+	log_sort1=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
+	curl -s "http://sc.ftqq.com/$SCKEY.send?text=JD_Script仓库状态" -d "&desp=$log_sort1" >/dev/null 2>&1
+
+}
+
 help() {
 	task
 	clear
@@ -457,7 +545,7 @@ help() {
 	echo ""
 	echo -e "$green  sh \$jd checklog $white  			#检测log日志是否有错误并推送"
 	echo ""
-	echo -e "$green  sh \$jd update_script && sh \$jd update $white	#更新jd.sh并下载js脚本"
+	echo -e "$green  sh \$jd that_day $white  			#检测JD_script仓库今天更新了什么"
 	echo ""
 	echo -e " 如果不喜欢这样，你也可以直接$green cd \$jd_file/js$white,然后用$green node 脚本名字.js$white "
 	echo ""
@@ -779,66 +867,6 @@ COMMENT
 
 }
 
-checklog() {
-	SCKEY=$(cat $script_dir/sendNotify.js | awk 'NR==12 {print $4}' | sed "s/'//g" | sed "s/;//g")
-	Wrap="%0D%0A%0D%0A%0D%0A%0D%0A" #Server酱换行
-	log1="checkjs_jd.log" #用来查看tmp有多少jd log文件
-	log2="checkjs_jd_eeror.log" #筛选jd log 里面有几个是带错误的
-	log3="checkjs_jd_eeror_detailed.log" #将错误的都输出在这里
-	by="$Wrap脚本仓库地址:https://github.com/ITdesk01/JD_Script"
-
-	cd /tmp
-	rm -rf $log2
-	rm -rf $log3
-
-	#用来查看tmp有多少jd log文件
-	ls ./ | grep -E "^j" | sort >$log1
-
-	#筛选jd log 里面有几个是带错误的
-	for i in `cat $log1`
-	do
-		grep -lrn  "错误" $i >> $log2
-	done
-	cat_log=$(cat $log2 | wc -l)
-	if [ $cat_log -ge "1" ];then
-		sed -i "s/log/log$Wrap/g" $log2
-		sort_log=$(sed ':t;N;s/\n//;b t' $log2)
-		num="发现$cat_log个日志有错误信息"
-		content="《检测到错误日志的文件》$Wrap$sort_log"
-	else
-		content="no_eeror"
-	fi
-
-	#将详细错误信息输出log3
-	sed -i "s/log$Wrap/log/g" $log2
-	for i in `cat $log2`
-	do
-		grep  "错误" $i  >> $log3
-	done
-
-	num3="$Wrap《日志文件内详细的错误信息》$Wrap"
-	sort_log3=$(sed 's/$/%0D%0A%0D%0A%0D%0A%0D%0A/' $log3 | sed 's/ /_/g' | sed ':t;N;s/\n//;b t')
-
-
-	if [ $content = "no_eeror" ]; then
-		echo "**********************************************"
-		echo -e "$green log日志没有发现错误，一切风平浪静$white"
-		echo "**********************************************"
-	else
-		if [ ! $SCKEY ];then
-			echo "没找到Server酱key不做操作"
-		else
-			echo "**********************************************"
-			echo -e "$yellow检测$cat_log个包含错误的日志，已推送到你的接收设备$white"
-			echo "**********************************************"
-			curl "http://sc.ftqq.com/$SCKEY.send?text=$num&desp=${content}${num3}${sort_log3}${by}" >/dev/null 2>&1 &
-		fi
-
-	fi
-
-	rm -rf $log1
-}
-
 time() {
 	if [ $script_read == "0" ];then
 		echo ""
@@ -987,7 +1015,7 @@ if [[ -z $action1 ]]; then
 	system_variable
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day)
 		$action1
 		;;
 		*)
@@ -999,7 +1027,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day)
 		$action2
 		;;
 		*)
