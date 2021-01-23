@@ -547,8 +547,6 @@ help() {
 	echo ""
 	echo -e "$green  sh \$jd that_day $white  			#检测JD_script仓库今天更新了什么"
 	echo ""
-	echo -e "$green  sh \$jd update_script && sh \$jd update $white	#更新jd.sh并下载js脚本"
-	echo ""
 	echo -e " 如果不喜欢这样，你也可以直接$green cd \$jd_file/js$white,然后用$green node 脚本名字.js$white "
 	echo ""
 	echo -e "$yellow 3.检测定时任务:$white $cron_help"
