@@ -500,11 +500,12 @@ that_day() {
 		Script_status="最新"
 	fi
 
-	echo > $dir_file/git_log/${current_time}.log
-
 	if [ ! -d $dir_file/git_log ];then
 		mkdir 	$dir_file/git_log
 	fi
+
+	echo > $dir_file/git_log/${current_time}.log
+
 
 	git_log=$(git log --format=format:"%ai %an %s" --since="$current_time 00:00:00" --before="$current_time 23:59:59" | sed "s/+0800//g" | sed "s/$current_time //g" | sed "s/ /+/g")
 
