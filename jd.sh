@@ -363,6 +363,7 @@ run_07() {
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
+	checklog #检测log日志是否有错误并推送
 	echo -e "$green run_07$stop_script $white"
 }
 
@@ -453,6 +454,8 @@ help() {
 	echo -e "$green  sh \$jd jd_sharecode $white 			#查询京东所有助力码"
 	echo ""
 	echo -e "$green  sh \$jd stop_notice $white  			#关掉萌宠 农场  多次提醒"
+	echo ""
+	echo -e "$green  sh \$jd checklog $white  			#检测log日志是否有错误并推送"
 	echo ""
 	echo -e "$green  sh \$jd update_script && sh \$jd update $white	#更新jd.sh并下载js脚本"
 	echo ""
@@ -776,6 +779,66 @@ COMMENT
 
 }
 
+checklog() {
+	SCKEY=$(cat $script_dir/sendNotify.js | awk 'NR==12 {print $4}' | sed "s/'//g" | sed "s/;//g")
+	Wrap="%0D%0A%0D%0A%0D%0A%0D%0A" #Server酱换行
+	log1="checkjs_jd.log" #用来查看tmp有多少jd log文件
+	log2="checkjs_jd_eeror.log" #筛选jd log 里面有几个是带错误的
+	log3="checkjs_jd_eeror_detailed.log" #将错误的都输出在这里
+	by="$Wrap脚本仓库地址:https://github.com/ITdesk01/JD_Script"
+
+	cd /tmp
+	rm -rf $log2
+	rm -rf $log3
+
+	#用来查看tmp有多少jd log文件
+	ls ./ | grep -E "^j" | sort >$log1
+
+	#筛选jd log 里面有几个是带错误的
+	for i in `cat $log1`
+	do
+		grep -lrn  "错误" $i >> $log2
+	done
+	cat_log=$(cat $log2 | wc -l)
+	if [ $cat_log -ge "1" ];then
+		sed -i "s/log/log$Wrap/g" $log2
+		sort_log=$(sed ':t;N;s/\n//;b t' $log2)
+		num="发现$cat_log个日志有错误信息"
+		content="《检测到错误日志的文件》$Wrap$sort_log"
+	else
+		content="no_eeror"
+	fi
+
+	#将详细错误信息输出log3
+	sed -i "s/log$Wrap/log/g" $log2
+	for i in `cat $log2`
+	do
+		grep  "错误" $i  >> $log3
+	done
+
+	num3="$Wrap《日志文件内详细的错误信息》$Wrap"
+	sort_log3=$(sed 's/$/%0D%0A%0D%0A%0D%0A%0D%0A/' $log3 | sed 's/ /_/g' | sed ':t;N;s/\n//;b t')
+
+
+	if [ $content = "no_eeror" ]; then
+		echo "**********************************************"
+		echo -e "$green log日志没有发现错误，一切风平浪静$white"
+		echo "**********************************************"
+	else
+		if [ ! $SCKEY ];then
+			echo "没找到Server酱key不做操作"
+		else
+			echo "**********************************************"
+			echo -e "$yellow检测$cat_log个包含错误的日志，已推送到你的接收设备$white"
+			echo "**********************************************"
+			curl "http://sc.ftqq.com/$SCKEY.send?text=$num&desp=${content}${num3}${sort_log3}${by}" >/dev/null 2>&1 &
+		fi
+
+	fi
+
+	rm -rf $log1
+}
+
 time() {
 	if [ $script_read == "0" ];then
 		echo ""
@@ -924,7 +987,7 @@ if [[ -z $action1 ]]; then
 	system_variable
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog)
 		$action1
 		;;
 		*)
@@ -936,7 +999,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog)
 		$action2
 		;;
 		*)
