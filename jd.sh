@@ -467,14 +467,19 @@ checklog() {
 		if [ ! $SCKEY ];then
 			echo "没找到Server酱key不做操作"
 		else
-			echo "**********************************************"
-			echo -e "$yellow检测$cat_log个包含错误的日志，已推送到你的接收设备$white"
-			echo "**********************************************"
 			log_sort=$(cat ${log3} | sed "s/$/$wrap$wrap_tab$sort_log/g" |  sed ':t;N;s/\n//;b t' )
 			log_sort1=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
-			curl -s "http://sc.ftqq.com/$SCKEY.send?text=$num" -d "&desp=${log_sort1}" >/dev/null 2>&1
+			if [ ! $log_sort1 ];then
+				echo -e "$red 推送失败$white，请检查 $log3是否存在"
+			else
+				echo "**********************************************"
+				echo -e "$yellow检测$cat_log个包含错误的日志，已推送到你的接收设备$white"
+				echo "**********************************************"
+				curl -s "http://sc.ftqq.com/$SCKEY.send?text=$num" -d "&desp=${log_sort1}" >/dev/null 2>&1
+				sleep 3
+				echo -e "$green 推送完成$white"
+			fi
 		fi
-
 	fi
 
 	rm -rf $log1
@@ -527,7 +532,7 @@ that_day() {
 	if [ ! $SCKEY ];then
 			echo "没找到Server酱key不做操作"
 	else
-		if [ ! $log_sort ];then
+		if [ ! $log_sort1 ];then
 			echo -e "$red 推送失败$white，请检查 $dir_file/git_log/${current_time}.log是否存在"
 		else
 			echo -e "$green开始推送JD_Script仓库状态$white"
