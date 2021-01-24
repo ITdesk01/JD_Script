@@ -103,7 +103,7 @@ ds_setup() {
 	echo "JD_Script删除全局变量"
 	sed -i '/JD_Script/d' /etc/profile >/dev/null 2>&1
 	. /etc/profile
-	echo "JD_Script定时任务和全局变量删除完成，脚本不会自动运行了"
+	echo "JD_Script定时任务和全局变量删除完成，脚本彻底不会自动运行了"
 }
 
 update() {
@@ -547,6 +547,7 @@ that_day() {
 
 }
 
+
 help() {
 	task
 	clear
@@ -583,6 +584,8 @@ help() {
 	echo -e "$green  sh \$jd checklog $white  			#检测log日志是否有错误并推送"
 	echo ""
 	echo -e "$green  sh \$jd that_day $white  			#检测JD_script仓库今天更新了什么"
+	echo ""
+	echo -e "$green  sh \$jd task_delete $white  			#删掉定时任务，这样就不会定时运行脚本了，重新跑脚本sh \$jd 就会添加定时任务了 "
 	echo ""
 	echo -e " 如果不喜欢这样，你也可以直接$green cd \$jd_file/js$white,然后用$green node 脚本名字.js$white "
 	echo ""
