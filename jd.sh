@@ -428,9 +428,9 @@ stop_notice() {
 }
 
 checklog() {
-	log1="checkjs_jd.log" #用来查看tmp有多少jd log文件
-	log2="checkjs_jd_eeror.log" #筛选jd log 里面有几个是带错误的
-	log3="checkjs_jd_eeror_detailed.log" #将错误的都输出在这里
+	log1="checklog_jd.log" #用来查看tmp有多少jd log文件
+	log2="checklog_jd_error.log" #筛选jd log 里面有几个是带错误的
+	log3="checklog_jd_error_detailed.log" #将错误的都输出在这里
 
 	cd /tmp
 	rm -rf $log3
@@ -442,8 +442,8 @@ checklog() {
 	echo "#### 检测到错误日志的文件" >>$log3
 	for i in `cat $log1`
 	do
-		grep -lrn  "错误" $i >> $log2
-		grep -lrn  "错误" $i >> $log3
+		grep -Elrn  "错误|失败|error" $i >> $log2
+		grep -Elrn  "错误|失败|error" $i >> $log3
 	done
 	cat_log=$(cat $log2 | wc -l)
 	if [ $cat_log -ge "1" ];then
@@ -453,10 +453,10 @@ checklog() {
 	fi
 
 	#将详细错误信息输出log3
-	echo "#### 日志文件内详细的错误信息" >> $log3
 	for i in `cat $log2`
 	do
-		grep  "错误" $i  >> $log3
+		echo "#### ${i}详细的错误" >> $log3
+		grep -E  "错误|失败" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败' | sort -u >> $log3
 	done
 
 	if [ $num = "no_eeror" ]; then
