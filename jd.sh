@@ -165,6 +165,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_pigPet.js			#金融养猪
 	jd_daily_egg.js 		#京东金融-天天提鹅
 	jd_nh.js			#京东年货节2021年1月9日-2021年2月9日
+	jd_sgmh.js			#闪购盲盒长期活动
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unbind.js			#注销京东会员卡
@@ -245,6 +246,8 @@ run_0() {
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
 	$node $dir_file_js/jd_nian_sign.js #年兽签到
+	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
+	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	run_08_12_16
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_06_18
@@ -348,7 +351,7 @@ run_07() {
 	$node $dir_file_js/jd_live.js #直播抢京豆 （需要执行三次，不然没有18豆子）
 	$node $dir_file_js/jd_live.js #直播抢京豆
 	$node $dir_file_js/jd_live.js #直播抢京豆
-	#$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
+	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	$node $dir_file_js/jd_jxnc.js #京喜农场
 	$node $dir_file_js/jd_mh.js #京东盲盒
 	$node $dir_file_js/jd_ms.js #京东秒秒币 一个号大概60秒
@@ -364,6 +367,7 @@ run_07() {
 	#$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
+	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
@@ -630,9 +634,10 @@ additional_settings() {
 	#sed -i "s/let joyRewardName = 20/let joyRewardName = 500/g" $dir_file_js/jd_joy_reward.js
 
 	#东东农场
-	old_fruit1="'0a74407df5df4fa99672a037eec61f7e@dbb21614667246fabcfd9685b6f448f3@6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6@56db8e7bc5874668ba7d5195230d067a@',"
+	old_fruit1="'0a74407df5df4fa99672a037eec61f7e@dbb21614667246fabcfd9685b6f448f3@6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6@56db8e7bc5874668ba7d5195230d067a@b9d287c974cc498d94112f1b064cf934',"
 	old_fruit2="'b1638a774d054a05a30a17d3b4d364b8@f92cb56c6a1349f5a35f0372aa041ea0@9c52670d52ad4e1a812f894563c746ea@8175509d82504e96828afc8b1bbb9cb3@2673c3777d4443829b2a635059953a28',"
-	old_fruit3="'6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6@9c52670d52ad4e1a812f894563c746ea@8175509d82504e96828afc8b1bbb9cb3',"
+	old_fruit3="'0a74407df5df4fa99672a037eec61f7e@dbb21614667246fabcfd9685b6f448f3@6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6@56db8e7bc5874668ba7d5195230d067a',"
+	old_fruit4="'6fbd26cc27ac44d6a7fed34092453f77@61ff5c624949454aa88561f2cd721bf6@9c52670d52ad4e1a812f894563c746ea@8175509d82504e96828afc8b1bbb9cb3',"
 
 	new_fruit1="0763443f7d6f4f5ea5e54adc1c6112ed@e61135aa1963447fa136f293a9d161c1@f9e6a916ad634475b8e77a7704b5c3d8@6632c8135d5c4e2c9ad7f4aa964d4d11@31a2097b10db48429013103077f2f037@5aa64e466c0e43a98cbfbbafcc3ecd02@bf0cbdb0083d443499a571796af20896@9046fbd8945f48cb8e36a17fff9b0983"
 	new_fruit2="d4e3080b06ed47d884e4ef9852cad568@72abb03ca91a4569933c6c8a62a5622c@ed2b2d28151a482eae49dff2e5a588f8@304b39f17d6c4dac87933882d4dec6bc"
@@ -662,9 +667,9 @@ additional_settings() {
 	sed -i "s/$old_fruit2/$new_fruit_set/g" $dir_file_js/jd_fruit.js
 	sed -i "34a $new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set" $dir_file_js/jd_fruit.js
 
-	sed -i "s/$old_fruit1/$new_fruit_set/g" $dir_file_js/jdFruitShareCodes.js
 	sed -i "s/$old_fruit3/$new_fruit_set/g" $dir_file_js/jdFruitShareCodes.js
-	sed -i "11a $new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set" $dir_file_js/jd_fruit.js
+	sed -i "s/$old_fruit4/$new_fruit_set/g" $dir_file_js/jdFruitShareCodes.js
+	sed -i "11a $new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set" $dir_file_js/jdFruitShareCodes.js
 
 	#萌宠
 	old_pet1="'MTAxODc2NTEzNTAwMDAwMDAwMjg3MDg2MA==@MTAxODc2NTEzMzAwMDAwMDAyNzUwMDA4MQ==@MTAxODc2NTEzMjAwMDAwMDAzMDI3MTMyOQ==@MTAxODc2NTEzNDAwMDAwMDAzMDI2MDI4MQ==@MTAxODcxOTI2NTAwMDAwMDAxOTQ3MjkzMw==',"
@@ -899,6 +904,16 @@ COMMENT
 	sed -i "s/$old_jdimmortal/$new_jdimmortal_set/g" $dir_file_js/jd_immortal.js
 	sed -i "s/$old_jdimmortal1/$new_jdimmortal_set/g" $dir_file_js/jd_immortal.js
 	sed -i "53a $new_jdimmortal_set\n$new_jdimmortal_set\n$new_jdimmortal_set\n$new_jdimmortal_set" $dir_file_js/jd_immortal.js
+
+	#闪购盲盒
+	old_jdsgmh="'T019-aknAFRllhyoQlyI46gCjVWmIaW5kRrbA',"
+	old_jdsgmh1="'T019-aknAFRllhyoQlyI46gCjVWmIaW5kRrbA'"
+	new_jdsgmh="T0225KkcRxoZ9AfVdB7wxvRcIQCjVWmIaW5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVWmIaW5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVWmIaW5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVWmIaW5kRrbA"
+
+	new_jdsgmh_set="'$new_jdsgmh',"
+	sed -i "s/$old_jdsgmh/$new_jdsgmh_set/g" $dir_file_js/jd_sgmh.js
+	sed -i "s/$old_jdsgmh1/$new_jdsgmh_set/g" $dir_file_js/jd_sgmh.js
+	sed -i "32a $new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set" $dir_file_js/jd_sgmh.js
 
 }
 
