@@ -442,8 +442,8 @@ checklog() {
 	echo "#### 检测到错误日志的文件" >>$log3
 	for i in `cat $log1`
 	do
-		grep -Elrn  "错误|失败|error" $i >> $log2
-		grep -Elrn  "错误|失败|error" $i >> $log3
+		grep -Elrn  "错误|失败|error|taskVos" $i >> $log2
+		grep -Elrn  "错误|失败|error|taskVos" $i >> $log3
 	done
 	cat_log=$(cat $log2 | wc -l)
 	if [ $cat_log -ge "1" ];then
@@ -456,7 +456,7 @@ checklog() {
 	for i in `cat $log2`
 	do
 		echo "#### ${i}详细的错误" >> $log3
-		grep -E  "错误|失败" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败' | sort -u >> $log3
+		grep -E  "错误|失败|taskVos" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败' | sort -u >> $log3
 	done
 
 	if [ $num = "no_eeror" ]; then
