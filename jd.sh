@@ -1042,7 +1042,7 @@ system_variable() {
 	fi
 
 	blacklist=""
-	if [ "黑名单" == "$blacklist" ]
+	if [ "黑名单" == "$blacklist" ];then
 		echo ""
 	fi
 
