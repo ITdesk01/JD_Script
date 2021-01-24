@@ -548,14 +548,14 @@ that_day() {
 }
 
 stop_script() {
-	echo "$green 删掉定时任务，这样就不会定时运行脚本了$white"
+	echo -e "$green 删掉定时任务，这样就不会定时运行脚本了$white"
 	task_delete
 	sleep 3
 
-	echo "$green kill JOY$white"
+	echo -e "$green kill JOY$white"
 	kill_joy
 	sleep 3
-	echo "$green处理完成，需要重新启用，重新跑脚本sh \$jd 就会添加定时任务了$white"
+	echo -e "$green处理完成，需要重新启用，重新跑脚本sh \$jd 就会添加定时任务了$white"
 }
 
 
