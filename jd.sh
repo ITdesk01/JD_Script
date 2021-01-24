@@ -1041,6 +1041,11 @@ system_variable() {
 		Script_status="$green最新$white"
 	fi
 
+	blacklist=""
+	if [ "黑名单" == "$blacklist" ]
+		echo ""
+	fi
+
 	help
 }
 
