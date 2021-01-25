@@ -237,7 +237,7 @@ update_script() {
 
 run_0() {
 	echo -e "$green run_0$start_script $white"
-	$node $dir_file_js/cfdtx.js #财富岛提取
+	#$node $dir_file_js/cfdtx.js #财富岛提取
 	$node $dir_file_js/jd_car_exchange.js #京东汽车兑换，500赛点兑换500京豆
 	$node $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
@@ -395,7 +395,7 @@ run_10_15_20() {
 	echo -e "$green run_10_15_20$start_script $white"
 	$node $dir_file_js/jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
 	$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
-	$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
+	#$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
 	echo -e "$green run_10_15_20$stop_script $white"
 }
 
