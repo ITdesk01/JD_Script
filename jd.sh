@@ -1078,8 +1078,37 @@ system_variable() {
 	help
 }
 
+script_black_Description() {
+cat >$dir_file/config/Script_blacklist.txt <<EOF
+******************************不要删使用说明*********************************************************************
+
+*这是脚本黑名单功能，作用就是你跑脚本黑活动了，你只需要把脚本名字放底下，跑脚本的时候（全部账号）就不会跑这个脚本了
+*但你可以通过node  脚本名字来单独跑（只是不会自动跑了而已）
+*PS：（彻底解开的办法就是删除这里的脚本名称，然后更新脚本）
+*例子
+
+jd_ceshi1.js #禁用的脚本1
+jd_ceshi2.js #禁用的脚本2
+
+*按这样排列下去（一行一个脚本名字）
+*每个脚本应的文件可以参考jd.sh 的注释，ctrl+f输名字搜索即可
+
+***********************要禁用的脚本往下写，不要删除这里的任何字符，也不要动上面的************************************
+EOF
+}
+
 script_black() {
 	#不是很完美，但也能用，后面再想想办法，grep无法处理$node 这种这样我无法判断是否禁用了，只能删除掉一了百了
+
+	if [ ! -f "$dir_file/config/Script_blacklist.txt" ]; then
+		echo > $dir_file/config/Script_blacklist.txt
+	fi
+
+	if_txt=$(grep "不要删使用说明" $dir_file/config/Script_blacklist.txt)
+	if [ !  $if_txt ];then
+		script_black_Description
+	fi
+
 	script_list=$(cat $dir_file/config/Script_blacklist.txt | sed  "/*/d"  | sed "/jd_ceshi/d" | sed "s/ //g" | awk '{print $1}')
 	if [ ! $script_list ];then
 		echo -e "$green 黑名单没有任何需要禁用的脚本，不做任何处理$white"
@@ -1091,6 +1120,7 @@ script_black() {
 		done
 	fi
 }
+
 
 action1="$1"
 action2="$2"
