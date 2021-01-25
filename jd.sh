@@ -237,7 +237,7 @@ update_script() {
 
 run_0() {
 	echo -e "$green run_0$start_script $white"
-	$node $dir_file_js/cfdtx.js #财富岛提取
+	#$node $dir_file_js/cfdtx.js #财富岛提取
 	$node $dir_file_js/jd_car_exchange.js #京东汽车兑换，500赛点兑换500京豆
 	$node $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
@@ -364,7 +364,7 @@ run_07() {
 	$node $dir_file_js/jd_nian_wechat.js #京东炸年兽小程序
 	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
 	$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
-	#$node $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
+	$node $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
 	#$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
@@ -395,7 +395,7 @@ run_10_15_20() {
 	echo -e "$green run_10_15_20$start_script $white"
 	$node $dir_file_js/jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
 	$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
-	$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
+	#$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
 	echo -e "$green run_10_15_20$stop_script $white"
 }
 
@@ -571,6 +571,7 @@ help() {
 	echo -e "$green  $script_dir/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
 	echo -e "$green  $script_dir/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
 	echo -e "$green  $script_dir/USER_AGENTS.js $white UA文件可以自定义也可以默认 ，自定义需要抓包本机UA，然后修改删掉里面的UA，改成自己的"
+	echo -e "$green  $script_dir/config/Script_blacklist.txt $white 脚本黑名单，用法去看这个文件"
 	echo ""
 	echo -e "$yellow JS脚本活动列表：$green https://github.com/LXK9301/jd_scripts/blob/master/README.md $white"
 	echo -e "$yellow 浏览器获取京东cookie教程：$green https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
@@ -1048,6 +1049,14 @@ system_variable() {
 		. /etc/profile
 	fi
 
+	script_black
+
+	blacklist=""
+	if [ "黑名单" == "$blacklist" ];then
+		echo ""
+	fi
+
+
 	#检查脚本是否最新
 	echo "稍等一下，正在取回远端脚本源码，用于比较现在脚本源码，速度看你网络"
 	cd $dir_file
@@ -1066,13 +1075,53 @@ system_variable() {
 		Script_status="$green最新$white"
 	fi
 
-	blacklist=""
-	if [ "黑名单" == "$blacklist" ];then
-		echo ""
-	fi
-
 	help
 }
+
+script_black_Description() {
+cat >$dir_file/config/Script_blacklist.txt <<EOF
+******************************不要删使用说明*********************************************************************
+
+*这是脚本黑名单功能，作用就是你跑脚本黑活动了，你只需要把脚本名字放底下，跑脚本的时候（全部账号）就不会跑这个脚本了
+*但你可以通过node  脚本名字来单独跑（只是不会自动跑了而已）
+*PS：（彻底解开的办法就是删除这里的脚本名称，然后更新脚本）
+*例子
+
+jd_ceshi1.js #禁用的脚本1
+jd_ceshi2.js #禁用的脚本2
+
+*按这样排列下去（一行一个脚本名字）
+*每个脚本应的文件可以参考jd.sh 的注释，ctrl+f输名字搜索即可
+
+***********************要禁用的脚本往下写，不要删除这里的任何字符，也不要动上面的************************************
+EOF
+}
+
+script_black() {
+	#不是很完美，但也能用，后面再想想办法，grep无法处理$node 这种这样我无法判断是否禁用了，只能删除掉一了百了
+
+	if [ ! -f "$dir_file/config/Script_blacklist.txt" ]; then
+		echo > $dir_file/config/Script_blacklist.txt
+	fi
+
+	if_txt=$(grep "不要删使用说明" $dir_file/config/Script_blacklist.txt)
+	if [ !  $if_txt ];then
+		script_black_Description
+	fi
+
+	script_list=$(cat $dir_file/config/Script_blacklist.txt | sed  "/*/d"  | sed "/jd_ceshi/d" | sed "s/ //g" | awk '{print $1}')
+	if [ ! $script_list ];then
+		echo -e "$green 黑名单没有任何需要禁用的脚本，不做任何处理$white"
+	else
+		for i in `echo "$script_list"`
+		do
+			echo "开始删除关于$i脚本的代码，后面需要的话看黑名单描述处理"
+			sed -i "s/\$node \$dir_file_js\/$i//g" $dir_file/jd.sh
+		done
+	fi
+	clear
+}
+
 
 action1="$1"
 action2="$2"
@@ -1080,7 +1129,7 @@ if [[ -z $action1 ]]; then
 	system_variable
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black)
 		$action1
 		;;
 		*)
@@ -1092,7 +1141,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black)
 		$action2
 		;;
 		*)
