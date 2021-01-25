@@ -571,6 +571,7 @@ help() {
 	echo -e "$green  $script_dir/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
 	echo -e "$green  $script_dir/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
 	echo -e "$green  $script_dir/USER_AGENTS.js $white UA文件可以自定义也可以默认 ，自定义需要抓包本机UA，然后修改删掉里面的UA，改成自己的"
+	echo -e "$green  $script_dir/config/Script_blacklist.txt $white 脚本黑名单，用法去看这个文件"
 	echo ""
 	echo -e "$yellow JS脚本活动列表：$green https://github.com/LXK9301/jd_scripts/blob/master/README.md $white"
 	echo -e "$yellow 浏览器获取京东cookie教程：$green https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
