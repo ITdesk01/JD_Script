@@ -1048,6 +1048,14 @@ system_variable() {
 		. /etc/profile
 	fi
 
+	script_black
+
+	blacklist=""
+	if [ "黑名单" == "$blacklist" ];then
+		echo ""
+	fi
+
+
 	#检查脚本是否最新
 	echo "稍等一下，正在取回远端脚本源码，用于比较现在脚本源码，速度看你网络"
 	cd $dir_file
@@ -1066,12 +1074,21 @@ system_variable() {
 		Script_status="$green最新$white"
 	fi
 
-	blacklist=""
-	if [ "黑名单" == "$blacklist" ];then
-		echo ""
-	fi
-
 	help
+}
+
+script_black() {
+	#不是很完美，但也能用，后面再想想办法，grep无法处理$node 这种这样我无法判断是否禁用了，只能删除掉一了百了
+	script_list=$(cat $dir_file/config/Script_blacklist.txt | sed  "/*/d"  | sed "/jd_ceshi/d" | sed "s/ //g" | awk '{print $1}')
+	if [ ! $script_list ];then
+		echo -e "$green 黑名单没有任何需要禁用的脚本，不做任何处理$white"
+	else
+		for i in `echo "$script_list"`
+		do
+			echo "开始删除关于$i脚本的代码，后面需要的话看黑名单描述处理"
+			sed -i "s/\$node \$dir_file_js\/$i//g" $dir_file/jd.sh
+		done
+	fi
 }
 
 action1="$1"
@@ -1080,7 +1097,7 @@ if [[ -z $action1 ]]; then
 	system_variable
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black)
 		$action1
 		;;
 		*)
@@ -1092,7 +1109,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black)
 		$action2
 		;;
 		*)
