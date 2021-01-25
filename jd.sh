@@ -1118,8 +1118,8 @@ script_black() {
 			echo "开始删除关于$i脚本的代码，后面需要的话看黑名单描述处理"
 			sed -i "s/\$node \$dir_file_js\/$i//g" $dir_file/jd.sh
 		done
-		clear
 	fi
+	clear
 }
 
 
