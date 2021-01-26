@@ -197,6 +197,7 @@ cat >$dir_file/config/shylocks_script.txt <<EOF
 	jd_sx.js			#海产新年抽奖，欧皇可中实物
 	jd_opencard.js			#开卡活动，一次性活动，运行完脚本获得53京豆，进入入口还可以开卡领30都
 	jd_friend.js			#JOY总动员 一期的活动
+	jd_festival.js			#京东手机年终奖 2021年1月26日～2021年2月8日
 EOF
 
 for script_name in `cat $dir_file/config/shylocks_script.txt | awk '{print $1}'`
@@ -263,13 +264,16 @@ run_0() {
 
 joy(){
 	#crazy joy挂机领金币/宝箱专用
+	echo -e "$green joy挂机领金币$start_script $white"
 	kill_joy
 	$node $dir_file_js/jd_crazy_joy_coin.js &
+	echo -e "$green joy挂机领金币$stop_script $white"
 }
 
 kill_joy() {
+	echo -e "$green  执行kill_joy$start_script $white"
 	pid=$(ps -ef | grep "$dir_file/js/jd_crazy_joy_coin.js" |grep -v grep |awk '{print $1}')
-	if [ $(echo $pid |wc -l ) -ge 1 ];then
+	if [ $(echo $pid |wc -l ) == "1" ];then
 		echo -e "$yellow发现joy后台程序开始清理，请稍等$white"
 		for i in $pid
 		do
@@ -281,6 +285,7 @@ kill_joy() {
 	else
 		echo "$green没有运行的joy后台$white"
 	fi
+	echo -e "$green 执行kill_joy$stop_script $white"
 }
 
 run_020() {
@@ -369,6 +374,7 @@ run_07() {
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
 	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
+	$node $dir_file_js/jd_festival.js #京东手机年终奖 2021年1月26日～2021年2月8日
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
@@ -930,6 +936,16 @@ COMMENT
 	sed -i "s/$old_jdsgmh/$new_jdsgmh_set/g" $dir_file_js/jd_sgmh.js
 	sed -i "s/$old_jdsgmh1/$new_jdsgmh_set/g" $dir_file_js/jd_sgmh.js
 	sed -i "32a $new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set" $dir_file_js/jd_sgmh.js
+
+	#京东手机年终奖
+	old_jdfestival="\`9b98eb88-80ed-40ac-920c-a63fc769e72b@94c2a4d4-b53b-454b-82a0-0b80828bfd37@e274c80b-82dd-470c-878c-0790f5bf6a5d@aae299fc-6854-4fa7-b3ef-a6dedc3771b7@91ae877b-c98b-484a-9143-22d3a70b4088\`,"
+	old_jdfestival1="\`9b98eb88-80ed-40ac-920c-a63fc769e72b@94c2a4d4-b53b-454b-82a0-0b80828bfd37@e274c80b-82dd-470c-878c-0790f5bf6a5d@aae299fc-6854-4fa7-b3ef-a6dedc3771b7@91ae877b-c98b-484a-9143-22d3a70b4088\`"
+	new_jdfestival="11875cff-d5d6-4f17-af03-6a4cd00f94ec@5925b538-aa20-4417-b448-20f9a8c206b4"
+
+	new_jdfestival_set="'$new_jdfestival',"
+	sed -i "s/$old_jdfestival/$new_jdfestival_set/g" $dir_file_js/jd_festival.js
+	sed -i "s/$old_jdfestival1/$new_jdfestival_set/g" $dir_file_js/jd_festival.js
+	sed -i "34a $new_jdfestival_set\n$new_jdfestival_set\n$new_jdfestival_set\n$new_jdfestival_set" $dir_file_js/jd_festival.js
 
 }
 
