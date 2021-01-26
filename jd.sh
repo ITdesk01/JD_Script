@@ -51,7 +51,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.57"
+	cron_version="2.58"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -83,7 +83,7 @@ cat >>/etc/crontabs/root <<EOF
 0,1 19-21/1 * * * $dir_file/jd.sh run_19_20_21 >/tmp/jd_run_19_20_21.log 2>&1 #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
 20 * * * * $dir_file/jd.sh run_020 >/tmp/jd_run_020.log 2>&1 #京东炸年兽领爆竹
 0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >>/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关
-59 23 * * * sleep 57; $dir_file/jd.sh dongdong >>/tmp/jd_dongdong.log 2>&1 #东东超市兑换
+59 23 * * * sleep 57; $dir_file/jd.sh ddcs >>/tmp/jd_ddcs.log 2>&1 #东东超市兑换
 0 0,9,11,13,15,17,19,20,21,23 3,5,20-30/1 1,2 * $dir_file/jd.sh nian_live >/tmp/jd_nian_live.log 2>&1 #年货直播雨
 30,31 12-23/1 * * * $node $dir_file_js/jd_live_redrain_half.js >/tmp/jd_live_redrain_half.log #半点直播雨
 0 0,9,11,13,15,17,19,20,21,23 * * * $node $dir_file_js/jd_live_redrain_offical.js >/tmp/jd_live_redrain_offical.log #官方号直播红包雨
@@ -417,13 +417,13 @@ nian_live() {
 	echo -e "$green 年货直播雨$stop_script $white"
 }
 
-dongdong() {
-	dongdong_left=20
-	while [[ ${dongdong_left} -gt 0 ]]; do
+ddcs() {
+	ddcs_left=30
+	while [[ ${ddcs_left} -gt 0 ]]; do
 		#东东超市兑换，有次数限制，没时间要求
 		$node $dir_file_js/jd_blueCoin.js  &
 		sleep 1
-		dongdong_left=$(($dongdong_left - 1))
+		ddcs_left=$(($ddcs_left - 1))
 	done
 }
 
@@ -1155,7 +1155,7 @@ if [[ -z $action1 ]]; then
 	system_variable
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|dongdong)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|ddcs)
 		$action1
 		;;
 		*)
@@ -1167,7 +1167,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|dongdong)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|ddcs)
 		$action2
 		;;
 		*)
