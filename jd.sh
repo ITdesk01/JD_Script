@@ -940,7 +940,7 @@ COMMENT
 	#闪购盲盒
 	old_jdsgmh="'T019-aknAFRllhyoQlyI46gCjVWmIaW5kRrbA',"
 	old_jdsgmh1="'T019-aknAFRllhyoQlyI46gCjVWmIaW5kRrbA'"
-	new_jdsgmh="T0225KkcRxoZ9AfVdB7wxvRcIQCjVWmIaW5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVWmIaW5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVWmIaW5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVWmIaW5kRrbA"
+	new_jdsgmh="T024anXulbWUI_NR9ZpeTHmEoPlACjVWmIaW5kRrbA@T0205KkcPElQrCOQVnqP66FpCjVWmIaW5kRrbA@T0225KkcRBpM_VSEKUz8kPENIQCjVWmIaW5kRrbA@T0225KkcRxoZ9AfVdB7wxvRcIQCjVWmIaW5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVWmIaW5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVWmIaW5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVWmIaW5kRrbA"
 
 	new_jdsgmh_set="'$new_jdsgmh',"
 	sed -i "s/$old_jdsgmh/$new_jdsgmh_set/g" $dir_file_js/jd_sgmh.js
@@ -950,7 +950,7 @@ COMMENT
 	#京东手机年终奖
 	old_jdfestival="\`9b98eb88-80ed-40ac-920c-a63fc769e72b@94c2a4d4-b53b-454b-82a0-0b80828bfd37@e274c80b-82dd-470c-878c-0790f5bf6a5d@aae299fc-6854-4fa7-b3ef-a6dedc3771b7@91ae877b-c98b-484a-9143-22d3a70b4088\`,"
 	old_jdfestival1="\`9b98eb88-80ed-40ac-920c-a63fc769e72b@94c2a4d4-b53b-454b-82a0-0b80828bfd37@e274c80b-82dd-470c-878c-0790f5bf6a5d@aae299fc-6854-4fa7-b3ef-a6dedc3771b7@91ae877b-c98b-484a-9143-22d3a70b4088\`"
-	new_jdfestival="11875cff-d5d6-4f17-af03-6a4cd00f94ec@5925b538-aa20-4417-b448-20f9a8c206b4"
+	new_jdfestival="a1f4425f-8c39-471e-8689-0dd9af382045@a2538c1d-a045-4ea0-98ba-d8962796c097@753c15e6-ca43-4df0-99d2-08a3e8789bf3@11875cff-d5d6-4f17-af03-6a4cd00f94ec@5925b538-aa20-4417-b448-20f9a8c206b4"
 
 	new_jdfestival_set="'$new_jdfestival',"
 	sed -i "s/$old_jdfestival/$new_jdfestival_set/g" $dir_file_js/jd_festival.js
