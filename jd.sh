@@ -51,7 +51,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.56"
+	cron_version="2.57"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -73,7 +73,7 @@ cat >>/etc/crontabs/root <<EOF
 10 2-22/3 * * * $dir_file/jd.sh run_03 >/tmp/jd_run_03.log 2>&1 #天天加速 3小时运行一次，打卡时间间隔是6小时
 40 6-18/6 * * * $dir_file/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1 #不是很重要的，错开运行
 35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1 #不是很重要的，错开运行
-10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #超市旺旺兑换礼品
+10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #旺旺兑换礼品
 00 22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本
 5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #22点05分更新lxk0301脚本
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本
@@ -83,6 +83,7 @@ cat >>/etc/crontabs/root <<EOF
 0,1 19-21/1 * * * $dir_file/jd.sh run_19_20_21 >/tmp/jd_run_19_20_21.log 2>&1 #直播间红包雨 1月17日-2月5日，每天19点、20点、21点
 20 * * * * $dir_file/jd.sh run_020 >/tmp/jd_run_020.log 2>&1 #京东炸年兽领爆竹
 0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >>/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关
+59 23 * * * sleep 57; $dir_file/jd.sh dongdong >>/tmp/jd_dongdong.log 2>&1 #东东超市兑换
 0 0,9,11,13,15,17,19,20,21,23 3,5,20-30/1 1,2 * $dir_file/jd.sh nian_live >/tmp/jd_nian_live.log 2>&1 #年货直播雨
 30,31 12-23/1 * * * $node $dir_file_js/jd_live_redrain_half.js >/tmp/jd_live_redrain_half.log #半点直播雨
 0 0,9,11,13,15,17,19,20,21,23 * * * $node $dir_file_js/jd_live_redrain_offical.js >/tmp/jd_live_redrain_offical.log #官方号直播红包雨
@@ -385,7 +386,6 @@ run_07() {
 run_08_12_16() {
 	echo -e "$green run_08_12_16$start_script $white"
 	nian
-	$node $dir_file_js/jd_blueCoin.js #东东超市兑换，有次数限制，没时间要求
 	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	echo -e "$green run_08_12_16$stop_script $white"
 }
@@ -415,6 +415,16 @@ nian_live() {
 	echo -e "$green年货直播雨$start_script $white"
 	$node $dir_file_js/jd_live_redrain_nian.js		#年货直播雨 2021年1月20日-2021年1月30日、2月3日、2月5日每天0,9,11,13,15,17,19,20,21,23点可领
 	echo -e "$green 年货直播雨$stop_script $white"
+}
+
+dongdong() {
+	dongdong_left=20
+	while [[ ${dongdong_left} -gt 0 ]]; do
+		#东东超市兑换，有次数限制，没时间要求
+		$node $dir_file_js/jd_blueCoin.js  &
+		sleep 1
+		dongdong_left=$(($dongdong_left - 1))
+	done
 }
 
 
@@ -1145,7 +1155,7 @@ if [[ -z $action1 ]]; then
 	system_variable
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|dongdong)
 		$action1
 		;;
 		*)
@@ -1157,7 +1167,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|dongdong)
 		$action2
 		;;
 		*)
