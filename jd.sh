@@ -199,6 +199,7 @@ cat >$dir_file/config/shylocks_script.txt <<EOF
 	jd_opencard.js			#开卡活动，一次性活动，运行完脚本获得53京豆，进入入口还可以开卡领30都
 	jd_friend.js			#JOY总动员 一期的活动
 	jd_festival.js			#京东手机年终奖 2021年1月26日～2021年2月8日
+	jd_coupon.js			#源头好物红包
 EOF
 
 for script_name in `cat $dir_file/config/shylocks_script.txt | awk '{print $1}'`
@@ -240,7 +241,6 @@ update_script() {
 run_0() {
 	echo -e "$green run_0$start_script $white"
 	#$node $dir_file_js/cfdtx.js #财富岛提取
-	$node $dir_file_js/jd_car_exchange.js #京东汽车兑换，500赛点兑换500京豆
 	$node $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jx_sign.js #京喜app签到长期
@@ -420,8 +420,9 @@ nian_live() {
 ddcs() {
 	ddcs_left=15
 	while [[ ${ddcs_left} -gt 0 ]]; do
-		#东东超市兑换，有次数限制，没时间要求
-		$node $dir_file_js/jd_blueCoin.js  &
+		$node $dir_file_js/jd_blueCoin.js  &	#东东超市兑换，有次数限制，没时间要求
+		$node $dir_file_js/jd_coupon.js	&	#源头好物红包
+		$node $dir_file_js/jd_car_exchange.js &  #京东汽车兑换，500赛点兑换500京豆
 		sleep 1
 		ddcs_left=$(($ddcs_left - 1))
 	done
