@@ -274,7 +274,7 @@ joy(){
 
 kill_joy() {
 	echo -e "$green  执行kill_joy$start_script $white"
-	pid=$(ps -ef | grep "$dir_file/js/jd_crazy_joy_coin.js" |grep -v grep |awk '{print $1}')
+	pid=$(ps -ef | grep "jd_crazy_joy_coin.js" | grep -v grep | awk '{print $1}')
 	if [ $(echo $pid |wc -l ) == "1" ];then
 		echo -e "$yellow发现joy后台程序开始清理，请稍等$white"
 		for i in $pid
