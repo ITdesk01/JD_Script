@@ -202,11 +202,12 @@ cat >$dir_file/config/shylocks_script.txt <<EOF
 	jd_coupon.js			#源头好物红包
 EOF
 
+:<<'COMMENT'
 for script_name in `cat $dir_file/config/shylocks_script.txt | awk '{print $1}'`
 do
 	wget $url2/$script_name -O $dir_file_js/$script_name
 done
-
+COMMENT
 
 
 	wget https://raw.githubusercontent.com/MoPoQAQ/Script/e864e3f995ac474cf2bb6dda8984b2be89e041f0/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
