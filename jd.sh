@@ -204,8 +204,6 @@ do
 done
 COMMENT
 
-
-	wget https://raw.githubusercontent.com/MoPoQAQ/Script/e864e3f995ac474cf2bb6dda8984b2be89e041f0/Me/jx_cfd.js -O $dir_file_js/jx_cfd.js
 	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
 
@@ -371,7 +369,7 @@ run_07() {
 	$node $dir_file_js/jd_super_box.js #京东超级盒子
 	#$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
-	#$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
+	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
 	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
 	$node $dir_file_js/jd_festival.js #京东手机年终奖 2021年1月26日～2021年2月8日
 	sy
@@ -400,7 +398,7 @@ run_10_15_20() {
 	echo -e "$green run_10_15_20$start_script $white"
 	$node $dir_file_js/jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
 	$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
-	#$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
+	$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
 	echo -e "$green run_10_15_20$stop_script $white"
 }
 
