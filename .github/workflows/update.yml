@@ -2,7 +2,7 @@ name: Update_js
 on:
   # push:
   #  branches: 
-  #    - master
+  #    - main
   schedule:
     - cron: 55 1,6,12 * * * 
   # release:
