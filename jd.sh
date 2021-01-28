@@ -163,6 +163,11 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_nh.js			#京东年货节2021年1月9日-2021年2月9日
 	jd_sgmh.js			#闪购盲盒长期活动
 	jd_super_box.js			#京东超级盒子
+	jd_festival.js			#京东手机年终奖 2021年1月26日～2021年2月8日
+	jd_mh.js			#京东盲盒
+	jd_ms.js			#京东秒秒币
+	jd_xg.js			#小鸽有礼 2021年1月15日至2021年2月19日
+	jd_coupon.js			#源头好物红包
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unbind.js			#注销京东会员卡
@@ -177,11 +182,8 @@ done
 
 url2="https://raw.githubusercontent.com/shylocks/Loon/main"
 cat >$dir_file/config/shylocks_script.txt <<EOF
-	jd_mh.js			#京东盲盒
-	jd_ms.js			#京东秒秒币
 	jd_bj.js			#宝洁美发屋
 	jd_super_coupon.js		#玩一玩-神券驾到,少于三个账号别玩
-	jd_xg.js			#小鸽有礼 2021年1月15日至2021年2月19日
 	jd_gyec.js			#工业爱消除
 	jd_xxl.js			#东东爱消除
 	jd_xxl_gh.js			#个护爱消除，完成所有任务+每日挑战
@@ -193,8 +195,6 @@ cat >$dir_file/config/shylocks_script.txt <<EOF
 	jd_sx.js			#海产新年抽奖，欧皇可中实物
 	jd_opencard.js			#开卡活动，一次性活动，运行完脚本获得53京豆，进入入口还可以开卡领30都
 	jd_friend.js			#JOY总动员 一期的活动
-	jd_festival.js			#京东手机年终奖 2021年1月26日～2021年2月8日
-	jd_coupon.js			#源头好物红包
 EOF
 
 :<<'COMMENT'
