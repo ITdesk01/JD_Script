@@ -77,6 +77,7 @@ cat >>/etc/crontabs/root <<EOF
 5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #22点05分更新lxk0301脚本
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本
 */30 1-22 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机
+*/30 12-19 * * * $dir_file/jjd_immortal_answer.js >/tmp/jd_immortal_answer.log 2>&1 #12-19,每半个小时运行一次答题
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机
 20 * * * * $dir_file/jd.sh run_020 >/tmp/jd_run_020.log 2>&1 #京东炸年兽领爆竹
 0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >>/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关
@@ -150,6 +151,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_nian_ar.js			#年兽ar
 	jd_nian_wechat.js		#京东炸年兽小程序
 	jd_immortal.js			#京东神仙书院 2021-1-20至2021-2-5
+        jd_immortal_answer.js           #京东神仙书院答题
 	jd_firecrackers.js		#集鞭炮赢京豆
 	jd_syj.js			#赚京豆
 	jd_bookshop.js			#口袋书店
@@ -366,8 +368,9 @@ run_07() {
 	$node $dir_file_js/jd_nian_ar.js #年兽ar
 	$node $dir_file_js/jd_nian_wechat.js #京东炸年兽小程序
 	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
+	$node $dir_file_js/jd_immortal_answer.js #京东神仙书院答题	
 	#$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
-	$node $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
+	#$node $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
 	#$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	#$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
