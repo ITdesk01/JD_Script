@@ -348,6 +348,7 @@ run_06_18() {
 
 run_07() {
 	echo -e "$green run_07$start_script $white"
+	sy
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jx_sign.js #京喜app签到长期
 	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
@@ -426,6 +427,15 @@ ddcs() {
 		$node $dir_file_js/jd_car_exchange.js &  #京东汽车兑换，500赛点兑换500京豆
 		sleep 1
 		ddcs_left=$(($ddcs_left - 1))
+	done
+}
+
+sy() {
+	sy_left=15
+	while [[ ${sy_left} -gt 0 ]]; do
+		$node $dir_file_js/jd_immortal_answer.js
+		sleep 5
+		sy_left=$(($sy_left - 1))
 	done
 }
 
@@ -1157,7 +1167,7 @@ if [[ -z $action1 ]]; then
 	system_variable
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|ddcs)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|ddcs|sy)
 		$action1
 		;;
 		*)
@@ -1169,7 +1179,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|ddcs)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|ddcs|sy)
 		$action2
 		;;
 		*)
@@ -1178,3 +1188,4 @@ else
 	esac
 	fi
 fi
+
