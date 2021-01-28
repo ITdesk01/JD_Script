@@ -150,6 +150,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_nian_ar.js			#年兽ar
 	jd_nian_wechat.js		#京东炸年兽小程序
 	jd_immortal.js			#京东神仙书院 2021-1-20至2021-2-5
+	jd_immortal_answer.js		#京东书院自动答题
 	jd_firecrackers.js		#集鞭炮赢京豆
 	jd_syj.js			#赚京豆
 	jd_bookshop.js			#口袋书店
@@ -162,6 +163,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_daily_egg.js 		#京东金融-天天提鹅
 	jd_nh.js			#京东年货节2021年1月9日-2021年2月9日
 	jd_sgmh.js			#闪购盲盒长期活动
+	jd_super_box.js			#京东超级盒子
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unbind.js			#注销京东会员卡
@@ -343,7 +345,6 @@ run_06_18() {
 
 run_07() {
 	echo -e "$green run_07$start_script $white"
-	sy
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
 	$node $dir_file_js/jx_sign.js #京喜app签到长期
 	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
@@ -367,12 +368,14 @@ run_07() {
 	$node $dir_file_js/jd_nian_wechat.js #京东炸年兽小程序
 	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
 	#$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
-	$node $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
+	rm -rf  $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
+	$node $dir_file_js/jd_super_box.js #京东超级盒子
 	#$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	#$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
 	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
 	$node $dir_file_js/jd_festival.js #京东手机年终奖 2021年1月26日～2021年2月8日
+	sy
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
@@ -429,7 +432,7 @@ sy() {
 	sy_left=15
 	while [[ ${sy_left} -gt 0 ]]; do
 		$node $dir_file_js/jd_immortal_answer.js
-		sleep 5
+		sleep 10
 		sy_left=$(($sy_left - 1))
 	done
 }
@@ -963,6 +966,16 @@ COMMENT
 	sed -i "s/$old_jdfestival/$new_jdfestival_set/g" $dir_file_js/jd_festival.js
 	sed -i "s/$old_jdfestival1/$new_jdfestival_set/g" $dir_file_js/jd_festival.js
 	sed -i "34a $new_jdfestival_set\n$new_jdfestival_set\n$new_jdfestival_set\n$new_jdfestival_set" $dir_file_js/jd_festival.js
+
+	#京东超级盒子
+	old_jdsuperbox="\`O3eI2LwEpHNofuF6LxjNqw@Hvm2Tg0jWloh4bnPOa9wuA@RY7V2DbS5uInv_GGD7JuoQij_0m9TAUe-t_mpE-BHB4@dZGLTyomKT0ZmOYaa4FSu0Ch0ywXFSW7gXwe_z6nUFc@UHW6hnmrpOABeMMKc5kpng\`,"
+	old_jdsuperbox1="\`O3eI2LwEpHNofuF6LxjNqw@Hvm2Tg0jWloh4bnPOa9wuA@RY7V2DbS5uInv_GGD7JuoQij_0m9TAUe-t_mpE-BHB4@dZGLTyomKT0ZmOYaa4FSu0Ch0ywXFSW7gXwe_z6nUFc@UHW6hnmrpOABeMMKc5kpng\`,"
+	new_jdsuperbox="NLQlCreLH6IcZX7xXmOy7JVKCiTveYfjCxRBHB1x7U8@TZOHaJd9uoCWSBGjTpvHtq4ESISc_JVtAz15HMVR0Xc@31AEesBSjRfF0nbzA0iTHw@GRTM4onTMM4_xLPwAgg2Lw"
+
+	new_jdsuperbox_set="'$new_jdsuperbox',"
+	sed -i "s/$old_jdsuperbox/$new_jdsuperbox_set/g" $dir_file_js/jd_super_box.js
+	sed -i "s/$old_jdsuperbox1/$new_jdsuperbox_set/g" $dir_file_js/jd_super_box.js
+	sed -i "34a $new_jdsuperbox_set\n$new_jdsuperbox_set\n$new_jdsuperbox_set\n$new_jdsuperbox_set" $dir_file_js/jd_super_box.js
 
 }
 
