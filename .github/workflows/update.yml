@@ -3,8 +3,8 @@ on:
  # push:
  #   branches: 
  #     - main
- #  schedule:
- #    - cron: 55 1,6,12 * * * 
+ # schedule:
+ #   - cron: 55 1,6,12 * * * 
  # release:
  #   types: [published]
  # watch:
