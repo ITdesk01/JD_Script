@@ -151,7 +151,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_nian_wechat.js		#京东炸年兽小程序
 	jd_immortal.js			#京东神仙书院 2021-1-20至2021-2-5
 	jd_immortal_answer.js		#京东书院自动答题
-	jd_firecrackers.js		#集鞭炮赢京豆
 	jd_syj.js			#赚京豆
 	jd_bookshop.js			#口袋书店
 	jd_family.js			#京东家庭号
@@ -984,7 +983,6 @@ time() {
 		echo ""
 		echo -e  "$green你是第一次使用脚本，请好好阅读以上脚本说明$white"
 		echo ""
-		mv $dir_file/js $dir_file/0js
 		seconds_left=120
 		while [[ ${seconds_left} -gt 0 ]]; do
 			echo -ne "$green${seconds_left}秒以后才能正常使用脚本，不要想结束我。我无处不在。。。$white"
@@ -992,7 +990,6 @@ time() {
 			seconds_left=$(($seconds_left - 1))
 			echo -ne "\r"
 		done
-		mv $dir_file/0js $dir_file/js
 		echo -e "$green恭喜你阅读完成，祝玩的愉快，我也不想搞这波，但太多小白不愿意看说明然后一大堆问题，请你也体谅一下$white"
 		echo "我已经阅读脚本说明" > $dir_file/script_read.txt
 	fi
