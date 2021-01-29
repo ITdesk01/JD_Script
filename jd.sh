@@ -168,6 +168,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_ms.js			#京东秒秒币
 	jd_xg.js			#小鸽有礼 2021年1月15日至2021年2月19日
 	jd_coupon.js			#源头好物红包
+	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unbind.js			#注销京东会员卡
