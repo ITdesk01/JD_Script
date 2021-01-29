@@ -62,7 +62,7 @@ N1（群友极地阳光测试）
 
 **2.安装完依赖以后用npm安装一些模块**
 
-         npm install -g crypto-js got http-server tough-cookie download request tunnel
+         npm install -g crypto-js got http-server tough-cookie download request tunnel qrcode-terminal
 
 
 **如果你执行安装npm install -g crypto-js got http-server tough-cookie download request tunnel报错，你也可以用以下代码安装**
