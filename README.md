@@ -67,7 +67,7 @@ N1（群友极地阳光测试）
 
 **如果你执行安装npm install -g crypto-js got http-server tough-cookie download request tunnel报错，你也可以用以下代码安装**
 
-         wget https://raw.githubusercontent.com/LXK9301/jd_scripts/master/package.json
+         wget https://gitee.com/lxk0301/jd_scripts/raw/master/package.json
         
          npm install
 
@@ -87,7 +87,7 @@ N1（群友极地阳光测试）
 
 **3.开始下载脚本**
 
-         git clone https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
+         git clone -b main https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
          cd /usr/share/JD_Script && chmod 777 jd.sh 
          sh jd.sh 
          
