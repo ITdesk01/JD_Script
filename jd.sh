@@ -599,6 +599,7 @@ help() {
 	echo ""
 	echo -e "$yellow JS脚本活动列表：$green https://github.com/LXK9301/jd_scripts/blob/master/README.md $white"
 	echo -e "$yellow 浏览器获取京东cookie教程：$green https://github.com/LXK9301/jd_scripts/blob/master/backUp/GetJdCookie.md $white"
+	echo -e "$yellow 脚本获取京东cookie：$green node $dir_file_js/getJDCookie.js $white"
 	echo ""
 	echo -e "$red 注意：$white请停掉你之前运行的其他jd脚本，然后把$green JS脚本活动列表$white的活动全部手动点开一次，不知活动入口的，作者js脚本里有写"
 	echo ""
@@ -820,13 +821,6 @@ additional_settings() {
 	fi
 
 
-	#东东超市
-	sed -i '323,338d' jd_superMarket.js
-	sed -i "s/eU9Ya-y2N_5z9DvXwyIV0A/eU9Ya-iyZ68kpWrRmXBFgw/g" $dir_file_js/jd_superMarket.js
-	sed -i "s/aURoM7PtY_Q/eU9Ya-iyZ68kpWrRmXBFgw/g" $dir_file_js/jd_superMarket.js
-	sed -i "s/eU9Ya-y2N_5z9DvXwyIV0A/eU9YabrkZ_h1-GrcmiJB0A/g" $dir_file_js/jd_superMarket.js
-	sed -i "s/eU9YaeS3Z6ol8zrRmnMb1Q/eU9YabrkZ_h1-GrcmiJB0A/g" $dir_file_js/jd_superMarket.js
-
 	#京喜农场
 	old_jxnc="'22bd6fbbabbaa770a45ab2607e7a1e8a@197c6094e965fdf3d33621b47719e0b1'"
 	new_jxnc="019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3"
@@ -837,6 +831,31 @@ additional_settings() {
 	sed -i "s/$old_jxnc/'019cffd91086ab563e91abf469634395@48f4c24ea3d01be32359cc61ba43ae7e@87c34293058a8644f73be7731a91a293@16b73e9a958c3f4636a51a17fcba28df@6cdc3a49111b7b57153a633eb6c1b1e3'/g" $dir_file_js/jd_jxnc.js
 	sed -i "s/'',/$new_jxnc_set/g" $dir_file_js/jdJxncShareCodes.js
 	sed -i "12a $new_jxnc_set\n$new_jxnc_set\n$new_jxnc_set\n$new_jxnc_set" $dir_file_js/jdJxncShareCodes.js
+
+	#工业爱消除
+	old_jdgyec="'840266@2583822@2585219@2586018@1556311@2583822@2585256@2586023@2728968',"
+	new_jdgyec="'743359@2753077@2759122@2759259@2337978',"
+
+	new_jdgyec_set="'$new_jdgyec',"
+	sed -i "s/$old_jdgyec,/$new_jdgyec_set/g" $dir_file_js/jd_gyec.js
+	sed -i "s/$old_jdgyec/$new_jdgyec_set/g" $dir_file_js/jd_gyec.js
+	sed -i "35a $new_jdgyec_set\n$new_jdgyec_set\n$new_jdgyec_set\n$new_jdgyec_set" $dir_file_js/jd_gyec.js
+
+	#东东爱消除
+	old_jdxxl="'840266@2585219@2586018@1556311@2583822@2585256',"
+	new_jdxxl="743359@2753077@2759122@2759259@2337978"
+
+	new_jdxxl_set="'$new_jdxxl',"
+	sed -i "s/$old_jdxxl/$new_jdxxl_set/g" $dir_file_js/jd_xxl.js
+	sed -i "37a $new_jdxxl_set\n$new_jdxxl_set\n$new_jdxxl_set\n$new_jdxxl_set" $dir_file_js/jd_xxl.js
+
+	#个护爱消除
+	old_jdxxlgh="'840266@2585219@2586018@1556311@2583822@2585256',"
+	new_jdxxlgh="743359@2753077@2759122@2759259@2337978"
+
+	new_jdxxlgh_set="'$new_jdxxlgh',"
+	sed -i "s/$old_jdxxlgh/$new_jdxxlgh_set/g" $dir_file_js/jd_xxl_gh.js
+	sed -i "39a $new_jdxxlgh_set\n$new_jdxxlgh_set\n$new_jdxxlgh_set\n$new_jdxxlgh_set" $dir_file_js/jd_xxl_gh.js
 
 COMMENT
 
@@ -888,32 +907,6 @@ COMMENT
 	sed -i "s/$old_jdcash/$new_jdcash_set/g" $dir_file_js/jd_cash.js
 	sed -i "s/$old_jdcash1/$new_jdcash_set/g" $dir_file_js/jd_cash.js
 	sed -i "33a $new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set" $dir_file_js/jd_cash.js
-
-	#工业爱消除
-	old_jdgyec="'840266@2583822@2585219@2586018@1556311@2583822@2585256@2586023@2728968',"
-	new_jdgyec="'743359@2753077@2759122@2759259@2337978',"
-
-	new_jdgyec_set="'$new_jdgyec',"
-	sed -i "s/$old_jdgyec,/$new_jdgyec_set/g" $dir_file_js/jd_gyec.js
-	sed -i "s/$old_jdgyec/$new_jdgyec_set/g" $dir_file_js/jd_gyec.js
-	sed -i "35a $new_jdgyec_set\n$new_jdgyec_set\n$new_jdgyec_set\n$new_jdgyec_set" $dir_file_js/jd_gyec.js
-
-	#东东爱消除
-	old_jdxxl="'840266@2585219@2586018@1556311@2583822@2585256',"
-	new_jdxxl="743359@2753077@2759122@2759259@2337978"
-
-	new_jdxxl_set="'$new_jdxxl',"
-	sed -i "s/$old_jdxxl/$new_jdxxl_set/g" $dir_file_js/jd_xxl.js
-	sed -i "37a $new_jdxxl_set\n$new_jdxxl_set\n$new_jdxxl_set\n$new_jdxxl_set" $dir_file_js/jd_xxl.js
-
-	#个护爱消除
-	old_jdxxlgh="'840266@2585219@2586018@1556311@2583822@2585256',"
-	new_jdxxlgh="743359@2753077@2759122@2759259@2337978"
-
-	new_jdxxlgh_set="'$new_jdxxlgh',"
-	sed -i "s/$old_jdxxlgh/$new_jdxxlgh_set/g" $dir_file_js/jd_xxl_gh.js
-	sed -i "39a $new_jdxxlgh_set\n$new_jdxxlgh_set\n$new_jdxxlgh_set\n$new_jdxxlgh_set" $dir_file_js/jd_xxl_gh.js
-
 
 	#京东炸年兽
 	old_jdnian="\`cgxZaDXWZPCmiUa2akPVmFMI27K6antJzucULQPYNim_BPEW1Dwd@cgxZdTXtIrPYuAqfDgSpusxr97nagU6hwFa3TXxnqM95u3ib-xt4nWqZdz8@cgxZdTXtIO-O6QmYDVf67KCEJ19JcybuMB2_hYu8NSNQg0oS2Z_FpMce45g@cgxZdTXtILiLvg7OAASp61meehou4OeZvqbjghsZlc3rI5SBk7b3InUqSQ0@cgxZ9_MZ8gByP7FZ368dN8oTZBwGieaH5HvtnvXuK1Epn_KK8yol8OYGw7h3M2j_PxSZvYA\`,"
