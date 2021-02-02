@@ -1171,22 +1171,26 @@ system_variable() {
 	help
 }
 
+black_version="黑名单版本1.0"
 script_black_Description() {
-cat >$dir_file/config/Script_blacklist.txt <<EOF
-******************************不要删使用说明*********************************************************************
 
+cat >> $dir_file/config/Script_blacklist.txt <<EOF
+******************************不要删使用说明，$black_version*********************************************************************
+*
 *这是脚本黑名单功能，作用就是你跑脚本黑活动了，你只需要把脚本名字放底下，跑脚本的时候（全部账号）就不会跑这个脚本了
 *但你可以通过node  脚本名字来单独跑（只是不会自动跑了而已）
 *PS：（彻底解开的办法就是删除这里的脚本名称，然后更新脚本）
 *例子
-
-jd_ceshi1.js #禁用的脚本1
-jd_ceshi2.js #禁用的脚本2
-
+*
+* 	jd_ceshi1.js #禁用的脚本1
+* 	jd_ceshi2.js #禁用的脚本2
+*
+*注意事项：禁用JOY挂机需要这么写 jd_crazy_joy_coin.js &
 *按这样排列下去（一行一个脚本名字）
-*每个脚本应的文件可以参考jd.sh 的注释，ctrl+f输名字搜索即可
-
-***********************要禁用的脚本往下写，不要删除这里的任何字符，也不要动上面的************************************
+*每个脚本应的文件可以用 sh \$jd script_name                    #显示所有JS脚本名称与作用
+*
+*
+***********************要禁用的脚本不要写这里面，不要删除这里的任何字符，也不要动里面的，往下面写随便你********************************
 EOF
 }
 
@@ -1197,8 +1201,12 @@ script_black() {
 		echo > $dir_file/config/Script_blacklist.txt
 	fi
 
-	if_txt=$(grep "不要删使用说明" $dir_file/config/Script_blacklist.txt)
-	if [ !  $if_txt ];then
+	if_txt=$(grep "$black_version" $dir_file/config/Script_blacklist.txt | wc -l)
+	if [  $if_txt == "0" ];then
+		echo "更新黑名单说明"
+		sed -i '/*/d' $dir_file/config/Script_blacklist.txt >/dev/null 2>&1
+		sed -i '/jd_ceshi/d' $dir_file/config/Script_blacklist.txt >/dev/null 2>&1
+		sed -i "s/ //g"  $dir_file/config/Script_blacklist.txt >/dev/null 2>&1
 		script_black_Description
 	fi
 
