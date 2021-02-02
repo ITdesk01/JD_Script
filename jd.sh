@@ -38,7 +38,7 @@ wrap="%0D%0A%0D%0A" #Server酱换行
 wrap_tab="     "
 current_time=$(date +"%Y-%m-%d")
 by="#### 脚本仓库地址:https://github.com/ITdesk01/JD_Script"
-SCKEY=$(cat $script_dir/sendNotify.js | awk 'NR==12 {print $4}' | sed "s/'//g" | sed "s/;//g")
+SCKEY=$(grep "let SCKEY" $script_dir/sendNotify.js  | awk -F "'" '{print $2}')
 
 red="\033[31m"
 green="\033[32m"
