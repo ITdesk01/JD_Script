@@ -596,6 +596,165 @@ that_day() {
 
 }
 
+backnas() {
+	date_time=$(date +%Y-%m-%d-%H:%M)
+	back_file_name="script_${date_time}.tar.gz"
+
+	#判断定时任务
+	backnas_version="1.0"
+	if [ `grep -o "backnas定时任务$backnas_version" $cron_file |wc -l` == "0" ]; then
+		echo "不存在计划任务开始设置"
+		sed -i '/backnas/d' /etc/crontabs/root >/dev/null 2>&1
+		backnas_cron
+		echo "计划任务设置完成"
+	fi
+	clear
+	#判断所在文件夹
+	if [ "$dir_file" == "$install_script/JD_Script" ];then
+		backnas_config_file="$install_script_config/backnas_config.txt"
+		if [ ! -f "$install_script_config/backnas_config.txt" ]; then
+			cd $install_script_config
+			backnas_config
+			cd
+		fi
+	else
+		backnas_config_file="$dir_file/config/backnas_config.txt"
+		if [ ! -f "$dir_file/config/backnas_config.txt" ]; then
+			cd $dir_file/config
+			backnas_config
+			cd
+		fi
+	fi
+
+	#判断依赖
+	sshpass_if=$(opkg list-installed | grep 'sshpass' |awk '{print $1}')
+	if [ ! $sshpass_if ];then
+		echo "未检测到sshpass依赖，开始安装"
+		opkg update
+		opkg install sshpass
+	fi
+
+	#开始传递参数
+	nas_user=$(grep "user" $backnas_config_file | awk -F "'" '{print $2}')
+	nas_pass=$(grep "password" $backnas_config_file | awk -F "'" '{print $2}')
+	nas_ip=$(grep "nas_ip" $backnas_config_file | awk -F "'" '{print $2}')
+	nas_file=$(grep "nas_file" $backnas_config_file | awk -F "'" '{print $2}')
+	nas_prot=$(grep "port" $backnas_config_file | awk -F "'" '{print $2}')
+
+	echo "#########################################"
+	echo "       backnas $backnas_version版本"
+	echo "#########################################"
+	#判断用户名
+	if [ ! $nas_user ];then
+		echo -e "$red 用户名为空，参数填写$backnas_config_file填完再回车继续$white"
+		read a
+		backnas
+	else
+		echo -e "$yellow 用户名：$green $nas_user $white"
+	fi
+
+	#判断密码
+	if [ ! $nas_pass ];then
+		echo -e "$red 密码为空，参数填写$backnas_config_file填完再回车继续 $white"
+		read a
+		backnas
+	else
+		echo -e "$yellow 密码：$green这是机密不显示给你看 $white"
+	fi
+
+	#判断IP
+	if [ ! $nas_ip ];then
+		echo -e "$red NAS IP为空，参数填写$backnas_config_file填完再回车继续 $white"
+		read a
+		backnas
+	else
+		echo -e "$yellow NAS IP：$green$nas_ip $white"
+	fi
+
+	#判断NAS文件夹
+	if [ ! $nas_file ];then
+		echo -e "$red NAS名为空，参数填写$backnas_config_file填完再回车继续 $white"
+		read a
+		backnas
+	else
+		echo -e "$yellow NAS备份目录：$green $nas_file $white"
+	fi
+
+	#判断端口
+	if [ ! $nas_prot ];then
+		echo -e "$red NAS 端口为空，参数填写$backnas_config_file填完再回车继续$white"
+		read a
+		backnas
+	else
+		echo -e "$yellow NAS 端口：$green $nas_prot $white"
+	fi
+	echo "#########################################"
+
+	echo -e "$green>> 开始备份到nas$white"
+	sleep 5
+
+	echo -e "$green>> 开始打包文件$white"
+	tar -zcvf /tmp/$back_file_name $dir_file
+	sleep 5
+
+	clear
+	echo -e "$green>> 开始上传文件 $white"
+	echo -e "$yellow注意事项: 首次连接NAS的ssh会遇见$green Do you want to continue connecting?$white然后你输入y卡住不动"
+	echo -e "$yellow解决办法:ctrl+c ，然后$green ssh -p $nas_prot $nas_user@$nas_ip $white连接成功以后输$green logout$white退出NAS，重新执行$green sh \$jd backnas$white"
+	echo ""
+	echo -e "$green>> 上传文件中，请稍等。。。。 $white"
+	sshpass -p "$nas_pass" scp -P $nas_prot /tmp/$back_file_name $nas_user@$nas_ip:$nas_file
+	if [ $? -eq 0 ]; then
+		sleep 5
+		echo -e "$green>> 上传文件完成 $white"
+		echo ""
+		echo "#############################################################################"
+		echo ""
+		echo -e "$green $date_time将$back_file_name上传到$nas_ip 的$nas_file目录$white"
+		echo ""
+		echo "#############################################################################"
+	else
+		echo -e "$red>> 上传文件失败，请检查你的参数是否正确$white"
+	fi
+	echo ""
+	echo -e "$green>> 清理tmp文件 $white"
+	rm -rf /tmp/*.tar.gz
+	sleep 5
+}
+
+backnas_config() {
+cat >backnas_config.txt <<EOF
+#################################################################
+用于备份JD_script 到NAS 采用scp传输，请确保你的nas，ssh端口有打开
+################################################################
+#填入你的nas账号(必填)
+user=''
+
+#填入你nas的密码(必填)
+password=''
+
+#填入nas IP地址可以是域名(必填)
+nas_ip=''
+
+#填入nas保存路径(必填)
+nas_file=''
+
+#端口(默认即可，ssh端口有变填这里)
+port='22'
+EOF
+}
+
+backnas_cron() {
+cat >>/etc/crontabs/root <<EOF
+#**********这里是backnas定时任务$backnas_version版本**********#
+0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次JD_script
+###########backnas##########请将其他定时任务放到底下###############
+EOF
+
+	/etc/init.d/cron restart
+	cron_help="$yellow定时任务更新完成，记得看下你的定时任务$white"
+}
+
 stop_script() {
 	echo -e "$green 删掉定时任务，这样就不会定时运行脚本了$white"
 	task_delete
@@ -648,6 +807,8 @@ help() {
 	echo -e "$green  sh \$jd that_day $white  			#检测JD_script仓库今天更新了什么"
 	echo ""
 	echo -e "$green  sh \$jd script_name $white  			#显示所有JS脚本名称与作用"
+	echo ""
+	echo -e "$green  sh \$jd backnas $white  			#备份脚本到NAS存档"
 	echo ""
 	echo -e "$green  sh \$jd stop_script $white  			#删除定时任务停用所用脚本"
 	echo ""
@@ -1239,7 +1400,7 @@ if [[ -z $action1 ]]; then
 	system_variable
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|ddcs|sy|script_name|baiyuan)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|ddcs|sy|script_name|baiyuan|backnas)
 		$action1
 		;;
 		*)
@@ -1251,7 +1412,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|ddcs|sy|script_name|baiyuan)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_19_20_21|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|ddcs|sy|script_name|baiyuan|backnas)
 		$action2
 		;;
 		*)
