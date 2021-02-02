@@ -612,6 +612,7 @@ backnas() {
 	#判断所在文件夹
 	if [ "$dir_file" == "$install_script/JD_Script" ];then
 		backnas_config_file="$install_script_config/backnas_config.txt"
+		back_file_patch="$install_script"
 		if [ ! -f "$install_script_config/backnas_config.txt" ]; then
 			cd $install_script_config
 			backnas_config
@@ -619,6 +620,7 @@ backnas() {
 		fi
 	else
 		backnas_config_file="$dir_file/config/backnas_config.txt"
+		back_file_patch="$dir_file"
 		if [ ! -f "$dir_file/config/backnas_config.txt" ]; then
 			cd $dir_file/config
 			backnas_config
@@ -694,7 +696,7 @@ backnas() {
 	sleep 5
 
 	echo -e "$green>> 开始打包文件$white"
-	tar -zcvf /tmp/$back_file_name $dir_file
+	tar -zcvf /tmp/$back_file_name $back_file_patch
 	sleep 5
 
 	clear
