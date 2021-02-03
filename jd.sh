@@ -632,7 +632,7 @@ backnas() {
 
 	#判断config文件
 	backnas_config_version="1.0"
-	if [ `grep -o "backnas_config版本$backnas_config_version" backnas_config_file |wc -l` == "0" ]; then
+	if [ `grep -o "backnas_config版本$backnas_config_version" $backnas_config_file |wc -l` == "0" ]; then
 		echo "backnas_config有变，开始更新"
 		backnas_config
 		echo "backnas计划任务设置完成"
