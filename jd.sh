@@ -604,6 +604,22 @@ that_day() {
 backnas() {
 	date_time=$(date +%Y-%m-%d-%H:%M)
 	back_file_name="script_${date_time}.tar.gz"
+	#判断所在文件夹
+	if [ "$dir_file" == "$install_script/JD_Script" ];then
+		backnas_config_file="$install_script_config/backnas_config.txt"
+		back_file_patch="$install_script"
+		if [ ! -f "$install_script_config/backnas_config.txt" ]; then
+			cd $install_script_config
+			backnas_config
+		fi
+	else
+		backnas_config_file="$dir_file/config/backnas_config.txt"
+		back_file_patch="$dir_file"
+		if [ ! -f "$dir_file/config/backnas_config.txt" ]; then
+			cd $dir_file/config
+			backnas_config
+		fi
+	fi
 
 	#判断定时任务
 	backnas_version="1.1"
@@ -613,25 +629,15 @@ backnas() {
 		backnas_cron
 		echo "backnas计划任务设置完成"
 	fi
-	clear
-	#判断所在文件夹
-	if [ "$dir_file" == "$install_script/JD_Script" ];then
-		backnas_config_file="$install_script_config/backnas_config.txt"
-		back_file_patch="$install_script"
-		if [ ! -f "$install_script_config/backnas_config.txt" ]; then
-			cd $install_script_config
-			backnas_config
-			cd
-		fi
-	else
-		backnas_config_file="$dir_file/config/backnas_config.txt"
-		back_file_patch="$dir_file"
-		if [ ! -f "$dir_file/config/backnas_config.txt" ]; then
-			cd $dir_file/config
-			backnas_config
-			cd
-		fi
+
+	#判断config文件
+	backnas_config_version="1.0"
+	if [ `grep -o "backnas_config版本$backnas_config_version" backnas_config_file |wc -l` == "0" ]; then
+		echo "backnas_config有变，开始更新"
+		backnas_config
+		echo "backnas计划任务设置完成"
 	fi
+	clear
 
 	#判断依赖
 	sshpass_if=$(opkg list-installed | grep 'sshpass' |awk '{print $1}')
@@ -643,6 +649,7 @@ backnas() {
 
 	#开始传递参数
 	nas_user=$(grep "user" $backnas_config_file | awk -F "'" '{print $2}')
+	nas_secret_key=$(grep "secret_key" $backnas_config_file | awk -F "'" '{print $2}')
 	nas_pass=$(grep "password" $backnas_config_file | awk -F "'" '{print $2}')
 	nas_ip=$(grep "nas_ip" $backnas_config_file | awk -F "'" '{print $2}')
 	nas_file=$(grep "nas_file" $backnas_config_file | awk -F "'" '{print $2}')
@@ -662,11 +669,16 @@ backnas() {
 
 	#判断密码
 	if [ ! $nas_pass ];then
-		echo -e "$red 密码为空，参数填写$backnas_config_file填完再回车继续 $white"
-		read a
-		backnas
+		echo -e "$yellow 密码：$green空 $white"
 	else
 		echo -e "$yellow 密码：$green这是机密不显示给你看 $white"
+	fi
+
+	#判断密钥
+	if [ ! $nas_secret_key ];then
+		echo -e "$yellow NAS 密钥：$green 空$white"
+	else
+		echo -e "$yellow NAS 密钥：$green $nas_secret_key $white"
 	fi
 
 	#判断IP
@@ -695,6 +707,8 @@ backnas() {
 	else
 		echo -e "$yellow NAS 端口：$green $nas_prot $white"
 	fi
+
+	echo -e "$yellow 使用协议：$green SCP$white"
 	echo "#########################################"
 
 	echo -e "$green>> 开始备份到nas$white"
@@ -710,7 +724,19 @@ backnas() {
 	echo -e "$yellow解决办法:ctrl+c ，然后$green ssh -p $nas_prot $nas_user@$nas_ip $white连接成功以后输$green logout$white退出NAS，重新执行$green sh \$jd backnas$white"
 	echo ""
 	echo -e "$green>> 上传文件中，请稍等。。。。 $white"
-	sshpass -p "$nas_pass" scp -P $nas_prot /tmp/$back_file_name $nas_user@$nas_ip:$nas_file
+
+	if [ ! $nas_secret_key ];then
+		if [ ! $nas_pass ];then
+			echo -e "$red 密码：为空，参数填写$backnas_config_file填完再回车继续$white"
+			read a
+			backnas
+		else
+			sshpass -p "$nas_pass" scp -P $nas_prot -r /tmp/$back_file_name $nas_user@$nas_ip:$nas_file
+		fi
+	else
+		scp -P $nas_prot -i $nas_secret_key -r /tmp/$back_file_name $nas_user@$nas_ip:$nas_file
+	fi
+
 	if [ $? -eq 0 ]; then
 		sleep 5
 		echo -e "$green>> 上传文件完成 $white"
@@ -730,15 +756,19 @@ backnas() {
 }
 
 backnas_config() {
-cat >backnas_config.txt <<EOF
-#################################################################
+cat >$backnas_config_file <<EOF
+################################################################
+                 backnas_config版本$backnas_config_version
 用于备份JD_script 到NAS 采用scp传输，请确保你的nas，ssh端口有打开
 ################################################################
 #填入你的nas账号(必填)
 user=''
 
-#填入你nas的密码(必填)
+#填入你nas的密码(密码和密钥必须填一个)
 password=''
+
+#填入你nas的密钥位置(可以留空)(密钥 > 密码,有密钥的情况优先使用密钥而不是密码)
+secret_key=''
 
 #填入nas IP地址可以是域名(必填)
 nas_ip=''
