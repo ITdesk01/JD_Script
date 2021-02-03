@@ -417,7 +417,7 @@ run_10_15_20() {
 
 baiyuan() {
         echo -e "$green百元卡$start_script $white"
-	baiyuan_left=15
+	baiyuan_left=8
 	while [[ ${baiyuan_left} -gt 0 ]]; do
 		$node $dir_file_js/jd_newYearMoney_lottery.js &
 		sleep 1
@@ -606,12 +606,12 @@ backnas() {
 	back_file_name="script_${date_time}.tar.gz"
 
 	#判断定时任务
-	backnas_version="1.0"
+	backnas_version="1.1"
 	if [ `grep -o "backnas定时任务$backnas_version" $cron_file |wc -l` == "0" ]; then
-		echo "不存在计划任务开始设置"
+		echo "backnas定时任务有变，开始更新"
 		sed -i '/backnas/d' /etc/crontabs/root >/dev/null 2>&1
 		backnas_cron
-		echo "计划任务设置完成"
+		echo "backnas计划任务设置完成"
 	fi
 	clear
 	#判断所在文件夹
@@ -754,7 +754,7 @@ EOF
 backnas_cron() {
 cat >>/etc/crontabs/root <<EOF
 #**********这里是backnas定时任务$backnas_version版本**********#
-0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次JD_script
+0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script
 ###########backnas##########请将其他定时任务放到底下###############
 EOF
 
