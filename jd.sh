@@ -145,9 +145,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_lotteryMachine.js 		#京东抽奖机
 	jd_necklace.js			#点点券
-	jd_nian.js			#京东炸年兽
-	jd_nianCollect.js		#炸年兽专门收集爆竹
-	jd_nian_sign.js			#年兽签到
 	jd_immortal.js			#京东神仙书院 2021-1-20至2021-2-5
 	jd_immortal_answer.js		#京东书院自动答题
 	jd_syj.js			#赚京豆
