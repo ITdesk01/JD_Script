@@ -148,8 +148,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_nian.js			#京东炸年兽
 	jd_nianCollect.js		#炸年兽专门收集爆竹
 	jd_nian_sign.js			#年兽签到
-	jd_nian_ar.js			#年兽ar
-	jd_nian_wechat.js		#京东炸年兽小程序
 	jd_immortal.js			#京东神仙书院 2021-1-20至2021-2-5
 	jd_immortal_answer.js		#京东书院自动答题
 	jd_syj.js			#赚京豆
@@ -168,7 +166,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_mh.js			#京东盲盒
 	jd_ms.js			#京东秒秒币
 	jd_xg.js			#小鸽有礼 2021年1月15日至2021年2月19日
-	jd_5g.js			#5G狂欢城
 	jd_818.js			#京东手机狂欢城活动
 	jd_xgyl.js			#小鸽有礼2 2021年1月28日～2021年2月28日
         jd_newYearMoney.js              #京东压岁钱
@@ -369,13 +366,13 @@ run_07() {
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_bj.js #宝洁美发屋
-	$node $dir_file_js/jd_nian_ar.js #年兽ar
-	$node $dir_file_js/jd_nian_wechat.js #京东炸年兽小程序
+	rm -rf $dir_file_js/jd_nian_ar.js #年兽ar
+	rm -rf  $dir_file_js/jd_nian_wechat.js #京东炸年兽小程序
 	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
-	#$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
+	$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
 	rm -rf  $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
 	$node $dir_file_js/jd_super_box.js #京东超级盒子
-	#$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
+	$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
 	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
 	$node $dir_file_js/jd_xgyl.js #小鸽有礼2 2021年1月28日～2021年2月28日
@@ -393,7 +390,7 @@ run_08_12_16() {
 	echo -e "$green run_08_12_16$start_script $white"
 	nian
 	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
-	$node $dir_file_js/jd_5g.js #5G狂欢城
+	rm -rf  $dir_file_js/jd_5g.js #5G狂欢城
 	$node $dir_file_js/jd_818.js #京东手机狂欢城活动
         $node $dir_file_js/jd_newYearMoney.js #京东压岁钱
 	echo -e "$green run_08_12_16$stop_script $white"
@@ -1153,21 +1150,6 @@ COMMENT
 	sed -i "s/$old_jdnian1/$new_jdnian_set/g" $dir_file_js/jd_nian.js
 	sed -i "50a $new_jdnian_set\n$new_jdnian_set\n$new_jdnian_set\n$new_jdnian_set" $dir_file_js/jd_nian.js
 
-	#京东炸年兽AR
-	sed -i "s/$old_jdnian/$new_jdnian_set/g" $dir_file_js/jd_nian_ar.js
-	sed -i "s/$old_jdnian1/$new_jdnian_set/g" $dir_file_js/jd_nian_ar.js
-	sed -i "50a $new_jdnian_set\n$new_jdnian_set\n$new_jdnian_set\n$new_jdnian_set" $dir_file_js/jd_nian_ar.js
-
-	#京东炸年兽PK
-	old_nian_pk="'IgNWdiLGaPadvlqJQnnKp27-YpAvKvSYNTSkTGvZylf_0wcvqD9EMkohEN4@IgNWdiLGaPaZskfACQyhgLSpZWps-WtQEW3McibU@IgNWdiLGaPaAvmHPAQf769XqjJjMyRirPzN9-AS-WHY9Y_G7t9Cwe5gdiI2qEvDY@IgNWdiLGaPYCeJUfsq18UNi5ln9xEZSPRdOue8Wl3hJTS2SQzU0vulL0fHeULJaIfgqHFd7f_ao@IgNWdiLGaPYCeJUfsq18UNi5ln9xEZSPRdOue8Wl3hLRjZBAJLHzBpcl18AeskNYctp_8w',"
-	old_nian_pk1="'IgNWdiLGaPadvlqJQnnKp27-YpAvKvSYNTSkTGvZylf_0wcvqD9EMkohEN4@IgNWdiLGaPaZskfACQyhgLSpZWps-WtQEW3McibU@IgNWdiLGaPaAvmHPAQf769XqjJjMyRirPzN9-AS-WHY9Y_G7t9Cwe5gdiI2qEvDY@IgNWdiLGaPYCeJUfsq18UNi5ln9xEZSPRdOue8Wl3hJTS2SQzU0vulL0fHeULJaIfgqHFd7f_ao@IgNWdiLGaPYCeJUfsq18UNi5ln9xEZSPRdOue8Wl3hLRjZBAJLHzBpcl18AeskNYctp_8w'"
-	new_nian_pk="IgNWdiLGaPaAvmHODAWovAEQf5WnHYwnEopqHDyPxTdVozWzvm1_etjnQvYdPkZj@IgNWdiLGaPaAvmHODAWovAEQf5WnHYwnEopqHDyPxTU-9lpZ2DvBtnBVL-fnj03h@IgNWdiLGaPaAvmHODAWovAEQf5WnHYwnEopqHDyPxW9xSTeGkUZE_6fcT6G9rHA@IgNWdiLGaPaAvmHODAWovAEQf5WnHYwnEopqHDyPxVQVGUrTfU1VM3N9zDV17QI"
-	zuoyou_20190516_nian_pk="IgNWdiLGaPaGqAnMZwXlo0PFiMdNj2YL@IgNWdiLGaPaAvmHNCQGo6YVqweTVylalVlaXKQIaKOosWst_P6NrORmEBh5X5r2q@IgNWdiLGaPaGs1mcVlLuuggjtZR-vo9r441dFARTzw30QMe1@IgNWdiLGaPaIs1CeQUCu7UQQj2LahbozbU4CGwKB_WqRVw"
-
-	new_jdnianpk_set="'$new_nian_pk@$zuoyou_20190516_nian_pk',"
-	sed -i "s/$old_nian_pk/$new_jdnianpk_set/g" $dir_file_js/jd_nian.js
-	sed -i "s/$old_nian_pk1/$new_jdnianpk_set/g" $dir_file_js/jd_nian.js
-	sed -i "58a $new_jdnianpk_set\n$new_jdnianpk_set\n$new_jdnianpk_set\n$new_jdnianpk_set" $dir_file_js/jd_nian.js
 
 	#京东神仙书院
 		old_jdimmortal="\`39xIs4YwE5Z7CPQQ0baz9jNWO6PSZHsNWqfOwWyqScbJBGhg4v7HbuBg63TJ4@27xIs4YwE5Z7FGzJqrMmavC_vWKtbEaJxbz0Vahw@43xIs4YwE5Z7DsWOzDSP_N6WTDnbA0wBjjof6cA9FzcbHMcZB9wE1R3ToSluCgxAzEXQ@43xIs4YwE5Z7DsWOzDSEuRWEOROpnDjMx_VvSs5ikYQ8XgcZB9whEHjDmPKQoL16TZ8w@50xIs4YwE5Z7FTId9W-KibDgxxx6AEa7189V1zSxSf2HP6681IXPQ81aJEP77WoHXLcK7QzlxGqsGqfU@43xIs4YwE5Z7DsWOzDSPKFWdkRe2Ae6h0jAdlhuSmuwcfUcZB9wBcHhj0_zyZDNK4Rhg\`,"
