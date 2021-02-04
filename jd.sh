@@ -1206,9 +1206,11 @@ COMMENT
 	new_jdnian="cgxZdTXtQOKDk2exSH7bm1yqE9lH3OVjhKsFb1yndmZ5KgUbv7F2-X8"
 	zuoyou_20190516_jdnian="cgxZcyOFIfaWiQqLAQXLjg@cgxZZyLGbL_apkKqAUet7CfElE0@cgxZdTXtI-nYvwbPAFSu7cfA8L-fTfRluVPeR9kXvOpzr7T1OB7z_vf53pY@cgxZdTXtIb-I4g2fWleovuuIRUaojOVYyqCW2tQE47NH2e5FdQdTPzqVq60@cgxZdTXtILve6wjPAVH6637oFStz2n55oDLBd31Gx1wuFVZtARbf7Apdz2k@cgxZczjVceSNrVumVUnljJGWK910VVlBaWrIryfH@cgxZciDRZb7fpkKqDALuuFHFNhA@cgxZfTjcc_Of7QzJREnK6JpEyVYO3l7cfElq@cgxZdyjGdeSNq1eWVlLlox-BNG_CcXjZTeAN16NgVbs@cgxZdTXtI-_fuVrKXAas6hLMvq8JwrWzJDKWMn5lPVfsd8XKc2XkCY6g0Rw"
 	jidiyangguang_20190516_jdnian="cgxZdTXtIL6J7QzACwWhunFByvPM_ltcuRhq9MwhLp6jp0TOnV3aPkhq-dY@cgxZdTXtI-jeuwqYWQStvcR9psTc5SAZg5CwlSr9fmHCeDi1lNzhztEP3zE"
-	chiyu_jdnian=""
+	Lgg_20200430_jdnian="cgxZdTXtIb7auQrPDAH45orfTfVayXwjjyYzgscaVqPlJIuaVuWlt4D82os@cgxZdTXtIbvSvwvMDger7tMWaAKMEUOcMwF2DnLzgn3y2ZgXZ21mqeO_0KY"
+	xo_20201229_jdnian="cgxZLmSLJbna4wfJFQeo7I-W-QWH-iztkxuIdAonLp1nlopEGNhP3Hl5j5g@cgxZdTXtI7zc71rMXQL65xjp0oWb_WpVGA4c8vZ5TVoIExpD1DMlxQKsOQs@cgxZdTXtI7vY7Q3ODwz7vOPSZf25xIy_9aRDIM4bGiJMCspQX3aEOxxbc1Y"
+	shazi_20201115_jdnian="cgxZaDX-VtKArEute2zBpwrzW5rWLbY4ucdn6LBOB-v-TgH-Mz6E@cgxZdTXtIL7cv1vNCAGq6iUYPZGSDH3An0h_cOVfi3235E9DS7hc8o8xgx4"
 
-	new_jdnian_set="'$new_jdnian@$zuoyou_20190516_jdnian@$jidiyangguang_20190516_jdnian',"
+	new_jdnian_set="'$new_jdnian@$zuoyou_20190516_jdnian@$jidiyangguang_20190516_jdnian@$Lgg_20200430_jdnian@$xo_20201229_jdnian@$shazi_20201115_jdnian',"
 	sed -i "s/$old_jdnian/$new_jdnian_set/g" $dir_file_js/jd_nian.js
 	sed -i "s/$old_jdnian1/$new_jdnian_set/g" $dir_file_js/jd_nian.js
 	sed -i "50a $new_jdnian_set\n$new_jdnian_set\n$new_jdnian_set\n$new_jdnian_set" $dir_file_js/jd_nian.js
