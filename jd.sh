@@ -1349,8 +1349,6 @@ system_variable() {
 		. /etc/profile
 	fi
 
-	script_black
-
 	blacklist=""
 	if [ "黑名单" == "$blacklist" ];then
 		echo ""
@@ -1430,6 +1428,8 @@ script_black() {
 	clear
 }
 
+#脚本黑名单
+script_black
 
 action1="$1"
 action2="$2"
