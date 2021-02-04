@@ -604,14 +604,12 @@ backnas() {
 		backnas_config_file="$install_script_config/backnas_config.txt"
 		back_file_patch="$install_script"
 		if [ ! -f "$install_script_config/backnas_config.txt" ]; then
-			cd $install_script_config
 			backnas_config
 		fi
 	else
 		backnas_config_file="$dir_file/config/backnas_config.txt"
 		back_file_patch="$dir_file"
 		if [ ! -f "$dir_file/config/backnas_config.txt" ]; then
-			cd $dir_file/config
 			backnas_config
 		fi
 	fi
@@ -785,6 +783,74 @@ EOF
 
 	/etc/init.d/cron restart
 	cron_help="$yellow定时任务更新完成，记得看下你的定时任务$white"
+}
+
+
+
+script_black() {
+	#不是很完美，但也能用，后面再想想办法，grep无法处理$node 这种这样我无法判断是否禁用了，只能删除掉一了百了
+	black_version="黑名单版本1.1"
+	#判断所在文件夹
+	if [ "$dir_file" == "$install_script/JD_Script" ];then
+		script_black_file="$install_script_config/Script_blacklist.txt"
+		if [ ! -f "$script_black_file" ]; then
+			script_black_Description
+		fi
+		#script_black用于升级以后恢复链接
+		if [ ! -f "$dir_file/config/Script_blacklist.txt" ]; then
+			ln -s $script_black_file $dir_file/config/Script_blacklist.txt
+		fi
+	else
+		script_black_file="$dir_file/config/Script_blacklist.txt"
+		if [ ! -f "$script_black_file" ]; then
+			script_black_Description
+		fi
+	fi
+
+	if_script_black=$(grep "$black_version" $script_black_file | wc -l)
+	if [  $if_script_black == "0" ];then
+		echo "更新一下黑名单"
+		rm -rf $dir_file/config/Script_blacklist.txt
+		sed -i '/*/d' $script_black_file >/dev/null 2>&1
+		sed -i '/jd_ceshi/d' $script_black_file >/dev/null 2>&1
+		sed -i "s/ //g"  $script_black_file >/dev/null 2>&1
+		echo "" >> $script_black_file >/dev/null 2>&1
+		ln -s $script_black_file $dir_file/config/Script_blacklist.txt
+		script_black_Description
+	fi
+
+	script_list=$(cat $script_black_file | sed  "/*/d"  | sed "/jd_ceshi/d" | sed "s/ //g" | awk '{print $1}')
+	if [ ! $script_list ];then
+		echo -e "$green 黑名单没有任何需要禁用的脚本，不做任何处理$white"
+	else
+		for i in `echo "$script_list"`
+		do
+			echo "开始删除关于$i脚本的代码，后面需要的话看黑名单描述处理"
+			sed -i "s/\$node \$dir_file_js\/$i//g" $dir_file/jd.sh
+		done
+	fi
+	clear
+}
+
+script_black_Description() {
+cat >> $script_black_file <<EOF
+******************************不要删使用说明，$black_version*********************************************************************
+*
+*这是脚本黑名单功能，作用就是你跑脚本黑活动了，你只需要把脚本名字放底下，跑脚本的时候（全部账号）就不会跑这个脚本了
+*但你可以通过node  脚本名字来单独跑（只是不会自动跑了而已）
+*PS：（彻底解开的办法就是删除这里的脚本名称，然后更新脚本）
+*例子
+*
+* 	jd_ceshi1.js #禁用的脚本1
+* 	jd_ceshi2.js #禁用的脚本2
+*
+*注意事项：禁用JOY挂机需要这么写 jd_crazy_joy_coin.js &
+*按这样排列下去（一行一个脚本名字）
+*每个脚本应的文件可以用 sh \$jd script_name                    #显示所有JS脚本名称与作用
+*
+*
+***********************要禁用的脚本不要写这里面，不要删除这里的任何字符，也不要动里面的，往下面写随便你********************************
+EOF
 }
 
 stop_script() {
@@ -1359,58 +1425,6 @@ system_variable() {
 	fi
 
 	help
-}
-
-black_version="黑名单版本1.0"
-script_black_Description() {
-
-cat >> $dir_file/config/Script_blacklist.txt <<EOF
-******************************不要删使用说明，$black_version*********************************************************************
-*
-*这是脚本黑名单功能，作用就是你跑脚本黑活动了，你只需要把脚本名字放底下，跑脚本的时候（全部账号）就不会跑这个脚本了
-*但你可以通过node  脚本名字来单独跑（只是不会自动跑了而已）
-*PS：（彻底解开的办法就是删除这里的脚本名称，然后更新脚本）
-*例子
-*
-* 	jd_ceshi1.js #禁用的脚本1
-* 	jd_ceshi2.js #禁用的脚本2
-*
-*注意事项：禁用JOY挂机需要这么写 jd_crazy_joy_coin.js &
-*按这样排列下去（一行一个脚本名字）
-*每个脚本应的文件可以用 sh \$jd script_name                    #显示所有JS脚本名称与作用
-*
-*
-***********************要禁用的脚本不要写这里面，不要删除这里的任何字符，也不要动里面的，往下面写随便你********************************
-EOF
-}
-
-script_black() {
-	#不是很完美，但也能用，后面再想想办法，grep无法处理$node 这种这样我无法判断是否禁用了，只能删除掉一了百了
-
-	if [ ! -f "$dir_file/config/Script_blacklist.txt" ]; then
-		echo > $dir_file/config/Script_blacklist.txt
-	fi
-
-	if_txt=$(grep "$black_version" $dir_file/config/Script_blacklist.txt | wc -l)
-	if [  $if_txt == "0" ];then
-		echo "更新黑名单说明"
-		sed -i '/*/d' $dir_file/config/Script_blacklist.txt >/dev/null 2>&1
-		sed -i '/jd_ceshi/d' $dir_file/config/Script_blacklist.txt >/dev/null 2>&1
-		sed -i "s/ //g"  $dir_file/config/Script_blacklist.txt >/dev/null 2>&1
-		script_black_Description
-	fi
-
-	script_list=$(cat $dir_file/config/Script_blacklist.txt | sed  "/*/d"  | sed "/jd_ceshi/d" | sed "s/ //g" | awk '{print $1}')
-	if [ ! $script_list ];then
-		echo -e "$green 黑名单没有任何需要禁用的脚本，不做任何处理$white"
-	else
-		for i in `echo "$script_list"`
-		do
-			echo "开始删除关于$i脚本的代码，后面需要的话看黑名单描述处理"
-			sed -i "s/\$node \$dir_file_js\/$i//g" $dir_file/jd.sh
-		done
-	fi
-	clear
 }
 
 action1="$1"
