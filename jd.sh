@@ -182,17 +182,9 @@ done
 
 url2="https://raw.githubusercontent.com/shylocks/Loon/main"
 cat >$dir_file/config/shylocks_script.txt <<EOF
-	jd_bj.js			#宝洁美发屋
-	jd_super_coupon.js		#玩一玩-神券驾到,少于三个账号别玩
 	jd_gyec.js			#工业爱消除
 	jd_xxl.js			#东东爱消除
 	jd_xxl_gh.js			#个护爱消除，完成所有任务+每日挑战
-	jd_live_redrain2.js		#直播间红包雨 1月17日-2月5日，每天19点、20点、21点
-	jd_live_redrain_nian.js		#年货直播雨 2021年1月20日-2021年1月30日、2月3日、2月5日每天0,9,11,13,15,17,19,20,21,23点可领
-	jd_live_redrain_half.js		#半点红包雨 2021年1月20日-2021年2月5日每天12~23每个半点
-	jd_live_redrain_offical.js	#官方号直播红包雨
-	jd_vote.js			#京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
-	jd_sx.js			#海产新年抽奖，欧皇可中实物
 	jd_opencard.js			#开卡活动，一次性活动，运行完脚本获得53京豆，进入入口还可以开卡领30都
 	jd_friend.js			#JOY总动员 一期的活动
 EOF
@@ -206,7 +198,7 @@ COMMENT
 	cat $dir_file/config/lxk0301_script.txt > $dir_file/config/collect_script.txt
 	cat $dir_file/config/shylocks_script.txt >> $dir_file/config/collect_script.txt
 
-	wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
+	#wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
 
 
@@ -348,7 +340,7 @@ run_07() {
 	$node $dir_file_js/jx_sign.js #京喜app签到长期
 	$node $dir_file_js/jd_rankingList.js #京东排行榜签到领京豆
 	$node $dir_file_js/jd_syj.js #十元街签到,一天一次即可，一周30豆子
-	$node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
+	rm -rf $node $dir_file_js/jd_paopao.js #京东泡泡大战,一天一次
 	$node $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
 	$node $dir_file_js/jd_bean_home.js #领京豆额外奖励
 	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
@@ -359,18 +351,12 @@ run_07() {
 	$node $dir_file_js/jd_jxnc.js #京喜农场
 	$node $dir_file_js/jd_mh.js #京东盲盒
 	$node $dir_file_js/jd_ms.js #京东秒秒币 一个号大概60秒
-	$node $dir_file_js/jd_bj.js #宝洁美发屋
-	$node $dir_file_js/jd_bj.js #宝洁美发屋
-	$node $dir_file_js/jd_bj.js #宝洁美发屋
-	$node $dir_file_js/jd_bj.js #宝洁美发屋
-	rm -rf $dir_file_js/jd_nian_ar.js #年兽ar
-	rm -rf  $dir_file_js/jd_nian_wechat.js #京东炸年兽小程序
+	rm -rf $node $dir_file_js/jd_bj.js #宝洁美发屋
 	$node $dir_file_js/jd_immortal.js #京东神仙书院 2021-1-20至2021-2-5
-	$node $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
-	rm -rf  $dir_file_js/jd_firecrackers.js	#集鞭炮赢京豆
+	rm -rf 	$node $dir_file_js/jd_vote.js #京年团圆
+	rm -rf  $dir_file_js/jd_sx.js #海产新年抽奖，欧皇可中实物
 	$node $dir_file_js/jd_super_box.js #京东超级盒子
-	$node $dir_file_js/jd_vote.js #京年团圆pick2021年1月11日至2021年1月20日 抽奖可获得京豆，白号100豆，黑号全是空气
-	$node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
+	rm -rf $node $dir_file_js/jd_super_coupon.js #玩一玩-神券驾到,少于三个账号别玩
 	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
 	$node $dir_file_js/jd_xgyl.js #小鸽有礼2 2021年1月28日～2021年2月28日
 	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
@@ -982,7 +968,7 @@ additional_settings() {
 	sed -i "s/$old_fruit1/$new_fruit_set/g" $dir_file_js/jd_fruit.js
 	sed -i "s/$old_fruit2/$new_fruit_set/g" $dir_file_js/jd_fruit.js
 	sed -i "34a $new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set" $dir_file_js/jd_fruit.js
-	sed -i "s/dFruitBeanCard = false/dFruitBeanCard = true/g" $dir_file_js/jd_fruit.js #年底不浇水开始换豆
+	#sed -i "s/dFruitBeanCard = false/dFruitBeanCard = true/g" $dir_file_js/jd_fruit.js #年底不浇水开始换豆
 
 	sed -i "s/$old_fruit3/$new_fruit_set/g" $dir_file_js/jdFruitShareCodes.js
 	sed -i "s/$old_fruit4/$new_fruit_set/g" $dir_file_js/jdFruitShareCodes.js
