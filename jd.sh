@@ -51,7 +51,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.63"
+	cron_version="2.64"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -66,7 +66,7 @@ task() {
 task_add() {
 cat >>/etc/crontabs/root <<EOF
 #**********这里是JD_Script的定时任务$cron_version版本**********#
-0 0 * * * $dir_file/jd.sh run_0  >/tmp/jd_run_0.log 2>&1 #0点0分执行全部脚本
+59 23 * * * sleep 57; $dir_file/jd.sh run_0  >/tmp/jd_run_0.log 2>&1 #0点0分执行全部脚本
 */45 2-23 * * * $dir_file/jd.sh run_045 >/tmp/jd_run_045.log 2>&1 #两个工厂
 0 7-23/1 * * * $dir_file/jd.sh run_01 >/tmp/jd_run_01.log 2>&1 #种豆得豆收瓶子
 10 2-22/3 * * * $dir_file/jd.sh run_03 >/tmp/jd_run_03.log 2>&1 #天天加速 3小时运行一次，打卡时间间隔是6小时
@@ -80,7 +80,6 @@ cat >>/etc/crontabs/root <<EOF
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机
 20 * * * * $dir_file/jd.sh run_020 >/tmp/jd_run_020.log 2>&1 #京东炸年兽领爆竹
 0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关
-59 23 * * * sleep 57; $dir_file/jd.sh ddcs >/tmp/jd_ddcs.log 2>&1 #东东超市兑换
 59 8,11,15,19 * * * sleep 57; $dir_file/jd.sh baiyuan >/tmp/jd_baiyuan.log 2>&1 #京东抢百元卡
 ###########100##########请将其他定时任务放到底下###############
 EOF
@@ -228,6 +227,7 @@ update_script() {
 
 run_0() {
 	echo -e "$green run_0$start_script $white"
+	ddcs
 	#$node $dir_file_js/cfdtx.js #财富岛提取
 	$node $dir_file_js/jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	$node $dir_file_js/jd_bean_sign.js #京东多合一签到
@@ -411,7 +411,7 @@ nian_live() {
 }
 
 ddcs() {
-	ddcs_left=15
+	ddcs_left=60
 	while [[ ${ddcs_left} -gt 0 ]]; do
 		#$node $dir_file_js/jd_blueCoin.js  &	#东东超市兑换，有次数限制，没时间要求
 		$node $dir_file_js/jd_car_exchange.js &  #京东汽车兑换，500赛点兑换500京豆
