@@ -411,10 +411,10 @@ nian_live() {
 }
 
 ddcs() {
-	ddcs_left=60
+	ddcs_left=30
 	while [[ ${ddcs_left} -gt 0 ]]; do
 		#$node $dir_file_js/jd_blueCoin.js  &	#东东超市兑换，有次数限制，没时间要求
-		$node $dir_file_js/jd_car_exchange.js &  #京东汽车兑换，500赛点兑换500京豆
+		$node $dir_file_js/jd_car_exchange.js   #京东汽车兑换，500赛点兑换500京豆
 		sleep 1
 		ddcs_left=$(($ddcs_left - 1))
 	done
