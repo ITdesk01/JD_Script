@@ -51,7 +51,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.64"
+	cron_version="2.65"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -81,6 +81,7 @@ cat >>/etc/crontabs/root <<EOF
 20 * * * * $dir_file/jd.sh run_020 >/tmp/jd_run_020.log 2>&1 #京东炸年兽领爆竹
 0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关
 59 8,11,15,19 * * * sleep 57; $dir_file/jd.sh baiyuan >/tmp/jd_baiyuan.log 2>&1 #京东抢百元卡
+10 10,11 * * 2-5 $node $dir_file_js/jd_entertainment.js >>/tmp/jd_entertainment.log 2>&1 #百变大咖秀
 ###########100##########请将其他定时任务放到底下###############
 EOF
 
@@ -195,6 +196,7 @@ COMMENT
 
 	#wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
+	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_entertainment.js -O $dir_file_js/jd_entertainment.js
 
 
 	if [ $? -eq 0 ]; then
