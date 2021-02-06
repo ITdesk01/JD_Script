@@ -160,7 +160,8 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_818.js			#京东手机狂欢城活动
 	jd_xgyl.js			#小鸽有礼2 2021年1月28日～2021年2月28日
         jd_newYearMoney.js              #京东压岁钱
-        jd_newYearMoney_lottery.js      ＃京东抢百元卡
+        jd_newYearMoney_lottery.js      #京东抢百元卡
+	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
