@@ -402,6 +402,7 @@ nian_live() {
 ddcs() {
 	ddcs_left=15
 	while [[ ${ddcs_left} -gt 0 ]]; do
+		echo -e "$green正在循环运行脚本，大概$ddcs_left次结束这个循环，然后跑下一个，不需要理这个,这个是正常的$white"
 		#$node $dir_file_js/jd_blueCoin.js  &	#东东超市兑换，有次数限制，没时间要求
 		$node $dir_file_js/jd_car_exchange.js   #京东汽车兑换，500赛点兑换500京豆
 		sleep 1
