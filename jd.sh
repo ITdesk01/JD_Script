@@ -194,8 +194,18 @@ COMMENT
 	cat $dir_file/config/shylocks_script.txt >> $dir_file/config/collect_script.txt
 
 	#wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
-	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js
-	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_entertainment.js -O $dir_file_js/jd_entertainment.js
+	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
+	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_entertainment.js -O $dir_file_js/jd_entertainment.js #百变大咖秀
+	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_priceProtect.js -O $dir_file_js/jd_priceProtect.js #京东价格保护
+	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
+
+cat >>$dir_file/config/collect_script.txt <<EOF
+	jx_products_detail.js		#京喜工厂商品列表详情
+	jd_entertainment.js 		#百变大咖秀
+	jd_priceProtect.js 		#京东价格保护
+	jd_try.js 			#京东试用
+EOF
+
 
 
 	if [ $? -eq 0 ]; then
