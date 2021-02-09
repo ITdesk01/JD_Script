@@ -366,7 +366,7 @@ run_07() {
 	rm -rf  $dir_file_js/jd_festival.js #京东手机年终奖 2021年1月26日～2021年2月8日
 	$node $dir_file_js/jd_entertainment.log #百变大咖秀
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
-	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
+	$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
 	checklog #检测log日志是否有错误并推送
 	echo -e "$green run_07$stop_script $white"
@@ -925,7 +925,7 @@ additional_settings() {
 	#sed -i "s/|| 0/|| 20/g" $dir_file_js/jd_blueCoin.js
 
 	#取消店铺从20个改成50个(没有星推官先默认20吧)
-	sed -i "s/|| 20/|| 50/g" $dir_file_js/jd_unsubscribe.js
+	sed -i "s/|| 20/|| 100/g" $dir_file_js/jd_unsubscribe.js
 
 	#宠汪汪积分兑换奖品改成兑换500豆子，个别人会兑换错误(350积分兑换20豆子，8000积分兑换500豆子要求等级16级，16000积分兑换1000京豆16级以后不能兑换)
 	#sed -i "s/let joyRewardName = 20/let joyRewardName = 500/g" $dir_file_js/jd_joy_reward.js
