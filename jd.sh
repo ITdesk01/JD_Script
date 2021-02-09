@@ -359,7 +359,7 @@ run_07() {
 	$node $dir_file_js/jd_xg.js #小鸽有礼 2021年1月15日至2021年2月19日
 	$node $dir_file_js/jd_xgyl.js #小鸽有礼2 2021年1月28日～2021年2月28日
 	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
-	$node $dir_file_js/jd_entertainment.log #百变大咖秀
+	$node $dir_file_js/jd_entertainment.js #百变大咖秀
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	rm -rf $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
