@@ -1023,11 +1023,12 @@ additional_settings() {
 	#京喜工厂
 	new_dreamFactory="4HL35B_v85-TsEGQbQTfFg==@q3X6tiRYVGYuAO4OD1-Fcg==@Gkf3Upy3YwQn2K3kO1hFFg==@w8B9d4EVh3e3eskOT5PR1A==@1s8ZZnxD6DVDyjdEUu-zXA==@FyYWfETygv_4XjGtnl2YSg==@us6se4fFC6cSjHDSS_ScMw==@oWcboKZa9XxTSWd28tCEPA==@sboe5PFeXgL2EWpxucrKYw==@rm-j1efPyFU50GBjacgEsw==@1rQLjMF_eWMiQ-RAWARW_w==@bHIVoTmS-fHA6G9ixqnOxfjRNGe1YfJzIbBoF-NEAOw=@6h514zWW6JNRE_Kp-L4cjA==@WFlk160B_Byd-xNNEyRPJQ==@bxUPiWroac-c9PLIPSjnNQ==@P2nGgK6JgLtCqJBeQJ0f27XXLQwYAFHrKmA2siZTuj8=@LTyKtCPGU6v0uv-n1GSwfQ==@y7KhVRopnOwB1qFo2vIefg==@WnaDbsWYwImvOD1CpkeVWA==@Y4r32JTAKNBpMoCXvBf7oA=="
 	zuoyou_20190516_df="oWcboKZa9XxTSWd28tCEPA==@sboe5PFeXgL2EWpxucrKYw==@rm-j1efPyFU50GBjacgEsw==@cA7LmxYoXxJNLnS7j25dxA==@aAwyOK0kb9OSm2oq2JVYMQ==@BprHGWI9w04zUnZPbIzKgw==@tZXnazfKhM0mZd2UGPWeCA==@9whmFTgMFw7ZfXcQdEJ3UA==@zVn3SNiwrEhxQEcbMZA27w==@k7iROwM2-Ha5EA59rRxBTg=="
+	ceshi_20190516_df= "43I0xnmtfBvt5qiFm6ftxA=="
 	Jhone_Potte_20200824_df="Q4Rij5_6085kuANMaAvBMA==@gTLa05neWl8UFTGKpFLeog=="
 	whiteboy_20190711_df="U_NgGvEUnbU6IblJUTMQV3F7G5ihingk9kVobx99yrY=@BXXbkqJN7sr-0Qkid6v27A=="
 	cainiao5_20201209_df="LBoBCAhsmQGJdrWJilbWJQ=="
 	
-	new_dreamFactory_set="'$new_dreamFactory@$zuoyou_20190516_df@$Jhone_Potte_20200824_df@$whiteboy_20190711_df@$cainiao5_20201209_df',"
+	new_dreamFactory_set="'$new_dreamFactory@$zuoyou_20190516_df@$ceshi_20190516_df@$Jhone_Potte_20200824_df@$whiteboy_20190711_df@$cainiao5_20201209_df',"
 
 	sed -i '44,47d' $dir_file_js/jd_dreamFactory.js
 	sed -i '10,11d' $dir_file_js/jdDreamFactoryShareCodes.js
