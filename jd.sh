@@ -51,7 +51,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.67"
+	cron_version="2.68"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -82,6 +82,7 @@ cat >>/etc/crontabs/root <<EOF
 0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关
 59 8,11,15,19 * * * sleep 57; $dir_file/jd.sh baiyuan >/tmp/jd_baiyuan.log 2>&1 #京东抢百元卡
 0 9,12,20,21 * * * $node $dir_file_js/jd_global.js >/tmp/jd_global.log 2>&1 #环球挑战赛
+0 9,12,20,21 * * * $node $dir_file_js/jd_global_mh.js >/tmp/jd_global_mh.log 2>&1 #环球魔盒
 ###########100##########请将其他定时任务放到底下###############
 EOF
 
@@ -245,7 +246,6 @@ run_0() {
 	rm -rf  $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
 	$node $dir_file_js/jd_nian_sign.js #年兽签到
 	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
-	$node $dir_file_js/jd_global_mh.js #国际盲盒,活动时间：2021-01-15 至 2021-02-15
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	$node $dir_file_js/jd_newYearMoney.js #京东压岁钱
 	run_08_12_16
@@ -385,6 +385,7 @@ run_10_15_20() {
 	$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
 	echo -e "$green run_10_15_20$stop_script $white"
 }
+
 
 baiyuan() {
         echo -e "$green百元卡$start_script $white"
