@@ -1172,9 +1172,9 @@ COMMENT
 
 	#环球挑战赛
 	new_jdglobal="UGJmYjF5bkViaURrQnBtQlhPNWpOeFRIb1gvczhPYTJya1RqTksxZFB6Zz0=@M0lGNjQwUWk4a0YxWDJuRDRZMDhXNmNPekh0dmFDV3ZHNHlnSXV3RSt0ND0=@QkZBdHg3b3JOcVl3d01ZS0lTOWZVZz09@dlBxYmhhcTVCS1Z1VnF5cUxrNlp3QT09"
-	new_jdglobal_set="'$new_ jdglobal',"
+	new_jdglobal_set="'$new_jdglobal',"
 	sed -i '53,54d' $dir_file_js/jd_global.js
-	sed -i "52a $new_ jdglobal_set\n$new_ jdglobal_set\n$new_ jdglobal_set\n$new_ jdglobal_set\n$new_ jdglobal_set\n$new_ jdglobal_set" $dir_file_js/jd_global.js
+	sed -i "52a $new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set" $dir_file_js/jd_global.js
 
 	#脚本黑名单
 	script_black
