@@ -161,6 +161,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
         jd_newYearMoney.js              #京东压岁钱
         jd_newYearMoney_lottery.js      #京东抢百元卡
 	jd_global.js			#环球挑战赛,活动时间：2021-02-02 至 2021-02-22
+	jd_global_mh.js                 #国际盲盒,活动时间：2021-01-15 至 2021-02-15
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jd_get_share_code.js		#获取jd所有助力码脚本
@@ -244,6 +245,7 @@ run_0() {
 	rm -rf  $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
 	$node $dir_file_js/jd_nian_sign.js #年兽签到
 	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
+	$node $dir_file_js/jd_global_mh.js #国际盲盒,活动时间：2021-01-15 至 2021-02-15
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	$node $dir_file_js/jd_newYearMoney.js #京东压岁钱
 	run_08_12_16
