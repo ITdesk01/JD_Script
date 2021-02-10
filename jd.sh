@@ -51,7 +51,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.68"
+	cron_version="2.69"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -83,6 +83,7 @@ cat >>/etc/crontabs/root <<EOF
 59 8,11,15,19 * * * sleep 57; $dir_file/jd.sh baiyuan >/tmp/jd_baiyuan.log 2>&1 #京东抢百元卡
 0 9,12,20,21 * * * $node $dir_file_js/jd_global.js >/tmp/jd_global.log 2>&1 #环球挑战赛
 0 9,12,20,21 * * * $node $dir_file_js/jd_global_mh.js >/tmp/jd_global_mh.log 2>&1 #环球魔盒
+0 0,20-23 10-12 2 * $node $dir_file_js/jd_cxhb.js >/tmp/jd_cxhb.log 2>&1 #除夕红包
 ###########100##########请将其他定时任务放到底下###############
 EOF
 
