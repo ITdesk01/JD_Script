@@ -51,7 +51,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.69"
+	cron_version="2.70"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -78,12 +78,12 @@ cat >>/etc/crontabs/root <<EOF
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本
 */30 1-22 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机
-20 * * * * $dir_file/jd.sh run_020 >/tmp/jd_run_020.log 2>&1 #京东炸年兽领爆竹
 0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关
 59 8,11,15,19 * * * sleep 57; $dir_file/jd.sh baiyuan >/tmp/jd_baiyuan.log 2>&1 #京东抢百元卡
 0 9,12,20,21 * * * $node $dir_file_js/jd_global.js >/tmp/jd_global.log 2>&1 #环球挑战赛
 0 9,12,20,21 * * * $node $dir_file_js/jd_global_mh.js >/tmp/jd_global_mh.log 2>&1 #环球魔盒
 0 0,20-23 10-12 2 * $node $dir_file_js/jd_cxhb.js >/tmp/jd_cxhb.log 2>&1 #除夕红包
+10 20 10-13 2 * $node $dir_file_js/jd_xmf.js >/tmp/jd_xmf.log 2>&1 #京东小魔方
 ###########100##########请将其他定时任务放到底下###############
 EOF
 
@@ -244,8 +244,6 @@ run_0() {
 	$node $dir_file_js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $dir_file_js/jd_lotteryMachine.js #京东抽奖机
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
-	rm -rf  $dir_file_js/jd_nh.js #京东年货节2021年1月9日-2021年2月9日
-	$node $dir_file_js/jd_nian_sign.js #年兽签到
 	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	$node $dir_file_js/jd_newYearMoney.js #京东压岁钱
@@ -290,7 +288,7 @@ kill_joy() {
 
 run_020() {
 	echo -e "$green run_020$start_script $white"
-	$node $dir_file_js/jd_nianCollect.js #京东炸年兽领爆竹
+	echo "暂时没有东西"
 	echo -e "$green run_020$stop_script $white"
 }
 
@@ -372,7 +370,6 @@ run_07() {
 
 run_08_12_16() {
 	echo -e "$green run_08_12_16$start_script $white"
-	nian
 	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	rm -rf $dir_file_js/jd_818.js #京东手机狂欢城活动
 	$node $dir_file_js/jd_bookshop.js #口袋书店
@@ -398,17 +395,6 @@ baiyuan() {
 	done
 	echo -e "$green 百元卡$stop_script $white"
         
-}
-nian() {
-	echo -e "$green炸年兽$start_script $white"
-	$node $dir_file_js/jd_nian.js #京东炸年兽
-	echo -e "$green 炸年兽$stop_script $white"
-}
-
-nian_live() {
-	echo -e "$green年货直播雨$start_script $white"
-	＃$node $dir_file_js/jd_live_redrain_nian.js		#年货直播雨 2021年1月20日-2021年1月30日、2月3日、2月5日每天0,9,11,13,15,17,19,20,21,23点可领
-	echo -e "$green 年货直播雨$stop_script $white"
 }
 
 ddcs() {
@@ -859,8 +845,6 @@ help() {
 	echo ""
 	echo -e "$yellow个别脚本有以下："
 	echo ""
-	echo -e "$green  sh \$jd nian $white				#运行炸年兽"
-	echo ""
 	echo -e "$green  sh \$jd joy $white				#运行疯狂的JOY(两个号需要1G以上，sh \$jd kill_joy 杀掉进程，彻底关闭需要先杀进程再禁用定时任务的代码)"
 	echo ""
 	echo -e "$green  sh \$jd jx $white 				#查询京喜商品生产使用时间"
@@ -1144,22 +1128,6 @@ COMMENT
 	sed -i "31a $new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set" $dir_file_js/jd_cash.js
 	sed -i "s/https:\/\/gitee.com\/shylocks\/updateTeam\/raw\/main\/jd_cash.json/https:\/\/raw.githubusercontent.com\/ITdesk01\/JD_Script\/main\/JSON\/jd_cash.json/g"  $dir_file_js/jd_cash.js
 
-
-	#京东炸年兽
-	old_jdnian="\`cgxZbDnLLbvT4kKFa2r4itMpof2y7_o@cgxZdTXtILLevwyYCwz65yWwCE8lGkr3bUNrT0h7kLPi4wxXS762i1R7_A0@cgxZdTXtIryM712cW1aougOBa8ZyzwDRObdr4-lyq7WPJbXwCd4EB76el1c@cgxZdTXtIL-L7FzMAQCqvap-CydslPKkAn5-YquhVOdq2fHQPxbVJ4pskHs\`,"
-	old_jdnian1="\`cgxZbDnLLbvT4kKFa2r4itMpof2y7_o@cgxZdTXtILLevwyYCwz65yWwCE8lGkr3bUNrT0h7kLPi4wxXS762i1R7_A0@cgxZdTXtIryM712cW1aougOBa8ZyzwDRObdr4-lyq7WPJbXwCd4EB76el1c@cgxZdTXtIL-L7FzMAQCqvap-CydslPKkAn5-YquhVOdq2fHQPxbVJ4pskHs\`"
-	new_jdnian="cgxZdTXtQOKDk2exSH7bm1yqE9lH3OVjhKsFb1yndmZ5KgUbv7F2-X8"
-	zuoyou_20190516_jdnian="cgxZcyOFIfaWiQqLAQXLjg@cgxZZyLGbL_apkKqAUet7CfElE0@cgxZdTXtI-nYvwbPAFSu7cfA8L-fTfRluVPeR9kXvOpzr7T1OB7z_vf53pY@cgxZdTXtIb-I4g2fWleovuuIRUaojOVYyqCW2tQE47NH2e5FdQdTPzqVq60@cgxZdTXtILve6wjPAVH6637oFStz2n55oDLBd31Gx1wuFVZtARbf7Apdz2k@cgxZczjVceSNrVumVUnljJGWK910VVlBaWrIryfH@cgxZciDRZb7fpkKqDALuuFHFNhA@cgxZfTjcc_Of7QzJREnK6JpEyVYO3l7cfElq@cgxZdyjGdeSNq1eWVlLlox-BNG_CcXjZTeAN16NgVbs@cgxZdTXtI-_fuVrKXAas6hLMvq8JwrWzJDKWMn5lPVfsd8XKc2XkCY6g0Rw"
-	jidiyangguang_20190516_jdnian="cgxZdTXtIL6J7QzACwWhunFByvPM_ltcuRhq9MwhLp6jp0TOnV3aPkhq-dY@cgxZdTXtI-jeuwqYWQStvcR9psTc5SAZg5CwlSr9fmHCeDi1lNzhztEP3zE"
-	Lgg_20200430_jdnian="cgxZdTXtIb7auQrPDAH45orfTfVayXwjjyYzgscaVqPlJIuaVuWlt4D82os@cgxZdTXtIbvSvwvMDger7tMWaAKMEUOcMwF2DnLzgn3y2ZgXZ21mqeO_0KY"
-	xo_20201229_jdnian="cgxZLmSLJbna4wfJFQeo7I-W-QWH-iztkxuIdAonLp1nlopEGNhP3Hl5j5g@cgxZdTXtI7zc71rMXQL65xjp0oWb_WpVGA4c8vZ5TVoIExpD1DMlxQKsOQs@cgxZdTXtI7vY7Q3ODwz7vOPSZf25xIy_9aRDIM4bGiJMCspQX3aEOxxbc1Y"
-	shazi_20201115_jdnian="cgxZaDX-VtKArEute2zBpwrzW5rWLbY4ucdn6LBOB-v-TgH-Mz6E@cgxZdTXtIL7cv1vNCAGq6iUYPZGSDH3An0h_cOVfi3235E9DS7hc8o8xgx4"
-
-	new_jdnian_set="'$new_jdnian@$zuoyou_20190516_jdnian@$jidiyangguang_20190516_jdnian@$Lgg_20200430_jdnian@$xo_20201229_jdnian@$shazi_20201115_jdnian',"
-	sed -i "s/$old_jdnian/$new_jdnian_set/g" $dir_file_js/jd_nian.js
-	sed -i "s/$old_jdnian1/$new_jdnian_set/g" $dir_file_js/jd_nian.js
-	sed -i "50a $new_jdnian_set\n$new_jdnian_set\n$new_jdnian_set\n$new_jdnian_set" $dir_file_js/jd_nian.js
-
 	#闪购盲盒
 	new_jdsgmh="T0225KkcRxoZ9AfVdB7wxvRcIQCjVWmIaW5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVWmIaW5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVWmIaW5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVWmIaW5kRrbA"
 	zuoyou_20190516_jdsgmh="T0064r90RQCjVWmIaW5kRrbA@T0089r43CBsZCjVWmIaW5kRrbA@T0225KkcR00boFzRKEvzlvYCcACjVWmIaW5kRrbA@T0225KkcRRtL_VeBckj1xaYNfACjVWmIaW5kRrbA@T0225KkcRB8d9FLRKU6nkPQOdwCjVWmIaW5kRrbA@T0144qQkFUBOsgG4fQCjVWmIaW5kRrbA@T00847wgARocCjVWmIaW5kRrbA@T0127KQtF1dc8lbXCjVWmIaW5kRrbA@T0155rQ3EUBOtA2Ifk0CjVWmIaW5kRrbA@T0225KkcR0scpgDUdBnxkaEPcgCjVWmIaW5kRrbA"
@@ -1366,7 +1334,7 @@ if [[ -z $action1 ]]; then
 	system_variable
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|ddcs|script_name|baiyuan|backnas)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_020|stop_notice|checklog|that_day|stop_script|script_black|ddcs|script_name|baiyuan|backnas)
 		$action1
 		;;
 		*)
@@ -1378,7 +1346,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_020|stop_notice|nian|checklog|nian_live|that_day|stop_script|script_black|ddcs|script_name|baiyuan|backnas)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_020|stop_notice|checklog|that_day|stop_script|script_black|ddcs|script_name|baiyuan|backnas)
 		$action2
 		;;
 		*)
