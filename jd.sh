@@ -79,7 +79,6 @@ cat >>/etc/crontabs/root <<EOF
 */30 1-22 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机
 0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关
-59 8,11,15,19 * * * sleep 57; $dir_file/jd.sh baiyuan >/tmp/jd_baiyuan.log 2>&1 #京东抢百元卡
 0 9,12,20,21 * * * $node $dir_file_js/jd_global.js >/tmp/jd_global.log 2>&1 #环球挑战赛
 0 9,12,20,21 * * * $node $dir_file_js/jd_global_mh.js >/tmp/jd_global_mh.log 2>&1 #环球魔盒
 0 0,20-23 10-12 2 * $node $dir_file_js/jd_cxhb.js >/tmp/jd_cxhb.log 2>&1 #除夕红包
@@ -154,8 +153,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_ms.js			#京东秒秒币
 	jd_xg.js			#小鸽有礼 2021年1月15日至2021年2月19日
 	jd_xgyl.js			#小鸽有礼2 2021年1月28日～2021年2月28日
-        jd_newYearMoney.js              #京东压岁钱
-        jd_newYearMoney_lottery.js      #京东抢百元卡
 	jd_global.js			#环球挑战赛,活动时间：2021-02-02 至 2021-02-22
 	jd_global_mh.js                 #国际盲盒,活动时间：2021-01-15 至 2021-02-15
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
@@ -246,7 +243,6 @@ run_0() {
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
-	$node $dir_file_js/jd_newYearMoney.js #京东压岁钱
 	run_08_12_16
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_06_18
@@ -256,7 +252,6 @@ run_0() {
 	run_03
 	run_045
 	$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
-	$node $dir_file_js/jd_newYearMoney.js #京东压岁钱
 	echo -e "$green run_0$stop_script $white"
 }
 
@@ -382,19 +377,6 @@ run_10_15_20() {
 	$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
 	$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
 	echo -e "$green run_10_15_20$stop_script $white"
-}
-
-
-baiyuan() {
-        echo -e "$green百元卡$start_script $white"
-	baiyuan_left=8
-	while [[ ${baiyuan_left} -gt 0 ]]; do
-		$node $dir_file_js/jd_newYearMoney_lottery.js &
-		sleep 1
-		baiyuan_left=$(($baiyuan_left - 1))
-	done
-	echo -e "$green 百元卡$stop_script $white"
-        
 }
 
 ddcs() {
@@ -1138,18 +1120,6 @@ COMMENT
 	sed -i '32,33d' $dir_file_js/jd_sgmh.js
 	sed -i "31a $new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set" $dir_file_js/jd_sgmh.js
 
-
-	#京东压岁钱
-	new_jdnewYearMoney="oMZeXOJIodhVV-Y1ZbMmqmvPtKAlRyWSpZHXBMXHaQv7_xCg@oMZeXrAeoY8ECuY4ZuEi-bGnIR1K0yNnDNWDkImYDex4F_F1@oMZeP74R2eIvQ5lDQ80OswPSAqISSuyC2ZZ6cpCa3i7-ZXw"
-
-	zuoyou_20190516_jdnewYearMoney="ptA2XqoE7IsbT64wMbFy_ijm1-Ix0vpd@stF1E-NI7McbA659e7F2_s6ZURRz8JnxEf8@oMZeXLVK9YNRC7M2NbF4-7Xm7XEsdoV41IsXn_1QRLQ7Nq7i@oMZeXuMaqIgBUbAwZuF39xmqW6y10RIBAP2ExzTk6nutNDSP@oMZeX-dMoY1RCrZiM7N0_BOfqHWcJLLXMAbrx3wwWCqXLLSx@pstmDrgf5944Xq59e7A8s4nkzMoa0aoJMEbaCgtA@p9NiGuJN7McbA659e7F2_g87WymICeNisfA@qMtvDK8Np4lXT659N_w8s3VNk9t-99MAHpjBWX4@ott1Crgf4dIIXbV9e_xws3sLXFIdRIkncldD7MFBtg@oMZeXLNN899UV-E0MuZ1-eBYUy16HG80tqC739W6DbRNs-uH"
-	jidiyangguang_20190516_jd_newYearMoney="oMZeX-Ibp4leAOI5YrMm_AAFBQ9pi-CmolSqYXlK4h1tUYEO@oMZeXLRM8Y8GUuM1Zblz-Tc1sYflDoMfgwtsLEmosPjb7dFI"
-	chiyu_jd_newYearMoney="qcpoEqNNooobT64xe_w8_raxKs0V5su15ReITQ"
-
-	new_jdnewYearMoney_set="'$new_jdnewYearMoney@$zuoyou_20190516_jdnewYearMoney@$jidiyangguang_20190516_jd_newYearMoney@$chiyu_jd_newYearMoney',"
-	sed -i '52,53d' $dir_file_js/jd_newYearMoney.js
-	sed -i "51a $new_jdnewYearMoney_set\n$new_jdnewYearMoney_set\n$new_jdnewYearMoney_set\n$new_jdnewYearMoney_set\n$new_jdnewYearMoney_set\n$new_jdnewYearMoney_set" $dir_file_js/jd_newYearMoney.js
-
 	#环球挑战赛
 	new_jdglobal="UGJmYjF5bkViaURrQnBtQlhPNWpOeFRIb1gvczhPYTJya1RqTksxZFB6Zz0=@M0lGNjQwUWk4a0YxWDJuRDRZMDhXNmNPekh0dmFDV3ZHNHlnSXV3RSt0ND0=@QkZBdHg3b3JOcVl3d01ZS0lTOWZVZz09@dlBxYmhhcTVCS1Z1VnF5cUxrNlp3QT09"
 	zuoyou_20190516_gb="WkdTb3dTUXo5WlJ0b09MNTdWMmNHQT09@K28ydmszcmF4ditCYjZrZ3UwS0lRUT09@ZHJtNkVxdzJFeEtQWmltRXNqRllPcmRpYk41VFI3NENjVjR1OS9ybXc4bz0=@RENkbGxncnNNb2lqK05LdktCSnhvRFJHVmdUVHJBTjdvVEQwWElYUEFJRT0=@Q1JFL1c5cWJCQ2JTVVFVSUFLamJ0ZnJ0eXZuRzl1ck9tWEovajJTaDBWUT0=@RHFSajJFVW9IQzlFdWttYzJ5aTc5UT09@VTdzK1l4SEF4RllvQlZ1b3BTOU5wZz09@Z09wTEFaZ3lQR0RYeTVTSElkM1g5Zz09@SVBLcGdCMXg2M1hxK1AvQmpDc2NmQT09@blJCWmdUNUxWRkMzeUhWeERTcDE4bHMwV0xaYWMzb1VyeTVJOWZKNXk3cz0=@MU9wNXJPZSt5VmlsRFVKby9HS0Ywdz09"
@@ -1334,7 +1304,7 @@ if [[ -z $action1 ]]; then
 	system_variable
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_020|stop_notice|checklog|that_day|stop_script|script_black|ddcs|script_name|baiyuan|backnas)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_020|stop_notice|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas)
 		$action1
 		;;
 		*)
@@ -1346,7 +1316,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_020|stop_notice|checklog|that_day|stop_script|script_black|ddcs|script_name|baiyuan|backnas)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_020|stop_notice|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas)
 		$action2
 		;;
 		*)
