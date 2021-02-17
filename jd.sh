@@ -80,7 +80,6 @@ cat >>/etc/crontabs/root <<EOF
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机
 0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关
 0 9,12,20,21 * * * $node $dir_file_js/jd_global.js >/tmp/jd_global.log 2>&1 #环球挑战赛
-#5 9,12,20,21 * * * $node $dir_file_js/jd_global_mh.js >/tmp/jd_global_mh.log 2>&1 #环球魔盒
 ###########100##########请将其他定时任务放到底下###############
 EOF
 	/etc/init.d/cron restart
@@ -150,7 +149,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_xg.js			#小鸽有礼 2021年1月15日至2021年2月19日
 	jd_xgyl.js			#小鸽有礼2 2021年1月28日～2021年2月28日
 	jd_global.js			#环球挑战赛,活动时间：2021-02-02 至 2021-02-22
-	jd_global_mh.js                 #国际盲盒,活动时间：2021-01-15 至 2021-02-15
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jd_get_share_code.js		#获取jd所有助力码脚本
