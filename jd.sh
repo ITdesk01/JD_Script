@@ -83,10 +83,6 @@ cat >>/etc/crontabs/root <<EOF
 5 9,12,20,21 * * * $node $dir_file_js/jd_global_mh.js >/tmp/jd_global_mh.log 2>&1 #环球魔盒
 ###########100##########请将其他定时任务放到底下###############
 EOF
-	rm -rf /tmp/jd_global.log
-	rm -rf /tmp/jd_global_mh.log
-	rm -rf /tmp/jd_xmf.log
-	rm -rf /tmp/jd_cxhb.log
 	/etc/init.d/cron restart
 	cron_help="$yellow定时任务更新完成，记得看下你的定时任务$white"
 }
