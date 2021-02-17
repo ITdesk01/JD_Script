@@ -51,7 +51,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.71"
+	cron_version="2.72"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -79,8 +79,8 @@ cat >>/etc/crontabs/root <<EOF
 */30 1-22 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机
 0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关
-#0 9,12,20,21 * * * $node $dir_file_js/jd_global.js >/tmp/jd_global.log 2>&1 #环球挑战赛
-#0 9,12,20,21 * * * $node $dir_file_js/jd_global_mh.js >/tmp/jd_global_mh.log 2>&1 #环球魔盒
+0 9,12,20,21 * * * $node $dir_file_js/jd_global.js >/tmp/jd_global.log 2>&1 #环球挑战赛
+0 9,12,20,21 * * * $node $dir_file_js/jd_global_mh.js >/tmp/jd_global_mh.log 2>&1 #环球魔盒
 ###########100##########请将其他定时任务放到底下###############
 EOF
 	rm -rf /tmp/jd_global.log
