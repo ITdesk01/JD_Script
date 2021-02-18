@@ -51,7 +51,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.74"
+	cron_version="2.75"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -79,9 +79,10 @@ cat >>/etc/crontabs/root <<EOF
 */30 1-22 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机
 0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关
-0 9,12,20,21 * * * $node $dir_file_js/jd_global.js >/tmp/jd_global.log 2>&1 #环球挑战赛
 ###########100##########请将其他定时任务放到底下###############
 EOF
+	rm -rf /tmp/jd_global.log
+	rm -rf /tmp/jd_global_mh.log
 	/etc/init.d/cron restart
 	cron_help="$yellow定时任务更新完成，记得看下你的定时任务$white"
 }
@@ -129,7 +130,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_redPacket.js			#全民开红包
 	jd_club_lottery.js		#摇京豆
 	jd_shop.js			#进店领豆
-	jd_live.js			#直播抢京豆
 	jd_bean_home.js			#领京豆额外奖励
 	jd_rankingList.js		#京东排行榜签到得京豆
 	jd_cash.js			#签到领现金，每日2毛～5毛长期
@@ -237,6 +237,7 @@ run_0() {
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
+	$node $dir_file_js/jd_global.js #京东国际环球赛事
 	run_08_12_16
 	$node $dir_file_js/jd_small_home.js #东东小窝
 	run_06_18
@@ -339,9 +340,6 @@ run_07() {
 	$node $dir_file_js/jd_kd.js #京东快递签到 一天运行一次即可
 	$node $dir_file_js/jd_bean_home.js #领京豆额外奖励
 	$node $dir_file_js/jd_club_lottery.js #摇京豆，没时间要求
-	$node $dir_file_js/jd_live.js #直播抢京豆 （需要执行三次，不然没有18豆子）
-	$node $dir_file_js/jd_live.js #直播抢京豆
-	$node $dir_file_js/jd_live.js #直播抢京豆
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	$node $dir_file_js/jd_jxnc.js #京喜农场
 	$node $dir_file_js/jd_ms.js #京东秒秒币 一个号大概60
@@ -349,6 +347,7 @@ run_07() {
 	$node $dir_file_js/jd_xgyl.js #小鸽有礼2 2021年1月28日～2021年2月28日
 	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
 	$node $dir_file_js/jd_entertainment.js #百变大咖秀
+	$node $dir_file_js/jd_global.js #京东国际环球赛事
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	rm -rf $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
