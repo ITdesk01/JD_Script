@@ -153,6 +153,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_xg.js			#小鸽有礼 2021年1月15日至2021年2月19日
 	jd_xgyl.js			#小鸽有礼2 2021年1月28日～2021年2月28日
 	jd_global.js			#环球挑战赛,活动时间：2021-02-02 至 2021-02-22
+	jd_nzmh.js			#女装盲盒 活动时间：2021-2-19至2021-2-25
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jd_get_share_code.js		#获取jd所有助力码脚本
@@ -352,6 +353,7 @@ run_07() {
 	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
 	$node $dir_file_js/jd_entertainment.js #百变大咖秀
 	$node $dir_file_js/jd_global.js #京东国际环球赛事
+	$node $dir_file_js/jd_nzmh.js #女装盲盒 活动时间：2021-2-19至2021-2-25
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	rm -rf $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
