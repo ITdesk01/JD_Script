@@ -154,6 +154,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_xgyl.js			#小鸽有礼2 2021年1月28日～2021年2月28日
 	jd_global.js			#环球挑战赛,活动时间：2021-02-02 至 2021-02-22
 	jd_nzmh.js			#女装盲盒 活动时间：2021-2-19至2021-2-25
+	jd_beauty.js			#美丽研究院
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jd_get_share_code.js		#获取jd所有助力码脚本
@@ -374,6 +375,7 @@ run_10_15_20() {
 	$node $dir_file_js/jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
 	$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
 	$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
+	$node $dir_file_js/jd_beauty.js	#美丽研究院
 	echo -e "$green run_10_15_20$stop_script $white"
 }
 
