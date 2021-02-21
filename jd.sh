@@ -9,11 +9,7 @@
 
 version="1.9"
 cron_file="/etc/crontabs/root"
-#url=https://raw.githubusercontent.com/lxk0301/jd_scripts/master
 url=https://gitee.com/lxk0301/jd_scripts/raw/master
-
-#url=https://raw.githubusercontent.com/zy2021/JD/master
-
 
 #获取当前脚本目录copy脚本之家
 Source="$0"
@@ -162,9 +158,9 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
 
-	wget --spider -nv wget $url/package.json -o /tmp/wget_test.log
+	wget --spider -nv $url/package.json -o /tmp/wget_test.log
 	wget_test=$( cat /tmp/wget_test.log | grep -o "200 OK")
-	if [ $wget_test == "200 OK" ];then
+	if [ "$wget_test" == "200 OK" ];then
 		for script_name in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
 		do
 			wget $url/$script_name -O $dir_file_js/$script_name
