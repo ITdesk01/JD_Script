@@ -114,9 +114,10 @@ update() {
 		exit 0
 	fi
 	
-	#判断
+	#判断参数
 	if [ ! -d /root/.ssh ];then
 		cp -r $dir_file/.ssh /root/.ssh
+		chmod 600 /root/.ssh/lxk0301
 	fi
 
 	if [ ! -d $dir_file/git_clone ];then
