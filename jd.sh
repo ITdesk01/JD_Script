@@ -190,6 +190,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 EOF
 for script_name in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
 do
+	echo -e "$green开始copy$script_name"
 	cp  $dir_file/git_clone/lxk0301/$script_name  $dir_file_js/$script_name
 done
 
