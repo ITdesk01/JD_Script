@@ -51,7 +51,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.77"
+	cron_version="2.78"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -85,8 +85,6 @@ cat >>/etc/crontabs/root <<EOF
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script
 ###########backnas##########请将其他定时任务放到底下###############
 EOF
-	rm -rf /tmp/jd_global.log
-	rm -rf /tmp/jd_global_mh.log
 	/etc/init.d/cron restart
 	cron_help="$yellow定时任务更新完成，记得看下你的定时任务$white"
 }
@@ -164,11 +162,17 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
 
-for script_name in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
-do
-	wget $url/$script_name -O $dir_file_js/$script_name
-done
-
+	wget --spider -nv wget $url/package.json -o /tmp/wget_test.log
+	wget_test=$( cat /tmp/wget_test.log | grep -o "200 OK")
+	if [ $wget_test == "200 OK" ];then
+		for script_name in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
+		do
+			wget $url/$script_name -O $dir_file_js/$script_name
+		done
+	else
+		echo -e "$red无法下载仓库文件，暂时不更新,可能是网络问题或者上游仓库被封，建议查看上游仓库是否正常，测试仓库是否正常：$url/package.json$white"
+		exit 0
+	fi
 
 url2="https://raw.githubusercontent.com/shylocks/Loon/main"
 cat >$dir_file/config/shylocks_script.txt <<EOF
