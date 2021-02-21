@@ -101,6 +101,23 @@ ds_setup() {
 }
 
 update() {
+	#判断
+	if [ ! -d /root/.ssh ];then
+		cp -r $dir_file/.ssh /root/.ssh
+	fi
+
+	if [ ! -d $dir_file/git_clone ];then
+		mkdir $dir_file/git_clone
+	fi
+
+	if [ -d $dir_file/git_clone/lxk0301 ];then
+		git clone -b master git clone git@gitee.com:lxk0301/jd_scripts.git $dir_file/git_clone/lxk0301
+		update
+	else
+		cd $dir_file/git_clone/lxk0301
+		git fetch --all
+		git reset --hard origin/master
+	fi
 	echo -e "$green update$start_script $white"
 	echo -e "$green开始下载JS脚本，请稍等$white"
 #cat script_name.txt | awk '{print length, $0}' | sort -rn | sed 's/^[0-9]\+ //'按照文件名长度降序：
@@ -157,7 +174,12 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
+for script_name in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
+do
+	cp  $dir_file/git_clone/lxk0301/$script_name  $dir_file_js/$script_name
+done
 
+:<<'COMMENT'
 	wget --spider -nv $url/package.json -o /tmp/wget_test.log
 	wget_test=$( cat /tmp/wget_test.log | grep -o "200 OK")
 	if [ "$wget_test" == "200 OK" ];then
@@ -169,6 +191,7 @@ EOF
 		echo -e "$red无法下载仓库文件，暂时不更新,可能是网络问题或者上游仓库被封，建议查看上游仓库是否正常，测试仓库是否正常：$url/package.json$white"
 		exit 0
 	fi
+COMMENT
 
 url2="https://raw.githubusercontent.com/shylocks/Loon/main"
 cat >$dir_file/config/shylocks_script.txt <<EOF
@@ -187,8 +210,6 @@ done
 COMMENT
 	cat $dir_file/config/lxk0301_script.txt > $dir_file/config/collect_script.txt
 	cat $dir_file/config/shylocks_script.txt >> $dir_file/config/collect_script.txt
-
-	#wget https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_paopao.js -O $dir_file_js/jd_paopao.js
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_entertainment.js -O $dir_file_js/jd_entertainment.js #百变大咖秀
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
@@ -204,8 +225,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jdFactoryShareCodes.js		#东东工厂ShareCodes
 	jdJxncShareCodes.js		#京喜农场ShareCodes
 EOF
-
-
 
 	if [ $? -eq 0 ]; then
 		echo -e ">>$green脚本下载完成$white"
@@ -1256,6 +1275,19 @@ system_variable() {
 
 	if [ ! $node_if -ge "10" ];then
 		echo "node-npm 版本小于10，请升级以后再使用本脚本"
+		exit 0
+	fi
+
+	#判断openssh
+	openssh_if=$(opkg list-installed | grep 'openssh-client' | awk '{print $1}')
+	openssh_if1=$(opkg list-installed | grep 'openssh-keygen' | awk '{print $1}')
+	if [ ! $openssh_if ];then
+		echo "未找到$green openssh-client$white，请安装以后再使用本脚本"
+		exit 0
+	fi
+
+	if [ ! $openssh_if1 ];then
+		echo "未找到$green openssh-keygen$white，请安装以后再使用本脚本"
 		exit 0
 	fi
 
