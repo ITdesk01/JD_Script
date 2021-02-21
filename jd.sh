@@ -101,6 +101,19 @@ ds_setup() {
 }
 
 update() {
+	#判断openssh
+	openssh_if=$(opkg list-installed | grep 'openssh-client' | awk '{print $1}')
+	openssh_if1=$(opkg list-installed | grep 'openssh-keygen' | awk '{print $1}')
+	if [ ! $openssh_if ];then
+		echo -e "未找到$green openssh-client$white，请安装以后再使用本脚本"
+		exit 0
+	fi
+
+	if [ ! $openssh_if1 ];then
+		echo -e "未找到$green openssh-keygen$white，请安装以后再使用本脚本"
+		exit 0
+	fi
+	
 	#判断
 	if [ ! -d /root/.ssh ];then
 		cp -r $dir_file/.ssh /root/.ssh
@@ -1275,19 +1288,6 @@ system_variable() {
 
 	if [ ! $node_if -ge "10" ];then
 		echo "node-npm 版本小于10，请升级以后再使用本脚本"
-		exit 0
-	fi
-
-	#判断openssh
-	openssh_if=$(opkg list-installed | grep 'openssh-client' | awk '{print $1}')
-	openssh_if1=$(opkg list-installed | grep 'openssh-keygen' | awk '{print $1}')
-	if [ ! $openssh_if ];then
-		echo "未找到$green openssh-client$white，请安装以后再使用本脚本"
-		exit 0
-	fi
-
-	if [ ! $openssh_if1 ];then
-		echo "未找到$green openssh-keygen$white，请安装以后再使用本脚本"
 		exit 0
 	fi
 
