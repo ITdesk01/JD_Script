@@ -124,7 +124,7 @@ update() {
 	fi
 
 	if [ -d $dir_file/git_clone/lxk0301 ];then
-		git clone -b master git clone git@gitee.com:lxk0301/jd_scripts.git $dir_file/git_clone/lxk0301
+		git clone -b master git@gitee.com:lxk0301/jd_scripts.git $dir_file/git_clone/lxk0301
 		update
 	else
 		cd $dir_file/git_clone/lxk0301
