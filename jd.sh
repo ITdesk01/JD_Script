@@ -211,6 +211,8 @@ COMMENT
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_entertainment.js -O $dir_file_js/jd_entertainment.js #百变大咖秀
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
+	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_asus_iqiyi.js -O $dir_file_js/jd_asus_iqiyi.js #华硕-爱奇艺
+	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_fanslove.js -O $dir_file_js/jd_fanslove.js #粉丝互动
 
 cat >>$dir_file/config/collect_script.txt <<EOF
 	jx_products_detail.js		#京喜工厂商品列表详情
@@ -373,7 +375,9 @@ run_07() {
 	$node $dir_file_js/jd_nzmh.js #女装盲盒 活动时间：2021-2-19至2021-2-25
 	$node $dir_file_js/jd_speed_sign.js #京东极速版签到+赚现金任务
 	$node $dir_file_js/jd_speed_redpocke.js	#京东极速版红包
-	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
+	$node $dir_file_js/jd_asus_iqiyi.js #华硕-爱奇艺
+	$node $dir_file_js/jd_fanslove.js #粉丝互动
+	#$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	rm -rf $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
 	checklog #检测log日志是否有错误并推送
@@ -383,7 +387,6 @@ run_07() {
 run_08_12_16() {
 	echo -e "$green run_08_12_16$start_script $white"
 	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
-	rm -rf $dir_file_js/jd_818.js #京东手机狂欢城活动
 	$node $dir_file_js/jd_bookshop.js #口袋书店
 	echo -e "$green run_08_12_16$stop_script $white"
 }
