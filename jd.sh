@@ -1211,27 +1211,6 @@ system_variable() {
 		update
 	fi
 
-	#判断参数
-	if [ ! -n /root/.ssh/lxk0301 ];then
-		cp -r $dir_file/.ssh /root/.ssh
-		chmod 600 /root/.ssh/lxk0301
-		sed -i "s/#   StrictHostKeyChecking ask/StrictHostKeyChecking no/g" /etc/ssh/ssh_config
-	fi
-
-	#判断openssh
-	openssh_if=$(opkg list-installed | grep 'openssh-client' | awk '{print $1}')
-	openssh_if1=$(opkg list-installed | grep 'openssh-keygen' | awk '{print $1}')
-	if [ ! $openssh_if ];then
-		echo -e "未找到$green openssh-client$white，请安装以后再使用本脚本"
-		exit 0
-	fi
-
-	if [ ! $openssh_if1 ];then
-		echo -e "未找到$green openssh-keygen$white，请安装以后再使用本脚本"
-		exit 0
-	fi
-
-
 	if [ "$dir_file" == "$install_script/JD_Script" ];then
 		#jdCookie.js
 		if [ ! -f "$install_script_config/jdCookie.js" ]; then
@@ -1346,6 +1325,26 @@ system_variable() {
 
 	help
 }
+
+#判断参数
+if [ ! -d /root/.ssh ];then
+	cp -r $dir_file/.ssh /root/.ssh
+	chmod 600 /root/.ssh/lxk0301
+	sed -i "s/#   StrictHostKeyChecking ask/StrictHostKeyChecking no/g" /etc/ssh/ssh_config
+fi
+
+#判断openssh
+openssh_if=$(opkg list-installed | grep 'openssh-client' | awk '{print $1}')
+openssh_if1=$(opkg list-installed | grep 'openssh-keygen' | awk '{print $1}')
+if [ ! $openssh_if ];then
+	echo -e "未找到$green openssh-client$white，请安装以后再使用本脚本"
+	exit 0
+fi
+
+if [ ! $openssh_if1 ];then
+	echo -e "未找到$green openssh-keygen$white，请安装以后再使用本脚本"
+	exit 0
+fi
 
 action1="$1"
 action2="$2"
