@@ -1297,7 +1297,7 @@ system_variable() {
 		echo "node-npm 版本小于10，请升级以后再使用本脚本"
 		exit 0
 	fi
-
+:<<'COMMENT'
 	#判断JS文件夹是否为空
 	if [ ! -f "$dir_file_js/Detect.txt" ]; then
 		echo -e "$green js文件夹缺少一个Detect.txt，现在开始更新请稍等很快$white"
@@ -1307,6 +1307,7 @@ system_variable() {
 		update
 		system_variable
 	fi
+COMMENT
 
 	#添加系统变量
 	jd_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
