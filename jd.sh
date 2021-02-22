@@ -1331,6 +1331,7 @@ if [ ! -d /root/.ssh ];then
 	cp -r $dir_file/.ssh /root/.ssh
 	chmod 600 /root/.ssh/lxk0301
 	sed -i "s/#   StrictHostKeyChecking ask/StrictHostKeyChecking no/g" /etc/ssh/ssh_config
+	update
 fi
 
 #判断openssh
