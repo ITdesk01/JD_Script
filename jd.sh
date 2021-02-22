@@ -1208,7 +1208,6 @@ system_variable() {
 	
 	if [[ ! -d "$dir_file/js" ]]; then
 		mkdir  $dir_file/js
-		update
 	fi
 
 	#判断openssh
