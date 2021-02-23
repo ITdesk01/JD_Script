@@ -375,6 +375,7 @@ run_07() {
 	$node $dir_file_js/jd_speed_redpocke.js	#京东极速版红包
 	$node $dir_file_js/jd_asus_iqiyi.js #华硕-爱奇艺
 	$node $dir_file_js/jd_fanslove.js #粉丝互动
+	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	#$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	rm -rf $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
