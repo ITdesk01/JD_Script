@@ -164,6 +164,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_speed_sign.js		#京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#京东极速版红包
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
+	jd_crazy_joy_bonus.js		#监控crazyJoy分红狗(默认不运行，欧皇自己设置定时任务)
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
