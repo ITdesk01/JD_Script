@@ -31,16 +31,33 @@ N1（群友极地阳光测试）
          node 大于10
  
          node-npm 大于10
+         
+         openssh-client
+         
+         openssh-keygen
  
 
-安装办法1
+## 安装办法一
 
-         通过opkg update 再 opkg install git git-http node node-npm
+         通过opkg update 再 opkg install git git-http node node-npm openssh-client openssh-keygen
 
-安装办法2
 
-       可以采用我的openwrt插件"Install_script"（不带luci界面）
-          https://github.com/openwrtcompileshell/OpenwrtCompileScript/tree/master/package/Install_script
+**node和node-npm版本一定要大于10**，安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10
+
+
+**开始下载脚本，安装npm模块**
+
+         git clone -b main https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
+         cd /usr/share/JD_Script && chmod 777 jd.sh && sh jd.sh
+         cd git_clone/lxk0301 && npm install
+                
+**开始跑脚本**   
+        
+        sh $jd run_0 run_07
+
+## 安装办法二（直接忽略上面操作，重新编译，编译参考以下文档）
+
+      
        
         Install_script插件使用办法
           
@@ -56,52 +73,10 @@ N1（群友极地阳光测试）
         删除插件安装的所有脚本
           /etc/init.d/Install_script stop
         
-        不会编译的可以采用我的编译辅助脚本编译： https://github.com/openwrtcompileshell/OpenwrtCompileScript
-
-**node和node-npm版本一定要大于10**，安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10
+        不会编译的可以采用我的编译辅助脚本编译： https://github.com/openwrtcompileshell/OpenwrtCompileScript（编译出来就是带插件的）
 
 
-
-**2.安装完依赖以后用npm安装一些模块**
-
-         npm install -g crypto-js got http-server tough-cookie download request tunnel qrcode-terminal websocket
-
-
-**如果你执行安装npm install -g crypto-js got http-server tough-cookie download request tunnel报错，你也可以用以下代码安装**
-
-         wget https://gitee.com/lxk0301/jd_scripts/raw/master/package.json
-        
-         npm install
-
-**还不行可以采用最后一个办法（痴雨提供）**
-设置NPM 下载源为淘宝 
-
-         npm config set registry https://registry.npm.taobao.org
-
-查看当前NPM下载源
-
-         npm config get registry
-
-然后再执行
-
-          npm install -g crypto-js got http-server tough-cookie download request tunnel
-
-
-**3.开始下载脚本**
-
-         git clone -b main https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
-         cd /usr/share/JD_Script && chmod 777 jd.sh 
-         sh jd.sh 
-         
-
-脚本安装完成以后可以用以下代码
-
-         sh $jd #直接调用代码
-
-         cd $jd_file # 可以直接进入代码所在文件夹
-
-
-##3.已知问题!!!
+## 已知问题!!!
 
 1.下载下来的js都是空的，建议强制代理raw.githubusercontent.com
 
@@ -110,7 +85,7 @@ N1（群友极地阳光测试）
          sh $jd jd_sharecode
 
 
-**4.问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)**
+**问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)**
 
 **吹水群** :**667491026** (公子大爷请绕道，白嫖可能没人理)
 
