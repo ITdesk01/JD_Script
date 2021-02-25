@@ -47,7 +47,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.81"
+	cron_version="2.82"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -76,7 +76,6 @@ cat >>/etc/crontabs/root <<EOF
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机#100#
 0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关#100#
 0 8 1 */1 * $node $dir_file/js/jd_price.js >/tmp/jd_price.log #每个月1号8点执行京东保价#100#
-0 9,12,20,21 * * * $node $dir_file/js/jd_global_mh.js >/tmp/jd_global_mh.log #京东国际盲盒#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
@@ -389,6 +388,7 @@ run_08_12_16() {
 	echo -e "$green run_08_12_16$start_script $white"
 	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	$node $dir_file_js/jd_bookshop.js #口袋书店
+	$node $dir_file_js/jd_global_mh.js #京东国际盲盒
 	echo -e "$green run_08_12_16$stop_script $white"
 }
 
