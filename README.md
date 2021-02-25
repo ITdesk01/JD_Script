@@ -57,7 +57,7 @@ N1（群友极地阳光测试）
 
 ## 安装办法二（直接忽略上面操作，重新编译，编译参考以下文档）
 
-      ![Install_script 插件编译使用说明1.1版本.docx](doc/Install_script 插件编译使用说明1.1版本.docx)
+   [doc/Install_script 插件编译使用说明1.1版本.docx](Install_script 插件编译使用说明1.1版本.docx)
        
         Install_script插件使用办法
           
