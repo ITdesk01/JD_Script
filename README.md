@@ -56,8 +56,9 @@ N1（群友极地阳光测试）
         sh $jd run_0 run_07
 
 ## 安装办法二（直接忽略上面操作，重新编译，编译参考以下文档）
+**安装插件好处，会帮你安装好依赖和npm模块，升级openwrt系统配置不会丢失，无需再重新设置，首次开机要等5分钟左右（视cpu与网络速度，进程可以看系统日志）**
 
-编译参考文档 ：[Install_script插件编译使用说明1.1版本](doc/Install_script插件编译使用说明1.1版本.docx)
+编译参考文档 ：[Install_script插件编译使用说明1.1版本](doc/Install_script插件编译使用说明1.1版本.docx)(不带luci界面，在shell界面控制)
        
         Install_script插件使用办法
           
