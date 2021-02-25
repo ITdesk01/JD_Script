@@ -38,6 +38,7 @@ N1（群友极地阳光测试）
  
 
 ## 安装办法一
+**安装依赖**
 
          通过opkg update 再 opkg install git git-http node node-npm openssh-client openssh-keygen
 
@@ -45,7 +46,7 @@ N1（群友极地阳光测试）
 **node和node-npm版本一定要大于10**，安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10
 
 
-**开始下载脚本，安装npm模块**
+**开始下载脚本，并安装npm模块**
 
          git clone -b main https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
          cd /usr/share/JD_Script && chmod 777 jd.sh && sh jd.sh
