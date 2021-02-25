@@ -855,6 +855,8 @@ help() {
 	echo ""
 	echo -e "$green  sh \$jd stop_script $white  			#删除定时任务停用所用脚本"
 	echo ""
+	echo "0 10 * * * $node $dir_file/js/jd_try.js >/tmp/jd_try.log #京东试用默认不开启有需要将这个定时任务添加到计划任务里面去"
+	echo ""
 	echo -e " 如果不喜欢这样，你也可以直接$green cd \$jd_file/js$white,然后用$green node 脚本名字.js$white "
 	echo ""
 	echo -e "$yellow 3.检测定时任务:$white $cron_help"
