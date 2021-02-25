@@ -837,13 +837,15 @@ help() {
 	echo ""
 	echo -e "$yellow个别脚本有以下："
 	echo ""
-	echo -e "$green  sh \$jd joy $white				#运行疯狂的JOY(两个号需要1G以上，sh \$jd kill_joy 杀掉进程，彻底关闭需要先杀进程再禁用定时任务的代码)"
+	echo -e "$green  sh \$jd npm_install $white  			#安装 npm 模块"
 	echo ""
 	echo -e "$green  sh \$jd jx $white 				#查询京喜商品生产使用时间"
 	echo ""
 	echo -e "$green  sh \$jd jd_sharecode $white 			#查询京东所有助力码"
 	echo ""
 	echo -e "$green  sh \$jd stop_notice $white  			#关掉萌宠 农场  多次提醒"
+	echo ""
+	echo -e "$green  sh \$jd joy $white				#运行疯狂的JOY(两个号需要1G以上，sh \$jd kill_joy 杀掉进程，彻底关闭需要先杀进程再禁用定时任务的代码)"
 	echo ""
 	echo -e "$green  sh \$jd checklog $white  			#检测log日志是否有错误并推送"
 	echo ""
@@ -1196,6 +1198,12 @@ time() {
 		echo "我已经阅读脚本说明" > $dir_file/script_read.txt
 	fi
 }
+
+npm_install() {
+	echo -e "$green 开始安装npm模块$white"
+	cd $dir_file/git_clone/lxk0301
+	npm install
+}
 system_variable() {
 	if [[ ! -d "$dir_file/config" ]]; then
 		mkdir  $dir_file/config
@@ -1348,7 +1356,7 @@ if [[ -z $action1 ]]; then
 	system_variable
 else
 	case "$action1" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_020|stop_notice|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_020|stop_notice|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install)
 		$action1
 		;;
 		*)
@@ -1360,7 +1368,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_020|stop_notice|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas)
+		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_020|stop_notice|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install)
 		$action2
 		;;
 		*)
