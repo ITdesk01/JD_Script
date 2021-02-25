@@ -7,7 +7,7 @@
 #
 #set -x
 
-version="1.9"
+version="2.0"
 cron_file="/etc/crontabs/root"
 url=https://gitee.com/lxk0301/jd_scripts/raw/master
 
@@ -854,6 +854,7 @@ help() {
 	echo -e "$green  sh \$jd backnas $white  			#备份脚本到NAS存档"
 	echo ""
 	echo -e "$green  sh \$jd stop_script $white  			#删除定时任务停用所用脚本"
+	echo ""
 	echo " #京东试用默认不开启有需要将这个定时任务添加到计划任务里面去"
 	echo " 0 10 * * * $node $dir_file/js/jd_try.js >/tmp/jd_try.log "
 	echo ""
