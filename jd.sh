@@ -468,7 +468,7 @@ checklog() {
 	for i in `cat $log2`
 	do
 		echo "#### ${i}详细的错误" >> $log3
-		grep -E  "错误|失败|taskVos" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败' | sort -u >> $log3
+		grep -E  "错误|失败|taskVos|module" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败' | sort -u >> $log3
 	done
 
 	if [ $num = "no_eeror" ]; then
