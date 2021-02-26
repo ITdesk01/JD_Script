@@ -48,15 +48,18 @@ N1（群友极地阳光测试）
          node和node-npm版本一定要大于10**，安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10
 
 
-**开始下载脚本，并安装npm模块**
+**开始下载脚本**
 
          git clone -b main https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
          cd /usr/share/JD_Script && chmod 777 jd.sh && sh jd.sh
-         cd git_clone/lxk0301 && npm install
+         
+**安装npm模块**
+
+         sh $jd npm_install
                 
 **开始跑脚本**   
         
-        sh $jd run_0 run_07
+         sh $jd run_0 run_07
 
 ## 安装办法二（直接忽略上面操作，重新编译，编译参考以下文档）
 **安装插件好处，会帮你安装好依赖和npm模块，升级openwrt系统配置不会丢失，无需再重新设置，首次开机要等5分钟左右（视cpu与网络速度，进程可以看系统日志）**
