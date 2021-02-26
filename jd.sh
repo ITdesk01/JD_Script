@@ -1203,7 +1203,7 @@ npm_install() {
 		cp $install_script/JD_Script/git_clone/lxk0301/package.json $install_script/package.json
 		cd $install_script && npm install
 	else
-		cp $dir_file/JD_Script/git_clone/lxk0301/package.json $dir_file/package.json
+		cp $dir_file/git_clone/lxk0301/package.json $dir_file/package.json
 		cd $dir_file && npm install
 	fi
 }
