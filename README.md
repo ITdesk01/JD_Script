@@ -56,7 +56,12 @@ N1（群友极地阳光测试）
 **安装npm模块**
 
          sh $jd npm_install
-                
+         
+**去填写cookie和推送
+
+          /usr/share/JD_Script/jdCookie.js  在此脚本内填写JD Cookie 脚本内有说明
+          /usr/share/JD_Script/sendNotify.js  在此脚本内填写推送服务的KEY，可以不填
+          
 **开始跑脚本**   
         
          sh $jd run_0 run_07
