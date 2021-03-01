@@ -1201,10 +1201,10 @@ npm_install() {
 	echo -e "$green 开始安装npm模块$white"
 	if [ "$dir_file" == "$install_script/JD_Script" ];then
 		cp $install_script/JD_Script/git_clone/lxk0301/package.json $install_script/package.json
-		cd $install_script && npm install
+		cd $install_script && npm install && npm install -g request
 	else
 		cp $dir_file/git_clone/lxk0301/package.json $dir_file/package.json
-		cd $dir_file && npm install
+		cd $dir_file && npm -g install && npm install -g request
 	fi
 }
 system_variable() {
