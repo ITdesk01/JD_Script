@@ -523,10 +523,9 @@ that_day() {
 
 
 	git_log=$(git log --format=format:"%ai %an %s" --since="$current_time 00:00:00" --before="$current_time 23:59:59" | sed "s/+0800//g" | sed "s/$current_time //g" | sed "s/ /+/g")
-
-	if [ $(echo $git_log |wc -l) == "0"  ];then
+	if [ $($git_log | wc -l) == "0"  ];then
 		echo "#### JD_Script+$current_time" >>$dir_file/git_log/${current_time}.log
-		echo "作者泡妹子或者干饭去了，今天没有任何更新，不要催佛系玩。。。" >>$dir_file/git_log/${current_time}.log
+		echo "作者泡妹子或者干饭去了$wrap$wrap_tab今天没有任何更新$wrap$wrap_tab不要催佛系玩。。。" >>$dir_file/git_log/${current_time}.log
 		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
 	else
 		echo "#### JD_Script+$current_time+更新日志" >> $dir_file/git_log/${current_time}.log
@@ -534,8 +533,6 @@ that_day() {
 		echo "$git_log" >> $dir_file/git_log/${current_time}.log
 		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
 	fi
-
-
 
 	log_sort=$(cat  $dir_file/git_log/${current_time}.log | sed "s/${current_time}//g" |sed "s/$/$wrap$wrap_tab/" | sed ':t;N;s/\n//;b t' | sed "s/$wrap_tab####/####/g")
 	log_sort1=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
