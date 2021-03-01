@@ -1230,7 +1230,7 @@ system_variable() {
 	fi
 
 	#判断参数
-	if [ ! -d /root/.ssh ];then
+	if [ ! -f /root/.ssh/lxk0301 ];then
 		cp -r $dir_file/.ssh /root/.ssh
 		chmod 600 /root/.ssh/lxk0301
 		sed -i "s/#   StrictHostKeyChecking ask/StrictHostKeyChecking no/g" /etc/ssh/ssh_config
