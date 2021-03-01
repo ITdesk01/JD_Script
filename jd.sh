@@ -162,6 +162,8 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
 	jd_crazy_joy_bonus.js		#监控crazyJoy分红狗(默认不运行，欧皇自己设置定时任务)
 	jd_global_mh.js			#京东国际盲盒
+	jd_firecrackers.js		#她的节，享京豆
+	jd_cfd.js			#京喜财富岛
 	jd_unbind.js			#注销京东会员卡
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	JS_USER_AGENTS.js		#京东极速版UA
@@ -352,6 +354,7 @@ run_06_18() {
 	$node $dir_file_js/jd_daily_egg.js #天天提鹅蛋，需要有金融app，没有顶多报错问题不大
 	$node $dir_file_js/jd_pigPet.js #金融养猪，需要有金融app，没有顶多报错问题不大
 	$node $dir_file_js/jd_superMarket.js #东东超市,6点 18点多加两场用于收金币
+	$node $dir_file_js/jd_firecrackers.js #她的节，享京豆
 	echo -e "$green run_06_18$stop_script $white"
 }
 
@@ -397,7 +400,7 @@ run_10_15_20() {
 	echo -e "$green run_10_15_20$start_script $white"
 	$node $dir_file_js/jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
 	$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
-	$node $dir_file_js/jx_cfd.js #京东财富岛 有一日三餐任务
+	$node $dir_file_js/jd_cfd.js #京东财富岛 有一日三餐任务
 	$node $dir_file_js/jd_beauty.js	#美丽研究院
 	echo -e "$green run_10_15_20$stop_script $white"
 }
