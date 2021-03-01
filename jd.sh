@@ -163,13 +163,14 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_global_mh.js			#京东国际盲盒
 	jd_firecrackers.js		#她的节，享京豆
 	jd_cfd.js			#京喜财富岛
-	jd_unbind.js			#注销京东会员卡
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	JS_USER_AGENTS.js		#京东极速版UA
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
+cp  $dir_file/git_clone/lxk0301/activity/jd_unbind.js	$dir_file_js/jd_unbind.js #注销京东会员卡
+
 for script_name in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
 do
 	echo -e "$yellow copy $green$script_name$white"
