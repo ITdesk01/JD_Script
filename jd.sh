@@ -153,7 +153,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_daily_egg.js 		#京东金融-天天提鹅
 	jd_sgmh.js			#闪购盲盒长期活动
 	jd_ms.js			#京东秒秒币
-	jd_xgyl.js			#小鸽有礼2 2021年1月28日～2021年2月28日
 	jd_nzmh.js			#女装盲盒 活动时间：2021-2-19至2021-2-25
 	jd_beauty.js			#美丽研究院
 	jd_price.js			#京东保价
@@ -368,7 +367,6 @@ run_07() {
 	$node $dir_file_js/jd_jdzz.js #京东赚赚长期活动
 	$node $dir_file_js/jd_jxnc.js #京喜农场
 	$node $dir_file_js/jd_ms.js #京东秒秒币 一个号大概60
-	$node $dir_file_js/jd_xgyl.js #小鸽有礼2 2021年1月28日～2021年2月28日
 	$node $dir_file_js/jd_sgmh.js #闪购盲盒长期活动
 	$node $dir_file_js/jd_entertainment.js #百变大咖秀
 	$node $dir_file_js/jd_nzmh.js #女装盲盒 活动时间：2021-2-19至2021-2-25
