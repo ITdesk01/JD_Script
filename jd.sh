@@ -47,7 +47,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.84"
+	cron_version="2.85"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -76,6 +76,7 @@ cat >>/etc/crontabs/root <<EOF
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机#100#
 0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关#100#
 0 11 */7 * *  $node $dir_file/js/jd_price.js >/tmp/jd_price.log #每7天11点执行京东保价#100#
+5 11 3 */1 *  $node $dir_file_js/jd_shakeBean.js  >/tmp/jd_shakeBean.log #京东会员-摇京豆,每个月运行一次
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
@@ -214,6 +215,9 @@ COMMENT
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_fanslove.js -O $dir_file_js/jd_fanslove.js #粉丝互动
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_shake.js -O $dir_file_js/jd_shake.js #超级摇一摇
+	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_shakeBean.js -O $dir_file_js/jd_shakeBean.js #京东会员-摇京豆,每个月运行一次
+	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_jump-jump.js -O $dir_file_js/jd_jump-jump.js #母婴-跳一跳
+
 
 cat >>$dir_file/config/collect_script.txt <<EOF
 	jx_products_detail.js		#京喜工厂商品列表详情
@@ -376,6 +380,7 @@ run_07() {
 	$node $dir_file_js/jd_fanslove.js #粉丝互动
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_shake.js #超级摇一摇
+	$node $dir_file_js/jd_jump-jump.js #母婴-跳一跳
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
