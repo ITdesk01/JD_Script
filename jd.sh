@@ -813,6 +813,23 @@ stop_script() {
 
 
 help() {
+	#检查脚本是否最新
+	echo "稍等一下，正在取回远端脚本源码，用于比较现在脚本源码，速度看你网络"
+	cd $dir_file
+	git fetch
+	if [[ $? -eq 0 ]]; then
+		echo ""
+	else
+		echo -e "$red>> 取回分支没有成功，重新执行代码$white"
+		system_variable
+	fi
+	clear
+	git_branch=$(git branch -v | grep -o behind )
+	if [[ "$git_branch" == "behind" ]]; then
+		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script && sh \$jd update && sh \$jd $white更新 )"
+	else
+		Script_status="$green最新$white"
+	fi
 	task
 	clear
 	echo ----------------------------------------------------
@@ -1350,33 +1367,14 @@ COMMENT
 	fi
 
 	script_black
-
-
-	#检查脚本是否最新
-	echo "稍等一下，正在取回远端脚本源码，用于比较现在脚本源码，速度看你网络"
-	cd $dir_file
-	git fetch
-	if [[ $? -eq 0 ]]; then
-		echo ""
-	else
-		echo -e "$red>> 取回分支没有成功，重新执行代码$white"
-		system_variable
-	fi
-	clear
-	git_branch=$(git branch -v | grep -o behind )
-	if [[ "$git_branch" == "behind" ]]; then
-		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script && sh \$jd update && sh \$jd $white更新 )"
-	else
-		Script_status="$green最新$white"
-	fi
-
-	help
 }
 
+
+system_variable
 action1="$1"
 action2="$2"
 if [[ -z $action1 ]]; then
-	system_variable
+	help
 else
 	case "$action1" in
 		system_variable|update|update_script|run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|task|run_08_12_16|jx|run_07|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|run_030|run_020|stop_notice|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install)
@@ -1400,4 +1398,5 @@ else
 	esac
 	fi
 fi
+
 
