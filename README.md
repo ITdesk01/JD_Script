@@ -38,12 +38,14 @@ N1（群友极地阳光测试）
          openssh-client
          
          openssh-keygen
+
+	 python3
  
 
 ## 安装办法一
 **安装依赖**
 
-         通过opkg update 再 opkg install git git-http node node-npm openssh-client openssh-keygen
+         通过opkg update 再 opkg install git git-http node node-npm openssh-client openssh-keygen python3
 
          node和node-npm版本一定要大于10**，安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10
 

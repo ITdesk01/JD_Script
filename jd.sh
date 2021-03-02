@@ -1006,7 +1006,7 @@ additional_settings() {
 	liandao_20201010_pb="nxawbkvqldtx4wdwxxbkf23g6y@l4ex6vx6yynouxxefa4hfq6z3in25fmktqqwtca"
 	adong_20201108_pb="qhw4z5vauoy4gfkaybvpmxvjfi@olmijoxgmjuty6wu5iufrhoi6jmzzodszk6xgda"
 	deng_20201120_pb="e7lhibzb3zek3knwnjhrbaadekphavflo22jqii@olmijoxgmjutzfvkt4iu7xobmplveczy2ogou3i@f3er4cqcqgwogenz3dwsg7owhy@eupxefvqt76x2ssddhd35aysfrchgqeijzo2wdi@3en43v3ev6tvx55oefp3vb2xure67mm3kwgsm6a@nkvdrkoit5o657wm7ui35qcu2dmtir7t5h7sema"
-	gomail_20201125_pb="yzhv4vq2u2tan56h4a764rocbe@4npkonnsy7xi2rducm544znpdzi2gnyg5ygrqei"
+	gomail_20201125_pb="yzhv4vqminty2u2tan56h4a764rocbe@4npkonnsy7xi2rducm544znpdzi2gnyg5ygrqei"
 	baijiezi_20201126_pb="m6brcm36t5fvxhxnhnjzssq3fauk3bdje2jbnra@mlkc4vnryrhbob7aruocema224@vv3gwhnjzvf5scyicvcrylwldjf2yqvagsa35cy@76gkpqn3nufwjfzgfcv2mxfeimcie5fxpwtraba"
 	superbei666_20201124_pb="gcdr655xfdjq764agedg7f27knlvxw5krpeddfq"
 	yiji_20201125_pb="qm7basnqm6wnqtoyefmgh65nby@mnuvelsb76r27b4ovdbtrrl2u5a53z543epg7hi"
@@ -1172,15 +1172,20 @@ COMMENT
 }
 
 random_array() {
-	echo "random_array" > /tmp/random.txt
+	#彻底完善，感谢minty大力支援
 	length=$(echo $random | awk -F '[@]' '{print NF}') #获取变量长度
-	random_num=$(awk -va=$length+1 'BEGIN {for (i = 1; i <= 30; i++)print int( a * rand() )}' | grep -v 0 | sort -u) #生成随机数(未完成还有点问题，数字太小重复太多了)
-	for i in `echo $random_num`
-	do
-		echo $random | awk -va=$i -F '[@]' '{print $a}'  >>/tmp/random.txt
-	done
+	if [ "$length" -ge "20" ];then
+		echo "random_array" > /tmp/random.txt
+		random_num=$(python3 $dir_file/jd_random.py $length,20  | sed "s/,/\n/g")
+		for i in `echo $random_num`
+		do
+			echo $random | awk -va=$i -F '[@]' '{print $a}'  >>/tmp/random.txt
+		done
 
-	random_set=$(cat /tmp/random.txt | sed  "/random_array/d"| sed "s/$/@/" | sed ':t;N;s/\n//;b t' |sed 's/.$//g')
+		random_set=$(cat /tmp/random.txt | sed  "/random_array/d"| sed "s/$/@/" | sed ':t;N;s/\n//;b t' |sed 's/.$//g')
+	else
+		random_set="$random"
+	fi
 }
 
 time() {
@@ -1223,12 +1228,19 @@ system_variable() {
 	openssh_if=$(opkg list-installed | grep 'openssh-client' | awk '{print $1}')
 	openssh_if1=$(opkg list-installed | grep 'openssh-keygen' | awk '{print $1}')
 	if [ ! $openssh_if ];then
-		echo -e "未找到$green openssh-client$white，请安装以后再使用本脚本"
+		echo -e "缺少$green openssh-client$white依赖，请安装以后再使用本脚本"
 		exit 0
 	fi
 	
 	if [ ! $openssh_if1 ];then
-		echo -e "未找到$green openssh-keygen$white，请安装以后再使用本脚本"
+		echo -e "缺少$green openssh-keygen$white依赖，请安装以后再使用本脚本"
+		exit 0
+	fiMTAxODc2NTE0NzAwMDAwMDAwNDI4ODExMQ==
+
+	#判断python
+	python_if=$(opkg list-installed | grep 'python3' | awk 'NR==1 {print $1}')
+	if [ ! $python_if ];then
+		echo -e "缺少$green python3$white依赖，请安装以后再使用本脚本"
 		exit 0
 	fi
 
