@@ -1238,7 +1238,7 @@ system_variable() {
 	if [ ! $openssh_if1 ];then
 		echo -e "缺少$green openssh-keygen$white依赖，请安装以后再使用本脚本"
 		exit 0
-	fiMTAxODc2NTE0NzAwMDAwMDAwNDI4ODExMQ==
+	fi
 
 	#判断python
 	python_if=$(opkg list-installed | grep 'python3' | awk 'NR==1 {print $1}')
