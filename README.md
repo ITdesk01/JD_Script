@@ -39,7 +39,7 @@ N1（群友极地阳光测试）
          
          openssh-keygen
 
-	 python3
+         python3
  
 
 ## 安装办法一
