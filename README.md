@@ -17,6 +17,8 @@ openwrt X86 （基于x86编写）
 
 N1（群友极地阳光测试）
 
+NANOPI R4S (群友snow测试)
+
 
 
 
@@ -64,7 +66,7 @@ N1（群友极地阳光测试）
           /usr/share/JD_Script/jdCookie.js  在此脚本内填写JD Cookie 脚本内有说明
           /usr/share/JD_Script/sendNotify.js  在此脚本内填写推送服务的KEY，可以不填
           
-**开始跑脚本**   
+**开始跑脚本**
         
          sh $jd run_0 run_07
 
