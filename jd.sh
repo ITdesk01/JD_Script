@@ -121,7 +121,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jx_sign.js			#京喜app签到长期
 	jd_fruit.js			#东东农场
 	jd_jxnc.js			#京喜农场
-	jdJxncTokens.js			#京喜农场token
 	jd_pet.js			#东东萌宠
 	jd_plantBean.js			#种豆得豆
 	jd_superMarket.js		#东东超市
