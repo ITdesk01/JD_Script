@@ -83,12 +83,12 @@ NANOPI R4S (群友snow测试)
           
           3.sh $jd && sh $jd run_0 run_07 #运行全部脚本
         
-        如果安装失败可以用以下命令控制插件安装
-          /etc/init.d/Install_script start
-        
-        删除插件安装的所有脚本
+        如果安装失败可以用以下命令控制插件重新安装
+          
           /etc/init.d/Install_script stop
-        
+          /etc/init.d/Install_script start
+      
+
         不会编译的可以采用我的编译辅助脚本编译： https://github.com/openwrtcompileshell/OpenwrtCompileScript（编译出来就是带插件的）
 
 
