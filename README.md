@@ -54,8 +54,8 @@ NANOPI R4S (群友snow测试)
 
 **开始下载脚本**
 
-         git clone -b main https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
-         cd /usr/share/JD_Script && chmod 777 jd.sh && sh jd.sh
+         git clone -b main https://github.com/ITdesk01/JD_Script.git /usr/share/Install_script/JD_Script
+         cd /usr/share/Install_script/JD_Script && chmod 777 jd.sh && sh jd.sh
          
 **安装npm模块**
 
