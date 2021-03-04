@@ -160,7 +160,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_beauty.js			#美丽研究院
 	jd_price.js			#京东保价
 	jd_speed_sign.js		#京东极速版签到+赚现金任务
-	jd_speed_redpocke.js		#京东极速版红包
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
 	jd_crazy_joy_bonus.js		#监控crazyJoy分红狗(默认不运行，欧皇自己设置定时任务)
 	jd_global_mh.js			#京东国际盲盒
@@ -219,6 +218,7 @@ COMMENT
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_shake.js -O $dir_file_js/jd_shake.js #超级摇一摇
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_shakeBean.js -O $dir_file_js/jd_shakeBean.js #京东会员-摇京豆,每个月运行一次
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_jump-jump.js -O $dir_file_js/jd_jump-jump.js #母婴-跳一跳
+	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_xmf.js -O $dir_file_js/jd_xmf.js #京东小魔方
 
 
 cat >>$dir_file/config/collect_script.txt <<EOF
@@ -378,11 +378,11 @@ run_07() {
 	$node $dir_file_js/jd_entertainment.js #百变大咖秀
 	$node $dir_file_js/jd_nzmh.js #女装盲盒 活动时间：2021-2-19至2021-2-25
 	$node $dir_file_js/jd_speed_sign.js #京东极速版签到+赚现金任务
-	$node $dir_file_js/jd_speed_redpocke.js	#京东极速版红包
 	$node $dir_file_js/jd_fanslove.js #粉丝互动
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_shake.js #超级摇一摇
 	$node $dir_file_js/jd_jump-jump.js #母婴-跳一跳
+	$node $dir_file_js/jd_xmf.js #京东小魔方
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
