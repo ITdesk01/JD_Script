@@ -36,7 +36,8 @@ line="%0D%0A%0D%0A---%0D%0A%0D%0A"
 current_time=$(date +"%Y-%m-%d")
 by="#### 脚本仓库地址:https://github.com/ITdesk01/JD_Script"
 SCKEY=$(grep "let SCKEY" $script_dir/sendNotify.js  | awk -F "'" '{print $2}')
-uname_version=$(uname -a | awk -v i="_" '{print $1i $2i $3}')
+sys_model=$(cat sysinfo/model | awk -v i="+" '{print $1i$2i$3}')
+uname_version=$(uname -a | awk -v i="+" '{print $1i $2i $3}')
 wan_ip=$(ubus call network.interface.wan status | grep \"address\" | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
 
 red="\033[31m"
@@ -457,8 +458,7 @@ checklog() {
 	ls ./ | grep -E "^j" | sort >$log1
 
 	#筛选jd log 里面有几个是带错误的
-	echo "#### Wan口IP地址：$wan_ip" >>$log3
-	echo "#### 当前的系统版本:$uname_version" >>$log3
+	echo -e "$line#### Model：$sys_model\n#### Wan+IP地址：+$wan_ip\n#### 系统版本:++$uname_version\n$line" >>$log3
 	echo "#### $current_time+检测到错误日志的文件" >>$log3
 	for i in `cat $log1`
 	do
@@ -534,15 +534,11 @@ that_day() {
 
 	git_log=$(git log --format=format:"%ai %an %s" --since="$current_time 00:00:00" --before="$current_time 23:59:59" | sed "s/+0800//g" | sed "s/$current_time //g" | sed "s/ /+/g")
 	if [ `echo "$git_log" | wc -l` == "0"  ];then
-		echo "#### JD_Script+$current_time+更新日志" >> $dir_file/git_log/${current_time}.log
+		echo -e "$line#### Model：$sys_model\n#### Wan+IP地址：+$wan_ip\n#### 系统版本:++$uname_version\n$line#### $current_time+更新日志\n" >> $dir_file/git_log/${current_time}.log
 		echo "作者泡妹子或者干饭去了$wrap$wrap_tab今天没有任何更新$wrap$wrap_tab不要催佛系玩。。。" >>$dir_file/git_log/${current_time}.log
-		echo "#### Wan口IP地址：$wan_ip" >>$dir_file/git_log/${current_time}.log
-		echo "#### 当前的系统版本:$uname_version" >>$dir_file/git_log/${current_time}.log
 		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
 	else
-		echo "#### JD_Script+$current_time+更新日志" >> $dir_file/git_log/${current_time}.log
-		echo "#### Wan口IP地址：$wan_ip" >>$dir_file/git_log/${current_time}.log
-		echo "#### 当前的系统版本:$uname_version" >>$dir_file/git_log/${current_time}.log
+		echo -e "$line#### Model：$sys_model\n#### Wan+IP地址：+$wan_ip\n#### 系统版本:++$uname_version\n$line#### $current_time+更新日志\n" >> $dir_file/git_log/${current_time}.log
 		echo "  时间       +作者          +操作" >> $dir_file/git_log/${current_time}.log
 		echo "$git_log" >> $dir_file/git_log/${current_time}.log
 		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
