@@ -462,8 +462,8 @@ checklog() {
 	echo "#### $current_time+检测到错误日志的文件" >>$log3
 	for i in `cat $log1`
 	do
-		grep -Elrn  "错误|失败|依赖|error|taskVos|module" $i >> $log2
-		grep -Elrn  "错误|失败|依赖|error|taskVos|module" $i >> $log3
+		grep -Elrn  "错误|失败|依赖|error|module" $i >> $log2
+		grep -Elrn  "错误|失败|依赖|error|module" $i >> $log3
 	done
 	cat_log=$(cat $log2 | wc -l)
 	if [ $cat_log -ge "1" ];then
@@ -476,7 +476,7 @@ checklog() {
 	for i in `cat $log2`
 	do
 		echo "#### ${i}详细的错误" >> $log3
-		grep -E  "错误|失败|依赖|error|taskVos|module" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败' | sort -u >> $log3
+		grep -E  "错误|失败|依赖|error|module" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败\|node_modules\|sgmodulse' | sort -u >> $log3
 	done
 
 	if [ $num = "no_eeror" ]; then
@@ -1257,8 +1257,8 @@ system_variable() {
 	fi
 
 	#判断openssh
-	openssh_if=$(opkg list-installed | grep 'openssh-client' | awk '{print $1}')
-	openssh_if1=$(opkg list-installed | grep 'openssh-keygen' | awk '{print $1}')
+	openssh_if=$(opkg list-installed | grep "openssh-client" | awk '{print $1}')
+	openssh_if1=$(opkg list-installed | grep "openssh-keygen" | awk '{print $1}')
 	if [ ! $openssh_if ];then
 		echo -e "缺少$green openssh-client$white依赖，请安装以后再使用本脚本"
 		sleep 5
@@ -1270,7 +1270,7 @@ system_variable() {
 	fi
 
 	#判断python
-	python_if=$(opkg list-installed | grep 'python3' | awk 'NR==1 {print $1}')
+	python_if=$(opkg list-installed | grep "python3" | awk 'NR==1 {print $1}')
 	if [ ! $python_if ];then
 		echo -e "缺少$green python3$white依赖，请安装以后再使用本脚本"
 		sleep 5
