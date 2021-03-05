@@ -44,7 +44,25 @@ NANOPI R4S (群友snow测试)
          python3
  
 
-## 安装办法一
+## 安装办法一（插件安装）
+
+**插件地址**
+        
+        https://github.com/ITdesk01/jd_openwrt_script
+      
+安装插件好处，会帮你安装好依赖和npm模块，升级openwrt系统配置不会丢失，无需再重新设置，备份路由器数据的时候也会一起打包走，首次开机联网要等5分钟左右（视cpu与网络速度，进程可以看系统日志）
+
+不会编译的可以采用我的编译辅助脚本编译： https://github.com/openwrtcompileshell/OpenwrtCompileScript（编译出来就是带插件的）
+
+
+## 安装办法二（本地安装，后期会慢慢放弃看情况）
+
+本地安装
+
+         好处：无须重新编译固件，满足底下依赖条件即可，可谓开箱即用
+
+         缺点：升级固件以后配置文件会丢失，需要重新配置以下东西才能使用（麻烦）
+
 **安装依赖**
 
          通过opkg update 再 opkg install git git-http node node-npm openssh-client openssh-keygen python3
@@ -54,8 +72,8 @@ NANOPI R4S (群友snow测试)
 
 **开始下载脚本**
 
-         git clone -b main https://github.com/ITdesk01/JD_Script.git /usr/share/Install_script/JD_Script
-         cd /usr/share/Install_script/JD_Script && chmod 777 jd.sh && sh jd.sh
+         git clone -b main https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
+         cd /usr/share/JD_Script && chmod 777 jd.sh && sh jd.sh
          
 **安装npm模块**
 
@@ -63,42 +81,30 @@ NANOPI R4S (群友snow测试)
          
 **去填写cookie和推**
 
-          /usr/share/Install_script/JD_Script/jdCookie.js  在此脚本内填写JD Cookie 脚本内有说明
-          /usr/share/Install_script/JD_Script/sendNotify.js  在此脚本内填写推送服务的KEY，可以不填
+          /usr/share/JD_Script/jdCookie.js  在此脚本内填写JD Cookie 脚本内有说明
+          /usr/share/JD_Script/sendNotify.js  在此脚本内填写推送服务的KEY，可以不填
           
 **开始跑脚本**
         
          sh $jd run_0 run_07
 
-## 安装办法二（直接忽略上面操作，重新编译，编译参考以下文档）
-**安装插件好处，会帮你安装好依赖和npm模块，升级openwrt系统配置不会丢失，无需再重新设置，首次开机要等5分钟左右（视cpu与网络速度，进程可以看系统日志）**
 
-编译参考文档 ：[Install_script插件编译使用说明1.1版本](doc/Install_script插件编译使用说明1.1版本.docx)(不带luci界面，在shell界面控制)
-       
-        Install_script插件使用办法
-          
-          1.编译完成以后刷机，开机的等5分钟连上网等自动安装脚本与依赖,是否完成可以查看/usr/share/Install_script/
-          
-          2.完成以后/usr/share/Install_script/script_config填上cookie
-          
-          3.sh $jd && sh $jd run_0 run_07 #运行全部脚本
-        
-        如果安装失败可以用以下命令控制插件重新安装
-          
-          /etc/init.d/Install_script stop
-          /etc/init.d/Install_script start
-      
-
-        不会编译的可以采用我的编译辅助脚本编译： https://github.com/openwrtcompileshell/OpenwrtCompileScript（编译出来就是带插件的）
 
 
 ## 已知问题!!!
 
-1.下载下来的js都是空的，建议强制代理raw.githubusercontent.com
+1.下载下来的js都是空的，
+   
+          强制代理raw.githubusercontent.com
+          rm -rf /root/.ssh && sh $jd update
 
 2.互助码怎么找
 
          sh $jd jd_sharecode
+         
+3.如何获取cookie
+
+          sh $jd #说明文件最顶上几行，嫌弃文字太多可以用grep过滤一下
 
 
 **问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)**
