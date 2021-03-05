@@ -462,24 +462,24 @@ checklog() {
 	echo "#### $current_time+检测到错误日志的文件" >>$log3
 	for i in `cat $log1`
 	do
-		grep -Elrn  "错误|失败|依赖|error|module" $i >> $log2
-		grep -Elrn  "错误|失败|依赖|error|module" $i >> $log3
+		grep -Elrn  "错误|失败|module" $i >> $log2
+		grep -Elrn  "错误|失败|module" $i >> $log3
 	done
 	cat_log=$(cat $log2 | wc -l)
 	if [ $cat_log -ge "1" ];then
 		num="JD_Script发现有$cat_log个日志包含错误信息"
 	else
-		num="no_eeror"
+		num="no_error"
 	fi
 
 	#将详细错误信息输出log3
 	for i in `cat $log2`
 	do
 		echo "#### ${i}详细的错误" >> $log3
-		grep -E  "错误|失败|依赖|error|module" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败\|node_modules\|sgmodulse' | sort -u >> $log3
+		grep -E  "错误|失败|module" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败\|node_modules\|sgmodule' | sort -u >> $log3
 	done
 
-	if [ $num = "no_eeror" ]; then
+	if [ $num = "no_error" ]; then
 		echo "**********************************************"
 		echo -e "$green log日志没有发现错误，一切风平浪静$white"
 		echo "**********************************************"
