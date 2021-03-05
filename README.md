@@ -63,8 +63,8 @@ NANOPI R4S (群友snow测试)
          
 **去填写cookie和推**
 
-          /usr/share/JD_Script/jdCookie.js  在此脚本内填写JD Cookie 脚本内有说明
-          /usr/share/JD_Script/sendNotify.js  在此脚本内填写推送服务的KEY，可以不填
+          /usr/share/Install_script/JD_Script/jdCookie.js  在此脚本内填写JD Cookie 脚本内有说明
+          /usr/share/Install_script/JD_Script/sendNotify.js  在此脚本内填写推送服务的KEY，可以不填
           
 **开始跑脚本**
         
