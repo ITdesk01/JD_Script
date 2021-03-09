@@ -1,5 +1,9 @@
 # JD_Script
 ![JD_Script](doc/JD_Script.png)
+## 通知
+
+      由于之前的安装方式比较麻烦，现在统一用安装方法1的插件安装方法，本地安装方式可能以后不考虑支持了
+
 ## 序言
    调用https://gitee.com/lxk0301/jd_scripts/blob/master/ 库的JS脚本，进行测试学习，在X86机器使用正常，其他机器满足依赖应该问题不大,
    感谢作者lxk0301 shylocks大佬和其他大佬的JS脚本，谢谢你们的付出
