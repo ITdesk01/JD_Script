@@ -237,16 +237,16 @@ COMMENT
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_fanslove.js -O $dir_file_js/jd_fanslove.js #粉丝互动
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_shake.js -O $dir_file_js/jd_shake.js #超级摇一摇
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_shakeBean.js -O $dir_file_js/jd_shakeBean.js #京东会员-摇京豆,每个月运行一次
-	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_jump-jump.js -O $dir_file_js/jd_jump-jump.js #母婴-跳一跳
-	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_xmf.js -O $dir_file_js/jd_xmf.js #京东小魔方
-jd_global.js			#环球挑战赛
+	rm -rf $dir_file_js/jd_jump-jump.js #母婴-跳一跳
+	rm -rf $dir_file_js/jd_xmf.js #京东小魔方
+
 
 cat >>$dir_file/config/collect_script.txt <<EOF
 	jx_products_detail.js		#京喜工厂商品列表详情
 	jd_entertainment.js 		#百变大咖秀
 	jd_try.js 			#京东试用
 	jdDreamFactoryShareCodes.js	#京喜工厂ShareCodes
-	jdFruitShareCodes.js		#东东农场ShareCodesjd_global.js			#环球挑战赛
+	jdFruitShareCodes.js		#东东农场ShareCodes
 	jdPetShareCodes.js		#东东萌宠ShareCodes
 	jdPlantBeanShareCodes.js	#种豆得豆ShareCodes
 	jdFactoryShareCodes.js		#东东工厂ShareCodes
@@ -399,8 +399,6 @@ run_07() {
 	$node $dir_file_js/jd_fanslove.js #粉丝互动
 	$node $dir_file_js/jd_cash.js #签到领现金，每日2毛～5毛长期
 	$node $dir_file_js/jd_shake.js #超级摇一摇
-	$node $dir_file_js/jd_jump-jump.js #母婴-跳一跳
-	$node $dir_file_js/jd_xmf.js #京东小魔方
 	$node $dir_file_js/jd_jxd.js #京小兑
 	$node $dir_file_js/jd_nzmh.js #女装盲盒 2021-3-8至2021-3-20
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
@@ -1260,7 +1258,7 @@ COMMENT
 	random_array
 	new_jdglobal_set="'$new_jdglobal@$zuoyou_20190516_gb@$jidiyangguang_20190516_gb@$random_set',"
 	sed -i '46,47d' $dir_file_js/jd_global.js
-	sed -i "45a $new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set" $dir_file_js/jd_global.
+	sed -i "45a $new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set" $dir_file_js/jd_global.js
 
 	#脚本黑名单
 	script_black
