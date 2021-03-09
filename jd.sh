@@ -549,14 +549,16 @@ that_day() {
 
 
 	git_log=$(git log --format=format:"%ai %an %s" --since="$current_time 00:00:00" --before="$current_time 23:59:59" | sed "s/+0800//g" | sed "s/$current_time //g" | sed "s/ /+/g")
-	if [ `echo "$git_log" | wc -l` == "0"  ];then
-		echo -e "$line#### Model：$sys_model\n#### Wan+IP地址：+$wan_ip\n#### 系统版本:++$uname_version\n$line#### $current_time+更新日志\n" >> $dir_file/git_log/${current_time}.log
-		echo "作者泡妹子或者干饭去了$wrap$wrap_tab今天没有任何更新$wrap$wrap_tab不要催佛系玩。。。" >>$dir_file/git_log/${current_time}.log
-		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
-	else
+	echo $git_log >/tmp/git_log_if.log
+	git_log_if=$(grep -Eo "Zhang|ITdesk" /tmp/git_log_if.log | sort -u | wc -l )
+	if [ $git_log_if -ge 1  ];then
 		echo -e "$line#### Model：$sys_model\n#### Wan+IP地址：+$wan_ip\n#### 系统版本:++$uname_version\n$line#### $current_time+更新日志\n" >> $dir_file/git_log/${current_time}.log
 		echo "  时间       +作者          +操作" >> $dir_file/git_log/${current_time}.log
 		echo "$git_log" >> $dir_file/git_log/${current_time}.log
+		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
+	else
+		echo -e "$line#### Model：$sys_model\n#### Wan+IP地址：+$wan_ip\n#### 系统版本:++$uname_version\n$line#### $current_time+更新日志\n" >> $dir_file/git_log/${current_time}.log
+		echo "作者泡妹子或者干饭去了$wrap$wrap_tab今天没有任何更新$wrap$wrap_tab不要催佛系玩。。。" >>$dir_file/git_log/${current_time}.log
 		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
 	fi
 
