@@ -181,6 +181,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_cfd.js			#京喜财富岛
 	jd_live.js			#京东直播
 	jd_jxd.js			#京小兑
+	jd_global.js			#环球挑战赛
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	JS_USER_AGENTS.js		#京东极速版UA
 	jd_get_share_code.js		#获取jd所有助力码脚本
@@ -235,14 +236,14 @@ COMMENT
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_shakeBean.js -O $dir_file_js/jd_shakeBean.js #京东会员-摇京豆,每个月运行一次
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_jump-jump.js -O $dir_file_js/jd_jump-jump.js #母婴-跳一跳
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_xmf.js -O $dir_file_js/jd_xmf.js #京东小魔方
-
+jd_global.js			#环球挑战赛
 
 cat >>$dir_file/config/collect_script.txt <<EOF
 	jx_products_detail.js		#京喜工厂商品列表详情
 	jd_entertainment.js 		#百变大咖秀
 	jd_try.js 			#京东试用
 	jdDreamFactoryShareCodes.js	#京喜工厂ShareCodes
-	jdFruitShareCodes.js		#东东农场ShareCodes
+	jdFruitShareCodes.js		#东东农场ShareCodesjd_global.js			#环球挑战赛
 	jdPetShareCodes.js		#东东萌宠ShareCodes
 	jdPlantBeanShareCodes.js	#种豆得豆ShareCodes
 	jdFactoryShareCodes.js		#东东工厂ShareCodes
@@ -410,6 +411,7 @@ run_08_12_16() {
 	$node $dir_file_js/jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	$node $dir_file_js/jd_bookshop.js #口袋书店
 	$node $dir_file_js/jd_global_mh.js #京东国际盲盒
+	$node $dir_file_js/jd_global.js	#环球挑战赛
 	echo -e "$green run_08_12_16$stop_script $white"
 }
 
