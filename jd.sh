@@ -186,7 +186,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_live_redrain.js 		#超级直播间红包雨
 	jd_nzmh.js			#女装盲盒 2021-3-8至2021-3-20
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
-	JS_USER_AGENTS.js		#京东极速版UA
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -879,7 +878,8 @@ help() {
 	echo ""
 	echo -e "$green  $script_dir/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
 	echo -e "$green  $script_dir/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
-	echo -e "$green  $script_dir/USER_AGENTS.js $white UA文件可以自定义也可以默认 ，自定义需要抓包本机UA，然后修改删掉里面的UA，改成自己的"
+	echo -e "$green  $script_dir/USER_AGENTS.js $white 京东UA文件可以自定义也可以默认"
+	echo -e "$green  $script_dir/JS_USER_AGENTS.js $white 京东极速版UA文件可以自定义也可以默认"
 	echo -e "$green  $script_dir/config/Script_blacklist.txt $white 脚本黑名单，用法去看这个文件"
 	echo ""
 	echo -e "$yellow JS脚本活动列表：$green $dir_file/git_clone/lxk0301/README.md $white"
@@ -1385,6 +1385,19 @@ system_variable() {
 		if [ ! -f "$dir_file_js/USER_AGENTS.js" ]; then
 			ln -s $install_script_config/USER_AGENTS.js $dir_file_js/USER_AGENTS.js
 		fi
+
+		#JS_USER_AGENTS.js
+		if [ ! -f "$install_script_config/JS_USER_AGENTS.js" ]; then
+			cp  $dir_file/git_clone/lxk0301/JS_USER_AGENTS.js $install_script_config/JS_USER_AGENTS.js
+			rm -rf $dir_file_js/JS_USER_AGENTS.js #用于删除旧的链接
+			ln -s $install_script_config/JS_USER_AGENTS.js $dir_file_js/JS_USER_AGENTS.js
+		fi
+
+		#JS_USER_AGENTS.js用于升级以后恢复链接
+		if [ ! -f "$dir_file_js/JS_USER_AGENTS.js" ]; then
+			ln -s $install_script_config/JS_USER_AGENTS.js $dir_file_js/JS_USER_AGENTS.js
+		fi
+
 	elif [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 		#jdCookie.js
 		if [ ! -f "$openwrt_script_config/jdCookie.js" ]; then
@@ -1421,6 +1434,18 @@ system_variable() {
 		if [ ! -f "$dir_file_js/USER_AGENTS.js" ]; then
 			ln -s $openwrt_script_config/USER_AGENTS.js $dir_file_js/USER_AGENTS.js
 		fi
+
+		#JS_USER_AGENTS.js
+		if [ ! -f "$openwrt_script_config/JS_USER_AGENTS.js" ]; then
+			cp  $dir_file/git_clone/lxk0301/JS_USER_AGENTS.js $openwrt_script_config/JS_USER_AGENTS.js
+			rm -rf $dir_file_js/JS_USER_AGENTS.js #用于删除旧的链接
+			ln -s $openwrt_script_config/JS_USER_AGENTS.js $dir_file_js/JS_USER_AGENTS.js
+		fi
+
+		#JS_USER_AGENTS.js用于升级以后恢复链接
+		if [ ! -f "$dir_file_js/JS_USER_AGENTS.js" ]; then
+			ln -s $openwrt_script_config/JS_USER_AGENTS.js $dir_file_js/JS_USER_AGENTS.js
+		fi
 	else
 		if [ ! -f "$dir_file/jdCookie.js" ]; then
 			cp  $dir_file/git_clone/lxk0301/jdCookie.js $dir_file/jdCookie.js
@@ -1437,6 +1462,10 @@ system_variable() {
 			ln -s $dir_file/USER_AGENTS.js $dir_file_js/USER_AGENTS.js
 		fi
 
+		if [ ! -f "$dir_file/JS_USER_AGENTS.js" ]; then
+			cp  $dir_file/git_clone/lxk0301/JS_USER_AGENTS.js $dir_file/JS_USER_AGENTS.js
+			ln -s $dir_file/JS_USER_AGENTS.js $dir_file_js/JS_USER_AGENTS.js
+		fi
 	fi
 
 	#判断node版本是大于10
