@@ -173,7 +173,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_daily_egg.js 		#京东金融-天天提鹅
 	jd_sgmh.js			#闪购盲盒长期活动
 	jd_ms.js			#京东秒秒币
-	jd_beauty.js			#美丽研究院
 	jd_price.js			#京东保价
 	jd_speed_sign.js		#京东极速版签到+赚现金任务
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
@@ -420,7 +419,6 @@ run_10_15_20() {
 	$node $dir_file_js/jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
 	$node $dir_file_js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
 	$node $dir_file_js/jd_cfd.js #京东财富岛 有一日三餐任务
-	$node $dir_file_js/jd_beauty.js	#美丽研究院
 	echo -e "$green run_10_15_20$stop_script $white"
 }
 
