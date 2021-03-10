@@ -478,8 +478,8 @@ checklog() {
 	echo "#### $current_time+检测到错误日志的文件" >>$log3
 	for i in `cat $log1`
 	do
-		grep -Elrn  "错误|失败|module" $i >> $log2
-		grep -Elrn  "错误|失败|module" $i >> $log3
+		grep -Elrn  "错误|失败" $i  >> $log2
+		grep -Elrn  "错误|失败" $i  >> $log3
 	done
 	cat_log=$(cat $log2 | wc -l)
 	if [ $cat_log -ge "1" ];then
