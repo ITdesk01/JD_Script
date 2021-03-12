@@ -245,14 +245,19 @@ COMMENT
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/z_unionPoster.js -O $dir_file_js/z_unionPoster.js #美的家电节
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_xmf.js -O $dir_file_js/jd_xmf.js #京东小魔方
 
-	rm -rf $dir_file_js/jd_jump-jump.js #母婴-跳一跳
-	rm -rf $dir_file_js/jd_xmf.js #京东小魔方
 
 
 cat >>$dir_file/config/collect_script.txt <<EOF
 	jx_products_detail.js		#京喜工厂商品列表详情
 	jd_entertainment.js 		#百变大咖秀
 	jd_try.js 			#京东试用
+	jd_fanslove.js			#粉丝互动
+	jd_shake.js 			#超级摇一摇
+	jd_shakeBean.js 		#京东会员-摇京豆,每个月运行一次
+	z_marketLottery.js 		#京东超市-大转盘
+	z_superDay.js 			#洗护发超级品类日2021-03-08 - 2021-03-15
+	z_unionPoster.js 		#美的家电节
+	jd_xmf.js 			#京东小魔方
 	jdDreamFactoryShareCodes.js	#京喜工厂ShareCodes
 	jdFruitShareCodes.js		#东东农场ShareCodes
 	jdPetShareCodes.js		#东东萌宠ShareCodes
