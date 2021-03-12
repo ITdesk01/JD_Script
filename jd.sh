@@ -91,7 +91,7 @@ cat >>/etc/crontabs/root <<EOF
 10 2-22/3 * * * $dir_file/jd.sh run_03 >/tmp/jd_run_03.log 2>&1 #天天加速 3小时运行一次，打卡时间间隔是6小时#100#
 40 6-18/6 * * * $dir_file/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1 #不是很重要的，错开运行#100#
 35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1 #不是很重要的，错开运行#100#
-10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #旺旺兑换礼品#100#
+10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #宠汪汪兑换礼品#100#
 00 22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本#100#
 5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #22点05分更新lxk0301脚本#100#
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本#100#
@@ -981,11 +981,6 @@ additional_settings() {
 	#取消店铺从20个改成50个(没有星推官先默认20吧)
 	sed -i "s/|| 20/|| 200/g" $dir_file_js/jd_unsubscribe.js
 
-	#宠汪汪积分兑换奖品改成兑换500豆子，个别人会兑换错误(350积分兑换20豆子，8000积分兑换500豆子要求等级16级，16000积分兑换1000京豆16级以后不能兑换)
-	sed -i "s/let joyRewardName = 20/let joyRewardName = 500/g" $dir_file_js/jd_joy_reward.js
-
-	#宠汪汪喂食改成80
-	sed -i "s/|| 10/|| 80/g" $dir_file_js/jd_joy_feedPets.js
 
 	#东东农场
 	new_fruit1="6632c8135d5c4e2c9ad7f4aa964d4d11@31a2097b10db48429013103077f2f037@5aa64e466c0e43a98cbfbbafcc3ecd02@bf0cbdb0083d443499a571796af20896@9046fbd8945f48cb8e36a17fff9b0983"
@@ -1072,6 +1067,15 @@ additional_settings() {
 	sed -i '10,11d' $dir_file_js/jdPetShareCodes.js
 	sed -i "32a $new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set" $dir_file_js/jd_pet.js
 	sed -i "9a $new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set" $dir_file_js/jdPetShareCodes.js
+
+	#宠汪汪积分兑换奖品改成兑换500豆子，个别人会兑换错误(350积分兑换20豆子，8000积分兑换500豆子要求等级16级，16000积分兑换1000京豆16级以后不能兑换)
+	sed -i "s/let joyRewardName = 20/let joyRewardName = 500/g" $dir_file_js/jd_joy_reward.js
+
+	#宠汪汪喂食改成80
+	sed -i "s/|| 10/|| 80/g" $dir_file_js/jd_joy_feedPets.js
+
+	#宠汪汪不给好友喂食
+	sed -i "s/let jdJoyHelpFeed = true/let jdJoyHelpFeed = false/g" $dir_file_js/jd_joy_steal.js
 
 
 	#种豆
