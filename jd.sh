@@ -42,7 +42,7 @@ elif [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 	prompt=""
 else
 	script_dir="$dir_file"
-	prompt="检测到你使用本地安装方式安装脚本，此插件后面会逐渐放弃，请按github：https://github.com/ITdesk01/jd_openwrt_script 重新编译插件"
+	prompt="检测到你使用本地安装方式安装脚本，此方式后面会逐渐放弃，请按github：https://github.com/ITdesk01/jd_openwrt_script 重新编译插件"
 fi
 
 
