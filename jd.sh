@@ -243,7 +243,6 @@ COMMENT
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/z_marketLottery.js -O $dir_file_js/z_marketLottery.js #京东超市-大转盘
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/z_superDay.js -O $dir_file_js/z_superDay.js #洗护发超级品类日2021-03-08 - 2021-03-15
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/z_unionPoster.js -O $dir_file_js/z_unionPoster.js #美的家电节
-	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_xmf.js -O $dir_file_js/jd_xmf.js #京东小魔方
 
 
 
@@ -257,7 +256,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	z_marketLottery.js 		#京东超市-大转盘
 	z_superDay.js 			#洗护发超级品类日2021-03-08 - 2021-03-15
 	z_unionPoster.js 		#美的家电节
-	jd_xmf.js 			#京东小魔方
 	jdDreamFactoryShareCodes.js	#京喜工厂ShareCodes
 	jdFruitShareCodes.js		#东东农场ShareCodes
 	jdPetShareCodes.js		#东东萌宠ShareCodes
@@ -416,7 +414,6 @@ run_07() {
 	$node $dir_file_js/z_marketLottery.js #京东超市-大转盘
 	$node $dir_file_js/z_superDay.js #洗护发超级品类日2021-03-08 - 2021-03-15
 	$node $dir_file_js/z_unionPoster.js #美的家电节
-	$node $dir_file_js/jd_xmf.js #京东小魔方
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
