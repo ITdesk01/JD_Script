@@ -1283,8 +1283,8 @@ COMMENT
 	random="$random_jdglobal"
 	random_array
 	new_jdglobal_set="'$new_jdglobal@$zuoyou_20190516_gb@$jidiyangguang_20190516_gb@$random_set',"
-	sed -i '46,47d' $dir_file_js/jd_global.js
-	sed -i "45a $new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set" $dir_file_js/jd_global.js
+	sed -i '47,48d' $dir_file_js/jd_global.js
+	sed -i "46a $new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set" $dir_file_js/jd_global.js
 
 	#脚本黑名单
 	script_black
