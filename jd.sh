@@ -28,16 +28,11 @@ dir_file_js="$dir_file/js"
 
 
 #检测当前位置
-install_script="/usr/share/Install_script"
-install_script_config="/usr/share/Install_script/script_config"
-
 openwrt_script="/usr/share/jd_openwrt_script"
 openwrt_script_config="/usr/share/jd_openwrt_script/script_config"
 
-if [ "$dir_file" == "$install_script/JD_Script" ];then
-	script_dir="$install_script_config"
-	prompt="检测到你使用Install_script插件安装脚本，此插件后面会逐渐放弃，请按github：https://github.com/ITdesk01/jd_openwrt_script 重新编译插件"
-elif [ "$dir_file" == "$openwrt_script/JD_Script" ];then
+
+if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 	script_dir="$openwrt_script_config"
 	prompt=""
 else
@@ -691,13 +686,7 @@ backnas() {
 	date_time=$(date +%Y-%m-%d-%H:%M)
 	back_file_name="script_${date_time}.tar.gz"
 	#判断所在文件夹
-	if [ "$dir_file" == "$install_script/JD_Script" ];then
-		backnas_config_file="$install_script_config/backnas_config.txt"
-		back_file_patch="$install_script"
-		if [ ! -f "$install_script_config/backnas_config.txt" ]; then
-			backnas_config
-		fi
-	elif [ "$dir_file" == "$openwrt_script/JD_Script" ];then
+	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 		backnas_config_file="$openwrt_script_config/backnas_config.txt"
 		back_file_patch="$openwrt_script"
 		if [ ! -f "$openwrt_script_config/backnas_config.txt" ]; then
@@ -876,16 +865,7 @@ script_black() {
 	#不是很完美，但也能用，后面再想想办法，grep无法处理$node 这种这样我无法判断是否禁用了，只能删除掉一了百了
 	black_version="黑名单版本1.1"
 	#判断所在文件夹
-	if [ "$dir_file" == "$install_script/JD_Script" ];then
-		script_black_file="$install_script_config/Script_blacklist.txt"
-		if [ ! -f "$script_black_file" ]; then
-			script_black_Description
-		fi
-		#script_black用于升级以后恢复链接
-		if [ ! -f "$dir_file/config/Script_blacklist.txt" ]; then
-			ln -s $script_black_file $dir_file/config/Script_blacklist.txt
-		fi
-	elif [ "$dir_file" == "$openwrt_script/JD_Script" ];then
+	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 		script_black_file="$openwrt_script_config/Script_blacklist.txt"
 		if [ ! -f "$script_black_file" ]; then
 			script_black_Description
@@ -1422,10 +1402,7 @@ time() {
 
 npm_install() {
 	echo -e "$green 开始安装npm模块$white"
-	if [ "$dir_file" == "$install_script/JD_Script" ];then
-		cp $install_script/JD_Script/git_clone/lxk0301/package.json $install_script/package.json
-		cd $install_script && npm install && npm install -g request
-	elif [ "$dir_file" == "$openwrt_script/JD_Script" ];then
+	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 		cp $openwrt_script/JD_Script/git_clone/lxk0301/package.json $openwrt_script/package.json
 		cd $openwrt_script && npm install && npm install -g request
 	else
@@ -1474,56 +1451,7 @@ system_variable() {
 		update
 	fi
 
-	if [ "$dir_file" == "$install_script/JD_Script" ];then
-		#jdCookie.js
-		if [ ! -f "$install_script_config/jdCookie.js" ]; then
-			cp  $dir_file/git_clone/lxk0301/jdCookie.js  $install_script_config/jdCookie.js
-			rm -rf $dir_file_js/jdCookie.js #用于删除旧的链接
-			ln -s $install_script_config/jdCookie.js $dir_file_js/jdCookie.js
-		fi
-
-		#jdCookie.js用于升级以后恢复链接
-		if [ ! -f "$dir_file_js/jdCookie.js" ]; then
-			ln -s $install_script_config/jdCookie.js $dir_file_js/jdCookie.js
-		fi
-
-		#sendNotify.js
-		if [ ! -f "$install_script_config/sendNotify.js" ]; then
-			cp  $dir_file/git_clone/lxk0301/sendNotify.js $install_script_config/sendNotify.js
-			rm -rf $dir_file_js/sendNotify.js  #用于删除旧的链接
-			ln -s $install_script_config/sendNotify.js $dir_file_js/sendNotify.js
-		fi
-
-		#sendNotify.js用于升级以后恢复链接
-		if [ ! -f "$dir_file_js/sendNotify.js" ]; then
-			ln -s $install_script_config/sendNotify.js $dir_file_js/sendNotify.js
-		fi
-
-		#USER_AGENTS.js
-		if [ ! -f "$install_script_config/USER_AGENTS.js" ]; then
-			cp  $dir_file/git_clone/lxk0301/USER_AGENTS.js $install_script_config/USER_AGENTS.js
-			rm -rf $dir_file_js/USER_AGENTS.js #用于删除旧的链接
-			ln -s $install_script_config/USER_AGENTS.js $dir_file_js/USER_AGENTS.js
-		fi
-
-		#USER_AGENTS.js用于升级以后恢复链接
-		if [ ! -f "$dir_file_js/USER_AGENTS.js" ]; then
-			ln -s $install_script_config/USER_AGENTS.js $dir_file_js/USER_AGENTS.js
-		fi
-
-		#JS_USER_AGENTS.js
-		if [ ! -f "$install_script_config/JS_USER_AGENTS.js" ]; then
-			cp  $dir_file/git_clone/lxk0301/JS_USER_AGENTS.js $install_script_config/JS_USER_AGENTS.js
-			rm -rf $dir_file_js/JS_USER_AGENTS.js #用于删除旧的链接
-			ln -s $install_script_config/JS_USER_AGENTS.js $dir_file_js/JS_USER_AGENTS.js
-		fi
-
-		#JS_USER_AGENTS.js用于升级以后恢复链接
-		if [ ! -f "$dir_file_js/JS_USER_AGENTS.js" ]; then
-			ln -s $install_script_config/JS_USER_AGENTS.js $dir_file_js/JS_USER_AGENTS.js
-		fi
-
-	elif [ "$dir_file" == "$openwrt_script/JD_Script" ];then
+	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 		#jdCookie.js
 		if [ ! -f "$openwrt_script_config/jdCookie.js" ]; then
 			cp  $dir_file/git_clone/lxk0301/jdCookie.js  $openwrt_script_config/jdCookie.js
