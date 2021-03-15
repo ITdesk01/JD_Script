@@ -25,13 +25,9 @@ done
 dir_file="$( cd -P "$( dirname "$Source"  )" && pwd  )"
 dir_file_js="$dir_file/js"
 
-
-
 #检测当前位置
 openwrt_script="/usr/share/jd_openwrt_script"
 openwrt_script_config="/usr/share/jd_openwrt_script/script_config"
-
-
 if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 	script_dir="$openwrt_script_config"
 	prompt=""
@@ -40,15 +36,12 @@ else
 	prompt="检测到你使用本地安装方式安装脚本，此方式后面会逐渐放弃，请按github：https://github.com/ITdesk01/jd_openwrt_script 重新编译插件"
 fi
 
-
-
 version="2.1"
 cron_file="/etc/crontabs/root"
 node="/usr/bin/node"
 sys_model=$(cat /tmp/sysinfo/model | awk -v i="+" '{print $1i$2i$3i$4}')
 uname_version=$(uname -a | awk -v i="+" '{print $1i $2i $3}')
 wan_ip=$(ubus call network.interface.wan status | grep \"address\" | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
-pt_pin_number=$(cat $script_dir/jdCookie.js | grep "pt_pin" |wc -l) #获取当前有多少账号
 
 #Server酱
 wrap="%0D%0A%0D%0A" #Server酱换行
@@ -200,46 +193,28 @@ do
 	sleep 1
 done
 
-:<<'COMMENT'
-	wget --spider -nv $url/package.json -o /tmp/wget_test.log
-	wget_test=$( cat /tmp/wget_test.log | grep -o "200 OK")
-	if [ "$wget_test" == "200 OK" ];then
-		for script_name in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
-		do
-			wget $url/$script_name -O $dir_file_js/$script_name
-		done
-	else
-		echo -e "$red无法下载仓库文件，暂时不更新,可能是网络问题或者上游仓库被封，建议查看上游仓库是否正常，测试仓库是否正常：$url/package.json$white"
-		exit 0
-	fi
-COMMENT
-
-url2="https://raw.githubusercontent.com/shylocks/Loon/main"
-cat >$dir_file/config/shylocks_script.txt <<EOF
-	jd_gyec.js			#工业爱消除
-	jd_xxl.js			#东东爱消除
-	jd_xxl_gh.js			#个护爱消除，完成所有任务+每日挑战
-	jd_opencard.js			#开卡活动，一次性活动，运行完脚本获得53京豆，进入入口还可以开卡领30都
-	jd_friend.js			#JOY总动员 一期的活动
+url2="https://raw.githubusercontent.com/i-chenzhe/qx/main"
+cat >$dir_file/config/i-chenzhe_script.txt <<EOF
+	jd_fanslove.js			#粉丝互动
+	jd_shake.js 			#超级摇一摇
+	jd_shakeBean.js 		#京东会员-摇京豆,每个月运行一次
+	z_marketLottery.js 		#京东超市-大转盘
+	z_superDay.js 			#洗护发超级品类日2021-03-08 - 2021-03-15
+	z_unionPoster.js 		#美的家电节
 EOF
 
-:<<'COMMENT'
-for script_name in `cat $dir_file/config/shylocks_script.txt | awk '{print $1}'`
+for script_name in `cat $dir_file/config/i-chenzhe_script.txt | awk '{print $1}'`
 do
 	wget $url2/$script_name -O $dir_file_js/$script_name
 done
-COMMENT
+
+	rm -rf $dir_file/config/shylocks_script.txt
 	cat $dir_file/config/lxk0301_script.txt > $dir_file/config/collect_script.txt
-	cat $dir_file/config/shylocks_script.txt >> $dir_file/config/collect_script.txt
+	cat $dir_file/config/i-chenzhe_script.txt >> $dir_file/config/collect_script.txt
+
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_entertainment.js -O $dir_file_js/jd_entertainment.js #百变大咖秀
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
-	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_fanslove.js -O $dir_file_js/jd_fanslove.js #粉丝互动
-	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_shake.js -O $dir_file_js/jd_shake.js #超级摇一摇
-	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_shakeBean.js -O $dir_file_js/jd_shakeBean.js #京东会员-摇京豆,每个月运行一次
-	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/z_marketLottery.js -O $dir_file_js/z_marketLottery.js #京东超市-大转盘
-	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/z_superDay.js -O $dir_file_js/z_superDay.js #洗护发超级品类日2021-03-08 - 2021-03-15
-	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/z_unionPoster.js -O $dir_file_js/z_unionPoster.js #美的家电节
 
 
 
@@ -247,12 +222,12 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jx_products_detail.js		#京喜工厂商品列表详情
 	jd_entertainment.js 		#百变大咖秀
 	jd_try.js 			#京东试用
-	jd_fanslove.js			#粉丝互动
-	jd_shake.js 			#超级摇一摇
-	jd_shakeBean.js 		#京东会员-摇京豆,每个月运行一次
-	z_marketLottery.js 		#京东超市-大转盘
-	z_superDay.js 			#洗护发超级品类日2021-03-08 - 2021-03-15
-	z_unionPoster.js 		#美的家电节
+	jd_gyec.js			#工业爱消除
+	jd_xxl.js			#东东爱消除
+	jd_xxl_gh.js			#个护爱消除，完成所有任务+每日挑战
+	jd_opencard.js			#开卡活动，一次性活动，运行完脚本获得53京豆，进入入口还可以开卡领30都
+	jd_friend.js			#JOY总动员 一期的活动
+	jd_unbind.js 			#注销京东会员卡
 	jdDreamFactoryShareCodes.js	#京喜工厂ShareCodes
 	jdFruitShareCodes.js		#东东农场ShareCodes
 	jdPetShareCodes.js		#东东萌宠ShareCodes
@@ -475,10 +450,6 @@ EOF
 	done
 
 	echo -e "$green run_10_15_20$stop_script $white"
-}
-
-Concurrency_detection() {
-	script_number=$(expr $code_number + 1)
 }
 
 ddcs() {
@@ -1035,16 +1006,10 @@ help() {
 
 additional_settings() {
 
-	for i in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
+	for i in `cat $dir_file/config/collect_script.txt | awk '{print $1}'`
 	do
 		sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/$i
 	done
-
-	for i in `cat $dir_file/config/shylocks_script.txt | awk '{print $1}'`
-	do
-		sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/$i
-	done
-
 
 	#京小超默认兑换20豆子(JS已经默认兑换20了)
 	#sed -i "s/|| 0/|| 20/g" $dir_file_js/jd_blueCoin.js
