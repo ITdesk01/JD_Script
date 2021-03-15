@@ -59,7 +59,7 @@ wrap="%0D%0A%0D%0A" #Server酱换行
 wrap_tab="     "
 line="%0D%0A%0D%0A---%0D%0A%0D%0A"
 current_time=$(date +"%Y-%m-%d")
-by="#### 脚本仓库地址:https://github.com/ITdesk01/JD_Script/tree/main"
+by="#### 脚本仓库地址:https://github.com/ITdesk01/JD_Script/tree/main,核心JS采用lxk0301开源JS脚本"
 SCKEY=$(grep "let SCKEY" $script_dir/sendNotify.js  | awk -F "'" '{print $2}')
 
 
@@ -1024,7 +1024,8 @@ additional_settings() {
 	#取消店铺从20个改成50个(没有星推官先默认20吧)
 	sed -i "s/|| 20/|| 200/g" $dir_file_js/jd_unsubscribe.js
 
-	sed -i "s/本脚本开源免费使用 By：https:\/\/gitee.com\/lxk0301\/jd_docker/JD_Script 采用lxk0301开源JS脚本/g" $dir_file_js/sendNotify.js
+	sed -i "s/本脚本开源免费使用 By：https:\/\/gitee.com\/lxk0301\/jd_docker/$by/g" $dir_file_js/sendNotify.js
+	sed -i "s/本脚本开源免费使用 By：https:\/\/github.com\/LXK9301\/jd_scripts/$by/g" $dir_file_js/sendNotify.js
 
 
 	#东东农场
