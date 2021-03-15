@@ -189,6 +189,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_global.js			#环球挑战赛
 	jd_live_redrain.js 		#超级直播间红包雨
 	jd_nzmh.js			#女装盲盒 2021-3-8至2021-3-20
+	jd_xtg.js			#手机尚学季
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
@@ -414,6 +415,7 @@ run_07() {
 	$node $dir_file_js/z_marketLottery.js #京东超市-大转盘
 	$node $dir_file_js/z_superDay.js #洗护发超级品类日2021-03-08 - 2021-03-15
 	$node $dir_file_js/z_unionPoster.js #美的家电节
+	$node $dir_file_js/jd_xtg.js #手机尚学季
 	$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	$node $dir_file_js/jd_bean_change.js #京豆变更
