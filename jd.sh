@@ -40,7 +40,7 @@ ccr_js_file="$dir_file/ccr_js"
 ps_if=$(ps -ww | grep "JD_Script" | grep -v "grep\|jd_crazy_joy_coin.js\|jd.sh run_0 run_07" |wc -l)
 
 
-version="2.1"
+version="2.2"
 cron_file="/etc/crontabs/root"
 node="/usr/bin/node"
 sys_model=$(cat /tmp/sysinfo/model | awk -v i="+" '{print $1i$2i$3i$4}')
