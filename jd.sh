@@ -1559,7 +1559,7 @@ system_variable() {
 		fi
 	fi
 
-	jd_openwrt_config_version="1.1"
+	jd_openwrt_config_version="1.2"
 	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 		jd_openwrt_config="$openwrt_script_config/jd_openwrt_script_config.txt"
 		if [ ! -f "$jd_openwrt_config" ]; then
@@ -1628,6 +1628,8 @@ cat > $jd_openwrt_config <<EOF
 这里主要定义一些脚本的个性化操作，如果你不需要微调，那么保持默认不理他就行了
 
 这里的参数如果你看不懂或者想知道还有没有其他参数，你可以去$dir_file_js这里找相应的js脚本看说明
+
+修改完参数如何生效：sh \$jd update && sh \$jd
 
 *******************************************************
 #是否启用账号并发功能（多账号考虑打开，黑了不管） yes开启 默认no
