@@ -37,8 +37,6 @@ else
 fi
 
 ccr_js_file="$dir_file/ccr_js"
-ps_if=$(ps -ww | grep "JD_Script" | grep -v "grep\|jd_crazy_joy_coin.js\|jd.sh run_" |wc -l)
-
 
 version="2.2"
 cron_file="/etc/crontabs/root"
@@ -550,13 +548,13 @@ concurrent_js_if() {
 			action="$action1"
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
 			concurrent_js
+			if_ps
 			if [ ! $action2 ];then
 				echo ""
 			else
 				case "$action2" in
 				run_07)
 					action="$action2"
-					if_ps
 					$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
 					concurrent_js
 					if_ps
@@ -636,23 +634,31 @@ concurrent_js_update() {
 }
 
 if_ps() {
-	sleep 2
+	ps_if=$(ps -ww | grep "JD_Script" | grep -v "grep\|jd_crazy_joy_coin.js\|jd.sh run_" |wc -l)
+	echo -e "$green>>开始第一次检测上一个并发程序是否结束(10秒)$white"
+	sleep 10
 	echo ""
-	echo -e "$green>>稍等检测一下上一个并发程序是否结束$white"
 	if [ "$ps_if" == "0" ];then
-		sleep 2
-		echo -e "$green上一个并发程序已经结束$white"
+		echo -e "$green>>开始第二次检测上一个并发程序是否结束(20秒)$white"
+		sleep 20
+		if [ "$ps_if" == "0" ];then
+			echo -e "$yellow并发程序已经结束，收尾一下$white"
+			for i in `ps -ww | grep "jd.sh run_" | grep -v grep | awk '{print $1}'`
+			do
+				echo "开始kill $i"
+				kill -9 $i
+			done
+		else
+			sleep 10
+			echo -ne "$green第二次检测到并发程序还在继续，10秒以后再检测$white"
+			if_ps
+		fi
 	else
-		sleep 2
-		seconds_left=30
-		while [[ ${seconds_left} -gt 0 ]]; do
-			echo -ne "$green检测到并发程序还在继续，${seconds_left}秒回来检测$white"
-			sleep 1
-			seconds_left=$(($seconds_left - 1))
-			echo -ne "\r"
-		done
+		sleep 10
+		echo -ne "$green第一次检测到并发程序还在继续，10秒以后再检测$white"
 		if_ps
 	fi
+	#for i in `ps -ww | grep "jd.sh run_" | grep -v grep | awk '{print $1}'`;do kill -9 $i ;done
 }
 
 checklog() {
