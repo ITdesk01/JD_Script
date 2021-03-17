@@ -550,7 +550,7 @@ concurrent_js_if() {
 			concurrent_js
 			if_ps
 			if [ ! $action2 ];then
-				echo ""
+				concurrent_js_clean
 			else
 				case "$action2" in
 				run_07)
@@ -563,6 +563,7 @@ concurrent_js_if() {
 					$node $openwrt_script/JD_Script/js/jd_unsubscribe.js #取关店铺，没时间要求
 					$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 					checklog #检测log日志是否有错误并推送
+					concurrent_js_clean
 				;;
 				esac
 			fi
@@ -575,11 +576,13 @@ concurrent_js_if() {
 			$node $openwrt_script/JD_Script/js/jd_unsubscribe.js #取关店铺，没时间要求
 			$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 			checklog #检测log日志是否有错误并推送
+			concurrent_js_clean
 		;;
 		run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_030|run_020)
 			action="$action1"
 			concurrent_js
 			if_ps
+			concurrent_js_clean
 		;;
 		esac
 	else
@@ -636,6 +639,15 @@ concurrent_js_update() {
 	done
 }
 
+concurrent_js_clean(){
+	echo -e "$yellow收尾一下$white"
+	for i in `ps -ww | grep "jd.sh run_" | grep -v grep | awk '{print $1}'`
+	do
+		echo "开始kill $i"
+		kill -9 $i
+	done
+}
+
 if_ps() {
 	ps_if=$(ps -ww | grep "JD_Script" | grep -v "grep\|jd_crazy_joy_coin.js\|jd.sh run_" |wc -l)
 	echo -e "$green>>开始第一次检测上一个并发程序是否结束(10秒)$white"
@@ -649,11 +661,6 @@ if_ps() {
 			sleep 30
 			if [ "$ps_if" == "0" ];then
 				echo -e "$yellow并发程序已经结束，收尾一下$white"
-				for i in `ps -ww | grep "jd.sh run_" | grep -v grep | awk '{print $1}'`
-				do
-				echo "开始kill $i"
-				kill -9 $i
-				done
 			else
 				sleep 30
 				echo -ne "$green第三次检测到并发程序还在继续，30秒以后再检测$white"
@@ -672,6 +679,7 @@ if_ps() {
 	fi
 	#for i in `ps -ww | grep "jd.sh run_" | grep -v grep | awk '{print $1}'`;do kill -9 $i ;done
 }
+
 
 checklog() {
 	log1="checklog_jd.log" #用来查看tmp有多少jd log文件
