@@ -203,6 +203,7 @@ cat >$dir_file/config/i-chenzhe_script.txt <<EOF
 	z_unionPoster.js 		#美的家电节
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_lenovo.js			#联想集卡活动
+	z_oneplus.js			#一加盲盒 2021-03-17 - 2021-03-30
 EOF
 
 for script_name in `cat $dir_file/config/i-chenzhe_script.txt | awk '{print $1}'`
@@ -378,6 +379,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_xtg.js #手机尚学季
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_lenovo.js			#联想集卡活动
+	z_oneplus.js			#一加盲盒 2021-03-17 - 2021-03-30
 EOF
 	echo -e "$green run_07$start_script $white"
 
