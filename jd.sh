@@ -203,9 +203,8 @@ cat >$dir_file/config/i-chenzhe_script.txt <<EOF
 	jd_shake.js 			#超级摇一摇
 	jd_shakeBean.js 		#京东会员-摇京豆,每个月运行一次
 	z_marketLottery.js 		#京东超市-大转盘
-	z_superDay.js 			#洗护发超级品类日2021-03-08 - 2021-03-15
 	z_unionPoster.js 		#美的家电节
-	z_mother_jump.jsv		#新一期母婴跳一跳开始咯
+	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_lenovo.js			#联想集卡活动
 EOF
 
@@ -214,7 +213,7 @@ do
 	wget $url2/$script_name -O $dir_file_js/$script_name
 done
 
-	rm -rf $dir_file/config/shylocks_script.txt
+	rm -rf $dir_file_js/z_superDay.js 			#洗护发超级品类日2021-03-08 - 2021-03-15
 	cat $dir_file/config/lxk0301_script.txt > $dir_file/config/collect_script.txt
 	cat $dir_file/config/i-chenzhe_script.txt >> $dir_file/config/collect_script.txt
 
@@ -378,9 +377,10 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_jxd.js #京小兑
 	jd_nzmh.js #女装盲盒 2021-3-8至2021-3-20
 	z_marketLottery.js #京东超市-大转盘
-	z_superDay.js #洗护发超级品类日2021-03-08 - 2021-03-15
 	z_unionPoster.js #美的家电节
 	jd_xtg.js #手机尚学季
+	z_mother_jump.js		#新一期母婴跳一跳开始咯
+	z_lenovo.js			#联想集卡活动
 EOF
 	echo -e "$green run_07$start_script $white"
 
