@@ -564,6 +564,7 @@ concurrent_js_if() {
 					$node $openwrt_script/JD_Script/js/jd_unsubscribe.js #取关店铺，没时间要求
 					$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 					checklog #检测log日志是否有错误并推送
+					if_ps
 					concurrent_js_clean
 				;;
 				esac
@@ -576,6 +577,7 @@ concurrent_js_if() {
 			$node $openwrt_script/JD_Script/js/jd_unsubscribe.js #取关店铺，没时间要求
 			$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 			checklog #检测log日志是否有错误并推送
+			if_ps
 			concurrent_js_clean
 		;;
 		run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_030|run_020)
