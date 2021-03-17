@@ -63,7 +63,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.88"
+	cron_version="2.89"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -90,7 +90,6 @@ cat >>/etc/crontabs/root <<EOF
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本#100#
 */30 1-22 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机#100#
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机#100#
-0 2-21/1 * * 0,2-6 $dir_file/jd.sh stop_notice >/tmp/jd_stop_notice.log 2>&1 #两点以后关闭农场推送，周一不关#100#
 0 11 */7 * *  $node $dir_file/js/jd_price.js >/tmp/jd_price.log #每7天11点执行京东保价#100#
 5 11 3 */1 *  $node $dir_file_js/jd_shakeBean.js  >/tmp/jd_shakeBean.log #京东会员-摇京豆,每个月运行一次#100#
 10-20/5 12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播
@@ -527,14 +526,6 @@ do
 done
 echo -e "$green============整理完成，可以提交了（没加群的忽略）======$white"
 
-}
-
-stop_notice() {
-	#农场和萌宠提示太多次了，所用每天提示一次即可
-	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
-	sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
-	echo "时间大于两点开始关闭农场和萌宠提示请稍等"
-	echo -e "$green农场和萌宠提示关闭成功$white"
 }
 
 concurrent_js() {
@@ -1437,6 +1428,22 @@ COMMENT
 		fi
 	else
 		echo "京东试用计划任务不导入"
+	fi
+
+	#农场和东东萌宠关闭通知
+	if [ `date +%A` == "Monday" ];then
+		echo -e "$green今天周一不关闭农场萌宠通知$white"
+	else
+		case `date +%H` in
+		0|1|2|3)
+			echo -e "$green暂时不关闭农场和萌宠通知"
+		;;
+		*)
+			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
+			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
+			echo -e "$green时间大于凌晨三点开始关闭农场和萌宠通知$white"
+		;;
+		esac
 	fi
 }
 
