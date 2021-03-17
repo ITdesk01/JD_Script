@@ -548,8 +548,8 @@ concurrent_js_if() {
 			action="$action1"
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
 			concurrent_js
-			if_ps
 			if [ ! $action2 ];then
+				if_ps
 				concurrent_js_clean
 			else
 				case "$action2" in
@@ -660,7 +660,7 @@ if_ps() {
 			echo -e "$green>>开始第三次检测上一个并发程序是否结束(30秒)$white"
 			sleep 30
 			if [ "$ps_if" == "0" ];then
-				echo -e "$yellow并发程序已经结束，收尾一下$white"
+				echo -e "$yellow并发程序已经结束$white"
 			else
 				sleep 30
 				echo -ne "$green第三次检测到并发程序还在继续，30秒以后再检测$white"
@@ -678,6 +678,7 @@ if_ps() {
 		if_ps
 	fi
 	#for i in `ps -ww | grep "jd.sh run_" | grep -v grep | awk '{print $1}'`;do kill -9 $i ;done
+	#i=1 && while [ 100 -ge 0 ];do ps -ww |grep JD_Script | grep -v 'grep\|jd_crazy_joy_coin.js' && sleep 3 && clear && echo "第$i次" && i=`expr $i + 1`;done
 }
 
 
