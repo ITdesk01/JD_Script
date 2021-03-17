@@ -642,15 +642,24 @@ if_ps() {
 		echo -e "$green>>开始第二次检测上一个并发程序是否结束(20秒)$white"
 		sleep 20
 		if [ "$ps_if" == "0" ];then
-			echo -e "$yellow并发程序已经结束，收尾一下$white"
-			for i in `ps -ww | grep "jd.sh run_" | grep -v grep | awk '{print $1}'`
-			do
+			echo -e "$green>>开始第三次检测上一个并发程序是否结束(30秒)$white"
+			sleep 30
+			if [ "$ps_if" == "0" ];then
+				echo -e "$yellow并发程序已经结束，收尾一下$white"
+				for i in `ps -ww | grep "jd.sh run_" | grep -v grep | awk '{print $1}'`
+				do
 				echo "开始kill $i"
 				kill -9 $i
-			done
+				done
+			else
+				sleep 30
+				echo -ne "$green第三次检测到并发程序还在继续，30秒以后再检测$white"
+				if_ps
+			fi
+			
 		else
-			sleep 10
-			echo -ne "$green第二次检测到并发程序还在继续，10秒以后再检测$white"
+			sleep 20
+			echo -ne "$green第二次检测到并发程序还在继续，20秒以后再检测$white"
 			if_ps
 		fi
 	else
