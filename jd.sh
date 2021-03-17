@@ -554,9 +554,11 @@ concurrent_js_if() {
 			else
 				case "$action2" in
 				run_07)
+					if_ps
 					action="$action2"
 					$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
 					concurrent_js
+					if_ps
 					if_ps
 					$node $openwrt_script/JD_Script/js/jd_unsubscribe.js #取关店铺，没时间要求
 					$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
@@ -568,6 +570,7 @@ concurrent_js_if() {
 		run_07)
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
 			concurrent_js
+			if_ps
 			if_ps
 			$node $openwrt_script/JD_Script/js/jd_unsubscribe.js #取关店铺，没时间要求
 			$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
