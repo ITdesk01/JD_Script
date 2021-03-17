@@ -571,6 +571,8 @@ concurrent_js_if() {
 			fi
 		;;
 		run_07)
+			if_ps
+			action="$action2"
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
 			concurrent_js
 			if_ps
@@ -683,7 +685,7 @@ if_ps() {
 }
 
 checktool() {
-	i=1 && while [ 100 -ge 0 ];do ps -ww |grep JD_Script | grep -v 'grep\|jd_crazy_joy_coin.js\|checktool' && sleep 3 && clear && echo "检测者工具第$i次循环输出(ctrl+c终止)" && echo 负载情况：`uptime` && echo "" &&echo "进程状态：" && i=`expr $i + 1`;done
+	i=1 && while [ 100 -ge 0 ];do ps -ww |grep JD_Script | grep -v 'grep\|jd_crazy_joy_coin.js\|checktool' && sleep 3 && clear && echo "检测者工具第$i次循环输出(ctrl+c终止)" && echo "负载情况：`uptime`" && echo "" &&echo "进程状态：" && i=`expr $i + 1`;done
 }
 
 
