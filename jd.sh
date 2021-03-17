@@ -680,7 +680,10 @@ if_ps() {
 		if_ps
 	fi
 	#for i in `ps -ww | grep "jd.sh run_" | grep -v grep | awk '{print $1}'`;do kill -9 $i ;done
-	#i=1 && while [ 100 -ge 0 ];do ps -ww |grep JD_Script | grep -v 'grep\|jd_crazy_joy_coin.js' && sleep 3 && clear && echo "检测者工具第$i次循环输出" && echo 负载情况：`uptime` && echo "" &&echo "进程状态：" && i=`expr $i + 1`;done
+}
+
+checktool() {
+	i=1 && while [ 100 -ge 0 ];do ps -ww |grep JD_Script | grep -v 'grep\|jd_crazy_joy_coin.js\|checktool' && sleep 3 && clear && echo "检测者工具第$i次循环输出(ctrl+c终止)" && echo 负载情况：`uptime` && echo "" &&echo "进程状态：" && i=`expr $i + 1`;done
 }
 
 
@@ -1753,7 +1756,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool)
 		$action1
 		;;
 		*)
@@ -1768,7 +1771,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool)
 		$action2
 		;;
 		*)
