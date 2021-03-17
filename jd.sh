@@ -1078,8 +1078,6 @@ help() {
 	echo ""
 	echo -e "$green  sh \$jd jd_sharecode $white 			#查询京东所有助力码"
 	echo ""
-	echo -e "$green  sh \$jd stop_notice $white  			#关掉萌宠 农场  多次提醒"
-	echo ""
 	echo -e "$green  sh \$jd joy $white				#运行疯狂的JOY(两个号需要1G以上，sh \$jd kill_joy 杀掉进程，彻底关闭需要先杀进程再禁用定时任务的代码)"
 	echo ""
 	echo -e "$green  sh \$jd checklog $white  			#检测log日志是否有错误并推送"
@@ -1726,7 +1724,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|stop_notice|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install)
 		$action1
 		;;
 		*)
@@ -1741,7 +1739,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|stop_notice|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install)
 		$action2
 		;;
 		*)
