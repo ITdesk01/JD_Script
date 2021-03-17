@@ -205,6 +205,8 @@ cat >$dir_file/config/i-chenzhe_script.txt <<EOF
 	z_marketLottery.js 		#京东超市-大转盘
 	z_superDay.js 			#洗护发超级品类日2021-03-08 - 2021-03-15
 	z_unionPoster.js 		#美的家电节
+	z_mother_jump.jsv		#新一期母婴跳一跳开始咯
+	z_lenovo.js			#联想集卡活动
 EOF
 
 for script_name in `cat $dir_file/config/i-chenzhe_script.txt | awk '{print $1}'`
