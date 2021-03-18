@@ -649,7 +649,7 @@ concurrent_js_update() {
 
 concurrent_js_clean(){
 	echo -e "$yellow收尾一下$white"
-	for i in `ps -ww | grep -v 'run_10_15_20\|grep' | grep "run_" | awk '{print $1}'`
+	for i in `ps -ww | grep "run_" | grep -v 'run_10_15_20\|grep' | awk '{print $1}'`
 	do
 		echo "开始kill $i"
 		kill -9 $i
