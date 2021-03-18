@@ -705,9 +705,9 @@ checktool() {
 			echo ""
 			echo "	没有检测到并发进程"
 		else
-			ps -ww | grep "JD_Script" |grep -v "grep"
+			ps -ww | grep "JD_Script" |grep -v 'grep\|checktool'
 		fi
-		sleep 1
+		sleep 2
 		clear
 		i=`expr $i + 1`
 	done
