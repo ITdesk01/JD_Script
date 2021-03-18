@@ -629,11 +629,16 @@ concurrent_js_update() {
 		mkdir $ccr_js_file/js_$js_amount
 		cp $script_dir/jdCookie.js $ccr_js_file/js_$js_amount/jdCookie.js
 
+		if [ ! -L "$ccr_js_file/js_$js_amount/sendNotify.js" ]; then
+			rm -rf $$ccr_js_file/js_$js_amount/sendNotify.js
+			ln -s $script_dir/sendNotify.js $ccr_js_file/js_$js_amount/sendNotify.js
+		fi
+
 		js_cookie=$(cat $openwrt_script_config/jdCookie.js |  grep "pt_pin" | grep -v "//'" | grep -v "// '" | awk -v a="$js_amount" 'NR==a{ print $0}') #获取pt
 		sed -i '/pt_pin/d' $ccr_js_file/js_$js_amount/jdCookie.js >/dev/null 2>&1
 		sed -i "6a $js_cookie" $ccr_js_file/js_$js_amount/jdCookie.js
 
-		for i in `ls $dir_file_js | grep -v "jdCookie.js"`
+		for i in `ls $dir_file_js | grep -v 'jdCookie.js\|sendNotify.js'`
 		do
 			cp $dir_file_js/$i $ccr_js_file/js_$js_amount/$i
 		done
@@ -1603,7 +1608,7 @@ system_variable() {
 		fi
 
 		#jdCookie.js用于升级以后恢复链接
-		if [ ! -f "$dir_file_js/jdCookie.js" ]; then
+		if [ ! -L "$dir_file_js/jdCookie.js" ]; then
 			ln -s $openwrt_script_config/jdCookie.js $dir_file_js/jdCookie.js
 		fi
 
@@ -1615,7 +1620,8 @@ system_variable() {
 		fi
 
 		#sendNotify.js用于升级以后恢复链接
-		if [ ! -f "$dir_file_js/sendNotify.js" ]; then
+		if [ ! -L "$dir_file_js/sendNotify.js" ]; then
+			rm -rf $dir_file_js/sendNotify.js  #临时删除，解决最近不推送问题
 			ln -s $openwrt_script_config/sendNotify.js $dir_file_js/sendNotify.js
 		fi
 
@@ -1627,7 +1633,7 @@ system_variable() {
 		fi
 
 		#USER_AGENTS.js用于升级以后恢复链接
-		if [ ! -f "$dir_file_js/USER_AGENTS.js" ]; then
+		if [ ! -L "$dir_file_js/USER_AGENTS.js" ]; then
 			ln -s $openwrt_script_config/USER_AGENTS.js $dir_file_js/USER_AGENTS.js
 		fi
 
@@ -1639,7 +1645,7 @@ system_variable() {
 		fi
 
 		#JS_USER_AGENTS.js用于升级以后恢复链接
-		if [ ! -f "$dir_file_js/JS_USER_AGENTS.js" ]; then
+		if [ ! -L "$dir_file_js/JS_USER_AGENTS.js" ]; then
 			ln -s $openwrt_script_config/JS_USER_AGENTS.js $dir_file_js/JS_USER_AGENTS.js
 		fi
 	else
