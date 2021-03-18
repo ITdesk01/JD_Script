@@ -698,7 +698,7 @@ checklog() {
 	rm -rf $log3
 
 	#用来查看tmp有多少jd log文件
-	ls ./ | grep -E "^j" | sort >$log1
+	ls ./ | grep -E "^j" | grep -v "jd_price.log" | sort >$log1
 
 	#筛选jd log 里面有几个是带错误的
 	echo -e "$line#### Model：$sys_model\n#### Wan+IP地址：+$wan_ip\n#### 系统版本:++$uname_version\n$line" >>$log3
