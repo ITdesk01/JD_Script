@@ -658,30 +658,30 @@ concurrent_js_clean(){
 
 if_ps() {
 	ps_if=$(ps -ww | grep "JD_Script" | grep -v "grep\|jd_crazy_joy_coin.js\|jd.sh run_" |wc -l)
-	echo -e "$green>>开始第一次检测上一个并发程序是否结束(10秒)$white"
-	sleep 10
+	echo -e "$green>>开始第一次检测上一个并发程序是否结束(20秒)$white"
+	sleep 20
 	echo ""
 	if [ "$ps_if" == "0" ];then
-		echo -e "$green>>开始第二次检测上一个并发程序是否结束(20秒)$white"
-		sleep 20
+		echo -e "$green>>开始第二次检测上一个并发程序是否结束(30秒)$white"
+		sleep 30
 		if [ "$ps_if" == "0" ];then
-			echo -e "$green>>开始第三次检测上一个并发程序是否结束(30秒)$white"
-			sleep 30
+			echo -e "$green>>开始第三次检测上一个并发程序是否结束(50秒)$white"
+			sleep 50
 			if [ "$ps_if" == "0" ];then
 				echo -e "$yellow并发程序已经结束$white"
 			else
-				sleep 30
-				echo -ne "$green第三次检测到并发程序还在继续，30秒以后再检测$white"
+				sleep 50
+				echo -ne "$green第三次检测到并发程序还在继续，50秒以后再检测$white"
 				if_ps
 			fi
 			
 		else
-			sleep 20
+			sleep 30
 			echo -ne "$green第二次检测到并发程序还在继续，20秒以后再检测$white"
 			if_ps
 		fi
 	else
-		sleep 10
+		sleep 20
 		echo -ne "$green第一次检测到并发程序还在继续，10秒以后再检测$white"
 		if_ps
 	fi
