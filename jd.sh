@@ -1789,7 +1789,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool|concurrent_js_clean)
 		$action1
 		;;
 		*)
@@ -1804,7 +1804,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool|concurrent_js_clean)
 		$action2
 		;;
 		*)
