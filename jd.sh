@@ -1467,7 +1467,7 @@ COMMENT
 		echo -e "$green今天周一不关闭农场萌宠通知$white"
 	else
 		case `date +%H` in
-		0|1|2|3)
+		22|23|0|1|2|3)
 			echo -e "$green暂时不关闭农场和萌宠通知"
 		;;
 		*)
