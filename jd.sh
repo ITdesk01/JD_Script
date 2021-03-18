@@ -637,7 +637,7 @@ concurrent_js_update() {
 
 		js_cookie=$(cat $openwrt_script_config/jdCookie.js |  grep "pt_pin" | grep -v "//'" | grep -v "// '" | awk -v a="$js_amount" 'NR==a{ print $0}') #获取pt
 		sed -i '/pt_pin/d' $ccr_js_file/js_$js_amount/jdCookie.js >/dev/null 2>&1
-		sed -i "6a $js_cookie" $ccr_js_file/js_$js_amount/jdCookie.js
+		sed -i "5a $js_cookie" $ccr_js_file/js_$js_amount/jdCookie.js
 
 		for i in `ls $dir_file_js | grep -v 'jdCookie.js\|sendNotify.js'`
 		do
@@ -1603,7 +1603,7 @@ system_variable() {
 	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 		#jdCookie.js
 		if [ ! -f "$openwrt_script_config/jdCookie.js" ]; then
-			cp  $dir_file/git_clone/lxk0301/jdCookie.js  $openwrt_script_config/jdCookie.js
+			cp  $dir_file/JSON/jdCookie.js  $openwrt_script_config/jdCookie.js
 			rm -rf $dir_file_js/jdCookie.js #用于删除旧的链接
 			ln -s $openwrt_script_config/jdCookie.js $dir_file_js/jdCookie.js
 		fi
@@ -1615,7 +1615,7 @@ system_variable() {
 
 		#sendNotify.js
 		if [ ! -f "$openwrt_script_config/sendNotify.js" ]; then
-			cp  $dir_file/git_clone/lxk0301/sendNotify.js $openwrt_script_config/sendNotify.js
+			cp  $dir_file/JSON/sendNotify.js $openwrt_script_config/sendNotify.js
 			rm -rf $dir_file_js/sendNotify.js  #用于删除旧的链接
 			ln -s $openwrt_script_config/sendNotify.js $dir_file_js/sendNotify.js
 		fi
@@ -1651,12 +1651,12 @@ system_variable() {
 		fi
 	else
 		if [ ! -f "$dir_file/jdCookie.js" ]; then
-			cp  $dir_file/git_clone/lxk0301/jdCookie.js $dir_file/jdCookie.js
+			cp  $dir_file/JSON/jdCookie.js $dir_file/jdCookie.js
 			ln -s $dir_file/jdCookie.js $dir_file_js/jdCookie.js
 		fi
 
 		if [ ! -f "$dir_file/sendNotify.js" ]; then
-			cp  $dir_file/git_clone/lxk0301/sendNotify.js $dir_file/sendNotify.js
+			cp  $dir_file/JSON/sendNotify.js $dir_file/sendNotify.js
 			ln -s $dir_file/sendNotify.js $dir_file_js/sendNotify.js
 		fi
 
