@@ -657,7 +657,7 @@ concurrent_js_clean(){
 }
 
 if_ps() {
-	ps_if=$(ps -ww | grep "js$" |wc -l)
+	ps_if=$(ps -ww | grep "js$" | awk '{print $1}' |wc -l)
 	num1="10"
 	num2="20"
 	num3="30"
@@ -666,10 +666,10 @@ if_ps() {
 	echo ""
 	if [ "$ps_if" == "0" ];then
 		echo -e "$green>>开始第二次检测上一个并发程序是否结束($num2秒)$white"
-		sleep 30
+		sleep $num2
 		if [ "$ps_if" == "0" ];then
 			echo -e "$green>>开始第三次检测上一个并发程序是否结束($num3秒)$white"
-			sleep 50
+			sleep $num3
 			if [ "$ps_if" == "0" ];then
 				echo -e "$yellow并发程序已经结束$white"
 			else
