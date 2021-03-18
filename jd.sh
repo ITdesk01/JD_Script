@@ -549,18 +549,16 @@ concurrent_js_if() {
 		run_0)
 			action="$action1"
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
-			concurrent_js
+			concurrent_js && if_ps
 			if [ ! $action2 ];then
 				if_ps
 				concurrent_js_clean
 			else
 				case "$action2" in
 				run_07)
-					if_ps
 					action="$action2"
 					$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
-					concurrent_js
-					if_ps
+					concurrent_js && if_ps
 					$node $openwrt_script/JD_Script/js/jd_unsubscribe.js #取关店铺，没时间要求
 					$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 					checklog #检测log日志是否有错误并推送
@@ -573,8 +571,7 @@ concurrent_js_if() {
 		run_07)
 			action="$action1"
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
-			concurrent_js
-			if_ps
+			concurrent_js && if_ps
 			$node $openwrt_script/JD_Script/js/jd_unsubscribe.js #取关店铺，没时间要求
 			$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 			checklog #检测log日志是否有错误并推送
@@ -671,7 +668,7 @@ if_ps() {
 			echo -e "$green>>开始第三次检测上一个并发程序是否结束($num3秒)$white"
 			sleep $num3
 			if [ "$ps_if" == "0" ];then
-				echo -e "$yellow并发程序已经结束$white"
+				echo -e "$yellow>>并发程序已经结束$white"
 			else
 				sleep $num3
 				echo -ne "$green第三次检测到并发程序还在继续，$num3秒以后再检测$white"
@@ -1792,7 +1789,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool|concurrent_js_clean)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps)
 		$action1
 		;;
 		*)
@@ -1807,7 +1804,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool|concurrent_js_clean)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps)
 		$action2
 		;;
 		*)
