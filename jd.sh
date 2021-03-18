@@ -691,18 +691,18 @@ if_ps() {
 checktool() {
 	i=1
 	while [ 100 -ge 0 ];do
-		ps_check=`ps -ww |grep "JD_Script" | grep -v 'grep\|jd_crazy_joy_coin.js\|checktool'`
+		ps_check=$(ps -ww |grep "JD_Script" | grep -v 'grep\|jd_crazy_joy_coin.js\|checktool' |awk '{print $1}' | wc -l )
 		echo "---------------------------------------------------------------------------"
 		echo -e  "		检测者工具第$green$i$white次循环输出(ctrl+c终止)"
 		echo "---------------------------------------------------------------------------"
 		echo "负载情况：`uptime`"
 		echo ""
 		echo "进程状态："
-		if [ `$ps_check| wc -l ` == "0"  ];then
+		if [ ! $ps_check  ];then
 			echo ""
 			echo "	没有检测到并发进程"
 		else
-			echo "$ps_check"
+			ps -ww |grep "JD_Script" | grep -v 'grep\|jd_crazy_joy_coin.js\|checktool'
 		fi
 		sleep 3
 		clear
