@@ -545,7 +545,6 @@ concurrent_js() {
 concurrent_js_if() {
 	if [ "$ccr_if" == "yes" ];then
 		echo -e "$green>>检测到开启了账号并发模式$white"
-		concurrent_js_clean #清理一下之前的可能残留进程
 		case "$action1" in
 		run_0)
 			action="$action1"
