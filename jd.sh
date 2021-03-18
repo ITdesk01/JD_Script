@@ -623,7 +623,7 @@ concurrent_js_if() {
 
 concurrent_js_update() {
 	rm -rf $ccr_js_file/*
-	js_amount=$(cat $script_dir/jdCookie.js | grep "pt_pin" | grep -v "//'" | grep -v "// '" |wc -l)
+	js_amount=$(cat $script_dir/jdCookie.js | grep "pt_pin" | grep -v "//'" | grep -v "pt_pin=(\|pt_key=xxx;pt_pin=xxx" | grep -v "// '" |wc -l)
 
 	while [[ ${js_amount} -gt 0 ]]; do
 		mkdir $ccr_js_file/js_$js_amount
