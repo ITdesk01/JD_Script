@@ -1454,11 +1454,19 @@ COMMENT
 	if [ "$jd_try" == "yes" ];then
 		jd_try_if=$(grep "jd_try.js" $cron_file | wc -l)
 		if [ "$jd_try_if" == "0" ];then
+			echo "检测到试用开关开启，导入一下计划任务"
 			echo "0 10 * * * $node $dir_file/js/jd_try.js >/tmp/jd_try.log" >>$cron_file
+			/etc/init.d/cron restart
 		else
 			echo "京东试用计划任务已经导入"
 		fi
 	else
+		jd_try_if=$(grep "jd_try.js" $cron_file | wc -l)
+		if [ "$jd_try_if" == "1" ];then
+			echo "检测到试用开关关闭，清理一下之前的导入"
+			sed -i '/jd_try.js/d' /etc/crontabs/root >/dev/null 2>&1
+			/etc/init.d/cron restart
+		fi
 		echo "京东试用计划任务不导入"
 	fi
 
