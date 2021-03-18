@@ -677,12 +677,12 @@ if_ps() {
 			
 		else
 			sleep 30
-			echo -ne "$green第二次检测到并发程序还在继续，20秒以后再检测$white"
+			echo -ne "$green第二次检测到并发程序还在继续，30秒以后再检测$white"
 			if_ps
 		fi
 	else
 		sleep 20
-		echo -ne "$green第一次检测到并发程序还在继续，10秒以后再检测$white"
+		echo -ne "$green第一次检测到并发程序还在继续，20秒以后再检测$white"
 		if_ps
 	fi
 	#for i in `ps -ww | grep "jd.sh run_" | grep -v grep | awk '{print $1}'`;do kill -9 $i ;done
@@ -698,7 +698,7 @@ checktool() {
 		echo "负载情况：`uptime`"
 		echo ""
 		echo "进程状态："
-		if [ ! $ps_check  ];then
+		if [ "$ps_check" == "0"  ];then
 			echo ""
 			echo "	没有检测到并发进程"
 		else
