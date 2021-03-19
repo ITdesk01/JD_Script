@@ -624,7 +624,8 @@ concurrent_js_if() {
 
 concurrent_js_update() {
 	rm -rf $ccr_js_file/*
-	js_amount=$(cat $script_dir/jdCookie.js | grep "pt_pin" | grep -v "//'" | grep -v "pt_pin=("  | grep -v "pt_key=XXX;pt_pin=XXX" | grep -v "pt_key=xxx;pt_pin=xxx"| grep -v "// '" |wc -l)
+	js_cookie=$(cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '")
+	js_amount=$(echo "$js_cookie" |wc -l)
 
 	while [[ ${js_amount} -gt 0 ]]; do
 		mkdir $ccr_js_file/js_$js_amount
@@ -635,9 +636,9 @@ concurrent_js_update() {
 			ln -s $script_dir/sendNotify.js $ccr_js_file/js_$js_amount/sendNotify.js
 		fi
 
-		js_cookie=$(cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '" | awk -v a="$js_amount" 'NR==a{ print $0}') #获取pt
+		js_cookie_obtain=$(echo "$js_cookie" | awk -v a="$js_amount" 'NR==a{ print $0}') #获取pt
 		sed -i '/pt_pin/d' $ccr_js_file/js_$js_amount/jdCookie.js >/dev/null 2>&1
-		sed -i "5a $js_cookie" $ccr_js_file/js_$js_amount/jdCookie.js
+		sed -i "5a $js_cookie_obtain" $ccr_js_file/js_$js_amount/jdCookie.js
 
 		for i in `ls $dir_file_js | grep -v 'jdCookie.js\|sendNotify.js'`
 		do
