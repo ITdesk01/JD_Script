@@ -774,15 +774,17 @@ addcookie() {
 	clear
 	echo -e "$yellow\n稍等开始为你查找是否存在这个cookie，有就更新，没有就新增。。。$white\n"
 	sleep 2
+	new_pt=$(echo $you_cookie)
 	pt_pin=$(echo $you_cookie | awk -F "pt_pin=" '{print $2}' | awk -F ";" '{print $1}')
 	pt_key=$(echo $you_cookie | awk -F "pt_key=" '{print $2}' | awk -F ";" '{print $1}')
 
 	if [ `cat $script_dir/jdCookie.js | grep "$pt_pin" | wc -l` == "1" ];then
 		echo -e "$green检测到 $yellow${pt_pin}$white 已经存在，开始更新cookie。。$white\n"
 		sleep 2
+		old_pt=$(cat $script_dir/jdCookie.js | grep "$pt_pin" | sed -e "s/',//g" -e "s/'//g")
 		old_pt_key=$(cat $script_dir/jdCookie.js | grep "$pt_pin" | awk -F "pt_key=" '{print $2}' | awk -F ";" '{print $1}')
 		sed -i "s/$old_pt_key/$pt_key/g" $script_dir/jdCookie.js
-		echo -e "$yellow${pt_pin}$green 旧cookie：$yellow${old_pt_key}$white\n\n$green更新为$white\n\n$yellow${pt_pin}$green 新cookie：$yellow${pt_key}$white\n"
+		echo -e "$green 旧cookie：$yellow${old_pt}$white\n\n$green更新为$white\n\n$green 新cookie：$yellow${new_pt}$white\n"
 		echo  "------------------------------------------------------------------------------"
 	else
 		echo -e "$green检测到 $yellow${pt_pin}$white 不存在，开始新增cookie。。$white\n"
@@ -1668,7 +1670,7 @@ close_notification() {
 	else
 		case `date +%H` in
 		22|23|0|1|2|3)
-			echo -e "$green暂时不关闭农场和萌宠通知"
+			echo -e "$green暂时不关闭农场和萌宠通知$white"
 		;;
 		*)
 			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
