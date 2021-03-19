@@ -592,27 +592,27 @@ concurrent_js_if() {
 	else
 		case "$action1" in
 		run_0)
-			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
+			$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
 			$action1
 			if [ ! $action2 ];then
 				echo ""
 			else
 				case "$action2" in
 				run_07)
-					$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
+					$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
 					$action2
-					$node $openwrt_script/JD_Script/js/jd_unsubscribe.js #取关店铺，没时间要求
-					$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
+					$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
+					$node $dir_file_js/jd_bean_change.js #京豆变更
 					checklog #检测log日志是否有错误并推送
 				;;
 				esac
 			fi
 		;;
 		run_07)
-			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
+			$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
 			$action1
-			$node $openwrt_script/JD_Script/js/jd_unsubscribe.js #取关店铺，没时间要求
-			$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
+			$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
+			$node $dir_file_js/jd_bean_change.js #京豆变更
 			checklog #检测log日志是否有错误并推送
 		;;
 		run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_030|run_020)
@@ -650,7 +650,7 @@ concurrent_js_update() {
 
 concurrent_js_clean(){
 	echo -e "$yellow收尾一下$white"
-	for i in `ps -ww | grep "run_" | grep -v 'run_10_15_20\|grep' | awk '{print $1}'`
+	for i in `ps -ww | grep "run_" | grep -v 'grep' | awk '{print $1}'`
 	do
 		echo "开始kill $i"
 		kill -9 $i
