@@ -656,11 +656,38 @@ concurrent_js_update() {
 
 concurrent_js_clean(){
 	echo -e "$yellow收尾一下$white"
-	for i in `ps -ww | grep "run_" | grep -v 'grep' | awk '{print $1}'`
+	for i in `ps -ww | grep "run_" | grep -v 'grep\|kill_ccr' | awk '{print $1}'`
 	do
 		echo "开始kill $i"
 		kill -9 $i
 	done
+}
+
+kill_ccr() {
+	if [ "$ccr_if" == "yes" ];then
+		echo -e "$green>>终止并发程序。请稍等。。。。$white"
+		if [ `ps -ww | grep "js$" | grep -v "jd_crazy_joy_coin.js" | awk '{print $1}' |wc -l` == "0" ];then
+			sleep 2
+			echo -e "$green逛了一圈空空如也，你确定不是在消遣我，如果不是你可以重新运行一下。。。$white"
+		else
+			for i in `ps -ww | grep "js$" | grep -v "jd_crazy_joy_coin.js" | awk '{print $1}'`
+			do
+				kill -9 $i
+				echo "kill $i"
+			done
+			concurrent_js_clean
+			echo -e "$green再次检测一下并发程序是否还有存在$white"
+			if [ `ps -ww | grep "js$" | grep -v "jd_crazy_joy_coin.js" | awk '{print $1}' |wc -l` == "0" ];then
+				echo -e "$yellow>>并发程序已经全部结束$white"
+			else
+				echo -e "$yellow！！！检测到并发程序还有存在，再继续杀，请稍等。。。$white"
+				sleep 1
+				kill_ccr
+			fi
+		fi
+	else
+		echo -e "$green>>你并发开关都没有打开，我终止啥？？？$white"
+	fi
 }
 
 if_ps() {
@@ -1155,6 +1182,8 @@ help() {
 	echo -e "$green  sh \$jd backnas $white  			#备份脚本到NAS存档"
 	echo ""
 	echo -e "$green  sh \$jd stop_script $white  			#删除定时任务停用所用脚本"
+	echo ""
+	echo -e "$green  sh \$jd kill_ccr $white  			#终止并发"
 	echo ""
 	echo -e "$green  sh \$jd checktool $white  			#检测后台进程，方便排除问题"
 	echo ""
