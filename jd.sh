@@ -1475,9 +1475,6 @@ COMMENT
 	sed -i '47,48d' $dir_file_js/jd_global.js
 	sed -i "46a $new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set\n$new_jdglobal_set" $dir_file_js/jd_global.js
 
-	#脚本黑名单
-	script_black
-
 	#京东试用
 	if [ "$jd_try" == "yes" ];then
 		jd_try_if=$(grep "jd_try.js" $cron_file | wc -l)
@@ -1497,6 +1494,13 @@ COMMENT
 		fi
 		echo "京东试用计划任务不导入"
 	fi
+
+	#取消会员卡脚本修复路径
+	sed -i "s/..\/jdCookie.js/.\/jdCookie.js/g" $dir_file_js/jd_unbind.js
+	sed -i "s/..\/sendNotify/.\/sendNotify/g" $dir_file_js/jd_unbind.js
+
+	#脚本黑名单
+	script_black
 }
 
 random_array() {
