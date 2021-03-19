@@ -1529,7 +1529,7 @@ close_notification() {
 				for i in `ls $ccr_js_file`
 				do
 					sed -i "s/jdNotify = false/jdNotify = true/g" $ccr_js_file/$i/jd_fruit.js
-					sed -i "s/jdNotify = false/jdNotify = true/g" $ccr_js_file/$i/jd_pet.jscp
+					sed -i "s/jdNotify = false/jdNotify = true/g" $ccr_js_file/$i/jd_pet.js
 				done
 			fi
 			echo -e "$green时间大于凌晨三点开始关闭农场和萌宠通知$white"
