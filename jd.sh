@@ -92,6 +92,7 @@ cat >>/etc/crontabs/root <<EOF
 5 11 3 */1 *  $node $dir_file_js/jd_shakeBean.js  >/tmp/jd_shakeBean.log #京东会员-摇京豆,每个月运行一次#100#
 10-20/5 12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播
 30,31 20-23/1 9,12 3 * $node $dir_file_js/jd_live_redrain.js >/tmp/jd_live_redrain.log	#超级直播间红包雨
+5 1,6,11,16,21 * 3-4 * $node $dir_file_js/z_super5g.js  >/tmp/jd_super5g.log #5G超级盲盒
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
@@ -204,6 +205,8 @@ cat >$dir_file/config/i-chenzhe_script.txt <<EOF
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_lenovo.js			#联想集卡活动
 	z_oneplus.js			#一加盲盒 2021-03-17 - 2021-03-30
+	z_super5g.js			#5G超级盲盒
+	z_mgold.js 			#金口碑奖投票
 EOF
 
 for script_name in `cat $dir_file/config/i-chenzhe_script.txt | awk '{print $1}'`
@@ -380,6 +383,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_lenovo.js			#联想集卡活动
 	z_oneplus.js			#一加盲盒 2021-03-17 - 2021-03-30
+	z_mgold.js 			#金口碑奖投票
 EOF
 	echo -e "$green run_07$start_script $white"
 
