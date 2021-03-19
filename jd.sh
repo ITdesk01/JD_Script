@@ -693,7 +693,7 @@ if_ps() {
 		fi
 	else
 		sleep $num1
-		echo -ne "$green第一次检测到并发程序还在继续，20秒以后再检测$white"
+		echo -ne "$green第一次检测到并发程序还在继续，$num1秒以后再检测$white"
 		if_ps
 	fi
 	#for i in `ps -ww | grep "jd.sh run_" | grep -v grep | awk '{print $1}'`;do kill -9 $i ;done
