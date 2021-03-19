@@ -1508,8 +1508,35 @@ COMMENT
 
 	#脚本黑名单
 	script_black
+
+	#农场萌宠关闭通知
+	close_notification
 }
 
+close_notification() {
+	#农场和东东萌宠关闭通知
+	if [ `date +%A` == "Monday" ];then
+		echo -e "$green今天周一不关闭农场萌宠通知$white"
+	else
+		case `date +%H` in
+		22|23|0|1|2|3)
+			echo -e "$green暂时不关闭农场和萌宠通知"
+		;;
+		*)
+			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
+			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
+			if [ "$ccr_if" == "yes" ];then
+				for i in `ls $ccr_js_file`
+				do
+					sed -i "s/jdNotify = false/jdNotify = true/g" $ccr_js_file/$i/jd_fruit.js
+					sed -i "s/jdNotify = false/jdNotify = true/g" $ccr_js_file/$i/jd_pet.jscp
+				done
+			fi
+			echo -e "$green时间大于凌晨三点开始关闭农场和萌宠通知$white"
+		;;
+		esac
+	fi
+}
 random_array() {
 	#彻底完善，感谢minty大力支援
 	length=$(echo $random | awk -F '[@]' '{print NF}') #获取变量长度
@@ -1555,6 +1582,7 @@ npm_install() {
 		cd $dir_file && npm -g install && npm install -g request
 	fi
 }
+
 system_variable() {
 	if [[ ! -d "$dir_file/config" ]]; then
 		mkdir  $dir_file/config
@@ -1730,21 +1758,8 @@ system_variable() {
 		echo ""
 	fi
 
-	#农场和东东萌宠关闭通知
-	if [ `date +%A` == "Monday" ];then
-		echo -e "$green今天周一不关闭农场萌宠通知$white"
-	else
-		case `date +%H` in
-		22|23|0|1|2|3)
-			echo -e "$green暂时不关闭农场和萌宠通知"
-		;;
-		*)
-			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
-			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
-			echo -e "$green时间大于凌晨三点开始关闭农场和萌宠通知$white"
-		;;
-		esac
-	fi
+	#农场萌宠关闭通知
+	close_notification
 
 	script_black
 }
