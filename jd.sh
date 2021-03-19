@@ -1495,22 +1495,6 @@ COMMENT
 		fi
 		echo "京东试用计划任务不导入"
 	fi
-
-	#农场和东东萌宠关闭通知
-	if [ `date +%A` == "Monday" ];then
-		echo -e "$green今天周一不关闭农场萌宠通知$white"
-	else
-		case `date +%H` in
-		22|23|0|1|2|3)
-			echo -e "$green暂时不关闭农场和萌宠通知"
-		;;
-		*)
-			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
-			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
-			echo -e "$green时间大于凌晨三点开始关闭农场和萌宠通知$white"
-		;;
-		esac
-	fi
 }
 
 random_array() {
@@ -1731,6 +1715,22 @@ system_variable() {
 	blacklist=""
 	if [ "黑名单" == "$blacklist" ];then
 		echo ""
+	fi
+
+	#农场和东东萌宠关闭通知
+	if [ `date +%A` == "Monday" ];then
+		echo -e "$green今天周一不关闭农场萌宠通知$white"
+	else
+		case `date +%H` in
+		22|23|0|1|2|3)
+			echo -e "$green暂时不关闭农场和萌宠通知"
+		;;
+		*)
+			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
+			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
+			echo -e "$green时间大于凌晨三点开始关闭农场和萌宠通知$white"
+		;;
+		esac
 	fi
 
 	script_black
