@@ -37,6 +37,7 @@ else
 fi
 
 ccr_js_file="$dir_file/ccr_js"
+run_sleep=$(sleep 2)
 
 version="2.2"
 cron_file="/etc/crontabs/root"
@@ -282,6 +283,7 @@ EOF
 	for i in `cat /tmp/jd_tmp/run_0 | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
+		$run_sleep
 	done
 
 	ddcs
@@ -353,6 +355,7 @@ EOF
 	for i in `cat /tmp/jd_tmp/run_06_18 | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
+		$run_sleep
 	done
 
 	echo -e "$green run_06_18$stop_script $white"
@@ -390,6 +393,7 @@ EOF
 	for i in `cat /tmp/jd_tmp/run_07 | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
+		$run_sleep
 	done
 
 	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
@@ -408,6 +412,7 @@ EOF
 	for i in `cat /tmp/jd_tmp/run_08_12_16 | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
+		$run_sleep
 	done
 
 	echo -e "$green run_08_12_16$stop_script $white"
@@ -425,6 +430,7 @@ EOF
 	for i in `cat /tmp/jd_tmp/run_10_15_20 | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
+		$run_sleep
 	done
 
 	echo -e "$green run_10_15_20$stop_script $white"
