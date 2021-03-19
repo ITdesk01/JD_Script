@@ -676,6 +676,7 @@ kill_ccr() {
 				echo "kill $i"
 			done
 			concurrent_js_clean
+			clear
 			echo -e "$green再次检测一下并发程序是否还有存在$white"
 			if [ `ps -ww | grep "js$" | grep -v "jd_crazy_joy_coin.js" | awk '{print $1}' |wc -l` == "0" ];then
 				echo -e "$yellow>>并发程序已经全部结束$white"
@@ -1849,7 +1850,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|kill_ccr)
 		$action1
 		;;
 		*)
@@ -1864,7 +1865,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|kill_ccr)
 		$action2
 		;;
 		*)
