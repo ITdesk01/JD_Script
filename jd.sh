@@ -1150,6 +1150,8 @@ help() {
 	echo ""
 	echo -e "$green  sh \$jd stop_script $white  			#删除定时任务停用所用脚本"
 	echo ""
+	echo -e "$green  sh \$jd checktool $white  			#检测后台进程，方便排除问题"
+	echo ""
 	echo -e " 如果不喜欢这样，你也可以直接$green cd \$jd_file/js$white,然后用$green node 脚本名字.js$white "
 	echo ""
 	echo -e "$yellow 3.检测定时任务:$white $cron_help"
