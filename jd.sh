@@ -146,7 +146,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_joy_feedPets.js 		#宠汪汪单独喂食
 	jd_joy.js			#宠汪汪
 	jd_joy_reward.js 		#宠汪汪兑换奖品
-	jd_joy_steal.js			#宠汪汪偷好友狗粮与积分
 	jd_crazy_joy.js			#crazyJoy任务
 	jd_crazy_joy_coin.js		#crazy joy挂机领金币/宝箱专用
 	jd_car_exchange.js		#京东汽车兑换，500赛点兑换500京豆
