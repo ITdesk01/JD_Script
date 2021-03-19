@@ -806,10 +806,14 @@ addcookie() {
 		echo "请稍等。。。"
 		sleep 1
 		clear
-		addcookie
+		getcookie
 	elif [ "$cookie_continue" == "2" ];then
 		echo "退出脚本。。。"
 		exit 0
+	elif [ "$cookie_continue" == "3" ];then
+		sleep 1
+		clear
+		addcookie
 	else
 		echo "请不要乱输，退出脚本。。。"
 		exit 0
