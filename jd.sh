@@ -781,7 +781,7 @@ addcookie() {
 		echo -e "$green检测到 $yellow${pt_pin}$white 已经存在，开始更新cookie。。$white\n"
 		sleep 2
 		old_pt_key=$(cat $script_dir/jdCookie.js | grep "$pt_pin" | awk -F "pt_key=" '{print $2}' | awk -F ";" '{print $1}')
-		sed -i "s/$old_pt_key/$pt_key/g" $dir_file_js/getJDCookie.js
+		sed -i "s/$old_pt_key/$pt_key/g" $script_dir/jdCookie.js
 		echo -e "$yellow${pt_pin}$green 旧cookie：$yellow${old_pt_key}$white\n\n$green更新为$white\n\n$yellow${pt_pin}$green 新cookie：$yellow${pt_key}$white\n"
 		echo  "------------------------------------------------------------------------------"
 	else
