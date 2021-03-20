@@ -387,6 +387,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	z_oneplus.js			#一加盲盒 2021-03-17 - 2021-03-30
 	z_mgold.js 			#金口碑奖投票
 	z_city_cash.js			#城城分现金
+	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_07$start_script $white"
 
@@ -569,7 +570,6 @@ concurrent_js_if() {
 					action="$action2"
 					$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
 					concurrent_js && if_ps
-					$node $openwrt_script/JD_Script/js/jd_unsubscribe.js #取关店铺，没时间要求
 					$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 					checklog #检测log日志是否有错误并推送
 					if_ps
@@ -582,7 +582,6 @@ concurrent_js_if() {
 			action="$action1"
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
 			concurrent_js && if_ps
-			$node $openwrt_script/JD_Script/js/jd_unsubscribe.js #取关店铺，没时间要求
 			$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 			checklog #检测log日志是否有错误并推送
 			if_ps
@@ -607,7 +606,6 @@ concurrent_js_if() {
 				run_07)
 					$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
 					$action2
-					$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
 					$node $dir_file_js/jd_bean_change.js #京豆变更
 					checklog #检测log日志是否有错误并推送
 				;;
@@ -759,11 +757,13 @@ getcookie() {
 addcookie() {
 	
 	if [ `cat /tmp/getcookie.txt | wc -l` == "1"  ];then
+		clear
 		you_cookie=$(cat /tmp/getcookie.txt)
 		rm -rf /tmp/getcookie.txt
 		echo -e "\n$green已经获取到cookie，稍等。。。$white"
 		sleep 1
 	else
+		clear
 		echo "---------------------------------------------------------------------------"
 		echo -e "		新增cookie或者更新cookie"
 		echo "---------------------------------------------------------------------------"
@@ -781,7 +781,6 @@ addcookie() {
 			echo -e "$red请不要输入空值。。。$white"
 			exit 0
 		fi
-		clear
 	fi
 	echo -e "$yellow\n开始为你查找是否存在这个cookie，有就更新，没有就新增。。。$white\n"
 	sleep 2
@@ -1570,8 +1569,8 @@ COMMENT
 
 	#京东赚赚长期活动
 	new_jdzz="AUWE5mKmQzGYKXGT8j38cwA@AUWE5mvvGzDFbAWTxjC0Ykw@AUWE5wPfRiVJ7SxKOuQY0@S5KkcJEZAjD2vYGGG4Ip0@S7aUqCVsc91U@S5KkcREsZ_QXWIx31wKJZcA@S5KkcRUwe81LRIR_3xaNedw@Suvp2RBcY_VHKKBn3k_MMdNw@SvPVyQRke_EnWJxj1nfE@S5KkcRBYbo1fXKUv2k_5ccQ@S5KkcRh0ZoVfQchP9wvQJdw@S5KkcJnlwogCDQ2G84qtI"
-
-	new_jdzz_set="'$new_jdzz',"
+	jidiyangguang_20190516_jdzz="S5KkcRBpK8lbeIxr8wfRcdw@S5KkcR0wdpFCGcRvwxv4Jcg"
+	new_jdzz_set="'$new_jdzz@$jidiyangguang_20190516_jdzz',"
 	sed -i '43,44d' $dir_file_js/jd_jdzz.js
 	sed -i "42a $new_jdzz_set\n$new_jdzz_set\n$new_jdzz_set\n$new_jdzz_set\n$new_jdzz_set\n$new_jdzz_set" $dir_file_js/jd_jdzz.js
 	sed -i "s/helpAuthor=true/helpAuthor=false/g" $dir_file_js/jd_jdzz.js
@@ -1606,8 +1605,9 @@ COMMENT
 	jidiyangguang_20190516_jdcash="eU9YaOjhYf4v8m7dnnBF1Q@eU9Ya762N_h3oG_RmXoQ0A"
 	chiyu_jdcash="cENuJam3ZP0"
 	Jhone_Potte_20200824_jdcash="eU9Yaum1N_4j82-EzCUSgw@eU9Yar-7Nf518GyBniIWhw"
+	jidiyangguang_20190516_jdcash="eU9YaOjhYf4v8m7dnnBF1Q@eU9Ya762N_h3oG_RmXoQ0A"
 
-	new_jdcash_set="'$new_jdcash@$zuoyou_20190516_jdcash@$jidiyangguang_20190516_jdcash@$chiyu_jdcash@$Jhone_Potte_20200824_jdcash',"
+	new_jdcash_set="'$new_jdcash@$zuoyou_20190516_jdcash@$jidiyangguang_20190516_jdcash@$chiyu_jdcash@$Jhone_Potte_20200824_jdcash@$jidiyangguang_20190516_jdcash',"
 	sed -i '32,33d' $dir_file_js/jd_cash.js
 	sed -i "31a $new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set" $dir_file_js/jd_cash.js
 	sed -i "s/https:\/\/gitee.com\/shylocks\/updateTeam\/raw\/main\/jd_cash.json/https:\/\/raw.githubusercontent.com\/ITdesk01\/JD_Script\/main\/JSON\/jd_cash.json/g"  $dir_file_js/jd_cash.js
@@ -1619,9 +1619,10 @@ COMMENT
 	chiyu_jdsgmh="T0117aUqCVsc91UCjVWmIaW5kRrbA"
 	Javon_20201224_jdsgmh="T023uvp2RBcY_VHKKBn3k_MMdNwCjVWmIaW5kRrbA"
 	Jhone_Potte_20200824_jdsgmh="T0225KkcRhsepFbSIhulk6ELIQCjVWmIaW5kRrbA@T0225KkcRk0QplaEIRigwaYPJQCjVWmIaW5kRrbA"
+	jidiyangguang_20190516_jdsgmh="T0225KkcRBpK8lbeIxr8wfRcdwCjVQmoaT5kRrbA@T0225KkcR0wdpFCGcRvwxv4JcgCjVQmoaT5kRrbA"
 
 
-	new_jdsgmh_set="'$new_jdsgmh@$zuoyou_20190516_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$Javon_20201224_jdsgmh@$Jhone_Potte_20200824_jdsgmh',"
+	new_jdsgmh_set="'$new_jdsgmh@$zuoyou_20190516_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$Javon_20201224_jdsgmh@$Jhone_Potte_20200824_jdsgmh@$jidiyangguang_20190516_jdsgmh',"
 	sed -i '32,33d' $dir_file_js/jd_sgmh.js
 	sed -i "31a $new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set" $dir_file_js/jd_sgmh.js
 
