@@ -750,6 +750,8 @@ checktool() {
 }
 
 getcookie() {
+	echo ""
+	echo -e "$yellow 温馨提示，如果你已经有cookie，不想扫码直接添加，可以用$green sh \$jd addcookie$white 增加cookie $green sh \$jd delcookie$white 删除cookie"
 	$node $dir_file_js/getJDCookie.js
 	addcookie
 }
