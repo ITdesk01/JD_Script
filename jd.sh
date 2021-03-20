@@ -180,7 +180,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_live_redrain.js 		#超级直播间红包雨
 	jd_nzmh.js			#女装盲盒 2021-3-8至2021-3-20
 	jd_mohe.js			#5G超级盲盒2021-03-19到2021-04-30 白天抽奖基本没有京豆，4小时运行一次收集热力值
-	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -225,6 +224,7 @@ done
 
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jx_products_detail.js		#京喜工厂商品列表详情
 	jd_entertainment.js 		#百变大咖秀
 	jd_try.js 			#京东试用
@@ -750,10 +750,10 @@ checktool() {
 }
 
 getcookie() {
+	#彻底完成感谢echowxsy大力支持
 	echo ""
 	echo -e "$yellow 温馨提示，如果你已经有cookie，不想扫码直接添加，可以用$green sh \$jd addcookie$white 增加cookie $green sh \$jd delcookie$white 删除cookie"
-	$node $dir_file_js/getJDCookie.js
-	addcookie
+	$node $dir_file_js/getJDCookie.js && addcookie
 }
 
 addcookie() {
@@ -768,13 +768,21 @@ addcookie() {
 	echo -e "$yellow pt_key=$green密码  $yellow pt_pin=$green 账号  $yellow// 二狗子 $green(备注这个账号是谁的)$white"
 	echo ""
 	echo -e "$yellow 请不要乱输，如果输错了可以用$green sh \$jd delcookie$yellow删除,\n 或者你手动去$green$script_dir/jdCookie.js$yellow删除也行\n$white"
-	echo "---------------------------------------------------------------------------"
-	read -p "请填写你获取到的cookie(一次只能一个cookie)：" you_cookie
-	if [[ -z $you_cookie ]]; then
-		echo -e "$red请不要输入空值。。。$white"
-		exit 0
+	if [ `cat /tmp/getcookie.txt | wc -l` == "1"  ];then
+		you_cookie=$(cat /tmp/getcookie.txt)
+		rm -rf /tmp/getcookie.txt
+		clear
+		echo -e "\n$green已经获取到cookie，稍等。。。$white"
+		sleep 1
+	else
+		echo "---------------------------------------------------------------------------"
+		read -p "请填写你获取到的cookie(一次只能一个cookie)：" you_cookie
+		if [[ -z $you_cookie ]]; then
+			echo -e "$red请不要输入空值。。。$white"
+			exit 0
+		fi
+		clear
 	fi
-	clear
 	echo -e "$yellow\n稍等开始为你查找是否存在这个cookie，有就更新，没有就新增。。。$white\n"
 	sleep 2
 	new_pt=$(echo $you_cookie)
