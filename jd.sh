@@ -757,24 +757,24 @@ getcookie() {
 }
 
 addcookie() {
-	echo "---------------------------------------------------------------------------"
-	echo -e "		新增cookie或者更新cookie"
-	echo "---------------------------------------------------------------------------"
-	echo ""
-	echo -e "$green例子：$white"
-	echo ""
-	echo -e "$green pt_key=jd_10086jd_10086jd_10086jd_10086jd_10086jd_10086jd_10086;pt_pin=jd_10086; //二狗子$white"
-	echo ""
-	echo -e "$yellow pt_key=$green密码  $yellow pt_pin=$green 账号  $yellow// 二狗子 $green(备注这个账号是谁的)$white"
-	echo ""
-	echo -e "$yellow 请不要乱输，如果输错了可以用$green sh \$jd delcookie$yellow删除,\n 或者你手动去$green$script_dir/jdCookie.js$yellow删除也行\n$white"
+	
 	if [ `cat /tmp/getcookie.txt | wc -l` == "1"  ];then
 		you_cookie=$(cat /tmp/getcookie.txt)
 		rm -rf /tmp/getcookie.txt
-		clear
 		echo -e "\n$green已经获取到cookie，稍等。。。$white"
 		sleep 1
 	else
+		echo "---------------------------------------------------------------------------"
+		echo -e "		新增cookie或者更新cookie"
+		echo "---------------------------------------------------------------------------"
+		echo ""
+		echo -e "$green例子：$white"
+		echo ""
+		echo -e "$green pt_key=jd_10086jd_10086jd_10086jd_10086jd_10086jd_10086jd_10086;pt_pin=jd_10086; //二狗子$white"
+		echo ""
+		echo -e "$yellow pt_key=$green密码  $yellow pt_pin=$green 账号  $yellow// 二狗子 $green(备注这个账号是谁的)$white"
+		echo ""
+		echo -e "$yellow 请不要乱输，如果输错了可以用$green sh \$jd delcookie$yellow删除,\n 或者你手动去$green$script_dir/jdCookie.js$yellow删除也行\n$white"
 		echo "---------------------------------------------------------------------------"
 		read -p "请填写你获取到的cookie(一次只能一个cookie)：" you_cookie
 		if [[ -z $you_cookie ]]; then
@@ -783,7 +783,7 @@ addcookie() {
 		fi
 		clear
 	fi
-	echo -e "$yellow\n稍等开始为你查找是否存在这个cookie，有就更新，没有就新增。。。$white\n"
+	echo -e "$yellow\n开始为你查找是否存在这个cookie，有就更新，没有就新增。。。$white\n"
 	sleep 2
 	new_pt=$(echo $you_cookie)
 	pt_pin=$(echo $you_cookie | awk -F "pt_pin=" '{print $2}' | awk -F ";" '{print $1}')
@@ -795,7 +795,7 @@ addcookie() {
 		old_pt=$(cat $script_dir/jdCookie.js | grep "$pt_pin" | sed -e "s/',//g" -e "s/'//g")
 		old_pt_key=$(cat $script_dir/jdCookie.js | grep "$pt_pin" | awk -F "pt_key=" '{print $2}' | awk -F ";" '{print $1}')
 		sed -i "s/$old_pt_key/$pt_key/g" $script_dir/jdCookie.js
-		echo -e "$green 旧cookie：$yellow${old_pt}$white\n\n$green更新为$white\n\n$green 新cookie：$yellow${new_pt}$white\n"
+		echo -e "$green 旧cookie：$yellow${old_pt}$white\n\n$green更新为$white\n\n$green   新cookie：$yellow${new_pt}$white\n"
 		echo  "------------------------------------------------------------------------------"
 	else
 		echo -e "$green检测到 $yellow${pt_pin}$white 不存在，开始新增cookie。。$white\n"
@@ -815,6 +815,7 @@ addcookie() {
 		echo  "------------------------------------------------------------------------------"
 	fi
 
+	echo ""
 	read -p "是否需要继续获取cookie（1.需要  2.不需要 ）：" cookie_continue
 	if [ "$cookie_continue" == "1" ];then
 		echo "请稍等。。。"
