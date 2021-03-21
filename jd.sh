@@ -62,7 +62,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.91"
+	cron_version="2.92"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -91,8 +91,8 @@ cat >>/etc/crontabs/root <<EOF
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机#100#
 0 11 */7 * *  $node $dir_file/js/jd_price.js >/tmp/jd_price.log #每7天11点执行京东保价#100#
 5 11 3 */1 *  $node $dir_file_js/jd_shakeBean.js  >/tmp/jd_shakeBean.log #京东会员-摇京豆,每个月运行一次#100#
-10-20/5 12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播
-30,31 20-23/1 9,12 3 * $node $dir_file_js/jd_live_redrain.js >/tmp/jd_live_redrain.log	#超级直播间红包雨
+10-20/5 12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
+30,31 20-23/1 9,12 3 * $node $dir_file_js/jd_live_redrain.js >/tmp/jd_live_redrain.log	#超级直播间红包雨#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
@@ -104,7 +104,7 @@ EOF
 
 task_delete() {
         sed -i '/#100#/d' /etc/crontabs/root >/dev/null 2>&1
-	sed -i '/JD_Script/js/d' /etc/crontabs/root >/dev/null 2>&1
+	sed -i '/JD_Script\/js/d' /etc/crontabs/root >/dev/null 2>&1
 }
 
 ds_setup() {
