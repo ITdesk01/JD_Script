@@ -62,7 +62,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.90"
+	cron_version="2.91"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -104,6 +104,7 @@ EOF
 
 task_delete() {
         sed -i '/#100#/d' /etc/crontabs/root >/dev/null 2>&1
+	sed -i '/JD_Script/js/d' /etc/crontabs/root >/dev/null 2>&1
 }
 
 ds_setup() {
