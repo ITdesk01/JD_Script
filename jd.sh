@@ -384,9 +384,6 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	z_marketLottery.js #京东超市-大转盘
 	z_unionPoster.js #美的家电节
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
-	z_lenovo.js			#联想集卡活动
-	z_oneplus.js			#一加盲盒 2021-03-17 - 2021-03-30
-	z_mgold.js 			#金口碑奖投票
 	z_city_cash.js			#城城分现金
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
@@ -571,8 +568,7 @@ concurrent_js_if() {
 					action="$action2"
 					$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
 					concurrent_js && if_ps
-					$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
-					checklog #检测log日志是否有错误并推送
+					
 					if_ps
 					concurrent_js_clean
 				;;
@@ -582,9 +578,10 @@ concurrent_js_if() {
 		run_07)
 			action="$action1"
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
-			concurrent_js && if_ps
-			$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
-			checklog #检测log日志是否有错误并推送
+			concurrent_js 
+			if_ps
+			if_ps
+			concurrent_js_run_07
 			if_ps
 			concurrent_js_clean
 		;;
@@ -607,8 +604,7 @@ concurrent_js_if() {
 				run_07)
 					$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
 					$action2
-					$node $dir_file_js/jd_bean_change.js #京豆变更
-					checklog #检测log日志是否有错误并推送
+					concurrent_js_run_07
 				;;
 				esac
 			fi
@@ -616,15 +612,21 @@ concurrent_js_if() {
 		run_07)
 			$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
 			$action1
-			$node $dir_file_js/jd_unsubscribe.js #取关店铺，没时间要求
-			$node $dir_file_js/jd_bean_change.js #京豆变更
-			checklog #检测log日志是否有错误并推送
+			concurrent_js_run_07
 		;;
 		run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_030|run_020)
 			$action1
 		;;
 		esac
 	fi
+}
+
+concurrent_js_run_07() {
+	$node $openwrt_script/JD_Script/js/z_lenovo.js			#联想集卡活动
+	$node $openwrt_script/JD_Script/js/z_oneplus.js			#一加盲盒 2021-03-17 - 2021-03-30
+	$node $openwrt_script/JD_Script/js/z_mgold.js 			#金口碑奖投票
+	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
+	checklog #检测log日志是否有错误并推送
 }
 
 concurrent_js_update() {
