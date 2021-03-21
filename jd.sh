@@ -1683,7 +1683,16 @@ close_notification() {
 		echo -e "$green今天周一不关闭农场萌宠通知$white"
 	else
 		case `date +%H` in
-		22|23|0|1|2|3)
+		22|23|00|01|02|03)
+			sed -i "s/jdNotify = true/jdNotify = false/g" $dir_file_js/jd_fruit.js
+			sed -i "s/jdNotify = true/jdNotify = false/g" $dir_file_js/jd_pet.js
+			if [ "$ccr_if" == "yes" ];then
+				for i in `ls $ccr_js_file`
+				do
+					sed -i "s/jdNotify = true/jdNotify = false/g" $ccr_js_file/$i/jd_fruit.js
+					sed -i "s/jdNotify = true/jdNotify = false/g" $ccr_js_file/$i/jd_pet.js
+				done
+			fi
 			echo -e "$green暂时不关闭农场和萌宠通知$white"
 		;;
 		*)
