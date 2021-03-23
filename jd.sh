@@ -267,6 +267,8 @@ update_script() {
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
+	jd_blueCoin.js  	#东东超市兑换，有次数限制，没时间要求
+	jd_car_exchange.js   #京东汽车兑换，500赛点兑换500京豆
 	jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jx_sign.js #京喜app签到长期
 	jd_redPacket.js #京东全民开红包，没时间要求
@@ -285,7 +287,6 @@ EOF
 		$run_sleep
 	done
 
-	ddcs
 	run_08_12_16
 	run_06_18
 	run_10_15_20
@@ -458,17 +459,6 @@ kill_joy() {
 		echo "$green没有运行的joy后台$white"
 	fi
 	echo -e "$green 执行kill_joy$stop_script $white"
-}
-
-ddcs() {
-	ddcs_left=1
-	while [[ ${ddcs_left} -gt 0 ]]; do
-		echo -e "$green正在循环运行脚本，大概$ddcs_left次结束这个循环，然后跑下一个，不需要理这个,这个是正常的$white"
-		$node $dir_file_js/jd_blueCoin.js  	#东东超市兑换，有次数限制，没时间要求
-		$node $dir_file_js/jd_car_exchange.js   #京东汽车兑换，500赛点兑换500京豆
-		sleep 1
-		ddcs_left=$(($ddcs_left - 1))
-	done
 }
 
 script_name() {
@@ -2009,7 +1999,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|kill_ccr|getcookie|addcookie|delcookie)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|kill_ccr|getcookie|addcookie|delcookie)
 		$action1
 		;;
 		*)
@@ -2024,7 +2014,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|ddcs|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|kill_ccr|getcookie|addcookie|delcookie)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|kill_ccr|getcookie|addcookie|delcookie)
 		$action2
 		;;
 		*)
