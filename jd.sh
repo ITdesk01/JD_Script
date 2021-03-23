@@ -623,7 +623,7 @@ kill_ccr() {
 }
 
 if_ps() {
-	sleep 5
+	sleep 10
 	ps_if=$(ps -ww | grep "js$" | grep -v "jd_crazy_joy_coin.js" | awk '{print $1}' |wc -l)
 	num1="10"
 	num2="20"
