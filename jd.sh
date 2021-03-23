@@ -1700,7 +1700,7 @@ close_notification() {
 }
 random_array() {
 	#彻底完善，感谢minty大力支援
-	quantity_num="50"
+	quantity_num="40"
 	length=$(echo $random | awk -F '[@]' '{print NF}') #获取变量长度
 	if [ "$length" -ge "$quantity_num" ];then
 		echo "random_array" > /tmp/random.txt
