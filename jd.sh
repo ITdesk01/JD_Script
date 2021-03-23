@@ -578,12 +578,21 @@ concurrent_js_update() {
 }
 
 concurrent_js_clean(){
-	echo -e "$yellow收尾一下$white"
-	for i in `ps -ww | grep "run_" | grep -v 'grep\|kill_ccr' | awk '{print $1}'`
-	do
-		echo "开始kill $i"
-		kill -9 $i
-	done
+		case `date +%H` in
+		22|23|00|01|02|03|07|08|09|10)
+			echo -e "$green处于特殊时间，暂时不关闭进程$white"
+		;;
+		*)
+			if [ "$ccr_if" == "yes" ];then
+				echo -e "$yellow收尾一下$white"
+				for i in `ps -ww | grep "run_" | grep -v 'grep\|kill_ccr' | awk '{print $1}'`
+				do
+					echo "开始kill $i"
+					kill -9 $i
+				done
+			fi
+		;;
+		esac
 }
 
 kill_ccr() {
