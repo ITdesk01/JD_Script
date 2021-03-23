@@ -1636,6 +1636,7 @@ additional_settings() {
 	#取消会员卡脚本修复路径
 	sed -i "s/..\/jdCookie.js/.\/jdCookie.js/g" $dir_file_js/jd_unbind.js
 	sed -i "s/..\/sendNotify/.\/sendNotify/g" $dir_file_js/jd_unbind.js
+	sed -i "s/..\/USER_AGENTS/.\/USER_AGENTS/g" $dir_file_js/jd_unbind.js
 
 	#脚本黑名单
 	script_black
