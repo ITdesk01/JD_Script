@@ -667,6 +667,7 @@ concurrent_js_if() {
 					action="$action2"
 					$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
 					concurrent_js && if_ps
+					concurrent_js_run_07 && if_ps
 					concurrent_js_clean
 				;;
 				esac
