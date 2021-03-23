@@ -538,6 +538,14 @@ echo -e "$green============整理完成，可以提交了（没加群的忽略�
 
 }
 
+concurrent_js_run_07() {
+	$node $openwrt_script/JD_Script/js/z_lenovo.js			#联想集卡活动
+	$node $openwrt_script/JD_Script/js/z_oneplus.js			#一加盲盒 2021-03-17 - 2021-03-30
+	$node $openwrt_script/JD_Script/js/z_mgold.js 			#金口碑奖投票
+	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
+	checklog #检测log日志是否有错误并推送
+}
+
 concurrent_js() {
 	if [ $(ls $ccr_js_file/ | wc -l ) -gt "0" ];then
 		for i in `ls $ccr_js_file/`
@@ -550,81 +558,6 @@ concurrent_js() {
 			update
 			concurrent_js_if
 	fi
-}
-
-concurrent_js_if() {
-	if [ "$ccr_if" == "yes" ];then
-		echo -e "$green>>检测到开启了账号并发模式$white"
-		case "$action1" in
-		run_0)
-			action="$action1"
-			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
-			concurrent_js && if_ps
-			if [ ! $action2 ];then
-				if_ps
-				concurrent_js_clean
-			else
-				case "$action2" in
-				run_07)
-					action="$action2"
-					$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
-					concurrent_js && if_ps
-					concurrent_js_clean
-				;;
-				esac
-			fi
-		;;
-		run_07)
-			action="$action1"
-			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
-			concurrent_js 
-			if_ps
-			concurrent_js_run_07
-			if_ps
-			concurrent_js_clean
-		;;
-		run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_030|run_020)
-			action="$action1"
-			concurrent_js
-			if_ps
-			concurrent_js_clean
-		;;
-		esac
-	else
-		case "$action1" in
-		run_0)
-			$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
-			$action1
-			if [ ! $action2 ];then
-				echo ""
-			else
-				case "$action2" in
-				run_07)
-					$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
-					$action2
-					concurrent_js_run_07
-				;;
-				esac
-			fi
-		;;
-		run_07)
-			$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
-			$action1
-			concurrent_js_run_07
-		;;
-		run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_030|run_020)
-			$action1
-		;;
-		esac
-	fi
-}
-
-concurrent_js_run_07() {
-	$node $openwrt_script/JD_Script/js/z_lenovo.js			#联想集卡活动
-	$node $openwrt_script/JD_Script/js/z_oneplus.js			#一加盲盒 2021-03-17 - 2021-03-30
-	$node $openwrt_script/JD_Script/js/z_mgold.js 			#金口碑奖投票
-	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
-	checklog #检测log日志是否有错误并推送
 }
 
 concurrent_js_update() {
@@ -726,6 +659,74 @@ if_ps() {
 	fi
 	#for i in `ps -ww | grep "jd.sh run_" | grep -v grep | awk '{print $1}'`;do kill -9 $i ;done
 }
+
+concurrent_js_if() {
+	if [ "$ccr_if" == "yes" ];then
+		echo -e "$green>>检测到开启了账号并发模式$white"
+		case "$action1" in
+		run_0)
+			action="$action1"
+			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
+			concurrent_js && if_ps
+			if [ ! $action2 ];then
+				if_ps
+				concurrent_js_clean
+			else
+				case "$action2" in
+				run_07)
+					action="$action2"
+					$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
+					concurrent_js && if_ps
+					concurrent_js_clean
+				;;
+				esac
+			fi
+		;;
+		run_07)
+			action="$action1"
+			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
+			concurrent_js
+			if_ps
+			concurrent_js_run_07
+			if_ps
+			concurrent_js_clean
+		;;
+		run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_030|run_020)
+			action="$action1"
+			concurrent_js
+			if_ps
+			concurrent_js_clean
+		;;
+		esac
+	else
+		case "$action1" in
+		run_0)
+			$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
+			$action1
+			if [ ! $action2 ];then
+				echo ""
+			else
+				case "$action2" in
+				run_07)
+					$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
+					$action2
+					concurrent_js_run_07
+				;;
+				esac
+			fi
+		;;
+		run_07)
+			$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
+			$action1
+			concurrent_js_run_07
+		;;
+		run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_030|run_020)
+			$action1
+		;;
+		esac
+	fi
+}
+
 
 checktool() {
 	i=1
