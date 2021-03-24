@@ -593,7 +593,7 @@ concurrent_js_clean(){
 
 kill_ccr() {
 	if [ "$ccr_if" == "yes" ];then
-		echo -e "$green>>终止并发程序。请稍等。。。。$white"
+		echo -e "$green>>终止并发程序启动。请稍等。。。。$white"
 		if [ `ps -ww | grep "js$" | grep -v "jd_crazy_joy_coin.js" | awk '{print $1}' |wc -l` == "0" ];then
 			sleep 2
 			echo -e "$green我曾经跨过山和大海，也穿过人山人海。。。$white"
