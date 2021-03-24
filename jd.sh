@@ -582,21 +582,14 @@ concurrent_js_update() {
 
 concurrent_js_clean(){
 		sleep 10
-		case `date +%H` in
-		22|23|00|01|02|03|07|08|09|10)
-			echo -e "$green处于特殊时间，暂时不关闭进程$white"
-		;;
-		*)
-			if [ "$ccr_if" == "yes" ];then
-				echo -e "$yellow收尾一下$white"
-				for i in `ps -ww | grep "run_" | grep -v 'grep\|kill_ccr' | awk '{print $1}'`
-				do
-					echo "开始kill $i"
-					kill -9 $i
-				done
-			fi
-		;;
-		esac
+		if [ "$ccr_if" == "yes" ];then
+			echo -e "$yellow收尾一下$white"
+			for i in `ps -ww | grep "$action" | grep -v 'grep\|kill_ccr' | awk '{print $1}'`
+			do
+				echo "开始kill $i"
+				kill -9 $i
+			done
+		fi
 }
 
 kill_ccr() {
@@ -2008,8 +2001,12 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|kill_ccr|getcookie|addcookie|delcookie)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie)
 		$action1
+		;;
+		kill_ccr)
+			action="run_"
+			kill_ccr
 		;;
 		*)
 		help
@@ -2023,8 +2020,12 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|kill_ccr|getcookie|addcookie|delcookie)
+		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie)
 		$action2
+		;;
+		kill_ccr)
+			action="run_"
+			kill_ccr
 		;;
 		*)
 		help
