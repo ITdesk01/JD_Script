@@ -596,7 +596,13 @@ kill_ccr() {
 		echo -e "$green>>终止并发程序。请稍等。。。。$white"
 		if [ `ps -ww | grep "js$" | grep -v "jd_crazy_joy_coin.js" | awk '{print $1}' |wc -l` == "0" ];then
 			sleep 2
-			echo -e "$green逛了一圈空空如也，你确定不是在消遣我，如果不是你可以重新运行一下。。。$white"
+			echo -e "$green我曾经跨过山和大海，也穿过人山人海。。。$white"
+			sleep 2
+			echo -e "$green直到来到你这里。。。$white"
+			sleep 2
+			echo -e "$green逛了一圈空空如也，你确定不是在消遣我？？？$white"
+			sleep 2
+			echo -e "$green后台都没有进程妹子，散了散了。。。$white"
 		else
 			for i in `ps -ww | grep "js$" | grep -v "jd_crazy_joy_coin.js" | awk '{print $1}'`
 			do
