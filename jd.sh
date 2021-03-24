@@ -422,7 +422,6 @@ EOF
 run_10_15_20() {
 cat >/tmp/jd_tmp/run_10_15_20 <<EOF
 	jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
-	jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
 	jd_cfd.js #京东财富岛 有一日三餐任务
 EOF
 
@@ -433,6 +432,8 @@ EOF
 		$node $dir_file_js/$i
 		$run_sleep
 	done
+
+	$node $openwrt_script/JD_Script/js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
 
 	echo -e "$green run_10_15_20$stop_script $white"
 }
