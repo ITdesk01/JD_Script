@@ -581,7 +581,6 @@ concurrent_js_update() {
 }
 
 concurrent_js_clean(){
-		sleep 10
 		if [ "$ccr_if" == "yes" ];then
 			echo -e "$yellow收尾一下$white"
 			for i in `ps -ww | grep "$action" | grep -v 'grep\|kill_ccr' | awk '{print $1}'`
