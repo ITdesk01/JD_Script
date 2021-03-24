@@ -386,6 +386,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	z_unionPoster.js #美的家电节
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_grassy.js			#答题赢京豆
+	z_sister.js			#乘风破浪的姐姐
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_07$start_script $white"
