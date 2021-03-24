@@ -587,7 +587,7 @@ concurrent_js_clean(){
 		*)
 			if [ "$ccr_if" == "yes" ];then
 				echo -e "$yellow收尾一下$white"
-				for i in `ps -ww | grep "run_" | grep -v 'grep\|kill_ccr' | awk '{print $1}'`
+				for i in `ps -ww | grep "$action" | grep -v 'grep\|kill_ccr' | awk '{print $1}'`
 				do
 					echo "开始kill $i"
 					kill -9 $i
