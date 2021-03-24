@@ -62,7 +62,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.93"
+	cron_version="2.94"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -85,7 +85,7 @@ cat >>/etc/crontabs/root <<EOF
 35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1 #不是很重要的，错开运行#100#
 10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #宠汪汪兑换礼品#100#
 00 22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本#100#
-5 22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #22点05分更新lxk0301脚本#100#
+5 11,19,22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #11,19,22点05分更新lxk0301脚本#100#
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本#100#
 */30 1-22 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机#100#
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机#100#
