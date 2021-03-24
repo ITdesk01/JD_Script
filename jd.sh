@@ -202,9 +202,8 @@ cat >$dir_file/config/i-chenzhe_script.txt <<EOF
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_lenovo.js			#联想集卡活动
 	z_oneplus.js			#一加盲盒 2021-03-17 - 2021-03-30
-	z_mgold.js 			#金口碑奖投票
-	z_city_cash.js			#城城分现金
 	z_grassy.js			#答题赢京豆
+	z_sister.js			#乘风破浪的姐姐
 EOF
 
 for script_name in `cat $dir_file/config/i-chenzhe_script.txt | awk '{print $1}'`
@@ -212,7 +211,8 @@ do
 	wget $url2/$script_name -O $dir_file_js/$script_name
 done
 
-	rm -rf $dir_file_js/jd_xtg.js			#手机尚学季
+	rm -rf $dir_file_js/z_city_cash.js			#城城分现金
+	rm -rf $dir_file_js/z_mgold.js 			#金口碑奖投票
 
 	cat $dir_file/config/lxk0301_script.txt > $dir_file/config/collect_script.txt
 	cat $dir_file/config/i-chenzhe_script.txt >> $dir_file/config/collect_script.txt
@@ -385,7 +385,6 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	z_marketLottery.js #京东超市-大转盘
 	z_unionPoster.js #美的家电节
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
-	z_city_cash.js			#城城分现金
 	z_grassy.js			#答题赢京豆
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
@@ -532,7 +531,6 @@ echo -e "$green============整理完成，可以提交了（没加群的忽略�
 concurrent_js_run_07() {
 	$node $openwrt_script/JD_Script/js/z_lenovo.js			#联想集卡活动
 	$node $openwrt_script/JD_Script/js/z_oneplus.js			#一加盲盒 2021-03-17 - 2021-03-30
-	$node $openwrt_script/JD_Script/js/z_mgold.js 			#金口碑奖投票
 	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 	checklog #检测log日志是否有错误并推送
 }
