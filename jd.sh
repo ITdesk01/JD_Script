@@ -160,7 +160,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_lotteryMachine.js 		#京东抽奖机
 	jd_necklace.js			#点点券
 	jd_syj.js			#赚京豆
-	jd_bookshop.js			#口袋书店
 	jd_kd.js			#京东快递签到 一天运行一次即可
 	jd_small_home.js		#东东小窝
 	jd_speed.js			#天天加速
@@ -404,7 +403,6 @@ EOF
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
-	jd_bookshop.js #口袋书店
 	jd_global_mh.js #京东国际盲盒
 	jd_global.js	#环球挑战赛
 EOF
@@ -1598,18 +1596,6 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	sed -i "s/applyJdBean = 2000/applyJdBean = $jd_crazy_joy/g" $dir_file_js/jd_crazy_joy.js #JOY兑换2000豆子
 
 
-	#口袋书店
-	new_jdbook="d6d73edddaa64cbda1ec42dd496591d0@e50f362dbf8e4e8891c18d0a6fc9d04d@40cb5da84f0448a695dd5b9643592cfa@3ef061eb9b244b3cbdc9904a0297c3f5@99f8c73daa9f488b8cb7a2ed585aa34d"
-	zuoyou_20190516_jdbook="6b1c75eb1cb94a798430419d910b72af@2bcf369644394ffda20b07abbd300957@dbd5fbf1ffde4f99b74fd5b9d5aba901@ccb016eff33147fc96b2b0cfa781965a@ab887a95729a4cc590fbb4161c19f57f@fa96f480e49b464e893bf18ac96a2772@eae4a6a81da5430688ed02c909d5ed75"
-	jidiyangguang_20190516_jdbook="a3ad79593cdb41bd8ab31dab7e19cf06@90660442a37f473b98bf57774e9825fe"
-	chiyu_jdbook="dfae57a9a2654667b0b5e7298d2ad137"
-	Jhone_Potte_20200824_jdbook="9248205cc28144d0bd1a925f9db0083c@de78e3257e184519bb7a2212cc4e49ec"
-
-	new_jdbook_set="'$new_jdbook@$zuoyou_20190516_jdbook@$jidiyangguang_20190516_jdbook@$chiyu_jdbook@$Jhone_Potte_20200824_jdbook',"
-
-	book_rows=$(grep -n "inviteCodes =" $dir_file_js/jd_bookshop.js | awk -F ":" '{print $1}')
-	sed -i "$book_rows a \ $new_jdbook_set\n$new_jdbook_set\n$new_jdbook_set\n$new_jdbook_set\n$new_jdbook_set\n$new_jdbook_set\n$new_jdbook_set\n$new_jdbook_set" $dir_file_js/jd_bookshop.js
-	
 	#签到领现金
 	new_jdcash="eU9Ya-iyZ68kpWrRmXBFgw@eU9YabrkZ_h1-GrcmiJB0A@eU9YM7bzIptVshyjrwlteU9YCLTrH5VesRWnvw5t@P2nGgK6JgLtCqJBeQJ0f27XXLQwYAFHrKmA2siZTuj8=@LTyKtCPGU6v0uv-n1GSwfQ==@y7KhVRopnOwB1qFo2vIefg==@WnaDbsWYwImvOD1CpkeVWA==@Y4r32JTAKNBpMoCXvBf7oA==@JuMHWNtZt4Ny_0ltvG6Ipg==@IRM2beu1b-En9mzUwnU@eU9YaOSwMP8m-D_XzHpF0w@eU9Yau-yMv8ho2fcnXAQ1Q@eU9YCovbMahykhWdvS9R@JxwyaOWzbvk7-W3WzHcV1mw"
 	zuoyou_20190516_jdcash="f1kwaQ@a1hzJOmy@eU9Ya7-wM_Qg-T_SyXIb0g@eU9Yaengbv9wozzUmiIU3g@f0JgObLlIalJrA@flpkLei3@cUJpO6X3Yf4m@e1JzPbLlJ6V5rzk"
