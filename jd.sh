@@ -596,6 +596,7 @@ kill_ccr() {
 		echo -e "$green>>终止并发程序启动。请稍等。。。。$white"
 		if [ `ps -ww | grep "js$" | grep -v "jd_crazy_joy_coin.js" | awk '{print $1}' |wc -l` == "0" ];then
 			sleep 2
+			echo ""
 			echo -e "$green我曾经跨过山和大海，也穿过人山人海。。。$white"
 			sleep 2
 			echo -e "$green直到来到你这里。。。$white"
@@ -1219,8 +1220,15 @@ script_black() {
 	else
 		for i in `echo "$script_list"`
 		do
-			echo "开始删除关于$i脚本的代码，后面需要的话看黑名单描述处理"
-			sed -i "s/\$node \$dir_file_js\/$i//g" $dir_file/jd.sh
+			if [ `grep "dir_file_js\/$i" $dir_file/jd.sh  | wc -l` -gt 0 ];then
+				echo "开始删除关于$i脚本的代码，后面需要的话看黑名单描述处理"
+				sed -i "s/\$node \$dir_file_js\/$i//g" $dir_file/jd.sh
+			elif [ `grep "$i" $dir_file/jd.sh  | wc -l` -gt 0 ];then
+				echo "开始删除关于$i脚本的代码，后面需要的话看黑名单描述处理"
+				sed -i "s/$i//g" $dir_file/jd.sh
+			else
+				echo "黑名单脚本已经全部禁用了"
+			fi
 		done
 	fi
 	clear
