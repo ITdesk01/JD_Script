@@ -203,6 +203,7 @@ cat >$dir_file/config/i-chenzhe_script.txt <<EOF
 	z_oneplus.js			#一加盲盒 2021-03-17 - 2021-03-30
 	z_grassy.js			#答题赢京豆
 	z_sister.js			#乘风破浪的姐姐
+	z_xmf.js			#京东小魔方活动时间：2021-03-25 至 2021-03-27
 EOF
 
 for script_name in `cat $dir_file/config/i-chenzhe_script.txt | awk '{print $1}'`
@@ -386,6 +387,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_grassy.js			#答题赢京豆
 	z_sister.js			#乘风破浪的姐姐
+	z_xmf.js			#京东小魔方活动时间：2021-03-25 至 2021-03-27
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_07$start_script $white"
