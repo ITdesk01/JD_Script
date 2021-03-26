@@ -1728,9 +1728,9 @@ close_notification() {
 }
 random_array() {
 	#彻底完善，感谢minty大力支援
-	quantity_num="40"
 	length=$(echo $random | awk -F '[@]' '{print NF}') #获取变量长度
-	if [ "$length" -ge "$quantity_num" ];then
+	quantity_num=$(expr $length - 1)
+	if [ "$length" -ge "20" ];then
 		echo "random_array" > /tmp/random.txt
 		random_num=$(python3 $dir_file/jd_random.py $length,$quantity_num  | sed "s/,/\n/g")
 		for i in `echo $random_num`
