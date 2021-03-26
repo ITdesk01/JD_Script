@@ -1729,10 +1729,11 @@ close_notification() {
 random_array() {
 	#彻底完善，感谢minty大力支援
 	length=$(echo $random | awk -F '[@]' '{print NF}') #获取变量长度
-	quantity_num=$(expr $length - 1)
+	quantity_num=$(expr $length + 1)
+
 	if [ "$length" -ge "20" ];then
 		echo "random_array" > /tmp/random.txt
-		random_num=$(python3 $dir_file/jd_random.py $length,$quantity_num  | sed "s/,/\n/g")
+		random_num=$(python3 $dir_file/jd_random.py $quantity_num,$length  | sed "s/,/\n/g")
 		for i in `echo $random_num`
 		do
 			echo $random | awk -va=$i -F '[@]' '{print $a}'  >>/tmp/random.txt
