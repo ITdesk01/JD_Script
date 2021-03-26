@@ -1229,10 +1229,10 @@ script_black() {
 		do
 			if [ `grep "dir_file_js\/$i" $dir_file/jd.sh  | wc -l` -gt 0 ];then
 				echo "开始删除关于$i脚本的代码，后面需要的话看黑名单描述处理"
-				sed -i "s/\$node \$dir_file_js\/$i//g" $dir_file/jd.sh
+				sed -i "/\$node \$dir_file_js\/$i/d" $dir_file/jd.sh
 			elif [ `grep "$i" $dir_file/jd.sh  | wc -l` -gt 0 ];then
 				echo "开始删除关于$i脚本的代码，后面需要的话看黑名单描述处理"
-				sed -i "s/$i//g" $dir_file/jd.sh
+				sed -i "/$i/d" $dir_file/jd.sh
 			else
 				echo "黑名单脚本已经全部禁用了"
 			fi
