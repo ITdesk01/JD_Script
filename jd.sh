@@ -121,11 +121,14 @@ update() {
 	fi
 
 	if [ ! -d $dir_file/git_clone/lxk0301 ];then
-		git clone -b master git@gitee.com:lxk0301/jd_scripts.git $dir_file/git_clone/lxk0301
+		echo "因上游停止秘钥，暂时不做git clone操作，你用不了脚本是正常的"
+		exit 0
+		#git clone -b master git@gitee.com:lxk0301/jd_scripts.git $dir_file/git_clone/lxk0301
 	else
-		cd $dir_file/git_clone/lxk0301
-		git fetch --all
-		git reset --hard origin/master
+		echo "因上游停止秘钥，暂时不做git pull操作"
+		#cd $dir_file/git_clone/lxk0301
+		#git fetch --all
+		#git reset --hard origin/master
 	fi
 	echo -e "$green update$start_script $white"
 	echo -e "$green开始下载JS脚本，请稍等$white"
