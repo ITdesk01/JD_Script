@@ -120,14 +120,11 @@ update() {
 	fi
 
 	if [ ! -d $dir_file/git_clone/lxk0301 ];then
-		echo "因上游停止秘钥，暂时不做git clone操作，你用不了脚本是正常的"
-		exit 0
-		#git clone -b master git@gitee.com:lxk0301/jd_scripts.git $dir_file/git_clone/lxk0301
+		git clone -b master git@gitee.com:lxk0301/jd_scripts.git $dir_file/git_clone/lxk0301
 	else
-		echo "因上游停止秘钥，暂时不做git pull操作"
-		#cd $dir_file/git_clone/lxk0301
-		#git fetch --all
-		#git reset --hard origin/master
+		cd $dir_file/git_clone/lxk0301
+		git fetch --all
+		git reset --hard origin/master
 	fi
 	echo -e "$green update$start_script $white"
 	echo -e "$green开始下载JS脚本，请稍等$white"
@@ -1814,10 +1811,12 @@ system_variable() {
 	fi
 
 	#判断参数
-	if [ ! -f /root/.ssh/lxk0301 ];then
+	if [ ! -f /root/.ssh/test ];then
+		rm -rf /root/.ssh
 		cp -r $dir_file/.ssh /root/.ssh
 		chmod 600 /root/.ssh/lxk0301
 		sed -i "s/#   StrictHostKeyChecking ask/StrictHostKeyChecking no/g" /etc/ssh/ssh_config
+		echo > /root/.ssh/test
 		update
 	fi
 
