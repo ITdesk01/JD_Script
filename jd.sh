@@ -103,7 +103,6 @@ EOF
 
 task_delete() {
         sed -i '/#100#/d' /etc/crontabs/root >/dev/null 2>&1
-	sed -i '/JD_Script\/js/d' /etc/crontabs/root >/dev/null 2>&1
 }
 
 ds_setup() {
