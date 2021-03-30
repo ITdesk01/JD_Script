@@ -222,10 +222,12 @@ COMMENT
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/i-chenzhe/qx/main/jd_entertainment.js -O $dir_file_js/jd_entertainment.js #百变大咖秀
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
+	wget https://raw.githubusercontent.com/monk-coder/dust/dust/normal/monk_shop_lottery.js -O $dir_file_js/monk_shop_lottery.js #店铺大转盘
 
 
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	monk_shop_lottery.js 		#店铺大转盘
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jx_products_detail.js		#京喜工厂商品列表详情
 	jd_entertainment.js 		#百变大咖秀
@@ -384,12 +386,13 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_shake.js #超级摇一摇
 	jd_jxd.js #京小兑
 	jd_nzmh.js #女装盲盒 2021-3-8至2021-3-20
-	z_marketLottery.js #京东超市-大转盘
-	z_unionPoster.js #美的家电节
+	z_marketLottery.js 		#京东超市-大转盘
+	z_unionPoster.js 		#美的家电节
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_grassy.js			#答题赢京豆
 	z_sister.js			#乘风破浪的姐姐
 	z_xmf.js			#京东小魔方活动时间：2021-03-25 至 2021-03-27
+	monk_shop_lottery.js		#店铺大转盘		
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_07$start_script $white"
