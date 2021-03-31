@@ -216,7 +216,7 @@ EOF
 
 for script_name in `cat $dir_file/config/monk-coder.txt | awk '{print $1}'`
 do
-	wget $url2/$script_name -O $dir_file_js/$script_name
+	wget $url3/$script_name -O $dir_file_js/$script_name
 done
 
 
