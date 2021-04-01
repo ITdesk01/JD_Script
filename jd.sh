@@ -170,7 +170,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_speed_sign.js		#京东极速版签到+赚现金任务
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
 	jd_crazy_joy_bonus.js		#监控crazyJoy分红狗(默认不运行，欧皇自己设置定时任务)
-	jd_global_mh.js			#京东国际盲盒
 	jd_cfd.js			#京喜财富岛
 	jd_live.js			#京东直播
 	jd_jxd.js			#京小兑
@@ -178,6 +177,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_live_redrain.js 		#超级直播间红包雨
 	jd_nzmh.js			#女装盲盒 2021-3-8至2021-3-20
 	jd_mohe.js			#5G超级盲盒2021-03-19到2021-04-30 白天抽奖基本没有京豆，4小时运行一次收集热力值
+	jd_carnivalcity.js		#京东手机狂欢城活动2021-4-1至2021-4-20
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -389,6 +389,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	z_shake.js  #超级摇一摇
 	jd_jxd.js #京小兑
 	jd_nzmh.js #女装盲盒 2021-3-8至2021-3-20
+	jd_carnivalcity.js		#京东手机狂欢城活动2021-4-1至2021-4-20
 	z_marketLottery.js 		#京东超市-大转盘
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_entertainment.js		#百变大咖秀
@@ -411,7 +412,6 @@ EOF
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
-	jd_global_mh.js #京东国际盲盒
 	jd_global.js	#环球挑战赛
 EOF
 	echo -e "$green run_08_12_16$start_script $white"
