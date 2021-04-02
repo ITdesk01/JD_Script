@@ -176,6 +176,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_live_redrain.js 		#超级直播间红包雨
 	jd_mohe.js			#5G超级盲盒2021-03-19到2021-04-30 白天抽奖基本没有京豆，4小时运行一次收集热力值
 	jd_carnivalcity.js		#京东手机狂欢城活动2021-4-1至2021-4-20
+	jd_nzmh.js			#女装盲盒2021-4-1至2021-4-31
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -285,6 +286,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_small_home.js #东东小窝
 	z_entertainment.js		#百变大咖秀
 	monk_inter_shop_sign.js #interCenter渠道店铺签到
+	jd_nzmh.js			#女装盲盒2021-4-1至2021-4-31
 EOF
 	echo -e "$green run_0$start_script $white"
 
