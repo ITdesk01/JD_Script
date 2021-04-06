@@ -210,6 +210,7 @@ cat >$dir_file/config/monk-coder.txt <<EOF
 	monk_shop_lottery.js #店铺大转盘
 	monk_inter_shop_sign.js #interCenter渠道店铺签到
 	monk_shop_follow_sku.js #关注有礼
+	monk_skyworth.js #创维408下班全勤奖
 EOF
 
 
@@ -394,6 +395,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	z_entertainment.js		#百变大咖秀
 	monk_shop_lottery.js		#店铺大转盘
 	monk_shop_follow_sku.js #关注有礼
+	monk_skyworth.js #创维408下班全勤奖
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_07$start_script $white"
