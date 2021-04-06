@@ -62,7 +62,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.95"
+	cron_version="2.96"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -78,15 +78,16 @@ task_add() {
 cat >>/etc/crontabs/root <<EOF
 #**********这里是JD_Script的定时任务$cron_version版本#100#**********#
 0 0 * * * $dir_file/jd.sh run_0  >/tmp/jd_run_0.log 2>&1 #0点0分执行全部脚本#100#
-*/30 2-23 * * * $dir_file/jd.sh run_030 >/tmp/jd_run_030.log 2>&1 #两个工厂#100#
 0 2-23/1 * * * $dir_file/jd.sh run_01 >/tmp/jd_run_01.log 2>&1 #种豆得豆收瓶子#100#
+0 2-23/2 * * * $dir_file/jd.sh run_020 >/tmp/jd_run_020.log 2>&1 #摇钱树#100#
+*/30 2-23 * * * $dir_file/jd.sh run_030 >/tmp/jd_run_030.log 2>&1 #两个工厂#100#
 10 2-22/3 * * * $dir_file/jd.sh run_03 >/tmp/jd_run_03.log 2>&1 #天天加速 3小时运行一次，打卡时间间隔是6小时#100#
 40 6-18/6 * * * $dir_file/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1 #不是很重要的，错开运行#100#
+5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本#100#
 35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1 #不是很重要的，错开运行#100#
 10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #宠汪汪兑换礼品#100#
 00 22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本#100#
 5 11,19,22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #11,19,22点05分更新lxk0301脚本#100#
-5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本#100#
 */30 1-22 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机#100#
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机#100#
 0 11 */7 * *  $node $dir_file/js/jd_price.js >/tmp/jd_price.log #每7天11点执行京东保价#100#
@@ -177,6 +178,7 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_mohe.js			#5G超级盲盒2021-03-19到2021-04-30 白天抽奖基本没有京豆，4小时运行一次收集热力值
 	jd_carnivalcity.js		#京东手机狂欢城活动2021-4-1至2021-4-20
 	jd_nzmh.js			#女装盲盒2021-4-1至2021-4-31
+	jd_moneyTree.js 		#摇钱树
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -335,7 +337,7 @@ run_01() {
 
 run_02() {
 	echo -e "$green run_02$start_script $white"
-	echo "暂时为空"
+	$node $dir_file_js/jd_moneyTree.js #摇钱树
 	echo -e "$green run_02$stop_script $white"
 }
 
