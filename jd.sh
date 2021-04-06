@@ -62,7 +62,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="2.94"
+	cron_version="2.95"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -78,7 +78,7 @@ task_add() {
 cat >>/etc/crontabs/root <<EOF
 #**********这里是JD_Script的定时任务$cron_version版本#100#**********#
 0 0 * * * $dir_file/jd.sh run_0  >/tmp/jd_run_0.log 2>&1 #0点0分执行全部脚本#100#
-*/45 2-23 * * * $dir_file/jd.sh run_045 >/tmp/jd_run_045.log 2>&1 #两个工厂#100#
+*/30 2-23 * * * $dir_file/jd.sh run_030 >/tmp/jd_run_030.log 2>&1 #两个工厂#100#
 0 2-23/1 * * * $dir_file/jd.sh run_01 >/tmp/jd_run_01.log 2>&1 #种豆得豆收瓶子#100#
 10 2-22/3 * * * $dir_file/jd.sh run_03 >/tmp/jd_run_03.log 2>&1 #天天加速 3小时运行一次，打卡时间间隔是6小时#100#
 40 6-18/6 * * * $dir_file/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1 #不是很重要的，错开运行#100#
@@ -302,29 +302,27 @@ EOF
 	run_10_15_20
 	run_01
 	run_03
-	run_045
+	run_030
 	$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
 	echo -e "$green run_0$stop_script $white"
 }
 
 run_020() {
 	echo -e "$green run_020$start_script $white"
-	echo "暂时没有东西"
+	echo "run_020暂时没有东西"
 	echo -e "$green run_020$stop_script $white"
 }
 
 run_030() {
 	echo -e "$green run_030$start_script $white"
-	#$node $dir_file_js/jd_gyec.js #工业爱消除
-	#$node $dir_file_js/jd_xxl.js #东东爱消除
-	#$node $dir_file_js/jd_xxl_gh.js	#个护爱消除，完成所有任务+每日挑战
+	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 45分钟运行一次
+	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
 	echo -e "$green run_030$stop_script $white"
 }
 
 run_045() {
 	echo -e "$green run_045$start_script $white"
-	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 45分钟运行一次
-	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
+	echo "run_045暂时没有东西"
 	echo -e "$green run_045$stop_script $white"
 }
 
