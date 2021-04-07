@@ -230,10 +230,11 @@ done
 
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
-
+	wget https://raw.githubusercontent.com/monk-coder/dust/dust/member/monk_pasture.js -O $dir_file_js/monk_pasture.js #有机牧场
 
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	monk_pasture.js 		#有机牧场
 	monk_shop_lottery.js 		#店铺大转盘
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jx_products_detail.js		#京喜工厂商品列表详情
@@ -339,6 +340,12 @@ run_01() {
 run_02() {
 	echo -e "$green run_02$start_script $white"
 	$node $dir_file_js/jd_moneyTree.js #摇钱树
+	if [ $(date "+%-H") -ge 13 ]; then
+ 		export PASTURE_EXCHANGE_KEYWORD="1京豆"
+	else
+ 		export PASTURE_EXCHANGE_KEYWORD="10京豆"
+	fi
+	$node $dir_file_js/monk_pasture.js #有机牧场
 	echo -e "$green run_02$stop_script $white"
 }
 
