@@ -150,7 +150,6 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_crazy_joy_coin.js		#crazy joy挂机领金币/宝箱专用
 	jd_car_exchange.js		#京东汽车兑换，500赛点兑换500京豆
 	jd_car.js			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
-	jd_redPacket.js			#全民开红包
 	jd_club_lottery.js		#摇京豆
 	jd_shop.js			#进店领豆
 	jd_bean_home.js			#领京豆额外奖励
@@ -183,6 +182,8 @@ cat >$dir_file/config/lxk0301_script.txt <<EOF
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
+#jd_redPacket.js			#全民开红包
+
 cp  $dir_file/git_clone/lxk0301/activity/jd_unbind.js	$dir_file_js/jd_unbind.js #注销京东会员卡
 
 for script_name in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
