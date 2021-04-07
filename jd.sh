@@ -292,6 +292,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	z_entertainment.js		#百变大咖秀
 	monk_inter_shop_sign.js #interCenter渠道店铺签到
 	jd_nzmh.js			#女装盲盒2021-4-1至2021-4-31
+	jd_syj.js #十元街签到,一天一次即可，一周30豆子
 EOF
 	echo -e "$green run_0$start_script $white"
 
