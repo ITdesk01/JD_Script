@@ -400,6 +400,10 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_entertainment.js		#百变大咖秀
 	monk_shop_follow_sku.js #关注有礼
+	jd_cash.js #签到领现金，每日2毛～5毛长期
+	jd_carnivalcity.js		#京东手机狂欢城活动2021-4-1至2021-4-20
+	monk_shop_lottery.js		#店铺大转盘
+	monk_skyworth.js #创维408下班全勤奖
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_07$start_script $white"
@@ -542,10 +546,6 @@ echo -e "$green============整理完成，可以提交了（没加群的忽略�
 
 concurrent_js_run_07() {
 	jd_redPacket.js #京东全民开红包，没时间要求
-	jd_cash.js #签到领现金，每日2毛～5毛长期
-	jd_carnivalcity.js		#京东手机狂欢城活动2021-4-1至2021-4-20
-	monk_shop_lottery.js		#店铺大转盘
-	monk_skyworth.js #创维408下班全勤奖
 	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 	checklog #检测log日志是否有错误并推送
 }
