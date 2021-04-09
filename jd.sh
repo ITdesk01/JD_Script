@@ -203,11 +203,12 @@ cat >$dir_file/config/i-chenzhe_script.txt <<EOF
 	z_entertainment.js		#百变大咖秀
 EOF
 
-
+:<<feng
 for script_name in `cat $dir_file/config/i-chenzhe_script.txt | awk '{print $1}'`
 do
 	wget $url2/$script_name -O $dir_file_js/$script_name
 done
+feng
 
 url3="https://raw.githubusercontent.com/monk-coder/dust/dust/normal"
 cat >$dir_file/config/monk-coder.txt <<EOF
@@ -217,12 +218,12 @@ cat >$dir_file/config/monk-coder.txt <<EOF
 	monk_skyworth.js #创维408下班全勤奖
 EOF
 
-
+:<<feng
 for script_name in `cat $dir_file/config/monk-coder.txt | awk '{print $1}'`
 do
 	wget $url3/$script_name -O $dir_file_js/$script_name
 done
-
+feng
 
 	cat $dir_file/config/lxk0301_script.txt > $dir_file/config/collect_script.txt
 	cat $dir_file/config/i-chenzhe_script.txt >> $dir_file/config/collect_script.txt
@@ -230,7 +231,12 @@ done
 
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
-	wget https://raw.githubusercontent.com/monk-coder/dust/dust/member/monk_pasture.js -O $dir_file_js/monk_pasture.js #有机牧场
+	#wget https://raw.githubusercontent.com/monk-coder/dust/dust/member/monk_pasture.js -O $dir_file_js/monk_pasture.js #有机牧场
+	rm -rf $dir_file_js/jd_shakeBean.js
+	rm -rf $dir_file_js/z_lenovo.js
+	rm -rf $dir_file_js/z_oneplus.js
+	rm -rf $dir_file_js/z_unionPoster.js
+	rm -rf $dir_file_js/z_xmf.js
 
 
 cat >>$dir_file/config/collect_script.txt <<EOF
