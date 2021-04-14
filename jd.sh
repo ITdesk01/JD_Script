@@ -211,10 +211,10 @@ done
 
 url3="https://share.r2ray.com/dust/normal"
 cat >$dir_file/config/tmp/monk-normal.txt <<EOF
-	monk_shop_lottery.js #店铺大转盘
-	monk_inter_shop_sign.js #interCenter渠道店铺签到
-	monk_shop_follow_sku.js #关注有礼
-	monk_skyworth.js #创维408下班全勤奖
+	monk_shop_lottery.js 		#店铺大转盘
+	monk_inter_shop_sign.js 	#interCenter渠道店铺签到
+	monk_shop_follow_sku.js 	#关注有礼
+	monk_skyworth.js 		#创维408下班全勤奖
 EOF
 
 for script_name in `cat $dir_file/config/tmp/monk-normal.txt | awk '{print $1}'`
@@ -224,8 +224,8 @@ done
 
 url4="https://share.r2ray.com/dust/car"
 cat >$dir_file/config/tmp/monk-car.txt <<EOF
-	monk_shop_add_to_car.js #加购有礼
-	monk_skyworth_car.js #创维408下班全勤奖
+	monk_shop_add_to_car.js 	#加购有礼
+	monk_skyworth_car.js 		#创维408下班全勤奖
 EOF
 
 for script_name in `cat $dir_file/config/tmp/monk-car.txt | awk '{print $1}'`
@@ -236,8 +236,8 @@ done
 
 url5="https://share.r2ray.com/dust/member"
 cat >$dir_file/config/tmp/monk-member.txt <<EOF
-	monk_pasture.js #有机牧场
-	monk_vinda.js	#“韧”性探索 空降好礼
+	monk_pasture.js			#有机牧场
+	monk_vinda.js			#“韧”性探索 空降好礼
 EOF
 
 for script_name in `cat $dir_file/config/tmp/monk-member.txt | awk '{print $1}'`
