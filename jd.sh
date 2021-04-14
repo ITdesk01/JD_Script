@@ -1835,7 +1835,7 @@ npm_install() {
 
 system_variable() {
 	if [[ ! -d "$dir_file/config/tmp" ]]; then
-		mkdir -p $dir_file/config
+		mkdir -p $dir_file/config/tmp
 	fi
 	
 	if [[ ! -d "$dir_file/js" ]]; then
