@@ -194,7 +194,7 @@ do
 	sleep 1
 done
 
-url2="https://raw.githubusercontent.com/monk-coder/dust/dust/i-chenzhe"
+url2="https://share.r2ray.com/dust/i-chenzhe"
 cat >$dir_file/config/i-chenzhe_script.txt <<EOF
 	z_fanslove.js			#粉丝互动
 	z_shake.js  			#超级摇一摇
@@ -203,46 +203,56 @@ cat >$dir_file/config/i-chenzhe_script.txt <<EOF
 	z_entertainment.js		#百变大咖秀
 EOF
 
-:<<feng
+
 for script_name in `cat $dir_file/config/i-chenzhe_script.txt | awk '{print $1}'`
 do
 	wget $url2/$script_name -O $dir_file_js/$script_name
 done
-feng
 
-url3="https://raw.githubusercontent.com/monk-coder/dust/dust/normal"
-cat >$dir_file/config/monk-coder.txt <<EOF
+url3="https://share.r2ray.com/dust/normal"
+cat >$dir_file/config/monk-normal.txt <<EOF
 	monk_shop_lottery.js #店铺大转盘
 	monk_inter_shop_sign.js #interCenter渠道店铺签到
 	monk_shop_follow_sku.js #关注有礼
-	monk_skyworth_car.js #创维408下班全勤奖
-	monk_vinda.js	#“韧”性探索 空降好礼
-	monk_shop_add_to_car.js #加购有礼
+	monk_skyworth.js #创维408下班全勤奖
 EOF
 
-:<<feng
-for script_name in `cat $dir_file/config/monk-coder.txt | awk '{print $1}'`
+for script_name in `cat $dir_file/config/monk-normal.txt | awk '{print $1}'`
 do
 	wget $url3/$script_name -O $dir_file_js/$script_name
 done
-feng
 
-	cat $dir_file/config/lxk0301_script.txt > $dir_file/config/collect_script.txt
-	cat $dir_file/config/i-chenzhe_script.txt >> $dir_file/config/collect_script.txt
-	cat $dir_file/config/monk-coder.txt >> $dir_file/config/collect_script.txt
+url4="https://share.r2ray.com/dust/car"
+cat >$dir_file/config/monk-car.txt <<EOF
+	monk_shop_add_to_car.js #加购有礼
+	monk_skyworth_car.js #创维408下班全勤奖
+EOF
 
-	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
-	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
-	#wget https://raw.githubusercontent.com/monk-coder/dust/dust/member/monk_pasture.js -O $dir_file_js/monk_pasture.js #有机牧场
-	rm -rf $dir_file_js/jd_shakeBean.js
-	rm -rf $dir_file_js/z_lenovo.js
-	rm -rf $dir_file_js/z_oneplus.js
-	rm -rf $dir_file_js/z_unionPoster.js
-	rm -rf $dir_file_js/z_xmf.js
+for script_name in `cat $dir_file/config/monk-car.txt | awk '{print $1}'`
+do
+	wget $url4/$script_name -O $dir_file_js/$script_name
+done
 
+
+url5="https://share.r2ray.com/dust/member"
+cat >$dir_file/config/monk-member.txt <<EOF
+	monk_pasture.js #有机牧场
+	monk_vinda.js	#“韧”性探索 空降好礼
+EOF
+
+for script_name in `cat $dir_file/config/monk-member.txt | awk '{print $1}'`
+do
+	wget $url5/$script_name -O $dir_file_js/$script_name
+done
+
+#将所有文本汇总
+echo > $dir_file/config/collect_script.txt
+for i in `ls  $dir_file/config | grep -v "collect_script.txt"`
+do
+	cat $dir_file/config/$i >> $dir_file/config/collect_script.txt
+done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	monk_pasture.js 		#有机牧场
 	monk_shop_lottery.js 		#店铺大转盘
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jx_products_detail.js		#京喜工厂商品列表详情
@@ -261,6 +271,11 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jdFactoryShareCodes.js		#东东工厂ShareCodes
 	jdJxncShareCodes.js		#京喜农场ShareCodes
 EOF
+
+
+	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
+	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
+
 
 	if [ $? -eq 0 ]; then
 		echo -e ">>$green脚本下载完成$white"
@@ -302,6 +317,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_nzmh.js			#女装盲盒2021-4-1至2021-4-31
 	jd_syj.js #十元街签到,一天一次即可，一周30豆子
 	monk_shop_add_to_car.js #加购有礼
+	monk_skyworth.js #创维408下班全勤奖
 EOF
 	echo -e "$green run_0$start_script $white"
 
