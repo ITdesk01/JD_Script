@@ -132,7 +132,7 @@ update() {
 #cat script_name.txt | awk '{print length, $0}' | sort -rn | sed 's/^[0-9]\+ //'按照文件名长度降序：
 #cat script_name.txt | awk '{print length, $0}' | sort -n | sed 's/^[0-9]\+ //' 按照文件名长度升序
 
-cat >$dir_file/config/lxk0301_script.txt <<EOF
+cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_bean_sign.js			#京东多合一签到
 	jx_sign.js			#京喜app签到长期
 	jd_fruit.js			#东东农场
@@ -187,7 +187,7 @@ EOF
 
 cp  $dir_file/git_clone/lxk0301/activity/jd_unbind.js	$dir_file_js/jd_unbind.js #注销京东会员卡
 
-for script_name in `cat $dir_file/config/lxk0301_script.txt | awk '{print $1}'`
+for script_name in `cat $dir_file/config/tmp/lxk0301_script.txt | awk '{print $1}'`
 do
 	echo -e "$yellow copy $green$script_name$white"
 	cp  $dir_file/git_clone/lxk0301/$script_name  $dir_file_js/$script_name
@@ -195,7 +195,7 @@ do
 done
 
 url2="https://share.r2ray.com/dust/i-chenzhe"
-cat >$dir_file/config/i-chenzhe_script.txt <<EOF
+cat >$dir_file/config/tmp/i-chenzhe_script.txt <<EOF
 	z_fanslove.js			#粉丝互动
 	z_shake.js  			#超级摇一摇
 	z_marketLottery.js 		#京东超市-大转盘
@@ -204,52 +204,52 @@ cat >$dir_file/config/i-chenzhe_script.txt <<EOF
 EOF
 
 
-for script_name in `cat $dir_file/config/i-chenzhe_script.txt | awk '{print $1}'`
+for script_name in `cat $dir_file/config/tmp/i-chenzhe_script.txt | awk '{print $1}'`
 do
 	wget $url2/$script_name -O $dir_file_js/$script_name
 done
 
 url3="https://share.r2ray.com/dust/normal"
-cat >$dir_file/config/monk-normal.txt <<EOF
+cat >$dir_file/config/tmp/monk-normal.txt <<EOF
 	monk_shop_lottery.js #店铺大转盘
 	monk_inter_shop_sign.js #interCenter渠道店铺签到
 	monk_shop_follow_sku.js #关注有礼
 	monk_skyworth.js #创维408下班全勤奖
 EOF
 
-for script_name in `cat $dir_file/config/monk-normal.txt | awk '{print $1}'`
+for script_name in `cat $dir_file/config/tmp/monk-normal.txt | awk '{print $1}'`
 do
 	wget $url3/$script_name -O $dir_file_js/$script_name
 done
 
 url4="https://share.r2ray.com/dust/car"
-cat >$dir_file/config/monk-car.txt <<EOF
+cat >$dir_file/config/tmp/monk-car.txt <<EOF
 	monk_shop_add_to_car.js #加购有礼
 	monk_skyworth_car.js #创维408下班全勤奖
 EOF
 
-for script_name in `cat $dir_file/config/monk-car.txt | awk '{print $1}'`
+for script_name in `cat $dir_file/config/tmp/monk-car.txt | awk '{print $1}'`
 do
 	wget $url4/$script_name -O $dir_file_js/$script_name
 done
 
 
 url5="https://share.r2ray.com/dust/member"
-cat >$dir_file/config/monk-member.txt <<EOF
+cat >$dir_file/config/tmp/monk-member.txt <<EOF
 	monk_pasture.js #有机牧场
 	monk_vinda.js	#“韧”性探索 空降好礼
 EOF
 
-for script_name in `cat $dir_file/config/monk-member.txt | awk '{print $1}'`
+for script_name in `cat $dir_file/config/tmp/monk-member.txt | awk '{print $1}'`
 do
 	wget $url5/$script_name -O $dir_file_js/$script_name
 done
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
-for i in `ls  $dir_file/config | grep -v "collect_script.txt"`
+for i in `ls  $dir_file/config/tmp`
 do
-	cat $dir_file/config/$i >> $dir_file/config/collect_script.txt
+	cat $dir_file/config/tmp/$i >> $dir_file/config/collect_script.txt
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
@@ -271,6 +271,13 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jdFactoryShareCodes.js		#东东工厂ShareCodes
 	jdJxncShareCodes.js		#京喜农场ShareCodes
 EOF
+
+	rm -rf $dir_file/config/monk-normal.txt
+	rm -rf $dir_file/config/monk-member.txt
+	rm -rf $dir_file/config/monk-coder.txt
+	rm -rf $dir_file/config/monk-car.txt
+	rm -rf $dir_file/config/lxk0301_script.txt
+	rm -rf $dir_file/config/i-chenzhe_script.txt
 
 
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
@@ -1827,8 +1834,8 @@ npm_install() {
 }
 
 system_variable() {
-	if [[ ! -d "$dir_file/config" ]]; then
-		mkdir  $dir_file/config
+	if [[ ! -d "$dir_file/config/tmp" ]]; then
+		mkdir -p $dir_file/config
 	fi
 	
 	if [[ ! -d "$dir_file/js" ]]; then
@@ -1951,16 +1958,17 @@ system_variable() {
 	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 		jd_openwrt_config="$openwrt_script_config/jd_openwrt_script_config.txt"
 		if [ ! -f "$jd_openwrt_config" ]; then
-				jd_openwrt_config_description
+			jd_openwrt_config_description
 		fi
 		#jd_openwrt_script_config用于升级以后恢复链接
-		if [ ! -f "$dir_file/config/jd_openwrt_script_config.txt" ]; then
-				ln -s $jd_openwrt_config $dir_file/config/jd_openwrt_script_config.txt
+		if [ ! -L "$dir_file/config/jd_openwrt_script_config.txt" ]; then
+			rm rf $dir_file/config/jd_openwrt_script_config.txt
+			ln -s $jd_openwrt_config $dir_file/config/jd_openwrt_script_config.txt
 		fi
 	else
 		jd_openwrt_config="$dir_file/config/jd_openwrt_script_config.txt"
 		if [ ! -f "$jd_openwrt_config" ]; then
-				jd_openwrt_config_description
+			jd_openwrt_config_description
 		fi
 	fi
 
