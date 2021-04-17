@@ -1760,6 +1760,9 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	sed -i '/JDCFD_SHARECODES/d' /etc/profile >/dev/null 2>&1
 	echo "export JDCFD_SHARECODES=$new_cfd_set" >> /etc/profile
 	. /etc/profile
+	if [ ! `echo $JDCFD_SHARECODES` == "$new_cfd_set" ];then
+		. /etc/profile
+	fi
 
 	#手机狂欢城
 	new_sj818="b10ff4fc-7465-45aa-b052-c5d3776685ca@61740c94-f9a4-4d16-bc47-b0f0e858663d@2003ee19-bb7d-405a-a018-3eb814704c13f9cbb5fb-3944-4cc1-8136-0d1321e90d47"
@@ -1771,6 +1774,9 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	sed -i '/JD818_SHARECODES/d' /etc/profile >/dev/null 2>&1
 	echo "export JD818_SHARECODES=$new_sj818_set" >> /etc/profile
 	. /etc/profile
+	if [ ! `echo $JD818_SHARECODES` == "$new_sj818_set" ];then
+		. /etc/profile
+	fi
 
 	#京东试用
 	if [ "$jd_try" == "yes" ];then
