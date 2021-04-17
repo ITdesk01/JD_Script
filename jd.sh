@@ -589,6 +589,7 @@ cat > /tmp/code_name <<EOF
 crazyJoy crazyJoy
 签到领现金 jdcash
 闪购盲盒 jdsgmh
+财富岛 cfd
 EOF
 
 
