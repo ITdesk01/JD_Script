@@ -111,7 +111,7 @@ ds_setup() {
 	task_delete
 	echo "JD_Script删除全局变量"
 	sed -i '/JD_Script/d' /etc/profile >/dev/null 2>&1
-	. /etc/profile
+	source /etc/profile
 	echo "JD_Script定时任务和全局变量删除完成，脚本彻底不会自动运行了"
 }
 
@@ -1759,10 +1759,7 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	new_cfd_set="$new_cfd@$random_set"
 	sed -i '/JDCFD_SHARECODES/d' /etc/profile >/dev/null 2>&1
 	echo "export JDCFD_SHARECODES=$new_cfd_set" >> /etc/profile
-	. /etc/profile
-	if [ ! `echo $JDCFD_SHARECODES` == "$new_cfd_set" ];then
-		. /etc/profile
-	fi
+	source /etc/profile
 
 	#手机狂欢城
 	new_sj818="b10ff4fc-7465-45aa-b052-c5d3776685ca@61740c94-f9a4-4d16-bc47-b0f0e858663d@2003ee19-bb7d-405a-a018-3eb814704c13f9cbb5fb-3944-4cc1-8136-0d1321e90d47"
@@ -1773,10 +1770,7 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	new_sj818_set="$new_sj818@$random_set"
 	sed -i '/JD818_SHARECODES/d' /etc/profile >/dev/null 2>&1
 	echo "export JD818_SHARECODES=$new_sj818_set" >> /etc/profile
-	. /etc/profile
-	if [ ! `echo $JD818_SHARECODES` == "$new_sj818_set" ];then
-		. /etc/profile
-	fi
+	source /etc/profile
 
 	#京东试用
 	if [ "$jd_try" == "yes" ];then
@@ -1892,6 +1886,8 @@ npm_install() {
 }
 
 system_variable() {
+	source /etc/profile
+
 	if [[ ! -d "$dir_file/config/tmp" ]]; then
 		mkdir -p $dir_file/config/tmp
 	fi
@@ -2064,7 +2060,7 @@ system_variable() {
 	if [[ "$jd_script_path" == "0" ]]; then
 		echo "export jd_file=$dir_file" >> /etc/profile
 		echo "export jd=$dir_file/jd.sh" >> /etc/profile
-		. /etc/profile
+		source /etc/profile
 	fi
 
 	blacklist=""
