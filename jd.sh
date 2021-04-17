@@ -211,7 +211,9 @@ EOF
 
 for script_name in `cat $dir_file/config/tmp/i-chenzhe_script.txt | awk '{print $1}'`
 do
+	url="$url2"
 	wget $url2/$script_name -O $dir_file_js/$script_name
+	update_if
 done
 
 url3="https://share.r2ray.com/dust/normal"
@@ -224,7 +226,9 @@ EOF
 
 for script_name in `cat $dir_file/config/tmp/monk-normal.txt | awk '{print $1}'`
 do
+	url="$url3"
 	wget $url3/$script_name -O $dir_file_js/$script_name
+	update_if
 done
 
 url4="https://share.r2ray.com/dust/car"
@@ -235,7 +239,9 @@ EOF
 
 for script_name in `cat $dir_file/config/tmp/monk-car.txt | awk '{print $1}'`
 do
+	url="$url4"
 	wget $url4/$script_name -O $dir_file_js/$script_name
+	update_if
 done
 
 
@@ -247,7 +253,9 @@ EOF
 
 for script_name in `cat $dir_file/config/tmp/monk-member.txt | awk '{print $1}'`
 do
+	url="$url5"
 	wget $url5/$script_name -O $dir_file_js/$script_name
+	update_if
 done
 
 fi
@@ -296,6 +304,29 @@ EOF
 	echo -e "$green update$stop_script $white"
 	task #更新完全部脚本顺便检查一下计划任务是否有变
 
+}
+
+update_if() {
+	if [ $? -eq 0 ]; then
+			echo -e ""
+	else
+		num="1"
+		eeror_num="1"
+		while [[ ${num} -gt 0 ]]; do
+			wget $url/$script_name -O $dir_file_js/$script_name
+			if [ $? -eq 0 ]; then
+				num=$(expr $num - 1)
+			else
+				if [ $eeror_num -gt 10 ];then
+					echo "下载$eeror_num次都失败，跳过这个下载"
+					num=$(expr $num - 1)
+				else
+					echo -e "下载失败继续下载"
+					eeror_num=$(expr $eeror_num + 1)
+				fi
+			fi
+		done
+	fi
 }
 
 update_script() {
