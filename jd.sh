@@ -1750,6 +1750,27 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	sgmh_rows=$(grep -n "inviteCodes =" $dir_file_js/jd_sgmh.js | awk -F ":" '{print $1}')
 	sed -i "$sgmh_rows a \ $new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set" $dir_file_js/jd_sgmh.js
 
+	#财富岛
+	new_cfd="698098B001CF38EEEBCF66F9746EAFC73C36297A95A48C90B928863583FC13E3@2F37BEBF8BFCDF8BEE92C1C2923706A411D77D02290C12A6E2CB6D6085D019F0@74368D6374341F98E02515D2661AA24D21A71F3D430C4C3CB7102A904AF54F55@161F722B03A9D0D88957B3A10D1993F05269434FB7E0C21EAB50C8D80F8BAE37"
+	test_cfd="1A91CB7D423B0797C8FCB56F427D8DBE17FC2BC3429518690AE267598024A64F@D2B2DC26C59CE6F9D40087876C5E1365B167EC29D2F4A5A1E466AD6DC908FF13@5B674A6E0E797CF70F2D784210E24D19875694C418C215CB732C90C8534DE908@30267C61BC24DCF80B89925CCCB5B4C3900AAE08116E9F7EC18A0ACF8371482D@EC1EE0B8E9D14A159CB3ED96274FE27FAD7BC87B7873159A8EE7F60C5FD7D681"
+	random_cfd="$test_cfd"
+	random="$random_cfd"
+	random_array
+	new_cfd_set="$new_cfd@$random_set"
+	sed -i '/JDCFD_SHARECODES/d' /etc/profile >/dev/null 2>&1
+	echo "export JDCFD_SHARECODES=$new_cfd_set" >> /etc/profile
+	. /etc/profile
+
+	#手机狂欢城
+	new_sj818="b10ff4fc-7465-45aa-b052-c5d3776685ca@61740c94-f9a4-4d16-bc47-b0f0e858663d@2003ee19-bb7d-405a-a018-3eb814704c13f9cbb5fb-3944-4cc1-8136-0d1321e90d47"
+	test_sj818="733546f2-f282-4f82-86df-0f8fd3b367bd@27f61a94-7a32-4f6c-81a3-1de4e4b44a59@a0d94b9a-438f-47d7-8db4-17aa0da80f6f@9ed7b309-b7cd-483e-b6e3-4ea65e7d7fb3@8f0420f6-a601-4f54-af56-90d24434d5b6"
+	random_sj818="$test_sj818"
+	random="$random_sj818"
+	random_array
+	new_sj818_set="$new_sj818@$random_set"
+	sed -i '/JD818_SHARECODES/d' /etc/profile >/dev/null 2>&1
+	echo "export JD818_SHARECODES=$new_sj818_set" >> /etc/profile
+	. /etc/profile
 
 	#京东试用
 	if [ "$jd_try" == "yes" ];then
