@@ -510,12 +510,10 @@ EOF
 		$node $dir_file_js/$i
 		$run_sleep
 	done
+	$node $openwrt_script/JD_Script/js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
 	echo -e "$green run_10_15_20$stop_script $white"
 }
 
-run_10_15_20_ccr() {
-	$node $openwrt_script/JD_Script/js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
-}
 
 joy(){
 	#crazy joy挂机领金币/宝箱专用
@@ -769,10 +767,6 @@ concurrent_js_if() {
 			concurrent_js && if_ps
 			concurrent_js_run_07 && if_ps
 			concurrent_js_clean
-		;;
-		run_10_15_20)
-			run_10_15_20
-			run_10_15_20_ccr
 		;;
 		run_03)
 			run_03
