@@ -355,6 +355,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_syj.js #十元街签到,一天一次即可，一周30豆子
 	monk_shop_add_to_car.js #加购有礼
 	monk_skyworth.js #创维408下班全勤奖
+	jd_carnivalcity.js		#京东手机狂欢城活动2021-4-1至2021-4-20
 EOF
 	echo -e "$green run_0$start_script $white"
 
