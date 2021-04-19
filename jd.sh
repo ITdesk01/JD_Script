@@ -608,7 +608,7 @@ echo -e "$green============整理完成，可以提交了（没加群的忽略�
 }
 
 concurrent_js_run_07() {
-	jd_redPacket.js #京东全民开红包，没时间要求
+	$node $openwrt_script/JD_Script/js/jd_redPacket.js #京东全民开红包，没时间要求
 	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 	checklog #检测log日志是否有错误并推送
 }
@@ -708,6 +708,7 @@ if_ps() {
 	num1="10"
 	num2="20"
 	num3="30"
+
 	echo -e "$green>>开始第一次检测上一个并发程序是否结束($num1秒)$white"
 	sleep $num1
 	echo ""
