@@ -261,6 +261,21 @@ done
 
 fi
 
+url6="https://raw.githubusercontent.com/nianyuguai/longzhuzhu/main/qx"
+cat >$dir_file/config/tmp/nianyuguai_qx.txt <<EOF
+	jd_live_lottery_social.js	#直播间抽奖（全局）
+	jd_super_redrain.js		#整点红包雨
+	jx_cash_sign.js 		#京喜签到消消乐
+EOF
+
+for script_name in `cat $dir_file/config/tmp/nianyuguai_qx.txt | awk '{print $1}'`
+do
+	url="$url6"
+	wget $url6/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
+
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
 for i in `ls  $dir_file/config/tmp`
@@ -399,6 +414,9 @@ run_01() {
 	echo -e "$green run_01$start_script $white"
 	$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
 	$node $dir_file_js/jd_joy_feedPets.js  #宠汪汪喂食一个小时喂一次
+	$node $dir_file_js/jd_live_lottery_social.js	#直播间抽奖（全局）
+	$node $dir_file_js/jd_super_redrain.js		#整点红包雨
+	$node $dir_file_js/jx_cash_sign.js 		#京喜签到消消乐
 	echo -e "$green run_01$stop_script $white"
 }
 
