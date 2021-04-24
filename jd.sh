@@ -628,7 +628,7 @@ echo -e "$green============整理完成，可以提交了（没加群的忽略�
 
 concurrent_js_run_07() {
 	$node $openwrt_script/JD_Script/js/jd_redPacket.js #京东全民开红包，没时间要求
-	$node $openwrt_script/JD_Script/js/jd_small_home.js #东东小窝
+	#$node $openwrt_script/JD_Script/js/jd_small_home.js #东东小窝
 	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 	checklog #检测log日志是否有错误并推送
 }
