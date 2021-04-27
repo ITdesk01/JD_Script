@@ -279,6 +279,22 @@ do
 	update_if
 done
 
+passerby_url="https://raw.githubusercontent.com/passerby-b/JDDJ/main"
+cat >$dir_file/config/tmp/passerby_url.txt <<EOF
+	jddj_bean.js			#京东到家鲜豆 一天一次
+	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
+	jddj_fruit.js			#京东到家果园 0,8,11,17
+	jddj_fruit_collectWater.js 	#京东到家果园水车收水滴 作者5分钟收一次
+	jddj_getPoints.js		#京东到家鲜豆庄园收水滴 作者5分钟收一次
+EOF
+
+for script_name in `cat $dir_file/config/tmp/passerby_url.txt | awk '{print $1}'`
+do
+	url="$passerby_url"
+	wget $passerby_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -377,6 +393,8 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_market_lottery.js #幸运大转盘
 	jd_tcl.js #球队赢好礼
 	jd_jin_tie.js #领金贴
+	jddj_bean.js			#京东到家鲜豆 一天一次
+	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
 EOF
 	echo -e "$green run_0$start_script $white"
 
@@ -404,9 +422,11 @@ run_020() {
 
 run_030() {
 	echo -e "$green run_030$start_script $white"
-	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 45分钟运行一次
+	$node $dir_file_js/jd_dreamFactory.js #京喜工厂
 	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
 	$node $dir_file_js/jd_health_collect.js		#健康社区-收能量
+	$node $dir_file_js/jddj_fruit_collectWater.js 	#京东到家果园水车收水滴 作者5分钟收一次
+	$node $dir_file_js/jddj_getPoints.js		#京东到家鲜豆庄园收水滴 作者5分钟收一次
 	echo -e "$green run_030$stop_script $white"
 }
 
@@ -442,6 +462,7 @@ run_03() {
 	$node $dir_file_js/jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
 	$node $dir_file_js/jd_mohe.js	#5G超级盲盒2021-03-19到2021-04-30 白天抽奖基本没有京豆，4小时运行一次收集热力值
 	$node $dir_file_js/jd_health.js		#健康社区
+	$node $dir_file_js/jddj_fruit.js			#京东到家果园 0,8,11,17
 	echo -e "$green run_03$stop_script $white"
 }
 
@@ -2024,6 +2045,19 @@ system_variable() {
 		if [ ! -L "$dir_file_js/JS_USER_AGENTS.js" ]; then
 			rm -rf $dir_file_js/JS_USER_AGENTS.js
 			ln -s $openwrt_script_config/JS_USER_AGENTS.js $dir_file_js/JS_USER_AGENTS.js
+		fi
+
+		#jddj_cookie.js 京东到家cookie
+		if [ ! -f "$openwrt_script_config/jddj_cookie.js" ]; then
+			cp  $dir_file/JSON/jddj_cookie.js  $openwrt_script_config/jddj_cookie.js
+			rm -rf $dir_file_js/jddj_cookie.js #用于删除旧的链接
+			ln -s $openwrt_script_config/jddj_cookie.js $dir_file_js/jddj_cookie.js
+		fi
+
+		#jddj_cookie.js 京东到家cookie用于升级以后恢复链接
+		if [ ! -L "$dir_file_js/jddj_cookie.js" ]; then
+			rm -rf $dir_file_js/jddj_cookie.js
+			ln -s $openwrt_script_config/jddj_cookie.js $dir_file_js/jddj_cookie.js
 		fi
 	else
 		if [ ! -f "$dir_file/jdCookie.js" ]; then
