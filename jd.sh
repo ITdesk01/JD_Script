@@ -181,6 +181,8 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_market_lottery.js 		#幸运大转盘
 	jd_tcl.js 			#球队赢好礼
 	jd_jin_tie.js 			#领金贴
+	jd_health.js			#健康社区
+	jd_health_collect.js		#健康社区-收能量
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -208,8 +210,6 @@ cat >$dir_file/config/tmp/i-chenzhe_script.txt <<EOF
 	z_marketLottery.js 		#京东超市-大转盘
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_entertainment.js		#百变大咖秀
-	z_health_energy.js		#健康社区-收能量
-	z_health_community.js		#健康社区
 EOF
 
 
@@ -404,7 +404,7 @@ run_030() {
 	echo -e "$green run_030$start_script $white"
 	$node $dir_file_js/jd_dreamFactory.js #京喜工厂 45分钟运行一次
 	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
-	$node $dir_file_js/z_health_energy.js		#健康社区-收能量
+	$node $dir_file_js/jd_health_collect.js		#健康社区-收能量
 	echo -e "$green run_030$stop_script $white"
 }
 
@@ -439,7 +439,7 @@ run_03() {
 	echo -e "$green run_03$start_script $white"
 	$node $dir_file_js/jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
 	$node $dir_file_js/jd_mohe.js	#5G超级盲盒2021-03-19到2021-04-30 白天抽奖基本没有京豆，4小时运行一次收集热力值
-	$node $dir_file_js/z_health_community.js		#健康社区
+	$node $dir_file_js/jd_health.js		#健康社区
 	echo -e "$green run_03$stop_script $white"
 }
 
@@ -1797,8 +1797,17 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	echo "export JDCFD_SHARECODES=$new_cfd_set" >> /etc/profile
 	source /etc/profile
 
-	#手机狂欢城
-	sed -i '/JD818_SHARECODES/d' /etc/profile >/dev/null 2>&1
+	#东东社区
+	new_health=""
+	test_health=""
+
+	random_health="$test_health"
+	random="$random_health"
+	random_array
+	new_health_set="$new_health@$random_set"
+	sed -i '/JDHEALTH_SHARECODES/d' /etc/profile >/dev/null 2>&1
+	echo "export JDHEALTH_SHARECODES=$new_health_set" >> /etc/profile
+	source /etc/profile
 
 	#京东试用
 	if [ "$jd_try" == "yes" ];then
