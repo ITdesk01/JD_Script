@@ -1445,6 +1445,7 @@ help() {
 	echo -e "$yellow 1.文件说明$white"
 	echo ""
 	echo -e "$green  $script_dir/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
+	echo -e "$green  $script_dir/jddj_cookie.js $white 在此脚本内填写京东到家Cookie，需要抓包"
 	echo -e "$green  $script_dir/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
 	echo -e "$green  $script_dir/USER_AGENTS.js $white 京东UA文件可以自定义也可以默认"
 	echo -e "$green  $script_dir/JS_USER_AGENTS.js $white 京东极速版UA文件可以自定义也可以默认"
