@@ -694,13 +694,29 @@ concurrent_js_update() {
 			sed -i '/pt_pin/d' $ccr_js_file/js_$js_amount/jdCookie.js >/dev/null 2>&1
 			sed -i "5a $js_cookie_obtain" $ccr_js_file/js_$js_amount/jdCookie.js
 
-			for i in `ls $dir_file_js | grep -v 'jdCookie.js\|sendNotify.js'`
+			for i in `ls $dir_file_js | grep -v 'jdCookie.js\|sendNotify.js\|jddj_cookie.js'`
 			do
 				cp $dir_file_js/$i $ccr_js_file/js_$js_amount/$i
 			done
 
 			js_amount=$(($js_amount - 1))
 		done
+
+		#京东到家cookie
+		jddj_cookie=$(cat $openwrt_script_config/jddj_cookie.js | grep "deviceid_pdj_jd" | grep -v "deviceid_pdj_jd=xxx-xxx-xxx;o2o_m_h5_sid=xxx-xxx-xxx" | grep -v "''," | grep -v "''")
+		if [ ! $jddj_cookie ];then
+			echo "jddj_cookie为空，不做操作"
+		else
+			jddj_cookie_amount=$(echo "$jddj_cookie" |wc -l)
+			while [[ ${js_amount} -gt 0 ]]; do
+				cp $script_dir/jddj_cookie.js $ccr_js_file/js_$jddj_cookie_amount/jddj_cookie.js
+				jddj_cookie_obtain=$(echo "$jddj_cookie" | awk -v a="$jddj_cookie_amount" 'NR==a{ print $0}') #获取pt
+				sed -i '/deviceid_pdj_jd/d' $ccr_js_file/js_$jddj_cookie_amount/jddj_cookie.js >/dev/null 2>&1
+				sed -i "3a $js_cookie_obtain" $ccr_js_file/js_$jddj_cookie_amount/jddj_cookie.js
+
+				jddj_cookie_amount=$(($jddj_cookie_amount - 1))
+			done
+		fi
 	fi
 }
 
