@@ -116,9 +116,6 @@ ds_setup() {
 }
 
 update() {
-	
-	rm -rf $dir_file_js/*
-
 	if [ ! -d $dir_file/git_clone ];then
 		mkdir $dir_file/git_clone
 	fi
@@ -214,6 +211,9 @@ cat >$dir_file/config/tmp/i-chenzhe_script.txt <<EOF
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_entertainment.js		#百变大咖秀
 EOF
+
+rm -rf $dir_file_js/z_health_energy.js
+rm -rf $dir_file_js/z_health_community.js
 
 for script_name in `cat $dir_file/config/tmp/i-chenzhe_script.txt | awk '{print $1}'`
 do
