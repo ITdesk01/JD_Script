@@ -708,7 +708,7 @@ concurrent_js_update() {
 			echo "jddj_cookie为空，不做操作"
 		else
 			jddj_cookie_amount=$(echo "$jddj_cookie" |wc -l)
-			while [[ ${js_amount} -gt 0 ]]; do
+			while [[ ${jddj_cookie_amount} -gt 0 ]]; do
 				cp $script_dir/jddj_cookie.js $ccr_js_file/js_$jddj_cookie_amount/jddj_cookie.js
 				jddj_cookie_obtain=$(echo "$jddj_cookie" | awk -v a="$jddj_cookie_amount" 'NR==a{ print $0}') #获取pt
 				sed -i '/deviceid_pdj_jd/d' $ccr_js_file/js_$jddj_cookie_amount/jddj_cookie.js >/dev/null 2>&1
