@@ -712,7 +712,7 @@ concurrent_js_update() {
 				cp $script_dir/jddj_cookie.js $ccr_js_file/js_$jddj_cookie_amount/jddj_cookie.js
 				jddj_cookie_obtain=$(echo "$jddj_cookie" | awk -v a="$jddj_cookie_amount" 'NR==a{ print $0}') #获取pt
 				sed -i '/deviceid_pdj_jd/d' $ccr_js_file/js_$jddj_cookie_amount/jddj_cookie.js >/dev/null 2>&1
-				sed -i "3a $js_cookie_obtain" $ccr_js_file/js_$jddj_cookie_amount/jddj_cookie.js
+				sed -i "2a $jddj_cookie_obtain" $ccr_js_file/js_$jddj_cookie_amount/jddj_cookie.js
 
 				jddj_cookie_amount=$(($jddj_cookie_amount - 1))
 			done
