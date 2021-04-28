@@ -1879,6 +1879,9 @@ sys_additional_settings(){
 	random="$random_health"
 	random_array
 	new_health_set="$new_health@$Javon_20201224_health@$random_set"
+
+	health_rows=$(grep -n "inviteCodes =" $dir_file_js/jd_health.js | awk -F ":" '{print $1}')
+	sed -i "$health_rows a \ $new_health_set\n$new_health_set\n$new_health_set\n$new_health_set\n$new_health_set\n$new_health_set\n$new_health_set\n$new_health_set" $dir_file_js/jd_health.js
 	sed -i '/JDHEALTH_SHARECODES/d' /etc/profile >/dev/null 2>&1
 	export JDHEALTH_SHARECODES=$new_health_set
 }
