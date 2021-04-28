@@ -1838,13 +1838,15 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	source /etc/profile
 
 	#东东社区
-	new_health="T023uvp2RBcY_VHKKBn3k_MMdNwCjVfnoaW5kRrbA"
-	test_health=""
+	new_health="T0225KkcRxoZ9AfVdB7wxvRcIQCjVfnoaW5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVfnoaW5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVfnoaW5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVfnoaW5kRrbA"
+	test_health="T019vPVyQRke_EnWJxj1nfECjVfnoaW5kRrbA@T0225KkcRBYbo1fXKUv2k_5ccQCjVfnoaW5kRrbA@T0225KkcRh0ZoVfQchP9wvQJdwCjVfnoaW5kRrbA@T0205KkcPGhhswmWX2e03YBbCjVfnoaW5kRrbA@T0225KkcRBwdp1CEI0v8l_9ZdwCjVfnoaW5kRrbA"
+
+	Javon_20201224_health="T023uvp2RBcY_VHKKBn3k_MMdNwCjVfnoaW5kRrbA"
 
 	random_health="$test_health"
 	random="$random_health"
 	random_array
-	new_health_set="$new_health@$random_set"
+	new_health_set="$new_health@$Javon_20201224_health@$random_set"
 	sed -i '/JDHEALTH_SHARECODES/d' /etc/profile >/dev/null 2>&1
 	echo "export JDHEALTH_SHARECODES=$new_health_set" >> /etc/profile
 	source /etc/profile
