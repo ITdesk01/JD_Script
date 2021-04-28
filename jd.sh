@@ -1838,7 +1838,7 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	source /etc/profile
 
 	#东东社区
-	new_health=""
+	new_health="T023uvp2RBcY_VHKKBn3k_MMdNwCjVfnoaW5kRrbA"
 	test_health=""
 
 	random_health="$test_health"
