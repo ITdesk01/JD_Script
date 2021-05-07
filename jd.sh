@@ -1848,6 +1848,9 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 
 	#农场萌宠关闭通知
 	close_notification
+
+	#极速版红包
+	sed -i "s/jOkIZzWCgGa9NfPuHBSx1A/AkOULcXbUA_8EAPbYLLMgg/g" $dir_file_js/jd_speed_redpocke.js
 }
 
 sys_additional_settings(){
