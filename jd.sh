@@ -211,11 +211,10 @@ cat >$dir_file/config/tmp/i-chenzhe_script.txt <<EOF
 	z_shake.js  			#超级摇一摇
 	z_marketLottery.js 		#京东超市-大转盘
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
-	z_entertainment.js		#百变大咖秀
 EOF
 
-rm -rf $dir_file_js/z_health_energy.js
-rm -rf $dir_file_js/z_health_community.js
+rm -rf $dir_file_js/z_entertainment.js
+rm -rf $dir_file_js/monk_skyworth.js
 
 for script_name in `cat $dir_file/config/tmp/i-chenzhe_script.txt | awk '{print $1}'`
 do
@@ -308,7 +307,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	monk_shop_lottery.js 		#店铺大转盘
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jx_products_detail.js		#京喜工厂商品列表详情
-	z_entertainment.js		#百变大咖秀
 	jd_try.js 			#京东试用
 	jd_gyec.js			#工业爱消除
 	jd_xxl.js			#东东爱消除
@@ -385,7 +383,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_cash.js #签到领现金，每日2毛～5毛长期
 	jd_sgmh.js #闪购盲盒长期活动
 	jd_jdzz.js #京东赚赚长期活动
-	z_entertainment.js		#百变大咖秀
 	monk_inter_shop_sign.js #interCenter渠道店铺签到
 	jd_syj.js #十元街签到,一天一次即可，一周30豆子
 	monk_shop_add_to_car.js #加购有礼
@@ -505,7 +502,6 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	z_shake.js  #超级摇一摇
 	z_marketLottery.js 		#京东超市-大转盘
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
-	z_entertainment.js		#百变大咖秀
 	monk_shop_follow_sku.js #关注有礼
 	jd_cash.js #签到领现金，每日2毛～5毛长期
 	monk_shop_lottery.js		#店铺大转盘
