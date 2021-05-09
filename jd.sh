@@ -201,9 +201,9 @@ do
 done
 
 
-if [ $(date "+%-H") -ge 10 ]; then
-	echo "大于10点，不拉取和尚库"
-else
+#if [ $(date "+%-H") -ge 10 ]; then
+	#echo "大于10点，不拉取和尚库"
+#else
 
 url2="https://raw.githubusercontent.com/monk-coder/dust/dust/i-chenzhe"
 cat >$dir_file/config/tmp/i-chenzhe_script.txt <<EOF
@@ -266,7 +266,7 @@ do
 	update_if
 done
 
-fi
+#fi
 
 url6="https://raw.githubusercontent.com/nianyuguai/longzhuzhu/main/qx"
 cat >$dir_file/config/tmp/nianyuguai_qx.txt <<EOF
