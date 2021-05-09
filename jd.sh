@@ -205,7 +205,7 @@ if [ $(date "+%-H") -ge 10 ]; then
 	echo "大于10点，不拉取和尚库"
 else
 
-url2="https://share.r2ray.com/dust/i-chenzhe"
+url2="https://raw.githubusercontent.com/monk-coder/dust/dust/i-chenzhe"
 cat >$dir_file/config/tmp/i-chenzhe_script.txt <<EOF
 	z_fanslove.js			#粉丝互动
 	z_shake.js  			#超级摇一摇
@@ -224,12 +224,13 @@ do
 	update_if
 done
 
-url3="https://share.r2ray.com/dust/normal"
+url3="https://raw.githubusercontent.com/monk-coder/dust/dust/normal"
 cat >$dir_file/config/tmp/monk-normal.txt <<EOF
 	monk_shop_lottery.js 		#店铺大转盘
 	monk_inter_shop_sign.js 	#interCenter渠道店铺签到
 	monk_shop_follow_sku.js 	#关注有礼
 	monk_skyworth.js 		#创维408下班全勤奖
+	adolf_oppo.js                   #刺客567之寻宝
 EOF
 
 for script_name in `cat $dir_file/config/tmp/monk-normal.txt | awk '{print $1}'`
@@ -239,10 +240,10 @@ do
 	update_if
 done
 
-url4="https://share.r2ray.com/dust/car"
+url4="https://raw.githubusercontent.com/monk-coder/dust/dust/car"
 cat >$dir_file/config/tmp/monk-car.txt <<EOF
 	monk_shop_add_to_car.js 	#加购有礼
-	monk_skyworth_car.js 		#创维408下班全勤奖
+        adolf_haier.js	                #海尔_欢乐大逃亡
 EOF
 
 for script_name in `cat $dir_file/config/tmp/monk-car.txt | awk '{print $1}'`
@@ -253,10 +254,9 @@ do
 done
 
 
-url5="https://share.r2ray.com/dust/member"
+url5="https://raw.githubusercontent.com/monk-coder/dust/dust/member"
 cat >$dir_file/config/tmp/monk-member.txt <<EOF
 	monk_pasture.js			#有机牧场
-	monk_vinda.js			#“韧”性探索 空降好礼
 EOF
 
 for script_name in `cat $dir_file/config/tmp/monk-member.txt | awk '{print $1}'`
@@ -395,6 +395,8 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_jin_tie.js #领金贴
 	jddj_bean.js			#京东到家鲜豆 一天一次
 	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
+	adolf_oppo.js                   #刺客567之寻宝
+        adolf_haier.js	                #海尔_欢乐大逃亡
 EOF
 	echo -e "$green run_0$start_script $white"
 
