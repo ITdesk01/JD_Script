@@ -476,6 +476,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_pet.js #东东萌宠，跟手机商城同一时间
 	jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
 	jd_superMarket.js #东东超市,6点 18点多加两场用于收金币
+	adolf_ETIP.js 			#探秘无限星空
 EOF
 	echo -e "$green run_06_18$start_script $white"
 
