@@ -1,7 +1,8 @@
 //---------------------------
-//  检测jd Cookie是否过期
+//  检测JD Cookie是否过期
 //  作者：Echowxsy
 //  修改时间：2021-05-13
+//  版本：1.0
 //---------------------------
 const path = require('path');
 const fs = require('fs');

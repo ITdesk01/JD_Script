@@ -186,11 +186,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
-
-rm -rf $dir_file_js/jd_tcl.js 			#球队赢好礼
-rm -rf $dir_file_js/jd_jxd.js			#京小兑
-rm -rf $dir_file_js/jd_mohe.js			#5G超级盲盒2021-03-19到2021-04-30 白天抽奖基本没有京豆，4小时运行一次收集热力值
-rm -rf $dir_file_js/jd_nzmh.js			#女装盲盒2021-4-1至2021-4-31
 cp  $dir_file/git_clone/lxk0301/activity/jd_unbind.js	$dir_file_js/jd_unbind.js #注销京东会员卡
 
 for script_name in `cat $dir_file/config/tmp/lxk0301_script.txt | awk '{print $1}'`
@@ -298,7 +293,7 @@ do
 done
 
 #检测cookie是否存活（暂时不能看到还有几天到期）
-cp  $dir_file/JSON/jd_check_cookie.js  $openwrt_script_config/jd_check_cookie.js
+cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
