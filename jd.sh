@@ -963,7 +963,7 @@ addcookie() {
 		cat $script_dir/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | sed -e "s/',//g" -e "s/'//g"
 		echo  "------------------------------------------------------------------------------"
 	fi
-
+	check_cooike
 	echo ""
 	read -p "是否需要继续获取cookie（1.需要  2.不需要 ）：" cookie_continue
 	if [ "$cookie_continue" == "1" ];then
@@ -1030,6 +1030,25 @@ delcookie() {
 		echo -e "$yellow你的cookie空空如也，比地板都干净，你想删啥。。。。。$white"
 	fi
 
+}
+
+check_cooike() {
+#将cookie获取时间导入文本
+	if [ ! -f $openwrt_script_config/check_cookie.txt  ];then
+		echo "Cookie   添加时间   预计到期时间(不保证百分百准确)" > $openwrt_script_config/check_cookie.txt
+	fi
+	Current_date=$(date +%Y-%m-%d)
+	Current_date_m=$(echo $Current_date | awk -F "-" '{print $2}')
+	if [ "$Current_date_m" == "12"  ];then
+		Expiration_date="1"
+	else
+		Expiration_date=$(expr $Current_date_m + 1)
+	fi
+	sed -i "/$pt_pin/d" $openwrt_script_config/check_cookie.txt
+	echo "$pt_pin   $Current_date   $Expiration_date" >> $openwrt_script_config/check_cookie.txt
+
+	sed -n  '1p' $openwrt_script_config/check_cookie.txt
+	grep "$pt_pin" $openwrt_script_config/check_cookie.txt
 }
 
 checklog() {
