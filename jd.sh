@@ -209,9 +209,6 @@ cat >$dir_file/config/tmp/i-chenzhe_script.txt <<EOF
 	z_shop_captain.js		#超级无线组队分奖品
 EOF
 
-rm -rf $dir_file_js/z_entertainment.js
-rm -rf $dir_file_js/monk_skyworth.js
-
 for script_name in `cat $dir_file/config/tmp/i-chenzhe_script.txt | awk '{print $1}'`
 do
 	url="$url2"
@@ -237,9 +234,10 @@ done
 url4="https://raw.githubusercontent.com/monk-coder/dust/dust/car"
 cat >$dir_file/config/tmp/monk-car.txt <<EOF
 	monk_shop_add_to_car.js 	#加购有礼
-        adolf_haier.js	                #海尔_欢乐大逃亡
-	adolf_ETIP.js 			#探秘无限星空
 EOF
+
+rm -rf $dir_file_js/adolf_haier.js
+rm -rf $dir_file_js/adolf_ETIP.js
 
 for script_name in `cat $dir_file/config/tmp/monk-car.txt | awk '{print $1}'`
 do
@@ -391,8 +389,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jddj_bean.js			#京东到家鲜豆 一天一次
 	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
 	adolf_oppo.js                   #刺客567之寻宝
-        adolf_haier.js	                #海尔_欢乐大逃亡
-	adolf_ETIP.js 			#探秘无限星空
 	z_shop_captain.js		#超级无线组队分奖品
 EOF
 	echo -e "$green run_0$start_script $white"
