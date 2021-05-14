@@ -62,7 +62,7 @@ stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.05"
+	cron_version="3.06"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -87,7 +87,7 @@ cat >>/etc/crontabs/root <<EOF
 35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1 #不是很重要的，错开运行#100#
 10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #宠汪汪兑换礼品#100#
 00 22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本#100#
-5 9,11,19,22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 #9,11,19,22点05分更新lxk0301脚本#100#
+5 9,11,19,22 * * * $dir_file/jd.sh update && source /etc/profile >/tmp/jd_update.log 2>&1 #9,11,19,22点05分更新lxk0301脚本#100#
 */30 1-22 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机#100#
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机#100#
 0 11 */7 * *  $node $dir_file/js/jd_price.js >/tmp/jd_price.log #每7天11点执行京东保价#100#
@@ -447,9 +447,11 @@ run_02() {
 	echo -e "$green run_02$start_script $white"
 	$node $dir_file_js/jd_moneyTree.js #摇钱树
 	if [ $(date "+%-H") -ge 13 ]; then
- 		export PASTURE_EXCHANGE_KEYWORD="1京豆"
+		sed -i '/PASTURE_EXCHANGE_KEYWORD/d' /etc/profile
+		echo "export PASTURE_EXCHANGE_KEYWORD="10京豆"" >>/etc/profile
 	else
- 		export PASTURE_EXCHANGE_KEYWORD="10京豆"
+		sed -i '/PASTURE_EXCHANGE_KEYWORD/d' /etc/profile
+		echo "export PASTURE_EXCHANGE_KEYWORD="1京豆"" >>/etc/profile
 	fi
 	$node $dir_file_js/monk_pasture.js #有机牧场
 	echo -e "$green run_02$stop_script $white"
@@ -1429,7 +1431,7 @@ help() {
 	clear
 	git_branch=$(git branch -v | grep -o behind )
 	if [[ "$git_branch" == "behind" ]]; then
-		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script && sh \$jd update && sh \$jd $white更新 )"
+		Script_status="$red建议更新$white (可以运行$green sh \$jd update_script && sh \$jd update && source /etc/profile && sh \$jd $white更新 )"
 	else
 		Script_status="$green最新$white"
 	fi
@@ -1876,7 +1878,7 @@ sys_additional_settings(){
 	random_array
 	new_cfd_set="$new_cfd@$Javon_20201224_cfd@$zuoyou_20190516_cfd@$jidiyangguang_20190516_cfd@$Jhone_Potte_20200824_cfd@$random_set@$stayhere_20200104_cfd"
 	sed -i '/JDCFD_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	export JDCFD_SHARECODES=$new_cfd_set
+	echo "export JDCFD_SHARECODES=$new_cfd_set" >> /etc/profile
 
 	#东东社区
 	new_health="T0225KkcRxoZ9AfVdB7wxvRcIQCjVfnoaW5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVfnoaW5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVfnoaW5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVfnoaW5kRrbA"
@@ -1889,7 +1891,8 @@ sys_additional_settings(){
 	random_array
 	new_health_set="$new_health@$Javon_20201224_health@$random_set"
 	sed -i '/JDHEALTH_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	export JDHEALTH_SHARECODES=$new_health_set
+	echo "export JDHEALTH_SHARECODES=$new_health_set" >> /etc/profile
+
 
 	new_health_set1="'$new_health_set',"
 	health_rows=$(grep -n "inviteCodes =" $dir_file_js/jd_health.js | awk -F ":" '{print $1}')
