@@ -1881,7 +1881,7 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 
 	#关闭整点红包雨通知
 	if [ ! `grep "RAIN_NOTIFY_CONTROL" /etc/profile | wc -l` == "1" ];then
-		export RAIN_NOTIFY_CONTROL="false"
+		export RAIN_NOTIFY_CONTROL="false" >> /etc/profile
 		source /etc/profile
 	fi
 
