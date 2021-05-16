@@ -435,6 +435,8 @@ run_01() {
 	echo -e "$green run_01$start_script $white"
 	$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
 	$node $dir_file_js/jd_joy_feedPets.js  #宠汪汪喂食一个小时喂一次
+	export RAIN_NOTIFY_CONTROL="false"
+	source /etc/profile
 	$node $dir_file_js/jd_super_redrain.js		#整点红包雨
 	echo -e "$green run_01$stop_script $white"
 }
