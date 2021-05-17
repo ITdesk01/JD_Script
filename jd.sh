@@ -222,6 +222,7 @@ cat >$dir_file/config/tmp/monk-normal.txt <<EOF
 	monk_inter_shop_sign.js 	#interCenter渠道店铺签到
 	monk_shop_follow_sku.js 	#关注有礼
 	adolf_oppo.js                   #刺客567之寻宝
+	adolf_pk.js 			#京享值PK
 EOF
 
 for script_name in `cat $dir_file/config/tmp/monk-normal.txt | awk '{print $1}'`
@@ -527,6 +528,7 @@ run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	jd_syj.js #赚京豆
+	adolf_pk.js 			#京享值PK
 EOF
 	echo -e "$green run_08_12_16$start_script $white"
 
