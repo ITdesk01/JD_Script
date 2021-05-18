@@ -292,7 +292,13 @@ do
 done
 
 #检测cookie是否存活（暂时不能看到还有几天到期）
-cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
+	cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
+
+
+	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
+	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
+	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_friend.js -O $dir_file_js/jd_friend.js #joy总动员一次性脚本
+
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -311,7 +317,7 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_xxl.js			#东东爱消除
 	jd_xxl_gh.js			#个护爱消除，完成所有任务+每日挑战
 	jd_opencard.js			#开卡活动，一次性活动，运行完脚本获得53京豆，进入入口还可以开卡领30都
-	jd_friend.js			#JOY总动员 一期的活动
+	jd_friend.js			#joy总动员 一次性脚本
 	jd_unbind.js 			#注销京东会员卡
 	jdDreamFactoryShareCodes.js	#京喜工厂ShareCodes
 	jdFruitShareCodes.js		#东东农场ShareCodes
@@ -320,9 +326,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jdFactoryShareCodes.js		#东东工厂ShareCodes
 	jdJxncShareCodes.js		#京喜农场ShareCodes
 EOF
-
-	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
-	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
 
 
 	if [ $? -eq 0 ]; then
