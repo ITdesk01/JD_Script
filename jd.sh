@@ -26,14 +26,13 @@ dir_file="$( cd -P "$( dirname "$Source"  )" && pwd  )"
 dir_file_js="$dir_file/js"
 
 #检测当前位置
-openwrt_script="/usr/share/jd_openwrt_script"
-openwrt_script_config="/usr/share/jd_openwrt_script/script_config"
-if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
-	script_dir="$openwrt_script_config"
-	prompt=""
+if [ "$dir_file" == "/usr/share/jd_openwrt_script/JD_Script" ];then
+	openwrt_script="/usr/share/jd_openwrt_script"
+	openwrt_script_config="/usr/share/jd_openwrt_script/script_config"
 else
-	script_dir="$dir_file"
-	prompt="检测到你使用本地安装方式安装脚本，此方式后面会逐渐放弃，请按github：https://github.com/ITdesk01/jd_openwrt_script 重新编译插件"
+	clear
+	echo -e "$red检测到你使用本地安装方式安装脚本，不再支持本地模式！！！，请按github：https://github.com/ITdesk01/jd_openwrt_script 重新编译插件$white"
+	exit 0
 fi
 
 ccr_js_file="$dir_file/ccr_js"
@@ -52,7 +51,7 @@ wrap_tab="     "
 line="%0D%0A%0D%0A---%0D%0A%0D%0A"
 current_time=$(date +"%Y-%m-%d")
 by="#### 脚本仓库地址:https://github.com/ITdesk01/JD_Script/tree/main 核心JS采用lxk0301开源JS脚本"
-SCKEY=$(grep "let SCKEY" $script_dir/sendNotify.js  | awk -F "'" '{print $2}')
+SCKEY=$(grep "let SCKEY" $openwrt_script_config/sendNotify.js  | awk -F "'" '{print $2}')
 
 
 
@@ -684,11 +683,11 @@ concurrent_js_update() {
 
 		while [[ ${js_amount} -gt 0 ]]; do
 			mkdir $ccr_js_file/js_$js_amount
-			cp $script_dir/jdCookie.js $ccr_js_file/js_$js_amount/jdCookie.js
+			cp $openwrt_script_config/jdCookie.js $ccr_js_file/js_$js_amount/jdCookie.js
 
 			if [ ! -L "$ccr_js_file/js_$js_amount/sendNotify.js" ]; then
 				rm -rf $$ccr_js_file/js_$js_amount/sendNotify.js
-				ln -s $script_dir/sendNotify.js $ccr_js_file/js_$js_amount/sendNotify.js
+				ln -s $openwrt_script_config/sendNotify.js $ccr_js_file/js_$js_amount/sendNotify.js
 			fi
 
 			js_cookie_obtain=$(echo "$js_cookie" | awk -v a="$js_amount" 'NR==a{ print $0}') #获取pt
@@ -710,7 +709,7 @@ concurrent_js_update() {
 		else
 			jddj_cookie_amount=$(echo "$jddj_cookie" |wc -l)
 			while [[ ${jddj_cookie_amount} -gt 0 ]]; do
-				cp $script_dir/jddj_cookie.js $ccr_js_file/js_$jddj_cookie_amount/jddj_cookie.js
+				cp $openwrt_script_config/jddj_cookie.js $ccr_js_file/js_$jddj_cookie_amount/jddj_cookie.js
 				jddj_cookie_obtain=$(echo "$jddj_cookie" | awk -v a="$jddj_cookie_amount" 'NR==a{ print $0}') #获取pt
 				sed -i '/deviceid_pdj_jd/d' $ccr_js_file/js_$jddj_cookie_amount/jddj_cookie.js >/dev/null 2>&1
 				sed -i "2a $jddj_cookie_obtain" $ccr_js_file/js_$jddj_cookie_amount/jddj_cookie.js
@@ -931,7 +930,7 @@ addcookie() {
 		echo ""
 		echo -e "$yellow pt_key=$green密码  $yellow pt_pin=$green 账号  $yellow// 二狗子 $green(备注这个账号是谁的)$white"
 		echo ""
-		echo -e "$yellow 请不要乱输，如果输错了可以用$green sh \$jd delcookie$yellow删除,\n 或者你手动去$green$script_dir/jdCookie.js$yellow删除也行\n$white"
+		echo -e "$yellow 请不要乱输，如果输错了可以用$green sh \$jd delcookie$yellow删除,\n 或者你手动去$green$openwrt_script_config/jdCookie.js$yellow删除也行\n$white"
 		echo "---------------------------------------------------------------------------"
 		read -p "请填写你获取到的cookie(一次只能一个cookie)：" you_cookie
 		if [[ -z $you_cookie ]]; then
@@ -945,29 +944,29 @@ addcookie() {
 	pt_pin=$(echo $you_cookie | awk -F "pt_pin=" '{print $2}' | awk -F ";" '{print $1}')
 	pt_key=$(echo $you_cookie | awk -F "pt_key=" '{print $2}' | awk -F ";" '{print $1}')
 
-	if [ `cat $script_dir/jdCookie.js | grep "$pt_pin" | wc -l` == "1" ];then
+	if [ `cat $openwrt_script_config/jdCookie.js | grep "$pt_pin" | wc -l` == "1" ];then
 		echo -e "$green检测到 $yellow${pt_pin}$white 已经存在，开始更新cookie。。$white\n"
 		sleep 2
-		old_pt=$(cat $script_dir/jdCookie.js | grep "$pt_pin" | sed -e "s/',//g" -e "s/'//g")
-		old_pt_key=$(cat $script_dir/jdCookie.js | grep "$pt_pin" | awk -F "pt_key=" '{print $2}' | awk -F ";" '{print $1}')
-		sed -i "s/$old_pt_key/$pt_key/g" $script_dir/jdCookie.js
+		old_pt=$(cat $openwrt_script_config/jdCookie.js | grep "$pt_pin" | sed -e "s/',//g" -e "s/'//g")
+		old_pt_key=$(cat $openwrt_script_config/jdCookie.js | grep "$pt_pin" | awk -F "pt_key=" '{print $2}' | awk -F ";" '{print $1}')
+		sed -i "s/$old_pt_key/$pt_key/g" $openwrt_script_config/jdCookie.js
 		echo -e "$green 旧cookie：$yellow${old_pt}$white\n\n$green更新为$white\n\n$green   新cookie：$yellow${new_pt}$white\n"
 		echo  "------------------------------------------------------------------------------"
 	else
 		echo -e "$green检测到 $yellow${pt_pin}$white 不存在，开始新增cookie。。$white\n"
 		sleep 2
-		cookie_quantity=$( cat $script_dir/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | wc -l)
+		cookie_quantity=$( cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | wc -l)
 		i=$(expr $cookie_quantity + 5)
 		if [ $i == "5" ];then
-			sed -i "5a \  '$you_cookie\'," $script_dir/jdCookie.js
+			sed -i "5a \  '$you_cookie\'," $openwrt_script_config/jdCookie.js
 		else
-			sed -i "$i a\  '$you_cookie\'," $script_dir/jdCookie.js
+			sed -i "$i a\  '$you_cookie\'," $openwrt_script_config/jdCookie.js
 		fi
-		echo -e "\n已将新cookie：$green${you_cookie}$white\n\n插入到$yellow$script_dir/jdCookie.js$white 第$i行\n"
-		cookie_quantity1=$( cat $script_dir/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | wc -l)
+		echo -e "\n已将新cookie：$green${you_cookie}$white\n\n插入到$yellow$openwrt_script_config/jdCookie.js$white 第$i行\n"
+		cookie_quantity1=$( cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | wc -l)
 		echo  "------------------------------------------------------------------------------"
 		echo -e "$yellow你增加了账号：$green${pt_pin}$white$yellow 现在cookie一共有$cookie_quantity1个，具体以下：$white"
-		cat $script_dir/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | sed -e "s/',//g" -e "s/'//g"
+		cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | sed -e "s/',//g" -e "s/'//g"
 		echo  "------------------------------------------------------------------------------"
 	fi
 	check_cooike
@@ -993,8 +992,8 @@ addcookie() {
 }
 
 delcookie() {
-	cookie_quantity=$(cat $script_dir/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | wc -l)
-	if [ `cat $script_dir/jdCookie.js | grep "$pt_pin" | wc -l` -ge "1" ];then
+	cookie_quantity=$(cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | wc -l)
+	if [ `cat $openwrt_script_config/jdCookie.js | grep "$pt_pin" | wc -l` -ge "1" ];then
 		echo "---------------------------------------------------------------------------"
 		echo -e "		删除cookie"
 		echo "---------------------------------------------------------------------------"
@@ -1006,7 +1005,7 @@ delcookie() {
 		echo -e "$yellow 请填写你要删除的cookie（// 备注 或者pt_pin 名都行）：$green jd_10086$white "
 		echo "---------------------------------------------------------------------------"
 		echo -e "$yellow你的cookie有$cookie_quantity个，具体如下：$white"
-		cat $script_dir/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | sed -e "s/',//g" -e "s/'//g"
+		cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | sed -e "s/',//g" -e "s/'//g"
 		echo "---------------------------------------------------------------------------"
 		echo ""
 		read -p "请填写你要删除的cookie（// 备注 或者pt_pin 名都行）：" you_cookie
@@ -1015,11 +1014,11 @@ delcookie() {
 			exit 0
 		fi
 	
-		sed -i "/$you_cookie/d" $script_dir/jdCookie.js
+		sed -i "/$you_cookie/d" $openwrt_script_config/jdCookie.js
 		clear
 		echo "---------------------------------------------------------------------------"
-		echo -e "$yellow你删除账号或者备注：$green${you_cookie}$white$yellow 现在cookie还有`cat $script_dir/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | wc -l`个，具体以下：$white"
-		cat $script_dir/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | sed -e "s/',//g" -e "s/'//g"
+		echo -e "$yellow你删除账号或者备注：$green${you_cookie}$white$yellow 现在cookie还有`cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | wc -l`个，具体以下：$white"
+		cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | sed -e "s/',//g" -e "s/'//g"
 		echo "---------------------------------------------------------------------------"
 		echo ""
 		read -p "是否需要删除cookie（1.需要  2.不需要 ）：" cookie_continue
@@ -1149,12 +1148,12 @@ that_day() {
 	echo $git_log >/tmp/git_log_if.log
 	git_log_if=$(grep -Eo "Zhang|ITdesk" /tmp/git_log_if.log | sort -u | wc -l )
 	if [ $git_log_if -ge 1  ];then
-		echo -e "$line#### Model：$sys_model\n#### Wan+IP地址：+$wan_ip\n#### 系统版本:++$uname_version\n$line#### $prompt\n#### $current_time+更新日志\n" >> $dir_file/git_log/${current_time}.log
+		echo -e "$line#### Model：$sys_model\n#### Wan+IP地址：+$wan_ip\n#### 系统版本:++$uname_version\n$line\n#### $current_time+更新日志\n" >> $dir_file/git_log/${current_time}.log
 		echo "  时间       +作者          +操作" >> $dir_file/git_log/${current_time}.log
 		echo "$git_log" >> $dir_file/git_log/${current_time}.log
 		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
 	else
-		echo -e "$line#### Model：$sys_model\n#### Wan+IP地址：+$wan_ip\n#### 系统版本:++$uname_version\n$line#### $prompt\n#### $current_time+更新日志\n" >> $dir_file/git_log/${current_time}.log
+		echo -e "$line#### Model：$sys_model\n#### Wan+IP地址：+$wan_ip\n#### 系统版本:++$uname_version\n$line\n#### $current_time+更新日志\n" >> $dir_file/git_log/${current_time}.log
 		echo "作者泡妹子或者干饭去了$wrap$wrap_tab今天没有任何更新$wrap$wrap_tab不要催佛系玩。。。" >>$dir_file/git_log/${current_time}.log
 		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
 	fi
@@ -1465,12 +1464,12 @@ help() {
 	echo ----------------------------------------------------
 	echo -e "$yellow 1.文件说明$white"
 	echo ""
-	echo -e "$green  $script_dir/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
-	echo -e "$green  $script_dir/jddj_cookie.js $white 在此脚本内填写京东到家Cookie，需要抓包"
-	echo -e "$green  $script_dir/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
-	echo -e "$green  $script_dir/USER_AGENTS.js $white 京东UA文件可以自定义也可以默认"
-	echo -e "$green  $script_dir/JS_USER_AGENTS.js $white 京东极速版UA文件可以自定义也可以默认"
-	echo -e "$green  $script_dir/config/Script_blacklist.txt $white 脚本黑名单，用法去看这个文件"
+	echo -e "$green  $openwrt_script_config/jdCookie.js $white 在此脚本内填写JD Cookie 脚本内有说明"
+	echo -e "$green  $openwrt_script_config/jddj_cookie.js $white 在此脚本内填写京东到家Cookie，需要抓包"
+	echo -e "$green  $openwrt_script_config/sendNotify.js $white 在此脚本内填写推送服务的KEY，可以不填"
+	echo -e "$green  $openwrt_script_config/USER_AGENTS.js $white 京东UA文件可以自定义也可以默认"
+	echo -e "$green  $openwrt_script_config/JS_USER_AGENTS.js $white 京东极速版UA文件可以自定义也可以默认"
+	echo -e "$green  $openwrt_script_config/Script_blacklist.txt $white 脚本黑名单，用法去看这个文件"
 	echo ""
 	echo -e "$yellow JS脚本活动列表：$green $dir_file/git_clone/lxk0301/README.md $white"
 	echo -e "$yellow 浏览器获取京东cookie教程：$green $dir_file/git_clone/lxk0301/backUp/GetJdCookie.md $white"
