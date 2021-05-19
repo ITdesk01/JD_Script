@@ -1908,7 +1908,7 @@ sys_additional_settings(){
 	random_array
 	new_cfd_set="$new_cfd@$Javon_20201224_cfd@$zuoyou_20190516_cfd@$jidiyangguang_20190516_cfd@$Jhone_Potte_20200824_cfd@$random_set@$stayhere_20200104_cfd"
 	#根据账号数量生成对应的助力码
-	js_cookie=$(cat $dir_file/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '")
+	js_cookie=$(cat $dir_file_js/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '")
 	js_amountT=$(echo "$js_cookie" |wc -l)
 	cfd_share_code="$new_cfd_set"
 	while [[ ${js_amountT} -gt 0 ]]; do
