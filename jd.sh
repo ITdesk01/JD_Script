@@ -2047,26 +2047,6 @@ system_variable() {
 		mkdir  $ccr_js_file
 	fi
 
-	#判断openssh
-	openssh_if=$(opkg list-installed | grep "openssh-client" | awk '{print $1}')
-	openssh_if1=$(opkg list-installed | grep "openssh-keygen" | awk '{print $1}')
-	if [ ! $openssh_if ];then
-		echo -e "缺少$green openssh-client$white依赖，请安装以后再使用本脚本"
-		sleep 5
-	fi
-	
-	if [ ! $openssh_if1 ];then
-		echo -e "缺少$green openssh-keygen$white依赖，请安装以后再使用本脚本"
-		sleep 5
-	fi
-
-	#判断python
-	python_if=$(opkg list-installed | grep "python3" | awk 'NR==1 {print $1}')
-	if [ ! $python_if ];then
-		echo -e "缺少$green python3$white依赖，请安装以后再使用本脚本"
-		sleep 5
-	fi
-
 	#判断参数
 	if [ ! -f /root/.ssh/test1 ];then
 		rm -rf /root/.ssh
