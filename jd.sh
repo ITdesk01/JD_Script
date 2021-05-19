@@ -56,8 +56,8 @@ SCKEY=$(grep "let SCKEY" $openwrt_script_config/sendNotify.js  | awk -F "'" '{pr
 
 
 
-start_script="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
-stop_script="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
+start_script_time="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
+stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
@@ -127,7 +127,7 @@ update() {
 		git fetch --all
 		git reset --hard origin/master
 	fi
-	echo -e "$green update$start_script $white"
+	echo -e "$green update$start_script_time $white"
 	echo -e "$green开始下载JS脚本，请稍等$white"
 #cat script_name.txt | awk '{print length, $0}' | sort -rn | sed 's/^[0-9]\+ //'按照文件名长度降序：
 #cat script_name.txt | awk '{print length, $0}' | sort -n | sed 's/^[0-9]\+ //' 按照文件名长度升序
@@ -337,7 +337,7 @@ EOF
 	chmod 755 $dir_file_js/*
 	additional_settings
 	concurrent_js_update
-	echo -e "$green update$stop_script $white"
+	echo -e "$green update$stop_script_time $white"
 	task #更新完全部脚本顺便检查一下计划任务是否有变
 
 }
@@ -366,11 +366,11 @@ update_if() {
 }
 
 update_script() {
-	echo -e "$green update_script$start_script $white"
+	echo -e "$green update_script$start_script_time $white"
 	cd $dir_file
 	git fetch --all
 	git reset --hard origin/main
-	echo -e "$green update_script$stop_script $white"
+	echo -e "$green update_script$stop_script_time $white"
 }
 
 
@@ -394,7 +394,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	adolf_oppo.js                   #刺客567之寻宝
 	z_shop_captain.js		#超级无线组队分奖品
 EOF
-	echo -e "$green run_0$start_script $white"
+	echo -e "$green run_0$start_script_time $white"
 
 	for i in `cat /tmp/jd_tmp/run_0 | awk '{print $1}'`
 	do
@@ -409,43 +409,43 @@ EOF
 	run_03
 	run_030
 	$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
-	echo -e "$green run_0$stop_script $white"
+	echo -e "$green run_0$stop_script_time $white"
 }
 
 run_020() {
-	echo -e "$green run_020$start_script $white"
+	echo -e "$green run_020$start_script_time $white"
 	echo "run_020暂时没有东西"
-	echo -e "$green run_020$stop_script $white"
+	echo -e "$green run_020$stop_script_time $white"
 }
 
 run_030() {
-	echo -e "$green run_030$start_script $white"
+	echo -e "$green run_030$start_script_time $white"
 	$node $dir_file_js/jd_dreamFactory.js #京喜工厂
 	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
 	$node $dir_file_js/jd_health_collect.js		#健康社区-收能量
 	$node $dir_file_js/jddj_fruit_collectWater.js 	#京东到家果园水车收水滴 作者5分钟收一次
 	$node $dir_file_js/jddj_getPoints.js		#京东到家鲜豆庄园收水滴 作者5分钟收一次
-	echo -e "$green run_030$stop_script $white"
+	echo -e "$green run_030$stop_script_time $white"
 }
 
 run_045() {
-	echo -e "$green run_045$start_script $white"
+	echo -e "$green run_045$start_script_time $white"
 	echo "run_045暂时没有东西"
-	echo -e "$green run_045$stop_script $white"
+	echo -e "$green run_045$stop_script_time $white"
 }
 
 run_01() {
-	echo -e "$green run_01$start_script $white"
+	echo -e "$green run_01$start_script_time $white"
 	$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
 	$node $dir_file_js/jd_joy_feedPets.js  #宠汪汪喂食一个小时喂一次
 	export RAIN_NOTIFY_CONTROL="false"
 	source /etc/profile
 	$node $dir_file_js/jd_super_redrain.js		#整点红包雨
-	echo -e "$green run_01$stop_script $white"
+	echo -e "$green run_01$stop_script_time $white"
 }
 
 run_02() {
-	echo -e "$green run_02$start_script $white"
+	echo -e "$green run_02$start_script_time $white"
 	$node $dir_file_js/jd_moneyTree.js #摇钱树
 	if [ $(date "+%-H") -ge 13 ]; then
 		sed -i '/PASTURE_EXCHANGE_KEYWORD/d' /etc/profile
@@ -455,16 +455,16 @@ run_02() {
 		echo "export PASTURE_EXCHANGE_KEYWORD="1京豆"" >>/etc/profile
 	fi
 	$node $dir_file_js/monk_pasture.js #有机牧场
-	echo -e "$green run_02$stop_script $white"
+	echo -e "$green run_02$stop_script_time $white"
 }
 
 run_03() {
-	echo -e "$green run_03$start_script $white"
+	echo -e "$green run_03$start_script_time $white"
 	$node $dir_file_js/jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
 	$node $dir_file_js/jd_health.js		#健康社区
 	$node $dir_file_js/jddj_fruit.js			#京东到家果园 0,8,11,17
 	$node $dir_file_js/jd_daily_lottery.js		#每日抽奖
-	echo -e "$green run_03$stop_script $white"
+	echo -e "$green run_03$stop_script_time $white"
 }
 
 
@@ -478,7 +478,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
 	jd_superMarket.js #东东超市,6点 18点多加两场用于收金币
 EOF
-	echo -e "$green run_06_18$start_script $white"
+	echo -e "$green run_06_18$start_script_time $white"
 
 	for i in `cat /tmp/jd_tmp/run_06_18 | awk '{print $1}'`
 	do
@@ -486,7 +486,7 @@ EOF
 		$run_sleep
 	done
 
-	echo -e "$green run_06_18$stop_script $white"
+	echo -e "$green run_06_18$stop_script_time $white"
 }
 
 run_07() {
@@ -514,7 +514,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_jin_tie.js 			#领金贴
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
-	echo -e "$green run_07$start_script $white"
+	echo -e "$green run_07$start_script_time $white"
 
 	for i in `cat /tmp/jd_tmp/run_07 | awk '{print $1}'`
 	do
@@ -523,7 +523,7 @@ EOF
 	done
 
 	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
-	echo -e "$green run_07$stop_script $white"
+	echo -e "$green run_07$stop_script_time $white"
 }
 
 run_08_12_16() {
@@ -532,7 +532,7 @@ cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_syj.js #赚京豆
 	adolf_pk.js 			#京享值PK
 EOF
-	echo -e "$green run_08_12_16$start_script $white"
+	echo -e "$green run_08_12_16$start_script_time $white"
 
 	for i in `cat /tmp/jd_tmp/run_08_12_16 | awk '{print $1}'`
 	do
@@ -540,7 +540,7 @@ EOF
 		$run_sleep
 	done
 
-	echo -e "$green run_08_12_16$stop_script $white"
+	echo -e "$green run_08_12_16$stop_script_time $white"
 }
 
 run_10_15_20() {
@@ -549,7 +549,7 @@ cat >/tmp/jd_tmp/run_10_15_20 <<EOF
 	jd_cfd.js #京东财富岛 有一日三餐任务
 EOF
 
-	echo -e "$green run_10_15_20$start_script $white"
+	echo -e "$green run_10_15_20$start_script_time $white"
 
 	for i in `cat /tmp/jd_tmp/run_10_15_20 | awk '{print $1}'`
 	do
@@ -557,20 +557,20 @@ EOF
 		$run_sleep
 	done
 	$node $openwrt_script/JD_Script/js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
-	echo -e "$green run_10_15_20$stop_script $white"
+	echo -e "$green run_10_15_20$stop_script_time $white"
 }
 
 
 joy(){
 	#crazy joy挂机领金币/宝箱专用
-	echo -e "$green joy挂机领金币$start_script $white"
+	echo -e "$green joy挂机领金币$start_script_time $white"
 	kill_joy
 	$node $dir_file_js/jd_crazy_joy_coin.js &
-	echo -e "$green joy挂机领金币$stop_script $white"
+	echo -e "$green joy挂机领金币$stop_script_time $white"
 }
 
 kill_joy() {
-	echo -e "$green  执行kill_joy$start_script $white"
+	echo -e "$green  执行kill_joy$start_script_time $white"
 	pid=$(ps -ww | grep "jd_crazy_joy_coin.js" | grep -v grep | awk '{print $1}')
 	if [ $(echo $pid |wc -l ) == "1" ];then
 		echo -e "$yellow发现joy后台程序开始清理，请稍等$white"
@@ -584,7 +584,7 @@ kill_joy() {
 	else
 		echo "$green没有运行的joy后台$white"
 	fi
-	echo -e "$green 执行kill_joy$stop_script $white"
+	echo -e "$green 执行kill_joy$stop_script_time $white"
 }
 
 script_name() {
@@ -595,15 +595,15 @@ script_name() {
 
 
 jx() {
-	echo -e "$green 查询京喜商品生产所用时间$start_script $white"
+	echo -e "$green 查询京喜商品生产所用时间$start_script_time $white"
 	$node $dir_file_js/jx_products_detail.js
-	echo -e "$green 查询完成$stop_script $white"
+	echo -e "$green 查询完成$stop_script_time $white"
 }
 
 jd_sharecode() {
-	echo -e "$green 查询京东助力码$start_script $white"
+	echo -e "$green 查询京东助力码$start_script_time $white"
 	$node $dir_file_js/jd_get_share_code.js #获取jd所有助力码脚本
-	echo -e "$green查询完成$start_script $white"
+	echo -e "$green查询完成$start_script_time $white"
 	echo ""
 	jd_sharecode_if
 }
