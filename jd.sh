@@ -2122,26 +2122,6 @@ system_variable() {
 			rm -rf $dir_file_js/jddj_cookie.js
 			ln -s $openwrt_script_config/jddj_cookie.js $dir_file_js/jddj_cookie.js
 		fi
-	else
-		if [ ! -f "$dir_file/jdCookie.js" ]; then
-			cp  $dir_file/JSON/jdCookie.js $dir_file/jdCookie.js
-			ln -s $dir_file/jdCookie.js $dir_file_js/jdCookie.js
-		fi
-
-		if [ ! -f "$dir_file/sendNotify.js" ]; then
-			cp  $dir_file/JSON/sendNotify.js $dir_file/sendNotify.js
-			ln -s $dir_file/sendNotify.js $dir_file_js/sendNotify.js
-		fi
-
-		if [ ! -f "$dir_file/USER_AGENTS.js" ]; then
-			cp  $dir_file/git_clone/lxk0301/USER_AGENTS.js $dir_file/USER_AGENTS.js
-			ln -s $dir_file/USER_AGENTS.js $dir_file_js/USER_AGENTS.js
-		fi
-
-		if [ ! -f "$dir_file/JS_USER_AGENTS.js" ]; then
-			cp  $dir_file/git_clone/lxk0301/JS_USER_AGENTS.js $dir_file/JS_USER_AGENTS.js
-			ln -s $dir_file/JS_USER_AGENTS.js $dir_file_js/JS_USER_AGENTS.js
-		fi
 	fi
 
 	jd_openwrt_config_version="1.2"
@@ -2154,11 +2134,6 @@ system_variable() {
 		if [ ! -L "$dir_file/config/jd_openwrt_script_config.txt" ]; then
 			rm rf $dir_file/config/jd_openwrt_script_config.txt
 			ln -s $jd_openwrt_config $dir_file/config/jd_openwrt_script_config.txt
-		fi
-	else
-		jd_openwrt_config="$dir_file/config/jd_openwrt_script_config.txt"
-		if [ ! -f "$jd_openwrt_config" ]; then
-			jd_openwrt_config_description
 		fi
 	fi
 
@@ -2178,30 +2153,12 @@ system_variable() {
 	jd_crazy_joy=$(grep "jd_crazy_joy" $jd_openwrt_config | awk -F "'" '{print $2}')
 	jd_unsubscribe=$(grep "jd_unsubscribe" $jd_openwrt_config | awk -F "'" '{print $2}')
 
-	#判断node版本是大于10
-	node_if=$(opkg list-installed | grep 'node -' | awk -F "." '{print $1}' | awk -F v '{print $2}')
-	node_npm=$(opkg list-installed | grep 'node-npm' | awk -F "." '{print $1}' | awk -F v '{print $2}')
-	if [ ! $node_if -ge "10" ];then
-		echo "node 版本小于10，请升级以后再使用本脚本"
-		exit 0
-	fi
-
-	if [ ! $node_if -ge "10" ];then
-		echo "node-npm 版本小于10，请升级以后再使用本脚本"
-		exit 0
-	fi
-
 	#添加系统变量
 	jd_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
 	if [[ "$jd_script_path" == "0" ]]; then
 		echo "export jd_file=$dir_file" >> /etc/profile
 		echo "export jd=$dir_file/jd.sh" >> /etc/profile
 		source /etc/profile
-	fi
-
-	blacklist=""
-	if [ "黑名单" == "$blacklist" ];then
-		echo ""
 	fi
 
 	#农场萌宠关闭通知

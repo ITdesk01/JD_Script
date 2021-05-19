@@ -48,7 +48,7 @@ NANOPI R4S (群友snow测试)
          python3
  
 
-## 安装办法一（插件安装）
+## 安装办法（插件安装）
 
 **插件地址**
         
@@ -59,56 +59,22 @@ NANOPI R4S (群友snow测试)
 不会编译的可以采用我的编译辅助脚本编译： https://github.com/openwrtcompileshell/OpenwrtCompileScript（编译出来就是带插件的）
 
 
-## 安装办法二（本地安装，后期会慢慢放弃看情况）
-
-本地安装
-
-         好处：无须重新编译固件，满足底下依赖条件即可，可谓开箱即用
-
-         缺点：升级固件以后配置文件会丢失，需要重新配置以下东西才能使用（麻烦）
-
-**安装依赖**
-
-         通过opkg update 再 opkg install git git-http node node-npm openssh-client openssh-keygen python3
-
-         node和node-npm版本一定要大于10**，安装node和node-npm以后用 opkg list-installed | grep node 查看node版本，两个都要大于10
-
-
-**开始下载脚本**
-
-         git clone -b main https://github.com/ITdesk01/JD_Script.git /usr/share/JD_Script
-         cd /usr/share/JD_Script && chmod 777 jd.sh && sh jd.sh
-         
-**安装npm模块**
-
-         sh $jd npm_install
-         
-**去填写cookie和推**
-
-          /usr/share/JD_Script/jdCookie.js  在此脚本内填写JD Cookie 脚本内有说明
-          /usr/share/JD_Script/sendNotify.js  在此脚本内填写推送服务的KEY，可以不填
-          
-**开始跑脚本**
-        
-         sh $jd run_0 run_07
-
-
 
 
 ## 已知问题!!!
 
 1.下载下来的js都是空的，
    
-          强制代理raw.githubusercontent.com
-          rm -rf /root/.ssh && sh $jd update
+		强制代理raw.githubusercontent.com
+		rm -rf /root/.ssh && sh $jd update
 
 2.互助码怎么找
 
-         sh $jd jd_sharecode
+		sh $jd jd_sharecode
          
 3.如何获取cookie
 
-          sh $jd #说明文件最顶上几行，嫌弃文字太多可以用grep过滤一下
+		sh $jd getcookie #扫码自动填cookie
 
 
 **问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)**
