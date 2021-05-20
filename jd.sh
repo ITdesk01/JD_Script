@@ -1925,6 +1925,7 @@ sys_additional_settings(){
 	done
 	sed -i '/JDCFD_SHARECODES/d' /etc/profile >/dev/null 2>&1
 	#echo "export JDCFD_SHARECODES=$new_cfd_set" >> /etc/profile
+	export JDCFD_SHARECODES="$cfd_share_code&&"
 	echo "export JDCFD_SHARECODES=\"$cfd_share_code&&\"" >> /etc/profile
 	
 	#东东社区
