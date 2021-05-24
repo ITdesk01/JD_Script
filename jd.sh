@@ -1842,8 +1842,8 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 
 	sed -i "s/https:\/\/gitee.com\/shylocks\/updateTeam\/raw\/main\/jd_cash.json/https:\/\/raw.githubusercontent.com\/ITdesk01\/JD_Script\/main\/JSON\/jd_cash.json/g"  $dir_file_js/jd_cash.js
 
-	if [ `date +%A` == "Monday" ];then
-		echo "今天周一开启2元兑换200豆子功能"
+	if [ `date +%A` == "Sunday" ];then
+		echo "周日提前开启2元兑换200豆子功能"
 		sed -i "s/cash_exchange = false/cash_exchange = true/g" $dir_file_js/jd_cash.js
 	else
 		echo > /dev/null 2>&1
