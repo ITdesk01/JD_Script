@@ -182,6 +182,8 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_health_collect.js		#健康社区-收能量
 	jd_daily_lottery.js		#每日抽奖
 	jd_jump.js			#跳跳乐瓜分京豆
+	jd_city.js			#城城领现金
+	jd_carnivalcity.js		#京东手机狂欢城
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -444,6 +446,7 @@ run_01() {
 	export RAIN_NOTIFY_CONTROL="false"
 	source /etc/profile
 	$node $dir_file_js/jd_super_redrain.js		#整点红包雨
+	$node $dir_file_js/jd_city.js			#城城领现金
 	echo -e "$green run_01$stop_script_time $white"
 }
 
@@ -537,6 +540,7 @@ cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_syj.js #赚京豆
 	adolf_pk.js 			#京享值PK
 	jd_jump.js			#跳跳乐瓜分京豆
+	jd_carnivalcity.js		#京东手机狂欢城
 EOF
 	echo -e "$green run_08_12_16$start_script_time $white"
 
