@@ -1909,6 +1909,19 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 		source /etc/profile
 	fi
 
+	#城城分现金
+	new_cc="RtGKz-ikQFmhKoeeRddlgy5fN15EGbxpkR8Hbii5cgoyTbfmdQ@RtGKzbryQA7wd4eTRoVh0LMrs5aJ5bA8HqX-MAWT_tmtr1Y6aA@RtGKl7blBW3QPfHsc65Nmnyr9cMU4yMYm4XOVHjO_cQ1jV0c@RtGKrLT9OGPbPvjoY6lNmn1fBMAgnWU33U4pTz3UaKy0C0GI"
+
+	new_cc_set="$new_cc"
+
+	js_cookie=$(cat $dir_file_js/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '")
+	js_amountT=$(echo "$js_cookie" |wc -l)
+	cc_share_code="$new_cc_set"
+	while [[ ${js_amountT} -gt 0 ]]; do
+		cc_share_code="$cc_share_code&$new_cc_set"
+		js_amountT=$(($js_amountT - 1))
+	done
+	export CITY_SHARECODES="$cc_share_code&&"
 }
 
 sys_additional_settings(){
