@@ -1921,7 +1921,10 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 		cc_share_code="$cc_share_code&$new_cc_set"
 		js_amountT=$(($js_amountT - 1))
 	done
+	sed -i '/CITY_SHARECODES/d' /etc/profile >/dev/null 2>&1
 	export CITY_SHARECODES="$cc_share_code&&"
+	echo "export CITY_SHARECODES=\"$cc_share_code&&\"" >> /etc/profile
+	
 }
 
 sys_additional_settings(){
