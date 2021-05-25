@@ -1914,12 +1914,13 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	#城城分现金
 	new_cc="RtGKz-ikQFmhKoeeRddlgy5fN15EGbxpkR8Hbii5cgoyTbfmdQ@RtGKzbryQA7wd4eTRoVh0LMrs5aJ5bA8HqX-MAWT_tmtr1Y6aA@RtGKl7blBW3QPfHsc65Nmnyr9cMU4yMYm4XOVHjO_cQ1jV0c@RtGKrLT9OGPbPvjoY6lNmn1fBMAgnWU33U4pTz3UaKy0C0GI"
 	chiyu_cc="T928gamhQwvvMs-aW5h_jzzHqsqm41LRlvzvIEs"
+	Javon_cc="GILgzOWlSQ--doCZENA11uAb_zbPuBcU4Jy0Wmd3epBVjfOSbWM"
 	shqn_cc="RtGKzumjEAimfILLEIIyg6o7DZAQBg28KVO_AUHkbPE2KDZhhw@RtGKzr-tEgjwf4HOQoU2h1ItdL5a4VkUCV3wwbEaLpBUuS5eu"
 	jidiyangguang_cc="RtGKzOj3RgiqfYOSQtdl1eOd05gIN2tIDWFgjWB4l2Sa7XrYtw@RtGKz76gEA7yL4KeRd0w0EiokyucAF_KVx05gJUTx_688J1Bag"
 	zuoyou_cc="QMfizaDoDQrvMs_DSZBmlAsHuBuLVdQKBg@VMahgOmkDUbvfs_WW41tkt5YZBFWid-KJ-Vu@QcS2ieihDUbvfs_WW41tkgLgjGBi-F28nlc8@QNyynbLzBl_MI8_WW9R_moklKD3GKxv_PFsJWTo_Wg@Tty7n6XhRgijMs_WF5h_mndWxiCbUusIAV4mMd0A@RMyhmbLzAFP8INTWW5gzmo5OufFYwXAL7NcY1iiaTzo@RtGKz7mhEl6gKoCfEoI20PA4S5NDpZHXyKdLuDtaEwEnYlrCMw@W9GaibH3F2L4LMfwf5x_mq9Ys636pNQshUOB3RdlkZ2WTwc@RtGKzen2SQn1LNGbRoU03roWennJ-KWPcB_FTGg3JBGr6Wp4hw"
 	
 
-	new_cc_set="$new_cc@$chiyu_cc@$shqn_cc@$jidiyangguang_cc@$zuoyou_cc"
+	new_cc_set="$new_cc@$chiyu_cc@$Javon_cc@$jidiyangguang_cc@$zuoyou_cc@$shqn_cc"
 
 	js_cookie=$(cat $dir_file_js/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '")
 	js_amountT=$(echo "$js_cookie" |wc -l)
