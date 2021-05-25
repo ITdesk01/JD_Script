@@ -184,6 +184,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_city.js			#城城领现金
 	jd_carnivalcity.js		#京东手机狂欢城
+	jd_zoo.js 			#动物联萌 618活动
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -302,7 +303,6 @@ done
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
 	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_friend.js -O $dir_file_js/jd_friend.js #joy总动员一次性脚本
-	wget https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_zoo.js -O $dir_file_js/jd_zoo.js #动物联萌 618活动
 
 
 #将所有文本汇总
@@ -385,7 +385,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_blueCoin.js  	#东东超市兑换，有次数限制，没时间要求
 	jd_car_exchange.js   #京东汽车兑换，500赛点兑换500京豆
 	jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
-	jd_zoo.js 			#动物联萌 618活动
 	jx_sign.js #京喜app签到长期
 	jd_lotteryMachine.js #京东抽奖机
 	jd_cash.js #签到领现金，每日2毛～5毛长期
@@ -400,7 +399,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
 	adolf_oppo.js                   #刺客567之寻宝
 	z_shop_captain.js		#超级无线组队分奖品
-	jd_zoo.js 			#动物联萌 618活动
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -473,6 +471,7 @@ run_03() {
 	$node $dir_file_js/jd_health.js		#健康社区
 	$node $dir_file_js/jddj_fruit.js			#京东到家果园 0,8,11,17
 	$node $dir_file_js/jd_daily_lottery.js		#每日抽奖
+	$node $dir_file_js/jd_zoo.js 			#动物联萌 618活动
 	echo -e "$green run_03$stop_script_time $white"
 }
 
