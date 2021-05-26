@@ -228,6 +228,8 @@ cat >$dir_file/config/tmp/monk-normal.txt <<EOF
 	adolf_pk.js 			#京享值PK
 	adolf_martin.js			#人头马x博朗
 	adolf_mi.js			#合成小金刚
+	adolf_superbox.js		#超级盒子
+	adolf_newInteraction.js		#618大势新品赏
 EOF
 
 for script_name in `cat $dir_file/config/tmp/monk-normal.txt | awk '{print $1}'`
@@ -399,6 +401,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
 	adolf_oppo.js                   #刺客567之寻宝
 	z_shop_captain.js		#超级无线组队分奖品
+	adolf_superbox.js		#超级盒子
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -559,6 +562,7 @@ run_10_15_20() {
 cat >/tmp/jd_tmp/run_10_15_20 <<EOF
 	jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
 	jd_cfd.js #京东财富岛 有一日三餐任务
+	adolf_newInteraction.js		#618大势新品赏
 EOF
 
 	echo -e "$green run_10_15_20$start_script_time $white"
