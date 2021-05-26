@@ -235,6 +235,7 @@ cat >$dir_file/config/tmp/monk-normal.txt <<EOF
 	adolf_mi.js			#合成小金刚
 	adolf_superbox.js		#超级盒子
 	adolf_newInteraction.js		#618大势新品赏
+	adolf_jxhb.js			#京喜阶梯红包
 EOF
 
 for script_name in `cat $dir_file/config/tmp/monk-normal.txt | awk '{print $1}'`
@@ -675,6 +676,7 @@ echo -e "$green============整理完成，可以提交了（没加群的忽略�
 }
 
 concurrent_js_run_07() {
+	$node $openwrt_script/JD_Script/js/adolf_jxhb.js			#京喜阶梯红包
 	$node $openwrt_script/JD_Script/js/jd_redPacket.js #京东全民开红包，没时间要求
 	#$node $openwrt_script/JD_Script/js/jd_small_home.js #东东小窝
 	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
