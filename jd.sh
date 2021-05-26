@@ -348,7 +348,8 @@ EOF
 		update
 	fi
 	chmod 755 $dir_file_js/*
-	additional_settings
+	#additional_settings
+	zoo_share
 	concurrent_js_update
 	source /etc/profile
 	echo -e "$green update$stop_script_time $white"
@@ -454,9 +455,9 @@ run_01() {
 	$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
 	$node $dir_file_js/jd_joy_feedPets.js  #宠汪汪喂食一个小时喂一次
 	export RAIN_NOTIFY_CONTROL="false"
-	source /etc/profile
 	$node $dir_file_js/jd_super_redrain.js		#整点红包雨
 	$node $dir_file_js/jd_city.js			#城城领现金
+	$node $dir_file_js/jd_zoo.js 			#动物联萌 618活动
 	echo -e "$green run_01$stop_script_time $white"
 }
 
@@ -482,7 +483,6 @@ run_03() {
 	$node $dir_file_js/jd_health.js		#健康社区
 	$node $dir_file_js/jddj_fruit.js			#京东到家果园 0,8,11,17
 	$node $dir_file_js/jd_daily_lottery.js		#每日抽奖
-	$node $dir_file_js/jd_zoo.js 			#动物联萌 618活动
 	echo -e "$green run_03$stop_script_time $white"
 }
 
@@ -862,6 +862,7 @@ concurrent_js_if() {
 			concurrent_js
 			if_ps
 			concurrent_js_clean
+		;;
 		run_01|run_02|run_045|run_08_12_16|run_030|run_020)
 			action="$action1"
 			concurrent_js
@@ -2017,6 +2018,20 @@ sys_additional_settings(){
 	sed -i '/JDHEALTH_SHARECODES/d' /etc/profile >/dev/null 2>&1
 	echo "export JDHEALTH_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
 	export JDHEALTH_SHARECODES="$share_code_value&&"
+}
+
+zoo_share() {
+	new_zoo="sSKNX-MpqKOJsNu-nJyIBnzohu1bg555wuah8sFivgbEmm15mndGsDU8xOB2HuY"
+	new_zoo_set="'$new_zoo',"
+
+	share_code_value="$new_zoo_set"
+	js_amount=$(echo "$js_cookie" | wc -l)
+	while [[ ${js_amount} -gt 0 ]]; do
+		share_code_value="$share_code_value$new_zoo_set"
+		js_amount=$(($js_amount - 1))
+	done
+	zoo_rows=$(grep -n ".innerPkInviteList \= \[" $dir_file_js/jd_zoo.js | awk -F ":" '{print $1}')
+	sed -i "$zoo_rows a \ $share_code_value" $dir_file_js/jd_zoo.js
 }
 
 share_code_generate() {
