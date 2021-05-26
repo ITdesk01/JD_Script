@@ -460,9 +460,11 @@ run_02() {
 	if [ $(date "+%-H") -ge 13 ]; then
 		sed -i '/PASTURE_EXCHANGE_KEYWORD/d' /etc/profile
 		echo "export PASTURE_EXCHANGE_KEYWORD="10京豆"" >>/etc/profile
+		export PASTURE_EXCHANGE_KEYWORD="10京豆"
 	else
 		sed -i '/PASTURE_EXCHANGE_KEYWORD/d' /etc/profile
 		echo "export PASTURE_EXCHANGE_KEYWORD="1京豆"" >>/etc/profile
+		export PASTURE_EXCHANGE_KEYWORD="1京豆"
 	fi
 	$node $dir_file_js/monk_pasture.js #有机牧场
 	echo -e "$green run_02$stop_script_time $white"
@@ -1959,7 +1961,6 @@ sys_additional_settings(){
 		js_amountT=$(($js_amountT - 1))
 	done
 	sed -i '/JDCFD_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	#echo "export JDCFD_SHARECODES=$new_cfd_set" >> /etc/profile
 	export JDCFD_SHARECODES="$cfd_share_code&&"
 	echo "export JDCFD_SHARECODES=\"$cfd_share_code&&\"" >> /etc/profile
 	
