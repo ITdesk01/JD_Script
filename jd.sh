@@ -492,7 +492,6 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_blueCoin.js  #东东超市兑换，有次数限制，没时间要求
 	jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
 	jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
-	jd_joy.js #jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
 	jd_pet.js #东东萌宠，跟手机商城同一时间
 	jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
 	jd_superMarket.js #东东超市,6点 18点多加两场用于收金币
@@ -857,7 +856,13 @@ concurrent_js_if() {
 		run_03)
 			run_03
 		;;
-		run_01|run_06_18|run_02|run_045|run_08_12_16|run_030|run_020)
+		run_06_18)
+			$node $openwrt_script/JD_Script/js/jd_joy.js #jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
+			action="$action1"
+			concurrent_js
+			if_ps
+			concurrent_js_clean
+		run_01|run_02|run_045|run_08_12_16|run_030|run_020)
 			action="$action1"
 			concurrent_js
 			if_ps
@@ -1711,6 +1716,13 @@ additional_settings() {
 	#宠汪汪不给好友喂食
 	sed -i "s/let jdJoyHelpFeed = true/let jdJoyHelpFeed = $jd_joy_steal/g" $dir_file_js/jd_joy_steal.js
 
+	if [ `echo "$js_cookie" | wc -l`  -ge "10" ];then
+		export JOY_TEAM_LEVEL="10"
+	else
+		export JOY_TEAM_LEVEL="2"
+	fi
+
+	export JOY_RUN_HELP_MYSELF="true"
 
 	#种豆
 	new_plantBean1="4npkonnsy7xi3n46rivf5vyrszud7yvj7hcdr5a@mlrdw3aw26j3xeqso5asaq6zechwcl76uojnpha@nkvdrkoit5o65lgaousaj4dqrfmnij2zyntizsa@u5lnx42k5ifivyrtqhfjikhl56zsnbmk6v66uzi@5sxiasthesobwa3lehotyqcrd4@b3q5tww6is42gzo3u67hjquj54@b3q5tww6is42gzo3u67hjquj54"
@@ -2008,7 +2020,7 @@ sys_additional_settings(){
 }
 
 share_code_generate() {
-	js_amount=$(echo "$js_cookie" |wc -l)
+	js_amount=$(echo "$js_cookie" | wc -l)
 	while [[ ${js_amount} -gt 0 ]]; do
 		share_code_value="$share_code_value&$share_code"
 		js_amount=$(($js_amount - 1))
