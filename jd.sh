@@ -520,8 +520,6 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	monk_shop_follow_sku.js #关注有礼
 	jd_cash.js #签到领现金，每日2毛～5毛长期
 	monk_shop_lottery.js		#店铺大转盘
-	monk_skyworth_car.js #创维408下班全勤奖
-	monk_vinda.js	#“韧”性探索 空降好礼
 	jd_jin_tie.js 			#领金贴
 	adolf_martin.js			#人头马x博朗
 	adolf_mi.js			#合成小金刚
