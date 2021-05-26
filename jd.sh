@@ -53,8 +53,7 @@ current_time=$(date +"%Y-%m-%d")
 by="#### 脚本仓库地址:https://github.com/ITdesk01/JD_Script/tree/main 核心JS采用lxk0301开源JS脚本"
 SCKEY=$(grep "let SCKEY" $openwrt_script_config/sendNotify.js  | awk -F "'" '{print $2}')
 
-
-
+js_cookie=$(cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '")
 
 start_script_time="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
@@ -186,6 +185,12 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_carnivalcity.js		#京东手机狂欢城
 	jd_zoo.js 			#动物联萌 618活动
 	jd_get_share_code.js		#获取jd所有助力码脚本
+	jdDreamFactoryShareCodes.js	#京喜工厂ShareCodes
+	jdFruitShareCodes.js		#东东农场ShareCodes
+	jdPetShareCodes.js		#东东萌宠ShareCodes
+	jdPlantBeanShareCodes.js	#种豆得豆ShareCodes
+	jdFactoryShareCodes.js		#东东工厂ShareCodes
+	jdJxncShareCodes.js		#京喜农场ShareCodes
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
@@ -345,6 +350,7 @@ EOF
 	chmod 755 $dir_file_js/*
 	additional_settings
 	concurrent_js_update
+	source /etc/profile
 	echo -e "$green update$stop_script_time $white"
 	task #更新完全部脚本顺便检查一下计划任务是否有变
 
@@ -694,9 +700,8 @@ concurrent_js() {
 concurrent_js_update() {
 	if [ "$ccr_if" == "yes" ];then
 		rm -rf $ccr_js_file/*
-		js_cookie=$(cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '")
-		js_amount=$(echo "$js_cookie" |wc -l)
 
+		js_amount=$(echo "$js_cookie" |wc -l)
 		while [[ ${js_amount} -gt 0 ]]; do
 			mkdir $ccr_js_file/js_$js_amount
 			cp $openwrt_script_config/jdCookie.js $ccr_js_file/js_$js_amount/jdCookie.js
@@ -1559,7 +1564,17 @@ additional_settings() {
 
 	for i in `cat $dir_file/config/collect_script.txt | awk '{print $1}'`
 	do
+		sed -i "s/$.isNode() ? 10 : 5/0/g" $dir_file_js/$i
+	done
+
+	for i in `cat $dir_file/config/collect_script.txt | awk '{print $1}'`
+	do
 		sed -i "s/helpAu = true/helpAu = false/g" $dir_file_js/$i
+	done
+
+	for i in `cat $dir_file/config/collect_script.txt | awk '{print $1}'`
+	do
+		sed -i "s/helpAuthor=true/helpAuthor=false/g" $dir_file_js/$i
 	done
 
 	#京小超兑换豆子
@@ -1621,13 +1636,14 @@ additional_settings() {
 	random_fruit="$xo_20201229_fr@$zuoyou_random_fr@$yushengyigeliang_20210101_fr@$Javon_random_fr@$test_fr@$xiaodengzi_random_20190516_fr@$xiaodengzi_20190516_fr@$cainiao5_20190516_fr@$wjq_20190516_fr@$whiteboy_20190711_fr@$jiu_20210110_fr@$Oyeah_20200104_fr@$shisan_20200213_fr@$JOSN_20200807_fr@$Jhone_Potte_20200824_fr@$liandao_20201010_fr@$adong_20201108_fr@$deng_20201120_fr@$gomail_20201125_fr@$baijiezi_20201126_fr@$superbei666_20201124_fr@$yiji_20201125_fr@$mjmdz_20201217_fr@$JDnailao_20201230_fr@$xo_20201229_fr@$xiaobai_20201204_fr@$wuming_20201225_fr@$JOSN_20210102_fr@$Lili_20210121_fr@$tanherongyi_20210121_fr@$dajiangyou20210116_fr@$luckies_20210121_fr@$soso_20210204_fr@$NanshanFox_20210303_fr@$xiaodengzi_random_fr@$ysygl_20210101_fr"
 	random="$random_fruit"
 	random_array
-	new_fruit_set="'$new_fruit1@$zuoyou_20190516_fr@$Javon_20201224_fr@$minty_20210114_fr@$ashou_20210516_fr@$xiaobandeng_fr@$chiyu_fr@$random_set',"
+	new_fruit_set="$new_fruit1@$zuoyou_20190516_fr@$Javon_20201224_fr@$minty_20210114_fr@$ashou_20210516_fr@$xiaobandeng_fr@$chiyu_fr@$random_set"
 
-	fr_rows=$(grep -n "shareCodes =" $dir_file_js/jd_fruit.js | awk -F ":" '{print $1}')
-	frcode_rows=$(grep -n "FruitShareCodes = \[" $dir_file_js/jdFruitShareCodes.js | awk -F ":" '{print $1}')
-
-	sed -i "$fr_rows a \ $new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set" $dir_file_js/jd_fruit.js
-	sed -i "$frcode_rows a  \ $new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set\n$new_fruit_set" $dir_file_js/jdFruitShareCodes.js
+	share_code="$new_fruit_set"
+	share_code_value="$new_fruit_set"
+	share_code_generate
+	sed -i '/FRUITSHARECODES/d' /etc/profile >/dev/null 2>&1
+	export FRUITSHARECODES="$share_code_value&&"
+	echo "export FRUITSHARECODES=\"$share_code_value&&\"" >> /etc/profile
 
 	sed -i "s/dFruitBeanCard = false/dFruitBeanCard = $jd_fruit/g" $dir_file_js/jd_fruit.js #农场不浇水开始换豆
 
@@ -1677,13 +1693,14 @@ additional_settings() {
 	random_pet="$xo_20201229_pet@$zuoyou_random_pet@$Javon_random_pet@$test_pet@$xiaodengzi_20190516_pet@$cainiao5_20190516_pet@$wjq_20190516_pet@$whiteboy_20190711_pet@$jiu_20210110_pet@$Oyeah_20200104_pet@$shisan_20200213_pet@$JOSN_20200807_pet@$liandao_20201010_pet@$adong_20201108_pet@$deng_20201120_pet@$gomail_20201125_pet@$baijiezi_20201126_pet@$superbei666_20201124_pet@$yiji_20201125_pet@$mjmdz_20201217_pet@$JDnailao_20201230_pet@$xo_20201229_pet@$xiaobai_20201204_pet@$wuming_20201225_pet@$yushengyigeliang_20210101_pet@$JOSN_20210102_pet@$Lili_20210121_pet@$tanherongyi_20210121_pet@$dajiangyou20210116_pet@$luckies_20210121_pet@$NanshanFox_20210303_pet@$soso_20210204_pet@$ysygl_20210101_pet"
 	random="$random_pet"
 	random_array
-	new_pet_set="'$new_pet1@$zuoyou_20190516_pet@$Javon_20201224_pet@$minty_20210114_pet@$ashou_20210516_pet@$Jhone_Potte_20200824_pet@$chiyu_pet@$random_set',"
+	new_pet_set="$new_pet1@$zuoyou_20190516_pet@$Javon_20201224_pet@$minty_20210114_pet@$ashou_20210516_pet@$Jhone_Potte_20200824_pet@$chiyu_pet@$random_set"
 
-	pet_rows=$(grep -n "shareCodes =" $dir_file_js/jd_pet.js | awk -F ":" '{print $1}')
-	petcode_rows=$(grep -n "PetShareCodes = \[" $dir_file_js/jdPetShareCodes.js | awk -F ":" '{print $1}')
-
-	sed -i "$pet_rows a \ $new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set" $dir_file_js/jd_pet.js
-	sed -i "$petcode_rows a  \ $new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set\n$new_pet_set" $dir_file_js/jdPetShareCodes.js
+	share_code="$new_pet_set"
+	share_code_value="$new_pet_set"
+	share_code_generate
+	sed -i '/PETSHARECODES/d' /etc/profile >/dev/null 2>&1
+	export PETSHARECODES="$share_code_value&&"
+	echo "export PETSHARECODES=\"$share_code_value&&\"" >> /etc/profile
 
 	#宠汪汪积分兑换奖品改成兑换500豆子，个别人会兑换错误(350积分兑换20豆子，8000积分兑换500豆子要求等级16级，16000积分兑换1000京豆16级以后不能兑换)
 	sed -i "s/let joyRewardName = 0/let joyRewardName = $jd_joy_reward/g" $dir_file_js/jd_joy_reward.js
@@ -1742,13 +1759,14 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	random_plantBean="$xo_20201229_pb@$zuoyou_random_pb@$Javon_random_pb@$test_pb@$xiaodengzi_20190516_pb@$cainiao5_20190516_pb@$wjq_20190516_pb@$whiteboy_20190711_pb@$jiu_20210110_pb@$Oyeah_20200104_pb@$shisan_20200213_pb@$JOSN_20200807_pb@$Jhone_Potte_20200824_pb@$liandao_20201010_pb@$adong_20201108_pb@$deng_20201120_pb@$gomail_20201125_pb@$baijiezi_20201126_pb@$superbei666_20201124_pb@$yiji_20201125_pb@$mjmdz_20201217_pb@$JDnailao_20201230_pb@$xo_20201229_pb@$xiaobai_20201204_pb@$wuming_20201225_pb@$JOSN_20210102_pb@$Lili_20210121_pb@$tanherongyi_20210121_pb@$dajiangyou20210116_pb@$luckies_20210121_pb@$NanshanFox_20210303_pb@$soso_20210204_pb@$yushengyigeliang_20210101_pb@$ysygl_20210101_pb"
 	random="$random_plantBean"
 	random_array
-	new_plantBean_set="'$new_plantBean1@$zuoyou_20190516_pb@$Javon_20201224_pb@$minty_20210114_pb@$ashou_20210516_pb@$xiaobandeng_pb@$chiyu_pb@$random_set',"
+	new_plantBean_set="$new_plantBean1@$zuoyou_20190516_pb@$Javon_20201224_pb@$minty_20210114_pb@$ashou_20210516_pb@$xiaobandeng_pb@$chiyu_pb@$random_set"
 
-	pb_rows=$(grep -n "shareCodes =" $dir_file_js/jd_plantBean.js | awk -F ":" '{print $1}')
-	pbcode_rows=$(grep -n "PlantBeanShareCodes = \[" $dir_file_js/jdPlantBeanShareCodes.js | awk -F ":" '{print $1}')
-
-	sed -i "$pb_rows a \ $new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set" $dir_file_js/jd_plantBean.js
-	sed -i "$pbcode_rows a  \ $new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set\n$new_plantBean_set" $dir_file_js/jdPlantBeanShareCodes.js
+	share_code="$new_pet_set"
+	share_code_value="$new_pet_set"
+	share_code_generate
+	sed -i '/PLANT_BEAN_SHARECODES/d' /etc/profile >/dev/null 2>&1
+	export PLANT_BEAN_SHARECODES="$share_code_value&&"
+	echo "export PLANT_BEAN_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
 
 
 	#京喜工厂
@@ -1784,13 +1802,14 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	random_dreamFactory="$xo_20201229_df@$zuoyou_random_df@$test_df@$wjq_20190516_df@$whiteboy_20190711_df@$adong_20201108_df@$cainiao5_20201209_df@$wuming_20201225_df@$JOSN_20210102_df@$Lili_20210121_df@$tanherongyi_20210121_df@$dajiangyou20210116_df@$luckies_20210121_df@$superbei666_20201124_df@$NanshanFox_20210303_df@$jdnailao_20201130_df@$Javon_20201224_random_df@$yushengyigeliang_20210101_df@$stayhere_20200104_df@$soso_20210204_df@$ysygl_20210101_df"
 	random="$random_dreamFactory"
 	random_array
-	new_dreamFactory_set="'$new_dreamFactory@$zuoyou_20190516_df@$Javon_20201224_df@$minty_20210114_df@$ashou_20210516_df@$Jhone_Potte_20200824_df@$chiyu_df@$random_set',"
+	new_dreamFactory_set="$new_dreamFactory@$zuoyou_20190516_df@$Javon_20201224_df@$minty_20210114_df@$ashou_20210516_df@$Jhone_Potte_20200824_df@$chiyu_df@$random_set"
 
-	df_rows=$(grep -n "inviteCodes =" $dir_file_js/jd_dreamFactory.js | awk -F ":" '{print $1}')
-	dfcode_rows=$(grep -n "shareCodes = \[" $dir_file_js/jdDreamFactoryShareCodes.js | awk -F ":" '{print $1}')
-
-	sed -i "$df_rows a \ $new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set" $dir_file_js/jd_dreamFactory.js
-	sed -i "$dfcode_rows a  \ $new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set\n$new_dreamFactory_set" $dir_file_js/jdDreamFactoryShareCodes.js
+	share_code="$new_dreamFactory_set"
+	share_code_value="$new_dreamFactory_set"
+	share_code_generate
+	sed -i '/DREAM_FACTORY_SHARE_CODES/d' /etc/profile >/dev/null 2>&1
+	export DREAM_FACTORY_SHARE_CODES="$share_code_value&&"
+	echo "export DREAM_FACTORY_SHARE_CODES=\"$share_code_value&&\"" >> /etc/profile
 
 	#京东赚赚长期活动
 	new_jdzz="AUWE5mKmQzGYKXGT8j38cwA@AUWE5mvvGzDFbAWTxjC0Ykw@AUWE5wPfRiVJ7SxKOuQY0@S5KkcJEZAjD2vYGGG4Ip0@S5KkcREsZ_QXWIx31wKJZcA@S5KkcRUwe81LRIR_3xaNedw@Suvp2RBcY_VHKKBn3k_MMdNw@SvPVyQRke_EnWJxj1nfE@S5KkcRBYbo1fXKUv2k_5ccQ@S5KkcRh0ZoVfQchP9wvQJdw@S5KkcJnlwogCDQ2G84qtI"
@@ -1802,12 +1821,14 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	stayhere_20200104_jdzz="S5KkcRBZM8FHfIk_zxvBZJg@Suf13Rhkd8FHKJB30l_AD"
 	wjq_20190516_jdzz="S-acyL1ZZ@S5KkcR0sZ9V2CJh-nlKMMdg@S5KkcRhod9VGGcUj3kaZeJQ@S5KkcA2RThBKfVGmO9Z1J"
 	
-	new_jdzz_set="'$xo_20201229_jdzz@$new_jdzz@$zuoyou_20190516_jdzz@$jidiyangguang_20190516_jdzz@$chiyu_jdzz@$ashou_20210516_jdzz@$xo_20201229_jdzz@$stayhere_20200104_jdzz@$wjq_20190516_jdzz',"
+	new_jdzz_set="$xo_20201229_jdzz@$new_jdzz@$zuoyou_20190516_jdzz@$jidiyangguang_20190516_jdzz@$chiyu_jdzz@$ashou_20210516_jdzz@$xo_20201229_jdzz@$stayhere_20200104_jdzz@$wjq_20190516_jdzz"
 
-	jdzz_rows=$(grep -n "inviteCodes =" $dir_file_js/jd_jdzz.js | awk -F ":" '{print $1}')
-	sed -i "$jdzz_rows a \ $new_jdzz_set\n$new_jdzz_set\n$new_jdzz_set\n$new_jdzz_set\n$new_jdzz_set\n$new_jdzz_set\n$new_jdzz_set\n$new_jdzz_set" $dir_file_js/jd_jdzz.js
-
-	sed -i "s/helpAuthor=true/helpAuthor=false/g" $dir_file_js/jd_jdzz.js
+	share_code="$new_jdzz_set"
+	share_code_value="$new_jdzz_set"
+	share_code_generate
+	sed -i '/JDZZ_SHARECODES/d' /etc/profile >/dev/null 2>&1
+	export JDZZ_SHARECODES="$share_code_value&&"
+	echo "export JDZZ_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
 
 	#crazyJoy任务
 	new_crazyJoy="rHYmFm9wQAUb1S9FJUrMB6t9zd5YaBeE@7P1a-YqssNzEUo2yzMjkKat9zd5YaBeE@5z24ds6URIn_QEyGetqaHg==@KgkXpuBiTwm918sV3j4cmA==@CCxsXuB_kLhf6HV1LsZZ3GXGvf5Si_Xe@2tkIpiDk0h5W4-QdQYV1Hw==@KERXjmCp23eGkqiL1HrNKKt9zd5YaBeE@AG0W7h-GcmIDy_e0bkMKyat9zd5YaBeE@_l4qGmr10IzOqi6IfXC7ZQ=="
@@ -1820,12 +1841,15 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	stayhere_20200104_crazyJoy="JYMB0M2DG_OE-H_RYgP99qt9zd5YaBeE@MDIQhVK-LG_PlEmOfPSLwQ=="
 	wjq_20190516_crazyJoy="ejBGqJTY4r0=@enMTVrJW7qPAbTSvji1oZat9zd5YaBeE@rxZNO2svihUeku1Bz2PDp6t9zd5YaBeE@a3gu8WxfBpqodtuySkObDw=="
 	
-	new_crazyJoy_set="'$xo_20201229_crazyJoy@$new_crazyJoy@$zuoyou_20190516_cj@$jidiyangguang_20190516_cj@$Jhone_Potte_20200824_cj@$chiyu_cj@$ashou_20210516_crazyJoy@$xo_20201229_crazyJoy@$stayhere_20200104_crazyJoy@$wjq_20190516_crazyJoy',"
+	new_crazyJoy_set="$new_crazyJoy@$zuoyou_20190516_cj@$jidiyangguang_20190516_cj@$Jhone_Potte_20200824_cj@$chiyu_cj@$ashou_20210516_crazyJoy@$xo_20201229_crazyJoy@$stayhere_20200104_crazyJoy@$wjq_20190516_crazyJoy"
 
-	crazyJoy_rows=$(grep -n "inviteCodes =" $dir_file_js/jd_crazy_joy.js | awk -F ":" '{print $1}')
-	sed -i "$crazyJoy_rows a \ $new_crazyJoy_set\n$new_crazyJoy_set\n$new_crazyJoy_set\n$new_crazyJoy_set\n$new_crazyJoy_set\n$new_crazyJoy_set\n$new_crazyJoy_set\n$new_crazyJoy_set" $dir_file_js/jd_crazy_joy.js
+	share_code="$new_crazyJoy_set"
+	share_code_value="$new_crazyJoy_set"
+	share_code_generate
+	sed -i '/JDJOY_SHARECODES/d' /etc/profile >/dev/null 2>&1
+	export JDJOY_SHARECODES="$share_code_value&&"
+	echo "export JDJOY_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
 
-	sed -i "s/$.isNode() ? 10 : 5/0/g" $dir_file_js/jd_crazy_joy.js
 	sed -i "s/applyJdBean = 2000/applyJdBean = $jd_crazy_joy/g" $dir_file_js/jd_crazy_joy.js #JOY兑换2000豆子
 
 
@@ -1841,10 +1865,14 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	stayhere_20200104_jdcash="eU9YaOTnY_ku8zvSmXRAhA@JBszauu2Y_k79WnVyHQa"
 	wjq_20190516_jdcash="ZEF2A6Ty@eU9Ya7myZvVz92uGyycV1A@eU9Yaui2Zvl3oDzWziJHhw@eU9YL5b4F7puhR2vqhlQ"
 
-	new_jdcash_set="'$new_jdcash@$zuoyou_20190516_jdcash@$jidiyangguang_20190516_jdcash@$chiyu_jdcash@$Jhone_Potte_20200824_jdcash@$ashou_20210516_jdcash@$test_jdcash@$stayhere_20200104_jdcash@$xo_20201229_jdcash@$wjq_20190516_jdcash',"
+	new_jdcash_set="$new_jdcash@$zuoyou_20190516_jdcash@$jidiyangguang_20190516_jdcash@$chiyu_jdcash@$Jhone_Potte_20200824_jdcash@$ashou_20210516_jdcash@$test_jdcash@$stayhere_20200104_jdcash@$xo_20201229_jdcash@$wjq_20190516_jdcash"
 
-	cash_rows=$(grep -n "inviteCodes =" $dir_file_js/jd_cash.js | awk -F ":" '{print $1}')
-	sed -i "$cash_rows a \ $new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set\n$new_jdcash_set" $dir_file_js/jd_cash.js
+	share_code="$new_jdcash_set"
+	share_code_value="$new_jdcash_set"
+	share_code_generate
+	sed -i '/JD_CASH_SHARECODES/d' /etc/profile >/dev/null 2>&1
+	export JD_CASH_SHARECODES="$share_code_value&&"
+	echo "export JD_CASH_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
 
 	sed -i "s/https:\/\/gitee.com\/shylocks\/updateTeam\/raw\/main\/jd_cash.json/https:\/\/raw.githubusercontent.com\/ITdesk01\/JD_Script\/main\/JSON\/jd_cash.json/g"  $dir_file_js/jd_cash.js
 
@@ -1864,15 +1892,20 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	Javon_20201224_jdsgmh="T023uvp2RBcY_VHKKBn3k_MMdNwCjVQmoaT5kRrbA"
 	Jhone_Potte_20200824_jdsgmh="T0225KkcRhsepFbSIhulk6ELIQCjVWmIaW5kRrbA@T0225KkcRk0QplaEIRigwaYPJQCjVWmIaW5kRrbA"
 	jidiyangguang_20190516_jdsgmh="T0225KkcRBpK8lbeIxr8wfRcdwCjVQmoaT5kRrbA@T0225KkcR0wdpFCGcRvwxv4JcgCjVQmoaT5kRrbA"
+	chiyu_jdsgmh="T0117aUqCVsc91UCjVQmoaT5kRrbA"
 	wjq_20190516_jdsgmh="T008-acyL1ZZCjVQmoaT5kRrbA@T0225KkcR0sZ9V2CJh-nlKMMdgCjVQmoaT5kRrbA@T0225KkcRhod9VGGcUj3kaZeJQCjVQmoaT5kRrbA@T0205KkcA2RThBKfVGmO9Z1JCjVQmoaT5kRrbA"
 	ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQmoaT5kRrbA@T0225KkcRRtN8wCBdUimlqVbJwCjVQmoaT5kRrbA@T0225KkcRkoboVKEJRr3xvINdQCjVQmoaT5kRrbA@T014_aIzGEdFoAGJdwCjVQmoaT5kRrbA@T0225KkcRhpI8VfXcR79wqVcIACjVQmoaT5kRrbA@T0225KkcRk1P8VTSdUmixvUIfQCjVQmoaT5kRrbA@T011-acrCh8Q_VECjVQmoaT5kRrbA"
 	xo_20201229_jdsgmh="T022v_h6QR0Z_F3XPRj1l_QMcQCjVQmoaT5kRrbA@T0225KkcRx8b8lfQJxOmx6NffACjVQmoaT5kRrbA"
 	stayhere_20200104_jdsgmh="T0225KkcRBZM8FHfIk_zxvBZJgCjVQmoaT5kRrbA@T020uf13Rhkd8FHKJB30l_ADCjVQmoaT5kRrbA"
 	
-	new_jdsgmh_set="'$xo_20201229_jdsgmh@$new_jdsgmh@$zuoyou_20190516_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$Javon_20201224_jdsgmh@$Jhone_Potte_20200824_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$ashou_20210516_jdsgmh@$xo_20201229_jdsgmh@$stayhere_20200104_jdsgmh@$wjq_20190516_jdsgmh',"
+	new_jdsgmh_set="$new_jdsgmh@$zuoyou_20190516_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$Javon_20201224_jdsgmh@$xo_20201229_jdsgmh@$Jhone_Potte_20200824_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$ashou_20210516_jdsgmh@$xo_20201229_jdsgmh@$stayhere_20200104_jdsgmh@$wjq_20190516_jdsgmh',"
 
-	sgmh_rows=$(grep -n "inviteCodes =" $dir_file_js/jd_sgmh.js | awk -F ":" '{print $1}')
-	sed -i "$sgmh_rows a \ $new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set\n$new_jdsgmh_set" $dir_file_js/jd_sgmh.js
+	share_code="$new_jdsgmh_set"
+	share_code_value="$new_jdsgmh_set"
+	share_code_generate
+	sed -i '/JDSGMH_SHARECODES/d' /etc/profile >/dev/null 2>&1
+	export JDSGMH_SHARECODES="$share_code_value&&"
+	echo "export JDSGMH_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
 
 	#京东试用
 	if [ "$jd_try" == "yes" ];then
@@ -1922,19 +1955,14 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	jidiyangguang_cc="RtGKzOj3RgiqfYOSQtdl1eOd05gIN2tIDWFgjWB4l2Sa7XrYtw@RtGKz76gEA7yL4KeRd0w0EiokyucAF_KVx05gJUTx_688J1Bag"
 	zuoyou_cc="QMfizaDoDQrvMs_DSZBmlAsHuBuLVdQKBg@VMahgOmkDUbvfs_WW41tkt5YZBFWid-KJ-Vu@QcS2ieihDUbvfs_WW41tkgLgjGBi-F28nlc8@QNyynbLzBl_MI8_WW9R_moklKD3GKxv_PFsJWTo_Wg@Tty7n6XhRgijMs_WF5h_mndWxiCbUusIAV4mMd0A@RMyhmbLzAFP8INTWW5gzmo5OufFYwXAL7NcY1iiaTzo@RtGKz7mhEl6gKoCfEoI20PA4S5NDpZHXyKdLuDtaEwEnYlrCMw@W9GaibH3F2L4LMfwf5x_mq9Ys636pNQshUOB3RdlkZ2WTwc@RtGKzen2SQn1LNGbRoU03roWennJ-KWPcB_FTGg3JBGr6Wp4hw"
 	
-
 	new_cc_set="$new_cc@$chiyu_cc@$Javon_cc@$jidiyangguang_cc@$zuoyou_cc@$shqn_cc"
 
-	js_cookie=$(cat $dir_file_js/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '")
-	js_amountT=$(echo "$js_cookie" |wc -l)
-	cc_share_code="$new_cc_set"
-	while [[ ${js_amountT} -gt 0 ]]; do
-		cc_share_code="$cc_share_code&$new_cc_set"
-		js_amountT=$(($js_amountT - 1))
-	done
+	share_code="$new_cc_set"
+	share_code_value="$new_cc_set"
+	share_code_generate
 	sed -i '/CITY_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	export CITY_SHARECODES="$cc_share_code&&"
-	echo "export CITY_SHARECODES=\"$cc_share_code&&\"" >> /etc/profile
+	export CITY_SHARECODES="$share_code_value&&"
+	echo "export CITY_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
 	
 }
 
@@ -1952,17 +1980,13 @@ sys_additional_settings(){
 	random="$random_cfd"
 	random_array
 	new_cfd_set="$new_cfd@$Javon_20201224_cfd@$zuoyou_20190516_cfd@$jidiyangguang_20190516_cfd@$Jhone_Potte_20200824_cfd@$random_set@$stayhere_20200104_cfd@$wjq_20190516_cfd"
-	#根据账号数量生成对应的助力码
-	js_cookie=$(cat $dir_file_js/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '")
-	js_amountT=$(echo "$js_cookie" |wc -l)
-	cfd_share_code="$new_cfd_set"
-	while [[ ${js_amountT} -gt 0 ]]; do
-		cfd_share_code="$cfd_share_code&$new_cfd_set"
-		js_amountT=$(($js_amountT - 1))
-	done
+
+	share_code="$new_cfd_set"
+	share_code_value="$new_cfd_set"
+	share_code_generate
 	sed -i '/JDCFD_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	export JDCFD_SHARECODES="$cfd_share_code&&"
-	echo "export JDCFD_SHARECODES=\"$cfd_share_code&&\"" >> /etc/profile
+	echo "export JDCFD_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
+	export JDCFD_SHARECODES="$share_code_value&&"
 	
 	#东东社区
 	new_health="T0225KkcRxoZ9AfVdB7wxvRcIQCjVfnoaW5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVfnoaW5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVfnoaW5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVfnoaW5kRrbA"
@@ -1974,13 +1998,21 @@ sys_additional_settings(){
 	random="$random_health"
 	random_array
 	new_health_set="$new_health@$Javon_20201224_health@$random_set"
+
+	share_code="$new_health_set"
+	share_code_value="$new_health_set"
+	share_code_generate
 	sed -i '/JDHEALTH_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	echo "export JDHEALTH_SHARECODES=$new_health_set" >> /etc/profile
+	echo "export JDHEALTH_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
+	export JDHEALTH_SHARECODES="$share_code_value&&"
+}
 
-
-	new_health_set1="'$new_health_set',"
-	health_rows=$(grep -n "inviteCodes =" $dir_file_js/jd_health.js | awk -F ":" '{print $1}')
-	sed -i "$health_rows a \ $new_health_set1\n$new_health_set1\n$new_health_set1\n$new_health_set1\n$new_health_set1\n$new_health_set1\n$new_health_set1\n$new_health_set1" $dir_file_js/jd_health.js
+share_code_generate() {
+	js_amount=$(echo "$js_cookie" |wc -l)
+	while [[ ${js_amount} -gt 0 ]]; do
+		share_code_value="$share_code_value&$share_code"
+		js_amount=$(($js_amount - 1))
+	done
 }
 
 close_notification() {
