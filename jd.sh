@@ -2097,8 +2097,6 @@ npm_install() {
 }
 
 system_variable() {
-	sys_additional_settings
-
 	if [[ ! -d "$dir_file/config/tmp" ]]; then
 		mkdir -p $dir_file/config/tmp
 	fi
@@ -2233,6 +2231,9 @@ system_variable() {
 	close_notification
 
 	script_black
+
+	sys_additional_settings
+	additional_settings
 }
 
 jd_openwrt_config_description() {
