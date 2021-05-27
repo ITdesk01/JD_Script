@@ -2018,14 +2018,12 @@ zoo_share() {
 	new_zoo="sSKNX-MpqKOJsNu-nJyIBnzohu1bg555wuah8sFivgbEmm15mndGsDU8xOB2HuY@sSKNX-MpqKOJsNu-nJyIBnzohu1bg555wuah8sFivgeDWC-K5kCbbW3HgcATcUw@sSKNX-MpqKOJsNu-nJyIBnzohu1bg555wuah8sFivgWfwcdG_tYuxcGJ39fvF0Q"
 	new_zoo_set="'$new_zoo',"
 
-	share_code_value="$new_zoo_set"
 	js_amount=$(echo "$js_cookie" | wc -l)
+	zoo_rows=$(grep -n ".innerPkInviteList \= \[" $dir_file_js/jd_zoo.js | awk -F ":" '{print $1}')
 	while [[ ${js_amount} -gt 0 ]]; do
-		share_code_value="$share_code_value$new_zoo_set"
+		sed -i "$zoo_rows a \ $new_zoo_set" $dir_file_js/jd_zoo.js
 		js_amount=$(($js_amount - 1))
 	done
-	zoo_rows=$(grep -n ".innerPkInviteList \= \[" $dir_file_js/jd_zoo.js | awk -F ":" '{print $1}')
-	sed -i "$zoo_rows a \ $share_code_value" $dir_file_js/jd_zoo.js
 }
 
 share_code_generate() {
