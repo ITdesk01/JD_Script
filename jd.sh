@@ -230,6 +230,7 @@ cat >$dir_file/config/tmp/monk-normal.txt <<EOF
 	adolf_superbox.js		#超级盒子
 	adolf_newInteraction.js		#618大势新品赏
 	adolf_jxhb.js			#京喜阶梯红包
+	adolf_star.js			#家电星推官
 EOF
 
 for script_name in `cat $dir_file/config/tmp/monk-normal.txt | awk '{print $1}'`
@@ -478,6 +479,7 @@ run_03() {
 	$node $dir_file_js/jd_health.js		#健康社区
 	$node $dir_file_js/jddj_fruit.js			#京东到家果园 0,8,11,17
 	$node $dir_file_js/jd_daily_lottery.js		#每日抽奖
+	$node $dir_file_js/adolf_star.js			#家电星推官
 	echo -e "$green run_03$stop_script_time $white"
 }
 
