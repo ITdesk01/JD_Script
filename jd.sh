@@ -449,12 +449,11 @@ run_045() {
 
 run_01() {
 	echo -e "$green run_01$start_script_time $white"
+	$node $dir_file_js/jd_zoo.js 			#动物联萌 618活动
 	$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
 	$node $dir_file_js/jd_joy_feedPets.js  #宠汪汪喂食一个小时喂一次
 	export RAIN_NOTIFY_CONTROL="false"
 	$node $dir_file_js/jd_super_redrain.js		#整点红包雨
-	$node $dir_file_js/jd_city.js			#城城领现金
-	$node $dir_file_js/jd_zoo.js 			#动物联萌 618活动
 	echo -e "$green run_01$stop_script_time $white"
 }
 
@@ -477,11 +476,12 @@ run_02() {
 
 run_03() {
 	echo -e "$green run_03$start_script_time $white"
+	$node $dir_file_js/jd_city.js			#城城领现金
+	$node $dir_file_js/jd_xtg_help.js			#家电星推官好友互助脚本
 	$node $dir_file_js/jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
 	$node $dir_file_js/jd_health.js		#健康社区
 	$node $dir_file_js/jddj_fruit.js			#京东到家果园 0,8,11,17
 	$node $dir_file_js/jd_daily_lottery.js		#每日抽奖
-	$node $dir_file_js/jd_xtg_help.js			#家电星推官好友互助脚本
 	echo -e "$green run_03$stop_script_time $white"
 }
 
