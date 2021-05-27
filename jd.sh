@@ -227,13 +227,13 @@ cat >$dir_file/config/tmp/monk-normal.txt <<EOF
 	adolf_oppo.js                   #刺客567之寻宝
 	adolf_pk.js 			#京享值PK
 	adolf_martin.js			#人头马x博朗
-	adolf_mi.js			#合成小金刚
 	adolf_superbox.js		#超级盒子
 	adolf_newInteraction.js		#618大势新品赏
 	adolf_jxhb.js			#京喜阶梯红包
 EOF
 
 rm -rf $dir_file_js/adolf_star.js
+rm -rf $dir_file_js/adolf_mi.js			#合成小金刚
 
 for script_name in `cat $dir_file/config/tmp/monk-normal.txt | awk '{print $1}'`
 do
@@ -387,6 +387,7 @@ update_script() {
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
+	jd_xtg.js			#家电星推官
 	jd_blueCoin.js  	#东东超市兑换，有次数限制，没时间要求
 	jd_car_exchange.js   #京东汽车兑换，500赛点兑换500京豆
 	jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
@@ -471,6 +472,7 @@ run_02() {
 	fi
 	$node $dir_file_js/monk_pasture.js #有机牧场
 	$node $dir_file_js/jd_xtg.js			#家电星推官
+	$node $dir_file_js/jd_xtg_help.js			#家电星推官好友互助脚本
 	echo -e "$green run_02$stop_script_time $white"
 }
 
@@ -526,7 +528,6 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	monk_shop_lottery.js		#店铺大转盘
 	jd_jin_tie.js 			#领金贴
 	adolf_martin.js			#人头马x博朗
-	adolf_mi.js			#合成小金刚
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_07$start_script_time $white"
