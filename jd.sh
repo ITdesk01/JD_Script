@@ -185,6 +185,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_carnivalcity.js		#京东手机狂欢城
 	jd_zoo.js 			#动物联萌 618活动
 	jd_xtg.js			#家电星推官
+	jd_xtg_help.js			#家电星推官好友互助
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
