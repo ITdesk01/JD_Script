@@ -472,7 +472,6 @@ run_02() {
 	fi
 	$node $dir_file_js/monk_pasture.js #有机牧场
 	$node $dir_file_js/jd_xtg.js			#家电星推官
-	$node $dir_file_js/jd_xtg_help.js			#家电星推官好友互助脚本
 	echo -e "$green run_02$stop_script_time $white"
 }
 
@@ -482,6 +481,7 @@ run_03() {
 	$node $dir_file_js/jd_health.js		#健康社区
 	$node $dir_file_js/jddj_fruit.js			#京东到家果园 0,8,11,17
 	$node $dir_file_js/jd_daily_lottery.js		#每日抽奖
+	$node $dir_file_js/jd_xtg_help.js			#家电星推官好友互助脚本
 	echo -e "$green run_03$stop_script_time $white"
 }
 
