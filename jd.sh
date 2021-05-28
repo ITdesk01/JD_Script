@@ -186,6 +186,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_zoo.js 			#动物联萌 618活动
 	jd_xtg.js			#家电星推官
 	jd_xtg_help.js			#家电星推官好友互助
+	jd_gold_creator.js		#金榜创造营
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -497,6 +498,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_pet.js #东东萌宠，跟手机商城同一时间
 	jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
 	jd_superMarket.js #东东超市,6点 18点多加两场用于收金币
+	jd_gold_creator.js		#金榜创造营
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
