@@ -226,7 +226,6 @@ cat >$dir_file/config/tmp/monk-normal.txt <<EOF
 	monk_shop_lottery.js 		#店铺大转盘
 	monk_inter_shop_sign.js 	#interCenter渠道店铺签到
 	monk_shop_follow_sku.js 	#关注有礼
-	adolf_oppo.js                   #刺客567之寻宝
 	adolf_pk.js 			#京享值PK
 	adolf_martin.js			#人头马x博朗
 	adolf_superbox.js		#超级盒子
@@ -235,7 +234,7 @@ cat >$dir_file/config/tmp/monk-normal.txt <<EOF
 	adolf_urge.js			#坐等更新
 EOF
 
-rm -rf $dir_file_js/adolf_star.js
+rm -rf $dir_file_js/adolf_oppo.js                   #刺客567之寻宝
 rm -rf $dir_file_js/adolf_mi.js			#合成小金刚
 
 for script_name in `cat $dir_file/config/tmp/monk-normal.txt | awk '{print $1}'`
@@ -406,7 +405,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_jin_tie.js #领金贴
 	jddj_bean.js			#京东到家鲜豆 一天一次
 	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
-	adolf_oppo.js                   #刺客567之寻宝
 	z_shop_captain.js		#超级无线组队分奖品
 	adolf_superbox.js		#超级盒子
 EOF
