@@ -231,6 +231,7 @@ cat >$dir_file/config/tmp/monk-normal.txt <<EOF
 	adolf_superbox.js		#超级盒子
 	adolf_newInteraction.js		#618大势新品赏
 	adolf_jxhb.js			#京喜阶梯红包
+	adolf_urge.js			#坐等更新
 EOF
 
 rm -rf $dir_file_js/adolf_star.js
@@ -530,6 +531,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	monk_shop_lottery.js		#店铺大转盘
 	jd_jin_tie.js 			#领金贴
 	adolf_martin.js			#人头马x博朗
+	adolf_urge.js			#坐等更新
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_07$start_script_time $white"
