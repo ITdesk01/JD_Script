@@ -2027,7 +2027,7 @@ sys_additional_settings(){
 }
 
 zoo_share() {
-	new_zoo="sSKNX-MpqKOJsNu-nJyIBnzohu1bg555wuah8sFivgbEmm15mndGsDU8xOB2HuY@sSKNX-MpqKOJsNu-nJyIBnzohu1bg555wuah8sFivgeDWC-K5kCbbW3HgcATcUw@sSKNX-MpqKOJsNu-nJyIBnzohu1bg555wuah8sFivgWfwcdG_tYuxcGJ39fvF0Q"
+	new_zoo="sSKNX-MpqKOJsNu-nJyIBnzohu1bg555wuah8sFivgbEmm15mndGsDU8xOB2Hug@sSKNX-MpqKOJsNu-nJyIBnzohu1bg555wuah8sFivgeDWC-K5kCbbW3HgcATcUw@sSKNX-MpqKOJsNu-nJyIBnzohu1bg555wuah8sFivgWfwcdG_tYuxcGJ39fvF0Q"
 	new_zoo_set="'$new_zoo',"
 
 	js_amount=$(echo "$js_cookie" | wc -l)
