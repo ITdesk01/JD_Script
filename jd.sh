@@ -58,7 +58,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.08"
+	cron_version="3.09"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -84,7 +84,7 @@ cat >>/etc/crontabs/root <<EOF
 10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #宠汪汪兑换礼品#100#
 00 22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本#100#
 5 9,11,19,22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 && source /etc/profile #9,11,19,22点05分更新lxk0301脚本#100#
-*/30 1-22 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机#100#
+#*/30 1-22 * * * $dir_file/jd.sh joy >/tmp/jd_joy.log 2>&1 #1-22,每半个小时kill joy并运行一次joy挂机#100#
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机#100#
 0 11 */7 * *  $node $dir_file/js/jd_price.js >/tmp/jd_price.log #每7天11点执行京东保价#100#
 10-20/5 12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
@@ -420,7 +420,7 @@ EOF
 	run_01
 	run_03
 	run_030
-	$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
+	#$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
 	echo -e "$green run_0$stop_script_time $white"
 }
 
@@ -1064,6 +1064,7 @@ delcookie() {
 	fi
 
 }
+cd $dir_file
 if [ ! `git remote -v | grep -o "https:\/\/github.com\/ITdesk01\/JD_Script.git" | wc -l` == "2" ];then 
 exit 0
 fi
@@ -1614,8 +1615,13 @@ additional_settings() {
 	#南山忆只狸
 	NanshanFox_20210303_fr="466c4a6b914f4639ac3b2f8b62473365@e3f644b3337d4bbabe45630dd6ad8702@7b688aadeb0448b8b1a2b2e85555ecb7@90d6fcb0843f45deb49575a7d7cb667c@5403258f288242efbe4e81d5f2ebb23b@80f21f968821456f886e10677d4b6874@8186b1fa4a78472095040db665bfb7a5@36f43e0dcb5e4b50b81388e9d1f4f6b5@fe199a2aeb894cee844aff3c7fbf8a84@fc335b5bc7854ee0a13679a9e6410b5b@ccf8e0ec661940c8a1e882b3bbf236fb@4e8439f1e9a14338ba90688b45d4958e@39e9e204c5cc473c967bd06031b94df9@43258bb57e464c268edc40148017fe73@bfec14f3156c41baa92b2c36ed9fb459@ac75cc510aaa475fbf1d08ef8973b462@7c98182e8d2a456381cc1f935dccaf61@c98bc75f96b7422b84388a90767fde2b@776e6ab6b0d04262b47ef1bd0db7dc55@7e96ed05c5f14c8bbf2a5b8bd083b79d@227baadbae854ce480e6e85f9ce4330c@6f9e47f94e844521bcd824f38ab64c66@248006afe4f04c9cb2b7b9d56e9c9288@23d728e8b9a449f18559b8ff29eebc0f@7bc93226f43e46b0aa9fb101b28ca55c@9b8d09eac9c14b19a06f61403b76fa80@8c44f316463a493fb207d928a3f4bf4d@7bc5b4abd4284849bf5adb44378cb637@da52dc3af6384ffdadecd68c6519645a@58477f92546843e48570cf11ef3c6784"
 
+	#Lili
+	Lili_20210121_fr="48651377d7544f6bbf32cbd7ef50be30"
+	#己巳
+	jisi_20201211_fr="df3ae0b59ca74e7a8567cdfb8c383f02@917de51d75414ddda4a1bbb863b8bf8a@e3ec63e3ba65424881469526d8964657@9b9e10d0aab44cfcb579ac6e76bb29c5"
 
-	random_fruit="$wjq_20190516_fr@$NanshanFox_20210303_fr"
+
+	random_fruit="$wjq_20190516_fr@$NanshanFox_20210303_fr@$Lili_20210121_fr@$jisi_20201211_fr"
 	random="$random_fruit"
 	random_array
 	new_fruit_set="'$new_fruit1@$zuoyou_20190516_fr@$Javon_20201224_fr@$minty_20210114_fr@$ashou_20210516_fr@$xiaobandeng_fr@$chiyu_fr@$random_set',"
@@ -1645,13 +1651,15 @@ additional_settings() {
 	#南山忆只狸
 	NanshanFox_20210303_pet="MTE1NDUwMTI0MDAwMDAwMDQ0OTY5Njcx@MTE1NDUyMjEwMDAwMDAwNDQ5Njk4MTE=@MTE1NDAxNzgwMDAwMDAwNDQ5ODUzMDU=@MTEzMzI0OTE0NTAwMDAwMDA0NTA5NjgzMQ==@MTE1NDQ5OTUwMDAwMDAwNDUyNTQ4ODE=@MTE1NDQ5MzYwMDAwMDAwNDUzMzY0MDM=@MTEzMzI0OTE0NTAwMDAwMDA0NTcwODMzOQ==@MTE1NDQ5OTIwMDAwMDAwNDYwMDc4OTE=@MTE1NDQ5OTUwMDAwMDAwNDcwNjg1ODc=@MTE0MDkyMjEwMDAwMDAwNDcxOTA1OTM=@MTE1NDUyMjEwMDAwMDAwNDUzNjkwNDE=@MTE0MjI0NTE1MjAwMDAwMDA0NzM5ODI2Mw==@MTE0MjI0NTE1MjAwMDAwMDA0NzM5MzU0OQ==@MTE0MDkyMjEwMDAwMDAwNDc1Nzk2NjM=@MTE0MDQ3MzIwMDAwMDAwNDc2MjYzMTk=@MTE0MDQ3MzIwMDAwMDAwNDgxNDQxMDk=@MTAxNzIyNTU1NDAwMDAwMDA0ODE5MzMxNw==@MTEyNjkzMjAwMDAwMDAwMDQ5MTU1MTE5@MTEyNjE4NjQ2MDAwMDAwMDQ5MTY0NzYz@MTAxODc2NTEzMDAwMDAwMDAyODgwODk4NQ==@MTEyOTEzNzMzMDAwMDAwMDQ5NTg3MDUx@MTEyNjkzMjAwMDAwMDAwMDQ5NjAzNDQ1@MTEzMzE4MTU2MDAwMDAwMDQ5NjA1Mzkx@MTEzMzkyODgwMDAwMDAwNDk2MDU3NzE=@MTEyNjE4NjQ2MDAwMDAwMDQ5NjE1MDYz@MTAxNzIxMDc1MTAwMDAwMDA0OTYzMDk5Nw==@MTE1NDY3NTMwMDAwMDAwNDk2NDY5NDE=@MTAxNzIyNTU1NDAwMDAwMDA0OTYzMTA4OQ=="
 
+	#Lili
+	Lili_20210121_pet="MTE1NDUyMjEwMDAwMDAwNDM4MjYyMDE="
+	#己巳
+	jisi_20201211_pet="MTE1NDUwMTI0MDAwMDAwMDQyODExMzU1@MTE0MDQ3MzIwMDAwMDAwNDc0NDU4MTU=@MTEzMzI0OTE0NTAwMDAwMDA0Mjg4NTczOQ==@MTE1MzEzNjI2MDAwMDAwMDQ5NjUwMjkz"
+
 	
 	
 
-
-	
-
-	random_pet="$wjq_20190516_pet@$NanshanFox_20210303_pet"
+	random_pet="$wjq_20190516_pet@$NanshanFox_20210303_pet@$Lili_20210121_pet@$jisi_20201211_pet"
 	random="$random_pet"
 	random_array
 	new_pet_set="'$new_pet1@$zuoyou_20190516_pet@$Javon_20201224_pet@$minty_20210114_pet@$ashou_20210516_pet@$Jhone_Potte_20200824_pet@$chiyu_pet@$random_set',"
@@ -1696,9 +1704,14 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	#南山忆只狸
 	NanshanFox_20210303_pb="ciue6ohtv7r3wcx6l7kb2trrc3l5vknx47277hi@olmijoxgmjutz53j2fxs5vi5olewxtttsjadtuy@l4ex6vx6yynovcxjwvmqdtk7zk32zmkp5skvdyy@zalmhfy34qahzjpq4r7s62tsf66ev3ukvxhsp6i@h3cggkcy6agkguhymcpp3wzsy2zc3aftfjwau3q@t7obxmpebrxkdikzvu24ze3o3le2sjlivykrmca@2vgtxj43q3jqyxm4pzec2nhm3ftkamipodkhaka@mlrdw3aw26j3x3wggfzdhfon4uiuzmkq7hdt7jq@e7lhibzb3zek26dyzu5w2furny4rqorn4rsndyy@x3x7xhsua3bmiz67jzdwhexwtcjwqfxalbniaay@wsr6thb5bd25kh3n6lzgafa6b6pmhkfjt3zql4a@e7lhibzb3zek36qgapszjjumi4nhdx4wxipoymi@e7lhibzb3zek3lqi2vghnvw5i2rtlplqsdde4ma@olmijoxgmjuty36rm5srvhxplrstiiao7fcgzyy@e7lhibzb3zek3pnn6nn5bwc4em2nns2z64j7mkq@mlrdw3aw26j3xrggjbpnypqkgh6oud4etfkht3a@7qol36k2wexakaxtmmksdngudu7eotuapecp3mq@olmijoxgmjutztjurvkyz7l5zs7rvu5ymlrz5xy@wrqpt6mmzjh2zmobm7vu2756w7yxyxaif5gfcpi@qwmkwedt5pnucx6ura6h7fexcsg2444ycms2rqy@olmijoxgmjutyc5ltjminzcnsnu3a4s75rv2a6i@m5dbjzf7aqwt35a2zxtvvcuj7pjvpeuemdctgjy@olmijoxgmjutyq4kv4v4qha4qsn6nwcbu5shu7q@e7lhibzb3zek2newt4kq22fbduvoy3aq3o2to6y@mlrdw3aw26j3x4glgmmnwlo7caxow6i5dol6rva@u72q4vdn3zes3kcwr6wn62bcbevnb5on7niyxri@olmijoxgmjutygkncksia3veh5xue2emzdd2pdi@tnmcphpjys5ich6ccffqeudobtvhixdtahfrvhy@o7eiltak46s2xirajkeyuomz3oa54pgd6klan4a@qjr4b6t5jjnzoz3rbp6e5smzhy"
 
+	#Lili
+	Lili_20210121_pb="n24x4hzuumfuu3a26r2o45ydxe"
+	#己巳
+	jisi_20201211_pb="qm7basnqm6wnqtoyefmgh65nby@eeexxudqtlamobesoisd3c4ygur4f7o46eyzl3q@mnuvelsb76r27b4ovdbtrrl2u5a53z543epg7hi@4npkonnsy7xi2mpzzclrkctwylbyoffpyhsqwri"
+
 	
 	
-	random_plantBean="$wjq_20190516_pb$NanshanFox_20210303_pb"
+	random_plantBean="$wjq_20190516_pb$NanshanFox_20210303_pb@$Lili_20210121_pb@$jisi_20201211_pb"
 	random="$random_plantBean"
 	random_array
 	new_plantBean_set="$new_plantBean1@$zuoyou_20190516_pb@$Javon_20201224_pb@$minty_20210114_pb@$ashou_20210516_pb@$xiaobandeng_pb@$chiyu_pb@$random_set"
@@ -1727,9 +1740,13 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	#南山忆只狸
 	NanshanFox_20210303_df="yPwJfzwijXtviR92IUzreA==@uQYCmXVYxC3TgnkWlBC5ow==@eSLN49Y-cyfdIeBJ8--W4Q==@0LoJKMF2z6q6ovH7kQNFsg==@V4iSET1KlJuMsf1pFuqfCw==@5zeEy4DZc8n3B-uxx7_-uQ==@Ro1eGwtyQMtdETPd6fOGkw==@m9R516G3-8n_CdFpFAvDMg==@qByxP-FAxaujLBXIIATaMg==@Pdi1IoP82K_YAaBU5TdHFQ==@6wbPf3gpOd_4JJP5fzRtAg==@7s6BaPPzUH_QbF0rPq6acg==@q-Y-p5x-1rksX6G6_NQqYg==@vtyUK9IAhNInmqnA1jS2PA==@IgYuMS2mirWp3qGyUZXPlA==@v2X95auqSibTe_b-WOotBA==@t8OcqcyCMVzfg7djKIZ57A==@JxumZ0LfZfEqni29uDk7iA==@rnWHWgA5DYvhkkHGTxdOOQ==@pCKqeU0_mAVYKMElGRg3xA==@4dx3By5yr2tng51IrBVCTg==@L7tnt1Rol0VSHGaooXBgrg==@EgO_xlLlGYc5Kxi2zJ3z6g==@Df3OTEOo0qqJWu_SaWFvPg=="
 
+	#Lili
+	Lili_20210121_df="HQTSebNAjuGe4igMSpHeog=="
+	#己巳
+	jisi_20201211_df="5BOWMhgoVeCjMEjg-ssm1w==@sTpAUMutQkLF8w3r6u9wCw==@i2SuMzTz18a7afGrr9zn6H86hjAEmRIdJD54NZbw_dg="
 
 	
-	random_dreamFactory="$wjq_20190516_df@$NanshanFox_20210303_df"
+	random_dreamFactory="$wjq_20190516_df@$NanshanFox_20210303_df@$Lili_20210121_df@$jisi_20201211_df"
 	random="$random_dreamFactory"
 	random_array
 	new_dreamFactory_set="'$new_dreamFactory@$zuoyou_20190516_df@$Javon_20201224_df@$minty_20210114_df@$ashou_20210516_df@$Jhone_Potte_20200824_df@$chiyu_df@$random_set',"
@@ -2230,6 +2247,34 @@ EOF
 }
 
 
+action1="$1"
+action2="$2"
+
+if [[ -z $action1 ]]; then
+	stop_script
+	clear
+	echo "脚本抽风，休息，开放时间未知。。。"
+	exit 0
+else
+	stop_script
+	clear
+	echo "脚本抽风，休息，开放时间未知。。。"
+	exit 0
+fi
+
+if [[ -z $action2 ]]; then
+	stop_script
+	clear
+	echo "脚本抽风，休息，开放时间未知。。。"
+	exit 0
+else
+	stop_script
+	clear
+	echo "脚本抽风，休息，开放时间未知。。。"
+	exit 0
+fi
+
+:<<'COMMENT'
 system_variable
 action1="$1"
 action2="$2"
@@ -2272,5 +2317,6 @@ else
 	esac
 	fi
 fi
+COMMENT
 
 
