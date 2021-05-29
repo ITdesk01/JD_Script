@@ -1593,7 +1593,7 @@ additional_settings() {
 
 	if [ `cat $openwrt_script_config/sendNotify.js | grep "采用lxk0301开源JS脚本" | wc -l` == "0" ];then
 	sed -i "s/本脚本开源免费使用 By：https:\/\/gitee.com\/lxk0301\/jd_docker/#### 脚本仓库地址:https:\/\/github.com\/ITdesk01\/JD_Script\/tree\/main 核心JS采用lxk0301开源JS脚本/g" $openwrt_script_config/sendNotify.js
-	sed -i "s/本脚本开源免费使用 By：https:\/\/github.com\/LXK9301\/jd_scripts/#### 脚本仓库地址:https:\/\/github.com\/ITdesk01\/JD_Script\/tree\/main 核心JS采用lxk0301开源JS脚本/g" $openwrt_script_config/sendNotify.js
+	sed -i "s/本脚本开源免费使用 By：https:\/\/github.com\/LXK0301\/jd_scripts/#### 脚本仓库地址:https:\/\/github.com\/ITdesk01\/JD_Script\/tree\/main 核心JS采用lxk0301开源JS脚本/g" $openwrt_script_config/sendNotify.js
 	fi
 	
 
@@ -1644,7 +1644,7 @@ additional_settings() {
 	random_fruit="$xo_20201229_fr@$zuoyou_random_fr@$yushengyigeliang_20210101_fr@$Javon_random_fr@$test_fr@$xiaodengzi_random_20190516_fr@$xiaodengzi_20190516_fr@$cainiao5_20190516_fr@$wjq_20190516_fr@$whiteboy_20190711_fr@$jiu_20210110_fr@$Oyeah_20200104_fr@$shisan_20200213_fr@$JOSN_20200807_fr@$Jhone_Potte_20200824_fr@$liandao_20201010_fr@$adong_20201108_fr@$deng_20201120_fr@$gomail_20201125_fr@$baijiezi_20201126_fr@$superbei666_20201124_fr@$yiji_20201125_fr@$mjmdz_20201217_fr@$JDnailao_20201230_fr@$xo_20201229_fr@$xiaobai_20201204_fr@$wuming_20201225_fr@$JOSN_20210102_fr@$Lili_20210121_fr@$tanherongyi_20210121_fr@$dajiangyou20210116_fr@$luckies_20210121_fr@$soso_20210204_fr@$NanshanFox_20210303_fr@$xiaodengzi_random_fr@$ysygl_20210101_fr"
 	random="$random_fruit"
 	random_array
-	new_fruit_set="'$new_fruit1@$zuoyou_20190516_fr@$Javon_20201224_fr@$minty_20210114_fr@$ashou_20210516_fr@$xiaobandeng_fr@$chiyu_fr@$random_set',"
+	new_fruit_set="'$new_fruit1@$zuoyou_20190516_fr@$Javon_20201224_fr@$minty_20210114_fr@$ashou_20210516_fr@$xiaobandeng_fr@$chiyu_fr',"
 
 	fr_rows=$(grep -n "shareCodes =" $dir_file_js/jd_fruit.js | awk -F ":" '{print $1}')
 	frcode_rows=$(grep -n "FruitShareCodes = \[" $dir_file_js/jdFruitShareCodes.js | awk -F ":" '{print $1}')
@@ -1700,7 +1700,7 @@ additional_settings() {
 	random_pet="$xo_20201229_pet@$zuoyou_random_pet@$Javon_random_pet@$test_pet@$xiaodengzi_20190516_pet@$cainiao5_20190516_pet@$wjq_20190516_pet@$whiteboy_20190711_pet@$jiu_20210110_pet@$Oyeah_20200104_pet@$shisan_20200213_pet@$JOSN_20200807_pet@$liandao_20201010_pet@$adong_20201108_pet@$deng_20201120_pet@$gomail_20201125_pet@$baijiezi_20201126_pet@$superbei666_20201124_pet@$yiji_20201125_pet@$mjmdz_20201217_pet@$JDnailao_20201230_pet@$xo_20201229_pet@$xiaobai_20201204_pet@$wuming_20201225_pet@$yushengyigeliang_20210101_pet@$JOSN_20210102_pet@$Lili_20210121_pet@$tanherongyi_20210121_pet@$dajiangyou20210116_pet@$luckies_20210121_pet@$NanshanFox_20210303_pet@$soso_20210204_pet@$ysygl_20210101_pet"
 	random="$random_pet"
 	random_array
-	new_pet_set="'$new_pet1@$zuoyou_20190516_pet@$Javon_20201224_pet@$minty_20210114_pet@$ashou_20210516_pet@$Jhone_Potte_20200824_pet@$chiyu_pet@$random_set',"
+	new_pet_set="'$new_pet1@$zuoyou_20190516_pet@$Javon_20201224_pet@$minty_20210114_pet@$ashou_20210516_pet@$Jhone_Potte_20200824_pet@$chiyu_pet',"
 
 	pet_rows=$(grep -n "shareCodes =" $dir_file_js/jd_pet.js | awk -F ":" '{print $1}')
 	petcode_rows=$(grep -n "PetShareCodes = \[" $dir_file_js/jdPetShareCodes.js | awk -F ":" '{print $1}')
@@ -1772,7 +1772,7 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	random_plantBean="$xo_20201229_pb@$zuoyou_random_pb@$Javon_random_pb@$test_pb@$xiaodengzi_20190516_pb@$cainiao5_20190516_pb@$wjq_20190516_pb@$whiteboy_20190711_pb@$jiu_20210110_pb@$Oyeah_20200104_pb@$shisan_20200213_pb@$JOSN_20200807_pb@$Jhone_Potte_20200824_pb@$liandao_20201010_pb@$adong_20201108_pb@$deng_20201120_pb@$gomail_20201125_pb@$baijiezi_20201126_pb@$superbei666_20201124_pb@$yiji_20201125_pb@$mjmdz_20201217_pb@$JDnailao_20201230_pb@$xo_20201229_pb@$xiaobai_20201204_pb@$wuming_20201225_pb@$JOSN_20210102_pb@$Lili_20210121_pb@$tanherongyi_20210121_pb@$dajiangyou20210116_pb@$luckies_20210121_pb@$NanshanFox_20210303_pb@$soso_20210204_pb@$yushengyigeliang_20210101_pb@$ysygl_20210101_pb"
 	random="$random_plantBean"
 	random_array
-	new_plantBean_set="$new_plantBean1@$zuoyou_20190516_pb@$Javon_20201224_pb@$minty_20210114_pb@$ashou_20210516_pb@$xiaobandeng_pb@$chiyu_pb@$random_set"
+	new_plantBean_set="$new_plantBean1@$zuoyou_20190516_pb@$Javon_20201224_pb@$minty_20210114_pb@$ashou_20210516_pb@$xiaobandeng_pb@$chiyu_pb"
 
 	share_code="$new_pet_set"
 	share_code_value="$new_pet_set"
@@ -1815,7 +1815,7 @@ ashou_20210516_pb="3wmn5ktjfo7ukgaymbrakyuqry3h7wlwy7o5jii@chcdw36mwfu6bh72u7gtv
 	random_dreamFactory="$xo_20201229_df@$zuoyou_random_df@$test_df@$wjq_20190516_df@$whiteboy_20190711_df@$adong_20201108_df@$cainiao5_20201209_df@$wuming_20201225_df@$JOSN_20210102_df@$Lili_20210121_df@$tanherongyi_20210121_df@$dajiangyou20210116_df@$luckies_20210121_df@$superbei666_20201124_df@$NanshanFox_20210303_df@$jdnailao_20201130_df@$Javon_20201224_random_df@$yushengyigeliang_20210101_df@$stayhere_20200104_df@$soso_20210204_df@$ysygl_20210101_df"
 	random="$random_dreamFactory"
 	random_array
-	new_dreamFactory_set="'$new_dreamFactory@$zuoyou_20190516_df@$Javon_20201224_df@$minty_20210114_df@$ashou_20210516_df@$Jhone_Potte_20200824_df@$chiyu_df@$random_set',"
+	new_dreamFactory_set="'$new_dreamFactory@$zuoyou_20190516_df@$Javon_20201224_df@$minty_20210114_df@$ashou_20210516_df@$Jhone_Potte_20200824_df@$chiyu_df',"
 
 	df_rows=$(grep -n "inviteCodes =" $dir_file_js/jd_dreamFactory.js | awk -F ":" '{print $1}')
 	dfcode_rows=$(grep -n "shareCodes = \[" $dir_file_js/jdDreamFactoryShareCodes.js | awk -F ":" '{print $1}')
@@ -1895,7 +1895,7 @@ sys_additional_settings(){
 	stayhere_20200104_crazyJoy="JYMB0M2DG_OE-H_RYgP99qt9zd5YaBeE@MDIQhVK-LG_PlEmOfPSLwQ=="
 	wjq_20190516_crazyJoy="ejBGqJTY4r0=@enMTVrJW7qPAbTSvji1oZat9zd5YaBeE@rxZNO2svihUeku1Bz2PDp6t9zd5YaBeE@a3gu8WxfBpqodtuySkObDw=="
 	
-	new_crazyJoy_set="$new_crazyJoy@$zuoyou_20190516_cj@$jidiyangguang_20190516_cj@$Jhone_Potte_20200824_cj@$chiyu_cj@$ashou_20210516_crazyJoy@$xo_20201229_crazyJoy@$stayhere_20200104_crazyJoy@$wjq_20190516_crazyJoy"
+	new_crazyJoy_set="$new_crazyJoy@$zuoyou_20190516_cj@$jidiyangguang_20190516_cj@$Jhone_Potte_20200824_cj@$chiyu_cj@$ashou_20210516_crazyJoy"
 
 	share_code="$new_crazyJoy_set"
 	share_code_value="$new_crazyJoy_set"
@@ -1919,7 +1919,7 @@ sys_additional_settings(){
 	stayhere_20200104_jdcash="eU9YaOTnY_ku8zvSmXRAhA@JBszauu2Y_k79WnVyHQa"
 	wjq_20190516_jdcash="ZEF2A6Ty@eU9Ya7myZvVz92uGyycV1A@eU9Yaui2Zvl3oDzWziJHhw@eU9YL5b4F7puhR2vqhlQ"
 
-	new_jdcash_set="$new_jdcash@$zuoyou_20190516_jdcash@$jidiyangguang_20190516_jdcash@$chiyu_jdcash@$Jhone_Potte_20200824_jdcash@$ashou_20210516_jdcash@$test_jdcash@$stayhere_20200104_jdcash@$xo_20201229_jdcash@$wjq_20190516_jdcash"
+	new_jdcash_set="$new_jdcash@$zuoyou_20190516_jdcash@$jidiyangguang_20190516_jdcash@$chiyu_jdcash@$Jhone_Potte_20200824_jdcash@$ashou_20210516_jdcash@$test_jdcash"
 
 	share_code="$new_jdcash_set"
 	share_code_value="$new_jdcash_set"
@@ -1952,7 +1952,7 @@ sys_additional_settings(){
 	xo_20201229_jdsgmh="T022v_h6QR0Z_F3XPRj1l_QMcQCjVQmoaT5kRrbA@T0225KkcRx8b8lfQJxOmx6NffACjVQmoaT5kRrbA"
 	stayhere_20200104_jdsgmh="T0225KkcRBZM8FHfIk_zxvBZJgCjVQmoaT5kRrbA@T020uf13Rhkd8FHKJB30l_ADCjVQmoaT5kRrbA"
 	
-	new_jdsgmh_set="$new_jdsgmh@$zuoyou_20190516_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$Javon_20201224_jdsgmh@$xo_20201229_jdsgmh@$Jhone_Potte_20200824_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$ashou_20210516_jdsgmh@$xo_20201229_jdsgmh@$stayhere_20200104_jdsgmh@$wjq_20190516_jdsgmh',"
+	new_jdsgmh_set="$new_jdsgmh@$zuoyou_20190516_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$Javon_20201224_jdsgmh@$xo_20201229_jdsgmh@$Jhone_Potte_20200824_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$ashou_20210516_jdsgmh',"
 
 	share_code="$new_jdsgmh_set"
 	share_code_value="$new_jdsgmh_set"
@@ -1969,7 +1969,7 @@ sys_additional_settings(){
 	jidiyangguang_cc="RtGKzOj3RgiqfYOSQtdl1eOd05gIN2tIDWFgjWB4l2Sa7XrYtw@RtGKz76gEA7yL4KeRd0w0EiokyucAF_KVx05gJUTx_688J1Bag"
 	zuoyou_cc="QMfizaDoDQrvMs_DSZBmlAsHuBuLVdQKBg@VMahgOmkDUbvfs_WW41tkt5YZBFWid-KJ-Vu@QcS2ieihDUbvfs_WW41tkgLgjGBi-F28nlc8@QNyynbLzBl_MI8_WW9R_moklKD3GKxv_PFsJWTo_Wg@Tty7n6XhRgijMs_WF5h_mndWxiCbUusIAV4mMd0A@RMyhmbLzAFP8INTWW5gzmo5OufFYwXAL7NcY1iiaTzo@RtGKz7mhEl6gKoCfEoI20PA4S5NDpZHXyKdLuDtaEwEnYlrCMw@W9GaibH3F2L4LMfwf5x_mq9Ys636pNQshUOB3RdlkZ2WTwc@RtGKzen2SQn1LNGbRoU03roWennJ-KWPcB_FTGg3JBGr6Wp4hw"
 	
-	new_cc_set="$new_cc@$chiyu_cc@$Javon_cc@$jidiyangguang_cc@$zuoyou_cc@$shqn_cc"
+	new_cc_set="$new_cc@$chiyu_cc@$Javon_cc@$jidiyangguang_cc@$zuoyou_cc"
 
 	share_code="$new_cc_set"
 	share_code_value="$new_cc_set"
@@ -1996,7 +1996,7 @@ sys_additional_settings(){
 	random_cfd="$test_cfd"
 	random="$random_cfd"
 	random_array
-	new_cfd_set="$new_cfd@$Javon_20201224_cfd@$zuoyou_20190516_cfd@$jidiyangguang_20190516_cfd@$Jhone_Potte_20200824_cfd@$random_set@$stayhere_20200104_cfd@$wjq_20190516_cfd"
+	new_cfd_set="$new_cfd@$Javon_20201224_cfd@$zuoyou_20190516_cfd@$jidiyangguang_20190516_cfd@$Jhone_Potte_20200824_cfd"
 
 	share_code="$new_cfd_set"
 	share_code_value="$new_cfd_set"
