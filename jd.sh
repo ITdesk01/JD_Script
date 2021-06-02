@@ -2022,9 +2022,11 @@ zoo_share() {
 	new_zoopk5="'sSKNX-MpqKObp_DwnJu2BGGTUTWUfPSxwzGOzw',"
 
 	sed -i "s/$.inviteList = \[/$.inviteList = \[ \n/g" $dir_file_js/jd_zoo.js
-	sed -i '/sSKNX-MpqKOJsNu8mJ7RA9BJMup4tAAmPcPPPhBUWYKUJ19UKeC8EAoKeUXELi4o/d' $dir_file_js/jd_zoo.js
+
 	zoo_rows=$(grep -n "\$.inviteList \= \[" $dir_file_js/jd_zoo.js | awk -F ":" '{print $1}')
 	zoopk_rows=$(grep -n "\$.pkInviteList \= \[" $dir_file_js/jd_zoo.js | awk -F ":" '{print $1}')
+	zoopk_rows1=$(expr $zoopk_rows + 1)
+	sed -i "$zoopk_rows1 d" $dir_file_js/jd_zoo.js
 	sed -i "$zoopk_rows a \ $new_zoopk5" $dir_file_js/jd_zoo.js
 	sed -i "$zoopk_rows a \ $new_zoopk4" $dir_file_js/jd_zoo.js
 	sed -i "$zoopk_rows a \ $new_zoopk3" $dir_file_js/jd_zoo.js
