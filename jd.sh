@@ -459,7 +459,6 @@ run_01() {
 
 run_02() {
 	echo -e "$green run_02$start_script_time $white"
-	$node $dir_file_js/babelDiy.js.js #总裁送好礼
 	$node $dir_file_js/jd_moneyTree.js #摇钱树
 	if [ $(date "+%-H") -ge 13 ]; then
 		sed -i '/PASTURE_EXCHANGE_KEYWORD/d' /etc/profile
@@ -477,6 +476,7 @@ run_02() {
 
 run_03() {
 	echo -e "$green run_03$start_script_time $white"
+	$node $dir_file_js/babelDiy.js.js #总裁送好礼
 	$node $openwrt_script/JD_Script/js/adolf_jxhb.js			#京喜阶梯红包
 	$node $dir_file_js/jd_city.js			#城城领现金
 	$node $dir_file_js/jd_xtg_help.js			#家电星推官好友互助脚本
