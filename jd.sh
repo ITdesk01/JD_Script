@@ -1884,7 +1884,7 @@ additional_settings() {
 	done
 
 	#明星小店
-	new_jdss=""
+	new_jdss="VYlzzuDz-Y8seOROZFxje-gusZ0qMCAXkWRSg4DzCCQ"
 
 	new_jdss_set="'$new_jdss',"
 
@@ -1897,7 +1897,7 @@ additional_settings() {
 	
 	js_amount=$(echo "$js_cookie" | wc -l)
 	while [[ ${js_amount} -gt 0 ]]; do
-		#sed -i "$jdss_rows a \ $new_jdss_set " $dir_file_js/jd_star_shop.js
+		sed -i "$jdss_rows a \ $new_jdss_set " $dir_file_js/jd_star_shop.js
 		js_amount=$(($js_amount - 1))
 	done
 
