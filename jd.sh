@@ -1890,12 +1890,10 @@ additional_settings() {
 
 	jdss_rows=$(grep -n "\$.authorCodeList \= \[" $dir_file_js/jd_star_shop.js | awk -F ":" '{print $1}')
 	jdss_rows1=$(expr $jdss_rows + 1)
-	jdss_rows2=$(expr $jdss_rows1 + 1)
-	jdss_rows3=$(expr $jdss_rows2 + 1)
 	
 	sed -i "$jdss_rows1 d" $dir_file_js/jd_star_shop.js
-	sed -i "$jdss_rows2 d" $dir_file_js/jd_star_shop.js
-	sed -i "$jdss_rows3 d" $dir_file_js/jd_star_shop.js
+	sed -i "$jdss_rows1 d" $dir_file_js/jd_star_shop.js
+	sed -i "$jdss_rows1 d" $dir_file_js/jd_star_shop.js
 	
 	js_amount=$(echo "$js_cookie" | wc -l)
 	while [[ ${js_amount} -gt 0 ]]; do
