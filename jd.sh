@@ -361,7 +361,7 @@ EOF
 	fi
 	chmod 755 $dir_file_js/*
 	additional_settings
-	sys_additional_settings
+	#sys_additional_settings
 	zoo_share
 	concurrent_js_update
 	source /etc/profile
