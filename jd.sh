@@ -232,8 +232,6 @@ cat >$dir_file/config/tmp/monk-normal.txt <<EOF
 	adolf_urge.js			#坐等更新
 EOF
 
-rm -rf $dir_file_js/adolf_oppo.js                   #刺客567之寻宝
-rm -rf $dir_file_js/adolf_mi.js			#合成小金刚
 
 for script_name in `cat $dir_file/config/tmp/monk-normal.txt | awk '{print $1}'`
 do
@@ -305,8 +303,9 @@ done
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
 	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_friend.js -O $dir_file_js/jd_friend.js #joy总动员一次性脚本
-	wget https://raw.githubusercontent.com/Wenmoux/scripts/master/jd/babelDiy.js -O $dir_file_js/babelDiy.js #总裁送好礼,跑两次就行了日志骗人的
+	wget https://raw.githubusercontent.com/Wenmoux/scripts/master/jd/jd_mcxhd_brandcity.js -O $dir_file_js/jd_mcxhd_brandcity.js  #新潮品牌狂欢
 
+rm -rf $dir_file_js/babelDiy.js
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -316,7 +315,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	babelDiy.js 			#总裁送好礼,跑两次就行了日志骗人的
+	jd_mcxhd_brandcity.js  		#新潮品牌狂欢
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	monk_shop_lottery.js 		#店铺大转盘
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
@@ -478,7 +477,6 @@ run_02() {
 
 run_03() {
 	echo -e "$green run_03$start_script_time $white"
-	$node $dir_file_js/babelDiy.js #总裁送好礼,跑两次就行了日志骗人的
 	$node $dir_file_js/adolf_jxhb.js			#京喜阶梯红包
 	$node $dir_file_js/jd_city.js			#城城领现金
 	$node $dir_file_js/jd_xtg_help.js			#家电星推官好友互助脚本
@@ -492,6 +490,7 @@ run_03() {
 
 run_06_18() {
 cat >/tmp/jd_tmp/run_06_18 <<EOF
+	jd_mcxhd_brandcity.js  		#新潮品牌狂欢
 	jd_blueCoin.js  #东东超市兑换，有次数限制，没时间要求
 	jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
 	jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
@@ -2052,8 +2051,8 @@ zoo_share() {
 	new_zoopk1="'sSKNX-MpqKOJsNu_nZvYV-nCFtEoibN3nsRhO8g77euwQQhVn3QtBsoadt4CFkmh',"
 	new_zoopk2="'sSKNX-MpqKOJsNu-nJyIBnzohu1bg555wuah8sFivgeDWC-K5kCbbW3HgcATcUju',"
 	new_zoopk3="'sSKNX-MpqKPQ5rO9mJ3eA9kQEewE3VAI3sBFbJT22o438AhSpqTxO3dqDFxqEXNZ',"
-	new_zoopk4="'sSKNX-MpqKOXrevjyMWdUScQdhgwySVYfKlCINKPUG9Dlw',"
-	new_zoopk5="'sSKNX-MpqKObp_DwnJu2BGGTUTWUfPSxwzGOzg',"
+	new_zoopk4="'sSKNX-MpqKObp_DwnJu2BGGTUTWUfPSxwzGOzg',"
+	new_zoopk5="'sSKNX-MpqKOXrevjyMWdUScQdhgwySVYfKlCINKPUG9Dlw',"
 
 	sed -i "s/$.inviteList = \[/$.inviteList = \[ \n/g" $dir_file_js/jd_zoo.js
 
