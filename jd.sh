@@ -316,7 +316,6 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	jd_mohe.js			#5G超级盲盒
 	jd_mcxhd_brandcity.js  		#新潮品牌狂欢
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	monk_shop_lottery.js 		#店铺大转盘
@@ -1078,10 +1077,7 @@ delcookie() {
 	fi
 
 }
-cd $dir_file
-if [ ! `git remote -v | grep -o "https:\/\/github.com\/ITdesk01\/JD_Script.git" | wc -l` == "2" ];then 
-exit 0
-fi
+
 check_cooike() {
 #将cookie获取时间导入文本
 	if [ ! -f $openwrt_script_config/check_cookie.txt  ];then
@@ -1161,7 +1157,10 @@ checklog() {
 	rm -rf $log1
 	rm -rf $log2
 }
-
+cd $dir_file
+if [ ! `git remote -v | grep -o "https:\/\/github.com\/ITdesk01\/JD_Script.git" | wc -l` == "2" ];then 
+exit 0
+fi
 
 #检测当天更新情况并推送
 that_day() {
