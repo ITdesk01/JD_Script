@@ -299,7 +299,7 @@ do
 	update_if
 done
 
-zooPanda_url="https://raw.githubusercontent.com/passerby-b/JDDJ/main"
+zooPanda_url="https://raw.githubusercontent.com/zooPanda/zoo/dev"
 cat >$dir_file/config/tmp/passerby_url.txt <<EOF
 	zooBaojiexiaoxiaole.js			#宝洁消消乐 一天一次
 	zooLongzhou.js				#浓情618 与“粽”不同 一天一次
