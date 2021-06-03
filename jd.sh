@@ -878,7 +878,7 @@ concurrent_js_if() {
 			if_ps
 			concurrent_js_clean
 		;;
-		run_01|run_02|run_045|run_08_12_16|run_020)
+		run_01|run_02|run_045|run_08_12_16|run_020|run_10_15_20)
 			action="$action1"
 			concurrent_js
 			if_ps
