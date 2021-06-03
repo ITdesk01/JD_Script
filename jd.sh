@@ -185,6 +185,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_gold_creator.js		#金榜创造营
 	jd_zooCollect.js		#zoo收集金币
 	jd_mohe.js			#5G超级盲盒
+	jd_star_shop.js			#明星小店
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -552,6 +553,7 @@ EOF
 
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
+	jd_star_shop.js			#明星小店
 	jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	jd_syj.js #赚京豆
 	adolf_pk.js 			#京享值PK
@@ -1878,6 +1880,26 @@ additional_settings() {
 	ddgc_rows=$(grep -n "inviteCodes =" $dir_file_js/jd_jdfactory.js | awk -F ":" '{print $1}')
 	while [[ ${js_amount} -gt 0 ]]; do
 		sed -i "$ddgc_rows a \ $new_ddgc_set " $dir_file_js/jd_jdfactory.js
+		js_amount=$(($js_amount - 1))
+	done
+
+	#明星小店
+	new_jdss=""
+
+	new_jdss_set="'$new_jdss',"
+
+	jdss_rows=$(grep -n "\$.authorCodeList \= \[" $dir_file_js/jd_star_shop.js | awk -F ":" '{print $1}')
+	jdss_rows1=$(expr $jdss_rows + 1)
+	jdss_rows2=$(expr $jdss_rows1 + 1)
+	jdss_rows3=$(expr $jdss_rows2 + 1)
+	
+	sed -i "$jdss_rows1 d" $dir_file_js/jd_star_shop.js
+	sed -i "$jdss_rows2 d" $dir_file_js/jd_star_shop.js
+	sed -i "$jdss_rows3 d" $dir_file_js/jd_star_shop.js
+	
+	js_amount=$(echo "$js_cookie" | wc -l)
+	while [[ ${js_amount} -gt 0 ]]; do
+		#sed -i "$jdss_rows a \ $new_jdss_set " $dir_file_js/jd_star_shop.js
 		js_amount=$(($js_amount - 1))
 	done
 
