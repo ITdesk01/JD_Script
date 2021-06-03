@@ -277,8 +277,8 @@ EOF
 for script_name in `cat $dir_file/config/tmp/nianyuguai_qx.txt | awk '{print $1}'`
 do
 	url="$nianyuguai_url"
-	wget $nianyuguai_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $nianyuguai_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 passerby_url="https://raw.githubusercontent.com/passerby-b/JDDJ/main"
