@@ -304,6 +304,8 @@ done
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
 	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_friend.js -O $dir_file_js/jd_friend.js #joy总动员一次性脚本
 	wget https://raw.githubusercontent.com/Wenmoux/scripts/master/jd/jd_mcxhd_brandcity.js -O $dir_file_js/jd_mcxhd_brandcity.js  #新潮品牌狂欢
+	wget https://jdsharedresourcescdn.azureedge.net/jdresource/jd_mohe.js  -O $dir_file_js/jd_mohe.js #5G超级盲盒
+
 
 rm -rf $dir_file_js/babelDiy.js
 
@@ -315,6 +317,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_mohe.js			#5G超级盲盒
 	jd_mcxhd_brandcity.js  		#新潮品牌狂欢
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	monk_shop_lottery.js 		#店铺大转盘
@@ -389,6 +392,7 @@ update_script() {
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_xtg.js			#家电星推官
+	jd_mohe.js			#5G超级盲盒
 	jd_blueCoin.js  	#东东超市兑换，有次数限制，没时间要求
 	jd_car_exchange.js   #京东汽车兑换，500赛点兑换500京豆
 	jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
@@ -491,6 +495,7 @@ run_03() {
 run_06_18() {
 cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_mcxhd_brandcity.js  		#新潮品牌狂欢
+	jd_mohe.js			#5G超级盲盒
 	jd_blueCoin.js  #东东超市兑换，有次数限制，没时间要求
 	jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
 	jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
