@@ -316,6 +316,7 @@ Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/master/jd"
 cat >$dir_file/config/tmp/Wenmoux_url.txt <<EOF
 	jd_mcxhd_brandcity.js  			#新潮品牌狂欢
 	jd_618redpacket.js			#翻翻乐
+	jd_superBrand.js 			#特物ZX联想
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Wenmoux_url.txt | awk '{print $1}'`
@@ -438,6 +439,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	adolf_superbox.js		#超级盒子
 	jd_dreamFactory.js 		#京喜工厂
 	jd_xcpp.js 			#柠檬新潮品牌
+	jd_superBrand.js 		#特物ZX联想
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
