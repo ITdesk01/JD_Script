@@ -312,13 +312,27 @@ do
 	update_if
 done
 
+Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/master/jd"
+cat >$dir_file/config/tmp/Wenmoux_url.txt <<EOF
+	jd_mcxhd_brandcity.js  			#新潮品牌狂欢
+	jd_618redpacket.js			#翻翻乐
+EOF
+
+for script_name in `cat $dir_file/config/tmp/Wenmoux_url.txt | awk '{print $1}'`
+do
+	url="$Wenmoux_url"
+	wget $Wenmoux_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
 	#检测cookie是否存活（暂时不能看到还有几天到期）
 	cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
 
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
 	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_friend.js -O $dir_file_js/jd_friend.js #joy总动员一次性脚本
-	wget https://raw.githubusercontent.com/Wenmoux/scripts/master/jd/jd_mcxhd_brandcity.js -O $dir_file_js/jd_mcxhd_brandcity.js  #新潮品牌狂欢
+	wget https://raw.githubusercontent.com/panghu999/panghu/master/jd_xcpp.js -O $dir_file_js/jd_xcpp.js #柠檬新潮品牌
+
 
 rm -rf $dir_file_js/jd_city.js
 
@@ -330,7 +344,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	jd_mcxhd_brandcity.js  		#新潮品牌狂欢
+	jd_xcpp.js 			#柠檬新潮品牌
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	monk_shop_lottery.js 		#店铺大转盘
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
@@ -423,6 +437,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	z_shop_captain.js		#超级无线组队分奖品
 	adolf_superbox.js		#超级盒子
 	jd_dreamFactory.js 		#京喜工厂
+	jd_xcpp.js 			#柠檬新潮品牌
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -465,12 +480,22 @@ run_045() {
 }
 
 run_01() {
+cat >/tmp/jd_tmp/run_01 <<EOF
+	jd_zoo.js 			#动物联萌 618活动
+	jd_618redpacket.js			#翻翻乐
+	jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
+	jd_joy_feedPets.js  #宠汪汪喂食一个小时喂一次
+EOF
+	#jd_super_redrain.js		#整点红包雨
 	echo -e "$green run_01$start_script_time $white"
-	$node $dir_file_js/jd_zoo.js 			#动物联萌 618活动
-	$node $dir_file_js/jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
-	$node $dir_file_js/jd_joy_feedPets.js  #宠汪汪喂食一个小时喂一次
+
+	for i in `cat /tmp/jd_tmp/run_01 | awk '{print $1}'`
+	do
+		$node $dir_file_js/$i
+		$run_sleep
+	done
 	export RAIN_NOTIFY_CONTROL="false"
-	#$node $dir_file_js/jd_super_redrain.js		#整点红包雨
+
 	echo -e "$green run_01$stop_script_time $white"
 }
 
@@ -492,14 +517,23 @@ run_02() {
 }
 
 run_03() {
+cat >/tmp/jd_tmp/run_03 <<EOF
+	adolf_jxhb.js			#京喜阶梯红包
+	jd_xtg_help.js			#家电星推官好友互助脚本
+	jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
+	jd_health.js		#健康社区
+	jddj_fruit.js			#京东到家果园 0,8,11,17
+	jd_daily_lottery.js		#每日抽奖
+	jd_mohe.js			#5G超级盲盒
+EOF
 	echo -e "$green run_03$start_script_time $white"
-	$node $dir_file_js/adolf_jxhb.js			#京喜阶梯红包
-	$node $dir_file_js/jd_xtg_help.js			#家电星推官好友互助脚本
-	$node $dir_file_js/jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
-	$node $dir_file_js/jd_health.js		#健康社区
-	$node $dir_file_js/jddj_fruit.js			#京东到家果园 0,8,11,17
-	$node $dir_file_js/jd_daily_lottery.js		#每日抽奖
-	$node $dir_file_js/jd_mohe.js			#5G超级盲盒
+
+	for i in `cat /tmp/jd_tmp/run_03 | awk '{print $1}'`
+	do
+		$node $dir_file_js/$i
+		$run_sleep
+	done
+
 	echo -e "$green run_03$stop_script_time $white"
 }
 
