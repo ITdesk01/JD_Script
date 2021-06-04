@@ -326,13 +326,27 @@ do
 	update_if
 done
 
+panghu999_url="https://raw.githubusercontent.com/panghu999/panghu/master"
+cat >$dir_file/config/tmp/panghu999_url.txt <<EOF
+	jd_xcpp.js 				#柠檬新潮品牌
+	jd_dphby.js				#柠檬大牌闪购红包雨 一天一次
+	jd_gcip.js 				#柠檬特物国创I
+	jd_ppdz.js				#柠檬东东泡泡大战
+EOF
+
+for script_name in `cat $dir_file/config/tmp/panghu999_url.txt | awk '{print $1}'`
+do
+	url="$panghu999_url"
+	wget $panghu999_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
 	#检测cookie是否存活（暂时不能看到还有几天到期）
 	cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
 
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
 	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_friend.js -O $dir_file_js/jd_friend.js #joy总动员一次性脚本
-	wget https://raw.githubusercontent.com/panghu999/panghu/master/jd_xcpp.js -O $dir_file_js/jd_xcpp.js #柠檬新潮品牌
 
 
 rm -rf $dir_file_js/jd_city.js
@@ -345,7 +359,6 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	jd_xcpp.js 			#柠檬新潮品牌
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	monk_shop_lottery.js 		#店铺大转盘
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
@@ -439,6 +452,9 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	adolf_superbox.js		#超级盒子
 	jd_dreamFactory.js 		#京喜工厂
 	jd_xcpp.js 			#柠檬新潮品牌
+	jd_dphby.js			#柠檬大牌闪购红包雨 一天一次
+	jd_gcip.js 			#柠檬特物国创I
+	jd_ppdz.js			#柠檬东东泡泡大战
 	jd_superBrand.js 		#特物ZX联想
 EOF
 	echo -e "$green run_0$start_script_time $white"
