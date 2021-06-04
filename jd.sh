@@ -2162,7 +2162,7 @@ zoo_share() {
 	new_zoopk2="'sSKNX-MpqKOJsNu-nJyIBnzohu1bg555wuah8sFivgeDWC-K5kCbbW3HgcATcUjo',"
 	new_zoopk3="'sSKNX-MpqKObp_DwnJu2BGGTUTWUfPSxwzGOyQ',"
 	new_zoopk4="'sSKNX-MpqKOXrevjyMWdUScQdhgwySVYfKlCINKPUG9DkQ',"
-	new_zoopk5="'sSKNX-MpqKPQ5rO9mJ3eA9kQEewE3VAI3sBFbJT22o438AhSpqTxO3dqDFxqEXNe',"
+	new_zoopk5="'sSKNX-MpqKPQ5rO9mJ3eA9kQEewE3VAI3sBFbJT22o438AhSpqTxO3dqDFxqEXNf',"
 
 	sed -i "s/$.inviteList = \[/$.inviteList = \[ \n/g" $dir_file_js/jd_zoo.js
 
