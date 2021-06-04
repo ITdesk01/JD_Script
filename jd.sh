@@ -305,6 +305,9 @@ zooPanda_url="https://raw.githubusercontent.com/zooPanda/zoo/dev"
 cat >$dir_file/config/tmp/zooPanda_url.txt <<EOF
 	zooBaojiexiaoxiaole.js			#宝洁消消乐 一天一次
 	zooLongzhou.js				#浓情618 与“粽”不同 一天一次
+	zooOpencard01.js			#纯开卡 大牌联合618提前购
+	zooOpencard02.js			#纯开卡 大牌强联合好物提前购
+	zooOpencard03.js			#纯开卡 大牌强联合好物提前购
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zooPanda_url.txt | awk '{print $1}'`
@@ -333,6 +336,7 @@ cat >$dir_file/config/tmp/panghu999_url.txt <<EOF
 	jd_dphby.js				#柠檬大牌闪购红包雨 一天一次
 	jd_gcip.js 				#柠檬特物国创I
 	jd_ppdz.js				#柠檬东东泡泡大战
+	jd_ry618.js				#柠檬华为荣耀618
 EOF
 
 for script_name in `cat $dir_file/config/tmp/panghu999_url.txt | awk '{print $1}'`
@@ -457,6 +461,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_dphby.js			#柠檬大牌闪购红包雨 一天一次
 	jd_gcip.js 			#柠檬特物国创I
 	jd_ppdz.js			#柠檬东东泡泡大战
+	jd_ry618.js			#柠檬华为荣耀618
 	jd_superBrand.js 		#特物ZX联想
 EOF
 	echo -e "$green run_0$start_script_time $white"
