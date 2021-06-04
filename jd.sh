@@ -1957,12 +1957,14 @@ additional_settings() {
 	done
 
 	#明星小店
-	new_jdss="VYlzzuDz-Y8seOROZFxje-gusZ0qMCAXkWRSg4DzCCQ"
+	new_jdss="VYlzzuDz-Y8seOROZFxje-gusZ0qMCAXkWRSg4DzCCQ@O-d-kb7wpZ1S27CVsn1DzTmTEwjTAPSH2XscO-ZOeAU"
 
 	new_jdss_set="'$new_jdss',"
 
 	jdss_rows=$(grep -n "\$.authorCodeList \= \[" $dir_file_js/jd_star_shop.js | awk -F ":" '{print $1}')
 	
+	sed -i "s/{'id':'YCDXNN','name':'蔡徐坤'},//g" $dir_file_js/jd_star_shop.js
+	sed -i "s/蔡徐坤//g" $dir_file_js/jd_star_shop.js
 	js_amount=$(echo "$js_cookie" | wc -l)
 	while [[ ${js_amount} -gt 0 ]]; do
 		sed -i "$jdss_rows a \ $new_jdss_set " $dir_file_js/jd_star_shop.js
