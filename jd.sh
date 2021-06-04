@@ -177,7 +177,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_health_collect.js		#健康社区-收能量
 	jd_daily_lottery.js		#每日抽奖
 	jd_jump.js			#跳跳乐瓜分京豆
-	jd_city.js			#城城领现金
 	jd_carnivalcity.js		#京东手机狂欢城
 	jd_zoo.js 			#动物联萌 618活动
 	jd_xtg.js			#家电星推官
@@ -321,7 +320,7 @@ done
 	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_friend.js -O $dir_file_js/jd_friend.js #joy总动员一次性脚本
 	wget https://raw.githubusercontent.com/Wenmoux/scripts/master/jd/jd_mcxhd_brandcity.js -O $dir_file_js/jd_mcxhd_brandcity.js  #新潮品牌狂欢
 
-rm -rf $dir_file_js/babelDiy.js
+rm -rf $dir_file_js/jd_city.js
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -495,7 +494,6 @@ run_02() {
 run_03() {
 	echo -e "$green run_03$start_script_time $white"
 	$node $dir_file_js/adolf_jxhb.js			#京喜阶梯红包
-	$node $dir_file_js/jd_city.js			#城城领现金
 	$node $dir_file_js/jd_xtg_help.js			#家电星推官好友互助脚本
 	$node $dir_file_js/jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
 	$node $dir_file_js/jd_health.js		#健康社区
@@ -2044,37 +2042,6 @@ ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQ
 	sed -i '/JDSGMH_SHARECODES/d' /etc/profile >/dev/null 2>&1
 	export JDSGMH_SHARECODES="$share_code_value&&"
 	echo "export JDSGMH_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
-
-	#城城分现金
-	new_cc="RtGKz-ikQFmhKoeeRddlgy5fN15EGbxpkR8Hbii5cgoyTbfmdQ@RtGKzbryQA7wd4eTRoVh0LMrs5aJ5bA8HqX-MAWT_tmtr1Y6aA@RtGKl7blBW3QPfHsc65Nmnyr9cMU4yMYm4XOVHjO_cQ1jV0c@RtGKrLT9OGPbPvjoY6lNmn1fBMAgnWU33U4pTz3UaKy0C0GI"
-	chiyu_cc="T928gamhQwvvMs-aW5h_jzzHqsqm41LRlvzvIEs"
-	Javon_cc="GILgzOWlSQ--doCZENA11uAb_zbPuBcU4Jy0Wmd3epBVjfOSbWM"
-	shqn_cc="RtGKzumjEAimfILLEIIyg6o7DZAQBg28KVO_AUHkbPE2KDZhhw@RtGKzr-tEgjwf4HOQoU2h1ItdL5a4VkUCV3wwbEaLpBUuS5eu"
-	jidiyangguang_cc="RtGKzOj3RgiqfYOSQtdl1eOd05gIN2tIDWFgjWB4l2Sa7XrYtw@RtGKz76gEA7yL4KeRd0w0EiokyucAF_KVx05gJUTx_688J1Bag"
-	zuoyou_cc="QMfizaDoDQrvMs_DSZBmlAsHuBuLVdQKBg@VMahgOmkDUbvfs_WW41tkt5YZBFWid-KJ-Vu@QcS2ieihDUbvfs_WW41tkgLgjGBi-F28nlc8@QNyynbLzBl_MI8_WW9R_moklKD3GKxv_PFsJWTo_Wg@Tty7n6XhRgijMs_WF5h_mndWxiCbUusIAV4mMd0A@RMyhmbLzAFP8INTWW5gzmo5OufFYwXAL7NcY1iiaTzo@RtGKz7mhEl6gKoCfEoI20PA4S5NDpZHXyKdLuDtaEwEnYlrCMw@W9GaibH3F2L4LMfwf5x_mq9Ys636pNQshUOB3RdlkZ2WTwc@RtGKzen2SQn1LNGbRoU03roWennJ-KWPcB_FTGg3JBGr6Wp4hw"
-	
-	random="$new_cc@$chiyu_cc@$Javon_cc@$jidiyangguang_cc@$zuoyou_cc"
-	random_array
-	new_cc_set="$random_set"
-
-	share_code="$new_cc_set"
-	share_code_value="$new_cc_set"
-	share_code_generate
-	sed -i '/CITY_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	export CITY_SHARECODES="$share_code_value&&"
-	echo "export CITY_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
-
-	js_amount=$(echo "$js_cookie" | wc -l)
-	cc_rows=$(grep -n " inviteCodes \=" $dir_file_js/jd_city.js | awk -F ":" '{print $1}')
-	while [[ ${js_amount} -gt 0 ]]; do
-		sed -i "$cc_rows a \ '$new_cc_set'," $dir_file_js/jd_city.js
-		js_amount=$(($js_amount - 1))
-	done
-
-	#开启城城分现金抽奖
-	sed -i '/JD_CITY_EXCHANGE/d' /etc/profile >/dev/null 2>&1
-	export JD_CITY_EXCHANGE="true"
-	echo "JD_CITY_EXCHANGE="true"" >> /etc/profile
 
 
 	#财富岛
