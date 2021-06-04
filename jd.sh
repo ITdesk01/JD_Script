@@ -308,6 +308,7 @@ cat >$dir_file/config/tmp/zooPanda_url.txt <<EOF
 	zooOpencard01.js			#纯开卡 大牌联合618提前购
 	zooOpencard02.js			#纯开卡 大牌强联合好物提前购
 	zooOpencard03.js			#纯开卡 大牌强联合好物提前购
+	zooOpencard04.js			#纯开卡 大牌联合宠爱有礼
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zooPanda_url.txt | awk '{print $1}'`
