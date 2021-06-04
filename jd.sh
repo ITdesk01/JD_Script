@@ -185,6 +185,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_zooCollect.js		#zoo收集金币
 	jd_mohe.js			#5G超级盲盒
 	jd_star_shop.js			#明星小店
+	jd_mcxhd.js			#新潮品牌狂欢
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -314,7 +315,6 @@ done
 
 Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/master/jd"
 cat >$dir_file/config/tmp/Wenmoux_url.txt <<EOF
-	jd_mcxhd_brandcity.js  			#新潮品牌狂欢
 	jd_618redpacket.js			#翻翻乐
 	jd_superBrand.js 			#特物ZX联想
 EOF
@@ -359,6 +359,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	pk.js				#新的PK京享值脚本
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	monk_shop_lottery.js 		#店铺大转盘
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
@@ -531,6 +532,7 @@ run_02() {
 	fi
 	$node $dir_file_js/monk_pasture.js #有机牧场
 	$node $dir_file_js/jd_xtg.js			#家电星推官
+	$node $dir_file_js/pk.js			#新的PK京享值脚本
 	echo -e "$green run_02$stop_script_time $white"
 }
 
@@ -558,7 +560,7 @@ EOF
 
 run_06_18() {
 cat >/tmp/jd_tmp/run_06_18 <<EOF
-	jd_mcxhd_brandcity.js  		#新潮品牌狂欢
+	jd_mcxhd.js  		#新潮品牌狂欢
 	jd_blueCoin.js  #东东超市兑换，有次数限制，没时间要求
 	jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
 	jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
