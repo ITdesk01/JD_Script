@@ -130,7 +130,6 @@ update() {
 
 cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_bean_sign.js			#京东多合一签到
-	jx_sign.js			#京喜app签到长期
 	jd_fruit.js			#东东农场
 	jd_jxnc.js			#京喜农场
 	jd_pet.js			#东东萌宠
@@ -2158,15 +2157,15 @@ ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQ
 }
 
 zoo_share() {
-	#wget 	
-	new_zoopk=$(cat $dir_file/JSON/zoo.txt)
+	wget https://raw.githubusercontent.com/ITdesk01/JD_Script/main/JSON/zoo.txt -O  $dir_file/JSON/zoo.txt
+	new_zoopk=$(cat $dir_file/JSON/zoo.txt  | sed ':t;N;s/\n//;b t')
 
 	sed -i "s/$.inviteList = \[/$.inviteList = \[ \n/g" $dir_file_js/jd_zoo.js
 
 	zoopk_rows=$(grep -n "\$.pkInviteList \= \[" $dir_file_js/jd_zoo.js | awk -F ":" '{print $1}')
 
 	sed -i "s/\$.pkInviteList \= \[/\$.pkInviteList \= \[ \n/g" $dir_file_js/jd_zoo.js
-	sed -i "$zoopk_rows a \ $new_zoopk" $dir_file_js/jd_zoo.js
+	sed -i "$zoopk_rows a  $new_zoopk" $dir_file_js/jd_zoo.js
 
 	sed -i "s/pKHelpAuthorFlag = true/pKHelpAuthorFlag = false/g" $dir_file_js/jd_zoo.js
 }
