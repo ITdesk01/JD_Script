@@ -308,6 +308,8 @@ cat >$dir_file/config/tmp/zooPanda_url.txt <<EOF
 	zooOpencard02.js			#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)
 	zooOpencard03.js			#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)
 	zooOpencard04.js			#纯开卡 大牌联合宠爱有礼(默认不运行，自己考虑要不要运行)
+	zooOpencard05.js			#纯开卡 大牌联合宠爱有礼(默认不运行，自己考虑要不要运行)
+	zooLimitbox.js				#限时盲盒
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zooPanda_url.txt | awk '{print $1}'`
@@ -321,6 +323,7 @@ Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/master/jd"
 cat >$dir_file/config/tmp/Wenmoux_url.txt <<EOF
 	jd_618redpacket.js			#翻翻乐
 	jd_superBrand.js 			#特物ZX联想
+	jd_limitBox.js				#618盲盒
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Wenmoux_url.txt | awk '{print $1}'`
@@ -352,7 +355,7 @@ done
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
 	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_friend.js -O $dir_file_js/jd_friend.js #joy总动员一次性脚本
-
+	wget https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/zy_618jc.js -O $dir_file_js/zy_618jc.js #618竞猜
 
 rm -rf $dir_file_js/jd_city.js
 
@@ -364,6 +367,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	zy_618jc.js 			#618竞猜
 	pk.js				#新的PK京享值脚本
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	monk_shop_lottery.js 		#店铺大转盘
@@ -463,6 +467,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_ppdz.js			#柠檬东东泡泡大战
 	jd_ry618.js			#柠檬华为荣耀618
 	jd_superBrand.js 		#特物ZX联想
+	zooLimitbox.js				#限时盲盒
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -500,7 +505,8 @@ run_030() {
 
 run_045() {
 	echo -e "$green run_045$start_script_time $white"
-	echo "run_045暂时没有东西"
+	$node $dir_file_js/zooOpencard05.js
+
 	echo -e "$green run_045$stop_script_time $white"
 }
 
@@ -611,6 +617,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	adolf_urge.js			#坐等更新
 	zooBaojiexiaoxiaole.js			#宝洁消消乐 一天一次
 	zooLongzhou.js				#浓情618 与“粽”不同 一天一次
+	zy_618jc.js 			#618竞猜
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_07$start_script_time $white"
@@ -633,6 +640,7 @@ cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	adolf_pk.js 			#京享值PK
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_carnivalcity.js		#京东手机狂欢城
+	jd_limitBox.js				#618盲盒
 EOF
 	echo -e "$green run_08_12_16$start_script_time $white"
 
