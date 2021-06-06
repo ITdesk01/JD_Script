@@ -550,7 +550,6 @@ run_02() {
 
 run_03() {
 cat >/tmp/jd_tmp/run_03 <<EOF
-	adolf_jxhb.js			#京喜阶梯红包
 	jd_xtg_help.js			#家电星推官好友互助脚本
 	jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
 	jd_health.js		#健康社区
@@ -572,6 +571,7 @@ EOF
 
 run_06_18() {
 cat >/tmp/jd_tmp/run_06_18 <<EOF
+	adolf_jxhb.js      #京喜阶梯红包
 	jd_mcxhd.js  		#新潮品牌狂欢
 	jd_blueCoin.js  #东东超市兑换，有次数限制，没时间要求
 	jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
@@ -924,6 +924,7 @@ concurrent_js_if() {
 		run_0)
 			action="$action1"
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
+			$node $openwrt_script/JD_Script/js/adolf_jxhb.js      #京喜阶梯红包
 			concurrent_js && if_ps
 			if [ ! $action2 ];then
 				if_ps
