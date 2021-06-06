@@ -2158,23 +2158,15 @@ ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQ
 }
 
 zoo_share() {
-	new_zoopk1="'sSKNX-MpqKOJsNu_nZvYV-nCFtEoibN3nsRhO8g77euwQQhVn3QtBsoadt4CFkmk',"
-	new_zoopk2="'sSKNX-MpqKOJsNu-nJyIBnzohu1bg555wuah8sFivgeDWC-K5kCbbW3HgcATcUjr',"
-	new_zoopk3="'sSKNX-MpqKObp_DwnJu2BGGTUTWUfPSxwzGOyw',"
-	new_zoopk4="'sSKNX-MpqKPQ5rO9mJ3eA9kQEewE3VAI3sBFbJT22o438AhSpqTxO3dqDFxqEXNc',"
-	new_zoopk5="'sSKNX-MpqKOXrevjyMWdUScQdhgwySVYfKlCINKPUG9Dkg',"
-
+	#wget 	
+	new_zoopk=$(cat $dir_file/JSON/zoo.txt)
 
 	sed -i "s/$.inviteList = \[/$.inviteList = \[ \n/g" $dir_file_js/jd_zoo.js
 
 	zoopk_rows=$(grep -n "\$.pkInviteList \= \[" $dir_file_js/jd_zoo.js | awk -F ":" '{print $1}')
 
 	sed -i "s/\$.pkInviteList \= \[/\$.pkInviteList \= \[ \n/g" $dir_file_js/jd_zoo.js
-	sed -i "$zoopk_rows a \ $new_zoopk5" $dir_file_js/jd_zoo.js
-	sed -i "$zoopk_rows a \ $new_zoopk4" $dir_file_js/jd_zoo.js
-	sed -i "$zoopk_rows a \ $new_zoopk3" $dir_file_js/jd_zoo.js
-	sed -i "$zoopk_rows a \ $new_zoopk2" $dir_file_js/jd_zoo.js
-	sed -i "$zoopk_rows a \ $new_zoopk1" $dir_file_js/jd_zoo.js
+	sed -i "$zoopk_rows a \ $new_zoopk" $dir_file_js/jd_zoo.js
 
 	sed -i "s/pKHelpAuthorFlag = true/pKHelpAuthorFlag = false/g" $dir_file_js/jd_zoo.js
 }
