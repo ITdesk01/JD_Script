@@ -187,6 +187,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_star_shop.js			#明星小店
 	jd_mcxhd.js			#新潮品牌狂欢
 	jd_jxlhb.js			#京喜领88元红包
+	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -359,7 +360,6 @@ done
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
 	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_friend.js -O $dir_file_js/jd_friend.js #joy总动员一次性脚本
 	wget https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/zy_618jc.js -O $dir_file_js/zy_618jc.js #618竞猜
-	wget https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc.js -O $dir_file_js/jx_mc.js #京喜牧场
 
 rm -rf $dir_file_js/jd_city.js
 
@@ -371,7 +371,6 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	jx_mc.js 			#京喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
 	zy_618jc.js 			#618竞猜
 	pk.js				#新的PK京享值脚本
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
@@ -562,6 +561,7 @@ cat >/tmp/jd_tmp/run_03 <<EOF
 	jddj_fruit.js			#京东到家果园 0,8,11,17
 	jd_daily_lottery.js		#每日抽奖
 	jd_mohe.js			#5G超级盲盒
+	jd_jxmc.js			#惊喜牧场
 EOF
 	echo -e "$green run_03$start_script_time $white"
 
