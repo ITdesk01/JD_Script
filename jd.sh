@@ -186,6 +186,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_mohe.js			#5G超级盲盒
 	jd_star_shop.js			#明星小店
 	jd_mcxhd.js			#新潮品牌狂欢
+	jd_jxlhb.js			#京喜领88元红包
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -230,7 +231,6 @@ cat >$dir_file/config/tmp/monk-normal.txt <<EOF
 	adolf_martin.js			#人头马x博朗
 	adolf_superbox.js		#超级盒子
 	adolf_newInteraction.js		#618大势新品赏
-	adolf_jxhb.js			#京喜阶梯红包
 	adolf_urge.js			#坐等更新
 EOF
 
@@ -572,7 +572,6 @@ EOF
 
 run_06_18() {
 cat >/tmp/jd_tmp/run_06_18 <<EOF
-	adolf_jxhb.js      #京喜阶梯红包
 	jd_mcxhd.js  		#新潮品牌狂欢
 	jd_blueCoin.js  #东东超市兑换，有次数限制，没时间要求
 	jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
@@ -925,7 +924,7 @@ concurrent_js_if() {
 		run_0)
 			action="$action1"
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
-			$node $openwrt_script/JD_Script/js/adolf_jxhb.js      #京喜阶梯红包
+			$node $openwrt_script/JD_Script/js/jd_jxlhb.js	#京喜领88元红包
 			concurrent_js && if_ps
 			if [ ! $action2 ];then
 				if_ps
