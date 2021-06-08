@@ -310,6 +310,7 @@ cat >$dir_file/config/tmp/zooPanda_url.txt <<EOF
 	zooOpencard04.js			#纯开卡 大牌联合宠爱有礼(默认不运行，自己考虑要不要运行)
 	zooOpencard05.js			#纯开卡 大牌联合宠爱有礼(默认不运行，自己考虑要不要运行)
 	zooJointeam01.js			#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooSupershophf.js			#合肥旗舰店开业(手动运行吧)
 	zooLimitbox.js				#限时盲盒
 EOF
 
@@ -341,6 +342,7 @@ cat >$dir_file/config/tmp/panghu999_url.txt <<EOF
 	jd_gcip.js 				#柠檬特物国创I
 	jd_ppdz.js				#柠檬东东泡泡大战
 	jd_ry618.js				#柠檬华为荣耀618
+	jd_sq.js				#柠檬省钱大赢家
 EOF
 
 for script_name in `cat $dir_file/config/tmp/panghu999_url.txt | awk '{print $1}'`
@@ -357,6 +359,7 @@ done
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
 	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_friend.js -O $dir_file_js/jd_friend.js #joy总动员一次性脚本
 	wget https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/zy_618jc.js -O $dir_file_js/zy_618jc.js #618竞猜
+	wgte https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc.js -O $dir_file_js/jx_mc.js #京喜牧场
 
 rm -rf $dir_file_js/jd_city.js
 
@@ -368,6 +371,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jx_mc.js 			#京喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
 	zy_618jc.js 			#618竞猜
 	pk.js				#新的PK京享值脚本
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
@@ -467,6 +471,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_gcip.js 			#柠檬特物国创I
 	jd_ppdz.js			#柠檬东东泡泡大战
 	jd_ry618.js			#柠檬华为荣耀618
+	jd_sq.js			#柠檬省钱大赢家
 	jd_superBrand.js 		#特物ZX联想
 	zooLimitbox.js				#限时盲盒
 EOF
@@ -2503,5 +2508,3 @@ else
 	esac
 	fi
 fi
-
-
