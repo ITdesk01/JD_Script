@@ -359,7 +359,7 @@ done
 	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
 	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_friend.js -O $dir_file_js/jd_friend.js #joy总动员一次性脚本
 	wget https://raw.githubusercontent.com/Ariszy/Private-Script/master/Scripts/zy_618jc.js -O $dir_file_js/zy_618jc.js #618竞猜
-	wgte https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc.js -O $dir_file_js/jx_mc.js #京喜牧场
+	wget https://raw.githubusercontent.com/moposmall/Script/main/Me/jx_mc.js -O $dir_file_js/jx_mc.js #京喜牧场
 
 rm -rf $dir_file_js/jd_city.js
 
