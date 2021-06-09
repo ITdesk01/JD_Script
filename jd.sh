@@ -117,11 +117,12 @@ update() {
 	fi
 
 	if [ ! -d $dir_file/git_clone/lxk0301 ];then
-		git clone -b master git@gitee.com:lxk0301/jd_scripts.git $dir_file/git_clone/lxk0301
+		echo ""
+		#git clone -b master git@gitee.com:lxk0301/jd_scripts.git $dir_file/git_clone/lxk0301
 	else
 		cd $dir_file/git_clone/lxk0301
 		git fetch --all
-		git reset --hard origin/master
+		git reset --hard a38137a
 	fi
 	echo -e "$green update$start_script_time $white"
 	echo -e "$green开始下载JS脚本，请稍等$white"
