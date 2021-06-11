@@ -179,7 +179,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_daily_lottery.js		#每日抽奖
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_carnivalcity.js		#京东手机狂欢城
-	jd_zoo.js 			#动物联萌 618活动
 	jd_xtg.js			#家电星推官
 	jd_xtg_help.js			#家电星推官好友互助
 	jd_gold_creator.js		#金榜创造营
@@ -193,6 +192,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
 cp  $dir_file/git_clone/lxk0301/activity/jd_unbind.js	$dir_file_js/jd_unbind.js #注销京东会员卡
+cp  $dir_file/JSON/jd_zoo.js 	$dir_file_js/jd_zoo.js		#动物联萌 618活动
 
 for script_name in `cat $dir_file/config/tmp/lxk0301_script.txt | awk '{print $1}'`
 do
