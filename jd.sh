@@ -2197,8 +2197,6 @@ zoo_share() {
 	wget https://raw.githubusercontent.com/ITdesk01/JD_Script/main/JSON/zoo.txt -O  $dir_file/JSON/zoo.txt
 	new_zoopk=$(cat $dir_file/JSON/zoo.txt  | sed ':t;N;s/\n//;b t')
 
-	sed -i "s/$.inviteList = \[/$.inviteList = \[ \n/g" $dir_file_js/jd_zoo.js
-
 	zoopk_rows=$(grep -n "\$.pkInviteList \= \[" $dir_file_js/jd_zoo.js | awk -F ":" '{print $1}')
 
 	sed -i "s/\$.pkInviteList \= \[/\$.pkInviteList \= \[ \n/g" $dir_file_js/jd_zoo.js
