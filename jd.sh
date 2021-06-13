@@ -2032,8 +2032,13 @@ additional_settings() {
 	new_jdcash_set="$new_jdcash@$zuoyou_20190516_jdcash@$jidiyangguang_20190516_jdcash@$chiyu_jdcash@$Jhone_Potte_20200824_jdcash@$ashou_20210516_jdcash"
 
 	sed -i '/JD_CASH_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	export JD_CASH_SHARECODES="$new_jdcash_set&$new_jdcash_set&$new_jdcash_set&$new_jdcash_set&$new_jdcash_set&$new_jdcash_set&$new_jdcash_set&$new_jdcash_set&&"
-	echo "export JD_CASH_SHARECODES=\"$new_jdcash_set&$new_jdcash_set&$new_jdcash_set&$new_jdcash_set&$new_jdcash_set&$new_jdcash_set&$new_jdcash_set&$new_jdcash_set&&\"" >> /etc/profile
+
+	js_amount=$(echo "$js_cookie" | wc -l)
+	cashcode_rows=$(grep -n "inviteCodes = \[" $dir_file_js/jd_cash.js | awk -F ":" '{print $1}')
+	while [[ ${js_amount} -gt 0 ]]; do
+		sed -i "$cashcode_rows a \ $new_jdcash_set " $dir_file_js/jd_cash.js
+		js_amount=$(($js_amount - 1))
+	done
 
 	sed -i "s/https:\/\/gitee.com\/shylocks\/updateTeam\/raw\/main\/jd_cash.json/https:\/\/raw.githubusercontent.com\/ITdesk01\/JD_Script\/main\/JSON\/jd_cash.json/g"  $dir_file_js/jd_cash.js
 
