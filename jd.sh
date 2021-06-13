@@ -2029,7 +2029,7 @@ additional_settings() {
 	jidiyangguang_20190516_jdcash="eU9YaOjhYf4v8m7dnnBF1Q@eU9Ya762N_h3oG_RmXoQ0A"
 	ashou_20210516_jdcash="IhMxaeq0bvsj92i6iw@9qagtEUMPKtx@eU9YaenmYKhwpDyHySFChQ@eU9YariwMvp19G7WmXYU1w@YER3NLXuM6l4pg@eU9YaujjYv8moGrcnSFFgg@eU9Yar_kYvwjpD2DmXER3w@ZEFvJu27bvk"
 
-	new_jdcash_set="$new_jdcash@$zuoyou_20190516_jdcash@$jidiyangguang_20190516_jdcash@$chiyu_jdcash@$Jhone_Potte_20200824_jdcash@$ashou_20210516_jdcash"
+	new_jdcash_set="'$new_jdcash@$zuoyou_20190516_jdcash@$jidiyangguang_20190516_jdcash@$chiyu_jdcash@$Jhone_Potte_20200824_jdcash@$ashou_20210516_jdcash',"
 
 	sed -i '/JD_CASH_SHARECODES/d' /etc/profile >/dev/null 2>&1
 
@@ -2041,20 +2041,6 @@ additional_settings() {
 	done
 
 	sed -i "s/https:\/\/gitee.com\/shylocks\/updateTeam\/raw\/main\/jd_cash.json/https:\/\/raw.githubusercontent.com\/ITdesk01\/JD_Script\/main\/JSON\/jd_cash.json/g"  $dir_file_js/jd_cash.js
-
-	if [ `date +%A` == "Sunday" ];then
-		echo "周日提前开启2元兑换200豆子功能"
-		sed -i "s/cash_exchange = false/cash_exchange = true/g" $dir_file_js/jd_cash.js
-	else
-		echo > /dev/null 2>&1
-	fi
-
-	if [ `date +%A` == "Wednesday" ];then
-		echo "开启2元兑换200豆子功能"
-		sed -i "s/cash_exchange = false/cash_exchange = true/g" $dir_file_js/jd_cash.js
-	else
-		echo > /dev/null 2>&1
-	fi
 
 	#脚本黑名单
 	script_black
@@ -2201,13 +2187,12 @@ ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQ
 zoo_share() {
 	wget https://raw.githubusercontent.com/ITdesk01/JD_Script/main/JSON/zoo.txt -O  $dir_file/JSON/zoo.txt
 	new_zoopk=$(cat $dir_file/JSON/zoo.txt  | sed ':t;N;s/\n//;b t')
-
 	zoopk_rows=$(grep -n "\$.pkInviteList \= \[" $dir_file_js/jd_zoo.js | awk -F ":" '{print $1}')
 
 	sed -i "s/\$.pkInviteList \= \[/\$.pkInviteList \= \[ \n/g" $dir_file_js/jd_zoo.js
 	sed -i "$zoopk_rows a  $new_zoopk" $dir_file_js/jd_zoo.js
 
-	sed -i "s/pKHelpAuthorFlag = true/pKHelpAuthorFlag = false/g" $dir_file_js/jd_zoo.js
+	#sed -i "s/pKHelpAuthorFlag = true/pKHelpAuthorFlag = false/g" $dir_file_js/jd_zoo.js
 }
 
 share_code_generate() {
