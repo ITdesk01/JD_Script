@@ -2180,8 +2180,8 @@ ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQ
 	share_code_value="$new_health_set"
 	share_code_generate
 	sed -i '/JDHEALTH_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	echo "export JDHEALTH_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
-	export JDHEALTH_SHARECODES="$share_code_value&&"
+	#echo "export JDHEALTH_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
+	#export JDHEALTH_SHARECODES="$share_code_value&&"
 }
 
 zoo_share() {
