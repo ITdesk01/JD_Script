@@ -2222,25 +2222,11 @@ close_notification() {
 		22|23|00|01|02|03)
 			sed -i "s/jdNotify = true/jdNotify = false/g" $dir_file_js/jd_fruit.js
 			sed -i "s/jdNotify = true/jdNotify = false/g" $dir_file_js/jd_pet.js
-			if [ "$ccr_if" == "yes" ];then
-				for i in `ls $ccr_js_file`
-				do
-					sed -i "s/jdNotify = true/jdNotify = false/g" $ccr_js_file/$i/jd_fruit.js
-					sed -i "s/jdNotify = true/jdNotify = false/g" $ccr_js_file/$i/jd_pet.js
-				done
-			fi
 			echo -e "$green暂时不关闭农场和萌宠通知$white"
 		;;
 		*)
 			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
 			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
-			if [ "$ccr_if" == "yes" ];then
-				for i in `ls $ccr_js_file`
-				do
-					sed -i "s/jdNotify = false/jdNotify = true/g" $ccr_js_file/$i/jd_fruit.js
-					sed -i "s/jdNotify = false/jdNotify = true/g" $ccr_js_file/$i/jd_pet.js
-				done
-			fi
 			echo -e "$green时间大于凌晨三点开始关闭农场和萌宠通知$white"
 		;;
 		esac
@@ -2435,9 +2421,6 @@ system_variable() {
 		echo -e "$green唯一的github地址：https://github.com/ITdesk01/JD_Script.git$white"
 		exit 0
 	fi
-
-	#农场萌宠关闭通知
-	close_notification
 
 	script_black
 }
