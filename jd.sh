@@ -460,7 +460,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_jin_tie.js #领金贴
 	jddj_bean.js			#京东到家鲜豆 一天一次
 	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
-	z_shop_captain.js		#超级无线组队分奖品
 	adolf_superbox.js		#超级盒子
 	jd_dreamFactory.js 		#京喜工厂
 	jd_xcpp.js 			#柠檬新潮品牌
