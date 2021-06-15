@@ -1607,8 +1607,8 @@ help() {
 	echo -e "$green  $openwrt_script_config/JS_USER_AGENTS.js $white 京东极速版UA文件可以自定义也可以默认"
 	echo -e "$green  $openwrt_script_config/Script_blacklist.txt $white 脚本黑名单，用法去看这个文件"
 	echo ""
-	echo -e "$yellow JS脚本活动列表：$green $dir_file/git_clone/lxk0301/README.md $white"
-	echo -e "$yellow 浏览器获取京东cookie教程：$green $dir_file/git_clone/lxk0301/backUp/GetJdCookie.md $white"
+	echo -e "$yellow JS脚本活动列表：$green $dir_file/git_clone/lxk0301_back/README.md $white"
+	echo -e "$yellow 浏览器获取京东cookie教程：$green $dir_file/git_clone/lxk0301_back/backUp/GetJdCookie.md $white"
 	echo -e "$yellow 脚本获取京东cookie：$green sh \$jd getcookie $white"
 	echo ""
 	echo -e "$red 注意：$white请停掉你之前运行的其他jd脚本，然后把$green JS脚本活动列表$white的活动全部手动点开一次，不知活动入口的，$dir_file_js/你要的js脚本里有写"
@@ -2265,10 +2265,10 @@ time() {
 npm_install() {
 	echo -e "$green 开始安装npm模块$white"
 	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
-		cp $openwrt_script/JD_Script/git_clone/lxk0301/package.json $openwrt_script/package.json
+		cp $openwrt_script/JD_Script/git_clone/lxk0301_back/package.json $openwrt_script/package.json
 		cd $openwrt_script && npm install && npm install -g request
 	else
-		cp $dir_file/git_clone/lxk0301/package.json $dir_file/package.json
+		cp $dir_file/git_clone/lxk0301_back/package.json $dir_file/package.json
 		cd $dir_file && npm -g install && npm install -g request
 	fi
 }
@@ -2330,7 +2330,7 @@ system_variable() {
 
 		#USER_AGENTS.js
 		if [ ! -f "$openwrt_script_config/USER_AGENTS.js" ]; then
-			cp  $dir_file/git_clone/lxk0301/USER_AGENTS.js $openwrt_script_config/USER_AGENTS.js
+			cp  $dir_file/git_clone/lxk0301_back/USER_AGENTS.js $openwrt_script_config/USER_AGENTS.js
 			rm -rf $dir_file_js/USER_AGENTS.js #用于删除旧的链接
 			ln -s $openwrt_script_config/USER_AGENTS.js $dir_file_js/USER_AGENTS.js
 		fi
@@ -2343,7 +2343,7 @@ system_variable() {
 
 		#JS_USER_AGENTS.js
 		if [ ! -f "$openwrt_script_config/JS_USER_AGENTS.js" ]; then
-			cp  $dir_file/git_clone/lxk0301/JS_USER_AGENTS.js $openwrt_script_config/JS_USER_AGENTS.js
+			cp  $dir_file/git_clone/lxk0301_back/JS_USER_AGENTS.js $openwrt_script_config/JS_USER_AGENTS.js
 			rm -rf $dir_file_js/JS_USER_AGENTS.js #用于删除旧的链接
 			ln -s $openwrt_script_config/JS_USER_AGENTS.js $dir_file_js/JS_USER_AGENTS.js
 		fi
