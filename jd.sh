@@ -181,7 +181,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_xtg.js			#家电星推官
 	jd_xtg_help.js			#家电星推官好友互助
 	jd_gold_creator.js		#金榜创造营
-	jd_zooCollect.js		#zoo收集金币
 	jd_mohe.js			#5G超级盲盒
 	jd_star_shop.js			#明星小店
 	jd_mcxhd.js			#新潮品牌狂欢
@@ -193,6 +192,7 @@ EOF
 cp  $dir_file/git_clone/lxk0301_back/activity/jd_unbind.js	$dir_file_js/jd_unbind.js #注销京东会员卡
 #wget https://raw.githubusercontent.com/star261/jd/main/scripts/jd_zoo.js -O 	$dir_file_js/jd_zoo.js		#动物联萌 618活动
 wget https://raw.githubusercontent.com/ITdesk01/JD_Script/main/JSON/jd_zoo.js -O 	$dir_file_js/jd_zoo.js
+wget https://raw.githubusercontent.com/ITdesk01/JD_Script/main/JSON/jd_zooCollect.js -O $dir_file_js/jd_zooCollect.js
 
 for script_name in `cat $dir_file/config/tmp/lxk0301_script.txt | awk '{print $1}'`
 do
