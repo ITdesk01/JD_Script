@@ -114,12 +114,12 @@ update() {
 		mkdir $dir_file/git_clone
 	fi
 
-	if [ ! -d $dir_file/git_clone/lxk0301 ];then
+	if [ ! -d $dir_file/git_clone/lxk0301_back ];then
 		echo ""
 		#git clone -b master git@gitee.com:lxk0301/jd_scripts.git $dir_file/git_clone/lxk0301
-		git clone https://github.com/ITdesk01/script_back.git $dir_file/git_clone/lxk0301
+		git clone https://github.com/ITdesk01/script_back.git $dir_file/git_clone/lxk0301_back
 	else
-		cd $dir_file/git_clone/lxk0301
+		cd $dir_file/git_clone/lxk0301_back
 		git fetch --all
 		git reset --hard a38137a
 	fi
@@ -190,13 +190,13 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
-cp  $dir_file/git_clone/lxk0301/activity/jd_unbind.js	$dir_file_js/jd_unbind.js #注销京东会员卡
+cp  $dir_file/git_clone/lxk0301_back/activity/jd_unbind.js	$dir_file_js/jd_unbind.js #注销京东会员卡
 wget https://raw.githubusercontent.com/star261/jd/main/scripts/jd_zoo.js -O 	$dir_file_js/jd_zoo.js		#动物联萌 618活动
 
 for script_name in `cat $dir_file/config/tmp/lxk0301_script.txt | awk '{print $1}'`
 do
 	echo -e "$yellow copy $green$script_name$white"
-	cp  $dir_file/git_clone/lxk0301/$script_name  $dir_file_js/$script_name
+	cp  $dir_file/git_clone/lxk0301_back/$script_name  $dir_file_js/$script_name
 done
 sleep 5
 
