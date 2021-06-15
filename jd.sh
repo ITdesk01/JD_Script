@@ -306,9 +306,12 @@ cat >$dir_file/config/tmp/zooPanda_url.txt <<EOF
 	zooLongzhou.js				#浓情618 与“粽”不同 一天一次
 	zooOpencard01.js			#纯开卡 大牌联合618提前购 (默认不运行，自己考虑要不要运行)
 	zooOpencard02.js			#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)
-	zooOpencard03.js			#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)
-	zooOpencard04.js			#纯开卡 大牌联合宠爱有礼(默认不运行，自己考虑要不要运行)
-	zooOpencard05.js			#纯开卡 大牌联合宠爱有礼(默认不运行，自己考虑要不要运行)
+	zooOpencard03.js			#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard04.js			#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard05.js			#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard06.js			#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard07.js			#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard08.js			#纯开卡 (默认不运行，自己考虑要不要运行)
 	zooJointeam01.js			#纯开卡 (默认不运行，自己考虑要不要运行)
 	zooSupershophf.js			#合肥旗舰店开业(手动运行吧)
 	zooLimitbox.js				#限时盲盒
@@ -636,6 +639,7 @@ EOF
 
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
+	jd_fndd.js			#福牛多多
 	jd_star_shop.js			#明星小店
 	jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	jd_syj.js #赚京豆
