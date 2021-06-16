@@ -325,8 +325,8 @@ EOF
 for script_name in `cat $dir_file/config/tmp/zooPanda_url.txt | awk '{print $1}'`
 do
 	url="$zooPanda_url"
-	#wget $zooPanda_url/$script_name -O $dir_file_js/$script_name
-	#update_if
+	wget $zooPanda_url/$script_name -O $dir_file_js/$script_name
+	update_if
 done
 
 Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/master/jd"
