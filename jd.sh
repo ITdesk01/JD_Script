@@ -190,7 +190,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
 cp  $dir_file/git_clone/lxk0301_back/activity/jd_unbind.js	$dir_file_js/jd_unbind.js #注销京东会员卡
-wget https://raw.githubusercontent.com/star261/jd/main/scripts/jd_zoo.js  -O 	$dir_file_js/jd_zoo.j
+wget https://raw.githubusercontent.com/star261/jd/main/scripts/jd_zoo.js  -O 	$dir_file_js/jd_zoo.js
 #wget https://raw.githubusercontent.com/yyetss/jd_scripts/master/jd_zoo.js -O 	$dir_file_js/jd_zoo.js		#动物联萌 618活动
 #wget https://raw.githubusercontent.com/ITdesk01/JD_Script/main/JSON/jd_zoo.js -O 	$dir_file_js/jd_zoo.js
 wget https://raw.githubusercontent.com/ITdesk01/JD_Script/main/JSON/jd_zooCollect.js -O $dir_file_js/jd_zooCollect.js
