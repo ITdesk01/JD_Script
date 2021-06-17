@@ -202,6 +202,8 @@ do
 done
 sleep 5
 
+#删除之前创建的文件（过两天处理掉）
+rm -rf monk-*
 
 longzhuzhu_url="https://raw.githubusercontent.com/longzhuzhu/nianyu/main/qx"
 cat >$dir_file/config/tmp/longzhuzhu_qx.txt <<EOF
@@ -280,7 +282,6 @@ done
 	cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
 
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
-	wget https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_try.js -O $dir_file_js/jd_try.js #京东试用
 	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_friend.js -O $dir_file_js/jd_friend.js #joy总动员一次性脚本
 
 rm -rf $dir_file_js/jd_city.js
@@ -308,7 +309,7 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jx_products_detail.js		#京喜工厂商品列表详情
-	jd_try.js 			#京东试用
+	jd_try.js 			#京东试用（默认不启用）
 	jd_gyec.js			#工业爱消除
 	jd_xxl.js			#东东爱消除
 	jd_xxl_gh.js			#个护爱消除，完成所有任务+每日挑战
