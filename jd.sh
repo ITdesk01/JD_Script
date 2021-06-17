@@ -121,7 +121,7 @@ update() {
 	else
 		cd $dir_file/git_clone/lxk0301_back
 		git fetch --all
-		git reset --hard a38137a
+		git reset --hard origin/main
 	fi
 	echo -e "$green update$start_script_time $white"
 	echo -e "$green开始下载JS脚本，请稍等$white"
