@@ -202,75 +202,6 @@ do
 done
 sleep 5
 
-rm -rf $dir_file_js/jd_party_night.js		#沸腾之夜
-
-#if [ $(date "+%-H") -ge 10 ]; then
-	#echo "大于10点，不拉取和尚库"
-#else
-
-url2="https://raw.githubusercontent.com/monk-coder/dust/dust/i-chenzhe"
-cat >$dir_file/config/tmp/i-chenzhe_script.txt <<EOF
-	z_fanslove.js			#粉丝互动
-	z_shake.js  			#超级摇一摇
-	z_marketLottery.js 		#京东超市-大转盘
-	z_mother_jump.js		#新一期母婴跳一跳开始咯
-	z_shop_captain.js		#超级无线组队分奖品
-EOF
-
-for script_name in `cat $dir_file/config/tmp/i-chenzhe_script.txt | awk '{print $1}'`
-do
-	url="$url2"
-	#wget $url2/$script_name -O $dir_file_js/$script_name
-	#update_if
-done
-
-url3="https://raw.githubusercontent.com/monk-coder/dust/dust/normal"
-cat >$dir_file/config/tmp/monk-normal.txt <<EOF
-	monk_shop_lottery.js 		#店铺大转盘
-	monk_inter_shop_sign.js 	#interCenter渠道店铺签到
-	monk_shop_follow_sku.js 	#关注有礼
-	adolf_pk.js 			#京享值PK
-	adolf_martin.js			#人头马x博朗
-	adolf_superbox.js		#超级盒子
-	adolf_newInteraction.js		#618大势新品赏
-	adolf_urge.js			#坐等更新
-EOF
-
-
-for script_name in `cat $dir_file/config/tmp/monk-normal.txt | awk '{print $1}'`
-do
-	url="$url3"
-	#wget $url3/$script_name -O $dir_file_js/$script_name
-	#update_if
-done
-
-url4="https://raw.githubusercontent.com/monk-coder/dust/dust/car"
-cat >$dir_file/config/tmp/monk-car.txt <<EOF
-	monk_shop_add_to_car.js 	#加购有礼
-EOF
-
-
-for script_name in `cat $dir_file/config/tmp/monk-car.txt | awk '{print $1}'`
-do
-	url="$url4"
-	#wget $url4/$script_name -O $dir_file_js/$script_name
-	#update_if
-done
-
-
-url5="https://raw.githubusercontent.com/monk-coder/dust/dust/member"
-cat >$dir_file/config/tmp/monk-member.txt <<EOF
-	monk_pasture.js			#有机牧场
-EOF
-
-for script_name in `cat $dir_file/config/tmp/monk-member.txt | awk '{print $1}'`
-do
-	url="$url5"
-	#wget $url5/$script_name -O $dir_file_js/$script_name
-	#update_if
-done
-
-#fi
 
 longzhuzhu_url="https://raw.githubusercontent.com/longzhuzhu/nianyu/main/qx"
 cat >$dir_file/config/tmp/longzhuzhu_qx.txt <<EOF
@@ -362,9 +293,19 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	#monk-member
+	adolf_pk.js 			#京享值PK
+	adolf_martin.js			#人头马x博朗
+	adolf_superbox.js		#超级盒子
+	adolf_newInteraction.js		#618大势新品赏
+	adolf_urge.js			#坐等更新
+	z_fanslove.js			#粉丝互动
+	z_shake.js  			#超级摇一摇
+	z_marketLottery.js 		#京东超市-大转盘
+	z_mother_jump.js		#新一期母婴跳一跳开始咯
+	z_shop_captain.js		#超级无线组队分奖品
 	pk.js				#新的PK京享值脚本
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
-	monk_shop_lottery.js 		#店铺大转盘
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jx_products_detail.js		#京喜工厂商品列表详情
 	jd_try.js 			#京东试用
@@ -446,9 +387,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_cash.js #签到领现金，每日2毛～5毛长期
 	jd_sgmh.js #闪购盲盒长期活动
 	jd_jdzz.js #京东赚赚长期活动
-	monk_inter_shop_sign.js #interCenter渠道店铺签到
 	jd_syj.js #十元街签到,一天一次即可，一周30豆子
-	monk_shop_add_to_car.js #加购有礼
 	jd_market_lottery.js #幸运大转盘
 	jd_jin_tie.js #领金贴
 	jddj_bean.js			#京东到家鲜豆 一天一次
@@ -522,16 +461,7 @@ EOF
 run_02() {
 	echo -e "$green run_02$start_script_time $white"
 	$node $dir_file_js/jd_moneyTree.js #摇钱树
-	if [ $(date "+%-H") -ge 13 ]; then
-		sed -i '/PASTURE_EXCHANGE_KEYWORD/d' /etc/profile
-		echo "export PASTURE_EXCHANGE_KEYWORD="10京豆"" >>/etc/profile
-		export PASTURE_EXCHANGE_KEYWORD="10京豆"
-	else
-		sed -i '/PASTURE_EXCHANGE_KEYWORD/d' /etc/profile
-		echo "export PASTURE_EXCHANGE_KEYWORD="1京豆"" >>/etc/profile
-		export PASTURE_EXCHANGE_KEYWORD="1京豆"
-	fi
-	$node $dir_file_js/monk_pasture.js #有机牧场
+	sed -i '/PASTURE_EXCHANGE_KEYWORD/d' /etc/profile
 	$node $dir_file_js/jd_xtg.js			#家电星推官
 	$node $dir_file_js/pk.js			#新的PK京享值脚本
 	echo -e "$green run_02$stop_script_time $white"
@@ -594,9 +524,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_sgmh.js #闪购盲盒长期活动
 	jd_speed_sign.js #京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#极速版红包
-	monk_shop_follow_sku.js #关注有礼
 	jd_cash.js #签到领现金，每日2毛～5毛长期
-	monk_shop_lottery.js		#店铺大转盘
 	jd_jin_tie.js 			#领金贴
 	adolf_martin.js			#人头马x博朗
 	adolf_urge.js			#坐等更新
