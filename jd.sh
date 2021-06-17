@@ -203,7 +203,8 @@ done
 sleep 5
 
 #删除之前创建的文件（过两天处理掉）
-rm -rf monk-*
+rm -rf $dir_file/config/tmp/monk-*
+rm -rf $dir_file/config/tmp/panghu999_url.txt
 
 longzhuzhu_url="https://raw.githubusercontent.com/longzhuzhu/nianyu/main/qx"
 cat >$dir_file/config/tmp/longzhuzhu_qx.txt <<EOF
@@ -237,23 +238,23 @@ done
 
 zooPanda_url="https://raw.githubusercontent.com/zooPanda/zoo/dev"
 cat >$dir_file/config/tmp/zooPanda_url.txt <<EOF
-	zooBaojiexiaoxiaole.js			#宝洁消消乐 一天一次
-	zooLongzhou.js				#浓情618 与“粽”不同 一天一次
-	zooLongzhou02.js			#粽情端午
-	zooOpencard01.js			#纯开卡 大牌联合618提前购 (默认不运行，自己考虑要不要运行)
-	zooOpencard02.js			#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)
-	zooOpencard03.js			#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard04.js			#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard05.js			#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard06.js			#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard07.js			#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard08.js			#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard09.js			#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard10.js			#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooJointeam01.js			#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooSupershophf.js			#合肥旗舰店开业(手动运行吧)
-	zooLimitbox.js				#限时盲盒
-	zooJx88hongbao.js			#京喜88红包
+	zooBaojiexiaoxiaole.js		#宝洁消消乐 一天一次
+	zooLongzhou.js			#浓情618 与“粽”不同 一天一次
+	zooLongzhou02.js		#粽情端午
+	zooOpencard01.js		#纯开卡 大牌联合618提前购 (默认不运行，自己考虑要不要运行)
+	zooOpencard02.js		#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)
+	zooOpencard03.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard04.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard05.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard06.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard07.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard08.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard09.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard10.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooJointeam01.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooSupershophf.js		#合肥旗舰店开业(手动运行吧)
+	zooLimitbox.js			#限时盲盒
+	zooJx88hongbao.js		#京喜88红包
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zooPanda_url.txt | awk '{print $1}'`
@@ -265,8 +266,8 @@ done
 
 Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/master/jd"
 cat >$dir_file/config/tmp/Wenmoux_url.txt <<EOF
-	jd_618redpacket.js			#翻翻乐
-	jd_superBrand.js 			#特物ZX联想
+	jd_618redpacket.js		#翻翻乐
+	jd_superBrand.js 		#特物ZX联想
 
 EOF
 
@@ -294,7 +295,6 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	#monk-member
 	adolf_pk.js 			#京享值PK
 	adolf_martin.js			#人头马x博朗
 	adolf_superbox.js		#超级盒子
@@ -433,8 +433,28 @@ run_030() {
 }
 
 run_045() {
+cat >/tmp/jd_tmp/run_045 <<EOF
+	zooOpencard01.js		#纯开卡 大牌联合618提前购 (默认不运行，自己考虑要不要运行)
+	zooOpencard02.js		#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)
+	zooOpencard03.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard04.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard05.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard06.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard07.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard08.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard09.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard10.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooJointeam01.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooSupershophf.js		#合肥旗舰店开业(手动运行吧)
+EOF
+
 	echo -e "$green run_045$start_script_time $white"
-	$node $dir_file_js/zooOpencard05.js
+
+	for i in `cat /tmp/jd_tmp/run_045 | awk '{print $1}'`
+	do
+		$node $dir_file_js/$i
+		$run_sleep
+	done
 
 	echo -e "$green run_045$stop_script_time $white"
 }
@@ -446,7 +466,7 @@ cat >/tmp/jd_tmp/run_01 <<EOF
 	jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
 	jd_joy_feedPets.js  #宠汪汪喂食一个小时喂一次
 EOF
-	long_super_redrain.js		#整点红包雨
+	#long_super_redrain.js		#整点红包雨
 	echo -e "$green run_01$start_script_time $white"
 
 	for i in `cat /tmp/jd_tmp/run_01 | awk '{print $1}'`
