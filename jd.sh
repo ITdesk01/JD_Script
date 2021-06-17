@@ -1239,10 +1239,7 @@ that_day() {
 	fi
 
 }
-cd $dir_file
-if [ ! `git remote -v | grep -o "https:\/\/github.com\/ITdesk01\/JD_Script.git" | wc -l` == "2" ];then 
-exit 0
-fi
+
 backnas() {
 	date_time=$(date +%Y-%m-%d-%H:%M | sed "s/:/_/")
 	back_file_name="script_${date_time}.tar.gz"
@@ -1473,6 +1470,8 @@ script_black() {
 	fi
 	clear
 }
+
+cd $dir_file && git remote -v | awk -F "/JD_Script"  '{print $1}' | awk -F "github.com/" '{print $2}' | sort -u >/tmp/github.txt
 
 script_black_Description() {
 cat >> $script_black_file <<EOF
@@ -2002,6 +2001,10 @@ additional_settings() {
 		source /etc/profile
 	fi
 }
+
+if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
+exit 0
+fi
 
 sys_additional_settings(){
 	#京东赚赚长期活动
