@@ -179,8 +179,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_daily_lottery.js		#每日抽奖
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_carnivalcity.js		#京东手机狂欢城
-	jd_xtg.js			#家电星推官
-	jd_xtg_help.js			#家电星推官好友互助
 	jd_gold_creator.js		#金榜创造营
 	jd_mohe.js			#5G超级盲盒
 	jd_star_shop.js			#明星小店
@@ -191,10 +189,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
 cp  $dir_file/git_clone/lxk0301_back/activity/jd_unbind.js	$dir_file_js/jd_unbind.js #注销京东会员卡
-wget https://raw.githubusercontent.com/star261/jd/main/scripts/jd_zoo.js  -O 	$dir_file_js/jd_zoo.js
-#wget https://raw.githubusercontent.com/yyetss/jd_scripts/master/jd_zoo.js -O 	$dir_file_js/jd_zoo.js		#动物联萌 618活动
-#wget https://raw.githubusercontent.com/ITdesk01/JD_Script/main/JSON/jd_zoo.js -O 	$dir_file_js/jd_zoo.js
-wget https://raw.githubusercontent.com/ITdesk01/JD_Script/main/JSON/jd_zooCollect.js -O $dir_file_js/jd_zooCollect.js
+
 
 wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 
@@ -205,9 +200,6 @@ do
 done
 sleep 5
 
-#删除之前创建的文件（过两天处理掉）
-rm -rf $dir_file/config/tmp/monk-*
-rm -rf $dir_file/config/tmp/panghu999_url.txt
 
 longzhuzhu_url="https://raw.githubusercontent.com/longzhuzhu/nianyu/main/qx"
 cat >$dir_file/config/tmp/longzhuzhu_qx.txt <<EOF
@@ -382,7 +374,6 @@ update_script() {
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
-	jd_xtg.js			#家电星推官
 	jd_mohe.js			#5G超级盲盒
 	jd_blueCoin.js  	#东东超市兑换，有次数限制，没时间要求
 	jd_car_exchange.js   #京东汽车兑换，500赛点兑换500京豆
@@ -428,7 +419,6 @@ run_020() {
 
 run_030() {
 	echo -e "$green run_030$start_script_time $white"
-	$node $dir_file_js/jd_zooCollect.js	#zoo收集金币
 	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
 	$node $dir_file_js/jd_health_collect.js		#健康社区-收能量
 	$node $dir_file_js/jddj_fruit_collectWater.js 	#京东到家果园水车收水滴 作者5分钟收一次
@@ -465,7 +455,6 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
-	jd_zoo.js 			#动物联萌 618活动
 	jd_618redpacket.js			#翻翻乐
 	jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
 	jd_joy_feedPets.js  #宠汪汪喂食一个小时喂一次
@@ -487,14 +476,12 @@ run_02() {
 	echo -e "$green run_02$start_script_time $white"
 	$node $dir_file_js/jd_moneyTree.js #摇钱树
 	sed -i '/PASTURE_EXCHANGE_KEYWORD/d' /etc/profile
-	$node $dir_file_js/jd_xtg.js			#家电星推官
 	$node $dir_file_js/pk.js			#新的PK京享值脚本
 	echo -e "$green run_02$stop_script_time $white"
 }
 
 run_03() {
 cat >/tmp/jd_tmp/run_03 <<EOF
-	jd_xtg_help.js			#家电星推官好友互助脚本
 	jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
 	jd_health.js		#健康社区
 	jddj_fruit.js			#京东到家果园 0,8,11,17
@@ -2139,16 +2126,6 @@ ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQ
 	#export JDHEALTH_SHARECODES="$share_code_value&&"
 }
 
-zoo_share() {
-	wget https://raw.githubusercontent.com/ITdesk01/JD_Script/main/JSON/zoo.txt -O  $dir_file/JSON/zoo.txt
-	new_zoopk=$(cat $dir_file/JSON/zoo.txt  | sed ':t;N;s/\n//;b t')
-	zoopk_rows=$(grep -n "\$.pkInviteList \= \[" $dir_file_js/jd_zoo.js | awk -F ":" '{print $1}')
-
-	sed -i "s/\$.pkInviteList \= \[/\$.pkInviteList \= \[ \n/g" $dir_file_js/jd_zoo.js
-	sed -i "$zoopk_rows a  $new_zoopk" $dir_file_js/jd_zoo.js
-
-	#sed -i "s/pKHelpAuthorFlag = true/pKHelpAuthorFlag = false/g" $dir_file_js/jd_zoo.js
-}
 
 share_code_generate() {
 	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
