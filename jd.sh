@@ -1861,8 +1861,8 @@ additional_settings() {
 
 	#京喜工厂
 	new_dreamFactory="4HL35B_v85-TsEGQbQTfFg==@q3X6tiRYVGYuAO4OD1-Fcg==@Gkf3Upy3YwQn2K3kO1hFFg==@w8B9d4EVh3e3eskOT5PR1A==@jwk7hHoEWAsvQyBkNrBS1Q==@iqAUAWEQx86GvVthAu7-jQ=="
-	zuoyou_20190516_df="oWcboKZa9XxTSWd28tCEPA==@sboe5PFeXgL2EWpxucrKYw==@rm-j1efPyFU50GBjacgEsw==@tZXnazfKhM0mZd2UGPWeCA=="
-	zuoyou_random_df="BprHGWI9w04zUnZPbIzKgw==@9aUfCEmRqRW9fK7-P-eGnQ==@9whmFTgMFw7ZfXcQdEJ3UA==@zVn3SNiwrEhxQEcbMZA27w==@k7iROwM2-Ha5EA59rRxBTg==@D_ttRc6eCyMxdHjMRGLobA==@BeecV8Oe9FL6I13lDGgOgA==@cA7LmxYoXxJNLnS7j25dxA==@aAwyOK0kb9OSm2oq2JVYMQ=="
+	zuoyou_20190516_df="oWcboKZa9XxTSWd28tCEPA==@sboe5PFeXgL2EWpxucrKYw==@rm-j1efPyFU50GBjacgEsw=="
+	zuoyou_random_df="BprHGWI9w04zUnZPbIzKgw==@DriN9xUWha-XqE0cN3u7Fg==@krMPYOnVbZAAkZJiSz5cUw==@9aUfCEmRqRW9fK7-P-eGnQ==@4yiyXPAaB_ReMPQy-st4AQ==@9whmFTgMFw7ZfXcQdEJ3UA==@zVn3SNiwrEhxQEcbMZA27w==@D_ttRc6eCyMxdHjMRGLobA==@BeecV8Oe9FL6I13lDGgOgA==@cA7LmxYoXxJNLnS7j25dxA==@aAwyOK0kb9OSm2oq2JVYMQ==@MmOfTa6Z79J9XRZA4roX1A==@rlJZquhGZTvDFksbDMhs2Q=="
 	Javon_20201224_df="P2nGgK6JgLtCqJBeQJ0f27XXLQwYAFHrKmA2siZTuj8=@LTyKtCPGU6v0uv-n1GSwfQ=="
 	Javon_20201224_random_df="@y7KhVRopnOwB1qFo2vIefg==@WnaDbsWYwImvOD1CpkeVWA==@Y4r32JTAKNBpMoCXvBf7oA==@JuMHWNtZt4Ny_0ltvG6Ipg==@KDhTwFSjylKffc2V7dp5HQ==@zS1ivJY43UFvaqOUiFijZQ==@-q3gc8s9Vr5x17EPRwyB8w==@BsCgeeTl_H2x5JQKGte6ow==@DQYKPYi5mD-dwO86UokUjg==@WHYhQ1mFlqoFow2iuq06wg==@1Oob_S4cfK2z2gApmzRBgw==@Z2t6d_X8aMYIp7IwTnuNyA==@UdTgtWxsEwypwH1v6GETfA=="
 	chiyu_df="us6se4fFC6cSjHDSS_ScMw=="
