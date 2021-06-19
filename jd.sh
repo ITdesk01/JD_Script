@@ -1995,6 +1995,9 @@ additional_settings() {
 
 	sed -i "s/https:\/\/gitee.com\/shylocks\/updateTeam\/raw\/main\/jd_cash.json/https:\/\/raw.githubusercontent.com\/ITdesk01\/JD_Script\/main\/JSON\/jd_cash.json/g"  $dir_file_js/jd_cash.js
 
+	#全民挖现金
+	sed -i "s/shareCode = ''/shareCode = 'D865D7C046B3594455DA8935E71EA2C5AD1DAAB9A3E3F6CBAFDE81EEB7393333'/g" $dir_file_js/jd_wxj.js		        #全民挖现金
+
 	#脚本黑名单
 	script_black
 
