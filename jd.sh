@@ -88,6 +88,7 @@ cat >>/etc/crontabs/root <<EOF
 10-20/5 12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
 30 20-23/1 * * * $node $dir_file_js/long_half_redrain.js	>/tmp/long_half_redrain.log	#半点红包雨#100#
 1 20-21/1 * * * $node $dir_file_js/long_hby_lottery.js >/tmp/long_hby_lottery.log #618主会场红包雨#100#
+50 0-23/8 * * * $node $dir_file_js/jd_wxj.js >/tmp/jd_wxj.log #全民挖现金#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
@@ -259,6 +260,20 @@ do
 	update_if
 done
 
+zero205_url="https://gitee.com/zero205/JD_tencent_scf/raw/main"
+cat >$dir_file/config/tmp/zero205_url.txt <<EOF
+	jd_wxj.js		        #全民挖现金
+	jd_djjl.js 		        #东东电竞经理
+
+EOF
+
+for script_name in `cat $dir_file/config/tmp/zero205_url.txt | awk '{print $1}'`
+do
+	url="$zero205_url"
+	wget $zero205_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
 Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/master/jd"
 cat >$dir_file/config/tmp/Wenmoux_url.txt <<EOF
 	jd_618redpacket.js		#翻翻乐
@@ -272,7 +287,6 @@ do
 	#wget $Wenmoux_url/$script_name -O $dir_file_js/$script_name
 	#update_if
 done
-
 
 	#检测cookie是否存活（暂时不能看到还有几天到期）
 	cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
@@ -390,8 +404,9 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
 	adolf_superbox.js		#超级盒子
 	jd_dreamFactory.js 		#京喜工厂
+	jd_djjl.js                      #电竞经理
 	jd_superBrand.js 		#特物ZX联想
-	zooLimitbox.js				#限时盲盒
+	zooLimitbox.js			#限时盲盒
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
