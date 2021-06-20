@@ -56,7 +56,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.19"
+	cron_version="3.20"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -84,10 +84,9 @@ cat >>/etc/crontabs/root <<EOF
 5 8,9,11,19,22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 && source /etc/profile #9,11,19,22点05分更新lxk0301脚本#100#
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机#100#
 0 11 */7 * *  $node $dir_file_js/jd_price.js >/tmp/jd_price.log #每7天11点执行京东保价#100#
-0 9 1 * *  $node $dir_file_js/jd_all_bean_change.js >/tmp/jd_all_bean_change.log #每个月1号推送当月京豆资产变化
+0 9 1 */1 *  $node $dir_file_js/jd_all_bean_change.js >/tmp/jd_all_bean_change.log #每个月1号推送当月京豆资产变化
 10-20/5 12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
 30 20-23/1 * * * $node $dir_file_js/long_half_redrain.js	>/tmp/long_half_redrain.log	#半点红包雨#100#
-1 20-21/1 * * * $node $dir_file_js/long_hby_lottery.js >/tmp/long_hby_lottery.log #618主会场红包雨#100#
 0 */8 * * * $node $dir_file_js/jd_wxj.js >/tmp/jd_wxj.log #全民挖现金#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
@@ -206,7 +205,6 @@ longzhuzhu_url="https://raw.githubusercontent.com/longzhuzhu/nianyu/main/qx"
 cat >$dir_file/config/tmp/longzhuzhu_qx.txt <<EOF
 	long_half_redrain.js		#半点红包雨
 	long_super_redrain.js 		#整点红包雨
-	long_hby_lottery.js		#主会场红包雨
 EOF
 
 for script_name in `cat $dir_file/config/tmp/longzhuzhu_qx.txt | awk '{print $1}'`
@@ -292,9 +290,10 @@ done
 	cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
 
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
-	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_friend.js -O $dir_file_js/jd_friend.js #joy总动员一次性脚本
 
-rm -rf $dir_file_js/jd_city.js
+rm -rf $dir_file_js/long_hby_lottery.js
+rm -rf $dir_file_js/jd_friend.js
+
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -324,7 +323,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_xxl.js			#东东爱消除
 	jd_xxl_gh.js			#个护爱消除，完成所有任务+每日挑战
 	jd_opencard.js			#开卡活动，一次性活动，运行完脚本获得53京豆，进入入口还可以开卡领30都
-	jd_friend.js			#joy总动员 一次性脚本
 	jd_unbind.js 			#注销京东会员卡
 	jdDreamFactoryShareCodes.js	#京喜工厂ShareCodes
 	jdFruitShareCodes.js		#东东农场ShareCodes
@@ -345,7 +343,6 @@ EOF
 	chmod 755 $dir_file_js/*
 	additional_settings
 	#sys_additional_settings
-	zoo_share
 	cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '" > $openwrt_script_config/js_cookie.txt
 	concurrent_js_update
 	source /etc/profile
