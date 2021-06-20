@@ -155,7 +155,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_lotteryMachine.js 		#京东抽奖机
 	jd_necklace.js			#点点券
 	jd_syj.js			#赚京豆
-	jd_redPacket.js			#全民开红包
 	jd_kd.js			#京东快递签到 一天运行一次即可
 	jd_small_home.js		#东东小窝
 	jd_speed.js			#天天加速
@@ -706,7 +705,6 @@ echo -e "$green============整理完成，可以提交了（没加群的忽略�
 }
 
 concurrent_js_run_07() {
-	$node $openwrt_script/JD_Script/js/jd_redPacket.js #京东全民开红包，没时间要求
 	#$node $openwrt_script/JD_Script/js/jd_small_home.js #东东小窝
 	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 	$node $openwrt_script/JD_Script/js/jd_check_cookie.js #检测cookie是否存活
