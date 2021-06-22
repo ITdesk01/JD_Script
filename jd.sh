@@ -56,7 +56,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.21"
+	cron_version="3.22"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -82,7 +82,6 @@ cat >>/etc/crontabs/root <<EOF
 10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #宠汪汪兑换礼品#100#
 00 8,12,22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本#100#
 5 8,9,11,19,22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 && source /etc/profile #9,11,19,22点05分更新lxk0301脚本#100#
-55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机#100#
 0 11 */7 * *  $node $dir_file_js/jd_price.js >/tmp/jd_price.log #每7天11点执行京东保价#100#
 0 9 1 */1 * $node $dir_file_js/jd_all_bean_change.js >/tmp/jd_all_bean_change.log #每个月1号推送当月京豆资产变化#100#
 10-20/5 12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
@@ -143,8 +142,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_joy_feedPets.js 		#宠汪汪单独喂食
 	jd_joy.js			#宠汪汪
 	jd_joy_reward.js 		#宠汪汪兑换奖品
-	jd_crazy_joy.js			#crazyJoy任务
-	jd_crazy_joy_coin.js		#crazy joy挂机领金币/宝箱专用
 	jd_car_exchange.js		#京东汽车兑换，500赛点兑换500京豆
 	jd_car.js			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_club_lottery.js		#摇京豆
@@ -166,7 +163,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_speed_sign.js		#京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#极速版红包
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
-	jd_crazy_joy_bonus.js		#监控crazyJoy分红狗(默认不运行，欧皇自己设置定时任务)
 	jd_cfd.js			#京喜财富岛
 	jd_live.js			#京东直播
 	jd_live_redrain.js 		#超级直播间红包雨
@@ -426,7 +422,6 @@ EOF
 	run_01
 	run_03
 	run_030
-	#$node $dir_file_js/jd_crazy_joy.js #crazyJoy任务
 	echo -e "$green run_0$stop_script_time $white"
 }
 
@@ -617,33 +612,6 @@ EOF
 	echo -e "$green run_10_15_20$stop_script_time $white"
 }
 
-
-joy(){
-	#crazy joy挂机领金币/宝箱专用
-	echo -e "$green joy挂机领金币$start_script_time $white"
-	kill_joy
-	$node $dir_file_js/jd_crazy_joy_coin.js &
-	echo -e "$green joy挂机领金币$stop_script_time $white"
-}
-
-kill_joy() {
-	echo -e "$green  执行kill_joy$start_script_time $white"
-	pid=$(ps -ww | grep "jd_crazy_joy_coin.js" | grep -v grep | awk '{print $1}')
-	if [ $(echo $pid |wc -l ) == "1" ];then
-		echo -e "$yellow发现joy后台程序开始清理，请稍等$white"
-		for joy_pid in `echo $pid`
-		do
-			echo "kill $joy_pid"
-			kill -9 $joy_pid
-			sleep 2
-		done
-		echo -e "$green joy后台程序清理完成$white"
-	else
-		echo "$green没有运行的joy后台$white"
-	fi
-	echo -e "$green 执行kill_joy$stop_script_time $white"
-}
-
 script_name() {
 	clear
 	echo -e "$green 显示所有JS脚本名称与作用$white"
@@ -687,7 +655,6 @@ cat > /tmp/code_name <<EOF
 种豆得豆 pb
 京喜工厂 df
 京东赚赚 jdzz
-crazyJoy crazyJoy
 签到领现金 jdcash
 闪购盲盒 jdsgmh
 财富岛 cfd
@@ -792,7 +759,7 @@ concurrent_js_clean(){
 kill_ccr() {
 	if [ "$ccr_if" == "yes" ];then
 		echo -e "$green>>终止并发程序启动。请稍等。。。。$white"
-		if [ `ps -ww | grep "js$" | grep -v "jd_crazy_joy_coin.js" | awk '{print $1}' |wc -l` == "0" ];then
+		if [ `ps -ww | grep "js$" | awk '{print $1}' |wc -l` == "0" ];then
 			sleep 2
 			echo ""
 			echo -e "$green我曾经跨过山和大海，也穿过人山人海。。。$white"
@@ -803,7 +770,7 @@ kill_ccr() {
 			sleep 2
 			echo -e "$green后台都没有进程妹子，散了散了。。。$white"
 		else
-			for i in `ps -ww | grep "js$" | grep -v "jd_crazy_joy_coin.js" | awk '{print $1}'`
+			for i in `ps -ww | grep "js$" | awk '{print $1}'`
 			do
 				kill -9 $i
 				echo "kill $i"
@@ -811,7 +778,7 @@ kill_ccr() {
 			concurrent_js_clean
 			clear
 			echo -e "$green再次检测一下并发程序是否还有存在$white"
-			if [ `ps -ww | grep "js$" | grep -v "jd_crazy_joy_coin.js" | awk '{print $1}' |wc -l` == "0" ];then
+			if [ `ps -ww | grep "js$" | awk '{print $1}' |wc -l` == "0" ];then
 				echo -e "$yellow>>并发程序已经全部结束$white"
 			else
 				echo -e "$yellow！！！检测到并发程序还有存在，再继续杀，请稍等。。。$white"
@@ -826,7 +793,7 @@ kill_ccr() {
 
 if_ps() {
 	sleep 10
-	ps_if=$(ps -ww | grep "js$" | grep -v "jd_crazy_joy_coin.js" | awk '{print $1}' |wc -l)
+	ps_if=$(ps -ww | grep "js$" | awk '{print $1}' |wc -l)
 	num1="10"
 	num2="20"
 	num3="30"
@@ -1428,7 +1395,7 @@ EOF
 
 script_black() {
 	#不是很完美，但也能用，后面再想想办法，grep无法处理$node 这种这样我无法判断是否禁用了，只能删除掉一了百了
-	black_version="黑名单版本1.1"
+	black_version="黑名单版本1.2"
 	#判断所在文件夹
 	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 		script_black_file="$openwrt_script_config/Script_blacklist.txt"
@@ -1492,7 +1459,6 @@ cat >> $script_black_file <<EOF
 * 	jd_ceshi1.js #禁用的脚本1
 * 	jd_ceshi2.js #禁用的脚本2
 *
-*注意事项：禁用JOY挂机需要这么写 jd_crazy_joy_coin.js &
 *按这样排列下去（一行一个脚本名字）
 *每个脚本应的文件可以用 sh \$jd script_name                    #显示所有JS脚本名称与作用
 *
@@ -1505,10 +1471,7 @@ stop_script() {
 	echo -e "$green 删掉定时任务，这样就不会定时运行脚本了$white"
 	task_delete
 	sleep 3
-
-	echo -e "$green kill JOY$white"
-	kill_joy
-	sleep 3
+	killall -9 node 
 	echo -e "$green处理完成，需要重新启用，重新跑脚本sh \$jd 就会添加定时任务了$white"
 }
 
@@ -1562,8 +1525,6 @@ help() {
 	echo -e "$green  sh \$jd jx $white 				#查询京喜商品生产使用时间"
 	echo ""
 	echo -e "$green  sh \$jd jd_sharecode $white 			#查询京东所有助力码"
-	echo ""
-	echo -e "$green  sh \$jd joy $white				#运行疯狂的JOY(两个号需要1G以上，sh \$jd kill_joy 杀掉进程，彻底关闭需要先杀进程再禁用定时任务的代码)"
 	echo ""
 	echo -e "$green  sh \$jd checklog $white  			#检测log日志是否有错误并推送"
 	echo ""
@@ -2033,27 +1994,6 @@ sys_additional_settings(){
 	export JDZZ_SHARECODES="$share_code_value&&"
 	echo "export JDZZ_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
 
-	#crazyJoy任务
-	new_crazyJoy="rHYmFm9wQAUb1S9FJUrMB6t9zd5YaBeE@7P1a-YqssNzEUo2yzMjkKat9zd5YaBeE@5z24ds6URIn_QEyGetqaHg==@KgkXpuBiTwm918sV3j4cmA==@CCxsXuB_kLhf6HV1LsZZ3GXGvf5Si_Xe@2tkIpiDk0h5W4-QdQYV1Hw==@KERXjmCp23eGkqiL1HrNKKt9zd5YaBeE@AG0W7h-GcmIDy_e0bkMKyat9zd5YaBeE@_l4qGmr10IzOqi6IfXC7ZQ=="
-	zuoyou_20190516_cj="4GfMxIH581M=@xIA07jnZuHg=@BxewpcJDIAwJqfAkvKwcwKt9zd5YaBeE@L5gPw7OnXf8=@Qx0ZX75ICJEEVf8fiwFZZA==@yMTonM2JMYjPW5TgkXsQnw==@nBb3HKybmr94I14meLVZPQ==@0LUQBIWvWsA-YbCjikIZGQ==@Ewg8NRIihRg66HXOGdlqrg==@3iUbFNTLF6tnJA1ZYLpP-w==@gz45Nf_7rgKdlolf3aQDpg==@z3O-VNgrWFev3DPdeHIlOKt9zd5YaBeE@jF5bHEsOxjmab12UFJJDiw==@bzbj_8Lr9NAPL-92UEK1ng==@iMvFEnejNI36J92m_biwh6t9zd5YaBeE@1YdTjf0z-ejoT4C48SJDsat9zd5YaBeE@S1xIX--AiOQoyxF9JQRskw==@9WX1Lyd2i9HEeHPgUAIx_A==@5CyQkzmAZL6XBiH6dZlijA=="
-	jidiyangguang_20190516_cj="YKcWnuVsQLhGGMGXoNagr6t9zd5YaBeE@bF34fM689WcBsccobrWCEKt9zd5YaBeE"
-	Jhone_Potte_20200824_cj="R0_iwyMT_LeF5osbxYCNwKt9zd5YaBeE@LVKLzARN7ub-xqKdK_upZ6t9zd5YaBeE"
-	chiyu_cj="C5vbyHg-mOmrfc3eWGgXhA=="
-	ashou_20210516_crazyJoy="olsw8XVa7wR0FkRUtBfFHA==@g1JWtxlX4qIozEmNryQipA==@kFXkccdosJUs2woo9v1i66t9zd5YaBeE@aM93O_bjCuJBkBWZB1ALPat9zd5YaBeE@JbQ7JvEWx7Fab-MBk27Njg==@Opw_ywaQzHoZAjvtslBb-qt9zd5YaBeE@lrfiS0THw-PihqcgEdchY6t9zd5YaBeE@_6SDheC97JWrfc3eWGgXhA=="
-	
-	
-	new_crazyJoy_set="$new_crazyJoy@$zuoyou_20190516_cj@$jidiyangguang_20190516_cj@$Jhone_Potte_20200824_cj@$chiyu_cj@$ashou_20210516_crazyJoy"
-
-	share_code="$new_crazyJoy_set"
-	share_code_value="$new_crazyJoy_set"
-	share_code_generate
-	sed -i '/JDJOY_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	export JDJOY_SHARECODES="$share_code_value&&"
-	echo "export JDJOY_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
-
-	sed -i "s/applyJdBean = 2000/applyJdBean = $jd_crazy_joy/g" $dir_file_js/jd_crazy_joy.js #JOY兑换2000豆子
-
-
 	#签到领现金
 	new_jdcash="eU9Ya-iyZ68kpWrRmXBFgw@eU9YabrkZ_h1-GrcmiJB0A@eU9YM7bzIptVshyjrwlteU9YCLTrH5VesRWnvw5t@P2nGgK6JgLtCqJBeQJ0f27XXLQwYAFHrKmA2siZTuj8=@JuMHWNtZt4Ny_0ltvG6Ipg==@IRM2beu1b-En9mzUwnU@eU9YaOSwMP8m-D_XzHpF0w@eU9Yau-yMv8ho2fcnXAQ1Q@eU9YCovbMahykhWdvS9R@JxwyaOWzbvk7-W3WzHcV1mw"
 	zuoyou_20190516_jdcash="f1kwaQ@a1hzJOmy@eU9Ya7-wM_Qg-T_SyXIb0g@flpkLei3@f0JgObLlIalJrA@eU9YG4X6HpZMixS8lBBu@eU9YH6THD4pXkiqTuCFi@eU9YD7rQHo1btTm9shR7@eU9YE67FOpl9hTG0mjNp@cUJpO6X3Yf4m@e1JzPbLlJ6V5rzk@eU9Ya7m3NaglpW3QziUW0A@eU9YFbnVJ6VArC-2lQtI@ZE9ILbHhMJR9oyq_ozs@eU9Yaengbv9wozzUmiIU3g@eU9YaO22Z_og-DqGz3AX1Q@eU9YBJrlD5xcixKfrS1U@eU9YG7TVDLlhgAyBsRpw@eU9YOKTPGLRegB2mmCpg"
@@ -2342,7 +2282,6 @@ system_variable() {
 	jd_joy_reward=$(grep "jd_joy_reward" $jd_openwrt_config | awk -F "'" '{print $2}')
 	jd_joy_feedPets=$(grep "jd_joy_feedPets" $jd_openwrt_config | awk -F "'" '{print $2}')
 	jd_joy_steal=$(grep "jd_joy_steal" $jd_openwrt_config | awk -F "'" '{print $2}')
-	jd_crazy_joy=$(grep "jd_crazy_joy" $jd_openwrt_config | awk -F "'" '{print $2}')
 	jd_unsubscribe=$(grep "jd_unsubscribe" $jd_openwrt_config | awk -F "'" '{print $2}')
 
 	#添加系统变量
@@ -2402,11 +2341,6 @@ jd_joy_feedPets='80'
 #宠汪汪不给好友喂食 false不喂食 ture喂食
 jd_joy_steal='false'
 
-
-#JOY兑换豆子(满2000开始兑换)
-jd_crazy_joy='2000'
-
-
 #取消店铺200个(觉得太多你可以自己调整)
 jd_unsubscribe='200'
 EOF
@@ -2422,7 +2356,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie)
 		$action1
 		;;
 		kill_ccr)
@@ -2441,7 +2375,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|joy|kill_joy|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie)
 		$action2
 		;;
 		kill_ccr)
