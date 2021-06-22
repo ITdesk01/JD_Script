@@ -296,8 +296,7 @@ done
 	cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
 
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
-	wget https://raw.githubusercontent.com/hyzaw/scripts/main/ddo_pk.js　-O $dir_file_js/ddo_pk.js #新的pk脚本
-
+	wget https://raw.githubusercontent.com/hyzaw/scripts/main/ddo_pk.js -O $dir_file_js/ddo_pk.js #新的pk脚本
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
