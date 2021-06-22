@@ -296,7 +296,7 @@ done
 	cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
 
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
-	wget https://raw.githubusercontent.com/hyzaw/scripts/main/ddo_pk.js #新的pk脚本
+	wget https://raw.githubusercontent.com/hyzaw/scripts/main/ddo_pk.js　-O $dir_file_js/ddo_pk.js #新的pk脚本
 
 
 #将所有文本汇总
@@ -345,7 +345,6 @@ EOF
 	fi
 	chmod 755 $dir_file_js/*
 	additional_settings
-	#sys_additional_settings
 	cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '" > $openwrt_script_config/js_cookie.txt
 	concurrent_js_update
 	source /etc/profile
@@ -1960,68 +1959,7 @@ additional_settings() {
 	#全民挖现金
 	sed -i "s/shareCode = ''/shareCode = 'D865D7C046B3594455DA8935E71EA2C5AD1DAAB9A3E3F6CBAFDE81EEB7393333'/g" $dir_file_js/jd_wxj.js		        #全民挖现金
 
-	#脚本黑名单
-	script_black
-
-	#农场萌宠关闭通知
-	close_notification
-
-	#关闭整点红包雨通知
-	if [ ! `grep "RAIN_NOTIFY_CONTROL" /etc/profile | wc -l` == "1" ];then
-		echo "export RAIN_NOTIFY_CONTROL="false"" >> /etc/profile
-		source /etc/profile
-	fi
-}
-
-if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
-exit 0
-fi
-
-sys_additional_settings(){
-	#京东赚赚长期活动
-	new_jdzz="AUWE5mKmQzGYKXGT8j38cwA@AUWE5mvvGzDFbAWTxjC0Ykw@AUWE5wPfRiVJ7SxKOuQY0@S5KkcJEZAjD2vYGGG4Ip0@S5KkcREsZ_QXWIx31wKJZcA@S5KkcRUwe81LRIR_3xaNedw@Suvp2RBcY_VHKKBn3k_MMdNw@SvPVyQRke_EnWJxj1nfE@S5KkcRBYbo1fXKUv2k_5ccQ@S5KkcRh0ZoVfQchP9wvQJdw@S5KkcJnlwogCDQ2G84qtI"
-	zuoyou_20190516_jdzz="S4r90RQ@S9r43CBsZ@S5KkcR00boFzRKEvzlvYCcA@S47wgARoc@S4qQkFUBOsgG4fQ@S7KQtF1dc8lbX@S5rQ3EUBOtA2Ifk0@S5KkcR0scpgDUdBnxkaEPcg@S5KkcOUt-tA2xfVuXyo9R@S-akMAUNKozyMcl6e_L8@S5KkcRRtL_VeBckj1xaYNfA@S5KkcRB8d9FLRKU6nkPQOdw"
-	jidiyangguang_20190516_jdzz="S5KkcRBpK8lbeIxr8wfRcdw@S5KkcR0wdpFCGcRvwxv4Jcg"
-	chiyu_jdzz="S7aUqCVsc91U"
-	ashou_20210516_jdzz="Sv_V1RRgf_VPSJhyb1A@Sa0DkmLenrwOA@S5KkcRRtN8wCBdUimlqVbJw@S5KkcRkoboVKEJRr3xvINdQ@S_aIzGEdFoAGJdw@S5KkcRhpI8VfXcR79wqVcIA@S5KkcRk1P8VTSdUmixvUIfQ@S-acrCh8Q_VE"
 	
-	new_jdzz_set="$xo_20201229_jdzz@$new_jdzz@$zuoyou_20190516_jdzz@$jidiyangguang_20190516_jdzz@$chiyu_jdzz@$ashou_20210516_jdzz"
-
-	share_code="$new_jdzz_set"
-	share_code_value="$new_jdzz_set"
-	share_code_generate
-	sed -i '/JDZZ_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	export JDZZ_SHARECODES="$share_code_value&&"
-	echo "export JDZZ_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
-
-	#签到领现金
-	new_jdcash="eU9Ya-iyZ68kpWrRmXBFgw@eU9YabrkZ_h1-GrcmiJB0A@eU9YM7bzIptVshyjrwlteU9YCLTrH5VesRWnvw5t@P2nGgK6JgLtCqJBeQJ0f27XXLQwYAFHrKmA2siZTuj8=@JuMHWNtZt4Ny_0ltvG6Ipg==@IRM2beu1b-En9mzUwnU@eU9YaOSwMP8m-D_XzHpF0w@eU9Yau-yMv8ho2fcnXAQ1Q@eU9YCovbMahykhWdvS9R@JxwyaOWzbvk7-W3WzHcV1mw"
-	zuoyou_20190516_jdcash="f1kwaQ@a1hzJOmy@eU9Ya7-wM_Qg-T_SyXIb0g@flpkLei3@f0JgObLlIalJrA@eU9YG4X6HpZMixS8lBBu@eU9YH6THD4pXkiqTuCFi@eU9YD7rQHo1btTm9shR7@eU9YE67FOpl9hTG0mjNp@cUJpO6X3Yf4m@e1JzPbLlJ6V5rzk@eU9Ya7m3NaglpW3QziUW0A@eU9YFbnVJ6VArC-2lQtI@ZE9ILbHhMJR9oyq_ozs@eU9Yaengbv9wozzUmiIU3g@eU9YaO22Z_og-DqGz3AX1Q@eU9YBJrlD5xcixKfrS1U@eU9YG7TVDLlhgAyBsRpw@eU9YOKTPGLRegB2mmCpg"
-	chiyu_jdcash="cENuJam3ZP0"
-	Jhone_Potte_20200824_jdcash="eU9Yaum1N_4j82-EzCUSgw@eU9Yar-7Nf518GyBniIWhw"
-	jidiyangguang_20190516_jdcash="eU9YaOjhYf4v8m7dnnBF1Q@eU9Ya762N_h3oG_RmXoQ0A"
-	ashou_20210516_jdcash="IhMxaeq0bvsj92i6iw@9qagtEUMPKtx@eU9YaenmYKhwpDyHySFChQ@eU9YariwMvp19G7WmXYU1w@YER3NLXuM6l4pg@eU9YaujjYv8moGrcnSFFgg@eU9Yar_kYvwjpD2DmXER3w@ZEFvJu27bvk"
-	
-
-	new_jdcash_set="$new_jdcash@$zuoyou_20190516_jdcash@$jidiyangguang_20190516_jdcash@$chiyu_jdcash@$Jhone_Potte_20200824_jdcash@$ashou_20210516_jdcash"
-
-	share_code="$new_jdcash_set"
-	share_code_value="$new_jdcash_set"
-	share_code_generate
-	sed -i '/JD_CASH_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	export JD_CASH_SHARECODES="$share_code_value&&"
-	echo "export JD_CASH_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
-
-	sed -i "s/https:\/\/gitee.com\/shylocks\/updateTeam\/raw\/main\/jd_cash.json/https:\/\/raw.githubusercontent.com\/ITdesk01\/JD_Script\/main\/JSON\/jd_cash.json/g"  $dir_file_js/jd_cash.js
-
-	if [ `date +%A` == "Sunday" ];then
-		echo "周日提前开启2元兑换200豆子功能"
-		sed -i "s/cash_exchange = false/cash_exchange = true/g" $dir_file_js/jd_cash.js
-	else
-		echo > /dev/null 2>&1
-	fi
-
-
 	#闪购盲盒
 	new_jdsgmh="T0225KkcRxoZ9AfVdB7wxvRcIQCjVWmIaW5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVWmIaW5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVWmIaW5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVWmIaW5kRrbA@T019vPVyQRke_EnWJxj1nfECjVQmoaT5kRrbA@T0225KkcRBYbo1fXKUv2k_5ccQCjVQmoaT5kRrbA@T0225KkcRh0ZoVfQchP9wvQJdwCjVQmoaT5kRrbA@T0205KkcJnlwogCDQ2G84qtICjVQmoaT5kRrbA"
 	zuoyou_20190516_jdsgmh="T0064r90RQCjVQmoaT5kRrbA@T0089r43CBsZCjVQmoaT5kRrbA@T0225KkcR00boFzRKEvzlvYCcACjVQmoaT5kRrbA@T00847wgARocCjVQmoaT5kRrbA@T0144qQkFUBOsgG4fQCjVQmoaT5kRrbA@T0205KkcI0h7jSWqZE2c7ZBiCjVQmoaT5kRrbA@T0205KkcP1xuqTGMVEWVxbdwCjVQmoaT5kRrbA@T0127KQtF1dc8lbXCjVQmoaT5kRrbA@T0155rQ3EUBOtA2Ifk0CjVQmoaT5kRrbA@T0225KkcR0scpgDUdBnxkaEPcgCjVQmoaT5kRrbA@T0205KkcOUt-tA2xfVuXyo9RCjVQmoaT5kRrbA@T019-akMAUNKozyMcl6e_L8CjVQmoaT5kRrbA@T0225KkcRRtL_VeBckj1xaYNfACjVQmoaT5kRrbA@T0225KkcRB8d9FLRKU6nkPQOdwCjVQmoaT5kRrbA@T0205KkcKGhOnDStWma-8qlNCjVQmoaT5kRrbA@T0205KkcN0Z-nxGQUXig7p5pCjVQmoaT5kRrbA@T0205KkcFFZkixyvUWmHx655CjVQmoaT5kRrbA"
@@ -2033,17 +1971,30 @@ sys_additional_settings(){
 	chiyu_jdsgmh="T0117aUqCVsc91UCjVQmoaT5kRrbA"
 	
 ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQmoaT5kRrbA@T0225KkcRRtN8wCBdUimlqVbJwCjVQmoaT5kRrbA@T0225KkcRkoboVKEJRr3xvINdQCjVQmoaT5kRrbA@T014_aIzGEdFoAGJdwCjVQmoaT5kRrbA@T0225KkcRhpI8VfXcR79wqVcIACjVQmoaT5kRrbA@T0225KkcRk1P8VTSdUmixvUIfQCjVQmoaT5kRrbA@T011-acrCh8Q_VECjVQmoaT5kRrbA"
-	
-	
 	new_jdsgmh_set="$new_jdsgmh@$zuoyou_20190516_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$Javon_20201224_jdsgmh@$xo_20201229_jdsgmh@$Jhone_Potte_20200824_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$ashou_20210516_jdsgmh',"
 
-	share_code="$new_jdsgmh_set"
-	share_code_value="$new_jdsgmh_set"
-	share_code_generate
-	sed -i '/JDSGMH_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	export JDSGMH_SHARECODES="$share_code_value&&"
-	echo "export JDSGMH_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
+	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
+	sgmhcode_rows=$(grep -n "inviteCodes = \[" $dir_file_js/jd_sgmh.js | awk -F ":" '{print $1}')
+	while [[ ${js_amount} -gt 0 ]]; do
+		sed -i "$sgmhcode_rows a \ '$new_jdsgmh_set', " $dir_file_js/jd_sgmh.js
+		js_amount=$(($js_amount - 1))
+	done
 
+	#京东赚赚长期活动
+	new_jdzz="AUWE5mKmQzGYKXGT8j38cwA@AUWE5mvvGzDFbAWTxjC0Ykw@AUWE5wPfRiVJ7SxKOuQY0@S5KkcJEZAjD2vYGGG4Ip0@S5KkcREsZ_QXWIx31wKJZcA@S5KkcRUwe81LRIR_3xaNedw@Suvp2RBcY_VHKKBn3k_MMdNw@SvPVyQRke_EnWJxj1nfE@S5KkcRBYbo1fXKUv2k_5ccQ@S5KkcRh0ZoVfQchP9wvQJdw@S5KkcJnlwogCDQ2G84qtI"
+	zuoyou_20190516_jdzz="S4r90RQ@S9r43CBsZ@S5KkcR00boFzRKEvzlvYCcA@S47wgARoc@S4qQkFUBOsgG4fQ@S7KQtF1dc8lbX@S5rQ3EUBOtA2Ifk0@S5KkcR0scpgDUdBnxkaEPcg@S5KkcOUt-tA2xfVuXyo9R@S-akMAUNKozyMcl6e_L8@S5KkcRRtL_VeBckj1xaYNfA@S5KkcRB8d9FLRKU6nkPQOdw"
+	jidiyangguang_20190516_jdzz="S5KkcRBpK8lbeIxr8wfRcdw@S5KkcR0wdpFCGcRvwxv4Jcg"
+	chiyu_jdzz="S7aUqCVsc91U"
+	ashou_20210516_jdzz="Sv_V1RRgf_VPSJhyb1A@Sa0DkmLenrwOA@S5KkcRRtN8wCBdUimlqVbJw@S5KkcRkoboVKEJRr3xvINdQ@S_aIzGEdFoAGJdw@S5KkcRhpI8VfXcR79wqVcIA@S5KkcRk1P8VTSdUmixvUIfQ@S-acrCh8Q_VE"
+	
+	new_jdzz_set="$new_jdzz@$zuoyou_20190516_jdzz@$jidiyangguang_20190516_jdzz@$chiyu_jdzz@$ashou_20210516_jdzz"
+
+	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
+	jdzzcode_rows=$(grep -n "inviteCodes = \[" $dir_file_js/jd_jdzz.js | awk -F ":" '{print $1}')
+	while [[ ${js_amount} -gt 0 ]]; do
+		sed -i "$jdzzcode_rows a \ '$new_jdzz_set', " $dir_file_js/jd_jdzz.js
+		js_amount=$(($js_amount - 1))
+	done
 
 	#财富岛
 	new_cfd="698098B001CF38EEEBCF66F9746EAFC7E1627164C06D4AADED9CCBC4B3A308EF@2F37BEBF8BFCDF8BEE92C1C2923706A4D1E39886C942A521A2A0353AED313BEC@74368D6374341F98E02515D2661AA24DDDF4780627137D1A2A93C1D968FE8698@161F722B03A9D0D88957B3A10D1993F0AC232B8CE6586F11D730AC247E887B31"
@@ -2063,10 +2014,9 @@ ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQ
 	share_code_value="$new_cfd_set"
 	share_code_generate
 	sed -i '/JDCFD_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	echo "export JDCFD_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
-	export JDCFD_SHARECODES="$share_code_value&&"
-	
-	#东东社区
+	sed -i "39a \let JDCFD_SHARECODES = \'$share_code_value&&\';" $dir_file_js/jd_cfd.js
+
+	#健康社区
 	new_health="T0225KkcRxoZ9AfVdB7wxvRcIQCjVfnoaW5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVfnoaW5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVfnoaW5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVfnoaW5kRrbA"
 	test_health="T019vPVyQRke_EnWJxj1nfECjVfnoaW5kRrbA@T0225KkcRBYbo1fXKUv2k_5ccQCjVfnoaW5kRrbA@T0225KkcRh0ZoVfQchP9wvQJdwCjVfnoaW5kRrbA@T0205KkcPGhhswmWX2e03YBbCjVfnoaW5kRrbA@T0225KkcRBwdp1CEI0v8l_9ZdwCjVfnoaW5kRrbA"
 
@@ -2077,17 +2027,26 @@ ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQ
 	random_array
 	new_health_set="$new_health@$Javon_20201224_health@$random_set"
 
-	share_code="$new_health_set"
-	share_code_value="$new_health_set"
-	share_code_generate
-	sed -i '/JDHEALTH_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	#echo "export JDHEALTH_SHARECODES=\"$share_code_value&&\"" >> /etc/profile
-	#export JDHEALTH_SHARECODES="$share_code_value&&"
+	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
+	healthcode_rows=$(grep -n "inviteCodes = \[" $dir_file_js/jd_health.js | awk -F ":" '{print $1}')
+	while [[ ${js_amount} -gt 0 ]]; do
+		sed -i "$healthcode_rows a \ '$new_health_set', " $dir_file_js/jd_health.js
+		js_amount=$(($js_amount - 1))
+	done
+	
+	#脚本黑名单
+	script_black
+
+	#农场萌宠关闭通知
+	close_notification
 }
 
+if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
+exit 0
+fi
 
 share_code_generate() {
-	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
+	js_amount="10"
 	while [[ ${js_amount} -gt 0 ]]; do
 		share_code_value="$share_code_value&$share_code"
 		js_amount=$(($js_amount - 1))
