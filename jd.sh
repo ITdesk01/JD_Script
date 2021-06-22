@@ -56,7 +56,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.20"
+	cron_version="3.21"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -84,7 +84,7 @@ cat >>/etc/crontabs/root <<EOF
 5 8,9,11,19,22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 && source /etc/profile #9,11,19,22点05分更新lxk0301脚本#100#
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机#100#
 0 11 */7 * *  $node $dir_file_js/jd_price.js >/tmp/jd_price.log #每7天11点执行京东保价#100#
-0 9 1 */1 *  $node $dir_file_js/jd_all_bean_change.js >/tmp/jd_all_bean_change.log #每个月1号推送当月京豆资产变化
+0 9 1 */1 * $node $dir_file_js/jd_all_bean_change.js >/tmp/jd_all_bean_change.log #每个月1号推送当月京豆资产变化
 10-20/5 12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
 30 20-23/1 * * * $node $dir_file_js/long_half_redrain.js	>/tmp/long_half_redrain.log	#半点红包雨#100#
 0 */8 * * * $node $dir_file_js/jd_wxj.js >/tmp/jd_wxj.log #全民挖现金#
@@ -299,6 +299,7 @@ done
 	cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
 
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
+	wget https://raw.githubusercontent.com/hyzaw/scripts/main/ddo_pk.js #新的pk脚本
 
 
 #将所有文本汇总
@@ -309,8 +310,8 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	ddo_pk.js #新的pk脚本
 	jd_all_bean_change.js 		#京东月资产变动通知
-	adolf_pk.js 			#京享值PK
 	adolf_martin.js			#人头马x博朗
 	adolf_superbox.js		#超级盒子
 	adolf_newInteraction.js		#618大势新品赏
@@ -320,7 +321,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	z_marketLottery.js 		#京东超市-大转盘
 	z_mother_jump.js		#新一期母婴跳一跳开始咯
 	z_shop_captain.js		#超级无线组队分奖品
-	pk.js				#新的PK京享值脚本
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jx_products_detail.js		#京喜工厂商品列表详情
@@ -494,7 +494,7 @@ run_02() {
 	echo -e "$green run_02$start_script_time $white"
 	$node $dir_file_js/jd_moneyTree.js #摇钱树
 	sed -i '/PASTURE_EXCHANGE_KEYWORD/d' /etc/profile
-	$node $dir_file_js/pk.js			#新的PK京享值脚本
+	$node $dir_file_js/ddo_pk.js #新的pk脚本
 	echo -e "$green run_02$stop_script_time $white"
 }
 
@@ -585,7 +585,6 @@ cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_star_shop.js			#明星小店
 	jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	jd_syj.js #赚京豆
-	adolf_pk.js 			#京享值PK
 	jd_jump.js			#跳跳乐瓜分京豆
 EOF
 	echo -e "$green run_08_12_16$start_script_time $white"
