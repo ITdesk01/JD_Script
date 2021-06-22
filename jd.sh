@@ -84,7 +84,7 @@ cat >>/etc/crontabs/root <<EOF
 5 8,9,11,19,22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 && source /etc/profile #9,11,19,22点05分更新lxk0301脚本#100#
 55 23 * * * $dir_file/jd.sh kill_joy >/tmp/jd_kill_joy.log 2>&1 #23点55分关掉joy挂机#100#
 0 11 */7 * *  $node $dir_file_js/jd_price.js >/tmp/jd_price.log #每7天11点执行京东保价#100#
-0 9 1 */1 * $node $dir_file_js/jd_all_bean_change.js >/tmp/jd_all_bean_change.log #每个月1号推送当月京豆资产变化
+0 9 1 */1 * $node $dir_file_js/jd_all_bean_change.js >/tmp/jd_all_bean_change.log #每个月1号推送当月京豆资产变化#100#
 10-20/5 12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
 30 20-23/1 * * * $node $dir_file_js/long_half_redrain.js	>/tmp/long_half_redrain.log	#半点红包雨#100#
 0 */8 * * * $node $dir_file_js/jd_wxj.js >/tmp/jd_wxj.log #全民挖现金#
@@ -99,6 +99,7 @@ EOF
 
 task_delete() {
         sed -i '/#100#/d' /etc/crontabs/root >/dev/null 2>&1
+	sed -i '/jd_all_bean_change.js/d' /etc/crontabs/root >/dev/null 2>&1
 }
 
 ds_setup() {
