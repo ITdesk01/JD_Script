@@ -2040,6 +2040,9 @@ ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQ
 		sed -i "$healthcode_rows a \ '$new_health_set', " $dir_file_js/jd_health.js
 		js_amount=$(($js_amount - 1))
 	done
+
+	#关闭翻翻乐的推送太多了
+	sed -i "s/await notify.sendNotify/\/\/await notify.sendNotify/g"  $dir_file_js/jd_618redpacket.js
 	
 	#脚本黑名单
 	script_black
