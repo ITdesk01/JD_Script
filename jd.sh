@@ -297,6 +297,7 @@ done
 
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/hyzaw/scripts/main/ddo_pk.js -O $dir_file_js/ddo_pk.js #新的pk脚本
+	wget https://raw.githubusercontent.com/star261/jd/main/scripts/star_dreamFactory_tuan.js -O $dir_file_js/star_dreamFactory_tuan.js #京喜开团
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -306,7 +307,8 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	ddo_pk.js #新的pk脚本
+	star_dreamFactory_tuan.js 	#京喜开团
+	ddo_pk.js 			#新的pk脚本
 	jd_all_bean_change.js 		#京东月资产变动通知
 	adolf_martin.js			#人头马x博朗
 	adolf_superbox.js		#超级盒子
@@ -515,6 +517,7 @@ EOF
 
 run_06_18() {
 cat >/tmp/jd_tmp/run_06_18 <<EOF
+	star_dreamFactory_tuan.js       #京喜开团
 	jd_mcxhd.js  		#新潮品牌狂欢
 	jd_blueCoin.js  #东东超市兑换，有次数限制，没时间要求
 	jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
@@ -1879,6 +1882,11 @@ additional_settings() {
 		sed -i "$dfcode_rows a \ $new_dreamFactory_set " $dir_file_js/jdDreamFactoryShareCodes.js
 		js_amount=$(($js_amount - 1))
 	done
+
+
+	#京喜开团
+	sed -i "s/helpFlag = true/helpFlag = false/g" $dir_file_js/star_dreamFactory_tuan.js
+	sed -i "27 a \let OPEN_DREAMFACTORY_TUAN = '1,2,3,4';" $dir_file_js/star_dreamFactory_tuan.js #京喜开团
 
 	#东东工厂
 	new_ddgc="T0225KkcRxoZ9AfVdB7wxvRcIQCjVWnYaS5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVWnYaS5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVWnYaS5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVWnYaS5kRrbA"
