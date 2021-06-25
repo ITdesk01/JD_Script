@@ -128,6 +128,8 @@ update() {
 #cat script_name.txt | awk '{print length, $0}' | sort -rn | sed 's/^[0-9]\+ //'按照文件名长度降序：
 #cat script_name.txt | awk '{print length, $0}' | sort -n | sed 's/^[0-9]\+ //' 按照文件名长度升序
 
+rm -rf $dir_file/config/tmp/*
+
 cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_bean_sign.js			#京东多合一签到
 	jd_fruit.js			#东东农场
@@ -295,27 +297,6 @@ do
 	update_if
 done
 
-
-
-#删掉过期脚本
-cat >$dir_file/config/tmp/del_js.txt <<EOF
-	jd_djjl.js 		        #东东电竞经理
-	jd_wxj.js		        #全民挖现金
-	zooJx88hongbao.js		#京喜88红包
-	zooLimitbox.js			#限时盲盒
-	jd_superBrand.js 		#特物ZX联想
-	zooBaojiexiaoxiaole.js		#宝洁消消乐 一天一次
-	zooLongzhou.js			#浓情618 与“粽”不同 一天一次
-	zooLongzhou02.js		#粽情端午
-EOF
-
-for script_name in `cat $dir_file/config/tmp/del_js.txt | awk '{print $1}'`
-do
-	rm -rf $dir_file_js/$script_name
-done
-
-
-
 	#检测cookie是否存活（暂时不能看到还有几天到期）
 	cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
 
@@ -360,6 +341,23 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jdFactoryShareCodes.js		#东东工厂ShareCodes
 	jdJxncShareCodes.js		#京喜农场ShareCodes
 EOF
+
+#删掉过期脚本
+cat >/tmp/del_js.txt <<EOF
+	jd_djjl.js 		        #东东电竞经理
+	jd_wxj.js		        #全民挖现金
+	zooJx88hongbao.js		#京喜88红包
+	zooLimitbox.js			#限时盲盒
+	jd_superBrand.js 		#特物ZX联想
+	zooBaojiexiaoxiaole.js		#宝洁消消乐 一天一次
+	zooLongzhou.js			#浓情618 与“粽”不同 一天一次
+	zooLongzhou02.js		#粽情端午
+EOF
+
+for script_name in `cat /tmp/del_js.txt | awk '{print $1}'`
+do
+	rm -rf $dir_file_js/$script_name
+done
 
 
 	if [ $? -eq 0 ]; then
