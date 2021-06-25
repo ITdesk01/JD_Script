@@ -210,6 +210,7 @@ cat >$dir_file/config/tmp/passerby_url.txt <<EOF
 	jddj_bean.js			#京东到家鲜豆 一天一次
 	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
 	jddj_fruit.js			#京东到家果园 0,8,11,17
+	jddj_fruit_code.js		#作用未知
 	jddj_fruit_collectWater.js 	#京东到家果园水车收水滴 作者5分钟收一次
 	jddj_getPoints.js		#京东到家鲜豆庄园收水滴 作者5分钟收一次
 EOF
