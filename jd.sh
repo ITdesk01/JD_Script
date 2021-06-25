@@ -56,7 +56,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.23"
+	cron_version="3.24"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -86,7 +86,6 @@ cat >>/etc/crontabs/root <<EOF
 0 9 1 */1 * $node $dir_file_js/jd_all_bean_change.js >/tmp/jd_all_bean_change.log #每个月1号推送当月京豆资产变化#100#
 10-20/5 12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
 30 20-23/1 * * * $node $dir_file_js/long_half_redrain.js	>/tmp/long_half_redrain.log	#半点红包雨#100#
-0 */8 * * * $node $dir_file_js/jd_wxj.js >/tmp/jd_wxj.log #全民挖现金#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
@@ -98,8 +97,6 @@ EOF
 
 task_delete() {
         sed -i '/#100#/d' /etc/crontabs/root >/dev/null 2>&1
-	sed -i '/jd_all_bean_change.js/d' /etc/crontabs/root >/dev/null 2>&1
-	sed -i '/jd_wxj.js/d' /etc/crontabs/root >/dev/null 2>&1
 }
 
 ds_setup() {
@@ -185,9 +182,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 EOF
 cp  $dir_file/git_clone/lxk0301_back/activity/jd_unbind.js	$dir_file_js/jd_unbind.js #注销京东会员卡
 
-
-wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
-
 for script_name in `cat $dir_file/config/tmp/lxk0301_script.txt | awk '{print $1}'`
 do
 	echo -e "$yellow copy $green$script_name$white"
@@ -227,9 +221,6 @@ done
 
 zooPanda_url="https://raw.githubusercontent.com/zooPanda/zoo/dev"
 cat >$dir_file/config/tmp/zooPanda_url.txt <<EOF
-	zooBaojiexiaoxiaole.js		#宝洁消消乐 一天一次
-	zooLongzhou.js			#浓情618 与“粽”不同 一天一次
-	zooLongzhou02.js		#粽情端午
 	zooOpencard01.js		#纯开卡 大牌联合618提前购 (默认不运行，自己考虑要不要运行)
 	zooOpencard02.js		#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)
 	zooOpencard03.js		#纯开卡 (默认不运行，自己考虑要不要运行)
@@ -242,9 +233,8 @@ cat >$dir_file/config/tmp/zooPanda_url.txt <<EOF
 	zooOpencard10.js		#纯开卡 (默认不运行，自己考虑要不要运行)
 	zooJointeam01.js		#纯开卡 (默认不运行，自己考虑要不要运行)
 	zooSupershophf.js		#合肥旗舰店开业(手动运行吧)
-	zooLimitbox.js			#限时盲盒
-	zooJx88hongbao.js		#京喜88红包
 EOF
+
 
 for script_name in `cat $dir_file/config/tmp/zooPanda_url.txt | awk '{print $1}'`
 do
@@ -255,7 +245,6 @@ done
 
 zero205_url="https://gitee.com/zero205/JD_tencent_scf/raw/main"
 cat >$dir_file/config/tmp/zero205_url.txt <<EOF
-	jd_wxj.js		        #全民挖现金
 	jd_djjl.js 		        #东东电竞经理
 
 EOF
@@ -270,7 +259,6 @@ done
 Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/master/jd"
 cat >$dir_file/config/tmp/Wenmoux_url.txt <<EOF
 	jd_618redpacket.js		#翻翻乐
-	jd_superBrand.js 		#特物ZX联想
 
 EOF
 
@@ -293,9 +281,30 @@ do
 	update_if
 done
 
+
+
+#删掉过期脚本
+cat >$dir_file/config/tmp/del_js.txt <<EOF
+	jd_wxj.js		        #全民挖现金
+	zooJx88hongbao.js		#京喜88红包
+	zooLimitbox.js			#限时盲盒
+	jd_superBrand.js 		#特物ZX联想
+	zooBaojiexiaoxiaole.js		#宝洁消消乐 一天一次
+	zooLongzhou.js			#浓情618 与“粽”不同 一天一次
+	zooLongzhou02.js		#粽情端午
+EOF
+
+for script_name in `cat $dir_file/config/tmp/del_js.txt | awk '{print $1}'`
+do
+	rm -rf $dir_file_js/$script_name
+done
+
+
+
 	#检测cookie是否存活（暂时不能看到还有几天到期）
 	cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
 
+	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/hyzaw/scripts/main/ddo_pk.js -O $dir_file_js/ddo_pk.js #新的pk脚本
 	wget https://raw.githubusercontent.com/star261/jd/main/scripts/star_dreamFactory_tuan.js -O $dir_file_js/star_dreamFactory_tuan.js #京喜开团
@@ -405,9 +414,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
 	adolf_superbox.js		#超级盒子
 	jd_dreamFactory.js 		#京喜工厂
-	jd_djjl.js                      #电竞经理
-	jd_superBrand.js 		#特物ZX联想
-	zooLimitbox.js			#限时盲盒
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -556,9 +562,6 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_jin_tie.js 			#领金贴
 	adolf_martin.js			#人头马x博朗
 	adolf_urge.js			#坐等更新
-	zooBaojiexiaoxiaole.js			#宝洁消消乐 一天一次
-	zooLongzhou.js				#浓情618 与“粽”不同 一天一次
-	zooLongzhou02.js			#粽情端午
 	zy_618jc.js 			#618竞猜
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
@@ -837,7 +840,6 @@ concurrent_js_if() {
 		run_0)
 			action="$action1"
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
-			$node $openwrt_script/JD_Script/js/zooJx88hongbao.js	#京喜领88元红包
 			concurrent_js && if_ps
 			if [ ! $action2 ];then
 				if_ps
@@ -857,6 +859,7 @@ concurrent_js_if() {
 		run_07)
 			action="$action1"
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
+			$node $openwrt_script/JD_Script/js/jd_djjl.js                      #电竞经理
 			concurrent_js && if_ps
 			concurrent_js_run_07 && if_ps
 			concurrent_js_clean
