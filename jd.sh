@@ -172,7 +172,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_jin_tie.js 			#领金贴
 	jd_health.js			#健康社区
 	jd_health_collect.js		#健康社区-收能量
-	jd_daily_lottery.js		#每日抽奖
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_gold_creator.js		#金榜创造营
 	jd_mohe.js			#5G超级盲盒
@@ -344,6 +343,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_daily_lottery.js		#每日抽奖
 	jd_djjl.js 		        #东东电竞经理
 	jd_wxj.js		        #全民挖现金
 	zooJx88hongbao.js		#京喜88红包
@@ -520,7 +520,6 @@ cat >/tmp/jd_tmp/run_03 <<EOF
 	jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
 	jd_health.js		#健康社区
 	jddj_fruit.js			#京东到家果园 0,8,11,17
-	jd_daily_lottery.js		#每日抽奖
 	jd_mohe.js			#5G超级盲盒
 EOF
 	echo -e "$green run_03$start_script_time $white"
