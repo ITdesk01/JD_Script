@@ -2058,7 +2058,7 @@ exit 0
 fi
 
 share_code_generate() {
-	js_amount="10"
+	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
 	while [[ ${js_amount} -gt 0 ]]; do
 		share_code_value="$share_code_value&$share_code"
 		js_amount=$(($js_amount - 1))
