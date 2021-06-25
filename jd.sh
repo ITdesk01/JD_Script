@@ -246,15 +246,15 @@ done
 
 zero205_url="https://gitee.com/zero205/JD_tencent_scf/raw/main"
 cat >$dir_file/config/tmp/zero205_url.txt <<EOF
-	jd_djjl.js 		        #东东电竞经理
+	
 
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | awk '{print $1}'`
 do
 	url="$zero205_url"
-	wget $zero205_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $zero205_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/master/jd"
@@ -285,6 +285,7 @@ done
 panghu999_url="https://raw.githubusercontent.com/panghu999/jd_scripts/master"
 cat >$dir_file/config/tmp/panghu999_url.txt <<EOF
 	jd_necklace.js		#点点劵
+	jd_dianjing.js		#电竞经理
 EOF
 
 for script_name in `cat $dir_file/config/tmp/panghu999_url.txt | awk '{print $1}'`
@@ -298,6 +299,7 @@ done
 
 #删掉过期脚本
 cat >$dir_file/config/tmp/del_js.txt <<EOF
+	jd_djjl.js 		        #东东电竞经理
 	jd_wxj.js		        #全民挖现金
 	zooJx88hongbao.js		#京喜88红包
 	zooLimitbox.js			#限时盲盒
@@ -872,7 +874,7 @@ concurrent_js_if() {
 		run_07)
 			action="$action1"
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
-			$node $openwrt_script/JD_Script/js/jd_djjl.js                      #电竞经理
+			$node $openwrt_script/JD_Script/js/jd_dianjing.js		#电竞经理
 			concurrent_js && if_ps
 			concurrent_js_run_07 && if_ps
 			concurrent_js_clean
