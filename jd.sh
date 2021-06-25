@@ -510,13 +510,16 @@ EOF
 run_02() {
 	echo -e "$green run_02$start_script_time $white"
 	$node $dir_file_js/jd_moneyTree.js #摇钱树
-	sed -i '/PASTURE_EXCHANGE_KEYWORD/d' /etc/profile
 	$node $dir_file_js/ddo_pk.js #新的pk脚本
 	echo -e "$green run_02$stop_script_time $white"
 }
 
 run_03() {
+#这里不会并发
 cat >/tmp/jd_tmp/run_03 <<EOF
+	jd_dianjing.js		#电竞经理
+	jd_joy.js #jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
+	jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
 	jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
 	jd_health.js		#健康社区
 	jddj_fruit.js			#京东到家果园 0,8,11,17
@@ -625,7 +628,6 @@ EOF
 		$node $dir_file_js/$i
 		$run_sleep
 	done
-	$node $openwrt_script/JD_Script/js/jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
 	echo -e "$green run_10_15_20$stop_script_time $white"
 }
 
@@ -871,7 +873,6 @@ concurrent_js_if() {
 		run_07)
 			action="$action1"
 			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
-			$node $openwrt_script/JD_Script/js/jd_dianjing.js		#电竞经理
 			concurrent_js && if_ps
 			concurrent_js_run_07 && if_ps
 			concurrent_js_clean
@@ -886,14 +887,7 @@ concurrent_js_if() {
 			if_ps
 			concurrent_js_clean
 		;;
-		run_06_18)
-			$node $openwrt_script/JD_Script/js/jd_joy.js #jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
-			action="$action1"
-			concurrent_js
-			if_ps
-			concurrent_js_clean
-		;;
-		run_01|run_02|run_045|run_08_12_16|run_020|run_10_15_20)
+		run_01|run_02|run_045|run_08_12_16|run_020|run_10_15_20|run_06_18)
 			action="$action1"
 			concurrent_js
 			if_ps
