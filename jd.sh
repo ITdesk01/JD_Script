@@ -435,6 +435,7 @@ run_020() {
 run_030() {
 	echo -e "$green run_030$start_script_time $white"
 	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
+	$node $dir_file_js/jd_jxmc.js			#惊喜牧场
 	$node $dir_file_js/jd_health_collect.js		#健康社区-收能量
 	$node $dir_file_js/jddj_fruit_collectWater.js 	#京东到家果园水车收水滴 作者5分钟收一次
 	$node $dir_file_js/jddj_getPoints.js		#京东到家鲜豆庄园收水滴 作者5分钟收一次
@@ -502,7 +503,6 @@ cat >/tmp/jd_tmp/run_03 <<EOF
 	jddj_fruit.js			#京东到家果园 0,8,11,17
 	jd_daily_lottery.js		#每日抽奖
 	jd_mohe.js			#5G超级盲盒
-	jd_jxmc.js			#惊喜牧场
 EOF
 	echo -e "$green run_03$start_script_time $white"
 
