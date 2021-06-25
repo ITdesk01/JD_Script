@@ -56,7 +56,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.24"
+	cron_version="3.25"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -86,6 +86,7 @@ cat >>/etc/crontabs/root <<EOF
 0 9 1 */1 * $node $dir_file_js/jd_all_bean_change.js >/tmp/jd_all_bean_change.log #每个月1号推送当月京豆资产变化#100#
 10-20/5 12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
 30 20-23/1 * * * $node $dir_file_js/long_half_redrain.js	>/tmp/long_half_redrain.log	#半点红包雨#100#
+0 0 * * * $node $dir_file_js/star_dreamFactory_tuan.js	>/tmp/star_dreamFactory_tuan.log	#京喜开团#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
@@ -267,6 +268,18 @@ do
 	url="$Wenmoux_url"
 	#wget $Wenmoux_url/$script_name -O $dir_file_js/$script_name
 	#update_if
+done
+
+panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
+cat >$dir_file/config/tmp/panghu999.txt <<EOF
+	jd_hwsx.js		#京东众筹
+EOF
+
+for script_name in `cat $dir_file/config/tmp/panghu999_url.txt | awk '{print $1}'`
+do
+	url="$panghu999_url"
+	wget $panghu999_url/$script_name -O $dir_file_js/$script_name
+	update_if
 done
 
 panghu999_url="https://raw.githubusercontent.com/panghu999/jd_scripts/master"
@@ -524,7 +537,7 @@ EOF
 
 run_06_18() {
 cat >/tmp/jd_tmp/run_06_18 <<EOF
-	star_dreamFactory_tuan.js       #京喜开团
+	jd_hwsx.js		#京东众筹
 	jd_mcxhd.js  		#新潮品牌狂欢
 	jd_blueCoin.js  #东东超市兑换，有次数限制，没时间要求
 	jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
