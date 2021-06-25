@@ -2019,11 +2019,13 @@ ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQ
 	random_array
 	new_cfd_set="$new_cfd@$Javon_20201224_cfd@$zuoyou_20190516_cfd@$jidiyangguang_20190516_cfd@$Jhone_Potte_20200824_cfd"
 
-	share_code="$new_cfd_set"
-	share_code_value="$new_cfd_set"
-	share_code_generate
-	sed -i '/JDCFD_SHARECODES/d' /etc/profile >/dev/null 2>&1
-	sed -i "39a \let JDCFD_SHARECODES = \'$share_code_value&&\';" $dir_file_js/jd_cfd.js
+	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
+	jdcfdcode_rows=$(grep -n "let shareCodes \=" $dir_file_js/jd_cfd.js | awk -F ":" '{print $1}')
+	sed -i "s/let shareCodes \= \[/let shareCodes \= \[\n/g" $dir_file_js/jd_cfd.js
+	while [[ ${js_amount} -gt 0 ]]; do
+		sed -i "$jdcfdcode_rows a \ '$new_cfd_set', " $dir_file_js/jd_cfd.js
+		js_amount=$(($js_amount - 1))
+	done
 
 	#健康社区
 	new_health="T0225KkcRxoZ9AfVdB7wxvRcIQCjVfnoaW5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVfnoaW5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVfnoaW5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVfnoaW5kRrbA"
