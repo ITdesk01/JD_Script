@@ -1116,7 +1116,7 @@ check_cooike() {
 
 check_cookie_push() {
 	cat $openwrt_script_config/check_cookie.txt
-	cookie_content=$(cat $openwrt_script_config/check_cookie.txt |sed "s/Cookie/$line$wrap$wrap_tab\# Cookie/" |sed "s/ /+/g"| sed "s/$/$wrap$wrap_tab/g"  | sed "s/(不保证百分百准确)//" |  sed ':t;N;s/\n//;b t')
+	cookie_content=$(cat $openwrt_script_config/check_cookie.txt |sed "s/Cookie/$line$wrap$wrap_tab\# Cookie/" |sed "s/ /+/g"| sed "s/$/$wrap$wrap_tab/g" |  sed ':t;N;s/\n//;b t')
 
 	cookie_content1=$(echo "${cookie_content}${by}" | sed "s/$wrap_tab####/####/g" )
 
