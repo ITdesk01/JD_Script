@@ -56,7 +56,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.25"
+	cron_version="3.26"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -80,7 +80,7 @@ cat >>/etc/crontabs/root <<EOF
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本#100#
 35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1 #不是很重要的，错开运行#100#
 10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #宠汪汪兑换礼品#100#
-00 8,12,22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本#100#
+00 12,22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本#100#
 5 8,9,11,19,22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 && source /etc/profile #9,11,19,22点05分更新lxk0301脚本#100#
 0 11 */7 * *  $node $dir_file_js/jd_price.js >/tmp/jd_price.log #每7天11点执行京东保价#100#
 0 9 1 */1 * $node $dir_file_js/jd_all_bean_change.js >/tmp/jd_all_bean_change.log #每个月1号推送当月京豆资产变化#100#
@@ -1181,8 +1181,22 @@ that_day() {
 	if [[ $? -eq 0 ]]; then
 		echo ""
 	else
-		echo -e "$red>> 取回分支没有成功，重新执行代码$white"
-		that_day
+		num="1"
+		eeror_num="1"
+		while [[ ${num} -gt 0 ]]; do
+			git fetch
+			if [ $? -eq 0 ]; then
+				num=$(expr $num - 1)
+			else
+				if [ $eeror_num -ge 10 ];then
+					echo "第$eeror_num次取回分支没有成功，跳过这个,不再执行"
+					exit 0
+				else
+					echo -e "第$eeror_num次取回分支没有成功，重新执行代码"
+					eeror_num=$(expr $eeror_num + 1)
+				fi
+			fi
+		done
 	fi
 	clear
 	git_branch=$(git branch -v | grep -o behind )
