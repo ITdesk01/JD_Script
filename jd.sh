@@ -1176,27 +1176,17 @@ checklog() {
 
 #检测当天更新情况并推送
 that_day() {
-	cd $dir_file
-	git fetch
+	ping -c 2 github.com > /dev/null 2>&1
 	if [[ $? -eq 0 ]]; then
-		echo ""
+		cd $dir_file
+		git fetch
+		if [[ $? -eq 0 ]]; then
+			echo ""
+		else
+			echo "请检查你的网络，github更新失败，建议科学上网"
+		fi
 	else
-		num="1"
-		eeror_num="1"
-		while [[ ${num} -gt 0 ]]; do
-			git fetch
-			if [ $? -eq 0 ]; then
-				num=$(expr $num - 1)
-			else
-				if [ $eeror_num -ge 3 ];then
-					echo "第$eeror_num次取回分支没有成功，跳过这个,不再执行"
-					exit 0
-				else
-					echo -e "第$eeror_num次取回分支没有成功，重新执行代码"
-					eeror_num=$(expr $eeror_num + 1)
-				fi
-			fi
-		done
+		echo "请检查你的网络，github更新失败，建议科学上网"
 	fi
 	clear
 	git_branch=$(git branch -v | grep -o behind )
