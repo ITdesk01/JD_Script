@@ -658,6 +658,10 @@ curtinlv_script_setup() {
 	if [ ! -L "$dir_file_js/jd_getFollowGift.py" ]; then
 		rm -rf $dir_file_js/jd_getFollowGift.py
 		ln -s $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py  $dir_file_js/jd_getFollowGift.py
+	fi
+
+	if [ ! -L "$dir_file_js/JDCookies.txt" ]; then
+		rm -rf $dir_file_js/JDCookies.txt
 		ln -s $dir_file/git_clone/curtinlv_script/getFollowGifts/JDCookies.txt  $dir_file_js/JDCookies.txt
 	fi
 
