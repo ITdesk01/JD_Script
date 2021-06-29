@@ -279,7 +279,7 @@ cat >$dir_file/config/tmp/panghu999.txt <<EOF
 	jd_zxry.js		#柠檬特物ZX荣耀一次性手动运行
 EOF
 
-for script_name in `cat $dir_file/config/tmp/panghu999_url.txt | awk '{print $1}'`
+for script_name in `cat $dir_file/config/tmp/panghu999.txt | awk '{print $1}'`
 do
 	url="$panghu999"
 	wget $panghu999/$script_name -O $dir_file_js/$script_name
