@@ -776,7 +776,7 @@ concurrent_js_update() {
 			sed -i '/pt_pin/d' $ccr_js_file/js_$js_amount/jdCookie.js >/dev/null 2>&1
 			sed -i "5a $js_cookie_obtain" $ccr_js_file/js_$js_amount/jdCookie.js
 
-			for i in `ls $dir_file_js | grep -v 'jdCookie.js\|sendNotify.js\|jddj_cookie.js'`
+			for i in `ls $dir_file_js | grep -v 'jdCookie.js\|sendNotify.js\|jddj_cookie.js\|log'`
 			do
 				cp $dir_file_js/$i $ccr_js_file/js_$js_amount/$i
 			done
