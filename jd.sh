@@ -39,6 +39,7 @@ run_sleep=$(sleep 1)
 version="2.2"
 cron_file="/etc/crontabs/root"
 node="/usr/bin/node"
+python3="/usr/bin/python3"
 sys_model=$(cat /tmp/sysinfo/model | awk -v i="+" '{print $1i$2i$3i$4}')
 uname_version=$(uname -a | awk -v i="+" '{print $1i $2i $3}')
 wan_ip=$(ubus call network.interface.wan status | grep \"address\" | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
@@ -56,7 +57,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.28"
+	cron_version="3.29"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -88,6 +89,8 @@ cat >>/etc/crontabs/root <<EOF
 10-20/5 12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
 30 20-23/1 * * * $node $dir_file_js/long_half_redrain.js	>/tmp/long_half_redrain.log	#半点红包雨#100#
 0 0 * * * $node $dir_file_js/star_dreamFactory_tuan.js	>/tmp/star_dreamFactory_tuan.log	#京喜开团#100#
+0 0 * * *　$python3　$dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py #关注有礼#100#
+0 8,15 * * *　$python3　$dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py #开卡程序#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
@@ -111,6 +114,8 @@ ds_setup() {
 }
 
 update() {
+	cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '" > $openwrt_script_config/js_cookie.txt
+
 	if [ ! -d $dir_file/git_clone ];then
 		mkdir $dir_file/git_clone
 	fi
@@ -124,6 +129,18 @@ update() {
 		git fetch --all
 		git reset --hard origin/main
 	fi
+
+	if [ ! -d $dir_file/git_clone/curtinlv_script ];then
+		echo ""
+		git clone https://github.com/curtinlv/JD-Script.git $dir_file/git_clone/curtinlv_script
+		curtinlv_script_setup
+	else
+		cd $dir_file/git_clone/curtinlv_script
+		git fetch --all
+		git reset --hard origin/main
+		curtinlv_script_setup
+	fi
+
 	echo -e "$green update$start_script_time $white"
 	echo -e "$green开始下载JS脚本，请稍等$white"
 #cat script_name.txt | awk '{print length, $0}' | sort -rn | sed 's/^[0-9]\+ //'按照文件名长度降序：
@@ -311,7 +328,9 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	jd_jxzpk.js			#pk
+	jd_OpenCard.py 			#开卡程序#100#
+	jd_getFollowGift.py 		#关注有礼#100#
+	jd_jxzpk.js			#京享值pk
 	star_dreamFactory_tuan.js 	#京喜开团
 	jd_all_bean_change.js 		#京东月资产变动通知
 	adolf_martin.js			#人头马x博朗
@@ -360,7 +379,6 @@ done
 	fi
 	chmod 755 $dir_file_js/*
 	additional_settings
-	cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '" > $openwrt_script_config/js_cookie.txt
 	concurrent_js_update
 	source /etc/profile
 	echo -e "$green update$stop_script_time $white"
@@ -427,7 +445,6 @@ EOF
 		$node $dir_file_js/$i
 		$run_sleep
 	done
-
 	run_08_12_16
 	run_06_18
 	run_10_15_20
@@ -622,6 +639,27 @@ EOF
 		$run_sleep
 	done
 	echo -e "$green run_10_15_20$stop_script_time $white"
+}
+
+curtinlv_script_setup() {
+	#开卡
+	curtinlv_cookie=$(cat $openwrt_script_config/jdCookie.js | grep "pt_key" | grep -v "pt_key=xxx" | awk -F "'," '{print $1}' | sed "s/'//g" | sed "s/$/\&/" | sed 's/[[:space:]]//g' | sed ':t;N;s/\n//;b t' | sed "s/&$//" )
+	sed -i "/JD_COOKIE = ''/d" $dir_file/git_clone/curtinlv_script/OpenCard/OpenCardConfig.ini
+	sed -i "3a \JD_COOKIE = '$curtinlv_cookie'" $dir_file/git_clone/curtinlv_script/OpenCard/OpenCardConfig.ini
+	sed -i "s/sleepNum = 0/sleepNum = 0.5/g" $dir_file/git_clone/curtinlv_script/OpenCard/OpenCardConfig.ini
+	if [ ! -L "$dir_file_js/jd_OpenCard.py" ]; then
+		rm -rf $dir_file_js/jd_OpenCard.py
+		ln -s $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py $dir_file_js/jd_OpenCard.py
+		ln -s $dir_file/git_clone/curtinlv_script/OpenCard/OpenCardConfig.ini $dir_file_js/OpenCardConfig.ini
+	fi
+
+	#关注有礼
+	cat $openwrt_script_config/js_cookie.txt > $dir_file/git_clone/curtinlv_script/getFollowGifts/JDCookies.txt
+	if [ ! -L "$dir_file_js/jd_getFollowGift.py" ]; then
+		rm -rf $dir_file_js/jd_getFollowGift.py
+		ln -s $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py  $dir_file_js/jd_getFollowGift.py
+		ln -s $dir_file/git_clone/curtinlv_script/getFollowGifts/JDCookies.txt  $dir_file_js/JDCookies.txt
+	fi
 }
 
 script_name() {
