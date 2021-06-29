@@ -281,8 +281,8 @@ EOF
 
 for script_name in `cat $dir_file/config/tmp/panghu999_url.txt | awk '{print $1}'`
 do
-	url="$panghu999_url"
-	wget $panghu999_url/$script_name -O $dir_file_js/$script_name
+	url="$panghu999"
+	wget $panghu999/$script_name -O $dir_file_js/$script_name
 	update_if
 done
 
