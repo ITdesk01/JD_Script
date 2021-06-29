@@ -263,7 +263,6 @@ done
 
 Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/master/jd"
 cat >$dir_file/config/tmp/Wenmoux_url.txt <<EOF
-	jd_618redpacket.js		#翻翻乐
 
 EOF
 
@@ -342,17 +341,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
-	ddo_pk.js 			#新的pk脚本
-	jddj_fruit_code.js		#作用未知
-	jd_daily_lottery.js		#每日抽奖
-	jd_djjl.js 		        #东东电竞经理
-	jd_wxj.js		        #全民挖现金
-	zooJx88hongbao.js		#京喜88红包
-	zooLimitbox.js			#限时盲盒
-	jd_superBrand.js 		#特物ZX联想
-	zooBaojiexiaoxiaole.js		#宝洁消消乐 一天一次
-	zooLongzhou.js			#浓情618 与“粽”不同 一天一次
-	zooLongzhou02.js		#粽情端午
+	jd_618redpacket.js		#翻翻乐
 EOF
 
 for script_name in `cat /tmp/del_js.txt | awk '{print $1}'`
@@ -493,7 +482,6 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
-	jd_618redpacket.js			#翻翻乐
 	jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
 	jd_joy_feedPets.js  #宠汪汪喂食一个小时喂一次
 EOF
@@ -2100,9 +2088,6 @@ additional_settings() {
 		sed -i "$healthcode_rows a \ '$new_health_set', " $dir_file_js/jd_health.js
 		js_amount=$(($js_amount - 1))
 	done
-
-	#关闭翻翻乐的推送太多了
-	sed -i "s/await notify.sendNotify/\/\/await notify.sendNotify/g"  $dir_file_js/jd_618redpacket.js
 	
 	#脚本黑名单
 	script_black
