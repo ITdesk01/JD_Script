@@ -1114,7 +1114,7 @@ check_cookie_push() {
 	echo "----------------------------------------------"
 	cat $openwrt_script_config/check_cookie.txt
 	echo "----------------------------------------------"
-	echo "$line#### cookie数量:`cat $openwrt_script_config/js_cookie.txt |　wc -l`$line" >/tmp/jd_check_cookie.txt
+	echo "$line#### cookie数量:`cat $openwrt_script_config/js_cookie.txt |wc -l`$line" >/tmp/jd_check_cookie.txt
 	cat $openwrt_script_config/check_cookie.txt |sed "s/Cookie/$wrap$wrap_tab\# Cookie/"  >>/tmp/jd_check_cookie.txt
 	echo "$line#### cookie是否有效$line" >>/tmp/jd_check_cookie.txt
 	$node $dir_file_js/jd_check_cookie1.js | grep "京东账号" >>/tmp/jd_check_cookie.txt
@@ -1573,7 +1573,7 @@ help() {
 	echo ""
 	echo -e "$green  sh \$jd that_day $white  			#检测JD_script仓库今天更新了什么"
 	echo ""
-	echo -e "$green  sh \$jd check_cookie_push $white  		#推送cookie大概到期时间"
+	echo -e "$green  sh \$jd check_cookie_push $white  		#推送cookie大概到期时间和是否有效"
 	echo ""
 	echo -e "$green  sh \$jd script_name $white  			#显示所有JS脚本名称与作用"
 	echo ""
