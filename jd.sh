@@ -276,6 +276,7 @@ done
 panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
 cat >$dir_file/config/tmp/panghu999.txt <<EOF
 	jd_hwsx.js		#京东众筹
+	jd_zxry.js		#柠檬特物ZX荣耀一次性手动运行
 EOF
 
 for script_name in `cat $dir_file/config/tmp/panghu999_url.txt | awk '{print $1}'`
