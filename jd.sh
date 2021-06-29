@@ -299,9 +299,6 @@ do
 	update_if
 done
 
-	#检测cookie是否存活（暂时不能看到还有几天到期）
-	cp  $dir_file/JSON/jd_check_cookie.js  $dir_file_js/jd_check_cookie.js
-
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	#wget https://raw.githubusercontent.com/hyzaw/scripts/main/ddo_pk.js -O $dir_file_js/ddo_pk.js #新的pk脚本
@@ -703,9 +700,7 @@ echo -e "$green============整理完成，可以提交了（没加群的忽略�
 }
 
 concurrent_js_run_07() {
-	#$node $openwrt_script/JD_Script/js/jd_small_home.js #东东小窝
 	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
-	$node $openwrt_script/JD_Script/js/jd_check_cookie.js #检测cookie是否存活
 	checklog #检测log日志是否有错误并推送
 }
 
@@ -1116,8 +1111,15 @@ check_cooike() {
 }
 
 check_cookie_push() {
+	echo "----------------------------------------------"
 	cat $openwrt_script_config/check_cookie.txt
-	cookie_content=$(cat $openwrt_script_config/check_cookie.txt |sed "s/Cookie/$line$wrap$wrap_tab\# Cookie/" |sed "s/ /+/g"| sed "s/$/$wrap$wrap_tab/g" |  sed ':t;N;s/\n//;b t')
+	echo "----------------------------------------------"
+	echo "$line#### cookie数量:`cat $openwrt_script_config/js_cookie.txt |　wc -l`$line" >/tmp/jd_check_cookie.txt
+	cat $openwrt_script_config/check_cookie.txt |sed "s/Cookie/$wrap$wrap_tab\# Cookie/"  >>/tmp/jd_check_cookie.txt
+	echo "$line#### cookie是否有效$line" >>/tmp/jd_check_cookie.txt
+	$node $dir_file_js/jd_check_cookie1.js | grep "京东账号" >>/tmp/jd_check_cookie.txt
+
+	cookie_content=$(cat /tmp/jd_check_cookie.txt |sed "s/ /+/g"| sed "s/$/$wrap$wrap_tab/g" |  sed ':t;N;s/\n//;b t' )
 
 	cookie_content1=$(echo "${cookie_content}${by}" | sed "s/$wrap_tab####/####/g" )
 
