@@ -660,6 +660,12 @@ curtinlv_script_setup() {
 		ln -s $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py  $dir_file_js/jd_getFollowGift.py
 		ln -s $dir_file/git_clone/curtinlv_script/getFollowGifts/JDCookies.txt  $dir_file_js/JDCookies.txt
 	fi
+
+	#瓜分10亿京豆
+	if [ ! -L "$dir_file_js/jd_zjd.py" ]; then
+		rm -rf $dir_file_js/jd_zjd.py 
+		ln -s $dir_file/git_clone/curtinlv_script/jd_zjd.py   $dir_file_js/jd_zjd.py 
+	fi
 }
 
 script_name() {
@@ -729,6 +735,7 @@ echo -e "$green============整理完成，可以提交了（没加群的忽略�
 }
 
 concurrent_js_run_07() {
+	$python3 $openwrt_script/JD_Script/js/jd_zjd.py #瓜分10亿京豆
 	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 	checklog #检测log日志是否有错误并推送
 }
