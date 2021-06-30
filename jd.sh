@@ -314,6 +314,7 @@ done
 
 panghu999_url="https://raw.githubusercontent.com/panghu999/jd_scripts/master"
 cat >$dir_file/config/tmp/panghu999_url.txt <<EOF
+	jd_lsj.js		#柠檬京东零食街
 	jd_necklace.js		#点点劵
 	jd_dianjing.js		#电竞经理
 EOF
@@ -447,6 +448,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	adolf_superbox.js		#超级盒子
 	jd_dreamFactory.js 		#京喜工厂
 	jd_jxzpk.js			#pk
+	jd_lsj.js		#柠檬京东零食街
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
