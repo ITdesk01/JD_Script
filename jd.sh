@@ -2216,7 +2216,7 @@ npm_install() {
 	cd $dir_file/cookies_web && npm install
 
 	echo -e "$green 开始安装python模块$white"
-	python3 get-pip.py
+	python3 $dir_file/get-pip.py
 	pip3 install requests rsa
 	echo -e "$green命令执行完成，如果一直报错我建议你重置系统或者重新编译重新刷$white"
 }
