@@ -85,7 +85,7 @@ const getCookie = (response) => {
   });
     const update_ok = `更新完成`;
     var exec = require('child_process').exec;
-    var cmd = `echo "${userCookie}" > /tmp/getcookie.txt && sh $jd addcookie && sh $jd update`;
+    var cmd = `echo "${userCookie}" > /tmp/getcookie.txt && sh $jd addcookie && sh $jd concurrent_js_update`;
     exec(cmd, function(error, stdout, stderr) {
  	// 
     });
