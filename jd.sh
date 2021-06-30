@@ -664,12 +664,6 @@ curtinlv_script_setup() {
 		rm -rf $dir_file_js/JDCookies.txt
 		ln -s $dir_file/git_clone/curtinlv_script/getFollowGifts/JDCookies.txt  $dir_file_js/JDCookies.txt
 	fi
-
-	#瓜分10亿京豆
-	if [ ! -L "$dir_file_js/jd_zjd.py" ]; then
-		rm -rf $dir_file_js/jd_zjd.py 
-		ln -s $dir_file/git_clone/curtinlv_script/jd_zjd.py   $dir_file_js/jd_zjd.py 
-	fi
 }
 
 script_name() {
@@ -739,7 +733,6 @@ echo -e "$green============整理完成，可以提交了（没加群的忽略�
 }
 
 concurrent_js_run_07() {
-	$python3 $openwrt_script/JD_Script/js/jd_zjd.py #瓜分10亿京豆
 	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 	checklog #检测log日志是否有错误并推送
 }
@@ -2218,15 +2211,14 @@ time() {
 
 npm_install() {
 	echo -e "$green 开始安装npm模块$white"
-	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
-		cp $openwrt_script/JD_Script/git_clone/lxk0301_back/package.json $openwrt_script/package.json
-		cd $openwrt_script && npm install && npm install -g request
-		cd $dir_file/cookies_web && npm install
-	else
-		cp $dir_file/git_clone/lxk0301_back/package.json $dir_file/package.json
-		cd $dir_file && npm -g install && npm install -g request
-		cd $dir_file/cookies_web && npm install
-	fi
+	cp $dir_file/git_clone/lxk0301_back/package.json $dir_file/package.json
+	cd $dir_file && npm -g install && npm install -g request
+	cd $dir_file/cookies_web && npm install
+
+	echo -e "$green 开始安装python模块$white"
+	python3 get-pip.py
+	pip3 install requests rsa
+	echo -e "$green命令执行完成，如果一直报错我建议你重置系统或者重新编译重新刷$white"
 }
 
 system_variable() {
