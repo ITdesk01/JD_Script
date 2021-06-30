@@ -288,16 +288,18 @@ do
 	#update_if
 done
 
-Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/master/jd"
+Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd"
 cat >$dir_file/config/tmp/Wenmoux_url.txt <<EOF
-
+	jd_ddnc_farmpark.js	#东东乐园
+	jd_europeancup.js	#狂欢欧洲杯
+	jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Wenmoux_url.txt | awk '{print $1}'`
 do
 	url="$Wenmoux_url"
-	#wget $Wenmoux_url/$script_name -O $dir_file_js/$script_name
-	#update_if
+	wget $Wenmoux_url/$script_name -O $dir_file_js/$script_name
+	update_if
 done
 
 panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
@@ -449,6 +451,8 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_dreamFactory.js 		#京喜工厂
 	jd_jxzpk.js			#pk
 	jd_lsj.js		#柠檬京东零食街
+	jd_ddnc_farmpark.js	#东东乐园
+	jd_europeancup.js	#狂欢欧洲杯
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -533,6 +537,7 @@ run_02() {
 	echo -e "$green run_02$start_script_time $white"
 	$node $dir_file_js/jd_moneyTree.js #摇钱树
 	$node $dir_file_js/ddo_pk.js #新的pk脚本
+	$node $dir_file_js/jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下
 	echo -e "$green run_02$stop_script_time $white"
 }
 
