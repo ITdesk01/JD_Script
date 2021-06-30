@@ -305,6 +305,7 @@ done
 panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
 cat >$dir_file/config/tmp/panghu999.txt <<EOF
 	jd_hwsx.js		#京东众筹
+	jd_lsj.js		#柠檬京东零食街
 EOF
 
 for script_name in `cat $dir_file/config/tmp/panghu999.txt | awk '{print $1}'`
@@ -316,7 +317,6 @@ done
 
 panghu999_url="https://raw.githubusercontent.com/panghu999/jd_scripts/master"
 cat >$dir_file/config/tmp/panghu999_url.txt <<EOF
-	jd_lsj.js		#柠檬京东零食街
 	jd_necklace.js		#点点劵
 	jd_dianjing.js		#电竞经理
 EOF
