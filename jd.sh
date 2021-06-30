@@ -769,6 +769,7 @@ concurrent_js() {
 }
 
 concurrent_js_update() {
+	echo -e "$green>> 创建并发文件夹$white"
 	if [ "$ccr_if" == "yes" ];then
 
 		for i in `ls $ccr_js_file | grep -E "^js"`
@@ -813,6 +814,7 @@ concurrent_js_update() {
 			done
 		fi
 	fi
+	echo -e "$green>> 创建并发文件夹完成$white"
 }
 
 concurrent_js_clean(){
