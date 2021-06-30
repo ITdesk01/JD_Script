@@ -992,7 +992,7 @@ getcookie() {
 	#彻底完成感谢echowxsy大力支持
 	echo ""
 	echo -e "$yellow 温馨提示，如果你已经有cookie，不想扫码直接添加，可以用$green sh \$jd addcookie$white 增加cookie $green sh \$jd delcookie$white 删除cookie"
-	$node $dir_file_js/getJDCookie.js && addcookie
+	$node $dir_file_js/getJDCookie.js && addcookie && addcookie_wait
 }
 
 addcookie() {
@@ -1057,6 +1057,9 @@ addcookie() {
 	check_cooike
 	sed -n  '1p' $openwrt_script_config/check_cookie.txt
 	grep "$pt_pin" $openwrt_script_config/check_cookie.txt
+}
+
+addcookie_wait(){
 	echo ""
 	read -p "是否需要继续获取cookie（1.需要  2.不需要 ）：" cookie_continue
 	if [ "$cookie_continue" == "1" ];then
@@ -1067,10 +1070,6 @@ addcookie() {
 	elif [ "$cookie_continue" == "2" ];then
 		echo "退出脚本。。。"
 		exit 0
-	elif [ "$cookie_continue" == "3" ];then
-		sleep 1
-		clear
-		addcookie
 	else
 		echo "请不要乱输，退出脚本。。。"
 		exit 0
