@@ -141,6 +141,15 @@ update() {
 		curtinlv_script_setup
 	fi
 
+	if [ ! -d $dir_file/git_clone/zooPanda ];then
+		echo ""
+		git clone https://github.com/zooPanda/zoo.git $dir_file/git_clone/zooPanda
+	else
+		cd $dir_file/git_clone/zooPanda
+		git fetch --all
+		git reset --hard origin/main
+	fi
+
 	echo -e "$green update$start_script_time $white"
 	echo -e "$green开始下载JS脚本，请稍等$white"
 #cat script_name.txt | awk '{print length, $0}' | sort -rn | sed 's/^[0-9]\+ //'按照文件名长度降序：
@@ -207,6 +216,33 @@ do
 	echo -e "$yellow copy $green$script_name$white"
 	cp  $dir_file/git_clone/lxk0301_back/$script_name  $dir_file_js/$script_name
 done
+
+#ZooPanda脚本
+cat >$dir_file/config/tmp/zooPanda_url.txt <<EOF
+	zooOpencard01.js		#纯开卡 大牌联合618提前购 (默认不运行，自己考虑要不要运行)
+	zooOpencard02.js		#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)
+	zooOpencard03.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard04.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard05.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard06.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard07.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard08.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard09.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard10.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard11.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooOpencard12.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooJointeam01.js		#纯开卡 (默认不运行，自己考虑要不要运行)
+	zooSupershophf.js		#合肥旗舰店开业(手动运行吧)
+EOF
+
+
+for script_name in `cat $dir_file/config/tmp/zooPanda_url.txt | awk '{print $1}'`
+do
+	echo -e "$yellow copy $green$script_name$white"
+	cp  $dir_file/git_clone/zooPanda/$script_name  $dir_file_js/$script_name
+done
+
+
 sleep 5
 
 
@@ -236,32 +272,6 @@ for script_name in `cat $dir_file/config/tmp/passerby_url.txt | awk '{print $1}'
 do
 	url="$passerby_url"
 	wget $passerby_url/$script_name -O $dir_file_js/$script_name
-	update_if
-done
-
-zooPanda_url="https://raw.githubusercontent.com/zooPanda/zoo/dev"
-cat >$dir_file/config/tmp/zooPanda_url.txt <<EOF
-	zooOpencard01.js		#纯开卡 大牌联合618提前购 (默认不运行，自己考虑要不要运行)
-	zooOpencard02.js		#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)
-	zooOpencard03.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard04.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard05.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard06.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard07.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard08.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard09.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard10.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard11.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard12.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooJointeam01.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooSupershophf.js		#合肥旗舰店开业(手动运行吧)
-EOF
-
-
-for script_name in `cat $dir_file/config/tmp/zooPanda_url.txt | awk '{print $1}'`
-do
-	url="$zooPanda_url"
-	wget $zooPanda_url/$script_name -O $dir_file_js/$script_name
 	update_if
 done
 
