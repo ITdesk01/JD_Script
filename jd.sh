@@ -1017,9 +1017,13 @@ addcookie() {
 	if [ `cat /tmp/getcookie.txt | wc -l` == "1"  ];then
 		clear
 		you_cookie=$(cat /tmp/getcookie.txt)
-		rm -rf /tmp/getcookie.txt
-		echo -e "\n$green已经获取到cookie，稍等。。。$white"
-		sleep 1
+		if [[ -z $you_cookie ]]; then
+			echo -e "$red cookie为空值，不做其他操作。。。$white"
+			exit 0
+		else
+			echo -e "\n$green已经获取到cookie，稍等。。。$white"
+			sleep 1
+		fi
 	else
 		clear
 		echo "---------------------------------------------------------------------------"
@@ -1074,6 +1078,7 @@ addcookie() {
 	check_cooike
 	sed -n  '1p' $openwrt_script_config/check_cookie.txt
 	grep "$pt_pin" $openwrt_script_config/check_cookie.txt
+	rm -rf /tmp/getcookie.txt
 }
 
 addcookie_wait(){
