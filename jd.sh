@@ -293,7 +293,6 @@ done
 panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
 cat >$dir_file/config/tmp/panghu999.txt <<EOF
 	jd_hwsx.js		#京东众筹
-	jd_zxry.js		#柠檬特物ZX荣耀一次性手动运行
 EOF
 
 for script_name in `cat $dir_file/config/tmp/panghu999.txt | awk '{print $1}'`
@@ -328,8 +327,8 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	jd_OpenCard.py 			#开卡程序#100#
-	jd_getFollowGift.py 		#关注有礼#100#
+	jd_OpenCard.py 			#开卡程序
+	jd_getFollowGift.py 		#关注有礼
 	jd_jxzpk.js			#京享值pk
 	star_dreamFactory_tuan.js 	#京喜开团
 	jd_all_bean_change.js 		#京东月资产变动通知
@@ -361,6 +360,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_zxry.js			#柠檬特物ZX荣耀一次性手动运行
 	jd_618redpacket.js		#翻翻乐
 EOF
 
