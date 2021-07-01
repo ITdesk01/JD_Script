@@ -147,7 +147,7 @@ update() {
 	else
 		cd $dir_file/git_clone/zooPanda
 		git fetch --all
-		git reset --hard origin/main
+		git reset --hard origin/dev
 	fi
 
 	echo -e "$green update$start_script_time $white"
