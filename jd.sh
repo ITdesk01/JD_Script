@@ -233,6 +233,7 @@ cat >$dir_file/config/tmp/zooPanda_url.txt <<EOF
 	zooOpencard12.js		#纯开卡 (默认不运行，自己考虑要不要运行)
 	zooJointeam01.js		#纯开卡 (默认不运行，自己考虑要不要运行)
 	zooSupershophf.js		#合肥旗舰店开业(手动运行吧)
+	zooCaptain01.js			#纯开卡 (默认不运行，自己考虑要不要运行)
 EOF
 
 
@@ -502,6 +503,7 @@ cat >/tmp/jd_tmp/run_045 <<EOF
 	zooOpencard12.js		#纯开卡 (默认不运行，自己考虑要不要运行)
 	zooJointeam01.js		#纯开卡 (默认不运行，自己考虑要不要运行)
 	zooSupershophf.js		#合肥旗舰店开业(手动运行吧)
+	zooCaptain01.js			#纯开卡 (默认不运行，自己考虑要不要运行)
 EOF
 
 	echo -e "$green run_045$start_script_time $white"
