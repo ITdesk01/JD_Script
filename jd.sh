@@ -2185,11 +2185,13 @@ close_notification() {
 		22|23|00|01|02|03)
 			sed -i "s/jdNotify = true/jdNotify = false/g" $dir_file_js/jd_fruit.js
 			sed -i "s/jdNotify = true/jdNotify = false/g" $dir_file_js/jd_pet.js
+			sed -i "s/isNotify = false/isNotify = true/g" $dir_file_js/jddj_fruit.js
 			echo -e "$green暂时不关闭农场和萌宠通知$white"
 		;;
 		*)
 			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
 			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
+			sed -i "s/isNotify = true/isNotify = false/g" $dir_file_js/jddj_fruit.js
 			echo -e "$green时间大于凌晨三点开始关闭农场和萌宠通知$white"
 		;;
 		esac
