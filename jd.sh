@@ -607,6 +607,8 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	adolf_martin.js			#人头马x博朗
 	adolf_urge.js			#坐等更新
 	zy_618jc.js 			#618竞猜
+	jddj_bean.js			#京东到家鲜豆 一天一次
+	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_07$start_script_time $white"
