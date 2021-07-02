@@ -91,6 +91,11 @@ cat >>/etc/crontabs/root <<EOF
 0 0 * * * $node $dir_file_js/star_dreamFactory_tuan.js	>/tmp/star_dreamFactory_tuan.log	#京喜开团#100#
 0 0 * * *　$python3　$dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py >/tmp/jd_getFollowGift.log #关注有礼#100#
 0 8,15 * * *　$python3　$dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py  >/tmp/jd_OpenCard.log #开卡程序#100#
+59 23 * * * sleep 57 && $node $dir_file_js/jd_blueCoin.js  >/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求
+59 23 * * * sleep 58 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求
+59 23 * * * sleep 59 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求
+59 23 * * * sleep 60 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求
+59 23 * * * sleep 61 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
@@ -170,7 +175,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_joy_feedPets.js 		#宠汪汪单独喂食
 	jd_joy.js			#宠汪汪
 	jd_joy_reward.js 		#宠汪汪兑换奖品
-	jd_car_exchange.js		#京东汽车兑换，500赛点兑换500京豆
 	jd_car.js			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_club_lottery.js		#摇京豆
 	jd_shop.js			#进店领豆
@@ -435,8 +439,6 @@ update_script() {
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_mohe.js			#5G超级盲盒
-	jd_blueCoin.js  	#东东超市兑换，有次数限制，没时间要求
-	jd_car_exchange.js   #京东汽车兑换，500赛点兑换500京豆
 	jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jx_sign.js #京喜app签到长期
 	jd_lotteryMachine.js #京东抽奖机
@@ -569,7 +571,6 @@ run_06_18() {
 cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_hwsx.js		#京东众筹
 	jd_mcxhd.js  		#新潮品牌狂欢
-	jd_blueCoin.js  #东东超市兑换，有次数限制，没时间要求
 	jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
 	jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
 	jd_pet.js #东东萌宠，跟手机商城同一时间
