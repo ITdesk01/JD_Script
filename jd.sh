@@ -244,19 +244,6 @@ do
 	update_if
 done
 
-zero205_url="https://gitee.com/zero205/JD_tencent_scf/raw/main"
-cat >$dir_file/config/tmp/zero205_url.txt <<EOF
-	
-
-EOF
-
-for script_name in `cat $dir_file/config/tmp/zero205_url.txt | awk '{print $1}'`
-do
-	url="$zero205_url"
-	#wget $zero205_url/$script_name -O $dir_file_js/$script_name
-	#update_if
-done
-
 panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
 cat >$dir_file/config/tmp/panghu999.txt <<EOF
 	jd_hwsx.js		#京东众筹
@@ -285,7 +272,6 @@ done
 
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
-	wget https://raw.githubusercontent.com/star261/jd/main/scripts/star_dreamFactory_tuan.js -O $dir_file_js/star_dreamFactory_tuan.js #京喜开团
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -295,6 +281,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	star_dreamFactory_tuan.js #京喜开团　star261脚本
 	jd_ddnc_farmpark.js	#东东乐园 Wenmoux脚本
 	jd_europeancup.js	#狂欢欧洲杯 Wenmoux脚本
 	jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下 Wenmoux脚本
@@ -316,7 +303,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_OpenCard.py 			#开卡程序
 	jd_getFollowGift.py 		#关注有礼
 	jd_jxzpk.js			#京享值pk
-	star_dreamFactory_tuan.js 	#京喜开团
 	jd_all_bean_change.js 		#京东月资产变动通知
 	adolf_martin.js			#人头马x博朗
 	adolf_superbox.js		#超级盒子
@@ -639,6 +625,10 @@ curtinlv_script_setup() {
 	if [ ! -L "$dir_file_js/jd_OpenCard.py" ]; then
 		rm -rf $dir_file_js/jd_OpenCard.py
 		ln -s $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py $dir_file_js/jd_OpenCard.py
+	fi
+
+	if [ ! -L "$dir_file_js/OpenCardConfig.ini" ]; then
+		rm -rf $dir_file_js/OpenCardConfig.ini
 		ln -s $dir_file/git_clone/curtinlv_script/OpenCard/OpenCardConfig.ini $dir_file_js/OpenCardConfig.ini
 	fi
 
@@ -2128,12 +2118,6 @@ additional_settings() {
 		sed -i "$healthcode_rows a \ '$new_health_set', " $dir_file_js/jd_health.js
 		js_amount=$(($js_amount - 1))
 	done
-	
-	#脚本黑名单
-	script_black
-
-	#农场萌宠关闭通知
-	close_notification
 }
 
 if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
@@ -2376,6 +2360,9 @@ system_variable() {
 			index_num="$yellow 8.网页扫码功能启动失败，请手动执行看下问题　node $dir_file/cookies_web/index.js$white"
 		fi
 	fi
+
+	#农场萌宠关闭通知
+	close_notification
 
 	script_black
 }
