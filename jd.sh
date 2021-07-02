@@ -220,8 +220,8 @@ EOF
 for script_name in `cat $dir_file/config/tmp/longzhuzhu_qx.txt | awk '{print $1}'`
 do
 	url="$longzhuzhu_url"
-	wget $nianyuguai_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $nianyuguai_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 passerby_url="https://raw.githubusercontent.com/passerby-b/JDDJ/main"
@@ -277,7 +277,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	star_dreamFactory_tuan.js #京喜开团　star261脚本
+	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
 	jd_ddnc_farmpark.js		#东东乐园 Wenmoux脚本
 	jd_europeancup.js		#狂欢欧洲杯 Wenmoux脚本
 	jd_qqxing.js			#星系牧场,需要手动去开卡然后进去玩一下 Wenmoux脚本
