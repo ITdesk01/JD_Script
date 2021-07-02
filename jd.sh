@@ -196,8 +196,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_gold_creator.js		#金榜创造营
 	jd_mohe.js			#5G超级盲盒
-	jd_star_shop.js			#明星小店
-	jd_mcxhd.js			#新潮品牌狂欢
 	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
@@ -303,10 +301,7 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_getFollowGift.py 		#关注有礼
 	jd_jxzpk.js			#京享值pk
 	jd_all_bean_change.js 		#京东月资产变动通知
-	adolf_martin.js			#人头马x博朗
 	adolf_superbox.js		#超级盒子
-	adolf_newInteraction.js		#618大势新品赏
-	adolf_urge.js			#坐等更新
 	z_fanslove.js			#粉丝互动
 	z_shake.js  			#超级摇一摇
 	z_marketLottery.js 		#京东超市-大转盘
@@ -401,8 +396,8 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_jin_tie.js #领金贴
 	jddj_bean.js			#京东到家鲜豆 一天一次
 	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
-	adolf_superbox.js		#超级盒子
 	jd_dreamFactory.js 		#京喜工厂
+	adolf_superbox.js		#超级盒子
 	jd_jxzpk.js			#pk
 	jd_lsj.js		#柠檬京东零食街
 	jd_ddnc_farmpark.js	#东东乐园
@@ -490,7 +485,7 @@ EOF
 run_02() {
 	echo -e "$green run_02$start_script_time $white"
 	$node $dir_file_js/jd_moneyTree.js #摇钱树
-	$node $dir_file_js/ddo_pk.js #新的pk脚本
+	$node $dir_file_js/jd_jxzpk.js			#pk
 	$node $dir_file_js/jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下
 	echo -e "$green run_02$stop_script_time $white"
 }
@@ -521,7 +516,6 @@ EOF
 run_06_18() {
 cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_hwsx.js		#京东众筹
-	jd_mcxhd.js  		#新潮品牌狂欢
 	jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
 	jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
 	jd_pet.js #东东萌宠，跟手机商城同一时间
@@ -542,21 +536,23 @@ EOF
 
 run_07() {
 cat >/tmp/jd_tmp/run_07 <<EOF
-	jd_rankingList.js #京东排行榜签到领京豆
-	jd_kd.js #京东快递签到 一天运行一次即可
-	jd_bean_home.js #领京豆额外奖励
-	jd_club_lottery.js #摇京豆，没时间要求
-	jd_jdzz.js #京东赚赚长期活动
-	jd_jxnc.js #京喜农场
-	jd_ms.js #京东秒秒币 一个号大概60
-	jd_sgmh.js #闪购盲盒长期活动
-	jd_speed_sign.js #京东极速版签到+赚现金任务
+	adolf_superbox.js		#超级盒子
+	jd_jxzpk.js			#pk
+	jd_lsj.js			#柠檬京东零食街
+	jd_ddnc_farmpark.js		#东东乐园
+	jd_europeancup.js		#狂欢欧洲杯
+	jd_rankingList.js 		#京东排行榜签到领京豆
+	jd_kd.js 			#京东快递签到 一天运行一次即可
+	jd_bean_home.js 		#领京豆额外奖励
+	jd_club_lottery.js 		#摇京豆，没时间要求
+	jd_jdzz.js 			#京东赚赚长期活动
+	jd_jxnc.js 			#京喜农场
+	jd_ms.js 			#京东秒秒币 一个号大概60
+	jd_sgmh.js 			#闪购盲盒长期活动
+	jd_speed_sign.js 		#京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#极速版红包
-	jd_cash.js #签到领现金，每日2毛～5毛长期
+	jd_cash.js 			#签到领现金，每日2毛～5毛长期
 	jd_jin_tie.js 			#领金贴
-	adolf_martin.js			#人头马x博朗
-	adolf_urge.js			#坐等更新
-	zy_618jc.js 			#618竞猜
 	jddj_bean.js			#京东到家鲜豆 一天一次
 	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
 	jd_unsubscribe.js 		#取关店铺，没时间要求
@@ -579,7 +575,6 @@ EOF
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_fndd.js			#福牛多多
-	jd_star_shop.js			#明星小店
 	jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	jd_syj.js #赚京豆
 	jd_jump.js			#跳跳乐瓜分京豆
@@ -599,7 +594,6 @@ run_10_15_20() {
 cat >/tmp/jd_tmp/run_10_15_20 <<EOF
 	jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
 	jd_cfd.js #京东财富岛 有一日三餐任务
-	adolf_newInteraction.js		#618大势新品赏
 EOF
 
 	echo -e "$green run_10_15_20$start_script_time $white"
@@ -1975,21 +1969,6 @@ additional_settings() {
 		js_amount=$(($js_amount - 1))
 	done
 
-	#明星小店
-	new_jdss="VYlzzuDz-Y8seOROZFxje-gusZ0qMCAXkWRSg4DzCCQ@O-d-kb7wpZ1S27CVsn1DzTmTEwjTAPSH2XscO-ZOeAU"
-
-	new_jdss_set="'$new_jdss',"
-
-	jdss_rows=$(grep -n "\$.authorCodeList \= \[" $dir_file_js/jd_star_shop.js | awk -F ":" '{print $1}')
-	
-	sed -i "s/{'id':'YCDXNN','name':'蔡徐坤'},//g" $dir_file_js/jd_star_shop.js
-	sed -i "s/蔡徐坤//g" $dir_file_js/jd_star_shop.js
-	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
-	while [[ ${js_amount} -gt 0 ]]; do
-		sed -i "$jdss_rows a \ $new_jdss_set " $dir_file_js/jd_star_shop.js
-		js_amount=$(($js_amount - 1))
-	done
-
 	#京东试用
 	if [ "$jd_try" == "yes" ];then
 		jd_try_if=$(grep "jd_try.js" $cron_file | wc -l)
@@ -2050,7 +2029,7 @@ additional_settings() {
 	ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQmoaT5kRrbA@T0225KkcRRtN8wCBdUimlqVbJwCjVQmoaT5kRrbA@T0225KkcRkoboVKEJRr3xvINdQCjVQmoaT5kRrbA@T014_aIzGEdFoAGJdwCjVQmoaT5kRrbA@T0225KkcRhpI8VfXcR79wqVcIACjVQmoaT5kRrbA@T0225KkcRk1P8VTSdUmixvUIfQCjVQmoaT5kRrbA@T011-acrCh8Q_VECjVQmoaT5kRrbA"
 	dreamer_20200524_jdsgmh="T018v_VwRB4Z_VbUIhqb1ACjVQmoaT5kRrbA"
 	
-	new_jdsgmh_set="$new_jdsgmh@$zuoyou_20190516_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$Javon_20201224_jdsgmh@$xo_20201229_jdsgmh@$Jhone_Potte_20200824_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$ashou_20210516_jdsgmh@$dreamer_20200524_jdsgmh"
+	new_jdsgmh_set="$new_jdsgmh@$zuoyou_20190516_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$Javon_20201224_jdsgmh@$xo_20201229_jdsgmh@$Jhone_Potte_20200824_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$ashou_20210516_jdsgmh@$dreamer_20200524_jdsgmh',"
 
 	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
 	sgmhcode_rows=$(grep -n "inviteCodes = \[" $dir_file_js/jd_sgmh.js | awk -F ":" '{print $1}')
