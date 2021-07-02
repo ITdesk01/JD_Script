@@ -201,7 +201,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
-cp  $dir_file/git_clone/lxk0301_back/activity/jd_unbind.js	$dir_file_js/jd_unbind.js #注销京东会员卡
 
 for script_name in `cat $dir_file/config/tmp/lxk0301_script.txt | awk '{print $1}'`
 do
@@ -250,8 +249,8 @@ EOF
 for script_name in `cat $dir_file/config/tmp/panghu999.txt | awk '{print $1}'`
 do
 	url="$panghu999"
-	wget $panghu999/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $panghu999/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 panghu999_url="https://raw.githubusercontent.com/panghu999/jd_scripts/master"
@@ -263,8 +262,8 @@ EOF
 for script_name in `cat $dir_file/config/tmp/panghu999_url.txt | awk '{print $1}'`
 do
 	url="$panghu999_url"
-	wget $panghu999_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $panghu999_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
@@ -302,20 +301,11 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_jxzpk.js			#京享值pk
 	jd_all_bean_change.js 		#京东月资产变动通知
 	adolf_superbox.js		#超级盒子
-	z_fanslove.js			#粉丝互动
-	z_shake.js  			#超级摇一摇
-	z_marketLottery.js 		#京东超市-大转盘
-	z_mother_jump.js		#新一期母婴跳一跳开始咯
-	z_shop_captain.js		#超级无线组队分奖品
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jx_products_detail.js		#京喜工厂商品列表详情
 	jd_try.js 			#京东试用（默认不启用）
-	jd_gyec.js			#工业爱消除
-	jd_xxl.js			#东东爱消除
-	jd_xxl_gh.js			#个护爱消除，完成所有任务+每日挑战
 	jd_opencard.js			#开卡活动，一次性活动，运行完脚本获得53京豆，进入入口还可以开卡领30都
-	jd_unbind.js 			#注销京东会员卡
 	jdDreamFactoryShareCodes.js	#京喜工厂ShareCodes
 	jdFruitShareCodes.js		#东东农场ShareCodes
 	jdPetShareCodes.js		#东东萌宠ShareCodes
@@ -387,21 +377,21 @@ update_script() {
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_mohe.js			#5G超级盲盒
-	jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
-	jd_cash.js #签到领现金，每日2毛～5毛长期
-	jd_sgmh.js #闪购盲盒长期活动
-	jd_jdzz.js #京东赚赚长期活动
-	jd_syj.js #十元街签到,一天一次即可，一周30豆子
-	jd_market_lottery.js #幸运大转盘
-	jd_jin_tie.js #领金贴
+	jd_car.js 			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
+	jd_cash.js 			#签到领现金，每日2毛～5毛长期
+	jd_sgmh.js 			#闪购盲盒长期活动
+	jd_jdzz.js			#京东赚赚长期活动
+	jd_syj.js 			#十元街签到,一天一次即可，一周30豆子
+	jd_market_lottery.js 		#幸运大转盘
+	jd_jin_tie.js 			#领金贴
 	jddj_bean.js			#京东到家鲜豆 一天一次
 	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
 	jd_dreamFactory.js 		#京喜工厂
 	adolf_superbox.js		#超级盒子
 	jd_jxzpk.js			#pk
-	jd_lsj.js		#柠檬京东零食街
-	jd_ddnc_farmpark.js	#东东乐园
-	jd_europeancup.js	#狂欢欧洲杯
+	jd_lsj.js			#柠檬京东零食街
+	jd_ddnc_farmpark.js		#东东乐园
+	jd_europeancup.js		#狂欢欧洲杯
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -427,7 +417,7 @@ run_020() {
 
 run_030() {
 	echo -e "$green run_030$start_script_time $white"
-	$node $dir_file_js/jd_jdfactory.js #东东工厂，不是京喜工厂
+	$node $dir_file_js/jd_jdfactory.js 		#东东工厂，不是京喜工厂
 	$node $dir_file_js/jd_jxmc.js			#惊喜牧场
 	$node $dir_file_js/jd_health_collect.js		#健康社区-收能量
 	$node $dir_file_js/jddj_fruit_collectWater.js 	#京东到家果园水车收水滴 作者5分钟收一次
@@ -466,8 +456,8 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
-	jd_plantBean.js #种豆得豆，没时间要求，一个小时收一次瓶子
-	jd_joy_feedPets.js  #宠汪汪喂食一个小时喂一次
+	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
+	jd_joy_feedPets.js  		#宠汪汪喂食一个小时喂一次
 EOF
 	#long_super_redrain.js		#整点红包雨
 	echo -e "$green run_01$start_script_time $white"
@@ -484,8 +474,8 @@ EOF
 
 run_02() {
 	echo -e "$green run_02$start_script_time $white"
-	$node $dir_file_js/jd_moneyTree.js #摇钱树
-	$node $dir_file_js/jd_jxzpk.js			#pk
+	$node $dir_file_js/jd_moneyTree.js 	#摇钱树
+	$node $dir_file_js/jd_jxzpk.js		#pk
 	$node $dir_file_js/jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下
 	echo -e "$green run_02$stop_script_time $white"
 }
@@ -493,11 +483,11 @@ run_02() {
 run_03() {
 #这里不会并发
 cat >/tmp/jd_tmp/run_03 <<EOF
-	jd_dianjing.js		#电竞经理
-	jd_joy.js #jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
-	jd_necklace.js  #点点券 大佬0,20领一次先扔这里后面再改
-	jd_speed.js #天天加速 3小时运行一次，打卡时间间隔是6小时
-	jd_health.js		#健康社区
+	jd_dianjing.js			#电竞经理
+	jd_joy.js 			#jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
+	jd_necklace.js  		#点点券 大佬0,20领一次先扔这里后面再改
+	jd_speed.js 			#天天加速 3小时运行一次，打卡时间间隔是6小时
+	jd_health.js			#健康社区
 	jddj_fruit.js			#京东到家果园 0,8,11,17
 	jd_mohe.js			#5G超级盲盒
 EOF
@@ -515,12 +505,12 @@ EOF
 
 run_06_18() {
 cat >/tmp/jd_tmp/run_06_18 <<EOF
-	jd_hwsx.js		#京东众筹
-	jd_shop.js #进店领豆，早点领，一天也可以执行两次以上
-	jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴
-	jd_pet.js #东东萌宠，跟手机商城同一时间
-	jd_joy_steal.js #可偷好友积分，零点开始，六点再偷一波狗粮
-	jd_superMarket.js #东东超市,6点 18点多加两场用于收金币
+	jd_hwsx.js			#京东众筹
+	jd_shop.js 			#进店领豆，早点领，一天也可以执行两次以上
+	jd_fruit.js 			#东东水果，6-9点 11-14点 17-21点可以领水滴
+	jd_pet.js 			#东东萌宠，跟手机商城同一时间
+	jd_joy_steal.js 		#可偷好友积分，零点开始，六点再偷一波狗粮
+	jd_superMarket.js 		#东东超市,6点 18点多加两场用于收金币
 	jd_gold_creator.js		#金榜创造营
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
@@ -564,19 +554,13 @@ EOF
 		$node $dir_file_js/$i
 		$run_sleep
 	done
-	#z_fanslove.js #粉丝互动
-	#z_shake.js  #超级摇一摇
-	#z_marketLottery.js 		#京东超市-大转盘
-	#z_mother_jump.js		#新一期母婴跳一跳开始咯
-	#$node $dir_file_js/jd_unbind.js #注销京东会员卡
 	echo -e "$green run_07$stop_script_time $white"
 }
 
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
-	jd_fndd.js			#福牛多多
-	jd_joy_reward.js #宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
-	jd_syj.js #赚京豆
+	jd_joy_reward.js 		#宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
+	jd_syj.js 			#赚京豆
 	jd_jump.js			#跳跳乐瓜分京豆
 EOF
 	echo -e "$green run_08_12_16$start_script_time $white"
@@ -592,8 +576,8 @@ EOF
 
 run_10_15_20() {
 cat >/tmp/jd_tmp/run_10_15_20 <<EOF
-	jd_superMarket.js #东东超市,0 10 15 20四场补货加劵
-	jd_cfd.js #京东财富岛 有一日三餐任务
+	jd_superMarket.js 		#东东超市,0 10 15 20四场补货加劵
+	jd_cfd.js 			#京东财富岛 有一日三餐任务
 EOF
 
 	echo -e "$green run_10_15_20$start_script_time $white"
@@ -1989,11 +1973,6 @@ additional_settings() {
 		fi
 		echo "京东试用计划任务不导入"
 	fi
-
-	#取消会员卡脚本修复路径
-	sed -i "s/..\/jdCookie.js/.\/jdCookie.js/g" $dir_file_js/jd_unbind.js
-	sed -i "s/..\/sendNotify/.\/sendNotify/g" $dir_file_js/jd_unbind.js
-	sed -i "s/..\/USER_AGENTS/.\/USER_AGENTS/g" $dir_file_js/jd_unbind.js
 
 	#签到领现金
 	new_jdcash="eU9Ya-iyZ68kpWrRmXBFgw@eU9YabrkZ_h1-GrcmiJB0A@eU9YM7bzIptVshyjrwlteU9YCLTrH5VesRWnvw5t@P2nGgK6JgLtCqJBeQJ0f27XXLQwYAFHrKmA2siZTuj8=@JuMHWNtZt4Ny_0ltvG6Ipg==@IRM2beu1b-En9mzUwnU@eU9YaOSwMP8m-D_XzHpF0w@eU9Yau-yMv8ho2fcnXAQ1Q@eU9YCovbMahykhWdvS9R@JxwyaOWzbvk7-W3WzHcV1mw"
