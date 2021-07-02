@@ -154,6 +154,7 @@ update() {
 rm -rf $dir_file/config/tmp/*
 
 cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
+	jx_sign.js 			#京喜app签到长期
 	jd_bean_sign.js			#京东多合一签到
 	jd_fruit.js			#东东农场
 	jd_jxnc.js			#京喜农场
