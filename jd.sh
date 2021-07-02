@@ -257,20 +257,6 @@ do
 	#update_if
 done
 
-Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd"
-cat >$dir_file/config/tmp/Wenmoux_url.txt <<EOF
-	jd_ddnc_farmpark.js	#东东乐园
-	jd_europeancup.js	#狂欢欧洲杯
-	jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下
-EOF
-
-for script_name in `cat $dir_file/config/tmp/Wenmoux_url.txt | awk '{print $1}'`
-do
-	url="$Wenmoux_url"
-	wget $Wenmoux_url/$script_name -O $dir_file_js/$script_name
-	update_if
-done
-
 panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
 cat >$dir_file/config/tmp/panghu999.txt <<EOF
 	jd_hwsx.js		#京东众筹
@@ -309,6 +295,9 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_ddnc_farmpark.js	#东东乐园 Wenmoux脚本
+	jd_europeancup.js	#狂欢欧洲杯 Wenmoux脚本
+	jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下 Wenmoux脚本
 	zooOpencard01.js		#纯开卡 大牌联合618提前购 (默认不运行，自己考虑要不要运行) ZooPanda脚本
 	zooOpencard02.js		#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)ZooPanda脚本
 	zooOpencard03.js		#纯开卡 (默认不运行，自己考虑要不要运行) ZooPanda脚本
