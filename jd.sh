@@ -154,7 +154,6 @@ update() {
 rm -rf $dir_file/config/tmp/*
 
 cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
-	jx_sign.js 			#京喜app签到长期
 	jd_bean_sign.js			#京东多合一签到
 	jd_fruit.js			#东东农场
 	jd_jxnc.js			#京喜农场
@@ -174,7 +173,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_rankingList.js		#京东排行榜签到得京豆
 	jd_cash.js			#签到领现金，每日2毛～5毛长期
 	jd_jdzz.js			#京东赚赚长期活动
-	jd_lotteryMachine.js 		#京东抽奖机
 	jd_syj.js			#赚京豆
 	jd_kd.js			#京东快递签到 一天运行一次即可
 	jd_small_home.js		#东东小窝
@@ -283,9 +281,9 @@ done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
 	star_dreamFactory_tuan.js #京喜开团　star261脚本
-	jd_ddnc_farmpark.js	#东东乐园 Wenmoux脚本
-	jd_europeancup.js	#狂欢欧洲杯 Wenmoux脚本
-	jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下 Wenmoux脚本
+	jd_ddnc_farmpark.js		#东东乐园 Wenmoux脚本
+	jd_europeancup.js		#狂欢欧洲杯 Wenmoux脚本
+	jd_qqxing.js			#星系牧场,需要手动去开卡然后进去玩一下 Wenmoux脚本
 	zooOpencard01.js		#纯开卡 大牌联合618提前购 (默认不运行，自己考虑要不要运行) ZooPanda脚本
 	zooOpencard02.js		#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)ZooPanda脚本
 	zooOpencard03.js		#纯开卡 (默认不运行，自己考虑要不要运行) ZooPanda脚本
@@ -395,8 +393,6 @@ run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_mohe.js			#5G超级盲盒
 	jd_car.js #京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
-	jx_sign.js #京喜app签到长期
-	jd_lotteryMachine.js #京东抽奖机
 	jd_cash.js #签到领现金，每日2毛～5毛长期
 	jd_sgmh.js #闪购盲盒长期活动
 	jd_jdzz.js #京东赚赚长期活动
@@ -546,7 +542,6 @@ EOF
 
 run_07() {
 cat >/tmp/jd_tmp/run_07 <<EOF
-	jx_sign.js #京喜app签到长期
 	jd_rankingList.js #京东排行榜签到领京豆
 	jd_kd.js #京东快递签到 一天运行一次即可
 	jd_bean_home.js #领京豆额外奖励
@@ -2055,7 +2050,7 @@ additional_settings() {
 	ashou_20210516_jdsgmh="T018v_V1RRgf_VPSJhyb1ACjVQmoaT5kRrbA@T012a0DkmLenrwOACjVQmoaT5kRrbA@T0225KkcRRtN8wCBdUimlqVbJwCjVQmoaT5kRrbA@T0225KkcRkoboVKEJRr3xvINdQCjVQmoaT5kRrbA@T014_aIzGEdFoAGJdwCjVQmoaT5kRrbA@T0225KkcRhpI8VfXcR79wqVcIACjVQmoaT5kRrbA@T0225KkcRk1P8VTSdUmixvUIfQCjVQmoaT5kRrbA@T011-acrCh8Q_VECjVQmoaT5kRrbA"
 	dreamer_20200524_jdsgmh="T018v_VwRB4Z_VbUIhqb1ACjVQmoaT5kRrbA"
 	
-	new_jdsgmh_set="$new_jdsgmh@$zuoyou_20190516_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$Javon_20201224_jdsgmh@$xo_20201229_jdsgmh@$Jhone_Potte_20200824_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$ashou_20210516_jdsgmh@$dreamer_20200524_jdsgmh',"
+	new_jdsgmh_set="$new_jdsgmh@$zuoyou_20190516_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$Javon_20201224_jdsgmh@$xo_20201229_jdsgmh@$Jhone_Potte_20200824_jdsgmh@$jidiyangguang_20190516_jdsgmh@$chiyu_jdsgmh@$ashou_20210516_jdsgmh@$dreamer_20200524_jdsgmh"
 
 	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
 	sgmhcode_rows=$(grep -n "inviteCodes = \[" $dir_file_js/jd_sgmh.js | awk -F ":" '{print $1}')
