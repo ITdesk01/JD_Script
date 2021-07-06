@@ -393,6 +393,8 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_lsj.js			#柠檬京东零食街
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_europeancup.js		#狂欢欧洲杯
+	jd_dogsEmploy.js 		#汪汪乐园开工位
+	jd_joy_park.js			#汪汪乐园
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
