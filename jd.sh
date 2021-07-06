@@ -265,7 +265,6 @@ done
 
 panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
 cat >$dir_file/config/tmp/panghu999.txt <<EOF
-	jd_hwsx.js		#京东众筹
 	jd_lsj.js		#柠檬京东零食街
 	jd_joy-park.js		#汪汪乐园
 EOF
@@ -533,7 +532,6 @@ EOF
 
 run_06_18() {
 cat >/tmp/jd_tmp/run_06_18 <<EOF
-	jd_hwsx.js			#京东众筹
 	jd_shop.js 			#进店领豆，早点领，一天也可以执行两次以上
 	jd_fruit.js 			#东东水果，6-9点 11-14点 17-21点可以领水滴
 	jd_pet.js 			#东东萌宠，跟手机商城同一时间
