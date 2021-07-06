@@ -267,6 +267,7 @@ panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
 cat >$dir_file/config/tmp/panghu999.txt <<EOF
 	jd_hwsx.js		#京东众筹
 	jd_lsj.js		#柠檬京东零食街
+	jd_joy-park.js		#汪汪乐园
 EOF
 
 for script_name in `cat $dir_file/config/tmp/panghu999.txt | awk '{print $1}'`
@@ -417,7 +418,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_europeancup.js		#狂欢欧洲杯
 	jd_dogsEmploy.js 		#汪汪乐园开工位
-	jd_joy_park.js			#汪汪乐园
+	jd_joy-park.js			#汪汪乐园
 	jd_joy_help.js			#宠汪汪强制为别人助力
 EOF
 	echo -e "$green run_0$start_script_time $white"
@@ -483,6 +484,7 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
+	jd_joy-park.js		#汪汪乐园
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 EOF
 	#long_super_redrain.js		#整点红包雨
