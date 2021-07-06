@@ -226,7 +226,7 @@ EOF
 for script_name in `cat $dir_file/config/tmp/JDHelloWorld_script.txt | awk '{print $1}'`
 do
 	echo -e "$yellow copy $green$script_name$white"
-	cp  $dir_file/git_clone/JDHelloWorld_back/$script_name  $dir_file_js/$script_name
+	cp  $dir_file/git_clone/JDHelloWorld/$script_name  $dir_file_js/$script_name
 done
 
 
