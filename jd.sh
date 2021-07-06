@@ -2156,6 +2156,8 @@ npm_install() {
 	echo -e "$green 开始安装npm模块$white"
 	cp $dir_file/git_clone/lxk0301_back/package.json $dir_file/package.json
 	cd $dir_file && npm -g install && npm install -g request
+	cp $dir_file/git_clone/JDHelloWorld/package.json
+	cd $dir_file && npm -g install
 	cd $dir_file/cookies_web && npm install
 
 	python_install
