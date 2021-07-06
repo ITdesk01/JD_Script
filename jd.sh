@@ -57,7 +57,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.32"
+	cron_version="3.33"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -135,6 +135,16 @@ update() {
 		git reset --hard origin/main
 	fi
 
+	if [ ! -d $dir_file/git_clone/JDHelloWorld ];then
+		echo ""
+		git clone https://github.com/JDHelloWorld/jd_scripts.git $dir_file/git_clone/JDHelloWorld
+
+	else
+		cd $dir_file/git_clone/JDHelloWorld
+		git fetch --all
+		git reset --hard origin/main
+	fi
+
 	if [ ! -d $dir_file/git_clone/curtinlv_script ];then
 		echo ""
 		git clone https://github.com/curtinlv/JD-Script.git $dir_file/git_clone/curtinlv_script
@@ -153,6 +163,7 @@ update() {
 
 rm -rf $dir_file/config/tmp/*
 
+#lxk0301
 cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_bean_sign.js			#京东多合一签到
 	jd_fruit.js			#东东农场
@@ -163,9 +174,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_blueCoin.js			#东东超市兑换奖品
 	jd_dreamFactory.js		#京喜工厂
 	jd_jdfactory.js			#东东工厂
-	jd_joy_feedPets.js 		#宠汪汪单独喂食
-	jd_joy.js			#宠汪汪
-	jd_joy_reward.js 		#宠汪汪兑换奖品
 	jd_car.js			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_club_lottery.js		#摇京豆
 	jd_shop.js			#进店领豆
@@ -207,6 +215,20 @@ do
 	echo -e "$yellow copy $green$script_name$white"
 	cp  $dir_file/git_clone/lxk0301_back/$script_name  $dir_file_js/$script_name
 done
+
+#JDHelloWorld
+cat >$dir_file/config/tmp/JDHelloWorld_script.txt <<EOF
+	jd_joy_help.js			#宠汪汪强制为别人助力
+	jd_joy_new.js			#宠汪汪二代目
+	jd_joy_steal.js			#宠汪汪偷好友狗粮
+EOF
+
+for script_name in `cat $dir_file/config/tmp/JDHelloWorld_script.txt | awk '{print $1}'`
+do
+	echo -e "$yellow copy $green$script_name$white"
+	cp  $dir_file/git_clone/JDHelloWorld_back/$script_name  $dir_file_js/$script_name
+done
+
 
 sleep 5
 
@@ -395,6 +417,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_europeancup.js		#狂欢欧洲杯
 	jd_dogsEmploy.js 		#汪汪乐园开工位
 	jd_joy_park.js			#汪汪乐园
+	jd_joy_help.js			#宠汪汪强制为别人助力
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -460,7 +483,6 @@ EOF
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
-	jd_joy_feedPets.js  		#宠汪汪喂食一个小时喂一次
 EOF
 	#long_super_redrain.js		#整点红包雨
 	echo -e "$green run_01$start_script_time $white"
@@ -487,7 +509,7 @@ run_03() {
 #这里不会并发
 cat >/tmp/jd_tmp/run_03 <<EOF
 	jd_dianjing.js			#电竞经理
-	jd_joy.js 			#jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
+	jd_joy_new.js 			#jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
 	jd_necklace.js  		#点点券 大佬0,20领一次先扔这里后面再改
 	jd_speed.js 			#天天加速 3小时运行一次，打卡时间间隔是6小时
 	jd_health.js			#健康社区
@@ -562,7 +584,6 @@ EOF
 
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
-	jd_joy_reward.js 		#宠汪汪积分兑换奖品，有次数限制，每日京豆库存会在0:00、8:00、16:00更新，经测试发现中午12:00也会有补发京豆
 	jd_syj.js 			#赚京豆
 	jd_jump.js			#跳跳乐瓜分京豆
 EOF
@@ -1787,23 +1808,6 @@ additional_settings() {
 		sed -i "$petcode_rows a \ $new_pet_set " $dir_file_js/jdPetShareCodes.js
 		js_amount=$(($js_amount - 1))
 	done
-
-	#宠汪汪积分兑换奖品改成兑换500豆子，个别人会兑换错误(350积分兑换20豆子，8000积分兑换500豆子要求等级16级，16000积分兑换1000京豆16级以后不能兑换)
-	sed -i "s/let joyRewardName = 0/let joyRewardName = $jd_joy_reward/g" $dir_file_js/jd_joy_reward.js
-
-	#宠汪汪喂食改成80
-	sed -i "s/|| 10/|| $jd_joy_feedPets/g" $dir_file_js/jd_joy_feedPets.js
-
-	#宠汪汪不给好友喂食
-	sed -i "s/let jdJoyHelpFeed = true/let jdJoyHelpFeed = $jd_joy_steal/g" $dir_file_js/jd_joy_steal.js
-
-	if [ `cat $openwrt_script_config/js_cookie.txt | wc -l`  -ge "10" ];then
-		export JOY_TEAM_LEVEL="10"
-	else
-		export JOY_TEAM_LEVEL="2"
-	fi
-
-	export JOY_RUN_HELP_MYSELF="true"
 
 	#种豆
 	new_plantBean1="4npkonnsy7xi3n46rivf5vyrszud7yvj7hcdr5a@mlrdw3aw26j3xeqso5asaq6zechwcl76uojnpha@nkvdrkoit5o65lgaousaj4dqrfmnij2zyntizsa@u5lnx42k5ifivyrtqhfjikhl56zsnbmk6v66uzi@5sxiasthesobwa3lehotyqcrd4@b3q5tww6is42gzo3u67hjquj54@b3q5tww6is42gzo3u67hjquj54"
