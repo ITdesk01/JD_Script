@@ -302,6 +302,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_senbeans.js			#来客有礼
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
 	jd_ddnc_farmpark.js		#东东乐园 Wenmoux脚本
 	jd_europeancup.js		#狂欢欧洲杯 Wenmoux脚本
@@ -584,6 +585,13 @@ EOF
 	echo -e "$green run_07$stop_script_time $white"
 }
 
+concurrent_js_run_07() {
+	#这里的也不会并发
+	$node $openwrt_script/JD_Script/js/jd_senbeans.js			#来客有礼
+	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
+	checklog #检测log日志是否有错误并推送
+}
+
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_syj.js 			#赚京豆
@@ -709,11 +717,6 @@ do
 done
 echo -e "$green============整理完成，可以提交了（没加群的忽略）======$white"
 
-}
-
-concurrent_js_run_07() {
-	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
-	checklog #检测log日志是否有错误并推送
 }
 
 concurrent_js() {
