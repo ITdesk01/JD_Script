@@ -57,7 +57,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.35"
+	cron_version="3.36"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -89,9 +89,8 @@ cat >>/etc/crontabs/root <<EOF
 10-20/5 10,12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
 30 20-23/1 * * * $node $dir_file_js/long_half_redrain.js	>/tmp/long_half_redrain.log	#半点红包雨#100#
 0 0 * * * $node $dir_file_js/star_dreamFactory_tuan.js	>/tmp/star_dreamFactory_tuan.log	#京喜开团#100#
-0 0 * * *　$python3 $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py >/tmp/jd_getFollowGift.log #关注有礼#100#
-0 8,15 * * *　$python3 $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py  >/tmp/jd_OpenCard.log #开卡程序#100#
-0 8 * * *　$python3 $dir_file_js/jd_zqfl.py  >/tmp/jd_zqfl.log #早起福利#100#
+0 0 * * * $python3 $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py >/tmp/jd_getFollowGift.log #关注有礼#100#
+0 8,15 * * * $python3 $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py  >/tmp/jd_OpenCard.log #开卡程序#100#
 59 23 * * * sleep 57 && $node $dir_file_js/jd_blueCoin.js  >/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * * sleep 58 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * * sleep 59 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
@@ -303,11 +302,23 @@ do
 	update_if
 done
 
+cdle_url="https://raw.githubusercontent.com/cdle/scripts/master"
+cat >$dir_file/config/tmp/cdle_url.txt <<EOF
+	jd_goodMorning.js		#早起福利
+	jd_olympicgames.js 		#全民运动会
+	jd_joy_park_help.js 		#汪汪乐园助力
+EOF
+
+#jd_dogsEmploy.js #汪汪乐园开工位，默认帮助前七个ck
+for script_name in `cat $dir_file/config/tmp/cdle_url.txt | awk '{print $1}'`
+do
+	url="$cdle_url"
+	wget $cdle_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
 
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
-	wget https://raw.githubusercontent.com/cdle/jd_study/main/jd_olympicgames.js -O $dir_file_js/jd_olympicgames.js #全民运动会
-	#wget https://raw.githubusercontent.com/cdle/jd_study/main/jd_dogsEmploy.js -O $dir_file_js/jd_dogsEmploy.js #汪汪乐园开工位，默认帮助前七个CK
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -418,7 +429,6 @@ update_script() {
 
 ccr_run() {
 	$node $openwrt_script/JD_Script/js/jd_bean_sign.js #京东多合一签到
-	$node $openwrt_script/JD_Script/js/jd_sign.js  #京东签到针对图形验证码
 }
 
 run_0() {
@@ -443,6 +453,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_joy-park.js			#汪汪乐园
 	jd_joy_help.js			#宠汪汪强制为别人助力
 	jd_olympicgames.js 		#全民运动会
+	jd_sign.js  			#京东签到针对图形验证码
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -564,6 +575,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_joy_steal.js 		#可偷好友积分，零点开始，六点再偷一波狗粮
 	jd_superMarket.js 		#东东超市,6点 18点多加两场用于收金币
 	jd_gold_creator.js		#金榜创造营
+	jd_goodMorning.js		#早起福利
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
@@ -636,6 +648,7 @@ run_10_15_20() {
 cat >/tmp/jd_tmp/run_10_15_20 <<EOF
 	jd_superMarket.js 		#东东超市,0 10 15 20四场补货加劵
 	jd_cfd.js 			#京东财富岛 有一日三餐任务
+	jd_joy_park_help.js 		#汪汪乐园助力
 EOF
 
 	echo -e "$green run_10_15_20$start_script_time $white"
