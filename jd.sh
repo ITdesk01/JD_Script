@@ -2140,7 +2140,7 @@ additional_settings() {
 	sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/jd_summer_movement.js
 
 	#老虎机
-	sed -i "8a /let JD_CFD_LHJ = '10';"  $dir_file_js/jd_cfd_SlotMachine.js
+	sed -i "8a\let JD_CFD_LHJ = '10';"  $dir_file_js/jd_cfd_SlotMachine.js
 }
 
 if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
