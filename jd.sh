@@ -286,9 +286,23 @@ EOF
 for script_name in `cat $dir_file/config/tmp/panghu999_url.txt | awk '{print $1}'`
 do
 	url="$panghu999_url"
-	#wget $panghu999_url/$script_name -O $dir_file_js/$script_name
-	#update_if
+	wget $panghu999_url/$script_name -O $dir_file_js/$script_name
+	update_if
 done
+
+smiek2221_url="https://raw.githubusercontent.com/smiek2221/scripts/master"
+cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
+	jd_summer_movement.js		#燃动夏季
+	MovementFaker.js		#燃动夏季解密脚本
+EOF
+
+for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | awk '{print $1}'`
+do
+	url="$smiek2221_url"
+	wget $smiek2221_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
 
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
@@ -302,6 +316,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_sign.js  			#京东签到针对图形验证码
 	jd_senbeans.js			#来客有礼
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
 	jd_ddnc_farmpark.js		#东东乐园 Wenmoux脚本
@@ -516,6 +531,7 @@ run_02() {
 run_03() {
 #这里不会并发
 cat >/tmp/jd_tmp/run_03 <<EOF
+	jd_summer_movement.js		#燃动夏季
 	jd_dianjing.js			#电竞经理
 	jd_joy_new.js 			#jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
 	jd_necklace.js  		#点点券 大佬0,20领一次先扔这里后面再改
