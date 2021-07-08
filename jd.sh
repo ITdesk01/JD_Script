@@ -291,7 +291,6 @@ done
 smiek2221_url="https://raw.githubusercontent.com/smiek2221/scripts/master"
 cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	jd_summer_movement.js		#燃动夏季
-	MovementFaker.js		#燃动夏季解密脚本
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | awk '{print $1}'`
