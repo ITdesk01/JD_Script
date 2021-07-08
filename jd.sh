@@ -399,6 +399,10 @@ update_script() {
 	echo -e "$green update_script$stop_script_time $white"
 }
 
+ccr_run() {
+	$node $openwrt_script/JD_Script/js/jd_bean_sign.js #京东多合一签到
+	$node $openwrt_script/JD_Script/js/jd_sign.js  #京东签到针对图形验证码
+}
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
@@ -871,7 +875,7 @@ concurrent_js_if() {
 		case "$action1" in
 		run_0)
 			action="$action1"
-			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
+			ccr_run
 			concurrent_js && if_ps
 			if [ ! $action2 ];then
 				if_ps
@@ -880,7 +884,7 @@ concurrent_js_if() {
 				case "$action2" in
 				run_07)
 					action="$action2"
-					$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
+					ccr_run
 					concurrent_js && if_ps
 					concurrent_js_run_07 && if_ps
 					concurrent_js_clean
@@ -890,7 +894,7 @@ concurrent_js_if() {
 		;;
 		run_07)
 			action="$action1"
-			$node $openwrt_script/JD_Script/js/jd_bean_sign.js "" #京东多合一签到
+			ccr_run
 			concurrent_js && if_ps
 			concurrent_js_run_07 && if_ps
 			concurrent_js_clean
@@ -915,11 +919,11 @@ concurrent_js_if() {
 	else
 		case "$action1" in
 			run_0)
-			$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
+			ccr_run
 			$action1
 			;;
 			run_07)
-			$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
+			ccr_run
 			$action1
 			concurrent_js_run_07
 			;;
@@ -933,11 +937,11 @@ concurrent_js_if() {
 		else
 			case "$action2" in
 			run_0)
-			$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
+			ccr_run
 			$action2
 			;;
 			run_07)
-			$node $dir_file_js/jd_bean_sign.js "" #京东多合一签到
+			ccr_run
 			$action2
 			concurrent_js_run_07
 			;;
