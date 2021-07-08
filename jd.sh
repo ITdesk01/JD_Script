@@ -2146,7 +2146,8 @@ additional_settings() {
 }
 
 if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
-exit 0
+echo ""
+#exit 0
 fi
 
 share_code_generate() {
@@ -2362,14 +2363,16 @@ system_variable() {
 		source /etc/profile
 	fi
 
+
 	cd $dir_file
 	if_git=$(git remote -v | grep -o "https:\/\/github.com\/ITdesk01\/JD_Script.git" | wc -l)
 	if [ "$if_git" == "2" ];then
 		echo ""
 	else
-		echo -e "$red检测到你的JD_Script的github地址错误，停止为你服务，省的老问我，为什么你更新了以后，没有我说的脚本,你用的都不是我的，怎么可能跟上我的更新！！！$white"
-		echo -e "$green唯一的github地址：https://github.com/ITdesk01/JD_Script.git$white"
-		exit 0
+		echo ""
+		#echo -e "$red检测到你的JD_Script的github地址错误，停止为你服务，省的老问我，为什么你更新了以后，没有我说的脚本,你用的都不是我的，怎么可能跟上我的更新！！！$white"
+		#echo -e "$green唯一的github地址：https://github.com/ITdesk01/JD_Script.git$white"
+		#exit 0
 	fi
 
 	#后台默认运行index.js
