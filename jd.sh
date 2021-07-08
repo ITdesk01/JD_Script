@@ -306,7 +306,8 @@ done
 
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
-	wget https://raw.githubusercontent.com/cdle/jd_study/main/jd_dogsEmploy.js -O $dir_file_js/jd_dogsEmploy.js #汪汪乐园开工位，默认帮助前七个CK
+	wget　https://raw.githubusercontent.com/cdle/jd_study/main/jd_olympicgames.js　-O $dir_file_js/jd_olympicgames.js #全民运动会
+	#wget https://raw.githubusercontent.com/cdle/jd_study/main/jd_dogsEmploy.js -O $dir_file_js/jd_dogsEmploy.js #汪汪乐园开工位，默认帮助前七个CK
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -316,6 +317,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_olympicgames.js 		#全民运动会
 	jd_sign.js  			#京东签到针对图形验证码
 	jd_senbeans.js			#来客有礼
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
@@ -440,6 +442,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_dogsEmploy.js 		#汪汪乐园开工位
 	jd_joy-park.js			#汪汪乐园
 	jd_joy_help.js			#宠汪汪强制为别人助力
+	jd_olympicgames.js 		#全民运动会
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
