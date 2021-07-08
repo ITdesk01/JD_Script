@@ -266,7 +266,6 @@ done
 panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
 cat >$dir_file/config/tmp/panghu999.txt <<EOF
 	jd_lsj.js		#柠檬京东零食街
-	jd_joy-park.js		#汪汪乐园
 EOF
 
 for script_name in `cat $dir_file/config/tmp/panghu999.txt | awk '{print $1}'`
@@ -309,11 +308,25 @@ cat >$dir_file/config/tmp/cdle_url.txt <<EOF
 	jd_joy_park_help.js 		#汪汪乐园助力
 EOF
 
-#jd_dogsEmploy.js #汪汪乐园开工位，默认帮助前七个ck
 for script_name in `cat $dir_file/config/tmp/cdle_url.txt | awk '{print $1}'`
 do
 	url="$cdle_url"
 	wget $cdle_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
+Tsukasa007_url="https://raw.githubusercontent.com/Tsukasa007/my_script/master"
+cat >$dir_file/config/tmp/Tsukasa007_url.txt <<EOF
+	jd_cfd_SlotMachine.js		#财富岛老虎机
+	jd_joypark_joy.js		#汪汪乐园养joy
+	jd_joypark_open.js		#汪汪乐园开工位
+	jd_joypark_task.js		#汪汪乐园每日任务
+EOF
+
+for script_name in `cat $dir_file/config/tmp/Tsukasa007_url.txt | awk '{print $1}'`
+do
+	url="$Tsukasa007_url"
+	wget $Tsukasa007_url/$script_name -O $dir_file_js/$script_name
 	update_if
 done
 
@@ -449,11 +462,11 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_lsj.js			#柠檬京东零食街
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_europeancup.js		#狂欢欧洲杯
-	jd_dogsEmploy.js 		#汪汪乐园开工位
-	jd_joy-park.js			#汪汪乐园
 	jd_joy_help.js			#宠汪汪强制为别人助力
 	jd_olympicgames.js 		#全民运动会
 	jd_sign.js  			#京东签到针对图形验证码
+	jd_cfd_SlotMachine.js		#财富岛老虎机
+	jd_joypark_task.js		#汪汪乐园每日任务
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -519,7 +532,7 @@ EOF
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
 	jd_summer_movement.js		#燃动夏季
-	jd_joy-park.js			#汪汪乐园
+	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 EOF
 	#long_super_redrain.js		#整点红包雨
