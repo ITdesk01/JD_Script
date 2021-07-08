@@ -530,7 +530,6 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
-	jd_summer_movement.js		#燃动夏季
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 EOF
@@ -558,7 +557,6 @@ run_02() {
 run_03() {
 #这里不会并发
 cat >/tmp/jd_tmp/run_03 <<EOF
-	jd_summer_movement.js		#燃动夏季
 	jd_dianjing.js			#电竞经理
 	jd_joy_new.js 			#jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
 	jd_necklace.js  		#点点券 大佬0,20领一次先扔这里后面再改
@@ -658,6 +656,7 @@ EOF
 
 run_10_15_20() {
 cat >/tmp/jd_tmp/run_10_15_20 <<EOF
+	jd_summer_movement.js		#燃动夏季
 	jd_superMarket.js 		#东东超市,0 10 15 20四场补货加劵
 	jd_cfd.js 			#京东财富岛 有一日三餐任务
 	jd_joy_park_help.js 		#汪汪乐园助力
@@ -2137,9 +2136,13 @@ additional_settings() {
 
 	#燃动夏季
 	sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/jd_summer_movement.js
+	jdsucode_rows=$(grep -n "innerShInviteList = \[" $dir_file_js/jd_summer_movement.js | awk -F ":" '{print $1}')
+	sed -i "/`$(($jdsucode_rows + 1))`/d" $dir_file_js/jd_summer_movement.js
+	sed -i "/`$(($jdsucode_rows + 1))`/d" $dir_file_js/jd_summer_movement.js
+	sed -i "/`$(($jdsucode_rows + 1))`/d" $dir_file_js/jd_summer_movement.js
 
 	#老虎机
-	sed -i "8a\let JD_CFD_LHJ = '10';"  $dir_file_js/jd_cfd_SlotMachine.js
+	sed -i "s/JD_CFD_LHJ : 1/JD_CFD_LHJ : 10/g"  $dir_file_js/jd_cfd_SlotMachine.js
 }
 
 if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
