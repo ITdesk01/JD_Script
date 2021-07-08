@@ -507,7 +507,8 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
-	jd_joy-park.js		#汪汪乐园
+	jd_summer_movement.js		#燃动夏季
+	jd_joy-park.js			#汪汪乐园
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 EOF
 	#long_super_redrain.js		#整点红包雨
