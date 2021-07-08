@@ -301,7 +301,7 @@ do
 	update_if
 done
 
-cdle_url="https://raw.githubusercontent.com/cdle/scripts/master"
+cdle_url="https://raw.githubusercontent.com/cdle/jd_study/main"
 cat >$dir_file/config/tmp/cdle_url.txt <<EOF
 	jd_goodMorning.js		#早起福利
 	jd_olympicgames.js 		#全民运动会
