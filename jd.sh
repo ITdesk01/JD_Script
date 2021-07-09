@@ -340,6 +340,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_mp_h5.js			#疯狂星期五
 	jd_olympicgames.js 		#全民运动会
 	jd_sign.js  			#京东签到针对图形验证码
 	jd_senbeans.js			#来客有礼
@@ -468,6 +469,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_sign.js  			#京东签到针对图形验证码
 	jd_cfd_SlotMachine.js		#财富岛老虎机
 	jd_joypark_task.js		#汪汪乐园每日任务
+	jd_mp_h5.js			#疯狂星期五
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
