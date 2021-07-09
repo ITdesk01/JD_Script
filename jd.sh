@@ -2138,9 +2138,10 @@ additional_settings() {
 	#燃动夏季
 	sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/jd_summer_movement.js
 	jdsucode_rows=$(grep -n "innerShInviteList = \[" $dir_file_js/jd_summer_movement.js | awk -F ":" '{print $1}')
-	sed -i "/`$(($jdsucode_rows + 1))`/d" $dir_file_js/jd_summer_movement.js
-	sed -i "/`$(($jdsucode_rows + 1))`/d" $dir_file_js/jd_summer_movement.js
-	sed -i "/`$(($jdsucode_rows + 1))`/d" $dir_file_js/jd_summer_movement.js
+	jdsucode_rows_expr=$(($jdsucode_rows + 1))
+	sed -i "$jdsucode_rows_expr d" $dir_file_js/jd_summer_movement.js
+	sed -i "$jdsucode_rows_expr d" $dir_file_js/jd_summer_movement.js
+	sed -i "$jdsucode_rows_expr d" $dir_file_js/jd_summer_movement.js
 
 	#老虎机
 	sed -i "s/JD_CFD_LHJ : 1/JD_CFD_LHJ : 10/g"  $dir_file_js/jd_cfd_SlotMachine.js
