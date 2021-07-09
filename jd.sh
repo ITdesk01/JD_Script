@@ -221,7 +221,6 @@ done
 cat >$dir_file/config/tmp/JDHelloWorld_script.txt <<EOF
 	jd_joy_help.js			#宠汪汪强制为别人助力
 	jd_joy_new.js			#宠汪汪二代目
-	jd_joy_steal.js			#宠汪汪偷好友狗粮
 EOF
 
 for script_name in `cat $dir_file/config/tmp/JDHelloWorld_script.txt | awk '{print $1}'`
@@ -383,6 +382,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_joy_steal.js
 	jd_zxry.js			#柠檬特物ZX荣耀一次性手动运行
 	jd_618redpacket.js		#翻翻乐
 EOF
@@ -2143,6 +2143,7 @@ cat >$dir_file/config/tmp/jdsucode.txt <<EOF
 	jd_summer_movement_help.js
 EOF
 
+	new_jdsu="HcmphLbwLg2nfoLJFYA30u-dkfKS4hpjksGd27ILY0nBA9PdPZzp8gTqNz_S2jmjyQaf_Ow0IvYnTgCt9SMOOg@HcmphLbwLg_1KIKeRN0338GtQYaAMSdknAtmRLjTTNHXpqHd8RCpGuyb0CZtHbb7oOM_du8AJ5bPilzCKHh8wg@HcmphLbwLlX5P8f9ZJdBoFFxRpxJKhUG79EM0btzsmQacnCZ5lVm9Kg4pwI2yTXPY2E8RruGdIwSw0TaXw@HcmphLbwLm77J_rzb5RIpE6kIY_J1x-EKNuqK9YnKrgV_cas1vhZY4X-D8FUDRKEAODU5yj0t_SMc7wv-g"
 	for i in `cat $dir_file/config/tmp/jdsucode.txt | awk '{print $1}'`
 	do
 		sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/$i
@@ -2153,6 +2154,11 @@ EOF
 		sed -i "$jdsucode_rows_expr d" $dir_file_js/$i
 		sed -i "$jdsucode_rows_expr d" $dir_file_js/$i
 	done
+	jdsucode_rows1=$(grep -n "\$.inviteList = \[" $dir_file_js/jd_summer_movement.js | awk -F ":" '{print $1}')
+	sed -i "s/\$.inviteList = \[/\$.inviteList = \[\n/g" $dir_file_js/jd_summer_movement.js
+	sed -i "$jdsucode_rows1 a\ \n" $dir_file_js/
+	sed -i "$jdsucode_rows1 a\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\'," $dir_file_js/jd_summer_movement.js
+
 
 	#老虎机
 	sed -i "s/JD_CFD_LHJ : 1/JD_CFD_LHJ : 10/g"  $dir_file_js/jd_cfd_SlotMachine.js
