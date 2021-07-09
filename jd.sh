@@ -2143,7 +2143,7 @@ cat >$dir_file/config/tmp/jdsucode.txt <<EOF
 	jd_summer_movement_help.js
 EOF
 
-	for script_name in `cat $dir_file/config/tmp/jdsucode.txt | awk '{print $1}'`
+	for i in `cat $dir_file/config/tmp/jdsucode.txt | awk '{print $1}'`
 	do
 		sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/$i
 		sed -i "s/summer_movement_joinjoinjoinhui = false/summer_movement_joinjoinjoinhui = true/g" $dir_file_js/$i
