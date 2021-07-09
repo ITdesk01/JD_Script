@@ -291,6 +291,7 @@ done
 smiek2221_url="https://raw.githubusercontent.com/smiek2221/scripts/master"
 cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	jd_summer_movement.js		#燃动夏季
+	jd_summer_movement_help.js	#燃动夏季助力
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | awk '{print $1}'`
@@ -531,6 +532,8 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
+	jd_summer_movement.js		#燃动夏季
+	jd_summer_movement_help.js	#燃动夏季助力
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 EOF
@@ -657,7 +660,6 @@ EOF
 
 run_10_15_20() {
 cat >/tmp/jd_tmp/run_10_15_20 <<EOF
-	jd_summer_movement.js		#燃动夏季
 	jd_superMarket.js 		#东东超市,0 10 15 20四场补货加劵
 	jd_cfd.js 			#京东财富岛 有一日三餐任务
 	jd_joy_park_help.js 		#汪汪乐园助力
@@ -2136,12 +2138,21 @@ additional_settings() {
 	done
 
 	#燃动夏季
-	sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/jd_summer_movement.js
-	jdsucode_rows=$(grep -n "innerShInviteList = \[" $dir_file_js/jd_summer_movement.js | awk -F ":" '{print $1}')
-	jdsucode_rows_expr=$(($jdsucode_rows + 1))
-	sed -i "$jdsucode_rows_expr d" $dir_file_js/jd_summer_movement.js
-	sed -i "$jdsucode_rows_expr d" $dir_file_js/jd_summer_movement.js
-	sed -i "$jdsucode_rows_expr d" $dir_file_js/jd_summer_movement.js
+cat >$dir_file/config/tmp/jdsucode.txt <<EOF
+	jd_summer_movement.js
+	jd_summer_movement_help.js
+EOF
+
+	for script_name in `cat $dir_file/config/tmp/jdsucode.txt | awk '{print $1}'`
+	do
+		sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/$i
+		sed -i "s/summer_movement_joinjoinjoinhui = false/summer_movement_joinjoinjoinhui = true/g" $dir_file_js/$i
+		jdsucode_rows=$(grep -n "innerShInviteList = \[" $dir_file_js/$i | awk -F ":" '{print $1}')
+		jdsucode_rows_expr=$(($jdsucode_rows + 1))
+		sed -i "$jdsucode_rows_expr d" $dir_file_js/$i
+		sed -i "$jdsucode_rows_expr d" $dir_file_js/$i
+		sed -i "$jdsucode_rows_expr d" $dir_file_js/$i
+	done
 
 	#老虎机
 	sed -i "s/JD_CFD_LHJ : 1/JD_CFD_LHJ : 10/g"  $dir_file_js/jd_cfd_SlotMachine.js
