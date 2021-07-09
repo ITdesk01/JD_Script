@@ -563,6 +563,7 @@ run_02() {
 run_03() {
 #这里不会并发
 cat >/tmp/jd_tmp/run_03 <<EOF
+	jd_summer_movement.js		#燃动夏季
 	jd_dianjing.js			#电竞经理
 	jd_joy_new.js 			#jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
 	jd_necklace.js  		#点点券 大佬0,20领一次先扔这里后面再改
