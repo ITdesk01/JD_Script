@@ -440,6 +440,7 @@ update_script() {
 }
 
 ccr_run() {
+	echo ""
 	$node $openwrt_script/JD_Script/js/jd_bean_sign.js #京东多合一签到
 }
 
