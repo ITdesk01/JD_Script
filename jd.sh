@@ -57,7 +57,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.36"
+	cron_version="3.37"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -96,6 +96,7 @@ cat >>/etc/crontabs/root <<EOF
 59 23 * * * sleep 59 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * * sleep 60 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * * sleep 61 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
+59 23 * * 6,0 sleep 59 && $node $dir_file_js/jd_cash_exchange.js	>/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
@@ -292,6 +293,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	jd_summer_movement.js		#燃动夏季
 	jd_summer_movement_help.js	#燃动夏季助力
 	jd_necklace.js  		#点点券
+	ZooFaker_Necklace.js		#点点券依赖文件
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | awk '{print $1}'`
@@ -299,13 +301,14 @@ do
 	url="$smiek2221_url"
 	wget $smiek2221_url/$script_name -O $dir_file_js/$script_name
 	update_if
-done
+don
 
 cdle_url="https://raw.githubusercontent.com/cdle/jd_study/main"
 cat >$dir_file/config/tmp/cdle_url.txt <<EOF
 	jd_goodMorning.js		#早起福利
 	jd_olympicgames.js 		#全民运动会
 	jd_joy_park_help.js 		#汪汪乐园助力
+	jd_cash_exchange.js		#签到领现金兑换
 EOF
 
 for script_name in `cat $dir_file/config/tmp/cdle_url.txt | awk '{print $1}'`
