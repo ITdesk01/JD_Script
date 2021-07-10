@@ -301,7 +301,7 @@ do
 	url="$smiek2221_url"
 	wget $smiek2221_url/$script_name -O $dir_file_js/$script_name
 	update_if
-don
+done
 
 cdle_url="https://raw.githubusercontent.com/cdle/jd_study/main"
 cat >$dir_file/config/tmp/cdle_url.txt <<EOF
