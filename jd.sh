@@ -2153,7 +2153,6 @@ EOF
 	for i in `cat $dir_file/config/tmp/jdsucode.txt | awk '{print $1}'`
 	do
 		sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/$i
-		sed -i "s/summer_movement_joinjoinjoinhui = false/summer_movement_joinjoinjoinhui = true/g" $dir_file_js/$i
 		jdsucode_rows=$(grep -n "innerShInviteList = \[" $dir_file_js/$i | awk -F ":" '{print $1}')
 		jdsucode_rows_expr=$(($jdsucode_rows + 1))
 		sed -i "$jdsucode_rows_expr d" $dir_file_js/$i
