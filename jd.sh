@@ -2275,10 +2275,10 @@ npm_install() {
 	cp $dir_file/git_clone/lxk0301_back/package.json $dir_file/package.json
 	cd $dir_file && npm -g install
 	npm install -g request http stream zlib vm png-js fs
-	cd $dir_file/cookies_web && npm install
+	cd $dir_file/cookies_web && npm -g install
 
 	#安装ts模块
-	cd $dir_file_js && npm install cnpm axios audit date-fns
+	cd $dir_file_js && npm install -g cnpm axios audit date-fns
 	cnpm i -g typescript ts-node
 
 	#安装python模块
