@@ -2283,6 +2283,7 @@ npm_install() {
 
 	#安装python模块
 	python_install
+	echo ""
 }
 
 python_install() {
