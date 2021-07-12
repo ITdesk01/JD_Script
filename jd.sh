@@ -221,7 +221,7 @@ done
 cat >$dir_file/config/tmp/JDHelloWorld_script.txt <<EOF
 	jd_cfd.ts			#财富岛新版
 	jd_cfd_loop.ts			#财富岛挂气球
-	TS_USER_AGENTS			#TS UA
+	TS_USER_AGENTS.ts 		#TS UA
 	jd_joy_help.js			#宠汪汪强制为别人助力
 	jd_joy_new.js			#宠汪汪二代目
 EOF
