@@ -221,6 +221,7 @@ done
 cat >$dir_file/config/tmp/JDHelloWorld_script.txt <<EOF
 	jd_cfd.ts			#财富岛新版
 	jd_cfd_loop.ts			#财富岛挂气球
+	TS_USER_AGENTS			#TS UA
 	jd_joy_help.js			#宠汪汪强制为别人助力
 	jd_joy_new.js			#宠汪汪二代目
 EOF
@@ -2270,10 +2271,11 @@ time() {
 npm_install() {
 	echo -e "$green 开始安装npm模块$white"
 	cp $dir_file/git_clone/lxk0301_back/package.json $dir_file/package.json
-	cd $dir_file && npm -g install
-	cd $dir_file/cookies_web && npm install
+	cd $dir_file
+	npm -g install
 	npm install -g request http stream zlib vm png-js fs cnpm axios audit date-fns
 	cnpm i -g typescript ts-node
+	cd $dir_file/cookies_web && npm install
 	python_install
 }
 
