@@ -58,7 +58,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.39"
+	cron_version="3.40"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -97,7 +97,8 @@ cat >>/etc/crontabs/root <<EOF
 59 23 * * * sleep 59 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * * sleep 60 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * * sleep 61 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
-59 23 * * 0,1,2,5,6 sleep 59 && $node $dir_file_js/jd_cash_exchange.js >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
+59 23 * * 0,1,2,5,6 sleep 59 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
+59 */1 * * * $dir_file/jd.sh kill_cfd #杀气球#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
@@ -555,12 +556,21 @@ EOF
 		$run_sleep
 	done
 	$tsnode $dir_file_js/jd_cfd.ts #财富岛新版
-	ps_cfd_if=$(ps -ww | grep "jd_cfd_loop.ts" | grep -v grep | awk '{print $1}')
-	kill -9 $ps_cfd_if
+	
 	$tsnode $dir_file_js/jd_cfd_loop.ts #财富岛收气球
 
 	echo -e "$green run_01$stop_script_time $white"
 }
+
+kill_cfd() {
+	ps_cfd_if=$(ps -ww | grep "jd_cfd_loop.ts" | grep -v grep | awk '{print $1}')
+	for i in `echo $ps_cfd_if`
+	do
+		kill -9 $i
+	done
+}
+
+
 
 run_02() {
 	echo -e "$green run_02$start_script_time $white"
@@ -2506,7 +2516,7 @@ if [[ -z $action1 ]]; then
 	help
 else
 	case "$action1" in
-		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020|run_jd_cash)
+		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020|run_jd_cash|kill_cfd)
 		concurrent_js_if
 		;;
 		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|run_jd_cash)
@@ -2525,7 +2535,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020|run_jd_cash)
+		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020|run_jd_cash|kill_cfd)
 		concurrent_js_if
 		;;
 		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update)
