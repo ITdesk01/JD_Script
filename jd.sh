@@ -57,7 +57,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.38"
+	cron_version="3.39"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -96,7 +96,7 @@ cat >>/etc/crontabs/root <<EOF
 59 23 * * * sleep 59 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * * sleep 60 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * * sleep 61 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
-59 23 * * 6,0 sleep 59 && $node $dir_file_js/jd_cash_exchange.js >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
+59 23 * * 0,1,2,5,6 sleep 59 && $node $dir_file_js/jd_cash_exchange.js >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
@@ -219,6 +219,8 @@ done
 
 #JDHelloWorld
 cat >$dir_file/config/tmp/JDHelloWorld_script.txt <<EOF
+	jd_cfd.ts			#财富岛新版
+	jd_cfd_loop.ts			#财富岛挂气球
 	jd_joy_help.js			#宠汪汪强制为别人助力
 	jd_joy_new.js			#宠汪汪二代目
 EOF
@@ -537,6 +539,8 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
+	jd_cfd.ts			#财富岛新版
+	jd_cfd_loop.ts			#财富岛挂气球
 	jd_summer_movement_help.js	#燃动夏季助力
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
@@ -2266,9 +2270,10 @@ time() {
 npm_install() {
 	echo -e "$green 开始安装npm模块$white"
 	cp $dir_file/git_clone/lxk0301_back/package.json $dir_file/package.json
-	cd $dir_file && npm -g install && npm install -g request http stream zlib vm png-js fs
+	cd $dir_file && npm -g install
 	cd $dir_file/cookies_web && npm install
-
+	npm install -g request http stream zlib vm png-js fs cnpm axios audit date-fns
+	cnpm i -g typescript ts-node
 	python_install
 }
 
