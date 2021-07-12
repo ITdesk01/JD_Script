@@ -2286,7 +2286,7 @@ npm_install() {
 	#安装js模块
 	cp $dir_file/git_clone/lxk0301_back/package.json $dir_file/package.json
 	cd $dir_file && npm -g install
-	npm install -g request http stream zlib vm png-js fs
+	npm install -g request http stream zlib vm png-js fs got tough-cookie
 	cd $dir_file/cookies_web && npm -g install
 
 	#安装ts模块
