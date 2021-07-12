@@ -830,7 +830,7 @@ concurrent_js_update() {
 
 			for i in `ls $dir_file_js | grep -v 'jdCookie.js\|sendNotify.js\|jddj_cookie.js\|log'`
 			do
-				cp $dir_file_js/$i $ccr_js_file/js_$js_amount/$i
+				cp -r $dir_file_js/$i $ccr_js_file/js_$js_amount/$i
 			done
 			js_amount=$(($js_amount - 1))
 		done
@@ -2270,18 +2270,17 @@ time() {
 
 npm_install() {
 	echo -e "$green 开始安装npm模块$white"
+	#安装js模块
 	cp $dir_file/git_clone/lxk0301_back/package.json $dir_file/package.json
-	cd $dir_file
-	npm -g install
-	npm install -g request http stream zlib vm png-js fs cnpm axios audit date-fns
-	cnpm i -g typescript ts-node
+	cd $dir_file && npm -g install
+	npm install -g request http stream zlib vm png-js fs
 	cd $dir_file/cookies_web && npm install
 
-	if [ ! -L "$dir_file_js/node_modules" ]; then
-		rm -rf $dir_file_js/node_modules
-		ln -s $dir_file/node_modules $dir_file_js/node_modules
-	fi
+	#安装ts模块
+	cd $dir_file_js && npm install cnpm axios audit date-fns
+	cnpm i -g typescript ts-node
 
+	#安装python模块
 	python_install
 }
 
