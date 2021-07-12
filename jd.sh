@@ -2132,12 +2132,12 @@ additional_settings() {
 	new_cfd_set="$new_cfd@$Javon_20201224_cfd@$zuoyou_20190516_cfd@$jidiyangguang_20190516_cfd@$Jhone_Potte_20200824_cfd"
 
 	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
-	jdcfdcode_rows=$(grep -n "let shareCodes \=" $dir_file_js/jd_cfd.js | awk -F ":" '{print $1}')
-	sed -i "s/let shareCodes \= \[/let shareCodes \= \[\n/g" $dir_file_js/jd_cfd.js
-	while [[ ${js_amount} -gt 0 ]]; do
+	#jdcfdcode_rows=$(grep -n "let shareCodes \=" $dir_file_js/jd_cfd.js | awk -F ":" '{print $1}')
+	#sed -i "s/let shareCodes \= \[/let shareCodes \= \[\n/g" $dir_file_js/jd_cfd.js
+	#while [[ ${js_amount} -gt 0 ]]; do
 		#sed -i "$jdcfdcode_rows a \ '$new_cfd_set', " $dir_file_js/jd_cfd.js
-		js_amount=$(($js_amount - 1))
-	done
+	#	js_amount=$(($js_amount - 1))
+	#done
 
 	#健康社区
 	new_health="T0225KkcRxoZ9AfVdB7wxvRcIQCjVfnoaW5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVfnoaW5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVfnoaW5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVfnoaW5kRrbA"
