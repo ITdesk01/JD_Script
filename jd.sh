@@ -195,7 +195,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_speed_sign.js		#京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#极速版红包
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
-	jd_cfd.js			#京喜财富岛
 	jd_live.js			#京东直播
 	jd_live_redrain.js 		#超级直播间红包雨
 	jd_moneyTree.js 		#摇钱树
@@ -320,7 +319,6 @@ done
 
 Tsukasa007_url="https://raw.githubusercontent.com/Tsukasa007/my_script/master"
 cat >$dir_file/config/tmp/Tsukasa007_url.txt <<EOF
-	jd_cfd_SlotMachine.js		#财富岛老虎机
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_joypark_open.js		#汪汪乐园开工位
 	jd_joypark_task.js		#汪汪乐园每日任务
@@ -387,6 +385,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_cfd_SlotMachine.js		#财富岛老虎机
+	jd_cfd.js 			#京东财富岛 有一日三餐任务
 	jd_joy_steal.js
 	jd_zxry.js			#柠檬特物ZX荣耀一次性手动运行
 	jd_618redpacket.js		#翻翻乐
@@ -471,7 +471,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_joy_help.js			#宠汪汪强制为别人助力
 	jd_olympicgames.js 		#全民运动会
 	jd_sign.js  			#京东签到针对图形验证码
-	jd_cfd_SlotMachine.js		#财富岛老虎机
 	jd_joypark_task.js		#汪汪乐园每日任务
 	jd_mp_h5.js			#疯狂星期五
 EOF
@@ -667,7 +666,6 @@ EOF
 run_10_15_20() {
 cat >/tmp/jd_tmp/run_10_15_20 <<EOF
 	jd_superMarket.js 		#东东超市,0 10 15 20四场补货加劵
-	jd_cfd.js 			#京东财富岛 有一日三餐任务
 	jd_joy_park_help.js 		#汪汪乐园助力
 EOF
 
@@ -2121,7 +2119,7 @@ additional_settings() {
 	jdcfdcode_rows=$(grep -n "let shareCodes \=" $dir_file_js/jd_cfd.js | awk -F ":" '{print $1}')
 	sed -i "s/let shareCodes \= \[/let shareCodes \= \[\n/g" $dir_file_js/jd_cfd.js
 	while [[ ${js_amount} -gt 0 ]]; do
-		sed -i "$jdcfdcode_rows a \ '$new_cfd_set', " $dir_file_js/jd_cfd.js
+		#sed -i "$jdcfdcode_rows a \ '$new_cfd_set', " $dir_file_js/jd_cfd.js
 		js_amount=$(($js_amount - 1))
 	done
 
@@ -2166,8 +2164,6 @@ EOF
 
 	rm -rf $dir_file_js/app.*.js
 
-	#老虎机
-	sed -i "s/JD_CFD_LHJ : 1/JD_CFD_LHJ : 10/g"  $dir_file_js/jd_cfd_SlotMachine.js
 }
 
 if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
