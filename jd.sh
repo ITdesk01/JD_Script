@@ -39,6 +39,7 @@ run_sleep=$(sleep 1)
 version="2.2"
 cron_file="/etc/crontabs/root"
 node="/usr/bin/node"
+tsnode="/usr/bin/ts-node"
 python3="/usr/bin/python3"
 sys_model=$(cat /tmp/sysinfo/model | awk -v i="+" '{print $1i$2i$3i$4}')
 uname_version=$(uname -a | awk -v i="+" '{print $1i $2i $3}')
@@ -540,7 +541,6 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
-	jd_cfd.ts			#财富岛新版
 	jd_cfd_loop.ts			#财富岛挂气球
 	jd_summer_movement_help.js	#燃动夏季助力
 	jd_joypark_joy.js		#汪汪乐园养joy
@@ -554,7 +554,8 @@ EOF
 		$node $dir_file_js/$i
 		$run_sleep
 	done
-	export RAIN_NOTIFY_CONTROL="false"
+	$tsnode $dir_file_js/jd_cfd.ts #财富岛新版
+	$tsnode $dir_file_js/jd_cfd_loop.ts #财富岛收气球
 
 	echo -e "$green run_01$stop_script_time $white"
 }
