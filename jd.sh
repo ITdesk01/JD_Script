@@ -2190,12 +2190,26 @@ close_notification() {
 	else
 		case `date +%H` in
 		22|23|00|01|02|03)
+			for i in `ls $ccr_js_file | grep -E "^js"`
+			do
+				sed -i "s/jdNotify = true/jdNotify = false/g" $ccr_js_file/$i/jd_fruit.js
+				sed -i "s/jdNotify = true/jdNotify = false/g" $ccr_js_file/$i/jd_pet.js
+				sed -i "s/isNotify = false/isNotify = true/g" $ccr_js_file/$i/jddj_fruit.js
+			done
+
 			sed -i "s/jdNotify = true/jdNotify = false/g" $dir_file_js/jd_fruit.js
 			sed -i "s/jdNotify = true/jdNotify = false/g" $dir_file_js/jd_pet.js
 			sed -i "s/isNotify = false/isNotify = true/g" $dir_file_js/jddj_fruit.js
 			echo -e "$green暂时不关闭农场和萌宠通知$white"
 		;;
 		*)
+			for i in `ls $ccr_js_file | grep -E "^js"`
+			do
+				sed -i "s/jdNotify = false/jdNotify = true/g" $ccr_js_file/$i/jd_fruit.js
+				sed -i "s/jdNotify = false/jdNotify = true/g" $ccr_js_file/$i/jd_pet.js
+				sed -i "s/isNotify = true/isNotify = false/g" $ccr_js_file/$i/jddj_fruit.js
+			done
+
 			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
 			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
 			sed -i "s/isNotify = true/isNotify = false/g" $dir_file_js/jddj_fruit.js
