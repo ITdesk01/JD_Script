@@ -2276,6 +2276,12 @@ npm_install() {
 	npm install -g request http stream zlib vm png-js fs cnpm axios audit date-fns
 	cnpm i -g typescript ts-node
 	cd $dir_file/cookies_web && npm install
+
+	if [ ! -L "$dir_file_js/node_modules" ]; then
+		rm -rf $dir_file_js/node_modules
+		ln -s $dir_file/node_modules $dir_file_js/node_modules
+	fi
+
 	python_install
 }
 
