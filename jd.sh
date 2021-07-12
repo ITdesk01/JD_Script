@@ -555,6 +555,8 @@ EOF
 		$run_sleep
 	done
 	$tsnode $dir_file_js/jd_cfd.ts #财富岛新版
+	ps_cfd_if=$(ps -ww | grep "jd_cfd_loop.ts" | grep -v grep | awk '{print $1}')
+	kill -9 $ps_cfd_if
 	$tsnode $dir_file_js/jd_cfd_loop.ts #财富岛收气球
 
 	echo -e "$green run_01$stop_script_time $white"
