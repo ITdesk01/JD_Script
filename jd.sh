@@ -2136,6 +2136,7 @@ additional_settings() {
 
 	js_amount="10"
 	jdcfdcode_rows=$(grep -n "\$.InviteList = \[" $dir_file_js/gua_wealth_island.js | awk -F ":" '{print $1}')
+	sed -i "s/HelpAuthorFlag = true/HelpAuthorFlag = false/g" $dir_file_js/gua_wealth_island.js
 	sed -i "s/\$.InviteList = \[/\$.InviteList = \[\n/g" $dir_file_js/gua_wealth_island.js
 	while [[ ${js_amount} -gt 0 ]]; do
 		sed -i "$jdcfdcode_rows a \ '$new_cfd_set', " $dir_file_js/gua_wealth_island.js
