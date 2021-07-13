@@ -58,7 +58,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.40"
+	cron_version="3.41"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -98,6 +98,7 @@ cat >>/etc/crontabs/root <<EOF
 59 23 * * * sleep 60 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * * sleep 61 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * 0,1,2,5,6 sleep 59 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
+0 8-23 * * * $dir_file/jd_summer_movement.js >/tmp/jd_cash_exchange.log #燃动夏季#100#
 59 */1 * * * $dir_file/jd.sh kill_cfd #杀气球#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
@@ -542,12 +543,12 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
+	jd_summer_movement_help.js	#燃动夏季助力
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	gua_wealth_island.js 		#财富岛新版
 	jd_cfd_loop.js			#财富岛挂气球
 EOF
-	#jd_summer_movement_help.js	#燃动夏季助力
 	#long_super_redrain.js		#整点红包雨
 	echo -e "$green run_01$start_script_time $white"
 
@@ -667,7 +668,6 @@ cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_syj.js 			#赚京豆
 	jd_jump.js			#跳跳乐瓜分京豆
 EOF
-	#jd_summer_movement.js		#燃动夏季
 	echo -e "$green run_08_12_16$start_script_time $white"
 
 	for i in `cat /tmp/jd_tmp/run_08_12_16 | awk '{print $1}'`
