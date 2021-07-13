@@ -221,9 +221,6 @@ done
 
 #JDHelloWorld
 cat >$dir_file/config/tmp/JDHelloWorld_script.txt <<EOF
-	jd_cfd.ts			#财富岛新版
-	jd_cfd_loop.ts			#财富岛挂气球
-	TS_USER_AGENTS.ts 		#TS UA
 	jd_joy_help.js			#宠汪汪强制为别人助力
 	jd_joy_new.js			#宠汪汪二代目
 EOF
@@ -390,6 +387,9 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_cfd.ts			#财富岛新版
+	jd_cfd_loop.ts			#财富岛挂气球
+	TS_USER_AGENTS.ts 		#TS UA
 	jd_cfd_SlotMachine.js		#财富岛老虎机
 	jd_cfd.js 			#京东财富岛 有一日三餐任务
 	jd_joy_steal.js
@@ -542,7 +542,8 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
-	jd_cfd_loop.ts			#财富岛挂气球
+	jd_cfd.js 			#财富岛新版
+	jd_cfd_loop.js			#财富岛挂气球
 	jd_summer_movement_help.js	#燃动夏季助力
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
@@ -555,15 +556,12 @@ EOF
 		$node $dir_file_js/$i
 		$run_sleep
 	done
-	$tsnode $dir_file_js/jd_cfd.ts #财富岛新版
-	
-	$tsnode $dir_file_js/jd_cfd_loop.ts #财富岛收气球
 
 	echo -e "$green run_01$stop_script_time $white"
 }
 
 kill_cfd() {
-	ps_cfd_if=$(ps -ww | grep "jd_cfd_loop.ts" | grep -v grep | awk '{print $1}')
+	ps_cfd_if=$(ps -ww | grep "jd_cfd_loop.js" | grep -v grep | awk '{print $1}')
 	for i in `echo $ps_cfd_if`
 	do
 		kill -9 $i
@@ -2286,12 +2284,9 @@ npm_install() {
 	#安装js模块
 	cp $dir_file/git_clone/lxk0301_back/package.json $dir_file/package.json
 	cd $dir_file && npm -g install
-	npm install -g request http stream zlib vm png-js fs got tough-cookie
+	npm install -g request http stream zlib vm png-js fs got tough-cookie audit date-fns
+	npm install --save axios
 	cd $dir_file/cookies_web && npm -g install
-
-	#安装ts模块
-	cd $dir_file_js && npm install -g cnpm axios audit date-fns
-	cnpm i -g typescript ts-node
 
 	#安装python模块
 	python_install
