@@ -488,9 +488,9 @@ EOF
 	run_08_12_16
 	run_06_18
 	run_10_15_20
-	run_01
 	run_03
 	run_030
+	run_01
 	echo -e "$green run_0$stop_script_time $white"
 }
 
@@ -2186,7 +2186,7 @@ EOF
 	done
 	jdsucode_rows1=$(grep -n "\$.inviteList = \[" $dir_file_js/jd_summer_movement.js | awk -F ":" '{print $1}')
 	sed -i "s/\$.inviteList = \[/\$.inviteList = \[\n/g" $dir_file_js/jd_summer_movement.js
-	sed -i "$jdsucode_rows1 a\ \n" $dir_file_js/
+	sed -i "$jdsucode_rows1 a\ \n" $dir_file_js/jd_summer_movement.js
 	sed -i "$jdsucode_rows1 a\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\'," $dir_file_js/jd_summer_movement.js
 
 	rm -rf $dir_file_js/app.*.js
