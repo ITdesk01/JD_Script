@@ -2130,16 +2130,16 @@ additional_settings() {
 	done
 
 	#财富岛
-	new_cfd="BA4E810FF2B7A0A2595AB5B0203D8D36087BE0ECBFB7483327EBF30625F579F2@C9EF5FCEDE6E93FC3B54FD18B84861D53ED3575819F5C57208D07E0BFEF11B13@9B4FB7103CF7052CBE0BB79FBDBB48286268FEC667A698EE374665F2E380723@CF7BD2AE3D422F84D269AF523BA64CD8D4D3F20BCA20BC8D4EC713969E0A7BA6"
+	new_cfd="'BA4E810FF2B7A0A2595AB5B0203D8D36087BE0ECBFB7483327EBF30625F579F2',\n'C9EF5FCEDE6E93FC3B54FD18B84861D53ED3575819F5C57208D07E0BFEF11B13',\n'9B4FB7103CF7052CBE0BB79FBDBB48286268FEC667A698EE374665F2E380723',\n'CF7BD2AE3D422F84D269AF523BA64CD8D4D3F20BCA20BC8D4EC713969E0A7BA6',"
 	
 	new_cfd_set="$new_cfd"
 
-	js_amount="10"
+	js_amount="1"
 	jdcfdcode_rows=$(grep -n "\$.InviteList = \[" $dir_file_js/gua_wealth_island.js | awk -F ":" '{print $1}')
 	sed -i "s/HelpAuthorFlag = true/HelpAuthorFlag = false/g" $dir_file_js/gua_wealth_island.js
 	sed -i "s/\$.InviteList = \[/\$.InviteList = \[\n/g" $dir_file_js/gua_wealth_island.js
 	while [[ ${js_amount} -gt 0 ]]; do
-		sed -i "$jdcfdcode_rows a \ '$new_cfd_set', " $dir_file_js/gua_wealth_island.js
+		sed -i "$jdcfdcode_rows a \ $new_cfd_set " $dir_file_js/gua_wealth_island.js
 		js_amount=$(($js_amount - 1))
 	done
 
