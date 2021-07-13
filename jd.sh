@@ -541,11 +541,11 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
-	jd_cfd.js 			#财富岛新版
-	jd_cfd_loop.js			#财富岛挂气球
 	jd_summer_movement_help.js	#燃动夏季助力
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
+	jd_cfd.js 			#财富岛新版
+	jd_cfd_loop.js			#财富岛挂气球
 EOF
 	#long_super_redrain.js		#整点红包雨
 	echo -e "$green run_01$start_script_time $white"
