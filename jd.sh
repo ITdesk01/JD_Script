@@ -2181,7 +2181,7 @@ EOF
 	done
 
 	sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/jd_summer_movement_help.js
-	jdsucode_rows1=$(grep -n "\$.inviteList = \[" $dir_file_js/jd_summer_movement_help.js | awk -F ":" '{print $1}')
+	jdsucode_rows1=$(grep -n "\$.innerShInviteList　= \[" $dir_file_js/jd_summer_movement_help.js | awk -F ":" '{print $1}')
 	sed -i "s/\$.inviteList = \[/\$.inviteList = \[\n/g" $dir_file_js/jd_summer_movement_help.js
 	sed -i "$jdsucode_rows1 a\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\'," $dir_file_js/jd_summer_movement_help.js
 
