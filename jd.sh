@@ -542,6 +542,7 @@ EOF
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
 	jd_cfd.js 			#财富岛新版
+	jd_cfd_loop.js			#财富岛挂气球
 	jd_summer_movement_help.js	#燃动夏季助力
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
@@ -554,7 +555,6 @@ EOF
 		$node $dir_file_js/$i
 		$run_sleep
 	done
-	$node $dir_file_js/jd_cfd_loop.js　&			#财富岛挂气球
 
 	echo -e "$green run_01$stop_script_time $white"
 }
