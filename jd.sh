@@ -58,7 +58,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.41"
+	cron_version="3.42"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -98,7 +98,6 @@ cat >>/etc/crontabs/root <<EOF
 59 23 * * * sleep 60 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * * sleep 61 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * 0,1,2,5,6 sleep 59 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
-0 8-23 * * * $dir_file/jd_summer_movement.js >/tmp/jd_cash_exchange.log #燃动夏季#100#
 59 */1 * * * $dir_file/jd.sh kill_cfd #杀气球#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
@@ -543,6 +542,7 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
+	jd_summer_movement.js		#燃动夏季
 	jd_summer_movement_help.js	#燃动夏季助力
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
@@ -2167,7 +2167,6 @@ additional_settings() {
 	#燃动夏季
 cat >$dir_file/config/tmp/jdsucode.txt <<EOF
 	jd_summer_movement.js
-	jd_summer_movement_help.js
 EOF
 
 	new_jdsu="HcmphLbwLg2nfoLJFYA30u-dkfKS4hpjksGd27ILY0nBA9PdPZzp8gTqNz_S2jmjyQaf_Ow0IvYnTgCt9SMOOg@HcmphLbwLg_1KIKeRN0338GtQYaAMSdknAtmRLjTTNHXpqHd8RCpGuyb0CZtHbb7oOM_du8AJ5bPilzCKHh8wg@HcmphLbwLlX5P8f9ZJdBoFFxRpxJKhUG79EM0btzsmQacnCZ5lVm9Kg4pwI2yTXPY2E8RruGdIwSw0TaXw@HcmphLbwLm77J_rzb5RIpE6kIY_J1x-EKNuqK9YnKrgV_cas1vhZY4X-D8FUDRKEAODU5yj0t_SMc7wv-g"
@@ -2180,10 +2179,11 @@ EOF
 		sed -i "$jdsucode_rows_expr d" $dir_file_js/$i
 		sed -i "$jdsucode_rows_expr d" $dir_file_js/$i
 	done
-	jdsucode_rows1=$(grep -n "\$.inviteList = \[" $dir_file_js/jd_summer_movement.js | awk -F ":" '{print $1}')
-	sed -i "s/\$.inviteList = \[/\$.inviteList = \[\n/g" $dir_file_js/jd_summer_movement.js
-	sed -i "$jdsucode_rows1 a\ \n" $dir_file_js/jd_summer_movement.js
-	sed -i "$jdsucode_rows1 a\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\'," $dir_file_js/jd_summer_movement.js
+
+	sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/jd_summer_movement_help.js
+	jdsucode_rows1=$(grep -n "\$.inviteList = \[" $dir_file_js/jd_summer_movement_help.js | awk -F ":" '{print $1}')
+	sed -i "s/\$.inviteList = \[/\$.inviteList = \[\n/g" $dir_file_js/jd_summer_movement_help.js
+	sed -i "$jdsucode_rows1 a\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\'," $dir_file_js/jd_summer_movement_help.js
 
 	rm -rf $dir_file_js/app.*.js
 
