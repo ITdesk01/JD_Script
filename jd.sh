@@ -306,6 +306,8 @@ done
 
 cdle_url="https://raw.githubusercontent.com/cdle/jd_study/main"
 cat >$dir_file/config/tmp/cdle_url.txt <<EOF
+	jd_angryCash.js			#愤怒的现金
+	jd_angryKoi.js			#愤怒的锦鲤
 	jd_goodMorning.js		#早起福利
 	jd_olympicgames.js 		#全民运动会
 	jd_joy_park_help.js 		#汪汪乐园助力
@@ -456,6 +458,8 @@ ccr_run() {
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
+	jd_angryCash.js			#愤怒的现金
+	jd_angryKoi.js			#愤怒的锦鲤
 	jd_mohe.js			#5G超级盲盒
 	jd_car.js 			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_cash.js 			#签到领现金，每日2毛～5毛长期
