@@ -391,7 +391,6 @@ cat >/tmp/del_js.txt <<EOF
 	jd_cfd_loop.ts			#财富岛挂气球
 	TS_USER_AGENTS.ts 		#TS UA
 	jd_cfd_SlotMachine.js		#财富岛老虎机
-	jd_cfd.js 			#京东财富岛 有一日三餐任务
 	jd_joy_steal.js
 	jd_zxry.js			#柠檬特物ZX荣耀一次性手动运行
 	jd_618redpacket.js		#翻翻乐
