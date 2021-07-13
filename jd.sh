@@ -2165,23 +2165,19 @@ additional_settings() {
 	done
 
 	#燃动夏季
-cat >$dir_file/config/tmp/jdsucode.txt <<EOF
-	jd_summer_movement.js
-EOF
-
 	new_jdsu="HcmphLbwLg2nfoLJFYA30u-dkfKS4hpjksGd27ILY0nBA9PdPZzp8gTqNz_S2jmjyQaf_Ow0IvYnTgCt9SMOOg@HcmphLbwLg_1KIKeRN0338GtQYaAMSdknAtmRLjTTNHXpqHd8RCpGuyb0CZtHbb7oOM_du8AJ5bPilzCKHh8wg@HcmphLbwLlX5P8f9ZJdBoFFxRpxJKhUG79EM0btzsmQacnCZ5lVm9Kg4pwI2yTXPY2E8RruGdIwSw0TaXw@HcmphLbwLm77J_rzb5RIpE6kIY_J1x-EKNuqK9YnKrgV_cas1vhZY4X-D8FUDRKEAODU5yj0t_SMc7wv-g"
-	for i in `cat $dir_file/config/tmp/jdsucode.txt | awk '{print $1}'`
-	do
-		sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/$i
-		jdsucode_rows=$(grep -n "innerShInviteList = \[" $dir_file_js/$i | awk -F ":" '{print $1}')
-		jdsucode_rows_expr=$(($jdsucode_rows + 1))
-		sed -i "$jdsucode_rows_expr d" $dir_file_js/$i
-		sed -i "$jdsucode_rows_expr d" $dir_file_js/$i
-		sed -i "$jdsucode_rows_expr d" $dir_file_js/$i
-	done
 
+	sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/jd_summer_movement.js
 	sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/jd_summer_movement_help.js
-	jdsucode_rows1=$(grep -n "\$.innerShInviteList　= \[" $dir_file_js/jd_summer_movement_help.js | awk -F ":" '{print $1}')
+
+	jdsucode_rows=$(grep -n "innerShInviteList = \[" $dir_file_js/jd_summer_movement.js | awk -F ":" '{print $1}')
+	jdsucode_rows_expr=$(($jdsucode_rows + 1))
+	sed -i "$jdsucode_rows_expr d" $dir_file_js/jd_summer_movement.js
+	sed -i "$jdsucode_rows_expr d" $dir_file_js/jd_summer_movement.js
+	sed -i "$jdsucode_rows_expr d" $dir_file_js/jd_summer_movement.js
+	sed -i "$jdsucode_rows a\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\'," $dir_file_js/jd_summer_movement.js
+
+	jdsucode_rows1=$(grep -n "innerShInviteList = \[" $dir_file_js/jd_summer_movement_help.js | awk -F ":" '{print $1}')
 	sed -i "s/\$.inviteList = \[/\$.inviteList = \[\n/g" $dir_file_js/jd_summer_movement_help.js
 	sed -i "$jdsucode_rows1 a\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\'," $dir_file_js/jd_summer_movement_help.js
 
