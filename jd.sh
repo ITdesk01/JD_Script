@@ -307,6 +307,7 @@ done
 
 cdle_url="https://raw.githubusercontent.com/cdle/jd_study/main"
 cat >$dir_file/config/tmp/cdle_url.txt <<EOF
+	jd_morningSc.js			#早起赢现金
 	jd_angryCash.js			#愤怒的现金
 	jd_angryKoi.js			#愤怒的锦鲤
 	jd_goodMorning.js		#早起福利
@@ -644,6 +645,7 @@ EOF
 
 run_07() {
 cat >/tmp/jd_tmp/run_07 <<EOF
+	jd_morningSc.js			#早起赢现金
 	adolf_superbox.js		#超级盒子
 	jd_jxzpk.js			#pk
 	jd_lsj.js			#柠檬京东零食街
