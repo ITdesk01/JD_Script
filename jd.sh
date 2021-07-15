@@ -551,8 +551,8 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
-	jd_summer_movement.js		#燃动夏季
-	jd_summer_movement_help.js	#燃动夏季助力
+	#jd_summer_movement.js		#燃动夏季
+	#jd_summer_movement_help.js	#燃动夏季助力
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	gua_wealth_island.js 		#财富岛新版
