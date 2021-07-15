@@ -353,7 +353,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_senbeans.js			#来客有礼
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
 	jd_ddnc_farmpark.js		#东东乐园 Wenmoux脚本
-	jd_europeancup.js		#狂欢欧洲杯 Wenmoux脚本
 	jd_qqxing.js			#星系牧场,需要手动去开卡然后进去玩一下 Wenmoux脚本
 	zooOpencard01.js		#纯开卡 大牌联合618提前购 (默认不运行，自己考虑要不要运行) ZooPanda脚本
 	zooOpencard02.js		#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)ZooPanda脚本
@@ -390,6 +389,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_europeancup.js		#狂欢欧洲杯
 	jd_joy_help.js
 	jd_cfd.ts			#财富岛新版
 	jd_cfd_loop.ts			#财富岛挂气球
@@ -473,7 +473,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_jxzpk.js			#pk
 	jd_lsj.js			#柠檬京东零食街
 	jd_ddnc_farmpark.js		#东东乐园
-	jd_europeancup.js		#狂欢欧洲杯
 	jd_olympicgames.js 		#全民运动会
 	jd_sign.js  			#京东签到针对图形验证码
 	jd_joypark_task.js		#汪汪乐园每日任务
@@ -649,7 +648,6 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_jxzpk.js			#pk
 	jd_lsj.js			#柠檬京东零食街
 	jd_ddnc_farmpark.js		#东东乐园
-	jd_europeancup.js		#狂欢欧洲杯
 	jd_rankingList.js 		#京东排行榜签到领京豆
 	jd_kd.js 			#京东快递签到 一天运行一次即可
 	jd_bean_home.js 		#领京豆额外奖励
@@ -1291,7 +1289,7 @@ checklog() {
 	for i in `cat $log2`
 	do
 		echo "#### ${i}详细的错误" >> $log3
-		grep -E  "错误|失败|module" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败\|node_modules\|sgmodule\|助力好友' | sort -u >> $log3
+		grep -E  "错误|失败|module" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败\|node_modules\|sgmodule\|无助力机会\|不可以为自己助力\|助力次数耗尽' | sort -u >> $log3
 	done
 
 	if [ $num = "no_error" ]; then
