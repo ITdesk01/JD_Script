@@ -480,7 +480,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
-	for i in `cat /tmp/jd_tmp/run_0 | awk '{print $1}'`
+	for i in `cat /tmp/jd_tmp/run_0 | grep -v "#.*js" | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
 		$run_sleep
@@ -501,12 +501,22 @@ run_020() {
 }
 
 run_030() {
+cat >/tmp/jd_tmp/run_030 <<EOF
+	jd_jdfactory.js 		#东东工厂，不是京喜工厂
+	jd_jxmc.js			#惊喜牧场
+	jd_health_collect.js		#健康社区-收能量
+	jddj_fruit_collectWater.js 	#京东到家果园水车收水滴 作者5分钟收一次
+	jddj_getPoints.js		#京东到家鲜豆庄园收水滴 作者5分钟收一次
+	#long_super_redrain.js		#整点红包雨
+EOF
 	echo -e "$green run_030$start_script_time $white"
-	$node $dir_file_js/jd_jdfactory.js 		#东东工厂，不是京喜工厂
-	$node $dir_file_js/jd_jxmc.js			#惊喜牧场
-	$node $dir_file_js/jd_health_collect.js		#健康社区-收能量
-	$node $dir_file_js/jddj_fruit_collectWater.js 	#京东到家果园水车收水滴 作者5分钟收一次
-	$node $dir_file_js/jddj_getPoints.js		#京东到家鲜豆庄园收水滴 作者5分钟收一次
+
+	for i in `cat /tmp/jd_tmp/run_030 | grep -v "#.*js" | awk '{print $1}'`
+	do
+		$node $dir_file_js/$i
+		$run_sleep
+	done
+
 	echo -e "$green run_030$stop_script_time $white"
 }
 
@@ -530,7 +540,7 @@ EOF
 
 	echo -e "$green run_045$start_script_time $white"
 
-	for i in `cat /tmp/jd_tmp/run_045 | awk '{print $1}'`
+	for i in `cat /tmp/jd_tmp/run_045 | grep -v "#.*js" | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
 		$run_sleep
@@ -551,7 +561,7 @@ EOF
 	#long_super_redrain.js		#整点红包雨
 	echo -e "$green run_01$start_script_time $white"
 
-	for i in `cat /tmp/jd_tmp/run_01 | awk '{print $1}'`
+	for i in `cat /tmp/jd_tmp/run_01 | grep -v "#.*js" | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
 		$run_sleep
@@ -571,10 +581,19 @@ kill_cfd() {
 
 
 run_02() {
+cat >/tmp/jd_tmp/run_02 <<EOF
+	jd_moneyTree.js 	#摇钱树
+	jd_jxzpk.js		#pk
+	jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下
+EOF
 	echo -e "$green run_02$start_script_time $white"
-	$node $dir_file_js/jd_moneyTree.js 	#摇钱树
-	$node $dir_file_js/jd_jxzpk.js		#pk
-	$node $dir_file_js/jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下
+
+	for i in `cat /tmp/jd_tmp/run_02 | grep -v "#.*js" | awk '{print $1}'`
+	do
+		$node $dir_file_js/$i
+		$run_sleep
+	done
+
 	echo -e "$green run_02$stop_script_time $white"
 }
 
@@ -591,7 +610,7 @@ cat >/tmp/jd_tmp/run_03 <<EOF
 EOF
 	echo -e "$green run_03$start_script_time $white"
 
-	for i in `cat /tmp/jd_tmp/run_03 | awk '{print $1}'`
+	for i in `cat /tmp/jd_tmp/run_03 | grep -v "#.*js" | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
 		$run_sleep
@@ -613,7 +632,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
-	for i in `cat /tmp/jd_tmp/run_06_18 | awk '{print $1}'`
+	for i in `cat /tmp/jd_tmp/run_06_18 | grep -v "#.*js" | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
 		$run_sleep
@@ -647,7 +666,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 EOF
 	echo -e "$green run_07$start_script_time $white"
 
-	for i in `cat /tmp/jd_tmp/run_07 | awk '{print $1}'`
+	for i in `cat /tmp/jd_tmp/run_07 | grep -v "#.*js" | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
 		$run_sleep
@@ -669,7 +688,7 @@ cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 EOF
 	echo -e "$green run_08_12_16$start_script_time $white"
 
-	for i in `cat /tmp/jd_tmp/run_08_12_16 | awk '{print $1}'`
+	for i in `cat /tmp/jd_tmp/run_08_12_16 | grep -v "#.*js" | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
 		$run_sleep
@@ -686,7 +705,7 @@ EOF
 
 	echo -e "$green run_10_15_20$start_script_time $white"
 
-	for i in `cat /tmp/jd_tmp/run_10_15_20 | awk '{print $1}'`
+	for i in `cat /tmp/jd_tmp/run_10_15_20 | grep -v "#.*js" | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
 		$run_sleep
