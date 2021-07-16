@@ -222,6 +222,7 @@ done
 #JDHelloWorld
 cat >$dir_file/config/tmp/JDHelloWorld_script.txt <<EOF
 	jd_joy_new.js			#宠汪汪二代目
+	jd_big_winner.js		#翻翻乐
 EOF
 
 for script_name in `cat $dir_file/config/tmp/JDHelloWorld_script.txt | awk '{print $1}'`
@@ -553,6 +554,7 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
+	jd_big_winner.js		#翻翻乐
 	#jd_summer_movement.js		#燃动夏季
 	#jd_summer_movement_help.js	#燃动夏季助力
 	jd_joypark_joy.js		#汪汪乐园养joy
