@@ -58,7 +58,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.42"
+	cron_version="3.43"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -98,6 +98,7 @@ cat >>/etc/crontabs/root <<EOF
 59 23 * * * sleep 60 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * * sleep 61 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * 0,1,2,5,6 sleep 59 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
+0 1-23/1 * * * $node $dir_file/jd_cfd_loop.js #财富岛挂气球#100#
 59 */1 * * * $dir_file/jd.sh kill_cfd #杀气球#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
@@ -350,6 +351,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_cfd_loop.js 			#财富岛挂气球(杀气球运行sh \$jd kill_cfd)
 	jd_mp_h5.js			#疯狂星期五
 	jd_olympicgames.js 		#全民运动会
 	jd_sign.js  			#京东签到针对图形验证码
@@ -561,7 +563,6 @@ cat >/tmp/jd_tmp/run_01 <<EOF
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	gua_wealth_island.js 		#财富岛新版
-	jd_cfd_loop.js			#财富岛挂气球
 	#long_super_redrain.js		#整点红包雨
 EOF
 	echo -e "$green run_01$start_script_time $white"
@@ -573,6 +574,10 @@ EOF
 	done
 
 	echo -e "$green run_01$stop_script_time $white"
+}
+
+cfd_loop() {
+	$node $dir_file_js/jd_cfd_loop.js			#财富岛挂气球
 }
 
 kill_cfd() {
@@ -2525,10 +2530,10 @@ if [[ -z $action1 ]]; then
 	help
 else
 	case "$action1" in
-		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020|run_jd_cash|kill_cfd)
+		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020|run_jd_cash)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|run_jd_cash)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|cfd_loop|kill_cfd)
 		$action1
 		;;
 		kill_ccr)
@@ -2544,10 +2549,10 @@ else
 		echo ""
 	else
 		case "$action2" in
-		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020|run_jd_cash|kill_cfd)
+		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020|run_jd_cash)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|cfd_loop|kill_cfd)
 		$action2
 		;;
 		kill_ccr)
