@@ -266,6 +266,7 @@ done
 
 panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
 cat >$dir_file/config/tmp/panghu999.txt <<EOF
+	jd_opencard2.js		#一次性开卡
 	jd_lsj.js		#柠檬京东零食街
 	jd_twz-star.js		#特务Z行动-星小店
 EOF
