@@ -314,7 +314,6 @@ cat >$dir_file/config/tmp/cdle_url.txt <<EOF
 	jd_angryCash.js			#愤怒的现金
 	jd_angryKoi.js			#愤怒的锦鲤
 	jd_goodMorning.js		#早起福利
-	jd_olympicgames.js 		#全民运动会
 	jd_joy_park_help.js 		#汪汪乐园助力
 	jd_cash_exchange.js		#签到领现金兑换
 EOF
@@ -353,7 +352,6 @@ done
 cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_cfd_loop.js 			#财富岛挂气球(杀气球运行sh \$jd kill_cfd)
 	jd_mp_h5.js			#疯狂星期五
-	jd_olympicgames.js 		#全民运动会
 	jd_sign.js  			#京东签到针对图形验证码
 	jd_senbeans.js			#来客有礼
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
@@ -379,11 +377,9 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_olympicgames.js 		#全民运动会
 	jd_europeancup.js		#狂欢欧洲杯
 	jd_joy_help.js
-	jd_cfd.ts			#财富岛新版
-	jd_cfd_loop.ts			#财富岛挂气球
-	TS_USER_AGENTS.ts 		#TS UA
 EOF
 
 for script_name in `cat /tmp/del_js.txt | awk '{print $1}'`
@@ -463,7 +459,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_jxzpk.js			#pk
 	jd_lsj.js			#柠檬京东零食街
 	jd_ddnc_farmpark.js		#东东乐园
-	jd_olympicgames.js 		#全民运动会
 	jd_sign.js  			#京东签到针对图形验证码
 	jd_joypark_task.js		#汪汪乐园每日任务
 	jd_mp_h5.js			#疯狂星期五
