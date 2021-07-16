@@ -267,7 +267,7 @@ done
 
 panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
 cat >$dir_file/config/tmp/panghu999.txt <<EOF
-	jd_opencard2.js		#一次性开卡
+	jd_opencard2.js		#柠檬一次性开卡
 	jd_lsj.js		#柠檬京东零食街
 	jd_twz-star.js		#特务Z行动-星小店
 EOF
@@ -359,21 +359,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
 	jd_ddnc_farmpark.js		#东东乐园 Wenmoux脚本
 	jd_qqxing.js			#星系牧场,需要手动去开卡然后进去玩一下 Wenmoux脚本
-	zooOpencard01.js		#纯开卡 大牌联合618提前购 (默认不运行，自己考虑要不要运行) ZooPanda脚本
-	zooOpencard02.js		#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)ZooPanda脚本
-	zooOpencard03.js		#纯开卡 (默认不运行，自己考虑要不要运行) ZooPanda脚本
-	zooOpencard04.js		#纯开卡 (默认不运行，自己考虑要不要运行) ZooPanda脚本
-	zooOpencard05.js		#纯开卡 (默认不运行，自己考虑要不要运行) ZooPanda脚本
-	zooOpencard06.js		#纯开卡 (默认不运行，自己考虑要不要运行) ZooPanda脚本
-	zooOpencard07.js		#纯开卡 (默认不运行，自己考虑要不要运行) ZooPanda脚本
-	zooOpencard08.js		#纯开卡 (默认不运行，自己考虑要不要运行) ZooPanda脚本
-	zooOpencard09.js		#纯开卡 (默认不运行，自己考虑要不要运行) ZooPanda脚本
-	zooOpencard10.js		#纯开卡 (默认不运行，自己考虑要不要运行) ZooPanda脚本
-	zooOpencard11.js		#纯开卡 (默认不运行，自己考虑要不要运行) ZooPanda脚本
-	zooOpencard12.js		#纯开卡 (默认不运行，自己考虑要不要运行) ZooPanda脚本
-	zooJointeam01.js		#纯开卡 (默认不运行，自己考虑要不要运行) ZooPanda脚本
-	zooSupershophf.js		#合肥旗舰店开业(手动运行吧)
-	zooCaptain01.js			#安佳牛奶组队瓜分京豆(不能并发，否则无法组队)
 	jd_OpenCard.py 			#开卡程序
 	jd_getFollowGift.py 		#关注有礼
 	jd_jxzpk.js			#京享值pk
@@ -528,20 +513,7 @@ EOF
 
 run_045() {
 cat >/tmp/jd_tmp/run_045 <<EOF
-	zooOpencard01.js		#纯开卡 大牌联合618提前购 (默认不运行，自己考虑要不要运行)
-	zooOpencard02.js		#纯开卡 大牌强联合好物提前购(默认不运行，自己考虑要不要运行)
-	zooOpencard03.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard04.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard05.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard06.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard07.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard08.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard09.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard10.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard11.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooOpencard12.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooJointeam01.js		#纯开卡 (默认不运行，自己考虑要不要运行)
-	zooSupershophf.js		#合肥旗舰店开业(手动运行吧)
+	jd_opencard2.js		#柠檬一次性开卡
 EOF
 
 	echo -e "$green run_045$start_script_time $white"
