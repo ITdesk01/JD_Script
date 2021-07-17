@@ -338,6 +338,7 @@ done
 zero205_url="https://raw.githubusercontent.com/zero205/JD_tencent_scf/main"
 cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_jxqd.js			#京喜签到
+        jd_fcdyj.js                     #发财大赢家
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | awk '{print $1}'`
@@ -595,6 +596,7 @@ cat >/tmp/jd_tmp/run_03 <<EOF
 	jd_health.js			#健康社区
 	jddj_fruit.js			#京东到家果园 0,8,11,17
 	jd_mohe.js			#5G超级盲盒
+        jd_fcdyj.js                     #发财大赢家
 EOF
 	echo -e "$green run_03$start_script_time $white"
 
