@@ -58,7 +58,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.43"
+	cron_version="3.44"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -98,7 +98,7 @@ cat >>/etc/crontabs/root <<EOF
 59 23 * * * sleep 60 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * * sleep 61 && $node $dir_file_js/jd_blueCoin.js  >>/tmp/jd_blueCoin.log	#东东超市兑换，有次数限制，没时间要求#100#
 59 23 * * 0,1,2,5,6 sleep 59 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
-0 1-23/1 * * * $node $dir_file/jd_cfd_loop.js #财富岛挂气球#100#
+0 1-23/1 * * * $node $dir_file_js/jd_cfd_loop.js #财富岛挂气球#100#
 59 */1 * * * $dir_file/jd.sh kill_cfd #杀气球#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
@@ -438,12 +438,12 @@ update_script() {
 ccr_run() {
 	echo ""
 	$node $openwrt_script/JD_Script/js/jd_bean_sign.js #京东多合一签到
+	$node $openwrt_script/JD_Script/js/jd_angryKoi.js #愤怒的锦鲤
+	$node $openwrt_script/JD_Script/js/jd_angryCash.js #愤怒的现金
 }
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
-	jd_angryCash.js			#愤怒的现金
-	jd_angryKoi.js			#愤怒的锦鲤
 	jd_mohe.js			#5G超级盲盒
 	jd_car.js 			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_cash.js 			#签到领现金，每日2毛～5毛长期
