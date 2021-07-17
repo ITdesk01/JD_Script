@@ -489,6 +489,7 @@ run_020() {
 
 run_030() {
 cat >/tmp/jd_tmp/run_030 <<EOF
+	gua_wealth_island.js 		#财富岛新版
 	jd_jdfactory.js 		#东东工厂，不是京喜工厂
 	jd_jxmc.js			#惊喜牧场
 	jd_health_collect.js		#健康社区-收能量
@@ -530,7 +531,6 @@ cat >/tmp/jd_tmp/run_01 <<EOF
 	#jd_summer_movement_help.js	#燃动夏季助力
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
-	gua_wealth_island.js 		#财富岛新版
 	#long_super_redrain.js		#整点红包雨
 EOF
 	echo -e "$green run_01$start_script_time $white"
