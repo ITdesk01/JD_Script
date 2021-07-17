@@ -293,6 +293,8 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_wealth_island.js 		#财富岛新版
 	jd_necklace.js  		#点点券
 	ZooFaker_Necklace.js		#点点券依赖文件
+	jd_joy.js			#宠汪汪
+	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | awk '{print $1}'`
@@ -567,6 +569,7 @@ kill_cfd() {
 
 run_02() {
 cat >/tmp/jd_tmp/run_02 <<EOF
+	jd_joy.js		#宠汪汪
 	jd_moneyTree.js 	#摇钱树
 	jd_jxzpk.js		#pk
 	jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下
