@@ -371,6 +371,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_blueCoin.js			#东东兑换
 	jd_olympicgames.js 		#全民运动会
 	jd_europeancup.js		#狂欢欧洲杯
 	jd_joy_help.js
