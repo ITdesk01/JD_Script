@@ -333,6 +333,18 @@ do
 	update_if
 done
 
+zero205_url="https://raw.githubusercontent.com/zero205/JD_tencent_scf/main"
+cat >$dir_file/config/tmp/zero205_url.txt <<EOF
+	jd_jxqd.js			#京喜签到
+EOF
+
+for script_name in `cat $dir_file/config/tmp/zero205_url.txt | awk '{print $1}'`
+do
+	url="$zero205_url"
+	wget $zero205_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 
@@ -616,6 +628,7 @@ EOF
 
 run_07() {
 cat >/tmp/jd_tmp/run_07 <<EOF
+	jd_jxqd.js			#京喜签到
 	jd_morningSc.js			#早起赢现金
 	adolf_superbox.js		#超级盒子
 	jd_jxzpk.js			#pk
