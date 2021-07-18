@@ -264,6 +264,7 @@ cat >$dir_file/config/tmp/panghu999.txt <<EOF
 	jd_opencard2.js		#柠檬一次性开卡
 	jd_lsj.js		#柠檬京东零食街
 	jd_twz-star.js		#特务Z行动-星小店
+	jd_ylyn.js		#伊利养牛
 EOF
 
 for script_name in `cat $dir_file/config/tmp/panghu999.txt | awk '{print $1}'`
@@ -674,6 +675,7 @@ run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_syj.js 			#赚京豆
 	jd_jump.js			#跳跳乐瓜分京豆
+	jd_ylyn.js			#伊利养牛
 EOF
 	echo -e "$green run_08_12_16$start_script_time $white"
 
