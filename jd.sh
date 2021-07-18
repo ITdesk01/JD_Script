@@ -58,7 +58,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.45"
+	cron_version="3.46"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -96,6 +96,7 @@ cat >>/etc/crontabs/root <<EOF
 0 1-23/1 * * * $node $dir_file_js/jd_cfd_loop.js #财富岛挂气球#100#
 59 */1 * * * $dir_file/jd.sh kill_cfd #杀气球#100#
 59 23 * * * $python3 $dir_file_js/jd_blueCoin.py >/tmp/jd_blueCoin.log	#东东超市兑换#100#
+45 23 * * * $dir_file/jd.sh kill_ccr #杀掉所有并发进程，为零点准备#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
 0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
@@ -570,7 +571,7 @@ kill_cfd() {
 
 run_02() {
 cat >/tmp/jd_tmp/run_02 <<EOF
-	jd_joy.js		#宠汪汪
+	#jd_joy.js		#宠汪汪
 	jd_moneyTree.js 	#摇钱树
 	jd_jxzpk.js		#pk
 	jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下
@@ -614,7 +615,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_shop.js 			#进店领豆，早点领，一天也可以执行两次以上
 	jd_fruit.js 			#东东水果，6-9点 11-14点 17-21点可以领水滴
 	jd_pet.js 			#东东萌宠，跟手机商城同一时间
-	jd_joy_steal.js 		#可偷好友积分，零点开始，六点再偷一波狗粮
+	#jd_joy_steal.js 		#可偷好友积分，零点开始，六点再偷一波狗粮
 	jd_superMarket.js 		#东东超市,6点 18点多加两场用于收金币
 	jd_gold_creator.js		#金榜创造营
 	jd_goodMorning.js		#早起福利
