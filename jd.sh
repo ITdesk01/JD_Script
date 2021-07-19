@@ -1,10 +1,11 @@
 #!/bin/sh
 #
-# Copyright (C) 2020 luci-app-jd-dailybonus <jerrykuku@qq.com>
+#by:ITdesk
 #
-# This is free software, licensed under the GNU General Public License v3.
-# See /LICENSE for more information.
+#Github:https://github.com/ITdesk01/JD_Script/tree/main
 #
+#如果你魔改我的脚本，请魔改的彻底一点，不要留我的qq群，没时间处理一堆不用我库的人，决定魔改那就自己维护，你好我也好。
+
 #set -x
 
 
@@ -366,7 +367,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_senbeans.js			#来客有礼
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
 	jd_ddnc_farmpark.js		#东东乐园 Wenmoux脚本
-	jd_qqxing.js			#星系牧场,需要手动去开卡然后进去玩一下 Wenmoux脚本
 	jd_OpenCard.py 			#开卡程序
 	jd_getFollowGift.py 		#关注有礼
 	jd_all_bean_change.js 		#京东月资产变动通知
@@ -386,11 +386,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_qqxing.js			#星系牧场,需要手动去开卡然后进去玩一下 Wenmoux脚本
 	jd_jxzpk.js			#京享值pk
-	jd_blueCoin.js			#东东兑换
-	jd_olympicgames.js 		#全民运动会
-	jd_europeancup.js		#狂欢欧洲杯
-	jd_joy_help.js
 EOF
 
 for script_name in `cat /tmp/del_js.txt | awk '{print $1}'`
@@ -572,7 +569,6 @@ run_02() {
 cat >/tmp/jd_tmp/run_02 <<EOF
 	#jd_joy.js		#宠汪汪
 	jd_moneyTree.js 	#摇钱树
-	jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下
 EOF
 	echo -e "$green run_02$start_script_time $white"
 
@@ -1281,7 +1277,7 @@ checklog() {
 	for i in `cat $log2`
 	do
 		echo "#### ${i}详细的错误" >> $log3
-		grep -E  "错误|失败|module" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败\|node_modules\|sgmodule\|无助力机会\|不可以为自己助力\|助力次数耗尽\|礼包已经抢完' | sort -u >> $log3
+		grep -E  "错误|失败|module" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败\|node_modules\|sgmodule\|无助力机会\|不可以为自己助力\|助力次数耗尽\|礼包已经抢完\|限流严重' | sort -u >> $log3
 	done
 
 	if [ $num = "no_error" ]; then
