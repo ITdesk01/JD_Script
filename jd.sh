@@ -1479,9 +1479,18 @@ backnas() {
 	echo -e "$green>> 开始备份到nas$white"
 	sleep 5
 
+	echo -e "$green>> 打包前处理，删除ccr_js文件"
+	rm -rf $back_file_patch/JD_Script/ccr_js
+	echo -e "$green>> 删除完成$white"
+	sleep 5
+
 	echo -e "$green>> 开始打包文件$white"
 	tar -zcvf /tmp/$back_file_name $back_file_patch
 	sleep 5
+
+	echo -e "$green>> 开始恢复ccr_js文件夹$white"
+	update
+	echo "$green>>  恢复完成$white"
 
 	clear
 	echo -e "$green>> 开始上传文件 $white"
