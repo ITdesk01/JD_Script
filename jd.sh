@@ -1480,7 +1480,7 @@ backnas() {
 	sleep 5
 
 	echo -e "$green>> 打包前处理，删除ccr_js文件"
-	rm -rf $back_file_patch/JD_Script/ccr_js
+	rm -rf $back_file_patch/JD_Script/ccr_js/*
 	echo -e "$green>> 删除完成$white"
 	sleep 5
 
