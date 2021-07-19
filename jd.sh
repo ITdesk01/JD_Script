@@ -369,7 +369,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_qqxing.js			#星系牧场,需要手动去开卡然后进去玩一下 Wenmoux脚本
 	jd_OpenCard.py 			#开卡程序
 	jd_getFollowGift.py 		#关注有礼
-	jd_jxzpk.js			#京享值pk
 	jd_all_bean_change.js 		#京东月资产变动通知
 	adolf_superbox.js		#超级盒子
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
@@ -387,6 +386,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_jxzpk.js			#京享值pk
 	jd_blueCoin.js			#东东兑换
 	jd_olympicgames.js 		#全民运动会
 	jd_europeancup.js		#狂欢欧洲杯
@@ -467,7 +467,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jddj_plantBeans.js 		#京东到家鲜豆庄园脚本 一天一次
 	jd_dreamFactory.js 		#京喜工厂
 	adolf_superbox.js		#超级盒子
-	jd_jxzpk.js			#pk
 	jd_lsj.js			#柠檬京东零食街
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_sign.js  			#京东签到针对图形验证码
@@ -573,7 +572,6 @@ run_02() {
 cat >/tmp/jd_tmp/run_02 <<EOF
 	#jd_joy.js		#宠汪汪
 	jd_moneyTree.js 	#摇钱树
-	jd_jxzpk.js		#pk
 	jd_qqxing.js		#星系牧场,需要手动去开卡然后进去玩一下
 EOF
 	echo -e "$green run_02$start_script_time $white"
@@ -636,7 +634,6 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_jxqd.js			#京喜签到
 	jd_morningSc.js			#早起赢现金
 	adolf_superbox.js		#超级盒子
-	jd_jxzpk.js			#pk
 	jd_lsj.js			#柠檬京东零食街
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_rankingList.js 		#京东排行榜签到领京豆
@@ -1284,7 +1281,7 @@ checklog() {
 	for i in `cat $log2`
 	do
 		echo "#### ${i}详细的错误" >> $log3
-		grep -E  "错误|失败|module" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败\|node_modules\|sgmodule\|无助力机会\|不可以为自己助力\|助力次数耗尽' | sort -u >> $log3
+		grep -E  "错误|失败|module" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败\|node_modules\|sgmodule\|无助力机会\|不可以为自己助力\|助力次数耗尽\|礼包已经抢完' | sort -u >> $log3
 	done
 
 	if [ $num = "no_error" ]; then
