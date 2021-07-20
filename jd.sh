@@ -1748,22 +1748,22 @@ help() {
 
 additional_settings() {
 
-	for i in `cat $dir_file/config/collect_script.txt | awk '{print $1}'`
+	for i in `cat $dir_file/config/collect_script.txt | grep -v "#.*js" | awk '{print $1}'`
 	do
 		sed -i "s/$.isNode() ? 20 : 5/0/g" $dir_file_js/$i
 	done
 
-	for i in `cat $dir_file/config/collect_script.txt | awk '{print $1}'`
+	for i in `cat $dir_file/config/collect_script.txt | grep -v "#.*js" | awk '{print $1}'`
 	do
 		sed -i "s/$.isNode() ? 10 : 5/0/g" $dir_file_js/$i
 	done
 
-	for i in `cat $dir_file/config/collect_script.txt | awk '{print $1}'`
+	for i in `cat $dir_file/config/collect_script.txt | grep -v "#.*js" | awk '{print $1}'`
 	do
 		sed -i "s/helpAu = true/helpAu = false/g" $dir_file_js/$i
 	done
 
-	for i in `cat $dir_file/config/collect_script.txt | awk '{print $1}'`
+	for i in `cat $dir_file/config/collect_script.txt | grep -v "#.*js" | awk '{print $1}'`
 	do
 		sed -i "s/helpAuthor=true/helpAuthor=false/g" $dir_file_js/$i
 	done
@@ -2212,7 +2212,7 @@ additional_settings() {
 	rm -rf $dir_file_js/app.*.js
 
 	#默认关闭京东到家通知
-	sed -i "s/isNotify = true/isNotify = false/g" $ccr_js_file/$i/jddj_fruit.js
+	sed -i "s/isNotify = true/isNotify = false/g" $dir_file_js/jddj_fruit.js
 
 }
 
