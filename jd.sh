@@ -1005,7 +1005,10 @@ concurrent_js_if() {
 			if_ps
 			concurrent_js_clean
 		;;
-		run_01|run_02|run_045|run_08_12_16|run_020|run_10_15_20|run_06_18|run_jd_cash|cfd_loop)
+		cfd_loop)
+			cfd_loop
+		;;
+		run_01|run_02|run_045|run_08_12_16|run_020|run_10_15_20|run_06_18|run_jd_cash)
 			action="$action1"
 			concurrent_js
 			if_ps
@@ -1023,7 +1026,10 @@ concurrent_js_if() {
 			$action1
 			concurrent_js_run_07
 			;;
-			run_01|run_06_18|run_10_15_20|run_03|run_02|run_045|run_08_12_16|run_07|run_030|run_020|run_jd_cash|cfd_loop)
+			cfd_loop)
+				cfd_loop
+			;;
+			run_01|run_06_18|run_10_15_20|run_03|run_02|run_045|run_08_12_16|run_07|run_030|run_020|run_jd_cash)
 			$action1
 			;;
 		esac
@@ -1041,7 +1047,10 @@ concurrent_js_if() {
 			$action2
 			concurrent_js_run_07
 			;;
-			run_01|run_06_18|run_10_15_20|run_03|run_02|run_045|run_08_12_16|run_07|run_020|run_jd_cash|cfd_loop)
+			cfd_loop)
+				cfd_loop
+			;;
+			run_01|run_06_18|run_10_15_20|run_03|run_02|run_045|run_08_12_16|run_07|run_020|run_jd_cash)
 			$action2
 			;;
 		esac
