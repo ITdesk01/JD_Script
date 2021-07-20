@@ -819,20 +819,6 @@ echo -e "$green============整理完成，可以提交了（没加群的忽略�
 
 }
 
-concurrent_js() {
-	if [ $(ls $ccr_js_file/ | wc -l ) -gt "0" ];then
-		for i in `ls $ccr_js_file/`
-		do
-			dir_file_js="$ccr_js_file/$i"
-			$action &
-		done
-	else
-		echo -e "$green>>并发文件夹为空开始下载$white"
-			update
-			concurrent_js_if
-	fi
-}
-
 concurrent_js_update() {
 	echo -e "$green>> 创建并发文件夹$white"
 	if [ "$ccr_if" == "yes" ];then
@@ -965,6 +951,20 @@ if_ps() {
 	#for i in `ps -ww | grep "jd.sh run_" | grep -v grep | awk '{print $1}'`;do kill -9 $i ;done
 }
 
+concurrent_js() {
+	if [ $(ls $ccr_js_file/ | wc -l ) -gt "0" ];then
+		for i in `ls $ccr_js_file/`
+		do
+			dir_file_js="$ccr_js_file/$i"
+			$action &
+		done
+	else
+		echo -e "$green>>并发文件夹为空开始下载$white"
+			update
+			concurrent_js_if
+	fi
+}
+
 concurrent_js_if() {
 	if [ "$ccr_if" == "yes" ];then
 		echo -e "$green>>检测到开启了账号并发模式$white"
@@ -1006,7 +1006,8 @@ concurrent_js_if() {
 			concurrent_js_clean
 		;;
 		cfd_loop)
-			cfd_loop
+			action="cfd_loop"
+			concurrent_js
 		;;
 		run_01|run_02|run_045|run_08_12_16|run_020|run_10_15_20|run_06_18|run_jd_cash)
 			action="$action1"
@@ -1027,7 +1028,8 @@ concurrent_js_if() {
 			concurrent_js_run_07
 			;;
 			cfd_loop)
-				cfd_loop
+				action="cfd_loop"
+				concurrent_js
 			;;
 			run_01|run_06_18|run_10_15_20|run_03|run_02|run_045|run_08_12_16|run_07|run_030|run_020|run_jd_cash)
 			$action1
@@ -1048,7 +1050,8 @@ concurrent_js_if() {
 			concurrent_js_run_07
 			;;
 			cfd_loop)
-				cfd_loop
+				action="cfd_loop"
+				concurrent_js
 			;;
 			run_01|run_06_18|run_10_15_20|run_03|run_02|run_045|run_08_12_16|run_07|run_020|run_jd_cash)
 			$action2
