@@ -2174,23 +2174,6 @@ additional_settings() {
 		js_amount=$(($js_amount - 1))
 	done
 
-	#财富岛
-	new_cfd="'BA4E810FF2B7A0A2595AB5B0203D8D36A83D7DACE78C52ED679ADED79575DA06',\n'C9EF5FCEDE6E93FC3B54FD18B84861D581B4061D8751A04418369391645FE6EB',\n'9B4FB7103CF7052CBE0BB79FBDBB4828D36D68CFA8AB801238349C707E53212B',\n'CF7BD2AE3D422F84D269AF523BA64CD841D874E1215131991EC597F11A7C44F3',"
-	tuimao_cfd="'1DEA855BBF23FF562E0A2F74BCD523FA5B656BDC934F1706FA0919DFF66E9530',\n'A72F74612214D32FC048691C06E2F243E6FB58908F5F2F77630FF3678185BD34',"
-	zuoyou_cfd="'C17C0F34CBBDB8F5FA5EA08DA98ACC97',\n'0BB5DE542D0BF1AF408F5C29AEE42B28A9C17D3FA167FD865A605B3E89D26A36',\n'179E4669C1C55F316BEDB78B465B0A11A3DF52989C108D582C10EDDCDCCD9E9B',\n'C6341A89CE797F531780D958ABA60FFED84C2FEF0409AAE8923004F53E450796',"
-	yangguang_cfd="'4E5A90229430CEE2A4FF17A58F054FC5F43674C6A918005D3047AD0C13C8BD37',\n'DD0B9E9A251F06CA576B517E26D3A0F938FABE557386120BE75FF9AFF01A58C6',"
-	
-	new_cfd_set="$new_cfd\n$tuimao_cfd\n$zuoyou_cfd\n$yangguang_cfd"
-
-	js_amount="1"
-	jdcfdcode_rows=$(grep -n "\$.InviteList = \[" $dir_file_js/gua_wealth_island.js | awk -F ":" '{print $1}')
-	sed -i "s/HelpAuthorFlag = true/HelpAuthorFlag = false/g" $dir_file_js/gua_wealth_island.js
-	sed -i "s/\$.InviteList = \[/\$.InviteList = \[\n/g" $dir_file_js/gua_wealth_island.js
-	while [[ ${js_amount} -gt 0 ]]; do
-		sed -i "$jdcfdcode_rows a \ $new_cfd_set " $dir_file_js/gua_wealth_island.js
-		js_amount=$(($js_amount - 1))
-	done
-
 	#健康社区
 	new_health="T0225KkcRxoZ9AfVdB7wxvRcIQCjVfnoaW5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVfnoaW5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVfnoaW5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVfnoaW5kRrbA"
 	test_health="T019vPVyQRke_EnWJxj1nfECjVfnoaW5kRrbA@T0225KkcRBYbo1fXKUv2k_5ccQCjVfnoaW5kRrbA@T0225KkcRh0ZoVfQchP9wvQJdwCjVfnoaW5kRrbA@T0205KkcPGhhswmWX2e03YBbCjVfnoaW5kRrbA@T0225KkcRBwdp1CEI0v8l_9ZdwCjVfnoaW5kRrbA"
@@ -2208,25 +2191,6 @@ additional_settings() {
 		sed -i "$healthcode_rows a \ '$new_health_set', " $dir_file_js/jd_health.js
 		js_amount=$(($js_amount - 1))
 	done
-
-	#燃动夏季
-	new_jdsu="HcmphLbwLg2nfoLJFYA30u-dkfKS4hpjksGd27ILY0nBA9PdPZzp8gTqNz_S2jmjyQaf_Ow0IvYnTgCt9SMOOg@HcmphLbwLg_1KIKeRN0338GtQYaAMSdknAtmRLjTTNHXpqHd8RCpGuyb0CZtHbb7oOM_du8AJ5bPilzCKHh8wg@HcmphLbwLlX5P8f9ZJdBoFFxRpxJKhUG79EM0btzsmQacnCZ5lVm9Kg4pwI2yTXPY2E8RruGdIwSw0TaXw@HcmphLbwLm77J_rzb5RIpE6kIY_J1x-EKNuqK9YnKrgV_cas1vhZY4X-D8FUDRKEAODU5yj0t_SMc7wv-g"
-
-	sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/jd_summer_movement.js
-	sed -i "s/ShHelpAuthorFlag = true/ShHelpAuthorFlag = false/g" $dir_file_js/jd_summer_movement_help.js
-
-	jdsucode_rows=$(grep -n "innerShInviteList = \[" $dir_file_js/jd_summer_movement.js | awk -F ":" '{print $1}')
-	jdsucode_rows_expr=$(($jdsucode_rows + 1))
-	sed -i "$jdsucode_rows_expr d" $dir_file_js/jd_summer_movement.js
-	sed -i "$jdsucode_rows_expr d" $dir_file_js/jd_summer_movement.js
-	sed -i "$jdsucode_rows_expr d" $dir_file_js/jd_summer_movement.js
-	sed -i "$jdsucode_rows a\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\'," $dir_file_js/jd_summer_movement.js
-
-	jdsucode_rows1=$(grep -n "innerShInviteList = \[" $dir_file_js/jd_summer_movement_help.js | awk -F ":" '{print $1}')
-	sed -i "s/\$.inviteList = \[/\$.inviteList = \[\n/g" $dir_file_js/jd_summer_movement_help.js
-	sed -i "$jdsucode_rows1 a\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\',\n\'$new_jdsu\'," $dir_file_js/jd_summer_movement_help.js
-
-	rm -rf $dir_file_js/app.*.js
 
 	#默认关闭京东到家通知
 	sed -i "s/isNotify = true/isNotify = false/g" $dir_file_js/jddj_fruit.js
