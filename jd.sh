@@ -208,6 +208,8 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
+	jd_earn30.js                    #赚30元
+	jd_qjd.js                       #抢京豆
 EOF
 
 for script_name in `cat $dir_file/config/tmp/lxk0301_script.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -337,7 +339,7 @@ done
 
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
-
+	
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
 for i in `ls  $dir_file/config/tmp`
@@ -641,6 +643,8 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_jin_tie.js 			#领金贴
 	jd_unsubscribe.js 		#取关店铺，没时间要求
         gua_MMdou.js                    #赚京豆MM豆
+	jd_earn30.js                    #赚30元
+	jd_qjd.js                       #抢京豆
 EOF
 	echo -e "$green run_07$start_script_time $white"
 
