@@ -727,16 +727,23 @@ curtinlv_script_setup() {
 	fi
 
 	#关注有礼
-	cat $openwrt_script_config/js_cookie.txt > $dir_file/git_clone/curtinlv_script/getFollowGifts/JDCookies.txt
+
 	if [ ! -L "$dir_file_js/jd_getFollowGift.py" ]; then
 		rm -rf $dir_file_js/jd_getFollowGift.py
 		ln -s $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py  $dir_file_js/jd_getFollowGift.py
 	fi
 
+	if [ ! -L "$dir_file_js/jd_qjd.py" ]; then
+		rm -rf $dir_file_js/jd_qjd.py
+		ln -s $dir_file/git_clone/curtinlv_script/jd_qjd.py  $dir_file_js/jd_qjd.py
+	fi
+
+	cat $openwrt_script_config/js_cookie.txt > $dir_file/git_clone/curtinlv_script/getFollowGifts/JDCookies.txt
 	if [ ! -L "$dir_file_js/JDCookies.txt" ]; then
 		rm -rf $dir_file_js/JDCookies.txt
 		ln -s $dir_file/git_clone/curtinlv_script/getFollowGifts/JDCookies.txt  $dir_file_js/JDCookies.txt
 	fi
+
 
 	#东东超市商品兑换
 	cp $dir_file/git_clone/curtinlv_script/jd_blueCoin.py $dir_file_js/jd_blueCoin.py
