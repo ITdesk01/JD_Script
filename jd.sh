@@ -743,7 +743,7 @@ curtinlv_script_setup() {
 	#软连接
 	if [ ! -L "$dir_file_js/JDCookies.txt" ]; then
 		rm -rf $dir_file_js/JDCookies.txt
-		ln -s $dir_file/git_clone/curtinlv_script/getFollowGifts/JDCookies.txt  $dir_file_js/JDCookies.txt
+		ln -s $dir_file/git_clone/curtinlv_script/JDCookies.txt  $dir_file_js/JDCookies.txt
 	fi
 
 
