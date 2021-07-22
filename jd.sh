@@ -2244,7 +2244,7 @@ npm_install() {
 	#安装js模块
 	cp $dir_file/git_clone/lxk0301_back/package.json $dir_file/package.json
 	cd $dir_file && npm -g install
-	npm install -g request http stream zlib vm png-js fs got tough-cookie audit date-fns
+	npm install -g request http stream zlib vm png-js fs got tough-cookie audit date-fns ts-md5
 	npm install --save axios
 	cd $dir_file/cookies_web && npm -g install
 
