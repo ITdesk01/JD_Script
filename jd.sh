@@ -333,6 +333,19 @@ do
 	update_if
 done
 
+Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd"
+cat >$dir_file/config/tmp/Wenmoux_url.txt <<EOF
+	jd_ddnc_farmpark.js		#东东乐园 Wenmoux脚本
+	jd_mb.js			#全民摸冰
+EOF
+
+for script_name in `cat $dir_file/config/tmp/Wenmoux_url.txt | grep -v "#.*js" | awk '{print $1}'`
+do
+	url="$Wenmoux_url"
+	wget $Wenmoux_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 
@@ -349,7 +362,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_sign.js  			#京东签到针对图形验证码
 	jd_senbeans.js			#来客有礼
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
-	jd_ddnc_farmpark.js		#东东乐园 Wenmoux脚本
 	jd_OpenCard.py 			#开卡程序
 	jd_getFollowGift.py 		#关注有礼
 	jd_all_bean_change.js 		#京东月资产变动通知
@@ -657,6 +669,7 @@ cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_syj.js 			#赚京豆
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_ylyn.js			#伊利养牛
+	jd_mb.js			#全民摸冰
 EOF
 	echo -e "$green run_08_12_16$start_script_time $white"
 
