@@ -11,7 +11,9 @@
 
 const $ = new Env('财富大陆');
 const {Md5} = require('ts-md5');
-const axios = require('axios');
+const http = require('http');
+const urlLib = require("url");
+//const axios = require('axios');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 // const notify = $.isNode() ? require('./sendNotify') : '';
 $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
@@ -94,9 +96,9 @@ async function getShareCode () {
   if (HELP_HW === 'true') {
     // try {
       
-      let resultsX = await axios.get("https://raw.githubusercontent.com/lllrrr3/cfd/main/cfd.json")
+      let resultsX = await getAuthorShareCode("https://raw.githubusercontent.com/lllrrr3/cfd/main/cfd.json")
       if(!resultsX) {
-        resultsX = await axios.get("http://cfd.212618.xyz/cfd.php")
+        resultsX = await getAuthorShareCode("http://cfd.212618.xyz/cfd.php")
       }
       $.InviteLists = resultsX.data.data;
       console.log(`获取助力码成功: ${$.InviteLists}`)
@@ -205,18 +207,34 @@ async function makeShareCodes(code) {
   return new Promise(async (resolve, reject) => {
     let pin = $.cookie.match(/pt_pin=([^;]*)/)[1]
     pin = Md5.hashStr(pin)
-    await axios.get(`http://cfd.212618.xyz/cfd.php?type=save&pin=${pin}&sharecode=${code}`)
-    //await getAuthorShareCode(`http://cfd.212618.xyz/cfd.php?type=save&pin=${pin}&sharecode=${code}`)
-      .then(res => {
-        if (res.data.status === 1)
-          console.log('已自动提交助力码')
-        else
-          console.log('提交失败！已提交farm的cookie才可提交cfd')
-        resolve(200)
-      })
-      .catch(e => {
-        reject('访问助力池出错')
-      })
+    //await axios.get(`http://cfd.212618.xyz/cfd.php?type=save&pin=${pin}&sharecode=${code}`)
+    // let xx = urlLib.parse(`http://cfd.212618.xyz/cfd.php?type=save&pin=${pin}&sharecode=${code}` , true)
+     http.get(`http://cfd.212618.xyz/cfd.php?type=save&pin=${pin}&sharecode=${code}`, function (res) {
+      res.setEncoding('utf8');
+      res.on('data', function (chunk) {
+        console.log('chunk:' + chunk)
+        let jsonDecodeData = JSON.parse(chunk);
+        if(jsonDecodeData.status == 1){
+          console.log('提交成功');
+          resolve()
+        }else{
+          reject('访问助力池出错')
+        }
+      });
+     })
+    // console.log(xx);
+
+
+      // .then(res => {
+      //   if (res.data.status === 1)
+      //     console.log('已自动提交助力码')
+      //   else
+      //     console.log('提交失败！已提交farm的cookie才可提交cfd')
+      //   resolve(200)
+      // })
+      // .catch(e => {
+      //   reject('访问助力池出错')
+      // })
   })
 }
 
@@ -1216,6 +1234,45 @@ function jsonParse(str) {
       return [];
     }
   }
+}
+
+function getAuthorShareCode(url) {
+  return new Promise(async resolve => {
+    const options = {
+      "url": `${url}?${new Date()}`,
+      "timeout": 10000,
+      "headers": {
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
+      }
+    };
+    if ($.isNode() && process.env.TG_PROXY_HOST && process.env.TG_PROXY_PORT) {
+      const tunnel = require("tunnel");
+      const agent = {
+        https: tunnel.httpsOverHttp({
+          proxy: {
+            host: process.env.TG_PROXY_HOST,
+            port: process.env.TG_PROXY_PORT * 1
+          }
+        })
+      }
+      Object.assign(options, { agent })
+    }
+    let res = []
+    $.get(options, async (err, resp, data) => {
+      try {
+        if (err) {
+        } else {
+          if (data) res = JSON.parse(data)
+        }
+      } catch (e) {
+        // $.logErr(e, resp)
+      } finally {
+        resolve(res || []);
+      }
+    })
+    await $.wait(10000)
+    resolve(res);
+  })
 }
 
 
