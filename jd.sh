@@ -404,6 +404,7 @@ done
 		update
 	fi
 	chmod 755 $dir_file_js/*
+	npm_install
 	additional_settings
 	concurrent_js_update
 	source /etc/profile
