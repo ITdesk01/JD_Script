@@ -281,7 +281,6 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	jd_summer_movement_help.js	#燃动夏季助力
 	jd_necklace.js  		#点点券
 	ZooFaker_Necklace.js		#点点券依赖文件
-	jd_joy.js			#宠汪汪
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
         gua_MMdou.js                    #赚京豆MM豆
 EOF
@@ -326,6 +325,11 @@ done
 
 zero205_url="https://raw.githubusercontent.com/zero205/JD_tencent_scf/main"
 cat >$dir_file/config/tmp/zero205_url.txt <<EOF
+	jd_joy.js			#宠汪汪
+	JDJRValidator_Pure.js
+	jd_sign.js  			#京东签到针对图形验证码
+	sign_graphics_validate.js
+	jd_tewuZ.js			#特务Ｚ(要跑两次)
 	jd_jxqd.js			#京喜签到
 EOF
 
@@ -362,7 +366,6 @@ done
 cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_cfd_loop.js 			#财富岛挂气球(杀气球运行sh \$jd kill_cfd)
 	jd_mp_h5.js			#疯狂星期五
-	jd_sign.js  			#京东签到针对图形验证码
 	jd_senbeans.js			#来客有礼
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
 	jd_OpenCard.py 			#开卡程序
@@ -465,6 +468,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_joypark_task.js		#汪汪乐园每日任务
 	jd_mp_h5.js			#疯狂星期五
 	jd_twz-star.js			#特务Z行动-星小店
+	jd_tewuZ.js			#特务Ｚ(要跑两次)
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_0$start_script_time $white"
@@ -572,7 +576,7 @@ kill_cfd() {
 
 run_02() {
 cat >/tmp/jd_tmp/run_02 <<EOF
-	#jd_joy.js		#宠汪汪
+	jd_joy.js		#宠汪汪
 	jd_moneyTree.js 	#摇钱树
 EOF
 	echo -e "$green run_02$start_script_time $white"
@@ -631,6 +635,7 @@ EOF
 
 run_07() {
 cat >/tmp/jd_tmp/run_07 <<EOF
+	jd_tewuZ.js			#特务Ｚ(要跑两次)
 	jd_jxqd.js			#京喜签到
 	jd_morningSc.js			#早起赢现金
 	adolf_superbox.js		#超级盒子
