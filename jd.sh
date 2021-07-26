@@ -549,7 +549,7 @@ EOF
 }
 
 kill_cfd() {
-	ps_cfd_if=$(ps -ww | grep "jd_cfd_loop.js" | grep -v grep | awk '{print $1}')
+	ps_cfd_if=$(ps -ww | grep "cfd_loop" | grep -v grep | awk '{print $1}')
 	for i in `echo $ps_cfd_if`
 	do
 		kill -9 $i
