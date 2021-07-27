@@ -350,6 +350,18 @@ do
 	update_if
 done
 
+Aaron_url="https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts"
+cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
+	jd_jxlhb.js			#京喜领红包
+EOF
+
+for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
+do
+	url="$Aaron_url"
+	wget $Aaron_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 
@@ -452,6 +464,7 @@ ccr_run() {
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
+	jd_jxlhb.js			#京喜领红包
 	jd_mohe.js			#5G超级盲盒
 	jd_car.js 			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_cash.js 			#签到领现金，每日2毛～5毛长期
