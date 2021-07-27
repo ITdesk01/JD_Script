@@ -59,7 +59,7 @@ stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
 task() {
-	cron_version="3.52"
+	cron_version="3.53"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -361,6 +361,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_diy_zeus.js			#店铺签到
 	jd_mp_h5.js			#疯狂星期五
 	jd_senbeans.js			#来客有礼
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
@@ -468,6 +469,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_mp_h5.js			#疯狂星期五
 	jd_twz-star.js			#特务Z行动-星小店
 	jd_tewuZ.js			#特务Ｚ(要跑两次)
+	jd_diy_zeus.js			#店铺签到
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_0$start_script_time $white"
