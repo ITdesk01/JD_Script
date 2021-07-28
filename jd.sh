@@ -277,8 +277,7 @@ smiek2221_url="https://raw.githubusercontent.com/smiek2221/scripts/master"
 cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	#gua_wealth_island.js 		#财富岛新版
 	jd_necklace.js  		#点点券
-	ZooFaker_
-	.js		#点点券依赖文件
+	ZooFaker_Necklace.js 		#点点券依赖文件
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
         gua_MMdou.js                    #赚京豆MM豆
 EOF
