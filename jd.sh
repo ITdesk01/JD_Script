@@ -325,7 +325,6 @@ zero205_url="https://raw.githubusercontent.com/zero205/JD_tencent_scf/main"
 cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_joy.js			#宠汪汪
 	JDJRValidator_Pure.js
-	jd_sign.js  			#京东签到针对图形验证码
 	sign_graphics_validate.js
 	jd_tewuZ.js			#特务Ｚ(要跑两次)
 	jd_jxqd.js			#京喜签到
@@ -399,8 +398,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
-	jd_summer_movement.js		#燃动夏季
-	jd_summer_movement_help.js	#燃动夏季助力
+	jd_sign.js  			#京东签到针对图形验证码
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -480,7 +478,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	adolf_superbox.js		#超级盒子
 	jd_lsj.js			#柠檬京东零食街
 	jd_ddnc_farmpark.js		#东东乐园
-	jd_sign.js  			#京东签到针对图形验证码
 	jd_sign_graphics.js		#京东签到图形验证
 	jd_joypark_task.js		#汪汪乐园每日任务
 	jd_mp_h5.js			#疯狂星期五
