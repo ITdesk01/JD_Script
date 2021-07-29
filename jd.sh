@@ -329,6 +329,8 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	sign_graphics_validate.js
 	jd_tewuZ.js			#特务Ｚ(要跑两次)
 	jd_jxqd.js			#京喜签到
+	jd_sign_graphics.js		#京东签到图形验证
+	JDJRValidator_Smiek.js
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -479,6 +481,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_lsj.js			#柠檬京东零食街
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_sign.js  			#京东签到针对图形验证码
+	jd_sign_graphics.js		#京东签到图形验证
 	jd_joypark_task.js		#汪汪乐园每日任务
 	jd_mp_h5.js			#疯狂星期五
 	jd_twz-star.js			#特务Z行动-星小店
