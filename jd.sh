@@ -254,8 +254,8 @@ EOF
 for script_name in `cat $dir_file/config/tmp/panghu999.txt | grep -v "#.*js" | awk '{print $1}'`
 do
 	url="$panghu999"
-	wget $panghu999/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $panghu999/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 panghu999_url="https://raw.githubusercontent.com/panghu999/jd_scripts/master"
@@ -267,8 +267,8 @@ EOF
 for script_name in `cat $dir_file/config/tmp/panghu999_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
 	url="$panghu999_url"
-	wget $panghu999_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $panghu999_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 smiek2221_url="https://raw.githubusercontent.com/smiek2221/scripts/master"
@@ -394,6 +394,11 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_dianjing.js		#电竞经理
+	jd_opencard2.js		#柠檬一次性开卡
+	jd_lsj.js		#柠檬京东零食街
+	jd_twz-star.js		#特务Z行动-星小店
+	jd_ylyn.js		#伊利养牛
 	jd_tewuZ.js			#特务Ｚ(要跑两次)
 	jd_sign.js  			#京东签到针对图形验证码
 EOF
@@ -474,12 +479,10 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_jin_tie.js 			#领金贴
 	jd_dreamFactory.js 		#京喜工厂
 	adolf_superbox.js		#超级盒子
-	jd_lsj.js			#柠檬京东零食街
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_sign_graphics.js		#京东签到图形验证
 	jd_joypark_task.js		#汪汪乐园每日任务
 	jd_mp_h5.js			#疯狂星期五
-	jd_twz-star.js			#特务Z行动-星小店
 	jd_dpqd.js			#店铺签到
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
@@ -590,7 +593,6 @@ EOF
 run_03() {
 #这里不会并发
 cat >/tmp/jd_tmp/run_03 <<EOF
-	jd_dianjing.js			#电竞经理
 	jd_joy_new.js 			#jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
 	jd_necklace.js  		#点点券 大佬0,20领一次先扔这里后面再改
 	jd_speed.js 			#天天加速 3小时运行一次，打卡时间间隔是6小时
@@ -673,7 +675,6 @@ run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_syj.js 			#赚京豆
 	jd_jump.js			#跳跳乐瓜分京豆
-	jd_ylyn.js			#伊利养牛
 	jd_mb.js			#全民摸冰
 EOF
 	echo -e "$green run_08_12_16$start_script_time $white"
