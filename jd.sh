@@ -563,17 +563,6 @@ EOF
 	echo -e "$green run_01$stop_script_time $white"
 }
 
-kill_index() {
-	index_if=$(ps -ww | grep "index.js" | grep -v grep | awk '{print $1}')
-	for i in `echo $index_if`
-	do
-		echo "终止网页扫码功能，重新执行sh \$jd 就可以恢复"
-		kill -9 $i
-	done
-}
-
-
-
 run_02() {
 cat >/tmp/jd_tmp/run_02 <<EOF
 	jd_joy.js		#宠汪汪
@@ -2429,6 +2418,7 @@ index_js() {
 	if [ $index_if == "1" ];then
 		index_num="$yellow 8.网页扫码功能已启动，网页输入$green$openwrt_ip:6789$white$yellow,就可以访问了$white"
 	else
+		echo -e "$green启动网页扫码功能$white"
 		node $dir_file/cookies_web/index.js &
 		if [ $? -eq 0 ]; then
 			index_num="$yellow 8.网页扫码功能已启动，网页输入$green$openwrt_ip:6789$white$yellow,就可以访问了$white"
@@ -2437,6 +2427,16 @@ index_js() {
 		fi
 	fi
 }
+
+kill_index() {
+	index_if=$(ps -ww | grep "index.js" | grep -v grep | awk '{print $1}')
+	for i in `echo $index_if`
+	do
+		echo "终止网页扫码功能，重新执行sh \$jd 就可以恢复"
+		kill -9 $i
+	done
+}
+
 
 jd_openwrt_config_description() {
 cat > $jd_openwrt_config <<EOF
