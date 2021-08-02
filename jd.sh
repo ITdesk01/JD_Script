@@ -310,7 +310,6 @@ cat >$dir_file/config/tmp/Tsukasa007_url.txt <<EOF
 	jd_joypark_open.js		#汪汪乐园开工位
 	jd_joypark_task.js		#汪汪乐园每日任务
 	jd_olympic_opencard.js		#一起奔跑 为奥运加油(一次性脚本)
-	jd_TW_buff.js			#特物-拉满BUFF 漂亮上场（没有几百个号，不用试了，默认不执行）
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Tsukasa007_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -325,7 +324,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_joy.js			#宠汪汪
 	JDJRValidator_Pure.js
 	sign_graphics_validate.js
-	jd_jxqd.js			#京喜签到
 	jd_sign_graphics.js		#京东签到图形验证
 	JDJRValidator_Smiek.js
 	jd_dpqd.js			#店铺签到
@@ -394,6 +392,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_TW_buff.js			#特物-拉满BUFF 漂亮上场（没有几百个号，不用试了，默认不执行）
+	jd_jxqd.js			#京喜签到
 	jd_dianjing.js		#电竞经理
 	jd_opencard2.js		#柠檬一次性开卡
 	jd_lsj.js		#柠檬京东零食街
@@ -634,7 +634,6 @@ EOF
 
 run_07() {
 cat >/tmp/jd_tmp/run_07 <<EOF
-	jd_jxqd.js			#京喜签到
 	jd_morningSc.js			#早起赢现金
 	adolf_superbox.js		#超级盒子
 	jd_lsj.js			#柠檬京东零食街
