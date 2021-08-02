@@ -3,6 +3,12 @@
 ## 通知
 
       由于之前的安装方式比较麻烦，现在统一用安装方法1的插件安装方法，本地安装方式可能以后不考虑支持了
+**吹水群** :**667491026** (公子大爷请绕道，白嫖可能没人理)
+
+**OP打到阳光通知频道** https://t.me/openwrtscript
+   
+       
+**OP打到阳光吹水群** https://t.me/jdopenwrt
 
 ## 序言
    调用https://gitee.com/lxk0301/jd_scripts/blob/master/ 库的JS脚本，进行测试学习，在X86机器使用正常，其他机器满足依赖应该问题不大,
@@ -79,12 +85,7 @@ NANOPI R4S (群友snow测试)
 
 **问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)**
 
-**吹水群** :**667491026** (公子大爷请绕道，白嫖可能没人理)
 
-**OP打到阳光通知频道** https://t.me/openwrtscript
-   
-       
-**OP打到阳光吹水群** https://t.me/jdopenwrt
 
 ## 你们可以不好好看安装依赖，我也可以拒绝回答任何问题。
 
