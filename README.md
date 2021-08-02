@@ -81,13 +81,10 @@ NANOPI R4S (群友snow测试)
 
 **吹水群** :**667491026** (公子大爷请绕道，白嫖可能没人理)
 
-**OP打到阳光通知频道
-
-       https://t.me/openwrtscript
+**OP打到阳光通知频道** https://t.me/openwrtscript
+   
        
-**OP打到阳光吹水群
-
-       https://t.me/jdopenwrt
+**OP打到阳光吹水群** https://t.me/jdopenwrt
 
 ## 你们可以不好好看安装依赖，我也可以拒绝回答任何问题。
 
