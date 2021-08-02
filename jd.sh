@@ -245,10 +245,10 @@ done
 
 panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
 cat >$dir_file/config/tmp/panghu999.txt <<EOF
-	jd_opencard2.js		#柠檬一次性开卡
-	jd_lsj.js		#柠檬京东零食街
-	jd_twz-star.js		#特务Z行动-星小店
-	jd_ylyn.js		#伊利养牛
+	#jd_opencard2.js		#柠檬一次性开卡
+	#jd_lsj.js		#柠檬京东零食街
+	#jd_twz-star.js		#特务Z行动-星小店
+	#jd_ylyn.js		#伊利养牛
 EOF
 
 for script_name in `cat $dir_file/config/tmp/panghu999.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -261,7 +261,7 @@ done
 panghu999_url="https://raw.githubusercontent.com/panghu999/jd_scripts/master"
 cat >$dir_file/config/tmp/panghu999_url.txt <<EOF
 	#jd_necklace.js		#点点劵
-	jd_dianjing.js		#电竞经理
+	#jd_dianjing.js		#电竞经理
 EOF
 
 for script_name in `cat $dir_file/config/tmp/panghu999_url.txt | grep -v "#.*js" | awk '{print $1}'`
