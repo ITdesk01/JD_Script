@@ -196,7 +196,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_health.js			#健康社区
 	jd_health_collect.js		#健康社区-收能量
 	jd_gold_creator.js		#金榜创造营
-	jd_mohe.js			#5G超级盲盒
 	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
 	jd_cleancart.js			#清空购物车（默认不执行）
 	jd_get_share_code.js		#获取jd所有助力码脚本
@@ -369,6 +368,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_mohe.js			#5G超级盲盒
 	adolf_superbox.js		#超级盒子
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_price.js			#京东保价
@@ -440,7 +440,6 @@ ccr_run() {
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_jxlhb.js			#京喜领红包
-	jd_mohe.js			#5G超级盲盒
 	jd_car.js 			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_cash.js 			#签到领现金，每日2毛～5毛长期
 	jd_sgmh.js 			#闪购盲盒长期活动
@@ -557,7 +556,6 @@ cat >/tmp/jd_tmp/run_03 <<EOF
 	jd_necklace.js  		#点点券 大佬0,20领一次先扔这里后面再改
 	jd_speed.js 			#天天加速 3小时运行一次，打卡时间间隔是6小时
 	jd_health.js			#健康社区
-	jd_mohe.js			#5G超级盲盒
 EOF
 	echo -e "$green run_03$start_script_time $white"
 
