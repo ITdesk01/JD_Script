@@ -196,7 +196,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_jin_tie.js 			#领金贴
 	jd_health.js			#健康社区
 	jd_health_collect.js		#健康社区-收能量
-	jd_jump.js			#跳跳乐瓜分京豆
 	jd_gold_creator.js		#金榜创造营
 	jd_mohe.js			#5G超级盲盒
 	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
@@ -384,7 +383,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_OpenCard.py 			#开卡程序
 	jd_getFollowGift.py 		#关注有礼
 	jd_all_bean_change.js 		#京东月资产变动通知
-	adolf_superbox.js		#超级盒子
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jx_products_detail.js		#京喜工厂商品列表详情
@@ -399,6 +397,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	adolf_superbox.js		#超级盒子
+	jd_jump.js			#跳跳乐瓜分京豆
 	jd_price.js			#京东保价
 	jd_TW_buff.js			#特物-拉满BUFF 漂亮上场（没有几百个号，不用试了，默认不执行）
 	jd_jxqd.js			#京喜签到
@@ -486,7 +486,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_market_lottery.js 		#幸运大转盘
 	jd_jin_tie.js 			#领金贴
 	jd_dreamFactory.js 		#京喜工厂
-	adolf_superbox.js		#超级盒子
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_sign_graphics.js		#京东签到图形验证
 	jd_joypark_task.js		#汪汪乐园每日任务
@@ -633,7 +632,6 @@ EOF
 run_07() {
 cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_morningSc.js			#早起赢现金
-	adolf_superbox.js		#超级盒子
 	jd_lsj.js			#柠檬京东零食街
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_rankingList.js 		#京东排行榜签到领京豆
@@ -671,7 +669,6 @@ concurrent_js_run_07() {
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_syj.js 			#赚京豆
-	jd_jump.js			#跳跳乐瓜分京豆
 	jd_mb.js			#全民摸冰
 EOF
 	echo -e "$green run_08_12_16$start_script_time $white"
