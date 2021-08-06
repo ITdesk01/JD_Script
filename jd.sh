@@ -239,34 +239,6 @@ do
 	#update_if
 done
 
-panghu999="https://raw.githubusercontent.com/panghu999/panghu/master"
-cat >$dir_file/config/tmp/panghu999.txt <<EOF
-	#jd_opencard2.js		#柠檬一次性开卡
-	#jd_lsj.js		#柠檬京东零食街
-	#jd_twz-star.js		#特务Z行动-星小店
-	#jd_ylyn.js		#伊利养牛
-EOF
-
-for script_name in `cat $dir_file/config/tmp/panghu999.txt | grep -v "#.*js" | awk '{print $1}'`
-do
-	url="$panghu999"
-	#wget $panghu999/$script_name -O $dir_file_js/$script_name
-	#update_if
-done
-
-panghu999_url="https://raw.githubusercontent.com/panghu999/jd_scripts/master"
-cat >$dir_file/config/tmp/panghu999_url.txt <<EOF
-	#jd_necklace.js		#点点劵
-	#jd_dianjing.js		#电竞经理
-EOF
-
-for script_name in `cat $dir_file/config/tmp/panghu999_url.txt | grep -v "#.*js" | awk '{print $1}'`
-do
-	url="$panghu999_url"
-	#wget $panghu999_url/$script_name -O $dir_file_js/$script_name
-	#update_if
-done
-
 smiek2221_url="https://raw.githubusercontent.com/smiek2221/scripts/master"
 cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	#gua_wealth_island.js 		#财富岛新版
@@ -402,15 +374,6 @@ cat >/tmp/del_js.txt <<EOF
 	adolf_superbox.js		#超级盒子
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_price.js			#京东保价
-	jd_TW_buff.js			#特物-拉满BUFF 漂亮上场（没有几百个号，不用试了，默认不执行）
-	jd_jxqd.js			#京喜签到
-	jd_dianjing.js		#电竞经理
-	jd_opencard2.js		#柠檬一次性开卡
-	jd_lsj.js		#柠檬京东零食街
-	jd_twz-star.js		#特务Z行动-星小店
-	jd_ylyn.js		#伊利养牛
-	jd_tewuZ.js			#特务Ｚ(要跑两次)
-	jd_sign.js  			#京东签到针对图形验证码
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -540,7 +503,7 @@ EOF
 
 run_045() {
 cat >/tmp/jd_tmp/run_045 <<EOF
-	jd_opencard2.js		#柠檬一次性开卡
+	#暂无东西
 EOF
 
 	echo -e "$green run_045$start_script_time $white"
@@ -634,7 +597,6 @@ EOF
 run_07() {
 cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_morningSc.js			#早起赢现金
-	jd_lsj.js			#柠檬京东零食街
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_rankingList.js 		#京东排行榜签到领京豆
 	jd_kd.js 			#京东快递签到 一天运行一次即可
