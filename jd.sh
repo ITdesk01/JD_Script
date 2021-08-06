@@ -368,6 +368,7 @@ done
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://gitee.com/SuperManito/scripts/raw/master/jd_superBrand.js -O $dir_file_js/jd_superBrand.js #特物Z花西子(一次性,默认不执行)
+	wget https://raw.githubusercontent.com/asd920/Auto-jd/main/jd_cleancart.js -O $dir_file_js/jd_cleancart.js #清空购物车（默认不执行）
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -377,6 +378,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_cleancart.js 		#清空购物车（默认不执行）
 	jd_superBrand.js 		#特物Z花西子(一次性)
 	jd_mp_h5.js			#疯狂星期五
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
