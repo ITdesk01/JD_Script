@@ -314,7 +314,6 @@ done
 Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd"
 cat >$dir_file/config/tmp/Wenmoux_url.txt <<EOF
 	jd_ddnc_farmpark.js		#东东乐园 Wenmoux脚本
-	jd_mb.js			#全民摸冰
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Wenmoux_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -368,6 +367,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_mb.js			#全民摸冰
 	jd_mohe.js			#5G超级盲盒
 	adolf_superbox.js		#超级盒子
 	jd_jump.js			#跳跳乐瓜分京豆
@@ -628,7 +628,6 @@ concurrent_js_run_07() {
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_syj.js 			#赚京豆
-	jd_mb.js			#全民摸冰
 EOF
 	echo -e "$green run_08_12_16$start_script_time $white"
 
