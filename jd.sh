@@ -2074,7 +2074,7 @@ additional_settings() {
 
 
 	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
-	sed -i "s/inviteCodes = \[/inviteCodes = \[/n/g" $dir_file_js/jd_cash.js
+	sed -i "s/inviteCodes = \[/inviteCodes = \[\n/g" $dir_file_js/jd_cash.js
 	cashcode_rows=$(grep -n "inviteCodes = \[" $dir_file_js/jd_cash.js | awk -F ":" '{print $1}')
 	while [[ ${js_amount} -gt 0 ]]; do
 		sed -i "$cashcode_rows a \ $new_jdcash_set " $dir_file_js/jd_cash.js
