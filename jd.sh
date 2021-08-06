@@ -333,6 +333,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	JDJRValidator_Smiek.js
 	jd_dpqd.js			#店铺签到
 	jd_bean_sign.js			#京东多合一签到
+	jd_joy_park_newtask.js		# 汪汪乐园过新手任务，有火爆账号的可以手动运行一次（默认不运行）
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
