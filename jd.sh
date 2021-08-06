@@ -176,7 +176,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_club_lottery.js		#摇京豆
 	jd_shop.js			#进店领豆
 	jd_bean_home.js			#领京豆额外奖励
-	jd_rankingList.js		#京东排行榜签到得京豆
 	jd_cash.js			#签到领现金，每日2毛～5毛长期
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_syj.js			#赚京豆
@@ -199,6 +198,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_gold_creator.js		#金榜创造营
 	jd_mohe.js			#5G超级盲盒
 	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
+	jd_cleancart.js			#清空购物车（默认不执行）
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -340,7 +340,6 @@ done
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://gitee.com/SuperManito/scripts/raw/master/jd_superBrand.js -O $dir_file_js/jd_superBrand.js #特物Z花西子(一次性,默认不执行)
-	wget https://raw.githubusercontent.com/asd920/Auto-jd/main/jd_cleancart.js -O $dir_file_js/jd_cleancart.js #清空购物车（默认不执行）
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -350,7 +349,6 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	jd_cleancart.js 		#清空购物车（默认不执行）
 	jd_superBrand.js 		#特物Z花西子(一次性)
 	jd_mp_h5.js			#疯狂星期五
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
@@ -598,7 +596,6 @@ run_07() {
 cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_morningSc.js			#早起赢现金
 	jd_ddnc_farmpark.js		#东东乐园
-	jd_rankingList.js 		#京东排行榜签到领京豆
 	jd_kd.js 			#京东快递签到 一天运行一次即可
 	jd_bean_home.js 		#领京豆额外奖励
 	jd_club_lottery.js 		#摇京豆，没时间要求
