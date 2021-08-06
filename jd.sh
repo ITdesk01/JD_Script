@@ -2072,16 +2072,15 @@ additional_settings() {
 	dreamer_20200524_jdcash="IhM0aOyybv4l8266iw@eU9Yaem2bqhz-WzSyHdG1Q@eU9Ya77hNakv8GaGyXUa0Q@eU9YaLnmYv909mvWnyUX0g@aUNoKb_qI6Im9m_S"
 	new_jdcash_set="'$new_jdcash@$zuoyou_20190516_jdcash@$jidiyangguang_20190516_jdcash@$chiyu_jdcash@$Jhone_Potte_20200824_jdcash@$ashou_20210516_jdcash@$dreamer_20200524_jdcash',"
 
-	sed -i '/JD_CASH_SHARECODES/d' /etc/profile >/dev/null 2>&1
 
 	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
+	sed -i "s/inviteCodes = \[/inviteCodes = \[/n/g" $dir_file_js/jd_cash.js
 	cashcode_rows=$(grep -n "inviteCodes = \[" $dir_file_js/jd_cash.js | awk -F ":" '{print $1}')
 	while [[ ${js_amount} -gt 0 ]]; do
 		sed -i "$cashcode_rows a \ $new_jdcash_set " $dir_file_js/jd_cash.js
 		js_amount=$(($js_amount - 1))
 	done
 
-	sed -i "s/https:\/\/gitee.com\/shylocks\/updateTeam\/raw\/main\/jd_cash.json/https:\/\/raw.githubusercontent.com\/ITdesk01\/JD_Script\/main\/JSON\/jd_cash.json/g"  $dir_file_js/jd_cash.js
 
 	
 	#闪购盲盒
