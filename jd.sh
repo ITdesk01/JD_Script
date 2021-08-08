@@ -341,6 +341,7 @@ done
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://gitee.com/SuperManito/scripts/raw/master/jd_superBrand.js -O $dir_file_js/jd_superBrand.js #特物Z花西子(一次性,默认不执行)
+	wget https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_ryhxj.js -O $dir_file_js/jd_ryhxj.js #荣耀焕新季
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -582,6 +583,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_gold_creator.js		#金榜创造营
 	jd_goodMorning.js		#早起福利
 	jd_nzmh.js			#新一期女装盲盒
+	jd_ryhxj.js 			#荣耀焕新季
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
