@@ -329,6 +329,7 @@ Aaron_url="https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts"
 cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_jxlhb.js			#京喜领红包
 	jd_nzmh.js			#新一期女装盲盒
+	jd_mohe.js			#5G超级盲盒
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -372,7 +373,6 @@ EOF
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
 	jd_mb.js			#全民摸冰
-	jd_mohe.js			#5G超级盲盒
 	adolf_superbox.js		#超级盒子
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_price.js			#京东保价
@@ -560,6 +560,7 @@ cat >/tmp/jd_tmp/run_03 <<EOF
 	jd_necklace.js  		#点点券 大佬0,20领一次先扔这里后面再改
 	jd_speed.js 			#天天加速 3小时运行一次，打卡时间间隔是6小时
 	jd_health.js			#健康社区
+	jd_mohe.js			#5G超级盲盒
 EOF
 	echo -e "$green run_03$start_script_time $white"
 
