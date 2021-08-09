@@ -280,8 +280,6 @@ cat >$dir_file/config/tmp/Tsukasa007_url.txt <<EOF
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_joypark_open.js		#汪汪乐园开工位
 	jd_joypark_task.js		#汪汪乐园每日任务
-	jd_olympic_opencard.js		#一起奔跑 为奥运加油(一次性脚本)
-	jd_opencard_Daddy.js		#8.2-8.12 奶爸盛典 爸气全开(跑完手动领取100豆,只能领一次，所以默认不执行)
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Tsukasa007_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -371,6 +369,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_olympic_opencard.js		#一起奔跑 为奥运加油(一次性脚本)
+	jd_opencard_Daddy.js		#8.2-8.12 奶爸盛典 爸气全开(跑完手动领取100豆,只能领一次，所以默认不执行)
 	jd_bean_home.js 		#领京豆额外奖励
 	jd_opencard_teamBean1_enc.js	#组队瓜分京豆(一次性脚本,默认不运行)
 	jd_mb.js			#全民摸冰
