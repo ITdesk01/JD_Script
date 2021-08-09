@@ -340,7 +340,7 @@ done
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://gitee.com/SuperManito/scripts/raw/master/jd_superBrand.js -O $dir_file_js/jd_superBrand.js #特物Z花西子(一次性,默认不执行)
 	wget https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_ryhxj.js -O $dir_file_js/jd_ryhxj.js #荣耀焕新季
-	wget https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_plantBean.js -O $dir_file_js/jd_plantBean.js　#种豆得豆
+	wget https://raw.githubusercontent.com/yuannian1112/jd_scripts/main/jd_plantBean.js -O $dir_file_js/jd_plantBean.js #种豆得豆
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
