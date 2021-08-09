@@ -1959,6 +1959,7 @@ additional_settings() {
 	new_plantBean_set="'$new_plantBean1@$zuoyou_20190516_pb@$Javon_20201224_pb@$jidiyangguang_20190516_pb@$ashou_20210516_pb@$xiaobandeng_pb@$chiyu_pb@$random_set',"
 
 	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
+	sed -i "s/shareCodes = \[/shareCodes = \[\n/g" $dir_file_js/jd_plantBean.js
 	pb_rows=$(grep -n "shareCodes =" $dir_file_js/jd_plantBean.js | awk -F ":" '{print $1}')
 	while [[ ${js_amount} -gt 0 ]]; do
 		sed -i "$pb_rows a \ $new_plantBean_set " $dir_file_js/jd_plantBean.js
