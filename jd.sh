@@ -350,6 +350,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_summer_movement_exchange.js	#燃动夏季红包兑换(最好今天兑换了，过时不候，手动跑)
 	jd_plantBean.js　		#种豆得豆
 	jd_ryhxj.js 			#荣耀焕新季
 	jd_superBrand.js 		#特物Z花西子(一次性)
