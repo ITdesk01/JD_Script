@@ -2196,6 +2196,7 @@ close_notification() {
 		*)
 			sed -i "s/\/\/notify.sendNotify/notify.sendNotify/g" $dir_file_js/jd_cash_exchange.js
 		;;
+		esac
 	else
 		case `date +%H` in
 		22|23|00|01)
