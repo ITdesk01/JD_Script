@@ -695,7 +695,7 @@ run_jd_cash() {
 cat >/tmp/jd_tmp/run_jd_cash <<EOF
 	jd_cash_exchange.js #领现金兑换
 EOF
-	jd_cash_num="20"
+	jd_cash_num="30"
 	while [[ ${jd_cash_num} -gt 0 ]]; do
 		$node $dir_file_js/jd_cash_exchange.js &
 		sleep 1
