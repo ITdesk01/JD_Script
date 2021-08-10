@@ -2189,6 +2189,13 @@ close_notification() {
 	#农场和东东萌宠关闭通知
 	if [ `date +%A` == "Monday" ];then
 		echo -e "$green今天周一不关闭农场萌宠通知$white"
+		case `date +%H` in
+		22|23|00|01)
+			sed -i "s/notify.sendNotify/\/\/notify.sendNotify/g" $dir_file_js/jd_cash_exchange.js
+		;;
+		*)
+			sed -i "s/\/\/notify.sendNotify/notify.sendNotify/g" $dir_file_js/jd_cash_exchange.js
+		;;
 	else
 		case `date +%H` in
 		22|23|00|01)
@@ -2199,6 +2206,8 @@ close_notification() {
 			done
 			sed -i "s/jdNotify = true/jdNotify = false/g" $dir_file_js/jd_fruit.js
 			sed -i "s/jdNotify = true/jdNotify = false/g" $dir_file_js/jd_pet.js
+
+			sed -i "s/notify.sendNotify/\/\/notify.sendNotify/g" $dir_file_js/jd_cash_exchange.js
 
 			echo -e "$green暂时不关闭农场和萌宠通知$white"
 		;;
@@ -2211,6 +2220,8 @@ close_notification() {
 
 			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
 			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_pet.js
+
+			sed -i "s/\/\/notify.sendNotify/notify.sendNotify/g" $dir_file_js/jd_cash_exchange.js
 			echo -e "$green时间大于凌晨一点开始关闭农场和萌宠通知$white"
 		;;
 		esac
