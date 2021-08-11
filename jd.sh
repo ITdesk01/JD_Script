@@ -262,6 +262,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard7.js		#七夕会员福利社(默认不跑自己运行)
 	gua_opencard8.js		#开卡(默认不跑自己运行)
 	gua_opencard9.js		#开卡(默认不跑自己运行)
+	gua_opencard10.js		#开卡(默认不跑自己运行)
 	sign_graphics_validate.js
 	gua_doge.js			#七夕情报局
 EOF
