@@ -254,6 +254,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	sign_graphics_validate.js
 	gua_doge.js			#七夕情报局
 	jd_qcshj.js			#汽车生活节（不知道有啥用)
+	sign_graphics_validate.js	#gua_opencard6.js使用的，还有点豆子冲
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
