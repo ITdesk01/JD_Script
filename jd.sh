@@ -253,6 +253,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard10.js		#开卡(默认不跑自己运行)
 	sign_graphics_validate.js
 	gua_doge.js			#七夕情报局
+	jd_qcshj.js			#汽车生活节（不知道有啥用)
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -347,7 +348,6 @@ cat >$dir_file/config/tmp/yuannian1112_url.txt <<EOF
 	jd_plantBean.js			#种豆得豆
 	jd_appliances.js		#家电
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
-	jd_qcshj.js			#汽车生活节（不知道有啥用)
 EOF
 
 for script_name in `cat $dir_file/config/tmp/yuannian1112_url.txt | grep -v "#.*js" | awk '{print $1}'`
