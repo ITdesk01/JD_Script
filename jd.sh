@@ -53,6 +53,21 @@ line="%0D%0A%0D%0A---%0D%0A%0D%0A"
 current_time=$(date +"%Y-%m-%d")
 by="#### 脚本仓库地址:https://github.com/ITdesk01/JD_Script/tree/main 核心JS采用lxk0301开源JS脚本"
 
+if [ ! -f $openwrt_script_config/Checkjs_Sckey.txt ];then
+	echo >$openwrt_script_config/Checkjs_Sckey.txt
+else
+	echo >$dir_file/Checkjs_Sckey.txt
+fi
+
+if [ "$dir_file" == "/usr/share/jd_openwrt_script/JD_Script" ];then
+	SCKEY=$(grep "let SCKEY" $openwrt_script_config/sendNotify.js  | awk -F "'" '{print $2}')
+	if [ ! $SCKEY ];then
+		SCKEY=$(cat $openwrt_script_config/Checkjs_Sckey.txt)
+	fi
+else
+	SCKEY=$(cat $dir_file/Checkjs_Sckey.txt)
+fi
+
 #企业微信
 weixin_line="------------------------------------------------"
 
@@ -1265,20 +1280,6 @@ case "$push_if" in
 }
 
 server_push() {
-if [ ! -f $openwrt_script_config/Checkjs_Sckey.txt ];then
-	echo >$openwrt_script_config/Checkjs_Sckey.txt
-else
-	echo >$dir_file/Checkjs_Sckey.txt
-fi
-
-if [ "$dir_file" == "/usr/share/jd_openwrt_script/JD_Script" ];then
-	SCKEY=$(grep "let SCKEY" $openwrt_script_config/sendNotify.js  | awk -F "'" '{print $2}')
-	if [ ! $SCKEY ];then
-		SCKEY=$(cat $openwrt_script_config/Checkjs_Sckey.txt)
-	fi
-else
-	SCKEY=$(cat $dir_file/Checkjs_Sckey.txt)
-fi
 
 if [ ! $SCKEY ];then
 	echo "没找到Server酱key不做操作"
