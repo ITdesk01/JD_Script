@@ -287,6 +287,7 @@ cat >$dir_file/config/tmp/Tsukasa007_url.txt <<EOF
 	jd_joypark_open.js		#汪汪乐园开工位
 	jd_joypark_task.js		#汪汪乐园每日任务
 	jd_opencard_teamBean3_enc.js	#开卡默认不运行
+	jd_opencard_teamBean4_enc.js	#开卡默认不运行限时活动随时删除
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Tsukasa007_url.txt | grep -v "#.*js" | awk '{print $1}'`
