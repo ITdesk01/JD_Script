@@ -244,14 +244,11 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	ZooFaker_Necklace.js 		#点点券依赖文件
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
         gua_MMdou.js                    #赚京豆MM豆
-	gua_opencard4.js		#大牌联合 冰爽一夏(默认不跑自己运行)
-	gua_opencard5.js		#冰爽夏日 钜惠送好礼(默认不跑自己运行)
 	gua_opencard6.js		#七夕告白季-开卡(默认不跑自己运行)
 	gua_opencard7.js		#七夕会员福利社(默认不跑自己运行)
 	gua_opencard8.js		#开卡(默认不跑自己运行)
 	gua_opencard9.js		#开卡(默认不跑自己运行)
 	gua_opencard10.js		#开卡(默认不跑自己运行)
-	sign_graphics_validate.js
 	gua_doge.js			#七夕情报局
 	jd_qcshj.js			#汽车生活节（不知道有啥用)
 	sign_graphics_validate.js	#gua_opencard6.js使用的，还有点豆子冲
