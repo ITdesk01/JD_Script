@@ -255,6 +255,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_doge.js			#七夕情报局
 	jd_qcshj.js			#汽车生活节（不知道有啥用)
 	sign_graphics_validate.js	#gua_opencard6.js使用的，还有点豆子冲
+	gua_xiaolong.js			#8.13-8.25 骁龙品牌日
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -462,6 +463,7 @@ ccr_run() {
 	echo ""
 	$node $openwrt_script/JD_Script/js/jd_angryCash.js #愤怒的现金
 	$node $openwrt_script/JD_Script/js/jd_sddd.js			#送豆得豆
+	$node $openwrt_script/JD_Script/js/gua_xiaolong.js			#8.13-8.25 骁龙品牌日
 }
 
 run_0() {
@@ -653,6 +655,7 @@ EOF
 
 concurrent_js_run_07() {
 	#这里的也不会并发
+	$node $openwrt_script/JD_Script/js/gua_xiaolong.js			#8.13-8.25 骁龙品牌日
 	$node $openwrt_script/JD_Script/js/jd_sddd.js			#送豆得豆
 	$node $openwrt_script/JD_Script/js/jd_qcshj.js		#汽车生活节（不知道有啥用)
 	$node $openwrt_script/JD_Script/js/jd_carnivalcity_help.js	#手机狂欢城内部互助
