@@ -469,6 +469,7 @@ update_script() {
 
 ccr_run() {
 	echo ""
+	$node $openwrt_script/JD_Script/js/jd_jxlhb.js			#京喜领红包
 	$node $openwrt_script/JD_Script/js/jd_angryCash.js #愤怒的现金
 	$node $openwrt_script/JD_Script/js/jd_sddd.js			#送豆得豆
 	$node $openwrt_script/JD_Script/js/gua_xiaolong.js			#8.13-8.25 骁龙品牌日
@@ -477,7 +478,6 @@ ccr_run() {
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
-	jd_jxlhb.js			#京喜领红包
 	jd_car.js 			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_cash.js 			#签到领现金，每日2毛～5毛长期
 	jd_sgmh.js 			#闪购盲盒长期活动
