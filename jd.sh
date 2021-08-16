@@ -211,7 +211,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_health_collect.js		#健康社区-收能量
 	jd_gold_creator.js		#金榜创造营
 	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
-	jd_cleancart.js			#清空购物车（默认不执行）
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
@@ -260,11 +259,9 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
         gua_MMdou.js                    #赚京豆MM豆
 	gua_opencard6.js		#七夕告白季-开卡(默认不跑自己运行)
-	gua_opencard7.js		#七夕会员福利社(默认不跑自己运行)
 	gua_opencard8.js		#开卡(默认不跑自己运行)
 	gua_opencard9.js		#开卡(默认不跑自己运行)
 	gua_opencard10.js		#开卡(默认不跑自己运行)
-	gua_doge.js			#七夕情报局
 	jd_qcshj.js			#汽车生活节（不知道有啥用)
 	#sign_graphics_validate.js	#gua_opencard6.js使用的，还有点豆子冲
 	gua_xiaolong.js			#8.13-8.25 骁龙品牌日
@@ -278,8 +275,8 @@ do
 	update_if
 done
 
-cdle_url="https://raw.githubusercontent.com/cdle/jd_study/main"
-cat >$dir_file/config/tmp/cdle_url.txt <<EOF
+faker2_url="https://raw.githubusercontent.com/shufflewzc/faker2/main"
+cat >$dir_file/config/tmp/faker2_url.txt <<EOF
 	jd_morningSc.js			#早起赢现金
 	jd_angryCash.js			#愤怒的现金
 	jd_angryKoi.js			#愤怒的锦鲤
@@ -288,10 +285,10 @@ cat >$dir_file/config/tmp/cdle_url.txt <<EOF
 	jd_cash_exchange.js		#签到领现金兑换
 EOF
 
-for script_name in `cat $dir_file/config/tmp/cdle_url.txt | grep -v "#.*js" | awk '{print $1}'`
+for script_name in `cat $dir_file/config/tmp/faker2_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
-	url="$cdle_url"
-	wget $cdle_url/$script_name -O $dir_file_js/$script_name
+	url="$faker2_url"
+	wget $faker2_url/$script_name -O $dir_file_js/$script_name
 	update_if
 done
 
@@ -300,7 +297,6 @@ cat >$dir_file/config/tmp/Tsukasa007_url.txt <<EOF
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_joypark_open.js		#汪汪乐园开工位
 	jd_joypark_task.js		#汪汪乐园每日任务
-	jd_opencard_teamBean3_enc.js	#开卡默认不运行
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Tsukasa007_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -407,9 +403,10 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
-	jd_opencard_teamBean4_enc.js	#开卡默认不运行限时活动随时删除
-	jd_olympic_opencard.js		#一起奔跑 为奥运加油(一次性脚本)
-	jd_opencard_Daddy.js		#8.2-8.12 奶爸盛典 爸气全开(跑完手动领取100豆,只能领一次，所以默认不执行)
+	gua_opencard7.js		#七夕会员福利社(默认不跑自己运行)
+	gua_doge.js			#七夕情报局
+	jd_cleancart.js			#清空购物车（默认不执行）
+	jd_opencard_teamBean3_enc.js	#开卡默认不运行
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
