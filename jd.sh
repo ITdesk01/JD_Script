@@ -669,6 +669,7 @@ concurrent_js_run_07() {
 	$node $openwrt_script/JD_Script/js/jd_sddd.js			#送豆得豆
 	$node $openwrt_script/JD_Script/js/jd_qcshj.js		#汽车生活节（不知道有啥用)
 	$node $openwrt_script/JD_Script/js/jd_carnivalcity_help.js	#手机狂欢城内部互助
+	$node $openwrt_script/JD_Script/js/jd_jxlhb.js			#京喜领红包
 	$node $openwrt_script/JD_Script/js/jd_dreamFactory.js #京喜工厂
 	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 	checklog #检测log日志是否有错误并推送
