@@ -180,7 +180,7 @@ update() {
 
 rm -rf $dir_file/config/tmp/*
 
-#lxk0301
+#lxk0301_back
 cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_fruit.js			#东东农场
 	jd_jxnc.js			#京喜农场
@@ -277,19 +277,19 @@ done
 
 cdle_url="https://raw.githubusercontent.com/cdle/jd_study/main"
 cat >$dir_file/config/tmp/cdle_url.txt <<EOF
-	#jd_morningSc.js			#早起赢现金
-	#jd_angryCash.js			#愤怒的现金
-	#jd_angryKoi.js			#愤怒的锦鲤
-	#jd_goodMorning.js		#早起福利
-	#jd_joy_park_help.js 		#汪汪乐园助力
-	#jd_cash_exchange.js		#签到领现金兑换
+	jd_morningSc.js		#早起赢现金
+	jd_angryCash.js		#愤怒的现金
+	jd_angryKoi.js			#愤怒的锦鲤
+	jd_goodMorning.js		#早起福利
+	jd_joy_park_help.js 		#汪汪乐园助力
+	jd_cash_exchange.js		#签到领现金兑换
 EOF
 
 for script_name in `cat $dir_file/config/tmp/cdle_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
 	url="$cdle_url"
-	wget $cdle_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $cdle_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 Tsukasa007_url="https://raw.githubusercontent.com/Tsukasa007/my_script/master"
