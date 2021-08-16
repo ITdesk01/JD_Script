@@ -1223,7 +1223,7 @@ check_cooike() {
 	fi
 	sed -i "/$pt_pin/d" $openwrt_script_config/check_cookie.txt
 	remark=$(grep "$pt_pin" $openwrt_script_config/jdCookie.js | awk -F "//" '{print $2}')
-	echo "$remark   $pt_pin   $Current_date      $Expiration_date" >> $openwrt_script_config/check_cookie.txt
+	echo "$remark      $pt_pin   $Current_date      $Expiration_date" >> $openwrt_script_config/check_cookie.txt
 }
 
 check_cookie_push() {
