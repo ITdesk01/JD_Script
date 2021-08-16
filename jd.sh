@@ -471,7 +471,6 @@ ccr_run() {
 	echo ""
 	$node $openwrt_script/JD_Script/js/jd_jxlhb.js			#京喜领红包
 	$node $openwrt_script/JD_Script/js/jd_angryCash.js #愤怒的现金
-	$node $openwrt_script/JD_Script/js/jd_sddd.js			#送豆得豆
 	$node $openwrt_script/JD_Script/js/gua_xiaolong.js			#8.13-8.25 骁龙品牌日
 	$node $openwrt_script/JD_Script/js/jd_decompression.js		#热血心跳,狂解压(一次两次)
 }
