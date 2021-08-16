@@ -180,7 +180,7 @@ update() {
 
 rm -rf $dir_file/config/tmp/*
 
-#lxk0301
+#lxk0301_back
 cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_fruit.js			#东东农场
 	jd_jxnc.js			#京喜农场
@@ -259,12 +259,9 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	ZooFaker_Necklace.js 		#点点券依赖文件
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
         gua_MMdou.js                    #赚京豆MM豆
-	gua_opencard6.js		#七夕告白季-开卡(默认不跑自己运行)
-	gua_opencard7.js		#七夕会员福利社(默认不跑自己运行)
 	gua_opencard8.js		#开卡(默认不跑自己运行)
 	gua_opencard9.js		#开卡(默认不跑自己运行)
 	gua_opencard10.js		#开卡(默认不跑自己运行)
-	gua_doge.js			#七夕情报局
 	jd_qcshj.js			#汽车生活节（不知道有啥用)
 	#sign_graphics_validate.js	#gua_opencard6.js使用的，还有点豆子冲
 	gua_xiaolong.js			#8.13-8.25 骁龙品牌日
@@ -280,8 +277,8 @@ done
 
 cdle_url="https://raw.githubusercontent.com/cdle/jd_study/main"
 cat >$dir_file/config/tmp/cdle_url.txt <<EOF
-	jd_morningSc.js			#早起赢现金
-	jd_angryCash.js			#愤怒的现金
+	jd_morningSc.js		#早起赢现金
+	jd_angryCash.js		#愤怒的现金
 	jd_angryKoi.js			#愤怒的锦鲤
 	jd_goodMorning.js		#早起福利
 	jd_joy_park_help.js 		#汪汪乐园助力
@@ -291,8 +288,8 @@ EOF
 for script_name in `cat $dir_file/config/tmp/cdle_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
 	url="$cdle_url"
-	wget $cdle_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $cdle_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 Tsukasa007_url="https://raw.githubusercontent.com/Tsukasa007/my_script/master"
@@ -300,7 +297,6 @@ cat >$dir_file/config/tmp/Tsukasa007_url.txt <<EOF
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_joypark_open.js		#汪汪乐园开工位
 	jd_joypark_task.js		#汪汪乐园每日任务
-	jd_opencard_teamBean3_enc.js	#开卡默认不运行
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Tsukasa007_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -407,6 +403,10 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_opencard6.js                #七夕告白季-开卡(默认不跑自己运行)
+	gua_opencard7.js                #七夕会员福利社(默认不跑自己运行)
+	gua_doge.js			#七夕情报局
+	jd_opencard_teamBean3_enc.js	#开卡默认不运行
 	jd_opencard_teamBean4_enc.js	#开卡默认不运行限时活动随时删除
 	jd_olympic_opencard.js		#一起奔跑 为奥运加油(一次性脚本)
 	jd_opencard_Daddy.js		#8.2-8.12 奶爸盛典 爸气全开(跑完手动领取100豆,只能领一次，所以默认不执行)
@@ -668,6 +668,7 @@ concurrent_js_run_07() {
 	$node $openwrt_script/JD_Script/js/jd_sddd.js			#送豆得豆
 	$node $openwrt_script/JD_Script/js/jd_qcshj.js		#汽车生活节（不知道有啥用)
 	$node $openwrt_script/JD_Script/js/jd_carnivalcity_help.js	#手机狂欢城内部互助
+	$node $openwrt_script/JD_Script/js/jd_jxlhb.js			#京喜领红包
 	$node $openwrt_script/JD_Script/js/jd_dreamFactory.js #京喜工厂
 	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
 	checklog #检测log日志是否有错误并推送
@@ -694,7 +695,6 @@ cat >/tmp/jd_tmp/run_10_15_20 <<EOF
 	jd_joy_park_help.js 		#汪汪乐园助力
 	jd_speed_sign.js 		#京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#极速版红包
-	gua_doge.js			#七夕情报局
 EOF
 
 	echo -e "$green run_10_15_20$start_script_time $white"
@@ -1207,8 +1207,10 @@ delcookie() {
 check_cooike() {
 #将cookie获取时间导入文本
 	if [ ! -f $openwrt_script_config/check_cookie.txt  ];then
-		echo "Cookie             添加时间      预计到期时间(不保证百分百准确)" > $openwrt_script_config/check_cookie.txt
+		echo "备注      Cookie             添加时间      预计到期时间(不保证百分百准确)" > $openwrt_script_config/check_cookie.txt
 	fi
+	sed -i "/添加时间/d" $openwrt_script_config/check_cookie.txt
+	sed -i "1i\备注      Cookie             添加时间      预计到期时间(不保证百分百准确)" $openwrt_script_config/check_cookie.txt
 	Current_date=$(date +%Y-%m-%d)
 	Current_date_m=$(echo $Current_date | awk -F "-" '{print $2}')
 	if [ "$Current_date_m" == "12"  ];then
@@ -1219,7 +1221,8 @@ check_cooike() {
 		#$这个不要改动，没有写错
 	fi
 	sed -i "/$pt_pin/d" $openwrt_script_config/check_cookie.txt
-	echo "$pt_pin   $Current_date      $Expiration_date" >> $openwrt_script_config/check_cookie.txt
+	remark=$(grep "$pt_pin" $openwrt_script_config/jdCookie.js | awk -F "//" '{print $2}')
+	echo "$remark      $pt_pin   $Current_date      $Expiration_date" >> $openwrt_script_config/check_cookie.txt
 }
 
 check_cookie_push() {
