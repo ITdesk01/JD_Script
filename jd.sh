@@ -259,12 +259,9 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	ZooFaker_Necklace.js 		#点点券依赖文件
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
         gua_MMdou.js                    #赚京豆MM豆
-	gua_opencard6.js		#七夕告白季-开卡(默认不跑自己运行)
-	gua_opencard7.js		#七夕会员福利社(默认不跑自己运行)
 	gua_opencard8.js		#开卡(默认不跑自己运行)
 	gua_opencard9.js		#开卡(默认不跑自己运行)
 	gua_opencard10.js		#开卡(默认不跑自己运行)
-	gua_doge.js			#七夕情报局
 	jd_qcshj.js			#汽车生活节（不知道有啥用)
 	#sign_graphics_validate.js	#gua_opencard6.js使用的，还有点豆子冲
 	gua_xiaolong.js			#8.13-8.25 骁龙品牌日
@@ -280,12 +277,12 @@ done
 
 cdle_url="https://raw.githubusercontent.com/cdle/jd_study/main"
 cat >$dir_file/config/tmp/cdle_url.txt <<EOF
-	jd_morningSc.js			#早起赢现金
-	jd_angryCash.js			#愤怒的现金
-	jd_angryKoi.js			#愤怒的锦鲤
-	jd_goodMorning.js		#早起福利
-	jd_joy_park_help.js 		#汪汪乐园助力
-	jd_cash_exchange.js		#签到领现金兑换
+	#jd_morningSc.js			#早起赢现金
+	#jd_angryCash.js			#愤怒的现金
+	#jd_angryKoi.js			#愤怒的锦鲤
+	#jd_goodMorning.js		#早起福利
+	#jd_joy_park_help.js 		#汪汪乐园助力
+	#jd_cash_exchange.js		#签到领现金兑换
 EOF
 
 for script_name in `cat $dir_file/config/tmp/cdle_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -406,6 +403,9 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_opencard6.js                #七夕告白季-开卡(默认不跑自己运行)
+	gua_opencard7.js                #七夕会员福利社(默认不跑自己运行)
+	gua_doge.js			#七夕情报局
 	jd_opencard_teamBean3_enc.js	#开卡默认不运行
 	jd_opencard_teamBean4_enc.js	#开卡默认不运行限时活动随时删除
 	jd_olympic_opencard.js		#一起奔跑 为奥运加油(一次性脚本)
@@ -696,7 +696,6 @@ cat >/tmp/jd_tmp/run_10_15_20 <<EOF
 	jd_joy_park_help.js 		#汪汪乐园助力
 	jd_speed_sign.js 		#京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#极速版红包
-	gua_doge.js			#七夕情报局
 EOF
 
 	echo -e "$green run_10_15_20$start_script_time $white"
