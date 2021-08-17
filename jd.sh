@@ -1443,24 +1443,19 @@ that_day() {
 	else
 		echo -e "$line#### Model：$sys_model\n#### Wan+IP地址：+$wan_ip\n#### 系统版本:++$uname_version\n$line\n#### $current_time+更新日志\n" >> $dir_file/git_log/${current_time}.log
 		echo "作者泡妹子或者干饭去了$wrap$wrap_tab今天没有任何更新$wrap$wrap_tab不要催佛系玩。。。" >>$dir_file/git_log/${current_time}.log
+		echo "\n" >>$dir_file/git_log/${current_time}.log
 		echo "#### 当前脚本是否最新：$Script_status" >>$dir_file/git_log/${current_time}.log
 	fi
 
 	log_sort=$(cat  $dir_file/git_log/${current_time}.log |sed "s/$/$wrap$wrap_tab/" | sed ':t;N;s/\n//;b t' | sed "s/$wrap_tab####/####/g")
-	log_sort1=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
-	if [ ! $SCKEY ];then
-			echo "没找到Server酱key不做操作"
-	else
-		if [ ! $log_sort1 ];then
-			echo -e "$red 推送失败$white，请检查 $dir_file/git_log/${current_time}.log是否存在"
-		else
-			echo -e "$green开始推送JD_Script仓库状态$white"
-			curl -s "http://sc.ftqq.com/$SCKEY.send?text=JD_Script仓库状态" -d "&desp=$log_sort1" >/dev/null 2>&1
-			sleep 3
-			echo -e "$green 推送完成$white"
-		fi
-	fi
+	server_content=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
 
+	weixin_content_sort=$(echo  $log_sort |sed "s/####/<b>/g"   |sed "s/$line/<hr\/><\/b>/g" |sed "s/$wrap/<br>/g" |sed "s/<br>#//g"  | sed "s/$/<br>/" |sed "s/<hr\/><\/b><br>/<hr\/><\/b>/g" |sed "s/+/ /g"| sed "s/<br> <br>/<br>/g"|  sed ':t;N;s/\n//;b t' )
+	weixin_content=$(echo "$weixin_content_sort<br><b>$by")
+	weixin_desp=$(echo "$weixin_content" | sed "s/<hr\/><\/b><b>/$weixin_line\n/g" |sed "s/<hr\/><\/b>/\n$weixin_line\n/g"| sed "s/<b>/\n/g"| sed "s/<br>/\n/g" | sed "s/<br><br>/\n/g" | sed "s/#/\n/g" )
+
+	title="JD_Script仓库状态"
+	push_menu
 }
 
 backnas() {
