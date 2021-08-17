@@ -1227,7 +1227,7 @@ check_cookie_push() {
 	cat $openwrt_script_config/check_cookie.txt
 	echo "----------------------------------------------"
 	echo "$line#### cookie数量:`cat $openwrt_script_config/js_cookie.txt |wc -l`$line" >/tmp/jd_check_cookie.txt
-	cat $openwrt_script_config/check_cookie.txt |sed "s/Cookie/$wrap$wrap_tab\# Cookie/"  >>/tmp/jd_check_cookie.txt
+	cat $openwrt_script_config/check_cookie.txt |sed "s/备注/$wrap$wrap_tab\# 备注/"  >>/tmp/jd_check_cookie.txt
 	echo "$line#### cookie是否有效$line" >>/tmp/jd_check_cookie.txt
 	$node $dir_file_js/jd_check_cookie1.js | grep "京东账号" >>/tmp/jd_check_cookie.txt
 
@@ -1368,6 +1368,7 @@ checklog() {
 		grep -Elrn  "错误|失败" $i  >> $log2
 		grep -Elrn  "错误|失败" $i  >> $log3
 	done
+
 	cat_log=$(cat $log2 | wc -l)
 	if [ $cat_log -ge "1" ];then
 		num="JD_Script发现有$cat_log个日志包含错误信息"
@@ -1379,7 +1380,7 @@ checklog() {
 	for i in `cat $log2`
 	do
 		echo "#### ${i}详细的错误" >> $log3
-		grep -E  "错误|失败|module" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败\|node_modules\|sgmodule\|无助力机会\|不可以为自己助力\|助力次数耗尽\|礼包已抢完\|限流严重\|不能去好友工厂打工啦\|验证失败\|提现失败' | sort -u >> $log3
+		grep -E  "错误|失败|module" $i | grep -v '京东天天\|京东商城\|京东拍拍\|京东现金\|京东秒杀\|京东日历\|京东金融\|京东金贴\|金融京豆\|检测\|参加团主\|参团失败\|node_modules\|sgmodule\|无助力机会\|不可以为自己助力\|助力次数耗尽\|礼包已抢完\|限流严重\|不能去好友工厂打工啦\|验证失败\|提现失败\|助力失败' | sort -u >> $log3
 	done
 
 	if [ $num = "no_error" ]; then
@@ -1390,9 +1391,9 @@ checklog() {
 		log_sort=$(cat ${log3} | sed "s/&//g" | sed "s/$/$wrap$wrap_tab$sort_log/g" |  sed ':t;N;s/\n//;b t' )
 		server_content=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
 
-		weixin_content_sort=$(cat ${log3} |sed "s/}//g" | sed "s/{//g"| sed "s/####/<b>/g"   |sed "s/$line/<hr\/><\/b>/g" |sed "s/$wrap$wrap_tab/<br>/g" |sed "s/<br>#//g"  | sed "s/$/<br>/" |sed "s/<hr\/><\/b><br>/<hr\/><\/b>/g" |  sed ':t;N;s/\n//;b t' )
+		weixin_content_sort=$(cat ${log3} |sed "s/}//g" | sed "s/{//g"| sed "s/####/<hr\/><b>/g"   |sed "s/$line/<hr\/><\/b>/g" |sed "s/$wrap$wrap_tab/<br>/g" |sed "s/<br>#//g"  | sed "s/$/<br>/" |sed "s/<hr\/><\/b><br>/<hr\/><\/b>/g"| sed "s/详细的错误<br>/详细的错误<b\/><hr\/><br>/g" | sed "s/错误日志的文件/错误日志的文件<b\/><hr\/>/g"| sed "s/<hr\/><b> Wan/<b> Wan/g" | sed "s/<hr\/><b> Model/<b> Model/g" | sed "s/<hr\/><b> 系统版本/<b> 系统版本/g"| sed "s/\"//g"  | sed "s/+/ /g" |  sed ':t;N;s/\n//;b t' | sed "s/<br><hr\/><\/b><hr\/><b>/<br><\/b><hr\/><b>/g")
 		weixin_content=$(echo "$weixin_content_sort<br><b>$by")
-		weixin_desp=$(echo "$weixin_content" | sed "s/<hr\/><\/b><b>/$weixin_line\n/g" |sed "s/<hr\/><\/b>/\n$weixin_line\n/g"| sed "s/<b>/\n/g"| sed "s/<br>/\n/g" | sed "s/<br><br>/\n/g" | sed "s/#/\n/g" )
+		weixin_desp=$(echo "$weixin_content" | sed "s/<hr\/><\/b><b>/$weixin_line\n/g" |sed "s/<hr\/><\/b>/\n$weixin_line\n/g"| sed "s/<b>/\n/g"| sed "s/<br>/\n/g" | sed "s/<br><br>/\n/g" | sed "s/#/\n/g" | sed "s/<hr\/>//g" | sed "s/<b\/><hr\/>//g" | sed "s/<b\/>//g" | sed "s/<\/b>/$weixin_line\n/g" )
 
 		title="$num"
 		push_menu
