@@ -210,7 +210,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_health.js			#健康社区
 	jd_health_collect.js		#健康社区-收能量
 	jd_gold_creator.js		#金榜创造营
-	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
 	jd_cleancart.js			#清空购物车（默认不执行）
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_bean_change.js		#京豆变动通知(长期)
@@ -368,6 +367,20 @@ do
 	wget $yuannian1112_url/$script_name -O $dir_file_js/$script_name
 	update_if
 done
+
+#star261
+star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
+cat >$dir_file/config/tmp/star261_url.txt <<EOF
+	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
+EOF
+
+for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
+do
+	url="$star261_url"
+	wget $star261_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
 
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
