@@ -461,12 +461,23 @@ update_script() {
 }
 
 ccr_run() {
+	#这里有的就不要加到concurrent_js_run_07
 	echo ""
 	$node $openwrt_script/JD_Script/js/jd_jxlhb.js			#京喜领红包
-	$node $openwrt_script/JD_Script/js/jd_angryCash.js #愤怒的现金
-	$node $openwrt_script/JD_Script/js/gua_xiaolong.js			#8.13-8.25 骁龙品牌日
-	$node $openwrt_script/JD_Script/js/jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
+	$node $openwrt_script/JD_Script/js/jd_angryCash.js 		#愤怒的现金
+	$node $openwrt_script/JD_Script/js/gua_xiaolong.js		#8.13-8.25 骁龙品牌日
+	$node $openwrt_script/JD_Script/js/jd_redPacket.js		#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 }
+
+concurrent_js_run_07() {
+	#这里的也不会并发
+	$node $openwrt_script/JD_Script/js/jd_qcshj.js			#汽车生活节（不知道有啥用)
+	$node $openwrt_script/JD_Script/js/jd_carnivalcity_help.js	#手机狂欢城内部互助
+	$node $openwrt_script/JD_Script/js/jd_dreamFactory.js 		#京喜工厂
+	$node $openwrt_script/JD_Script/js/jd_bean_change.js 		#京豆变更
+	checklog #检测log日志是否有错误并推送
+}
+
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
@@ -651,17 +662,6 @@ EOF
 	echo -e "$green run_07$stop_script_time $white"
 }
 
-concurrent_js_run_07() {
-	#这里的也不会并发
-	$node $openwrt_script/JD_Script/js/jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
-	$node $openwrt_script/JD_Script/js/gua_xiaolong.js			#8.13-8.25 骁龙品牌日
-	$node $openwrt_script/JD_Script/js/jd_qcshj.js		#汽车生活节（不知道有啥用)
-	$node $openwrt_script/JD_Script/js/jd_carnivalcity_help.js	#手机狂欢城内部互助
-	$node $openwrt_script/JD_Script/js/jd_jxlhb.js			#京喜领红包
-	$node $openwrt_script/JD_Script/js/jd_dreamFactory.js #京喜工厂
-	$node $openwrt_script/JD_Script/js/jd_bean_change.js #京豆变更
-	checklog #检测log日志是否有错误并推送
-}
 
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
