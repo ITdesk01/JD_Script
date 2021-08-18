@@ -261,6 +261,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
         gua_MMdou.js                    #赚京豆MM豆
 	gua_opencard12.js		#开卡(默认不跑自己运行)
 	gua_opencard13.js		#开卡(默认不跑自己运行)
+	gua_opencard14.js		#开卡(默认不跑自己运行)
 	jd_qcshj.js			#汽车生活节（不知道有啥用)
 	#sign_graphics_validate.js	#gua_opencard6.js使用的，还有点豆子冲
 	gua_xiaolong.js			#8.13-8.25 骁龙品牌日
