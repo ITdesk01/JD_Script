@@ -1250,10 +1250,22 @@ check_cookie_push() {
 	echo "----------------------------------------------"
 	cat $openwrt_script_config/check_cookie.txt
 	echo "----------------------------------------------"
-	echo "$line#### cookie数量:`cat $openwrt_script_config/js_cookie.txt |wc -l`$line" >/tmp/jd_check_cookie.txt
+	echo "$line#### cookie数量:`cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | wc -l`$line" >/tmp/jd_check_cookie.txt
 	cat $openwrt_script_config/check_cookie.txt |sed "s/备注/$wrap$wrap_tab\# 备注/"  >>/tmp/jd_check_cookie.txt
-	echo "$line#### cookie是否有效$line" >>/tmp/jd_check_cookie.txt
-	$node $dir_file_js/jd_check_cookie1.js | grep "京东账号" >>/tmp/jd_check_cookie.txt
+	$node $dir_file_js/jd_check_cookie1.js | grep "京东账号" >/tmp/jd_check_cookie_sort.txt
+
+	effective_cookie=$(cat /tmp/jd_check_cookie_sort.txt | grep "有效" )
+	Invalid_cookie=$(cat /tmp/jd_check_cookie_sort.txt | grep "失效" )
+	echo "$line#### cookie有效数量:`cat /tmp/jd_check_cookie_sort.txt | grep "有效"| wc -l`$line" >>/tmp/jd_check_cookie.txt
+
+	echo "$effective_cookie"　>>/tmp/jd_check_cookie.txt
+
+	if [ `echo $Invalid_cookie | wc -l` -ge "1" ];then
+		echo "$line#### cookie失效数量:`cat /tmp/jd_check_cookie_sort.txt | grep "失效"| wc -l`$line" >>/tmp/jd_check_cookie.txt
+		echo "$Invalid_cookie"　>>/tmp/jd_check_cookie.txt
+	else
+		echo "没有失效cookie"
+	fi
 
 	cookie_content=$(cat /tmp/jd_check_cookie.txt |sed "s/ /+/g"| sed "s/$/$wrap$wrap_tab/g" |  sed ':t;N;s/\n//;b t' )
 
