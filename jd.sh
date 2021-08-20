@@ -362,6 +362,7 @@ cat >$dir_file/config/tmp/yuannian1112_url.txt <<EOF
 	jd_ryhxj.js			#荣耀焕新季
 	jd_plantBean.js			#种豆得豆
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
+	jd_focus.js			#一次性关注脚本（默认不运行）
 EOF
 
 for script_name in `cat $dir_file/config/tmp/yuannian1112_url.txt | grep -v "#.*js" | awk '{print $1}'`
