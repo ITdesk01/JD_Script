@@ -397,6 +397,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	gua_opencard15.js		#新的开卡（默认不运行）
 	jd_summer_movement_exchange.js	#燃动夏季红包兑换(最好今天兑换了，过时不候，手动跑)
 	jd_mp_h5.js			#疯狂星期五
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
