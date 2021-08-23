@@ -348,6 +348,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_mohe.js			#5G超级盲盒
 	jd_carnivalcity.js		#手机狂欢城
 	jd_carnivalcity_help.js		#手机狂欢城内部互助
+	jd_ccSign.js			#领券中心签到
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -519,6 +520,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_joypark_task.js		#汪汪乐园每日任务
 	jd_mp_h5.js			#疯狂星期五
 	jd_dpqd.js			#店铺签到
+	jd_ccSign.js			#领券中心签到
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_0$start_script_time $white"
