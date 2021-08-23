@@ -390,6 +390,7 @@ done
 
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
+	wget https://raw.githubusercontent.com/shufflewzc/faker2/main/jd_bean_change_new.js -O $dir_file_js/jd_bean_change_new.js #资产变动强化版
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -399,6 +400,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_bean_change_new.js 		#资产变动强化版
 	gua_opencard15.js		#新的开卡（默认不运行）
 	jd_summer_movement_exchange.js	#燃动夏季红包兑换(最好今天兑换了，过时不候，手动跑)
 	jd_mp_h5.js			#疯狂星期五
@@ -496,7 +498,8 @@ concurrent_js_run_07() {
 	$node $openwrt_script/JD_Script/js/jd_carnivalcity_help.js	#手机狂欢城内部互助
 	$node $openwrt_script/JD_Script/js/jd_dreamFactory.js 		#京喜工厂
 	$node $openwrt_script/JD_Script/js/jd_unsubscriLive.js		#取关主播
-	$node $openwrt_script/JD_Script/js/jd_bean_change.js 		#京豆变更
+	$node $openwrt_script/JD_Script/js/jd_bean_change_new.js 	#资产变动强化版
+	#$node $openwrt_script/JD_Script/js/jd_bean_change.js 		#京豆变更
 	checklog #检测log日志是否有错误并推送
 }
 
