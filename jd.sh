@@ -191,7 +191,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_car.js			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_club_lottery.js		#摇京豆
 	jd_shop.js			#进店领豆
-	jd_cash.js			#签到领现金，每日2毛～5毛长期
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_syj.js			#赚京豆
 	jd_kd.js			#京东快递签到 一天运行一次即可
@@ -350,6 +349,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_carnivalcity.js		#手机狂欢城
 	jd_carnivalcity_help.js		#手机狂欢城内部互助
 	jd_ccSign.js			#领券中心签到
+	jd_cash.js			#签到领现金，每日2毛～5毛长期
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
