@@ -344,8 +344,6 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_jxlhb.js			#京喜领红包
 	jd_nzmh.js			#新一期女装盲盒
 	jd_mohe.js			#5G超级盲盒
-	jd_carnivalcity.js		#手机狂欢城
-	jd_carnivalcity_help.js		#手机狂欢城内部互助
 	jd_ccSign.js			#领券中心签到
 	jd_cash.js			#签到领现金，每日2毛～5毛长期
 EOF
@@ -400,8 +398,6 @@ done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_bean_change_new.js 		#资产变动强化版
-	gua_opencard15.js		#新的开卡（默认不运行）
-	jd_summer_movement_exchange.js	#燃动夏季红包兑换(最好今天兑换了，过时不候，手动跑)
 	jd_mp_h5.js			#疯狂星期五
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
 	jd_OpenCard.py 			#开卡程序
@@ -421,15 +417,11 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
-	gua_opencard10.js		#开卡(默认不跑自己运行)
-	gua_opencard12.js		#开卡(默认不跑自己运行)
-	gua_opencard13.js		#开卡(默认不跑自己运行)
-	jd_ryhxj.js			#荣耀焕新季
-	jd_focus.js                     #一次性关注脚本（默认不运行）
-	jd_appliances.js		#家电
-	jd_sddd.js			#送豆得豆
-	gua_opencard8.js		#开卡(默认不跑自己运行)
-	gua_opencard9.js		#开卡(默认不跑自己运行)
+	jd_ryhxj.js 			#荣耀焕新季
+	jd_carnivalcity.js		#手机狂欢城
+	jd_carnivalcity_help.js		#手机狂欢城内部互助
+	gua_opencard15.js		#新的开卡（默认不运行）
+	jd_summer_movement_exchange.js	#燃动夏季红包兑换(最好今天兑换了，过时不候，手动跑)
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -499,11 +491,9 @@ ccr_run() {
 concurrent_js_run_07() {
 	#这里的也不会并发
 	$node $openwrt_script/JD_Script/js/jd_qcshj.js			#汽车生活节（不知道有啥用)
-	$node $openwrt_script/JD_Script/js/jd_carnivalcity_help.js	#手机狂欢城内部互助
 	$node $openwrt_script/JD_Script/js/jd_dreamFactory.js 		#京喜工厂
 	$node $openwrt_script/JD_Script/js/jd_unsubscriLive.js		#取关主播
 	$node $openwrt_script/JD_Script/js/jd_bean_change_new.js 	#资产变动强化版
-	#$node $openwrt_script/JD_Script/js/jd_bean_change.js 		#京豆变更
 	checklog #检测log日志是否有错误并推送
 }
 
@@ -651,8 +641,6 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_gold_creator.js		#金榜创造营
 	jd_goodMorning.js		#早起福利
 	jd_nzmh.js			#新一期女装盲盒
-	jd_ryhxj.js 			#荣耀焕新季
-	jd_carnivalcity.js		#手机狂欢城
 	jd_king.js			#王者荣耀投票，脚本内随机随缘助力
 	jd_dwapp.js			#积分换话费
 EOF
