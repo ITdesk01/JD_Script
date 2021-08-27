@@ -735,6 +735,7 @@ cat >/tmp/jd_tmp/run_jd_cash <<EOF
 EOF
 	jd_cash_num="30"
 	while [[ ${jd_cash_num} -gt 0 ]]; do
+		$node $dir_file_js/jd_cash_exchange.js &
 		sleep 1
 		jd_cash_num=$(($jd_cash_num - 1))
 	done
