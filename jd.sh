@@ -2445,8 +2445,8 @@ time() {
 npm_install() {
 	echo -e "$green 开始安装npm模块$white"
 	#安装js模块
-	cp $dir_file/git_clone/lxk0301_back/package.json $dir_file/package.json
-	cd $dir_file && npm -g install
+	cp $dir_file/git_clone/lxk0301_back/package.json $openwrt_script/package.json
+	cd $openwrt_script && npm -g install
 	npm install -g request http stream zlib vm png-js fs got tough-cookie audit date-fns ts-md5
 	npm install --save axios
 	cd $dir_file/cookies_web && npm -g install
