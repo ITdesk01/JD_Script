@@ -2367,6 +2367,9 @@ additional_settings() {
 		sed -i "$healthcode_rows a \ '$new_health_set', " $dir_file_js/jd_health.js
 		js_amount=$(($js_amount - 1))
 	done
+
+	#宠汪汪兑换
+	sed -i "s/.\/utils\/JDJRValidator_Pure/.\/JDJRValidator_Pure/g" $dir_file_js/jd_joy_reward.js
 }
 
 if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
