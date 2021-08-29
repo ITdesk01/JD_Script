@@ -75,8 +75,10 @@ start_script_time="脚本开始运行，当前时间：`date "+%Y-%m-%d %H:%M"`"
 stop_script_time="脚本结束，当前时间：`date "+%Y-%m-%d %H:%M"`"
 script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"  | wc -l)
 
+export JD_JOY_REWARD_NAME="500"
+
 task() {
-	cron_version="3.59"
+	cron_version="3.60"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -112,6 +114,7 @@ cat >>/etc/crontabs/root <<EOF
 #0 1 * * * $python3 $dir_file/git_clone/curtinlv_script/jd_qjd.py >/tmp/jd_qjd.log #抢京豆#100#
 59 23 * * 0,1,2,5,6 sleep 57 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
 59 23 * * * sleep 50 && $dir_file/jd.sh run_jd_blueCoin >/tmp/jd_jd_blueCoin.log	#京东超市兑换#100#
+59 23,7,15 * * * sleep 56 && $dir_file/jd.sh run_jd_joy_reward >/tmp/jd_joy_reward.log	#汪汪兑换积分#100#
 45 23 * * * $dir_file/jd.sh kill_ccr #杀掉所有并发进程，为零点准备#100#
 46 23 * * * rm -rf /tmp/*.log #删掉所有log文件，为零点准备#100#
 ###########100##########请将其他定时任务放到底下###############
@@ -357,6 +360,7 @@ cat >$dir_file/config/tmp/yuannian1112_url.txt <<EOF
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_dwapp.js			#积分换话费
 	jd_opencard17.js		#秋新资联合开卡(默认不运行)
+	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
 EOF
 
 for script_name in `cat $dir_file/config/tmp/yuannian1112_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -726,6 +730,18 @@ EOF
 	done
 }
 
+run_jd_joy_reward() {
+cat >/tmp/jd_tmp/run_jd_joy_reward <<EOF
+	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
+EOF
+	jd_joy_reward_num="30"
+	while [[ ${jd_joy_reward_num} -gt 0 ]]; do
+		$node $dir_file_js/jd_joy_reward.js &
+		sleep 1
+		jd_joy_reward_num=$(($jd_joy_reward_num - 1))
+	done
+}
+
 
 run_jd_blueCoin() {
 cat >/tmp/jd_tmp/run_jd_blueCoin <<EOF
@@ -738,6 +754,10 @@ EOF
 		jd_blueCoin_num=$(($jd_blueCoin_num - 1))
 	done
 }
+
+
+
+
 
 curtinlv_script_setup() {
 	#开卡
@@ -2684,7 +2704,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward)
 		$action1
 		;;
 		kill_ccr)
@@ -2703,7 +2723,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward)
 		$action2
 		;;
 		kill_ccr)
