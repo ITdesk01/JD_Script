@@ -260,7 +260,6 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard14.js		#开卡(默认不跑自己运行)
 	jd_qcshj.js			#汽车生活节（不知道有啥用)
 	#sign_graphics_validate.js	#gua_opencard6.js使用的，还有点豆子冲
-	gua_xiaolong.js			#8.13-8.25 骁龙品牌日
 	gua_xmGame.js			#小米-星空大冒险（一次性脚本）
 EOF
 
@@ -416,6 +415,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_xiaolong.js			#8.13-8.25 骁龙品牌日
 	jd_ryhxj.js 			#荣耀焕新季
 	jd_carnivalcity.js		#手机狂欢城
 	jd_carnivalcity_help.js		#手机狂欢城内部互助
@@ -482,7 +482,6 @@ ccr_run() {
 	#这里有的就不要加到concurrent_js_run_07
 	echo ""
 	$node $openwrt_script/JD_Script/js/jd_jxlhb.js			#京喜领红包
-	$node $openwrt_script/JD_Script/js/gua_xiaolong.js		#8.13-8.25 骁龙品牌日
 	$node $openwrt_script/JD_Script/js/jd_redPacket.js		#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 }
 
