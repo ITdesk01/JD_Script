@@ -258,7 +258,6 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
         gua_MMdou.js                    #赚京豆MM豆
 	gua_opencard14.js		#开卡(默认不跑自己运行)
-	jd_qcshj.js			#汽车生活节（不知道有啥用)
 	#sign_graphics_validate.js	#gua_opencard6.js使用的，还有点豆子冲
 	gua_xmGame.js			#小米-星空大冒险（一次性脚本）
 EOF
@@ -416,6 +415,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_qcshj.js			#汽车生活节（不知道有啥用)
 	gua_xiaolong.js			#8.13-8.25 骁龙品牌日
 	jd_ryhxj.js 			#荣耀焕新季
 	jd_carnivalcity.js		#手机狂欢城
@@ -489,7 +489,6 @@ ccr_run() {
 concurrent_js_run_07() {
 	#这里的也不会并发
 	$node $openwrt_script/JD_Script/js/jd_jdzz.js			#京东赚赚长期活动
-	$node $openwrt_script/JD_Script/js/jd_qcshj.js			#汽车生活节（不知道有啥用)
 	$node $openwrt_script/JD_Script/js/jd_dreamFactory.js 		#京喜工厂
 	$node $openwrt_script/JD_Script/js/jd_unsubscriLive.js		#取关主播
 	$node $openwrt_script/JD_Script/js/jd_bean_change_new.js 	#资产变动强化版
