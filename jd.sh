@@ -287,7 +287,6 @@ done
 
 Tsukasa007_url="https://raw.githubusercontent.com/Tsukasa007/my_script/master"
 cat >$dir_file/config/tmp/Tsukasa007_url.txt <<EOF
-	jd_opencard_Starbucks.js	#星巴克开卡(默认不运行)
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_joypark_open.js		#汪汪乐园开工位
 	jd_joypark_task.js		#汪汪乐园每日任务
@@ -296,8 +295,8 @@ EOF
 for script_name in `cat $dir_file/config/tmp/Tsukasa007_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
 	url="$Tsukasa007_url"
-	wget $Tsukasa007_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $Tsukasa007_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 zero205_url="https://raw.githubusercontent.com/zero205/JD_tencent_scf/main"
@@ -331,8 +330,8 @@ EOF
 for script_name in `cat $dir_file/config/tmp/Wenmoux_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
 	url="$Wenmoux_url"
-	wget $Wenmoux_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $Wenmoux_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 Aaron_url="https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts"
@@ -415,6 +414,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_opencard_Starbucks.js	#星巴克开卡(默认不运行)
 	jd_qcshj.js			#汽车生活节（不知道有啥用)
 	gua_xiaolong.js			#8.13-8.25 骁龙品牌日
 	jd_ryhxj.js 			#荣耀焕新季
@@ -1930,7 +1930,7 @@ additional_settings() {
 	youxizhenhaowan_20201229_fr="99a9841c61f94408beecd446ff9075f1@287ccad61f0249dab7426db9f019e5e1@b2ed38d653c945e18a5c38b73fae0a4e"
 
 	#谈何容易
-f	tanherongyi_20210121_fr="24156b43b0664cff955e2bedea49e2b5@1cf02b657b524b90b882e45414893abe@5ec06e692aa8412db93acb3b4ec47a58@9875e6c9ea2e4cd2a89adeea15383315"
+	tanherongyi_20210121_fr="24156b43b0664cff955e2bedea49e2b5@1cf02b657b524b90b882e45414893abe@5ec06e692aa8412db93acb3b4ec47a58@9875e6c9ea2e4cd2a89adeea15383315"
 
 	#无聊
 	wuliao_20210214_fr="6b8689615bdc4831a9f9b96d8842e06e@85da7dbfa1b749efb3f7b1ffa7e6d018"
