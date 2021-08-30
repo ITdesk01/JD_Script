@@ -313,7 +313,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_bean_sign.js			#京东多合一签到
 	jd_joy_park_newtask.js		# 汪汪乐园过新手任务，有火爆账号的可以手动运行一次（默认不运行）
 	jd_superMarket.js		#东东超市
-	jd_superBrand.js 		#特物Z(手动跑两次就行了)
 	jd_kxcdz.js			#开学充电站
 	jd_unsubscriLive.js		#取关主播
 EOF
@@ -359,7 +358,6 @@ cat >$dir_file/config/tmp/yuannian1112_url.txt <<EOF
 	jd_plantBean.js			#种豆得豆
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_dwapp.js			#积分换话费
-	jd_opencard17.js		#秋新资联合开卡(默认不运行)
 	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
 EOF
 
@@ -376,6 +374,7 @@ cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
 	jd_king.js			#王者荣耀投票，脚本内随机随缘助力
 	jd_iqoo_run.js			#iqoo生而为赢酷跑
+	jd_prodev_dailyTask.js		#个护联合活动（一次性脚本默认不执行）
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -418,14 +417,10 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_opencard17.js		#秋新资联合开卡(默认不运行)
+	jd_superBrand.js 		#特物Z(手动跑两次就行了)
 	jd_opencard_Starbucks.js	#星巴克开卡(默认不运行)
 	jd_qcshj.js			#汽车生活节（不知道有啥用)
-	gua_xiaolong.js			#8.13-8.25 骁龙品牌日
-	jd_ryhxj.js 			#荣耀焕新季
-	jd_carnivalcity.js		#手机狂欢城
-	jd_carnivalcity_help.js		#手机狂欢城内部互助
-	gua_opencard15.js		#新的开卡（默认不运行）
-	jd_summer_movement_exchange.js	#燃动夏季红包兑换(最好今天兑换了，过时不候，手动跑)
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
