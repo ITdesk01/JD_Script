@@ -315,6 +315,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_superMarket.js		#东东超市
 	jd_kxcdz.js			#开学充电站
 	jd_unsubscriLive.js		#取关主播
+	jd_superBrand.js		#特物Z|万物皆可国创
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -489,6 +490,7 @@ concurrent_js_run_07() {
 	$node $openwrt_script/JD_Script/js/jd_jdzz.js			#京东赚赚长期活动
 	$node $openwrt_script/JD_Script/js/jd_dreamFactory.js 		#京喜工厂
 	$node $openwrt_script/JD_Script/js/jd_unsubscriLive.js		#取关主播
+	$node $openwrt_script/JD_Script/js/jd_superBrand.js		#特物Z|万物皆可国创
 	$node $openwrt_script/JD_Script/js/jd_bean_change_new.js 	#资产变动强化版
 	checklog #检测log日志是否有错误并推送
 }
