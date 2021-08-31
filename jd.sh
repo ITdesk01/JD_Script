@@ -418,7 +418,6 @@ EOF
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
 	jd_opencard17.js		#秋新资联合开卡(默认不运行)
-	jd_superBrand.js 		#特物Z(手动跑两次就行了)
 	jd_opencard_Starbucks.js	#星巴克开卡(默认不运行)
 	jd_qcshj.js			#汽车生活节（不知道有啥用)
 EOF
