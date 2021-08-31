@@ -374,7 +374,6 @@ cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
 	jd_king.js			#王者荣耀投票，脚本内随机随缘助力
 	jd_iqoo_run.js			#iqoo生而为赢酷跑
-	jd_prodev_dailyTask.js		#个护联合活动（一次性脚本默认不执行）
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
