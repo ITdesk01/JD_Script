@@ -337,7 +337,6 @@ done
 
 Aaron_url="https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts"
 cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
-	jd_jxlhb.js			#京喜领红包
 	jd_nzmh.js			#新一期女装盲盒
 	jd_mohe.js			#5G超级盲盒
 	jd_ccSign.js			#领券中心签到
@@ -417,6 +416,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_jxlhb.js			#京喜领红包
 	gua_opencard14.js		#开卡(默认不跑自己运行)
 	jd_jxnc.js			#京喜农场
 	jd_opencard17.js		#秋新资联合开卡(默认不运行)
@@ -482,7 +482,6 @@ update_script() {
 ccr_run() {
 	#这里有的就不要加到concurrent_js_run_07
 	echo ""
-	$node $openwrt_script/JD_Script/js/jd_jxlhb.js			#京喜领红包
 	$node $openwrt_script/JD_Script/js/jd_redPacket.js		#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 }
 
