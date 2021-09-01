@@ -1152,7 +1152,7 @@ addcookie() {
 		new_pt=$(echo $you_cookie)
 		pt_pin=$(echo $you_cookie | awk -F "pt_pin=" '{print $2}' | awk -F ";" '{print $1}')
 		pt_key=$(echo $you_cookie | awk -F "pt_key=" '{print $2}' | awk -F ";" '{print $1}')
-		if [ ! $pt_pin  ] && [ ! $pt_key ];then
+		if [ `echo "$pt_pin" | wc -l` == "1"  ] && [ `echo "$pt_key" | wc -l` == "1" ];then
 			addcookie_replace
 		else
 			echo "$pt_pin $pt_key　$red异常$white"
