@@ -302,6 +302,7 @@ done
 
 zero205_url="https://raw.githubusercontent.com/zero205/JD_tencent_scf/main"
 cat >$dir_file/config/tmp/zero205_url.txt <<EOF
+	jd_jxlhb.js			#京喜领红包
 	jd_joy.js			#宠汪汪
 	JDJRValidator_Pure.js
 	sign_graphics_validate.js
@@ -482,6 +483,7 @@ update_script() {
 ccr_run() {
 	#这里有的就不要加到concurrent_js_run_07
 	echo ""
+	$node $openwrt_script/JD_Script/js/jd_jxlhb.js			#京喜领红包
 	$node $openwrt_script/JD_Script/js/jd_redPacket.js		#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 }
 
