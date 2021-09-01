@@ -1122,9 +1122,13 @@ addcookie() {
 		echo -e "		新增cookie或者更新cookie"
 		echo "---------------------------------------------------------------------------"
 		echo ""
-		echo -e "$green例子：$white"
+		echo -e "$yellow单账号例子：$white"
 		echo ""
-		echo -e "$green pt_key=jd_10086jd_10086jd_10086jd_10086jd_10086jd_10086jd_10086;pt_pin=jd_10086; //二狗子$white"
+		echo -e "pt_key=xxxxxx;pt_pin=jd_xxxxxx; //二狗子"
+		echo ""
+		echo -e "$yellow多账号例子：（用＆分割账号）$white"
+		echo ""
+		echo -e "pt_key=xxxxxx;pt_pin=jd_xxxxxx; //二狗子&pt_key=xxxxxx;pt_pin=jd_xxxxxx; //雪糕兄"
 		echo ""
 		echo -e "$yellow pt_key=$green密码  $yellow pt_pin=$green 账号  $yellow// 二狗子 $green(备注这个账号是谁的)$white"
 		echo ""
@@ -1135,13 +1139,50 @@ addcookie() {
 			echo -e "$red请不要输入空值。。。$white"
 			exit 0
 		fi
+
 	fi
+
+	echo "$you_cookie" > /tmp/you_cookie.txt
+	sed -i "s/&/\n/g" /tmp/you_cookie.txt
 	echo -e "$yellow\n开始为你查找是否存在这个cookie，有就更新，没有就新增。。。$white\n"
 	sleep 2
-	new_pt=$(echo $you_cookie)
-	pt_pin=$(echo $you_cookie | awk -F "pt_pin=" '{print $2}' | awk -F ";" '{print $1}')
-	pt_key=$(echo $you_cookie | awk -F "pt_key=" '{print $2}' | awk -F ";" '{print $1}')
+	if_you_cookie=$(cat /tmp/you_cookie.txt | wc -l)
+	if [ $if_you_cookie == "1" ];then
+		you_cookie=$(cat /tmp/you_cookie.txt)
+		new_pt=$(echo $you_cookie)
+		pt_pin=$(echo $you_cookie | awk -F "pt_pin=" '{print $2}' | awk -F ";" '{print $1}')
+		pt_key=$(echo $you_cookie | awk -F "pt_key=" '{print $2}' | awk -F ";" '{print $1}')
+		if [ ! $pt_pin  ] && [ ! $pt_key ];then
+			addcookie_replace
+		else
+			echo "$pt_pin $pt_key　$red异常$white"
+			sleep 2
+		fi
+	else
+		num="1"
+		while [ $if_you_cookie -ge $num ];do
+			clear
+			echo  "------------------------------------------------------------------------------"
+			echo -e "你一共输入了$yellow$if_you_cookie$white条cookie现在开始替换第$green$num$white条cookie"
+			you_cookie=$(sed -n "$num p" /tmp/you_cookie.txt)
+			new_pt=$(echo $you_cookie)
+			pt_pin=$(echo $you_cookie | awk -F "pt_pin=" '{print $2}' | awk -F ";" '{print $1}')
+			pt_key=$(echo $you_cookie | awk -F "pt_key=" '{print $2}' | awk -F ";" '{print $1}')
 
+			if [ `echo "$pt_pin" | wc -l` == "1"  ] && [ `echo "$pt_key" | wc -l` == "1" ];then
+				addcookie_replace
+				sleep 2
+			else
+				echo -e "$pt_pin $pt_key　$red异常$white"
+				sleep 2
+			fi
+			num=$(( $num + 1))
+		done
+
+	fi
+}
+
+addcookie_replace(){
 	if [ `cat $openwrt_script_config/jdCookie.js | grep "$pt_pin" | wc -l` == "1" ];then
 		echo -e "$green检测到 $yellow${pt_pin}$white 已经存在，开始更新cookie。。$white\n"
 		sleep 2
@@ -1167,6 +1208,7 @@ addcookie() {
 		cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | sed -e "s/',//g" -e "s/'//g"
 		echo  "------------------------------------------------------------------------------"
 	fi
+
 	check_cooike
 	sed -n  '1p' $openwrt_script_config/check_cookie.txt
 	grep "$pt_pin" $openwrt_script_config/check_cookie.txt
