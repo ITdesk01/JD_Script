@@ -311,7 +311,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_bean_sign.js			#京东多合一签到
 	jd_joy_park_newtask.js		# 汪汪乐园过新手任务，有火爆账号的可以手动运行一次（默认不运行）
 	jd_superMarket.js		#东东超市
-	jd_kxcdz.js			#开学充电站
 	jd_unsubscriLive.js		#取关主播
 	jd_superBrand.js		#特物Z|万物皆可国创
 EOF
@@ -416,6 +415,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_kxcdz.js			#开学充电站
 	gua_xmGame.js			#小米-星空大冒险（一次性脚本）
 	gua_opencard14.js		#开卡(默认不跑自己运行)
 	jd_jxnc.js			#京喜农场
@@ -667,7 +667,6 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_speed_redpocke.js		#极速版红包
 	jd_cash.js 			#签到领现金，每日2毛～5毛长期
 	jd_jin_tie.js 			#领金贴
-	jd_kxcdz.js			#开学充电站
 	jd_unsubscribe.js 		#取关店铺，没时间要求
         gua_MMdou.js                    #赚京豆MM豆
 EOF
