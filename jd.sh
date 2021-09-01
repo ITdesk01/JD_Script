@@ -1134,7 +1134,7 @@ addcookie() {
 		echo ""
 		echo -e "$yellow 请不要乱输，如果输错了可以用$green sh \$jd delcookie$yellow删除,\n 或者你手动去$green$openwrt_script_config/jdCookie.js$yellow删除也行\n$white"
 		echo "---------------------------------------------------------------------------"
-		read -p "请填写你获取到的cookie(一次只能一个cookie)：" you_cookie
+		read -p "请填写你获取到的cookie(一次只能一个cookie,多个cookie要用＆连接起来)：" you_cookie
 		if [[ -z $you_cookie ]]; then
 			echo -e "$red请不要输入空值。。。$white"
 			exit 0
