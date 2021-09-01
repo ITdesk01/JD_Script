@@ -187,7 +187,6 @@ rm -rf $dir_file/config/tmp/*
 #lxk0301_back
 cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_fruit.js			#东东农场
-	jd_jxnc.js			#京喜农场
 	jd_pet.js			#东东萌宠
 	jd_dreamFactory.js		#京喜工厂
 	jd_jdfactory.js			#东东工厂
@@ -260,7 +259,6 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	ZooFaker_Necklace.js 		#点点券依赖文件
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
         gua_MMdou.js                    #赚京豆MM豆
-	gua_opencard14.js		#开卡(默认不跑自己运行)
 	#sign_graphics_validate.js	#gua_opencard6.js使用的，还有点豆子冲
 	gua_xmGame.js			#小米-星空大冒险（一次性脚本）
 EOF
@@ -419,6 +417,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_opencard14.js		#开卡(默认不跑自己运行)
+	jd_jxnc.js			#京喜农场
 	jd_opencard17.js		#秋新资联合开卡(默认不运行)
 	jd_opencard_Starbucks.js	#星巴克开卡(默认不运行)
 	jd_qcshj.js			#汽车生活节（不知道有啥用)
@@ -661,7 +661,6 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_kd.js 			#京东快递签到 一天运行一次即可
 	jd_club_lottery.js 		#摇京豆，没时间要求
 	jd_jdzz.js 			#京东赚赚长期活动
-	jd_jxnc.js 			#京喜农场
 	jd_ms.js 			#京东秒秒币 一个号大概60
 	jd_sgmh.js 			#闪购盲盒长期活动
 	jd_speed_sign.js 		#京东极速版签到+赚现金任务
