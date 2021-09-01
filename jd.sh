@@ -260,7 +260,6 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
         gua_MMdou.js                    #赚京豆MM豆
 	#sign_graphics_validate.js	#gua_opencard6.js使用的，还有点豆子冲
-	gua_xmGame.js			#小米-星空大冒险（一次性脚本）
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -417,7 +416,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
-	jd_jxlhb.js			#京喜领红包
+	gua_xmGame.js			#小米-星空大冒险（一次性脚本）
 	gua_opencard14.js		#开卡(默认不跑自己运行)
 	jd_jxnc.js			#京喜农场
 	jd_opencard17.js		#秋新资联合开卡(默认不运行)
