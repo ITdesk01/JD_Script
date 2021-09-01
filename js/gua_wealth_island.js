@@ -18,10 +18,10 @@ const urlLib = require("url");
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 // const notify = $.isNode() ? require('./sendNotify') : '';
 $.CryptoJS = $.isNode() ? require('crypto-js') : CryptoJS;
-let UA = `jdapp;iPhone;10.0.5;${Math.ceil(Math.random()*2+12)}.${Math.ceil(Math.random()*4)};${randomString(40)};`
+let UA = `jdpingou;iPhone;5.2.2;14.3;${randomString(40)};network/wifi;model/iPhone12,1;appBuild/100630;ADID/00000000-0000-0000-0000-000000000000;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/0;hasOCPay/0;supportBestPay/0;session/1;pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148`
 function randomString(e) {
   e = e || 32;
-  let t = "abcdefhijkmnprstwxyz2345678", a = t.length, n = "";
+  let t = "abcdef0123456789", a = t.length, n = "";
   for (i = 0; i < e; i++)
     n += t.charAt(Math.floor(Math.random() * a));
   return n
@@ -31,7 +31,7 @@ $.innerInviteList = [];
 const HelpAuthorFlag = false;//是否助力作者SH  true 助力，false 不助力
 
 // 热气球接客 每次运行接客次数
-let serviceNum = 20;// 每次运行接客次数
+let serviceNum = 10;// 每次运行接客次数
 if ($.isNode() && process.env.gua_wealth_island_serviceNum) {
   serviceNum = Number(process.env.gua_wealth_island_serviceNum);
 }
@@ -66,7 +66,7 @@ $.appId = 10032;
       $.index = i + 1;
       $.isLogin = true;
       console.log(`\n*****开始【京东账号${$.index}】${$.UserName}****\n`);
-      UA = `jdapp;iPhone;10.0.5;${Math.ceil(Math.random()*2+12)}.${Math.ceil(Math.random()*4)};${randomString(40)};`
+      UA = `jdpingou;iPhone;5.2.2;14.3;${randomString(40)};network/wifi;model/iPhone12,1;appBuild/100630;ADID/00000000-0000-0000-0000-000000000000;supportApplePay/1;hasUPPay/0;pushNoticeIsOpen/0;hasOCPay/0;supportBestPay/0;session/1;pap/JA2019_3111789;brand/apple;supportJDSHWK/1;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148`
       await run();
     }
   }
@@ -226,8 +226,9 @@ async function makeShareCodes(code) {
 }
 
 async function GetHomePageInfo() {
-  let additional= `&ddwTaskId&strShareId&strMarkList=guider_step%2Ccollect_coin_auth%2Cguider_medal%2Cguider_over_flag%2Cbuild_food_full%2Cbuild_sea_full%2Cbuild_shop_full%2Cbuild_fun_full%2Cmedal_guider_show%2Cguide_guider_show%2Cguide_receive_vistor`
-  let stk= `_cfd_t,bizCode,ddwTaskId,dwEnv,ptag,source,strMarkList,strShareId,strZone`
+  let e = getJxAppToken()
+  let additional= `&strPgtimestamp=${e.strPgtimestamp}&strPhoneID=${e.strPhoneID}&strPgUUNum=${e.strPgUUNum}&ddwTaskId=&strShareId=&strMarkList=guider_step%2Ccollect_coin_auth%2Cguider_medal%2Cguider_over_flag%2Cbuild_food_full%2Cbuild_sea_full%2Cbuild_shop_full%2Cbuild_fun_full%2Cmedal_guider_show%2Cguide_guider_show%2Cguide_receive_vistor%2Cdaily_task%2Cguider_daily_task%2Ccfd_has_show_selef_point`
+  let stk= `_cfd_t,bizCode,ddwTaskId,dwEnv,ptag,source,strMarkList,strPgUUNum,strPgtimestamp,strPhoneID,strShareId,strVersion,strZone`
   $.HomeInfo = await taskGet(`user/QueryUserInfo`, stk, additional)
   if($.HomeInfo){
     $.Fund = $.HomeInfo.Fund || ''
@@ -428,8 +429,9 @@ async function sign(){
           }
         }
         if(flag){
-          let additional = `&ptag=&ddwCoin=${ddwCoin}&ddwMoney=${ddwMoney}&dwPrizeType=${dwPrizeType}&strPrizePool${strPrizePool && '='+strPrizePool ||''}&dwPrizeLv=${dwPrizeLv}`
-          let stk= `_cfd_t,bizCode,ddwCoin,ddwMoney,dwEnv,dwPrizeLv,dwPrizeType,ptag,source,strPrizePool,strZone`
+          let e = getJxAppToken()
+          let additional = `&ptag=&ddwCoin=${ddwCoin}&ddwMoney=${ddwMoney}&dwPrizeType=${dwPrizeType}&strPrizePool${strPrizePool && '='+strPrizePool ||''}&dwPrizeLv=${dwPrizeLv}&strPgtimestamp=${e.strPgtimestamp}&strPhoneID=${e.strPhoneID}&strPgUUNum=${e.strPgUUNum}`
+          let stk= `_cfd_t,bizCode,ddwCoin,ddwMoney,dwEnv,dwPrizeLv,dwPrizeType,ptag,source,strPrizePool,strPgUUNum,strPgtimestamp,strPhoneID,strZone`
           let res = await taskGet(`story/RewardSign`, stk, additional)
           await printRes(res, '签到')
         }
@@ -494,7 +496,7 @@ async function pickshell(num = 1){
   return new Promise(async (resolve) => {
     try{
       console.log(`\n捡垃圾`)
-      // pickshell dwType 1珍珠 2海螺 3大海螺  4海星
+      // pickshell dwType 1珍珠 2海螺 3大海螺  4海星 5小贝壳 6扇贝
       for(i=1;num--;i++){
         await $.wait(2000)
         $.queryshell = await taskGet(`story/queryshell`, '_cfd_t,bizCode,dwEnv,ptag,source,strZone', `&ptag=`)
@@ -707,14 +709,12 @@ async function ActTask(){
         }
         if(item.dwAwardStatus == 2 && item.dwCompleteNum < item.dwTargetNum && [1,2].includes(item.dwOrderId)){
           await $.wait(1000)
-          if(item.dwOrderId == 2){
-            if(item.strTaskName.indexOf('热气球接待') > -1){
-              let b = (item.dwTargetNum-item.dwCompleteNum)
-              // 热气球接客
-              await service(b)
-              await $.wait((Number(item.dwLookTime) * 1000) || 1000)
-            }
-          }else if(item.dwOrderId == 1){
+          if(item.strTaskName.indexOf('热气球接待') > -1){
+            let b = (item.dwTargetNum-item.dwCompleteNum)
+            // 热气球接客
+            await service(b)
+            await $.wait((Number(item.dwLookTime) * 1000) || 1000)
+          }else if(item.dwPointType == 301){
             await $.wait((Number(item.dwLookTime) * 1000) || 1000)
             res = await taskGet('DoTask1', '_cfd_t,bizCode,configExtra,dwEnv,ptag,source,strZone,taskId', `&ptag=&taskId=${item.ddwTaskId}&configExtra=`)
           }
@@ -850,6 +850,23 @@ function printRes(res, msg=''){
     console.log(`${msg}失败:${res.sErrMsg}`)
   }else{
     console.log(`${msg}失败:${JSON.stringify(res)}`)
+  }
+}
+function getJxAppToken(){
+  function generateStr(e) {
+    e = e || 32;
+    let t = "abcdefghijklmnopqrstuvwxyz1234567890", a = t.length, n = "";
+    for (i = 0; i < e; i++)
+      n += t.charAt(Math.floor(Math.random() * a));
+    return n
+  }
+  let phoneId = generateStr(40);
+  let timestamp = Date.now().toString();
+  let pgUUNum = $.CryptoJS.MD5('' + decodeURIComponent($.UserName || '') + timestamp + phoneId + 'tPOamqCuk9NLgVPAljUyIHcPRmKlVxDy').toString($.CryptoJS.enc.MD5);
+  return {
+    'strPgtimestamp': timestamp,
+    'strPhoneID': phoneId,
+    'strPgUUNum': pgUUNum
   }
 }
 async function noviceTask(){
@@ -1281,3 +1298,4 @@ function MD5() {
   //创建并实例化MD5对象并让他可以调用自身方法
   function MD5(n){return this._this=this,this}this.MD5=new MD5,MD5.prototype.createMD5String=function(n){var r,d,e,t,o,i,a,H,F,G=Array(),I=7,g=12,u=17,f=22,s=5,c=9,U=14,h=20,C=4,v=11,S=16,T=23,w=6,x=10,m=15,A=21;for(n=uTF8Encode(n),G=convertToWordArray(n),i=1732584193,a=4023233417,H=2562383102,F=271733878,r=0;r<G.length;r+=16)d=i,e=a,t=H,o=F,i=FF(i,a,H,F,G[r+0],I,3614090360),F=FF(F,i,a,H,G[r+1],g,3905402710),H=FF(H,F,i,a,G[r+2],u,606105819),a=FF(a,H,F,i,G[r+3],f,3250441966),i=FF(i,a,H,F,G[r+4],I,4118548399),F=FF(F,i,a,H,G[r+5],g,1200080426),H=FF(H,F,i,a,G[r+6],u,2821735955),a=FF(a,H,F,i,G[r+7],f,4249261313),i=FF(i,a,H,F,G[r+8],I,1770035416),F=FF(F,i,a,H,G[r+9],g,2336552879),H=FF(H,F,i,a,G[r+10],u,4294925233),a=FF(a,H,F,i,G[r+11],f,2304563134),i=FF(i,a,H,F,G[r+12],I,1804603682),F=FF(F,i,a,H,G[r+13],g,4254626195),H=FF(H,F,i,a,G[r+14],u,2792965006),a=FF(a,H,F,i,G[r+15],f,1236535329),i=GG(i,a,H,F,G[r+1],s,4129170786),F=GG(F,i,a,H,G[r+6],c,3225465664),H=GG(H,F,i,a,G[r+11],U,643717713),a=GG(a,H,F,i,G[r+0],h,3921069994),i=GG(i,a,H,F,G[r+5],s,3593408605),F=GG(F,i,a,H,G[r+10],c,38016083),H=GG(H,F,i,a,G[r+15],U,3634488961),a=GG(a,H,F,i,G[r+4],h,3889429448),i=GG(i,a,H,F,G[r+9],s,568446438),F=GG(F,i,a,H,G[r+14],c,3275163606),H=GG(H,F,i,a,G[r+3],U,4107603335),a=GG(a,H,F,i,G[r+8],h,1163531501),i=GG(i,a,H,F,G[r+13],s,2850285829),F=GG(F,i,a,H,G[r+2],c,4243563512),H=GG(H,F,i,a,G[r+7],U,1735328473),a=GG(a,H,F,i,G[r+12],h,2368359562),i=HH(i,a,H,F,G[r+5],C,4294588738),F=HH(F,i,a,H,G[r+8],v,2272392833),H=HH(H,F,i,a,G[r+11],S,1839030562),a=HH(a,H,F,i,G[r+14],T,4259657740),i=HH(i,a,H,F,G[r+1],C,2763975236),F=HH(F,i,a,H,G[r+4],v,1272893353),H=HH(H,F,i,a,G[r+7],S,4139469664),a=HH(a,H,F,i,G[r+10],T,3200236656),i=HH(i,a,H,F,G[r+13],C,681279174),F=HH(F,i,a,H,G[r+0],v,3936430074),H=HH(H,F,i,a,G[r+3],S,3572445317),a=HH(a,H,F,i,G[r+6],T,76029189),i=HH(i,a,H,F,G[r+9],C,3654602809),F=HH(F,i,a,H,G[r+12],v,3873151461),H=HH(H,F,i,a,G[r+15],S,530742520),a=HH(a,H,F,i,G[r+2],T,3299628645),i=II(i,a,H,F,G[r+0],w,4096336452),F=II(F,i,a,H,G[r+7],x,1126891415),H=II(H,F,i,a,G[r+14],m,2878612391),a=II(a,H,F,i,G[r+5],A,4237533241),i=II(i,a,H,F,G[r+12],w,1700485571),F=II(F,i,a,H,G[r+3],x,2399980690),H=II(H,F,i,a,G[r+10],m,4293915773),a=II(a,H,F,i,G[r+1],A,2240044497),i=II(i,a,H,F,G[r+8],w,1873313359),F=II(F,i,a,H,G[r+15],x,4264355552),H=II(H,F,i,a,G[r+6],m,2734768916),a=II(a,H,F,i,G[r+13],A,1309151649),i=II(i,a,H,F,G[r+4],w,4149444226),F=II(F,i,a,H,G[r+11],x,3174756917),H=II(H,F,i,a,G[r+2],m,718787259),a=II(a,H,F,i,G[r+9],A,3951481745),i=addUnsigned(i,d),a=addUnsigned(a,e),H=addUnsigned(H,t),F=addUnsigned(F,o);return(wordToHex(i)+wordToHex(a)+wordToHex(H)+wordToHex(F)).toLowerCase()};var rotateLeft=function(n,r){return n<<r|n>>>32-r},addUnsigned=function(n,r){var d,e,t,o,i;return t=2147483648&n,o=2147483648&r,i=(1073741823&n)+(1073741823&r),(d=1073741824&n)&(e=1073741824&r)?2147483648^i^t^o:d|e?1073741824&i?3221225472^i^t^o:1073741824^i^t^o:i^t^o},F=function(n,r,d){return n&r|~n&d},G=function(n,r,d){return n&d|r&~d},H=function(n,r,d){return n^r^d},I=function(n,r,d){return r^(n|~d)},FF=function(n,r,d,e,t,o,i){return n=addUnsigned(n,addUnsigned(addUnsigned(F(r,d,e),t),i)),addUnsigned(rotateLeft(n,o),r)},GG=function(n,r,d,e,t,o,i){return n=addUnsigned(n,addUnsigned(addUnsigned(G(r,d,e),t),i)),addUnsigned(rotateLeft(n,o),r)},HH=function(n,r,d,e,t,o,i){return n=addUnsigned(n,addUnsigned(addUnsigned(H(r,d,e),t),i)),addUnsigned(rotateLeft(n,o),r)},II=function(n,r,d,e,t,o,i){return n=addUnsigned(n,addUnsigned(addUnsigned(I(r,d,e),t),i)),addUnsigned(rotateLeft(n,o),r)},convertToWordArray=function(n){for(var r,d=n.length,e=d+8,t=16*((e-e%64)/64+1),o=Array(t-1),i=0,a=0;a<d;)i=a%4*8,o[r=(a-a%4)/4]=o[r]|n.charCodeAt(a)<<i,a++;return i=a%4*8,o[r=(a-a%4)/4]=o[r]|128<<i,o[t-2]=d<<3,o[t-1]=d>>>29,o},wordToHex=function(n){var r,d="",e="";for(r=0;r<=3;r++)d+=(e="0"+(n>>>8*r&255).toString(16)).substr(e.length-2,2);return d},uTF8Encode=function(n){n=n.toString().replace(/\x0d\x0a/g,"\n");for(var r="",d=0;d<n.length;d++){var e=n.charCodeAt(d);e<128?r+=String.fromCharCode(e):e>127&&e<2048?(r+=String.fromCharCode(e>>6|192),r+=String.fromCharCode(63&e|128)):(r+=String.fromCharCode(e>>12|224),r+=String.fromCharCode(e>>6&63|128),r+=String.fromCharCode(63&e|128))}return r};
 }
+
