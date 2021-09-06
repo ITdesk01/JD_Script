@@ -442,8 +442,6 @@ done
 	kill_index
 	index_js
 	additional_settings
-	echo -e "$green >>先杀掉一下后台脚本$white"
-	kill_ccr
 	concurrent_js_update
 	source /etc/profile
 	echo -e "$green update$stop_script_time $white"
