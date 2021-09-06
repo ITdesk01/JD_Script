@@ -259,7 +259,8 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	ZooFaker_Necklace.js 		#点点券依赖文件
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
         gua_MMdou.js                    #赚京豆MM豆
-	#sign_graphics_validate.js	#gua_opencard6.js使用的，还有点豆子冲
+	gua_opencard22.js		#开卡默认不运行
+	gua_opencard23.js		#开卡默认不运行
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -1180,6 +1181,7 @@ addcookie() {
 		done
 
 	fi
+	del_expired_cookie
 }
 
 addcookie_replace(){
@@ -1239,10 +1241,11 @@ del_expired_cookie() {
 	do
 		jd_cookie=$(grep "$i" $openwrt_script_config/jdCookie.js | awk -F "pt_pin=" '{print $2}' | awk -F ";" '{print $1}')
 		if [ ! $jd_cookie ];then
-			echo "$i在$openwrt_script_config/jdCookie.js找不到"
+			echo -e "$red$i$white在$openwrt_script_config/jdCookie.js找不到"
 		else
 			if [ "$jd_cookie" == "$i" ];then
-				echo "$i在$openwrt_script_config/jdCookie.js正常存在"
+				echo -e "$green$i$white在$openwrt_script_config/jdCookie.js正常存在"
+				echo ""
 			else
 				sed -i "/$i/d" $openwrt_script_config/check_cookie.txt
 			fi
