@@ -78,7 +78,7 @@ script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"
 export JD_JOY_REWARD_NAME="500"
 
 task() {
-	cron_version="3.60"
+	cron_version="3.61"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -112,14 +112,14 @@ cat >>/etc/crontabs/root <<EOF
 0 0 * * * $python3 $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py >/tmp/jd_getFollowGift.log #关注有礼#100#
 0 8,15 * * * $python3 $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py  >/tmp/jd_OpenCard.log #开卡程序#100#
 #0 1 * * * $python3 $dir_file/git_clone/curtinlv_script/jd_qjd.py >/tmp/jd_qjd.log #抢京豆#100#
-59 23 * * 0,1,2,5,6 sleep 57 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
+#59 23 * * 0,1,2,5,6 sleep 57 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
 59 23 * * * sleep 50 && $dir_file/jd.sh run_jd_blueCoin >/tmp/jd_jd_blueCoin.log	#京东超市兑换#100#
 59 23,7,15 * * * sleep 56 && $dir_file/jd.sh run_jd_joy_reward >/tmp/jd_joy_reward.log	#汪汪兑换积分#100#
 45 23 * * * $dir_file/jd.sh kill_ccr #杀掉所有并发进程，为零点准备#100#
 46 23 * * * rm -rf /tmp/*.log #删掉所有log文件，为零点准备#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
-0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
+50 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
 ############100###########请将其他定时任务放到底下###############
 EOF
 	/etc/init.d/cron restart
@@ -442,6 +442,8 @@ done
 	kill_index
 	index_js
 	additional_settings
+	echo -e "$green >>先杀掉一下后台脚本$white"
+	kill_ccr
 	concurrent_js_update
 	source /etc/profile
 	echo -e "$green update$stop_script_time $white"
@@ -1678,6 +1680,9 @@ backnas() {
 		exit 0
 	fi
 
+	echo -e "$green >>先杀掉一下后台脚本，然后方便打包文件$white"
+	kill_ccr
+	sleep 5
 	echo -e "$green>> 开始备份到nas$white"
 	sleep 5
 
