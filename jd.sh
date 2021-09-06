@@ -1233,6 +1233,23 @@ addcookie_wait(){
 
 }
 
+del_expired_cookie() {
+	echo -e "$green整理一下check_cookie.txt,删掉一些过期的信息$white"
+	for i in `cat $openwrt_script_config/check_cookie.txt | awk '{print $2}'| grep -v "Cookie"`
+	do
+		jd_cookie=$(grep "$i" $openwrt_script_config/jdCookie.js | awk -F "pt_pin=" '{print $2}' | awk -F ";" '{print $1}')
+		if [ ! $jd_cookie ];then
+			echo "$i在$openwrt_script_config/jdCookie.js找不到"
+		else
+			if [ "$jd_cookie" == "$i" ];then
+				echo "$i在$openwrt_script_config/jdCookie.js正常存在"
+			else
+				sed -i "/$i/d" $openwrt_script_config/check_cookie.txt
+			fi
+		fi
+	done
+}
+
 delcookie() {
 	cookie_quantity=$(cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | wc -l)
 	if [ `cat $openwrt_script_config/jdCookie.js | grep "$pt_pin" | wc -l` -ge "1" ];then
@@ -2744,7 +2761,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie)
 		$action1
 		;;
 		kill_ccr)
@@ -2763,7 +2780,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie)
 		$action2
 		;;
 		kill_ccr)
