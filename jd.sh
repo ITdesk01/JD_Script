@@ -369,7 +369,6 @@ done
 star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
-	jd_king.js			#王者荣耀投票，脚本内随机随缘助力
 	jd_iqoo_run.js			#iqoo生而为赢酷跑
 EOF
 
@@ -415,13 +414,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_king.js			#王者荣耀投票，脚本内随机随缘助力
 	jd_kxcdz.js			#开学充电站
-	gua_xmGame.js			#小米-星空大冒险（一次性脚本）
-	gua_opencard14.js		#开卡(默认不跑自己运行)
-	jd_jxnc.js			#京喜农场
-	jd_opencard17.js		#秋新资联合开卡(默认不运行)
-	jd_opencard_Starbucks.js	#星巴克开卡(默认不运行)
-	jd_qcshj.js			#汽车生活节（不知道有啥用)
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -640,7 +634,6 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_gold_creator.js		#金榜创造营
 	jd_goodMorning.js		#早起福利
 	jd_nzmh.js			#新一期女装盲盒
-	jd_king.js			#王者荣耀投票，脚本内随机随缘助力
 	jd_dwapp.js			#积分换话费
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
@@ -919,7 +912,7 @@ kill_ccr() {
 			sleep 2
 			echo -e "$green后台都没有进程妹子，散了散了。。。$white"
 		else
-			for i in `ps -ww | grep "js$" | grep -v "index.js" | awk '{print $1}'`
+			for i in `ps -ww | grep -v 'index.js\|json\|app.js' | awk '{print $1}'`
 			do
 				kill -9 $i
 				echo "kill $i"
@@ -927,7 +920,7 @@ kill_ccr() {
 			concurrent_js_clean
 			clear
 			echo -e "$green再次检测一下并发程序是否还有存在$white"
-			if [ `ps -ww | grep "js$" | grep -v "index.js" | awk '{print $1}' |wc -l` == "0" ];then
+			if [ `ps -ww | grep "js$" | grep -v 'index.js\|json\|app.js' | awk '{print $1}' |wc -l` == "0" ];then
 				echo -e "$yellow>>并发程序已经全部结束$white"
 			else
 				echo -e "$yellow！！！检测到并发程序还有存在，再继续杀，请稍等。。。$white"
