@@ -314,6 +314,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_superMarket.js		#东东超市
 	jd_unsubscriLive.js		#取关主播
 	jd_superBrand.js		#特物Z|万物皆可国创
+	jd_try.js 			#京东试用（默认不启用）
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -404,7 +405,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jx_products_detail.js		#京喜工厂商品列表详情
-	jd_try.js 			#京东试用（默认不启用）
 	jdDreamFactoryShareCodes.js	#京喜工厂ShareCodes
 	jdFruitShareCodes.js		#东东农场ShareCodes
 	jdPetShareCodes.js		#东东萌宠ShareCodes
@@ -2325,6 +2325,12 @@ additional_settings() {
 			echo "检测到试用开关开启，导入一下计划任务"
 			echo "0 10 * * * $node $dir_file/js/jd_try.js >/tmp/jd_try.log" >>$cron_file
 			/etc/init.d/cron restart
+			if [ `cat /etc/profile | grep "JD_TRY" | wc -l` == "1" ];then
+				echo "京东试用全局变量已经导入，不生效，请重启路由器"
+			else
+				echo "export JD_TRY="true"" >>/etc/profile
+				source 	/etc/profile
+			fi
 		else
 			echo "京东试用计划任务已经导入"
 		fi
@@ -2334,6 +2340,12 @@ additional_settings() {
 			echo "检测到试用开关关闭，清理一下之前的导入"
 			sed -i '/jd_try.js/d' /etc/crontabs/root >/dev/null 2>&1
 			/etc/init.d/cron restart
+			if [ `cat /etc/profile | grep "JD_TRY" | wc -l` == "1" ];then
+				sed -i "/JD_TRY/d"  /etc/profile
+				source 	/etc/profile
+			else
+				echo "京东试用全局变量已经删除"
+			fi
 		fi
 		echo "京东试用计划任务不导入"
 	fi
