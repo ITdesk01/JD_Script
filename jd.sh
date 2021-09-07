@@ -207,13 +207,11 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_live.js			#京东直播
 	jd_moneyTree.js 		#摇钱树
 	jd_market_lottery.js 		#幸运大转盘
-	jd_jin_tie.js 			#领金贴
 	jd_health.js			#健康社区
 	jd_health_collect.js		#健康社区-收能量
 	jd_gold_creator.js		#金榜创造营
 	jd_cleancart.js			#清空购物车（默认不执行）
 	jd_get_share_code.js		#获取jd所有助力码脚本
-	jd_bean_change.js		#京豆变动通知(长期)
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
 
@@ -381,10 +379,38 @@ do
 	update_if
 done
 
+#X1a0He
+X1a0He_url="https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed"
+cat >$dir_file/config/tmp/X1a0He_url.txt <<EOF
+	jd_car_exchange_xh.js		#京东汽车兑换
+	jd_jin_tie_xh.js  		#领金贴
+EOF
+
+for script_name in `cat $dir_file/config/tmp/X1a0He_url.txt | grep -v "#.*js" | awk '{print $1}'`
+do
+	url="$X1a0He_url"
+	wget $X1a0He_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
+
+#ccwav
+ccwav_url="https://raw.githubusercontent.com/ccwav/QLScript/main"
+cat >$dir_file/config/tmp/ccwav_url.txt <<EOF
+	jd_bean_change.js		#资产变化强化版by-ccwav
+EOF
+
+for script_name in `cat $dir_file/config/tmp/ccwav_url.txt | grep -v "#.*js" | awk '{print $1}'`
+do
+	url="$ccwav_url"
+	wget $ccwav_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
 
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
-	wget https://raw.githubusercontent.com/shufflewzc/faker2/main/jd_bean_change_new.js -O $dir_file_js/jd_bean_change_new.js #资产变动强化版
+	#wget https://raw.githubusercontent.com/shufflewzc/faker2/main/jd_bean_change_new.js -O $dir_file_js/jd_bean_change_new.js #资产变动强化版
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -397,7 +423,7 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	gua_opencard19.js		#开卡(默认不跑自己运行)
 	gua_opencard20.js		#开卡(默认不跑自己运行)
 	jd_dianjing.js			#电竞经理
-	jd_bean_change_new.js 		#资产变动强化版
+	#jd_bean_change_new.js 		#资产变动强化版
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
 	jd_OpenCard.py 			#开卡程序
 	jd_getFollowGift.py 		#关注有礼
@@ -415,6 +441,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_jin_tie.js 			#领金贴
 	jd_king.js			#王者荣耀投票，脚本内随机随缘助力
 	jd_kxcdz.js			#开学充电站
 EOF
@@ -487,7 +514,7 @@ concurrent_js_run_07() {
 	$node $openwrt_script/JD_Script/js/jd_dreamFactory.js 		#京喜工厂
 	$node $openwrt_script/JD_Script/js/jd_unsubscriLive.js		#取关主播
 	$node $openwrt_script/JD_Script/js/jd_superBrand.js		#特物Z|万物皆可国创
-	$node $openwrt_script/JD_Script/js/jd_bean_change_new.js 	#资产变动强化版
+	$node $openwrt_script/JD_Script/js/jd_bean_change.js 	#资产变动强化版
 	checklog #检测log日志是否有错误并推送
 }
 
@@ -499,7 +526,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_sgmh.js 			#闪购盲盒长期活动
 	jd_syj.js 			#十元街签到,一天一次即可，一周30豆子
 	jd_market_lottery.js 		#幸运大转盘
-	jd_jin_tie.js 			#领金贴
+	jd_jin_tie_xh.js  		#领金贴
 	jd_dreamFactory.js 		#京喜工厂
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_sign_graphics.js		#京东签到图形验证
@@ -660,7 +687,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_speed_sign.js 		#京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#极速版红包
 	jd_cash.js 			#签到领现金，每日2毛～5毛长期
-	jd_jin_tie.js 			#领金贴
+	jd_jin_tie_xh.js  		#领金贴
 	jd_unsubscribe.js 		#取关店铺，没时间要求
         gua_MMdou.js                    #赚京豆MM豆
 EOF
@@ -710,6 +737,7 @@ EOF
 run_jd_cash() {
 cat >/tmp/jd_tmp/run_jd_cash <<EOF
 	jd_cash_exchange.js #领现金兑换
+	jd_car_exchange_xh.js	#京东汽车兑换
 EOF
 	jd_cash_num="30"
 	while [[ ${jd_cash_num} -gt 0 ]]; do
