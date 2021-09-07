@@ -78,7 +78,7 @@ script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"
 export JD_JOY_REWARD_NAME="500"
 
 task() {
-	cron_version="3.60"
+	cron_version="3.61"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -102,7 +102,7 @@ cat >>/etc/crontabs/root <<EOF
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本#100#
 35 10,15,20 * * * $dir_file/jd.sh run_10_15_20 >/tmp/jd_run_10_15_20.log 2>&1 #不是很重要的，错开运行#100#
 10 8,12,16 * * * $dir_file/jd.sh run_08_12_16 >/tmp/jd_run_08_12_16.log 2>&1 #宠汪汪兑换礼品#100#
-00 12,22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点更新JD_Script脚本#100#
+20 12,22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点20更新JD_Script脚本#100#
 00 10 */7 * * $dir_file/jd.sh check_cookie_push >/tmp/check_cookie_push.log 2>&1 #每个7天推送cookie相关信息#100#
 5 11,19,22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 && source /etc/profile #9,11,19,22点05分更新lxk0301脚本#100#
 0 9 28 */1 * $node $dir_file_js/jd_all_bean_change.js >/tmp/jd_all_bean_change.log #每个月28号推送当月京豆资产变化#100#
@@ -112,14 +112,14 @@ cat >>/etc/crontabs/root <<EOF
 0 0 * * * $python3 $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py >/tmp/jd_getFollowGift.log #关注有礼#100#
 0 8,15 * * * $python3 $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py  >/tmp/jd_OpenCard.log #开卡程序#100#
 #0 1 * * * $python3 $dir_file/git_clone/curtinlv_script/jd_qjd.py >/tmp/jd_qjd.log #抢京豆#100#
-59 23 * * 0,1,2,5,6 sleep 57 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
+#59 23 * * 0,1,2,5,6 sleep 57 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
 59 23 * * * sleep 50 && $dir_file/jd.sh run_jd_blueCoin >/tmp/jd_jd_blueCoin.log	#京东超市兑换#100#
 59 23,7,15 * * * sleep 56 && $dir_file/jd.sh run_jd_joy_reward >/tmp/jd_joy_reward.log	#汪汪兑换积分#100#
 45 23 * * * $dir_file/jd.sh kill_ccr #杀掉所有并发进程，为零点准备#100#
 46 23 * * * rm -rf /tmp/*.log #删掉所有log文件，为零点准备#100#
 ###########100##########请将其他定时任务放到底下###############
 #**********这里是backnas定时任务#100#******************************#
-0 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
+50 */4 * * * $dir_file/jd.sh backnas  >/tmp/jd_backnas.log 2>&1 #每4个小时备份一次script,如果没有填写参数不会运行#100#
 ############100###########请将其他定时任务放到底下###############
 EOF
 	/etc/init.d/cron restart
@@ -259,7 +259,8 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	ZooFaker_Necklace.js 		#点点券依赖文件
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
         gua_MMdou.js                    #赚京豆MM豆
-	#sign_graphics_validate.js	#gua_opencard6.js使用的，还有点豆子冲
+	gua_opencard22.js		#开卡默认不运行
+	gua_opencard23.js		#开卡默认不运行
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -1173,6 +1174,7 @@ addcookie() {
 		done
 
 	fi
+	del_expired_cookie
 }
 
 addcookie_replace(){
@@ -1224,6 +1226,24 @@ addcookie_wait(){
 		exit 0
 	fi
 
+}
+
+del_expired_cookie() {
+	echo -e "$green整理一下check_cookie.txt,删掉一些过期的信息$white"
+	for i in `cat $openwrt_script_config/check_cookie.txt | awk '{print $2}'| grep -v "Cookie"`
+	do
+		jd_cookie=$(grep "$i" $openwrt_script_config/jdCookie.js | awk -F "pt_pin=" '{print $2}' | awk -F ";" '{print $1}')
+		if [ ! $jd_cookie ];then
+			echo -e "$red$i$white在$openwrt_script_config/jdCookie.js找不到"
+		else
+			if [ "$jd_cookie" == "$i" ];then
+				echo -e "$green$i$white在$openwrt_script_config/jdCookie.js正常存在"
+				echo ""
+			else
+				sed -i "/$i/d" $openwrt_script_config/check_cookie.txt
+			fi
+		fi
+	done
 }
 
 delcookie() {
@@ -1651,6 +1671,9 @@ backnas() {
 		exit 0
 	fi
 
+	echo -e "$green >>先杀掉一下后台脚本，然后方便打包文件$white"
+	kill_ccr
+	sleep 5
 	echo -e "$green>> 开始备份到nas$white"
 	sleep 5
 
@@ -2737,7 +2760,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie)
 		$action1
 		;;
 		kill_ccr)
@@ -2756,7 +2779,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie)
 		$action2
 		;;
 		kill_ccr)
