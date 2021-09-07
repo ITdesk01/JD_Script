@@ -313,6 +313,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_unsubscriLive.js		#取关主播
 	jd_superBrand.js		#特物Z|万物皆可国创
 	jd_try.js 			#京东试用（默认不启用）
+	jd_nzmh.js			#新一期女装盲盒
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -336,7 +337,6 @@ done
 
 Aaron_url="https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts"
 cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
-	jd_nzmh.js			#新一期女装盲盒
 	jd_mohe.js			#5G超级盲盒
 	jd_ccSign.js			#领券中心签到
 	jd_cash.js			#签到领现金，每日2毛～5毛长期
