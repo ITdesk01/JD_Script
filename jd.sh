@@ -380,7 +380,7 @@ do
 done
 
 #X1a0He
-X1a0He_url="https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed"
+X1a0He_url="https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main"
 cat >$dir_file/config/tmp/X1a0He_url.txt <<EOF
 	jd_car_exchange_xh.js		#京东汽车兑换
 	jd_jin_tie_xh.js  		#领金贴
