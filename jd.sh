@@ -77,6 +77,12 @@ script_read=$(cat $dir_file/script_read.txt | grep "我已经阅读脚本说明"
 
 export JD_JOY_REWARD_NAME="500"
 
+#开卡变量
+export guaopencard_All="true"
+export guaopencard_addSku_All="true"
+export guaopencardRun_All="true"
+export guaopencard_draw="true"
+
 task() {
 	cron_version="3.62"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
@@ -259,6 +265,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
         gua_MMdou.js                    #赚京豆MM豆
 	gua_opencard22.js		#开卡默认不运行
 	gua_opencard23.js		#开卡默认不运行
+	gua_opencard24.js		#开卡默认不运行
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -599,21 +606,25 @@ EOF
 	echo -e "$green run_030$stop_script_time $white"
 }
 
-run_045() {
-cat >/tmp/jd_tmp/run_045 <<EOF
-	gua_opencard6.js		#七夕告白季-开卡(默认不跑自己运行)
-	gua_opencard7.js		#七夕会员福利社(默认不跑自己运行)
+opencard() {
+cat >/tmp/jd_tmp/opencard <<EOF
+	gua_opencard22.js		#开卡默认不运行
+	gua_opencard23.js		#开卡默认不运行
+	gua_opencard24.js		#开卡默认不运行
 EOF
 
-	echo -e "$green run_045$start_script_time $white"
+	echo -e "$green opencard$start_script_time $white"
 
-	for i in `cat /tmp/jd_tmp/run_045 | grep -v "#.*js" | awk '{print $1}'`
+	for i in `cat /tmp/jd_tmp/opencard | grep -v "#.*js" | awk '{print $1}'`
 	do
+	{
 		$node $dir_file_js/$i
 		$run_sleep
+	}&
 	done
+	wait
 
-	echo -e "$green run_045$stop_script_time $white"
+	echo -e "$green opencard$stop_script_time $white"
 }
 
 run_01() {
@@ -1077,7 +1088,7 @@ concurrent_js_if() {
 			if_ps
 			concurrent_js_clean
 		;;
-		run_01|run_02|run_045|run_08_12_16|run_020|run_10_15_20|run_06_18)
+		run_01|run_02|opencard|run_08_12_16|run_020|run_10_15_20|run_06_18)
 			action="$action1"
 			concurrent_js
 			if_ps
@@ -1095,7 +1106,7 @@ concurrent_js_if() {
 			$action1
 			concurrent_js_run_07
 			;;
-			run_01|run_06_18|run_10_15_20|run_03|run_02|run_045|run_08_12_16|run_07|run_030|run_020)
+			run_01|run_06_18|run_10_15_20|run_03|run_02|opencard|run_08_12_16|run_07|run_030|run_020)
 			$action1
 			;;
 		esac
@@ -1113,7 +1124,7 @@ concurrent_js_if() {
 			$action2
 			concurrent_js_run_07
 			;;
-			run_01|run_06_18|run_10_15_20|run_03|run_02|run_045|run_08_12_16|run_07|run_020)
+			run_01|run_06_18|run_10_15_20|run_03|run_02|opencard|run_08_12_16|run_07|run_020)
 			$action2
 			;;
 		esac
@@ -1933,6 +1944,8 @@ help() {
 	echo -e "$yellow个别脚本有以下："
 	echo ""
 	echo -e "$green  sh \$jd npm_install $white  			#安装 npm 模块"
+	echo ""
+	echo -e "$green  sh \$jd opencard $white  			#开卡(默认不执行，你可以执行这句跑)"
 	echo ""
 	echo -e "$green  sh \$jd jx $white 				#查询京喜商品生产使用时间"
 	echo ""
@@ -2822,7 +2835,7 @@ if [[ -z $action1 ]]; then
 	help
 else
 	case "$action1" in
-		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
+		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|opencard|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
 		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie)
@@ -2841,7 +2854,7 @@ else
 		echo ""
 	else
 		case "$action2" in
-		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_045|run_08_12_16|run_07|run_030|run_020)
+		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|opencard|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
 		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie)
