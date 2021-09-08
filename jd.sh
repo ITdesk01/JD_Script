@@ -1436,7 +1436,7 @@ case "$push_if" in
 			weixin_push
 		;;
 		*)
-			echo -e "$red填写错误，不进行推送$white"
+			echo -e "$green jd_openwrt_script_config.txt$white的$yellow push_if参数$white$red填写错误，不进行推送$white"
 		;;
 	esac
 
