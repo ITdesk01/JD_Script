@@ -503,18 +503,38 @@ update_script() {
 }
 
 ccr_run() {
-	#这里有的就不要加到concurrent_js_run_07
-	echo ""
-	$node $openwrt_script/JD_Script/js/jd_jxlhb.js			#京喜领红包
-	$node $openwrt_script/JD_Script/js/jd_redPacket.js		#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
+#这里有的就不要加到concurrent_js_run_07
+cat >/tmp/jd_tmp/ccr_run <<EOF
+	jd_jxlhb.js			#京喜领红包
+	jd_redPacket.js		#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
+EOF
+	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
+	do
+	{
+		$node $openwrt_script/JD_Script/js/$i
+		$run_sleep
+	}&
+	done
+	wait
 }
 
 concurrent_js_run_07() {
-	#这里的也不会并发
-	$node $openwrt_script/JD_Script/js/jd_jdzz.js			#京东赚赚长期活动
-	$node $openwrt_script/JD_Script/js/jd_dreamFactory.js 		#京喜工厂
-	$node $openwrt_script/JD_Script/js/jd_unsubscriLive.js		#取关主播
-	$node $openwrt_script/JD_Script/js/jd_superBrand.js		#特物Z|万物皆可国创
+#这里的也不会并发
+cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
+	jd_jdzz.js			#京东赚赚长期活动
+	jd_dreamFactory.js 		#京喜工厂
+	jd_unsubscriLive.js		#取关主播
+	jd_unsubscriLive.js		#取关主播
+	jd_superBrand.js		#特物Z|万物皆可国创
+EOF
+	for i in `cat /tmp/jd_tmp/concurrent_js_run_07 | grep -v "#.*js" | awk '{print $1}'`
+	do
+	{
+		$node $openwrt_script/JD_Script/js/$i
+		$run_sleep
+	}&
+	done
+	wait
 	$node $openwrt_script/JD_Script/js/jd_bean_change.js 	#资产变动强化版
 	checklog #检测log日志是否有错误并推送
 }
