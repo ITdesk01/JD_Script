@@ -314,6 +314,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_superBrand.js		#特物Z|万物皆可国创
 	jd_try.js 			#京东试用（默认不启用）
 	jd_nzmh.js			#新一期女装盲盒
+	jd_jika.js			#集萌宝得团圆礼包
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -639,14 +640,18 @@ cat >/tmp/jd_tmp/run_03 <<EOF
 	jd_mohe.js			#5G超级盲盒
 	jd_dianjing.js			#电竞经理
 	jd_joy_park_help.js 		#汪汪乐园助力
+	jd_jika.js			#集萌宝得团圆礼包
 EOF
 	echo -e "$green run_03$start_script_time $white"
 
 	for i in `cat /tmp/jd_tmp/run_03 | grep -v "#.*js" | awk '{print $1}'`
 	do
+	{
 		$node $dir_file_js/$i
 		$run_sleep
+	}&
 	done
+	wait
 
 	echo -e "$green run_03$stop_script_time $white"
 }
