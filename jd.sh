@@ -266,6 +266,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard22.js		#开卡默认不运行
 	gua_opencard23.js		#开卡默认不运行
 	gua_opencard24.js		#开卡默认不运行
+	gua_opencard25.js		#开卡默认不运行
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -611,6 +612,7 @@ cat >/tmp/jd_tmp/opencard <<EOF
 	gua_opencard22.js		#开卡默认不运行
 	gua_opencard23.js		#开卡默认不运行
 	gua_opencard24.js		#开卡默认不运行
+	gua_opencard25.js		#开卡默认不运行
 EOF
 
 	echo -e "$green opencard$start_script_time $white"
