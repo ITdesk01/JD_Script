@@ -973,10 +973,10 @@ concurrent_js_update() {
 		#wait
 		sleep 3
 
-		ps_cp=$(ps -ww | grep "cp -r" | grep -v | wc -l)
+		ps_cp=$(ps -ww | grep "cp -r" | grep -v grep | wc -l)
 		while [ $ps_cp -gt 0 ];do
 			sleep 1
-			ps_cp=$(ps -ww | grep "cp -r" | grep -v | wc -l)
+			ps_cp=$(ps -ww | grep "cp -r" | grep -v grep| wc -l)
 		done
 		end_date=$(date +%s)
 		result_date=$(( $start_date - $end_date ))
