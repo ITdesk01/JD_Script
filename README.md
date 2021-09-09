@@ -62,7 +62,7 @@ NANOPI R4S (群友snow测试)
       
 安装插件好处，会帮你安装好依赖和npm模块，升级openwrt系统配置不会丢失，无需再重新设置，备份路由器数据的时候也会一起打包走，首次开机联网要等5分钟左右（视cpu与网络速度，进程可以看系统日志）
 
-不会编译的可以采用我的编译辅助脚本编译： https://github.com/openwrtcompileshell/OpenwrtCompileScript（编译出来就是带插件的）
+不会编译的可以采用我的编译辅助脚本编译： https://github.com/openwrtcompileshell/OpenwrtCompileScript （编译出来就是带插件的）
 
 
 
