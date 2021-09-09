@@ -438,8 +438,6 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	gua_opencard19.js		#开卡(默认不跑自己运行)
-	gua_opencard20.js		#开卡(默认不跑自己运行)
 	jd_dianjing.js			#电竞经理
 	#jd_bean_change_new.js 		#资产变动强化版
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
