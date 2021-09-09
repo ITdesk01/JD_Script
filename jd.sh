@@ -962,7 +962,7 @@ concurrent_js_update() {
 			done
 		} &
 		done
-		wait
+		#wait
 	fi
 	echo -e "$green>> 创建并发文件夹完成$white"
 }
