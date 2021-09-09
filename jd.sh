@@ -242,7 +242,7 @@ done
 
 sleep 5
 
-
+#longzhuzhu
 longzhuzhu_url="https://raw.githubusercontent.com/longzhuzhu/nianyu/main/qx"
 cat >$dir_file/config/tmp/longzhuzhu_qx.txt <<EOF
 	long_half_redrain.js		#半点红包雨
@@ -256,6 +256,7 @@ do
 	#update_if
 done
 
+#smiek2221
 smiek2221_url="https://raw.githubusercontent.com/smiek2221/scripts/master"
 cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	#gua_wealth_island.js 		#财富岛新版
@@ -267,6 +268,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard23.js		#开卡默认不运行
 	gua_opencard24.js		#开卡默认不运行
 	gua_opencard25.js		#开卡默认不运行
+	gua_UnknownTask1.js		#电脑配件
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -276,6 +278,7 @@ do
 	update_if
 done
 
+#cdle
 cdle_url="https://raw.githubusercontent.com/cdle/jd_study/main"
 cat >$dir_file/config/tmp/cdle_url.txt <<EOF
 	jd_morningSc.js			#早起赢现金
@@ -292,6 +295,7 @@ do
 	#update_if
 done
 
+#Tsukasa007
 Tsukasa007_url="https://raw.githubusercontent.com/Tsukasa007/my_script/master"
 cat >$dir_file/config/tmp/Tsukasa007_url.txt <<EOF
 	jd_joypark_joy.js		#汪汪乐园养joy
@@ -306,6 +310,7 @@ do
 	#update_if
 done
 
+#zero205
 zero205_url="https://raw.githubusercontent.com/zero205/JD_tencent_scf/main"
 cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_jxlhb.js			#京喜领红包
@@ -323,7 +328,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_try.js 			#京东试用（默认不启用）
 	jd_nzmh.js			#新一期女装盲盒
 	jd_jika.js			#集萌宝得团圆礼包
-	gua_UnknownTask1.js		#电脑配件
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -333,6 +337,7 @@ do
 	update_if
 done
 
+#Wenmoux
 Wenmoux_url="https://raw.githubusercontent.com/Wenmoux/scripts/wen/jd"
 cat >$dir_file/config/tmp/Wenmoux_url.txt <<EOF
 	jd_ddnc_farmpark.js		#东东乐园 Wenmoux脚本
@@ -345,6 +350,7 @@ do
 	#update_if
 done
 
+#Aaron
 Aaron_url="https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts"
 cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_mohe.js			#5G超级盲盒
@@ -360,6 +366,7 @@ do
 	update_if
 done
 
+#yuannian1112
 yuannian1112_url="https://raw.githubusercontent.com/yuannian1112/jd_scripts/main"
 cat >$dir_file/config/tmp/yuannian1112_url.txt <<EOF
 	jd_plantBean.js			#种豆得豆
