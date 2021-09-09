@@ -941,25 +941,28 @@ concurrent_js_update() {
 		done
 
 		js_amount=$(cat $openwrt_script_config/js_cookie.txt |wc -l)
-		while [[ ${js_amount} -gt 0 ]]; do
-			mkdir $ccr_js_file/js_$js_amount
-			cp $openwrt_script_config/jdCookie.js $ccr_js_file/js_$js_amount/jdCookie.js
+		for ck_num in `seq 1 $js_amount`
+		do
+		{
+			mkdir $ccr_js_file/js_$ck_num
+			cp $openwrt_script_config/jdCookie.js $ccr_js_file/js_$ck_num/jdCookie.js
 
-			if [ ! -L "$ccr_js_file/js_$js_amount/sendNotify.js" ]; then
-				rm -rf $$ccr_js_file/js_$js_amount/sendNotify.js
-				ln -s $openwrt_script_config/sendNotify.js $ccr_js_file/js_$js_amount/sendNotify.js
+			if [ ! -L "$ccr_js_file/js_$ck_num/sendNotify.js" ]; then
+				rm -rf $$ccr_js_file/js_$ck_num/sendNotify.js
+				ln -s $openwrt_script_config/sendNotify.js $ccr_js_file/js_$ck_num/sendNotify.js
 			fi
 
-			js_cookie_obtain=$(sed -n $js_amount\p "$openwrt_script_config/js_cookie.txt") #获取pt
-			sed -i '/pt_pin/d' $ccr_js_file/js_$js_amount/jdCookie.js >/dev/null 2>&1
-			sed -i "5a $js_cookie_obtain" $ccr_js_file/js_$js_amount/jdCookie.js
+			js_cookie_obtain=$(sed -n $ck_num\p "$openwrt_script_config/js_cookie.txt") #获取pt
+			sed -i '/pt_pin/d' $ccr_js_file/js_$ck_num/jdCookie.js >/dev/null 2>&1
+			sed -i "5a $js_cookie_obtain" $ccr_js_file/js_$ck_num/jdCookie.js
 
 			for i in `ls $dir_file_js | grep -v 'jdCookie.js\|sendNotify.js\|jddj_cookie.js\|log'`
 			do
-				cp -r $dir_file_js/$i $ccr_js_file/js_$js_amount/$i
+				cp -r $dir_file_js/$i $ccr_js_file/js_$ck_num/$i
 			done
-			js_amount=$(($js_amount - 1))
+		} &
 		done
+		wait
 	fi
 	echo -e "$green>> 创建并发文件夹完成$white"
 }
