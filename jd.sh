@@ -459,9 +459,17 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_prodev_dailyTask.js
+	gua_opencard4.js		#开卡默认不运行
+	gua_opencard5.js		#开卡默认不运行
+	gua_opencard19.js		#开卡默认不运行
+	gua_opencard20.js		#开卡默认不运行
+	gua_opencard21.js		#开卡默认不运行
+	jd_wish.js
 	jd_jin_tie.js 			#领金贴
 	jd_king.js			#王者荣耀投票，脚本内随机随缘助力
 	jd_kxcdz.js			#开学充电站
+	CookieSet.json
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
