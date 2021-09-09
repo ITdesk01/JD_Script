@@ -323,6 +323,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_try.js 			#京东试用（默认不启用）
 	jd_nzmh.js			#新一期女装盲盒
 	jd_jika.js			#集萌宝得团圆礼包
+	gua_UnknownTask1.js		#电脑配件
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -514,7 +515,8 @@ ccr_run() {
 #这里有的就不要加到concurrent_js_run_07
 cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_jxlhb.js			#京喜领红包
-	jd_redPacket.js		#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
+	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
+	gua_UnknownTask1.js		#电脑配件
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
