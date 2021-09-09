@@ -940,15 +940,15 @@ echo -e "$green============整理完成，可以提交了（没加群的忽略�
 }
 
 concurrent_js_update() {
-	echo -e "$green>> 创建并发文件夹$white"
 	if [ "$ccr_if" == "yes" ];then
-
+		js_amount=$(cat $openwrt_script_config/js_cookie.txt |wc -l)
+		echo -e "$green>> 你有$js_amount个ck要创建并发文件夹$white"
+		start_date=$(date +%s)
 		for i in `ls $ccr_js_file | grep -E "^js"`
 		do
 			rm -rf $ccr_js_file/$i
 		done
 
-		js_amount=$(cat $openwrt_script_config/js_cookie.txt |wc -l)
 		for ck_num in `seq 1 $js_amount`
 		do
 		{
@@ -971,8 +971,21 @@ concurrent_js_update() {
 		} &
 		done
 		#wait
+		sleep 3
+
+		ps_cp=$(ps -ww | grep "cp -r" | grep -v | wc -l)
+		while [ $ps_cp -gt 0 ];do
+			sleep 1
+			ps_cp=$(ps -ww | grep "cp -r" | grep -v | wc -l)
+		done
+		end_date=$(date +%s)
+		result_date=$(( $start_date - $end_date ))
+		echo -e "$yellow 耗时:$green$result_date秒$white"
+		echo -e "$green>> 创建$js_amount个并发文件夹完成$white"
+	else
+		echo -e "$yellow>> 并发开关没有打开$white"
 	fi
-	echo -e "$green>> 创建并发文件夹完成$white"
+
 }
 
 concurrent_js_clean(){
