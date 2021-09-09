@@ -2569,9 +2569,19 @@ close_notification() {
 		22|23|00|01)
 			for i in `ls $ccr_js_file | grep -E "^js"`
 			do
+			{
 				sed -i "s/jdNotify = true/jdNotify = false/g" $ccr_js_file/$i/jd_fruit.js
 				sed -i "s/jdNotify = true/jdNotify = false/g" $ccr_js_file/$i/jd_pet.js
+			}&
 			done
+			ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
+			ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
+			while [ $ps_fr -gt 0 && $ps_pet -gt 0 ];do
+				sleep 1
+				ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
+				ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
+			done
+
 			sed -i "s/jdNotify = true/jdNotify = false/g" $dir_file_js/jd_fruit.js
 			sed -i "s/jdNotify = true/jdNotify = false/g" $dir_file_js/jd_pet.js
 
@@ -2582,8 +2592,18 @@ close_notification() {
 		*)
 			for i in `ls $ccr_js_file | grep -E "^js"`
 			do
+			{
 				sed -i "s/jdNotify = false/jdNotify = true/g" $ccr_js_file/$i/jd_fruit.js
 				sed -i "s/jdNotify = false/jdNotify = true/g" $ccr_js_file/$i/jd_pet.js
+			}&
+			done
+
+			ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
+			ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
+			while [ $ps_fr -gt 0 && $ps_pet -gt 0 ];do
+				sleep 1
+				ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
+				ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
 			done
 
 			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
