@@ -330,6 +330,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_try.js 			#京东试用（默认不启用）
 	jd_nzmh.js			#新一期女装盲盒
 	jd_jika.js			#集萌宝得团圆礼包
+	jd_connoisseur.js		#内容鉴赏官
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -375,6 +376,7 @@ cat >$dir_file/config/tmp/yuannian1112_url.txt <<EOF
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_dwapp.js			#积分换话费
 	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
+	jd_star_shop.js			#明星小店
 EOF
 
 for script_name in `cat $dir_file/config/tmp/yuannian1112_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -533,6 +535,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_jxlhb.js			#京喜领红包
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	gua_UnknownTask1.js		#电脑配件
+	jd_connoisseur.js		#内容鉴赏官
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -552,6 +555,7 @@ cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
 	jd_unsubscriLive.js		#取关主播
 	jd_unsubscriLive.js		#取关主播
 	jd_superBrand.js		#特物Z|万物皆可国创
+	jd_star_shop.js			#明星小店
 EOF
 	for i in `cat /tmp/jd_tmp/concurrent_js_run_07 | grep -v "#.*js" | awk '{print $1}'`
 	do
