@@ -269,7 +269,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard24.js		#开卡默认不运行
 	gua_opencard25.js		#开卡默认不运行
 	gua_opencard26.js		#开卡默认不运行
-	gua_opencard26.js		#开卡默认不运行
+	gua_opencard27.js		#开卡默认不运行
 	gua_UnknownTask1.js		#电脑配件
 EOF
 
@@ -439,6 +439,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	gua_UnknownTask2.js		#关注频道、抽奖(默认不运行)
 	jd_dianjing.js			#电竞经理
 	#jd_bean_change_new.js 		#资产变动强化版
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
