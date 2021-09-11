@@ -2925,7 +2925,7 @@ weixin2=''
 
 ------------------------------------------------------------------------------------------------------------
 #京东试用 true开启  默认false(更多详细内容请查看/usr/share/jd_openwrt_script/JD_Script/js/jd_try.js)
-JD_TRY="true"
+JD_TRY="false"
 
 #jd_try ck变量(那几个ck要跑，用@隔开，比如jd_01@jd_02(填写ck的用户名也就是pt_pin值)，这里不填就跑所有ck)
 jd_try_ck=""
