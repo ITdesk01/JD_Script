@@ -275,9 +275,11 @@ EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
+{
 	url="$smiek2221_url"
 	wget $smiek2221_url/$script_name -O $dir_file_js/$script_name
 	update_if
+}&
 done
 
 #cdle
@@ -335,9 +337,11 @@ EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
+{
 	url="$zero205_url"
 	wget $zero205_url/$script_name -O $dir_file_js/$script_name
 	update_if
+}&
 done
 
 #Wenmoux
@@ -381,9 +385,11 @@ EOF
 
 for script_name in `cat $dir_file/config/tmp/yuannian1112_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
+{
 	url="$yuannian1112_url"
 	wget $yuannian1112_url/$script_name -O $dir_file_js/$script_name
 	update_if
+}&
 done
 
 #star261
@@ -399,21 +405,6 @@ do
 	wget $star261_url/$script_name -O $dir_file_js/$script_name
 	update_if
 done
-
-#X1a0He
-X1a0He_url="https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main"
-cat >$dir_file/config/tmp/X1a0He_url.txt <<EOF
-	jd_car_exchange_xh.js		#京东汽车兑换
-	jd_jin_tie_xh.js  		#领金贴
-EOF
-
-for script_name in `cat $dir_file/config/tmp/X1a0He_url.txt | grep -v "#.*js" | awk '{print $1}'`
-do
-	url="$X1a0He_url"
-	wget $X1a0He_url/$script_name -O $dir_file_js/$script_name
-	update_if
-done
-
 
 #ccwav
 ccwav_url="https://raw.githubusercontent.com/ccwav/QLScript/main"
@@ -461,17 +452,11 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_jin_tie_xh.js  		#领金贴
+	jd_car_exchange_xh.js		#京东汽车兑换
 	jd_prodev_dailyTask.js
 	gua_opencard4.js		#开卡默认不运行
 	gua_opencard5.js		#开卡默认不运行
-	gua_opencard19.js		#开卡默认不运行
-	gua_opencard20.js		#开卡默认不运行
-	gua_opencard21.js		#开卡默认不运行
-	jd_wish.js
-	jd_jin_tie.js 			#领金贴
-	jd_king.js			#王者荣耀投票，脚本内随机随缘助力
-	jd_kxcdz.js			#开学充电站
-	CookieSet.json
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -797,7 +782,6 @@ EOF
 run_jd_cash() {
 cat >/tmp/jd_tmp/run_jd_cash <<EOF
 	jd_cash_exchange.js #领现金兑换
-	jd_car_exchange_xh.js	#京东汽车兑换
 EOF
 	jd_cash_num="30"
 	while [[ ${jd_cash_num} -gt 0 ]]; do
@@ -941,6 +925,42 @@ do
 done
 echo -e "$green============整理完成，可以提交了（没加群的忽略）======$white"
 
+}
+
+
+jd_try() {
+cat >/tmp/jd_tmp/jd_try_variable <<EOF
+	JD_TRY_TITLEFILTERS
+	JD_TRY_WHITELIST
+	JD_TRY_PRICE
+	JD_TRY_MINSUPPLYNUM
+	JD_TRY_TABID
+	JD_TRY_PLOG
+	JD_TRY_MAXLENGTH
+	JD_TRY_APPLYNUMFILTER
+	JD_TRY_TRIALPRICE
+EOF
+
+	for i in `cat /tmp/jd_tmp/jd_try_variable | grep -v "#.*js" | awk '{print $1}'`
+	do
+		export $i=$(cat $openwrt_script_config/jd_openwrt_script_config.txt | grep "$i" | awk -F "\"" '{print $2}')
+	done
+
+	JD_TRY=$(cat $openwrt_script_config/jd_openwrt_script_config.txt | grep "JD_TRY=" | awk -F "\"" '{print $2}')
+	if [ $JD_TRY == "true" ];then
+		export JD_TRY="true"
+		echo -e "$green >> 开始执行试用脚本$white"
+		for i in `ls $dir_file/jd_try_file/tmp | grep "jd_try"`
+		do
+		{
+			echo -e "$green >> 开始跑$i$white"
+			$node $dir_file/jd_try_file/tmp/$i
+		} &
+		done
+		wait
+	else
+		echo -e "$red >> 试用脚本开关没有打开$white"
+	fi
 }
 
 concurrent_js_update() {
@@ -2425,33 +2445,71 @@ additional_settings() {
 	done
 
 	#京东试用
-	if [ "$jd_try" == "yes" ];then
-		jd_try_if=$(grep "jd_try.js" $cron_file | wc -l)
+	sed -i '/jd_try/d' /etc/crontabs/root >/dev/null 2>&1
+	/etc/init.d/cron restart
+	JD_TRY=$(cat $openwrt_script_config/jd_openwrt_script_config.txt | grep "JD_TRY=" | awk -F "\"" '{print $2}')
+	if [ "$JD_TRY" == "true" ];then
+		#jd_try变量(更多详细内容请查看/usr/share/jd_openwrt_script/JD_Script/js/jd_try.js)
+		jd_try_ck=$(cat $openwrt_script_config/jd_openwrt_script_config.txt | grep "jd_try_ck" | awk -F "\"" '{print $2}')
+
+		if [ ! -d "$dir_file/jd_try_file" ]; then
+			mkdir $dir_file/jd_try_file
+			mkdir $dir_file/jd_try_file/tmp
+		else
+			rm -rf $dir_file/jd_try_file/*
+			mkdir $dir_file/jd_try_file/tmp
+		fi
+
+		ln -s $openwrt_script_config/sendNotify.js $dir_file/jd_try_file/tmp/sendNotify.js
+		ln -s $openwrt_script_config/USER_AGENTS.js $dir_file/jd_try_file/tmp/USER_AGENTS.js
+		cp $dir_file_js/jd_try.js $dir_file/jd_try_file/jd_try.js
+		wget https://raw.githubusercontent.com/ITdesk01/JD_Script/main/JSON/jdCookie.js -O $dir_file/jd_try_file/jdCookie.js
+
+		jd_try_if=$(grep "jd_try" $cron_file | wc -l)
 		if [ "$jd_try_if" == "0" ];then
 			echo "检测到试用开关开启，导入一下计划任务"
-			echo "0 10 * * * $node $dir_file/js/jd_try.js >/tmp/jd_try.log" >>$cron_file
+			echo "0 0 * * * $node $dir_file/jd.sh jd_try >/tmp/jd_try.log" >>$cron_file
 			/etc/init.d/cron restart
-			if [ `cat /etc/profile | grep "JD_TRY" | wc -l` == "1" ];then
-				echo "京东试用全局变量已经导入，不生效，请重启路由器"
-			else
-				echo "export JD_TRY="true"" >>/etc/profile
-				source 	/etc/profile
-			fi
 		else
 			echo "京东试用计划任务已经导入"
 		fi
+
+		if [ ! "$jd_try_ck" ];then
+			ck_num=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
+			for i in `seq $ck_num`
+			do
+			{
+				cp $dir_file/jd_try_file/jd_try.js  $dir_file/jd_try_file/tmp/jd_try$i.js
+				cp $dir_file/jd_try_file/jdCookie.js $dir_file/jd_try_file/tmp/jdCookie$i.js
+				sed -i "s/jdCookie.js/jdCookie$i.js/g" $dir_file/jd_try_file/tmp/jd_try$i.js
+
+				jd_tryck=$(sed -n "$i p" $openwrt_script_config/js_cookie.txt)
+				sed -i "5a $jd_tryck" $dir_file/jd_try_file/tmp/jdCookie$i.js
+			}
+			done
+		else
+			echo "$jd_try_ck" >/tmp/jd_tmp/jd_tryck.txt
+			sed -i "s/@/\n/g" /tmp/jd_tmp/jd_tryck.txt
+			ck_num=$(cat /tmp/jd_tmp/jd_tryck.txt |wc -l)
+			for i in `seq $ck_num`
+			do
+			{
+				cp $dir_file/jd_try_file/jd_try.js  $dir_file/jd_try_file/tmp/jd_try$i.js
+				cp $dir_file/jd_try_file/jdCookie.js $dir_file/jd_try_file/tmp/jdCookie$i.js
+				sed -i "s/jdCookie.js/jdCookie$i.js/g" $dir_file/jd_try_file/tmp/jd_try$i.js
+
+				jd_tryck=$(sed -n "$i p" /tmp/jd_tmp/jd_tryck.txt)
+				jd_tryck1=$(grep "$jd_tryck" $openwrt_script_config/js_cookie.txt)
+				sed -i "5a $jd_tryck1" $dir_file/jd_try_file/tmp/jdCookie$i.js
+			}
+			done
+		fi
 	else
-		jd_try_if=$(grep "jd_try.js" $cron_file | wc -l)
+		jd_try_if=$(grep "jd_try" $cron_file | wc -l)
 		if [ "$jd_try_if" == "1" ];then
 			echo "检测到试用开关关闭，清理一下之前的导入"
-			sed -i '/jd_try.js/d' /etc/crontabs/root >/dev/null 2>&1
+			sed -i '/jd_try/d' /etc/crontabs/root >/dev/null 2>&1
 			/etc/init.d/cron restart
-			if [ `cat /etc/profile | grep "JD_TRY" | wc -l` == "1" ];then
-				sed -i "/JD_TRY/d"  /etc/profile
-				source 	/etc/profile
-			else
-				echo "京东试用全局变量已经删除"
-			fi
 		fi
 		echo "京东试用计划任务不导入"
 	fi
@@ -2661,7 +2719,7 @@ npm_install() {
 	#安装js模块
 	cp $dir_file/git_clone/lxk0301_back/package.json $openwrt_script/package.json
 	cd $openwrt_script && npm -g install
-	npm install -g request http stream zlib vm png-js fs got tough-cookie audit date-fns ts-md5
+	npm install -g request http stream zlib vm png-js fs got tough-cookie audit date-fns ts-md5 md5
 	npm install --save axios
 	cd $dir_file/cookies_web && npm -g install
 
@@ -2759,7 +2817,7 @@ system_variable() {
 		fi
 	fi
 
-	jd_openwrt_config_version="1.3"
+	jd_openwrt_config_version="1.4"
 	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 		jd_openwrt_config="$openwrt_script_config/jd_openwrt_script_config.txt"
 		if [ ! -f "$jd_openwrt_config" ]; then
@@ -2779,7 +2837,6 @@ system_variable() {
 	fi
 
 	ccr_if=$(grep "concurrent" $jd_openwrt_config | awk -F "'" '{print $2}')
-	jd_try=$(grep "jd_try" $jd_openwrt_config | awk -F "'" '{print $2}')
 	jd_fruit=$(grep "jd_fruit" $jd_openwrt_config | awk -F "'" '{print $2}')
 	jd_joy_reward=$(grep "jd_joy_reward" $jd_openwrt_config | awk -F "'" '{print $2}')
 	jd_joy_feedPets=$(grep "jd_joy_feedPets" $jd_openwrt_config | awk -F "'" '{print $2}')
@@ -2866,10 +2923,32 @@ push_if='1'
 (push_if填写为3，这里就必须要填，不然无法推送，不为3,可以不填)
 weixin2=''
 
-#京东试用 yes开启  默认no
-jd_try='no'
+------------------------------------------------------------------------------------------------------------
+#京东试用 true开启  默认false(更多详细内容请查看/usr/share/jd_openwrt_script/JD_Script/js/jd_try.js)
+JD_TRY="true"
 
-#农场不浇水换豆 false关闭 ture打开
+#jd_try ck变量(那几个ck要跑，用@隔开，比如jd_01@jd_02(填写ck的用户名也就是pt_pin值)，这里不填就跑所有ck)
+jd_try_ck=""
+
+#jd_try黑名单
+export JD_TRY_TITLEFILTERS="门票@水管@钢化膜@僵尸粉@防臭地漏@风湿@口罩@题库@手机壳@在线直播@抖音作品@手机套@qq名片@口臭咀嚼片@咀嚼片@皮带扣@眼影@降敏@钙片@补钙@便携装@睫毛@面膜@玉石@风湿@肉苁蓉@和田玉@羊脂玉@羊脂白玉@男用喷剂@随身wifi@类纸膜@贴膜@手抄报@贴纸@早餐奶@产后修复@体验装@腮红@袜子一双@睫毛胶水@儿童牛奶@牙刷头@灵芝@孢子@除臭@鼻炎@口罩@宠物@和田玉@祛痘@解酒@教程@软件@英语@辅导@培训@流量卡@保护套@手机壳@衣架@戒烟@棉签@网课@擦杯布@驱蚊@刷头@卸妆@互动课@小靓美@脚气@文胸@卷尺@种子@档案袋@癣@中年@老太太@妇女@私处@孕妇@卫生巾@卫生条@课@培训@阴道@生殖器@肛门@狐臭@少女内衣@胸罩@洋娃娃@益智@少女@女性内衣@女性内裤@女内裤@女内衣@女孩@屏风底座@童装@吊带@黑丝@钢圈@婴儿@玩具@幼儿@娃娃@网课@网校@电商@手机壳@钢化膜@网络课程@女纯棉@三角裤@美少女@纸尿裤@英语@俄语@四级@六级@四六级@在线网络@在线@阴道炎@宫颈@糜烂@打底裤@手机膜@鱼@狗@猫@宠物"
+
+#jd_try试用白名单
+JD_TRY_WHITELIST="润滑液@振动"
+
+#jd_try最小提供数量
+JD_TRY_PRICE="50"
+JD_TRY_PLOG="true"
+JD_TRY_MINSUPPLYNUM="0"
+JD_TRY_TABID="1@2@3@4@5@6@7@8@9@10@11@12@13@14@15@16"
+JD_TRY_MAXLENGTH="100"
+JD_TRY_APPLYNUMFILTER="10000"
+JD_TRY_TRIALPRICE="10"
+
+------------------------------------------------------------------------------------------------------------
+
+
+#农场不浇水换豆 false关闭 true打开
 jd_fruit='false'
 
 #宠汪汪积分兑换500豆子，(350积分兑换20豆子，8000积分兑换500豆子要求等级16级，16000积分兑换1000京豆16级以后不能兑换)
@@ -2880,7 +2959,7 @@ jd_joy_reward='500'
 jd_joy_feedPets='80'
 
 
-#宠汪汪不给好友喂食 false不喂食 ture喂食
+#宠汪汪不给好友喂食 false不喂食 true喂食
 jd_joy_steal='false'
 
 #取消店铺200个(觉得太多你可以自己调整)
@@ -2898,7 +2977,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|opencard|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie|jd_try)
 		$action1
 		;;
 		kill_ccr)
@@ -2917,7 +2996,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|opencard|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie|jd_try)
 		$action2
 		;;
 		kill_ccr)
