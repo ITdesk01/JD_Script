@@ -2937,7 +2937,7 @@ export JD_TRY_TITLEFILTERS="门票@水管@钢化膜@僵尸粉@防臭地漏@风�
 JD_TRY_WHITELIST="润滑液@振动"
 
 #jd_try最小提供数量
-JD_TRY_PRICE="50"
+JD_TRY_PRICE="119"
 JD_TRY_PLOG="true"
 JD_TRY_MINSUPPLYNUM="0"
 JD_TRY_TABID="1@2@3@4@5@6@7@8@9@10@11@12@13@14@15@16"
@@ -2945,6 +2945,7 @@ JD_TRY_MAXLENGTH="100"
 JD_TRY_APPLYNUMFILTER="10000"
 JD_TRY_TRIALPRICE="10"
 
+#这里的变量都可以自己修改，按自己的想法来
 ------------------------------------------------------------------------------------------------------------
 
 
