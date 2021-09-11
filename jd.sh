@@ -270,6 +270,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard25.js		#开卡默认不运行
 	gua_opencard26.js		#开卡默认不运行
 	gua_opencard27.js		#开卡默认不运行
+	gua_opencard28.js		#开卡默认不运行
 	gua_UnknownTask1.js		#电脑配件
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 EOF
@@ -365,6 +366,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_ccSign.js			#领券中心签到
 	jd_cash.js			#签到领现金，每日2毛～5毛长期
 	jd_jdzz.js			#京东赚赚长期活动
+	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -531,7 +533,6 @@ EOF
 		$run_sleep
 	}&
 	done
-	wait
 }
 
 concurrent_js_run_07() {
@@ -539,7 +540,6 @@ concurrent_js_run_07() {
 cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_dreamFactory.js 		#京喜工厂
-	jd_unsubscriLive.js		#取关主播
 	jd_unsubscriLive.js		#取关主播
 	jd_superBrand.js		#特物Z|万物皆可国创
 	jd_star_shop.js			#明星小店
@@ -572,6 +572,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_dpqd.js			#店铺签到
 	jd_ccSign.js			#领券中心签到
 	jd_iqoo_run.js			#iqoo生而为赢酷跑
+	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 EOF
 	echo -e "$green run_0$start_script_time $white"
@@ -644,6 +645,7 @@ cat >/tmp/jd_tmp/run_01 <<EOF
 	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	long_super_redrain.js		#整点红包雨
+	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 EOF
 	echo -e "$green run_01$start_script_time $white"
 
@@ -2601,6 +2603,9 @@ additional_settings() {
 
 	#宠汪汪兑换
 	sed -i "s/.\/utils\/JDJRValidator_Pure/.\/JDJRValidator_Pure/g" $dir_file_js/jd_joy_reward.js
+
+	#财富岛合成月饼
+	sed -i "s/cfd.json/cfd1.json/g" $dir_file_js/jd_cfd_mooncake.js
 }
 
 if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
