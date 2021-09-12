@@ -399,13 +399,27 @@ done
 star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
-	jd_iqoo_run.js			#iqoo生而为赢酷跑
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
 	url="$star261_url"
 	wget $star261_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
+#X1a0He
+X1a0He_url="https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main"
+cat >$dir_file/config/tmp/X1a0He_url.txt <<EOF
+	jd_car_exchange_xh.js		#京东汽车兑换
+	jd_jin_tie_xh.js  		#领金贴
+	jd_ljd_xh.js			#领京豆
+EOF
+
+for script_name in `cat $dir_file/config/tmp/X1a0He_url.txt | grep -v "#.*js" | awk '{print $1}'`
+do
+	url="$X1a0He_url"
+	wget $X1a0He_url/$script_name -O $dir_file_js/$script_name
 	update_if
 done
 
@@ -455,8 +469,6 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
-	jd_jin_tie_xh.js  		#领金贴
-	jd_car_exchange_xh.js		#京东汽车兑换
 	jd_prodev_dailyTask.js
 	gua_opencard4.js		#开卡默认不运行
 	gua_opencard5.js		#开卡默认不运行
@@ -528,6 +540,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_superBrand.js		#特物Z|万物皆可国创
 	jd_star_shop.js			#明星小店
 	jd_jdzz.js			#京东赚赚长期活动
+	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -570,9 +583,8 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_joypark_task.js		#汪汪乐园每日任务
 	jd_dpqd.js			#店铺签到
 	jd_ccSign.js			#领券中心签到
-	jd_iqoo_run.js			#iqoo生而为赢酷跑
-	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 	jd_unsubscribe.js 		#取关店铺，没时间要求
+	jd_ljd_xh.js			#领京豆
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -786,6 +798,7 @@ EOF
 run_jd_cash() {
 cat >/tmp/jd_tmp/run_jd_cash <<EOF
 	jd_cash_exchange.js #领现金兑换
+	jd_car_exchange_xh.js #京东汽车兑换
 EOF
 	jd_cash_num="30"
 	while [[ ${jd_cash_num} -gt 0 ]]; do
