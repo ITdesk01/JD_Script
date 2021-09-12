@@ -2472,7 +2472,7 @@ additional_settings() {
 		jd_try_if=$(grep "jd_try" $cron_file | wc -l)
 		if [ "$jd_try_if" == "0" ];then
 			echo "检测到试用开关开启，导入一下计划任务"
-			echo "0 0 * * * $node $dir_file/jd.sh jd_try >/tmp/jd_try.log" >>$cron_file
+			echo "0 0 * * * $dir_file/jd.sh jd_try >/tmp/jd_try.log" >>$cron_file
 			/etc/init.d/cron restart
 		else
 			echo "京东试用计划任务已经导入"
