@@ -469,6 +469,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_iqoo_run.js
 	jd_prodev_dailyTask.js
 	gua_opencard4.js		#开卡默认不运行
 	gua_opencard5.js		#开卡默认不运行
