@@ -525,6 +525,9 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	gua_UnknownTask1.js		#电脑配件
 	jd_connoisseur.js		#内容鉴赏官
 	gua_UnknownTask3.js		#寻找内容鉴赏官
+	jd_superBrand.js		#特物Z|万物皆可国创
+	jd_star_shop.js			#明星小店
+	jd_jdzz.js			#京东赚赚长期活动
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -538,11 +541,7 @@ EOF
 concurrent_js_run_07() {
 #这里的也不会并发
 cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
-	jd_jdzz.js			#京东赚赚长期活动
 	jd_dreamFactory.js 		#京喜工厂
-	jd_unsubscriLive.js		#取关主播
-	jd_superBrand.js		#特物Z|万物皆可国创
-	jd_star_shop.js			#明星小店
 EOF
 	for i in `cat /tmp/jd_tmp/concurrent_js_run_07 | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -739,6 +738,7 @@ cat >/tmp/jd_tmp/run_07 <<EOF
 	jd_jin_tie_xh.js  		#领金贴
 	jd_unsubscribe.js 		#取关店铺，没时间要求
         gua_MMdou.js                    #赚京豆MM豆
+	jd_unsubscriLive.js		#取关主播
 EOF
 	echo -e "$green run_07$start_script_time $white"
 
