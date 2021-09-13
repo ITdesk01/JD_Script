@@ -273,6 +273,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard28.js		#开卡默认不运行
 	gua_UnknownTask1.js		#电脑配件
 	gua_UnknownTask3.js		#寻找内容鉴赏官
+	gua_UnknownTask4.js		#希捷品牌日瓜分百万京豆
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -538,6 +539,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	gua_UnknownTask1.js		#电脑配件
 	jd_connoisseur.js		#内容鉴赏官
 	gua_UnknownTask3.js		#寻找内容鉴赏官
+	gua_UnknownTask4.js		#希捷品牌日瓜分百万京豆
 	jd_superBrand.js		#特物Z|万物皆可国创
 	jd_star_shop.js			#明星小店
 	jd_jdzz.js			#京东赚赚长期活动
