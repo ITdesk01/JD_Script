@@ -272,7 +272,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard27.js		#开卡默认不运行
 	gua_opencard28.js		#开卡默认不运行
 	gua_opencard29.js		#开卡默认不运行
-	gua_UnknownTask1.js		#电脑配件
+	gua_opencard30.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 	gua_UnknownTask4.js		#希捷品牌日瓜分百万京豆
 EOF
@@ -471,6 +471,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_UnknownTask1.js		#电脑配件
 	jd_jika.js			#集萌宝得团圆礼包
 	jd_iqoo_run.js
 EOF
@@ -535,7 +536,6 @@ ccr_run() {
 cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_jxlhb.js			#京喜领红包
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
-	gua_UnknownTask1.js		#电脑配件
 	jd_connoisseur.js		#内容鉴赏官
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 	gua_UnknownTask4.js		#希捷品牌日瓜分百万京豆
