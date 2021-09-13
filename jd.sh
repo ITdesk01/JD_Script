@@ -334,7 +334,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_superBrand.js		#特物Z|万物皆可国创
 	jd_try.js 			#京东试用（默认不启用）
 	jd_nzmh.js			#新一期女装盲盒
-	jd_jika.js			#集萌宝得团圆礼包
 	jd_connoisseur.js		#内容鉴赏官
 EOF
 
@@ -470,10 +469,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_jika.js			#集萌宝得团圆礼包
 	jd_iqoo_run.js
-	jd_prodev_dailyTask.js
-	gua_opencard4.js		#开卡默认不运行
-	gua_opencard5.js		#开卡默认不运行
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -698,7 +695,6 @@ cat >/tmp/jd_tmp/run_03 <<EOF
 	jd_mohe.js			#5G超级盲盒
 	jd_dianjing.js			#电竞经理
 	jd_joy_park_help.js 		#汪汪乐园助力
-	jd_jika.js			#集萌宝得团圆礼包
 EOF
 	echo -e "$green run_03$start_script_time $white"
 
@@ -2465,8 +2461,6 @@ additional_settings() {
 	done
 
 	#京东试用
-	sed -i '/jd_try/d' /etc/crontabs/root >/dev/null 2>&1
-	/etc/init.d/cron restart
 	JD_TRY=$(cat $openwrt_script_config/jd_openwrt_script_config.txt | grep "JD_TRY=" | awk -F "\"" '{print $2}')
 	if [ "$JD_TRY" == "true" ];then
 		#jd_try变量(更多详细内容请查看/usr/share/jd_openwrt_script/JD_Script/js/jd_try.js)
