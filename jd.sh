@@ -90,7 +90,7 @@ task() {
 		task_delete
 		task_add
 		echo "计划任务设置完成"
-	elif [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "1" ]]; then
+	else
 			echo "计划任务与设定一致，不做改变"
 			cron_help="$green定时任务与设定一致$white"
 	fi
