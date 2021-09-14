@@ -388,6 +388,7 @@ cat >$dir_file/config/tmp/yuannian1112_url.txt <<EOF
 	jd_dwapp.js			#积分换话费
 	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
 	jd_star_shop.js			#明星小店
+	jd_film_museum.js 		#动人影像馆
 EOF
 
 for script_name in `cat $dir_file/config/tmp/yuannian1112_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -742,6 +743,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_goodMorning.js		#早起福利
 	jd_nzmh.js			#新一期女装盲盒
 	jd_dwapp.js			#积分换话费
+	jd_film_museum.js 		#动人影像馆
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
