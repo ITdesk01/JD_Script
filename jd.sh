@@ -324,7 +324,6 @@ zero205_url="https://raw.githubusercontent.com/zero205/JD_tencent_scf/main"
 cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_jxlhb.js			#京喜领红包
 	jd_joy.js			#宠汪汪
-	JDJRValidator_Pure.js
 	sign_graphics_validate.js
 	jd_sign_graphics.js		#京东签到图形验证
 	JDJRValidator_Smiek.js
@@ -439,6 +438,20 @@ do
 	update_if
 done
 
+#ZCY01
+ZCY01_url="https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd"
+cat >$dir_file/config/tmp/ZCY01_url.txt <<EOF
+	jd_priceProtectRewrite.js		#价保脚本需要抓token
+EOF
+
+for script_name in `cat $dir_file/config/tmp/ZCY01_url.txt | grep -v "#.*js" | awk '{print $1}'`
+do
+	url="$ZCY01_url"
+	wget $ZCY01_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
+
 
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
@@ -472,6 +485,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	JDJRValidator_Pure.js
 	gua_UnknownTask1.js		#电脑配件
 	jd_jika.js			#集萌宝得团圆礼包
 	jd_iqoo_run.js
