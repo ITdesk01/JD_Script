@@ -264,6 +264,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	ZooFaker_Necklace.js 		#点点券依赖文件
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
         gua_MMdou.js                    #赚京豆MM豆
+	gua_opencard18.js		#开卡默认不运行
 	gua_opencard22.js		#开卡默认不运行
 	gua_opencard23.js		#开卡默认不运行
 	gua_opencard24.js		#开卡默认不运行
