@@ -265,13 +265,11 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
         gua_MMdou.js                    #赚京豆MM豆
 	gua_opencard18.js		#开卡默认不运行
-	gua_opencard22.js		#开卡默认不运行
 	gua_opencard23.js		#开卡默认不运行
 	gua_opencard24.js		#开卡默认不运行
 	gua_opencard25.js		#开卡默认不运行
 	gua_opencard26.js		#开卡默认不运行
 	gua_opencard27.js		#开卡默认不运行
-	gua_opencard28.js		#开卡默认不运行
 	gua_opencard29.js		#开卡默认不运行
 	gua_opencard30.js		#开卡默认不运行
 	gua_opencard31.js		#开卡默认不运行
@@ -340,7 +338,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_nzmh.js			#新一期女装盲盒
 	jd_connoisseur.js		#内容鉴赏官
 	jd_jump.js			#跳跳乐瓜分京豆
-	jd_sendBeans.js			#送豆得豆
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -491,6 +488,9 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_sendBeans.js			#送豆得豆
+	gua_opencard22.js		#开卡默认不运行
+	gua_opencard28.js		#开卡默认不运行
 	JDJRValidator_Pure.js
 	gua_UnknownTask1.js		#电脑配件
 	jd_jika.js			#集萌宝得团圆礼包
@@ -564,7 +564,6 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_star_shop.js			#明星小店
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
-	jd_sendBeans.js			#送豆得豆
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -654,7 +653,6 @@ EOF
 
 opencard() {
 cat >/tmp/jd_tmp/opencard <<EOF
-	gua_opencard22.js		#开卡默认不运行
 	gua_opencard23.js		#开卡默认不运行
 	gua_opencard24.js		#开卡默认不运行
 	gua_opencard25.js		#开卡默认不运行
