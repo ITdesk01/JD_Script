@@ -2680,7 +2680,7 @@ close_notification() {
 			done
 			ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
 			ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
-			while [ $ps_fr -gt 0 && $ps_pet -gt 0 ];do
+			while [ $ps_fr -gt 0 ] && [ $ps_pet -gt 0 ];do
 				sleep 1
 				ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
 				ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
@@ -2704,7 +2704,7 @@ close_notification() {
 
 			ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
 			ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
-			while [ $ps_fr -gt 0 && $ps_pet -gt 0 ];do
+			while [ $ps_fr -gt 0 ] && [ $ps_pet -gt 0 ];do
 				sleep 1
 				ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
 				ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
