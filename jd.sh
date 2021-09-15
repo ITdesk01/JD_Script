@@ -275,6 +275,8 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard29.js		#开卡默认不运行
 	gua_opencard30.js		#开卡默认不运行
 	gua_opencard31.js		#开卡默认不运行
+	gua_opencard32.js		#开卡默认不运行
+	gua_opencard33.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 	gua_UnknownTask4.js		#希捷品牌日瓜分百万京豆
 EOF
