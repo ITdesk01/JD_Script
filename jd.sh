@@ -370,6 +370,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_cash.js			#签到领现金，每日2毛～5毛长期
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
+	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -385,7 +386,6 @@ cat >$dir_file/config/tmp/yuannian1112_url.txt <<EOF
 	jd_plantBean.js			#种豆得豆
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_dwapp.js			#积分换话费
-	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
 	jd_star_shop.js			#明星小店
 	jd_film_museum.js 		#动人影像馆
 	jd_qycl.js			#企有此礼
@@ -2125,6 +2125,11 @@ additional_settings() {
 	sed -i "s/coinToBeans = ''/coinToBeans = '超值京豆包'/g" $dir_file_js/jd_blueCoin.py
 	sed -i "s/blueCoin_Cc = False/blueCoin_Cc = True/g" $dir_file_js/jd_blueCoin.py
 
+	#宠汪汪兑换
+	sed -i "s/.\/utils\/JDJRValidator_Pure/.\/JDJRValidator_Pure/g" $dir_file_js/jd_joy_reward.js
+	sed -i "s/joyRewardName = 0/joyRewardName = $jd_joy_reward/g" $dir_file_js/jd_joy_reward.js
+
+
 
 	#取消店铺从20个改成50个(没有星推官先默认20吧)
 	sed -i "s/|| 20/|| $jd_unsubscribe/g" $dir_file_js/jd_unsubscribe.js
@@ -2635,9 +2640,6 @@ additional_settings() {
 		sed -i "$healthcode_rows a \ '$new_health_set', " $dir_file_js/jd_health.js
 		js_amount=$(($js_amount - 1))
 	done
-
-	#宠汪汪兑换
-	sed -i "s/.\/utils\/JDJRValidator_Pure/.\/JDJRValidator_Pure/g" $dir_file_js/jd_joy_reward.js
 
 	#财富岛合成月饼
 	sed -i "s/cfd.json/cfd1.json/g" $dir_file_js/jd_cfd_mooncake.js
