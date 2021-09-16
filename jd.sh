@@ -458,6 +458,7 @@ done
 
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
+	wget https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/utils/JDJRValidator_Pure.js -O $dir_file_js/JDJRValidator_Pure.js
 	#wget https://raw.githubusercontent.com/shufflewzc/faker2/main/jd_bean_change_new.js -O $dir_file_js/jd_bean_change_new.js #资产变动强化版
 
 #将所有文本汇总
@@ -491,7 +492,6 @@ cat >/tmp/del_js.txt <<EOF
 	jd_sendBeans.js			#送豆得豆
 	gua_opencard22.js		#开卡默认不运行
 	gua_opencard28.js		#开卡默认不运行
-	JDJRValidator_Pure.js
 	gua_UnknownTask1.js		#电脑配件
 	jd_jika.js			#集萌宝得团圆礼包
 	jd_iqoo_run.js
