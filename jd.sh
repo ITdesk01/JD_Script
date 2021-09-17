@@ -83,6 +83,8 @@ export guaopencard_addSku_All="true"
 export guaopencardRun_All="true"
 export guaopencard_draw="true"
 
+export FS_LEVEL="card开卡+加购"
+
 task() {
 	cron_version="3.63"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
@@ -338,6 +340,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_nzmh.js			#新一期女装盲盒
 	jd_connoisseur.js		#内容鉴赏官
 	jd_jump.js			#跳跳乐瓜分京豆
+	jd_fansa.js			#超店会员福利社
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -564,6 +567,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_star_shop.js			#明星小店
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
+	jd_fansa.js			#超店会员福利社
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
