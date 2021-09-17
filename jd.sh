@@ -265,7 +265,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	jd_necklace.js  		#点点券
 	ZooFaker_Necklace.js 		#点点券依赖文件
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
-        gua_MMdou.js                    #赚京豆MM豆
+	gua_MMdou.js                    #赚京豆MM豆
 	gua_opencard18.js		#开卡默认不运行
 	gua_opencard23.js		#开卡默认不运行
 	gua_opencard24.js		#开卡默认不运行
@@ -338,7 +338,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_superBrand.js		#特物Z|万物皆可国创
 	jd_try.js 			#京东试用（默认不启用）
 	jd_nzmh.js			#新一期女装盲盒
-	jd_connoisseur.js		#内容鉴赏官
+	#jd_connoisseur.js		#内容鉴赏官
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_fansa.js			#超店会员福利社
 	jd_qqxing.js			#QQ星系牧场
@@ -374,6 +374,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_cash.js			#签到领现金，每日2毛～5毛长期
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
+	jd_connoisseur.js		#内容鉴赏官
 	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
 EOF
 
