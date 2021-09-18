@@ -378,6 +378,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 	jd_connoisseur.js		#内容鉴赏官
 	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
+	jd_ddworld.js			#东东世界
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -586,6 +587,7 @@ EOF
 concurrent_js_run_07() {
 #这里的也不会并发
 cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
+	jd_ddworld.js			#东东世界
 	jd_dreamFactory.js 		#京喜工厂
 EOF
 	for i in `cat /tmp/jd_tmp/concurrent_js_run_07 | grep -v "#.*js" | awk '{print $1}'`
@@ -617,6 +619,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_ccSign.js			#领券中心签到
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 	jd_ljd_xh.js			#领京豆
+	jd_ddworld.js			#东东世界
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
