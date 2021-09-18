@@ -379,6 +379,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_connoisseur.js		#内容鉴赏官
 	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
 	jd_ddworld.js			#东东世界
+	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -392,7 +393,6 @@ done
 yuannian1112_url="https://raw.githubusercontent.com/yuannian1112/jd_scripts/main"
 cat >$dir_file/config/tmp/yuannian1112_url.txt <<EOF
 	jd_plantBean.js			#种豆得豆
-	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_dwapp.js			#积分换话费
 	jd_star_shop.js			#明星小店
 	jd_film_museum.js 		#动人影像馆
