@@ -268,11 +268,9 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_MMdou.js                    #赚京豆MM豆
 	gua_carnivalcity.js		#京东手机狂欢城活动
 	gua_opencard18.js		#开卡默认不运行
-	gua_opencard23.js		#开卡默认不运行
 	gua_opencard24.js		#开卡默认不运行
 	gua_opencard25.js		#开卡默认不运行
 	gua_opencard26.js		#开卡默认不运行
-	gua_opencard27.js		#开卡默认不运行
 	gua_opencard29.js		#开卡默认不运行
 	gua_opencard30.js		#开卡默认不运行
 	gua_opencard31.js		#开卡默认不运行
@@ -497,12 +495,10 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_opencard27.js		#开卡默认不运行
+	gua_UnknownTask4.js		#希捷品牌日瓜分百万京豆
+	gua_opencard23.js		#开卡默认不运行
 	jd_sendBeans.js			#送豆得豆
-	gua_opencard22.js		#开卡默认不运行
-	gua_opencard28.js		#开卡默认不运行
-	gua_UnknownTask1.js		#电脑配件
-	jd_jika.js			#集萌宝得团圆礼包
-	jd_iqoo_run.js
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -567,7 +563,6 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_connoisseur.js		#内容鉴赏官
 	gua_UnknownTask3.js		#寻找内容鉴赏官
-	gua_UnknownTask4.js		#希捷品牌日瓜分百万京豆
 	jd_superBrand.js		#特物Z|万物皆可国创
 	jd_star_shop.js			#明星小店
 	jd_jdzz.js			#京东赚赚长期活动
@@ -665,7 +660,6 @@ EOF
 
 opencard() {
 cat >/tmp/jd_tmp/opencard <<EOF
-	gua_opencard23.js		#开卡默认不运行
 	gua_opencard24.js		#开卡默认不运行
 	gua_opencard25.js		#开卡默认不运行
 EOF
