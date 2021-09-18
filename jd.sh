@@ -266,6 +266,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	ZooFaker_Necklace.js 		#点点券依赖文件
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
 	gua_MMdou.js                    #赚京豆MM豆
+	gua_carnivalcity.js		#京东手机狂欢城活动
 	gua_opencard18.js		#开卡默认不运行
 	gua_opencard23.js		#开卡默认不运行
 	gua_opencard24.js		#开卡默认不运行
@@ -277,8 +278,9 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard31.js		#开卡默认不运行
 	gua_opencard32.js		#开卡默认不运行
 	gua_opencard33.js		#开卡默认不运行
+	gua_opencard34.js		#开卡默认不运行
+	gua_opencard35.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
-	gua_UnknownTask4.js		#希捷品牌日瓜分百万京豆
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -570,6 +572,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 	jd_fansa.js			#超店会员福利社
+	gua_carnivalcity.js		#京东手机狂欢城活动
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
