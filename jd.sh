@@ -466,6 +466,7 @@ done
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/utils/JDJRValidator_Pure.js -O $dir_file_js/JDJRValidator_Pure.js
 	#wget https://raw.githubusercontent.com/shufflewzc/faker2/main/jd_bean_change_new.js -O $dir_file_js/jd_bean_change_new.js #资产变动强化版
+	wget https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ddwj.js -O $dir_file_js/zy_ddwj.js	#东东玩家
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -569,6 +570,8 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 	jd_fansa.js			#超店会员福利社
 	gua_carnivalcity.js		#京东手机狂欢城活动
+	zy_ddwj.js			#东东玩家
+	jd_ddworld.js			#东东世界
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -582,7 +585,6 @@ EOF
 concurrent_js_run_07() {
 #这里的也不会并发
 cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
-	jd_ddworld.js			#东东世界
 	jd_dreamFactory.js 		#京喜工厂
 EOF
 	for i in `cat /tmp/jd_tmp/concurrent_js_run_07 | grep -v "#.*js" | awk '{print $1}'`
