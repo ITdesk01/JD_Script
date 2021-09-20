@@ -266,6 +266,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	ZooFaker_Necklace.js 		#点点券依赖文件
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
 	gua_MMdou.js                    #赚京豆MM豆
+	gua_ddgame.js			#东东游戏
 	gua_carnivalcity.js		#京东手机狂欢城活动
 	gua_opencard18.js		#开卡默认不运行
 	gua_opencard24.js		#开卡默认不运行
@@ -816,6 +817,7 @@ cat >/tmp/jd_tmp/run_10_15_20 <<EOF
 	jd_superMarket.js 		#东东超市,0 10 15 20四场补货加劵
 	jd_speed_sign.js 		#京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#极速版红包
+	gua_ddgame.js			#东东游戏
 EOF
 
 	echo -e "$green run_10_15_20$start_script_time $white"
