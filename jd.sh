@@ -212,7 +212,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_speed_sign.js		#京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#极速版红包
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
-	jd_live.js			#京东直播
+	#jd_live.js			#京东直播
 	jd_moneyTree.js 		#摇钱树
 	jd_market_lottery.js 		#幸运大转盘
 	jd_health.js			#健康社区
@@ -380,6 +380,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
 	jd_ddworld.js			#东东世界
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
+	jd_live.js			#京东直播
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
