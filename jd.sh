@@ -219,7 +219,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_health_collect.js		#健康社区-收能量
 	jd_gold_creator.js		#金榜创造营
 	jd_cleancart.js			#清空购物车（默认不执行）
-	jd_get_share_code.js		#获取jd所有助力码脚本
+	#jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_unsubscribe.js		#取关京东店铺和商品
 EOF
 
@@ -343,6 +343,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_fansa.js			#超店会员福利社
 	jd_qqxing.js			#QQ星系牧场
+	jd_get_share_code.js		#获取jd所有助力码脚本
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
