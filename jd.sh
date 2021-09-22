@@ -521,7 +521,7 @@ done
 	fi
 	chmod 755 $dir_file_js/*
 	kill_index
-	index_js
+	#index_js
 	additional_settings
 	concurrent_js_update
 	source /etc/profile
