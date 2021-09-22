@@ -1955,9 +1955,6 @@ script_black() {
 		do
 			if [ `grep "dir_file_js\/$i" $dir_file/jd.sh  | wc -l` -gt 0 ];then
 				echo "开始删除关于$i脚本的代码，后面需要的话看黑名单描述处理"
-				sed -i "/\$node \$dir_file_js\/$i/d" $dir_file/jd.sh
-			elif [ `grep "$i" $dir_file/jd.sh  | wc -l` -gt 0 ];then
-				echo "开始删除关于$i脚本的代码，后面需要的话看黑名单描述处理"
 				sed -i "/$i/d" $dir_file/jd.sh
 			else
 				echo "黑名单脚本已经全部禁用了"
@@ -2918,9 +2915,9 @@ system_variable() {
 	#index_js
 	index_if=$(ps -ww | grep "index.js" | grep -v grep | awk '{print $1}')
 	if [ ! "$index_if" ];then
-		kill -9 $index_if
-	else
 		echo ""
+	else
+		kill -9 $index_if
 	fi
 	index_num="$yellow 8.网页扫码功能已关闭，看后面情况再开放$white"
 
