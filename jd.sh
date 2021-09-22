@@ -2506,6 +2506,7 @@ additional_settings() {
 	done
 
 	#京东试用
+	sed -i "/jd_try/d" $cron_file
 	JD_TRY=$(cat $openwrt_script_config/jd_openwrt_script_config.txt | grep "JD_TRY=" | awk -F "\"" '{print $2}')
 	if [ "$JD_TRY" == "true" ];then
 		#jd_try变量(更多详细内容请查看/usr/share/jd_openwrt_script/JD_Script/js/jd_try.js)
@@ -2527,7 +2528,7 @@ additional_settings() {
 		jd_try_if=$(grep "jd_try" $cron_file | wc -l)
 		if [ "$jd_try_if" == "0" ];then
 			echo "检测到试用开关开启，导入一下计划任务"
-			echo "0 0 * * * $dir_file/jd.sh jd_try >/tmp/jd_try.log" >>$cron_file
+			echo "0 10 * * * $dir_file/jd.sh jd_try >/tmp/jd_try.log" >>$cron_file
 			/etc/init.d/cron restart
 		else
 			echo "京东试用计划任务已经导入"
