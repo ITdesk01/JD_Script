@@ -308,21 +308,6 @@ do
 	#update_if
 done
 
-#Tsukasa007
-Tsukasa007_url="https://raw.githubusercontent.com/Tsukasa007/my_script/master"
-cat >$dir_file/config/tmp/Tsukasa007_url.txt <<EOF
-	jd_joypark_joy.js		#汪汪乐园养joy
-	jd_joypark_open.js		#汪汪乐园开工位
-	jd_joypark_task.js		#汪汪乐园每日任务
-EOF
-
-for script_name in `cat $dir_file/config/tmp/Tsukasa007_url.txt | grep -v "#.*js" | awk '{print $1}'`
-do
-	url="$Tsukasa007_url"
-	#wget $Tsukasa007_url/$script_name -O $dir_file_js/$script_name
-	#update_if
-done
-
 #zero205
 zero205_url="https://raw.githubusercontent.com/zero205/JD_tencent_scf/main"
 cat >$dir_file/config/tmp/zero205_url.txt <<EOF
@@ -614,7 +599,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_dreamFactory.js 		#京喜工厂
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_sign_graphics.js		#京东签到图形验证
-	jd_joypark_task.js		#汪汪乐园每日任务
 	jd_dpqd.js			#店铺签到
 	jd_ccSign.js			#领券中心签到
 	jd_unsubscribe.js 		#取关店铺，没时间要求
@@ -687,7 +671,6 @@ EOF
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
 	jd_big_winner.js		#翻翻乐
-	jd_joypark_joy.js		#汪汪乐园养joy
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	long_super_redrain.js		#整点红包雨
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
@@ -1081,7 +1064,7 @@ concurrent_js_clean(){
 kill_ccr() {
 	if [ "$ccr_if" == "yes" ];then
 		echo -e "$green>>终止并发程序启动。请稍等。。。。$white"
-		if [ `ps -ww | grep "js$" | grep "JD_Script"| grep -v 'index.js\|jd_try.js' | awk '{print $1}' |wc -l` == "0" ];then
+		if [ `ps -ww | grep "js$" | grep "JD_Script"| grep -v 'index.js\|jd_try.js\|ssrplus' | awk '{print $1}' |wc -l` == "0" ];then
 			sleep 2
 			echo ""
 			echo -e "$green我曾经跨过山和大海，也穿过人山人海。。。$white"
@@ -1092,7 +1075,7 @@ kill_ccr() {
 			sleep 2
 			echo -e "$green后台都没有进程妹子，散了散了。。。$white"
 		else
-			for i in `ps -ww | grep "js$" | grep "JD_Script"| grep -v 'index.js\|jd_try.js' | awk '{print $1}'`
+			for i in `ps -ww | grep "js$" | grep "JD_Script"| grep -v 'index.js\|jd_try.js\|ssrplus' | awk '{print $1}'`
 			do
 				kill -9 $i
 				echo "kill $i"
@@ -1100,7 +1083,7 @@ kill_ccr() {
 			concurrent_js_clean
 			clear
 			echo -e "$green再次检测一下并发程序是否还有存在$white"
-			if [ `ps -ww | grep "js$" | grep "JD_Script"| grep -v 'index.js\|jd_try.js' | awk '{print $1}' |wc -l` == "0" ];then
+			if [ `ps -ww | grep "js$" | grep "JD_Script"| grep -v 'index.js\|jd_try.js\|ssrplus' | awk '{print $1}' |wc -l` == "0" ];then
 				echo -e "$yellow>>并发程序已经全部结束$white"
 			else
 				echo -e "$yellow！！！检测到并发程序还有存在，再继续杀，请稍等。。。$white"
@@ -1115,7 +1098,7 @@ kill_ccr() {
 
 if_ps() {
 	sleep 10
-	ps_if=$(ps -ww | grep "js$" | grep "JD_Script"| grep -v 'index.js\|jd_try.js' | awk '{print $1}' |wc -l)
+	ps_if=$(ps -ww | grep "js$" | grep "JD_Script"| grep -v 'index.js\|jd_try.js\|ssrplus' | awk '{print $1}' |wc -l)
 	num1="10"
 	num2="20"
 	num3="30"
