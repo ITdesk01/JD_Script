@@ -2809,10 +2809,6 @@ system_variable() {
 		mkdir  /tmp/jd_tmp
 	fi
 
-	if [[ ! -d "$ccr_js_file" ]]; then
-		mkdir  $ccr_js_file
-	fi
-
 	#判断参数
 	if [ ! -f /root/.ssh/test1 ];then
 		rm -rf /root/.ssh
@@ -2924,8 +2920,26 @@ system_variable() {
 		#echo -e "$green唯一的github地址：https://github.com/ITdesk01/JD_Script.git$white"
 		#exit 0
 	fi
+	if [ "$ccr_if" == "yes" ];then
+		if [[ ! -d "$ccr_js_file" ]]; then
+			mkdir  $ccr_js_file
+		fi
+	else
+		if [[ ! -d "$ccr_js_file" ]]; then
+			echo ""
+		else
+			rm -rf $ccr_js_file
+		fi
+	fi
 
-	index_js
+	#index_js
+	index_if=$(ps -ww | grep "index.js" | grep -v grep | awk '{print $1}')
+	if [ ! "$index_if" ];then
+		kill -9 $index_if
+	else
+		echo ""
+	fi
+	index_num="$yellow 8.网页扫码功能已关闭，看后面情况再开放$white"
 
 	#农场萌宠关闭通知
 	close_notification
