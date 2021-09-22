@@ -395,7 +395,7 @@ yuannian1112_url="https://raw.githubusercontent.com/yuannian1112/jd_scripts/main
 cat >$dir_file/config/tmp/yuannian1112_url.txt <<EOF
 	jd_plantBean.js			#种豆得豆
 	jd_dwapp.js			#积分换话费
-	jd_star_shop.js			#明星小店
+	#jd_star_shop.js			#明星小店
 	jd_film_museum.js 		#动人影像馆
 	jd_qycl.js			#企有此礼
 EOF
@@ -413,6 +413,7 @@ done
 star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
+	jd_star_shop.js			#明星小店
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
