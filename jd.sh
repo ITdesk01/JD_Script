@@ -268,15 +268,11 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_MMdou.js                    #赚京豆MM豆
 	gua_ddgame.js			#东东游戏
 	gua_carnivalcity.js		#京东手机狂欢城活动
-	gua_opencard18.js		#开卡默认不运行
 	gua_opencard24.js		#开卡默认不运行
 	gua_opencard25.js		#开卡默认不运行
 	gua_opencard26.js		#开卡默认不运行
-	gua_opencard29.js		#开卡默认不运行
 	gua_opencard30.js		#开卡默认不运行
 	gua_opencard31.js		#开卡默认不运行
-	gua_opencard32.js		#开卡默认不运行
-	gua_opencard33.js		#开卡默认不运行
 	gua_opencard34.js		#开卡默认不运行
 	gua_opencard35.js		#开卡默认不运行
 	gua_opencard36.js		#开卡默认不运行
