@@ -324,7 +324,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_nzmh.js			#新一期女装盲盒
 	#jd_connoisseur.js		#内容鉴赏官
 	jd_jump.js			#跳跳乐瓜分京豆
-	jd_fansa.js			#超店会员福利社
 	jd_qqxing.js			#QQ星系牧场
 	jd_get_share_code.js		#获取jd所有助力码脚本
 EOF
@@ -483,6 +482,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_fansa.js			#超店会员福利社
 	gua_opencard32.js		#开卡默认不运行
 	gua_opencard33.js		#开卡默认不运行
 	gua_opencard29.js		#开卡默认不运行
@@ -559,7 +559,6 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_star_shop.js			#明星小店
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
-	jd_fansa.js			#超店会员福利社
 	gua_carnivalcity.js		#京东手机狂欢城活动
 	jd_ddworld.js			#东东世界
 EOF
