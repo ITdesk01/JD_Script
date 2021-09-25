@@ -462,6 +462,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_mofang.js			#集魔方
 	gua_UnknownTask2.js		#关注频道、抽奖(默认不运行)
 	jd_dianjing.js			#电竞经理
 	#jd_bean_change_new.js 		#资产变动强化版
@@ -606,6 +607,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_ljd_xh.js			#领京豆
 	jd_ddworld.js			#东东世界
 	zy_ddwj.js			#东东玩家
+	jd_mofang.js			#集魔方
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
