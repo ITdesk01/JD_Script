@@ -86,7 +86,7 @@ export guaopencard_draw="true"
 export FS_LEVEL="card开卡+加购"
 
 task() {
-	cron_version="3.64"
+	cron_version="3.65"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -117,6 +117,7 @@ cat >>/etc/crontabs/root <<EOF
 10-20/5 10,12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
 0 0,7 * * * $node $dir_file_js/jd_bean_sign.js >/tmp/jd_bean_sign.log #京东多合一签到#100#
 0 0 * * * $node $dir_file_js/star_dreamFactory_tuan.js	>/tmp/star_dreamFactory_tuan.log	#京喜开团#100#
+0 10 */7 * * $node $dir_file_js/jd_priceProtect_Mod.js	>/tmp/jd_priceProtect_Mod.log	#价保脚本#100#
 0 0 * * * $python3 $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py >/tmp/jd_getFollowGift.log #关注有礼#100#
 0 8,15 * * * $python3 $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py  >/tmp/jd_OpenCard.log #开卡程序#100#
 #0 1 * * * $python3 $dir_file/git_clone/curtinlv_script/jd_qjd.py >/tmp/jd_qjd.log #抢京豆#100#
@@ -277,6 +278,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard35.js		#开卡默认不运行
 	gua_opencard36.js		#开卡默认不运行
 	gua_opencard37.js		#开卡默认不运行
+	gua_opencard38.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 EOF
 
@@ -424,6 +426,7 @@ done
 ccwav_url="https://raw.githubusercontent.com/ccwav/QLScript/main"
 cat >$dir_file/config/tmp/ccwav_url.txt <<EOF
 	jd_bean_change.js		#资产变化强化版by-ccwav
+	jd_priceProtect_Mod.js		#价保脚本
 EOF
 
 for script_name in `cat $dir_file/config/tmp/ccwav_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -432,21 +435,6 @@ do
 	wget $ccwav_url/$script_name -O $dir_file_js/$script_name
 	update_if
 done
-
-#ZCY01
-ZCY01_url="https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd"
-cat >$dir_file/config/tmp/ZCY01_url.txt <<EOF
-	jd_priceProtectRewrite.js		#价保脚本需要抓token
-EOF
-
-for script_name in `cat $dir_file/config/tmp/ZCY01_url.txt | grep -v "#.*js" | awk '{print $1}'`
-do
-	url="$ZCY01_url"
-	wget $ZCY01_url/$script_name -O $dir_file_js/$script_name
-	update_if
-done
-
-
 
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
@@ -483,15 +471,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_priceProtectRewrite.js		#价保脚本需要抓token
 	jd_fansa.js			#超店会员福利社
-	gua_opencard32.js		#开卡默认不运行
-	gua_opencard33.js		#开卡默认不运行
-	gua_opencard29.js		#开卡默认不运行
-	gua_opencard18.js		#开卡默认不运行
-	gua_opencard27.js		#开卡默认不运行
-	gua_UnknownTask4.js		#希捷品牌日瓜分百万京豆
-	gua_opencard23.js		#开卡默认不运行
-	jd_sendBeans.js			#送豆得豆
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
