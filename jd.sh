@@ -273,7 +273,6 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard25.js		#开卡默认不运行
 	gua_opencard26.js		#开卡默认不运行
 	gua_opencard30.js		#开卡默认不运行
-	gua_opencard31.js		#开卡默认不运行
 	gua_opencard34.js		#开卡默认不运行
 	gua_opencard35.js		#开卡默认不运行
 	gua_opencard36.js		#开卡默认不运行
@@ -471,6 +470,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_opencard31.js		#开卡默认不运行
 	jd_priceProtectRewrite.js		#价保脚本需要抓token
 	jd_fansa.js			#超店会员福利社
 EOF
