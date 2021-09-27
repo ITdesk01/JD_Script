@@ -364,6 +364,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_ddworld.js			#东东世界
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_live.js			#京东直播
+	jd_mf.js			#集魔方
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -449,7 +450,6 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	jd_mofang.js			#集魔方
 	gua_UnknownTask2.js		#关注频道、抽奖(默认不运行)
 	jd_dianjing.js			#电竞经理
 	#jd_bean_change_new.js 		#资产变动强化版
@@ -727,6 +727,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_dwapp.js			#积分换话费
 	jd_film_museum.js 		#动人影像馆
 	jd_qycl.js			#企有此礼
+	jd_mf.js			#集魔方
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
