@@ -437,10 +437,22 @@ do
 	update_if
 done
 
+#Tsukasa007
+Tsukasa007_url="https://raw.githubusercontent.com/Tsukasa007/my_script/master"
+cat >$dir_file/config/tmp/Tsukasa007_url.txt <<EOF
+	jd_opencard_LiHuiGuoQing_9-28_10-8_enc.js		#礼惠国庆 大牌欢乐购,开卡默认不运行
+EOF
+
+for script_name in `cat $dir_file/config/tmp/Tsukasa007_url.txt | grep -v "#.*js" | awk '{print $1}'`
+do
+	url="$Tsukasa007_url"
+	wget $Tsukasa007_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/utils/JDJRValidator_Pure.js -O $dir_file_js/JDJRValidator_Pure.js
-	#wget https://raw.githubusercontent.com/shufflewzc/faker2/main/jd_bean_change_new.js -O $dir_file_js/jd_bean_change_new.js #资产变动强化版
 	wget https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ddwj.js -O $dir_file_js/zy_ddwj.js	#东东玩家
 
 #将所有文本汇总
