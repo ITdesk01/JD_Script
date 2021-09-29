@@ -233,7 +233,6 @@ done
 #JDHelloWorld
 cat >$dir_file/config/tmp/JDHelloWorld_script.txt <<EOF
 	jd_joy_new.js			#宠汪汪二代目
-	jd_big_winner.js		#翻翻乐
 EOF
 
 for script_name in `cat $dir_file/config/tmp/JDHelloWorld_script.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -424,6 +423,7 @@ ccwav_url="https://raw.githubusercontent.com/ccwav/QLScript/main"
 cat >$dir_file/config/tmp/ccwav_url.txt <<EOF
 	jd_bean_change.js		#资产变化强化版by-ccwav
 	jd_priceProtect_Mod.js		#价保脚本
+	ZY_big_winner_Mod.js		#翻翻乐
 EOF
 
 for script_name in `cat $dir_file/config/tmp/ccwav_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -479,6 +479,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_big_winner.js		#翻翻乐
 	gua_opencard30.js		#开卡默认不运行
 	gua_opencard34.js		#开卡默认不运行
 	gua_opencard35.js		#开卡默认不运行
@@ -667,7 +668,7 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
-	jd_big_winner.js		#翻翻乐
+	ZY_big_winner_Mod.js		#翻翻乐
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	long_super_redrain.js		#整点红包雨
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
