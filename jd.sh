@@ -558,6 +558,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 	gua_carnivalcity.js		#京东手机狂欢城活动
 	jd_ddworld.js			#东东世界
+	zy_ddwj.js			#东东玩家
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -602,7 +603,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 	jd_ljd_xh.js			#领京豆
 	jd_ddworld.js			#东东世界
-	zy_ddwj.js			#东东玩家
 	jd_mofang.js			#集魔方
 EOF
 	echo -e "$green run_0$start_script_time $white"
