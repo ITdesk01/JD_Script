@@ -323,6 +323,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_qqxing.js			#QQ星系牧场
 	jd_get_share_code.js		#获取jd所有助力码脚本
+	jd_ttpt.js			#天天拼图
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -742,6 +743,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_film_museum.js 		#动人影像馆
 	jd_qycl.js			#企有此礼
 	jd_mf.js			#集魔方
+	jd_ttpt.js			#天天拼图
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
