@@ -419,7 +419,7 @@ do
 done
 
 #ccwav
-ccwav_url="https://raw.githubusercontent.com/ccwav/QLScript/main"
+ccwav_url="https://raw.githubusercontent.com/ccwav/QLScript2/main"
 cat >$dir_file/config/tmp/ccwav_url.txt <<EOF
 	jd_bean_change.js		#资产变化强化版by-ccwav
 	jd_priceProtect_Mod.js		#价保脚本
