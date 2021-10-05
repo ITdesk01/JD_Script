@@ -449,7 +449,6 @@ done
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/utils/JDJRValidator_Pure.js -O $dir_file_js/JDJRValidator_Pure.js
-	wget https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ddwj.js -O $dir_file_js/zy_ddwj.js	#东东玩家
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -479,6 +478,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	zy_ddwj.js			#东东玩家
 	jd_film_museum.js 		#动人影像馆
 	jd_big_winner.js		#翻翻乐
 	gua_opencard30.js		#开卡默认不运行
@@ -558,7 +558,6 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 	gua_carnivalcity.js		#京东手机狂欢城活动
 	jd_ddworld.js			#东东世界
-	zy_ddwj.js			#东东玩家
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
