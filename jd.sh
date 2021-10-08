@@ -431,8 +431,8 @@ EOF
 for script_name in `cat $dir_file/config/tmp/ccwav_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
 	url="$ccwav_url"
-	wget $ccwav_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $ccwav_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 #Tsukasa007
