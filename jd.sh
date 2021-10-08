@@ -516,11 +516,11 @@ update_if() {
 			if [ $? -eq 0 ]; then
 				num=$(expr $num - 1)
 			else
-				if [ $eeror_num -ge 10 ];then
-					echo "下载$eeror_num次都失败，跳过这个下载"
+				if [ $eeror_num -ge 5 ];then
+					echo ">> $yellow$script_name$white下载$eeror_num次都失败，跳过这个下载"
 					num=$(expr $num - 1)
 				else
-					echo -e "下载失败,尝试第$eeror_num次下载"
+					echo -e ">> $yellow$script_name$white下载失败,尝试第$eeror_num次下载"
 					eeror_num=$(expr $eeror_num + 1)
 				fi
 			fi
