@@ -505,7 +505,7 @@ done
 	fi
 	chmod 755 $dir_file_js/*
 	kill_index
-	#index_js
+	index_js
 	additional_settings
 	concurrent_js_update
 	source /etc/profile
@@ -2898,14 +2898,7 @@ system_variable() {
 		fi
 	fi
 
-	#index_js
-	index_if=$(ps -ww | grep "index.js" | grep -v grep | awk '{print $1}')
-	if [ ! "$index_if" ];then
-		echo ""
-	else
-		kill -9 $index_if
-	fi
-	index_num="$yellow 8.网页扫码功能已关闭，看后面情况再开放$white"
+	index_js
 
 	#农场萌宠关闭通知
 	close_notification
