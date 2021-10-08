@@ -262,17 +262,12 @@ done
 #smiek2221
 smiek2221_url="https://raw.githubusercontent.com/smiek2221/scripts/master"
 cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
-	#gua_wealth_island.js 		#财富岛新版
-	jd_necklace.js  		#点点券
-	ZooFaker_Necklace.js 		#点点券依赖文件
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
 	gua_MMdou.js                    #赚京豆MM豆
 	gua_ddgame.js			#东东游戏
 	gua_opencard24.js		#开卡默认不运行
-	gua_opencard25.js		#开卡默认不运行
 	gua_opencard26.js		#开卡默认不运行
 	gua_opencard36.js		#开卡默认不运行
-	gua_opencard37.js		#开卡默认不运行
 	gua_opencard39.js		#开卡默认不运行
 	gua_opencard40.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
@@ -476,6 +471,10 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_opencard25.js		#开卡默认不运行
+	gua_opencard37.js		#开卡默认不运行
+	jd_necklace.js  		#点点券
+	ZooFaker_Necklace.js 		#点点券依赖文件
 	jd_star_shop.js			#明星小店
 	jd_jump.js			#跳跳乐瓜分京豆
 	gua_carnivalcity.js		#京东手机狂欢城活动
@@ -694,7 +693,6 @@ run_03() {
 #这里不会并发
 cat >/tmp/jd_tmp/run_03 <<EOF
 	jd_joy_new.js 			#jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
-	jd_necklace.js  		#点点券 大佬0,20领一次先扔这里后面再改
 	jd_speed.js 			#天天加速 3小时运行一次，打卡时间间隔是6小时
 	jd_health.js			#健康社区
 	jd_mohe.js			#5G超级盲盒
