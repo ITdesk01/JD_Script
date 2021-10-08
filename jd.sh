@@ -268,7 +268,6 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
 	gua_MMdou.js                    #赚京豆MM豆
 	gua_ddgame.js			#东东游戏
-	gua_carnivalcity.js		#京东手机狂欢城活动
 	gua_opencard24.js		#开卡默认不运行
 	gua_opencard25.js		#开卡默认不运行
 	gua_opencard26.js		#开卡默认不运行
@@ -321,8 +320,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_superBrand.js		#特物Z|万物皆可国创
 	jd_try.js 			#京东试用（默认不启用）
 	jd_nzmh.js			#新一期女装盲盒
-	#jd_connoisseur.js		#内容鉴赏官
-	jd_jump.js			#跳跳乐瓜分京豆
 	jd_qqxing.js			#QQ星系牧场
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_ttpt.js			#天天拼图
@@ -394,7 +391,6 @@ done
 star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
-	jd_star_shop.js			#明星小店
 	jd_beauty_twelfth.js		#美妆周年庆
 EOF
 
@@ -480,16 +476,9 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
-	zy_ddwj.js			#东东玩家
-	jd_film_museum.js 		#动人影像馆
-	jd_big_winner.js		#翻翻乐
-	gua_opencard30.js		#开卡默认不运行
-	gua_opencard34.js		#开卡默认不运行
-	gua_opencard35.js		#开卡默认不运行
-	gua_opencard38.js		#开卡默认不运行
-	gua_opencard31.js		#开卡默认不运行
-	jd_priceProtectRewrite.js		#价保脚本需要抓token
-	jd_fansa.js			#超店会员福利社
+	jd_star_shop.js			#明星小店
+	jd_jump.js			#跳跳乐瓜分京豆
+	gua_carnivalcity.js		#京东手机狂欢城活动
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -555,10 +544,8 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_connoisseur.js		#内容鉴赏官
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 	jd_superBrand.js		#特物Z|万物皆可国创
-	jd_star_shop.js			#明星小店
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
-	gua_carnivalcity.js		#京东手机狂欢城活动
 	jd_ddworld.js			#东东世界
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
@@ -788,7 +775,6 @@ EOF
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_syj.js 			#赚京豆
-	jd_jump.js			#跳跳乐瓜分京豆
 EOF
 	echo -e "$green run_08_12_16$start_script_time $white"
 
