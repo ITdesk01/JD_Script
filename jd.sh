@@ -117,7 +117,7 @@ cat >>/etc/crontabs/root <<EOF
 10-20/5 10,12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
 0 0,7 * * * $node $dir_file_js/jd_bean_sign.js >/tmp/jd_bean_sign.log #京东多合一签到#100#
 0 0 * * * $node $dir_file_js/star_dreamFactory_tuan.js	>/tmp/star_dreamFactory_tuan.log	#京喜开团#100#
-0 10 */7 * * $node $dir_file_js/jd_priceProtect_Mod.js	>/tmp/jd_priceProtect_Mod.log	#价保脚本#100#
+0 10 */7 * * $node $dir_file_js/jd_price.js	>/tmp/jd_price.log	#价保脚本#100#
 0 0 * * * $python3 $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py >/tmp/jd_getFollowGift.log #关注有礼#100#
 0 8,15 * * * $python3 $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py  >/tmp/jd_OpenCard.log #开卡程序#100#
 #0 1 * * * $python3 $dir_file/git_clone/curtinlv_script/jd_qjd.py >/tmp/jd_qjd.log #抢京豆#100#
@@ -358,6 +358,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_live.js			#京东直播
 	jd_mf.js			#集魔方
+	jd_price.js		        #价保脚本
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -417,7 +418,7 @@ done
 ccwav_url="https://raw.githubusercontent.com/ccwav/QLScript2/main"
 cat >$dir_file/config/tmp/ccwav_url.txt <<EOF
 	jd_bean_change.js		#资产变化强化版by-ccwav
-	jd_priceProtect_Mod.js		#价保脚本
+	#jd_priceProtect_Mod.js		#价保脚本
 	jd_big_winner_Mod.js		#翻翻乐
 EOF
 
