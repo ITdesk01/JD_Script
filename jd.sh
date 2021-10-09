@@ -390,6 +390,8 @@ star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
 	jd_beauty_twelfth.js		#美妆周年庆
+	jd_haier.js			#海尔京东超级品牌日
+	jd_yijia.js			#一加
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -595,6 +597,8 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_ddworld.js			#东东世界
 	jd_mofang.js			#集魔方
 	jd_beauty_twelfth.js		#美妆周年庆
+	jd_haier.js			#海尔京东超级品牌日
+	jd_yijia.js			#一加
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
