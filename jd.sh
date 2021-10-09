@@ -2734,7 +2734,7 @@ npm_install() {
 	#安装js模块
 	cp $dir_file/git_clone/lxk0301_back/package.json $openwrt_script/package.json
 	cd $openwrt_script && npm -g install
-	npm install -g request http stream zlib vm png-js fs got tough-cookie audit date-fns ts-md5 md5
+	npm install -g request http stream zlib vm png-js fs got tough-cookie audit date-fns ts-md5 md5 jsdom png-js
 	npm install --save axios
 	cd $dir_file/cookies_web && npm -g install
 
