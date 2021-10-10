@@ -825,10 +825,10 @@ run_jd_joy_reward() {
 cat >/tmp/jd_tmp/run_jd_joy_reward <<EOF
 	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
 EOF
-	jd_joy_reward_num="30"
+	jd_joy_reward_num="5"
 	while [[ ${jd_joy_reward_num} -gt 0 ]]; do
 		$node $dir_file_js/jd_joy_reward.js &
-		sleep 1
+		sleep 2
 		jd_joy_reward_num=$(($jd_joy_reward_num - 1))
 	done
 }
