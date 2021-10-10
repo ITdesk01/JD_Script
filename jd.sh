@@ -595,7 +595,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 	jd_ljd_xh.js			#领京豆
 	jd_ddworld.js			#东东世界
-	jd_mofang.js			#集魔方
 	jd_beauty_twelfth.js		#美妆周年庆
 	jd_haier.js			#海尔京东超级品牌日
 	jd_yijia.js			#一加
