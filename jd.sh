@@ -317,6 +317,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_qqxing.js			#QQ星系牧场
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_ttpt.js			#天天拼图
+	jd_industrial_task.js		#京东工业品任务
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -390,6 +391,7 @@ cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_haier.js			#海尔京东超级品牌日
 	jd_yijia.js			#一加
 	jd_honour.js			#荣耀新品传送挑战
+	jd_lucky_egg.js			#幸运扭蛋
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -594,6 +596,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_beauty_twelfth.js		#美妆周年庆
 	jd_haier.js			#海尔京东超级品牌日
 	jd_yijia.js			#一加
+	jd_lucky_egg.js			#幸运扭蛋
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -733,6 +736,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_qycl.js			#企有此礼
 	jd_mf.js			#集魔方
 	jd_ttpt.js			#天天拼图
+	jd_industrial_task.js		#京东工业品任务
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
