@@ -265,13 +265,10 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
 	gua_MMdou.js                    #赚京豆MM豆
 	gua_ddgame.js			#东东游戏
-	gua_opencard24.js		#开卡默认不运行
-	gua_opencard26.js		#开卡默认不运行
-	gua_opencard36.js		#开卡默认不运行
 	gua_opencard39.js		#开卡默认不运行
-	gua_opencard40.js		#开卡默认不运行
 	gua_opencard41.js		#开卡默认不运行
 	gua_opencard42.js		#开卡默认不运行
+	gua_opencard43.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 EOF
 
@@ -392,6 +389,7 @@ cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_beauty_twelfth.js		#美妆周年庆
 	jd_haier.js			#海尔京东超级品牌日
 	jd_yijia.js			#一加
+	jd_honour.js			#荣耀新品传送挑战
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -476,13 +474,11 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_opencard24.js		#开卡默认不运行
+	gua_opencard26.js		#开卡默认不运行
+	gua_opencard36.js		#开卡默认不运行
+	gua_opencard40.js		#开卡默认不运行
 	gua_opencard25.js		#开卡默认不运行
-	gua_opencard37.js		#开卡默认不运行
-	jd_necklace.js  		#点点券
-	ZooFaker_Necklace.js 		#点点券依赖文件
-	jd_star_shop.js			#明星小店
-	jd_jump.js			#跳跳乐瓜分京豆
-	gua_carnivalcity.js		#京东手机狂欢城活动
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -681,8 +677,9 @@ EOF
 
 run_02() {
 cat >/tmp/jd_tmp/run_02 <<EOF
-	jd_joy.js		#宠汪汪
-	jd_moneyTree.js 	#摇钱树
+	jd_joy.js			#宠汪汪
+	jd_moneyTree.js 		#摇钱树
+	jd_honour.js			#荣耀新品传送挑战
 EOF
 	echo -e "$green run_02$start_script_time $white"
 
