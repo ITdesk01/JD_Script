@@ -180,13 +180,13 @@ async function run() {
     await RubbishOper()
     // 导游
     await Guide()
-    // 撸珍珠
-    await Pearl()
     // 牛牛任务
     await ActTask()
     await getShareCode()
     // 日常任务、成就任务
     await UserTask()
+    // 撸珍珠
+    await Pearl()
 
   }
   catch (e) {
