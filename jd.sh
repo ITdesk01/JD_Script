@@ -420,15 +420,14 @@ done
 ccwav_url="https://raw.githubusercontent.com/ccwav/QLScript2/main"
 cat >$dir_file/config/tmp/ccwav_url.txt <<EOF
 	jd_bean_change.js		#资产变化强化版by-ccwav
-	#jd_priceProtect_Mod.js		#价保脚本
 	jd_big_winner_Mod.js		#翻翻乐
 EOF
 
 for script_name in `cat $dir_file/config/tmp/ccwav_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
 	url="$ccwav_url"
-	#wget $ccwav_url/$script_name -O $dir_file_js/$script_name
-	#update_if
+	wget $ccwav_url/$script_name -O $dir_file_js/$script_name
+	update_if
 done
 
 #Tsukasa007
@@ -458,7 +457,6 @@ done
 cat >>$dir_file/config/collect_script.txt <<EOF
 	gua_UnknownTask2.js		#关注频道、抽奖(默认不运行)
 	jd_dianjing.js			#电竞经理
-	#jd_bean_change_new.js 		#资产变动强化版
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
 	jd_OpenCard.py 			#开卡程序
 	jd_getFollowGift.py 		#关注有礼
