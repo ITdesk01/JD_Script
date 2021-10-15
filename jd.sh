@@ -536,8 +536,6 @@ update_script() {
 ccr_run() {
 #这里有的就不要加到concurrent_js_run_07
 cat >/tmp/jd_tmp/ccr_run <<EOF
-	jd_jxlhb.js			#京喜领红包
-	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_connoisseur.js		#内容鉴赏官
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 	jd_superBrand.js		#特物Z|万物皆可国创
@@ -557,6 +555,8 @@ EOF
 concurrent_js_run_07() {
 #这里的也不会并发
 cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
+        jd_jxlhb.js			#京喜领红包
+	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_dreamFactory.js 		#京喜工厂
 EOF
 	for i in `cat /tmp/jd_tmp/concurrent_js_run_07 | grep -v "#.*js" | awk '{print $1}'`
