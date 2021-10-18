@@ -1639,7 +1639,7 @@ checklog() {
 
 #检测当天更新情况并推送
 that_day() {
-	ping -c 2 github.com > /dev/null 2>&1
+	wget https://raw.githubusercontent.com/ITdesk01/JD_Script/master/README.md > /dev/null 2>&1
 	if [[ $? -eq 0 ]]; then
 		cd $dir_file
 		git fetch
@@ -2953,7 +2953,7 @@ kill_index() {
 
 ss_if() {
 	echo -e "$green开启检测github是否联通，请稍等。。$white"
-	ping -c 2 github.com > /dev/null 2>&1
+	wget https://raw.githubusercontent.com/ITdesk01/JD_Script/master/README.md > /dev/null 2>&1
 	if [[ $? -eq 0 ]]; then
 		echo "github正常访问，不做任何操作"
 	else
@@ -2965,7 +2965,7 @@ ss_if() {
 			/etc/init.d/shadowsocksr stop
 			/etc/init.d/shadowsocksr start
 			echo "重启进程完成"
-			ping -c 2 github.com > /dev/null 2>&1
+			wget https://raw.githubusercontent.com/ITdesk01/JD_Script/master/README.md > /dev/null 2>&1
 			if [[ $? -eq 0 ]]; then
 				echo -e "$green github正常访问，不做任何操作$white"
 			else
