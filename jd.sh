@@ -317,7 +317,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_qqxing.js			#QQ星系牧场
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_ttpt.js			#天天拼图
-	jd_industrial_task.js		#京东工业品任务
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -387,9 +386,6 @@ done
 star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
-	jd_beauty_twelfth.js		#美妆周年庆
-	jd_haier.js			#海尔京东超级品牌日
-	jd_yijia.js			#一加
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -418,7 +414,6 @@ done
 ccwav_url="https://raw.githubusercontent.com/ccwav/QLScript2/main"
 cat >$dir_file/config/tmp/ccwav_url.txt <<EOF
 	jd_bean_change.js		#资产变化强化版by-ccwav
-	jd_big_winner_Mod.js		#翻翻乐
 EOF
 
 for script_name in `cat $dir_file/config/tmp/ccwav_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -431,14 +426,14 @@ done
 #Tsukasa007
 Tsukasa007_url="https://raw.githubusercontent.com/Tsukasa007/my_script/master"
 cat >$dir_file/config/tmp/Tsukasa007_url.txt <<EOF
-	jd_opencard_LiHuiGuoQing_9-28_10-8_enc.js		#礼惠国庆 大牌欢乐购,开卡默认不运行
+	#空
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Tsukasa007_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
 	url="$Tsukasa007_url"
-	wget $Tsukasa007_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $Tsukasa007_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
@@ -472,11 +467,12 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
-	gua_opencard24.js		#开卡默认不运行
-	gua_opencard26.js		#开卡默认不运行
-	gua_opencard36.js		#开卡默认不运行
-	gua_opencard40.js		#开卡默认不运行
-	gua_opencard25.js		#开卡默认不运行
+	jd_opencard_LiHuiGuoQing_9-28_10-8_enc.js		#礼惠国庆 大牌欢乐购,开卡默认不运行
+	jd_big_winner_Mod.js		#翻翻乐
+	jd_yijia.js			#一加
+	jd_haier.js			#海尔京东超级品牌日
+	jd_beauty_twelfth.js		#美妆周年庆
+	jd_industrial_task.js		#京东工业品任务
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -588,10 +584,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_ccSign.js			#领券中心签到
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 	jd_ljd_xh.js			#领京豆
-	jd_ddworld.js			#东东世界
-	jd_beauty_twelfth.js		#美妆周年庆
-	jd_haier.js			#海尔京东超级品牌日
-	jd_yijia.js			#一加
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -657,7 +649,6 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
-	jd_big_winner_Mod.js		#翻翻乐
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	long_super_redrain.js		#整点红包雨
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
@@ -729,7 +720,6 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_qycl.js			#企有此礼
 	jd_mf.js			#集魔方
 	jd_ttpt.js			#天天拼图
-	jd_industrial_task.js		#京东工业品任务
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
