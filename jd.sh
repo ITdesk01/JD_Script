@@ -307,6 +307,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	JDJRValidator_Smiek.js
 	jd_dpqd.js			#店铺签到
 	jd_bean_sign.js			#京东多合一签到
+	JDSignValidator.js		#京东多合一签到依赖
 	jd_joy_park_newtask.js		# 汪汪乐园过新手任务，有火爆账号的可以手动运行一次（默认不运行）
 	jd_superMarket.js		#东东超市
 	jd_unsubscriLive.js		#取关主播
