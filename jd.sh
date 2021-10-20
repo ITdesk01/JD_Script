@@ -265,7 +265,6 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
 	gua_MMdou.js                    #赚京豆MM豆
 	gua_opencard39.js		#开卡默认不运行
-	gua_opencard41.js		#开卡默认不运行
 	gua_opencard43.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 EOF
@@ -468,13 +467,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_opencard41.js		#开卡默认不运行
 	gua_opencard42.js
-	jd_opencard_LiHuiGuoQing_9-28_10-8_enc.js		#礼惠国庆 大牌欢乐购,开卡默认不运行
-	jd_big_winner_Mod.js		#翻翻乐
-	jd_yijia.js			#一加
-	jd_haier.js			#海尔京东超级品牌日
-	jd_beauty_twelfth.js		#美妆周年庆
-	jd_industrial_task.js		#京东工业品任务
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
