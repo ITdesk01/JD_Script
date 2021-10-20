@@ -321,8 +321,8 @@ function readShareCode() {
     $.get({url: `https://jd.smiek.tk/city1`, 'timeout': 10000}, (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`助力池 API请求失败，请检查网路重试`)
+          //console.log(`${JSON.stringify(err)}`)
+          //console.log(`助力池 API请求失败，请检查网路重试`)
         } else {
           if (data) {
             data = JSON.parse(data);
