@@ -348,10 +348,10 @@ function shareCodesFormat() {
     }
     if($.index == 1) $.newShareCodes = [...inviteCodes,...$.newShareCodes]
     try{
-      //const readShareCodeRes = await readShareCode();
-      //if (readShareCodeRes && readShareCodeRes.code === 200) {
-        //$.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])];
-      //}
+      const readShareCodeRes = await readShareCode();
+      if (readShareCodeRes && readShareCodeRes.code === 200) {
+        $.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])];
+      }
     } catch (e) {
       console.log(e);
     }
