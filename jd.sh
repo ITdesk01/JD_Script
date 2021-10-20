@@ -269,6 +269,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard42.js		#开卡默认不运行
 	gua_opencard43.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
+	gua_city.js			#城城分现金
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -2629,8 +2630,8 @@ additional_settings() {
 		js_amount=$(($js_amount - 1))
 	done
 
-	#财富岛合成月饼
-	sed -i "s/cfd.json/cfd1.json/g" $dir_file_js/jd_cfd_mooncake.js
+	#城城分现金
+	sed -i "s/RtGKzrihQw6hfYTPEtMy0A1vM1ibgTeCpYV6qYA0wNuelDPPLg/RtGKz-ikQFmhKoeeRddlgy5fN5EGbxpkR8Hbii5cgoyTbfmdQ/g" $dir_file_js/gua_city.js
 }
 
 if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
