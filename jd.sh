@@ -266,10 +266,8 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_MMdou.js                    #赚京豆MM豆
 	gua_opencard39.js		#开卡默认不运行
 	gua_opencard41.js		#开卡默认不运行
-	gua_opencard42.js		#开卡默认不运行
 	gua_opencard43.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
-	gua_city.js			#城城分现金
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -450,6 +448,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	gua_city.js			#城城分现金
 	gua_UnknownTask2.js		#关注频道、抽奖(默认不运行)
 	jd_dianjing.js			#电竞经理
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
@@ -469,6 +468,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_opencard42.js
 	jd_opencard_LiHuiGuoQing_9-28_10-8_enc.js		#礼惠国庆 大牌欢乐购,开卡默认不运行
 	jd_big_winner_Mod.js		#翻翻乐
 	jd_yijia.js			#一加
@@ -2630,11 +2630,6 @@ additional_settings() {
 		sed -i "$healthcode_rows a \ '$new_health_set', " $dir_file_js/jd_health.js
 		js_amount=$(($js_amount - 1))
 	done
-
-	#城城分现金
-	sed -i "s/RtGKzrihQw6hfYTPEtMy0A1vM1ibgTeCpYV6qYA0wNuelDPPLg/RtGKz-ikQFmhKoeeRddlgy5fN5EGbxpkR8Hbii5cgoyTbfmdQ/g" $dir_file_js/gua_city.js
-	sed -i "s/RtGKvYTEGVDkGsT6RK5bmqTc70BvSeKy4Dl4I-VmAg5ByvAS/RtGKtJLGBH7wHcfCfqVgmrQ_rwGNMIBiRuzwohST3UifnCde/g" $dir_file_js/gua_city.js
-	sed -i "s/jd.smiek.tk\/city/jd.smiek.tk\/city1/g" $dir_file_js/gua_city.js
 }
 
 if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
