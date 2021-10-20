@@ -44,7 +44,14 @@ tsnode="/usr/bin/ts-node"
 python3="/usr/bin/python3"
 sys_model=$(cat /tmp/sysinfo/model | awk -v i="+" '{print $1i$2i$3i$4}')
 uname_version=$(uname -a | awk -v i="+" '{print $1i $2i $3}')
-wan_ip=$(ubus call network.interface.wan status | grep \"address\" | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
+
+#给强迫症的福利
+wan_ip=$(cat /etc/config/network | grep "wan")
+if [ ! $wan_ip ];then
+	wan_ip="找不到Wan IP"
+else
+	wan_ip=$(ubus call network.interface.wan status | grep \"address\" | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
+fi
 
 #Server酱
 wrap="%0D%0A%0D%0A" #Server酱换行
