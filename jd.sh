@@ -557,6 +557,7 @@ cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
         jd_jxlhb.js			#京喜领红包
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_dreamFactory.js 		#京喜工厂
+	gua_city.js			#城城分现金
 EOF
 	for i in `cat /tmp/jd_tmp/concurrent_js_run_07 | grep -v "#.*js" | awk '{print $1}'`
 	do
