@@ -2633,6 +2633,8 @@ additional_settings() {
 
 	#城城分现金
 	sed -i "s/RtGKzrihQw6hfYTPEtMy0A1vM1ibgTeCpYV6qYA0wNuelDPPLg/RtGKz-ikQFmhKoeeRddlgy5fN5EGbxpkR8Hbii5cgoyTbfmdQ/g" $dir_file_js/gua_city.js
+	sed -i "s/RtGKvYTEGVDkGsT6RK5bmqTc70BvSeKy4Dl4I-VmAg5ByvAS/RtGKtJLGBH7wHcfCfqVgmrQ_rwGNMIBiRuzwohST3UifnCde/g" $dir_file_js/gua_city.js
+	sed -i "s/jd.smiek.tk\/city/jd.smiek.tk\/city1/g" $dir_file_js/gua_city.js
 }
 
 if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
