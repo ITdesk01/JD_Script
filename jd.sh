@@ -273,6 +273,11 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_MMdou.js                    #赚京豆MM豆
 	gua_opencard39.js		#开卡默认不运行
 	gua_opencard43.js		#开卡默认不运行
+	gua_opencard44.js		#开卡默认不运行
+	gua_opencard45.js		#开卡默认不运行
+	gua_opencard46.js		#开卡默认不运行
+	gua_opencard47.js		#开卡默认不运行
+	gua_opencard48.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 EOF
 
