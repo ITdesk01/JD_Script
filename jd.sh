@@ -46,7 +46,7 @@ sys_model=$(cat /tmp/sysinfo/model | awk -v i="+" '{print $1i$2i$3i$4}')
 uname_version=$(uname -a | awk -v i="+" '{print $1i $2i $3}')
 
 #给强迫症的福利
-wan_ip=$(cat /etc/config/network | grep "wan")
+wan_ip=$(cat /etc/config/network | grep "wan" | wc -l)
 if [ ! $wan_ip ];then
 	wan_ip="找不到Wan IP"
 else
@@ -431,7 +431,7 @@ done
 #Tsukasa007
 Tsukasa007_url="https://raw.githubusercontent.com/Tsukasa007/my_script/master"
 cat >$dir_file/config/tmp/Tsukasa007_url.txt <<EOF
-	#空
+	#空.js
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Tsukasa007_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -543,6 +543,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 	jd_ddworld.js			#东东世界
 	jd_fission.js			#东东超市限时抢京豆
+	jd_fission.js			#东东超市限时抢京豆(多加一次领奖励)
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
