@@ -361,6 +361,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_live.js			#京东直播
 	jd_mf.js			#集魔方
 	jd_price.js		        #价保脚本
+	jd_ys.js			#预售福利机
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -725,6 +726,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_dwapp.js			#积分换话费
 	jd_mf.js			#集魔方
 	jd_ttpt.js			#天天拼图
+	jd_ys.js			#预售福利机
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
