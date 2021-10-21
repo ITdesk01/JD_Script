@@ -307,6 +307,19 @@ do
 	#update_if
 done
 
+#cdle_carry
+cdle_carry_url="https://raw.githubusercontent.com/cdle/carry/main"
+cat >$dir_file/config/tmp/cdle_carry_url.txt <<EOF
+	jd_hyj.js			#环游记
+EOF
+
+for script_name in `cat $dir_file/config/tmp/cdle_carry_url.txt | grep -v "#.*js" | awk '{print $1}'`
+do
+	url="$cdle_carry_url"
+	wget $cdle_carry_url/$script_name -O $dir_file_js/$script_name
+	update_if
+done
+
 #zero205
 zero205_url="https://raw.githubusercontent.com/zero205/JD_tencent_scf/main"
 cat >$dir_file/config/tmp/zero205_url.txt <<EOF
@@ -694,6 +707,7 @@ run_02() {
 cat >/tmp/jd_tmp/run_02 <<EOF
 	jd_joy.js			#宠汪汪
 	jd_moneyTree.js 		#摇钱树
+	jd_hyj.js			#环游记
 EOF
 	echo -e "$green run_02$start_script_time $white"
 
