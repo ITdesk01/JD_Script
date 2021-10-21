@@ -317,12 +317,12 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_joy_park_newtask.js		# 汪汪乐园过新手任务，有火爆账号的可以手动运行一次（默认不运行）
 	jd_superMarket.js		#东东超市
 	jd_unsubscriLive.js		#取关主播
-	jd_superBrand.js		#特物Z|万物皆可国创
 	jd_try.js 			#京东试用（默认不启用）
 	jd_nzmh.js			#新一期女装盲盒
 	jd_qqxing.js			#QQ星系牧场
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_ttpt.js			#天天拼图
+	jd_fission.js			#东东超市限时抢京豆
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -474,6 +474,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_superBrand.js		#特物Z|万物皆可国创
 	gua_opencard41.js		#开卡默认不运行
 	gua_opencard42.js
 EOF
@@ -538,10 +539,10 @@ ccr_run() {
 cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_connoisseur.js		#内容鉴赏官
 	gua_UnknownTask3.js		#寻找内容鉴赏官
-	jd_superBrand.js		#特物Z|万物皆可国创
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 	jd_ddworld.js			#东东世界
+	jd_fission.js			#东东超市限时抢京豆
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
