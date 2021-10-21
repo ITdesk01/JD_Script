@@ -322,7 +322,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_qqxing.js			#QQ星系牧场
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_ttpt.js			#天天拼图
-	jd_fission.js			#东东超市限时抢京豆
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -453,6 +452,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_fission.js			#东东超市限时抢京豆
 	gua_city.js			#城城分现金
 	gua_UnknownTask2.js		#关注频道、抽奖(默认不运行)
 	jd_dianjing.js			#电竞经理
