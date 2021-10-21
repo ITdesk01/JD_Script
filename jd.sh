@@ -376,7 +376,6 @@ yuannian1112_url="https://raw.githubusercontent.com/yuannian1112/jd_scripts/main
 cat >$dir_file/config/tmp/yuannian1112_url.txt <<EOF
 	jd_plantBean.js			#种豆得豆
 	jd_dwapp.js			#积分换话费
-	jd_qycl.js			#企有此礼
 EOF
 
 for script_name in `cat $dir_file/config/tmp/yuannian1112_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -474,6 +473,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_qycl.js			#企有此礼
 	jd_superBrand.js		#特物Z|万物皆可国创
 	gua_opencard41.js		#开卡默认不运行
 	gua_opencard42.js
@@ -722,7 +722,6 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_goodMorning.js		#早起福利
 	jd_nzmh.js			#新一期女装盲盒
 	jd_dwapp.js			#积分换话费
-	jd_qycl.js			#企有此礼
 	jd_mf.js			#集魔方
 	jd_ttpt.js			#天天拼图
 EOF
