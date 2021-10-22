@@ -2952,6 +2952,9 @@ system_variable() {
 	close_notification
 
 	script_black
+
+	#清理一下之前的问题
+	rm -rf /root/README.*
 }
 
 index_js() {
