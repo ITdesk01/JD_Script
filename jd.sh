@@ -380,6 +380,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_mf.js			#集魔方
 	jd_price.js		        #价保脚本
 	jd_ys.js			#预售福利机
+	jd_wish.js			#众筹许愿池
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -392,14 +393,14 @@ done
 #Ariszy
 Ariszy_url="https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD"
 cat >$dir_file/config/tmp/Ariszy_url.txt <<EOF
-	zy_jxdzz.js		#惊喜大作战
+	#zy_jxdzz.js		#惊喜大作战
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Ariszy_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
 	url="$Ariszy_url"
-	wget $Ariszy_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $Ariszy_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 #yuannian1112
@@ -506,6 +507,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	zy_jxdzz.js			#惊喜大作战
 	jd_qycl.js			#企有此礼
 	jd_superBrand.js		#特物Z|万物皆可国创
 	gua_opencard41.js		#开卡默认不运行
@@ -624,7 +626,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_ccSign.js			#领券中心签到
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 	jd_ljd_xh.js			#领京豆
-	zy_jxdzz.js			#惊喜大作战
+	jd_wish.js			#众筹许愿池
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
