@@ -311,6 +311,7 @@ done
 cdle_carry_url="https://raw.githubusercontent.com/cdle/carry/main"
 cat >$dir_file/config/tmp/cdle_carry_url.txt <<EOF
 	jd_hyj.js			#环游记
+	rush_lzdz2_fashion.js		#时尚宠粉趴
 EOF
 
 for script_name in `cat $dir_file/config/tmp/cdle_carry_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -581,6 +582,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_fission.js			#东东超市限时抢京豆
 	jd_fission.js			#东东超市限时抢京豆(多加一次领奖励)
 	jd_selectionOfficer.js		#美妆馆
+	rush_lzdz2_fashion.js		#时尚宠粉趴
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
