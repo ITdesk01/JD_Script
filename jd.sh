@@ -383,7 +383,6 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_ys.js			#预售福利机
 	jd_wish.js			#众筹许愿池
 	jd_carnivalcity.js		#京东手机狂欢城
-	jd_carnivalcity_help.js		#京东手机狂欢城助力
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
