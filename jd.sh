@@ -273,9 +273,6 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_MMdou.js                    #赚京豆MM豆
 	gua_opencard39.js		#开卡默认不运行
 	gua_opencard43.js		#开卡默认不运行
-	gua_opencard44.js		#开卡默认不运行
-	gua_opencard45.js		#开卡默认不运行
-	gua_opencard46.js		#开卡默认不运行
 	gua_opencard47.js		#开卡默认不运行
 	gua_opencard48.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
@@ -341,6 +338,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_ttpt.js			#天天拼图
 	jd_jump.js			#跳跳乐瓜分京豆
+	jd_djyyj.js			#电竞预言家,请在18点之前运行
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -812,6 +810,7 @@ EOF
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
 	jd_syj.js 			#赚京豆
+	jd_djyyj.js			#电竞预言家,请在18点之前运行
 EOF
 	echo -e "$green run_08_12_16$start_script_time $white"
 
