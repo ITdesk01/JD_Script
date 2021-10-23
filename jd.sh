@@ -310,7 +310,6 @@ done
 #cdle_carry
 cdle_carry_url="https://raw.githubusercontent.com/cdle/carry/main"
 cat >$dir_file/config/tmp/cdle_carry_url.txt <<EOF
-	jd_hyj.js			#环游记
 	rush_lzdz2_fashion.js		#时尚宠粉趴
 EOF
 
