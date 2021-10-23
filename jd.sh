@@ -2961,6 +2961,7 @@ system_variable() {
 
 	#清理一下之前的问题
 	rm -rf /root/README.*
+	rm -rf $dir_file/README.*.*
 }
 
 index_js() {
