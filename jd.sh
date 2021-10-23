@@ -383,6 +383,8 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_price.js		        #价保脚本
 	jd_ys.js			#预售福利机
 	jd_wish.js			#众筹许愿池
+	jd_carnivalcity.js		#京东手机狂欢城
+	jd_carnivalcity_help.js		#京东手机狂欢城助力
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -583,6 +585,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_fission.js			#东东超市限时抢京豆(多加一次领奖励)
 	jd_selectionOfficer.js		#美妆馆
 	rush_lzdz2_fashion.js		#时尚宠粉趴
+	jd_carnivalcity_help.js		#京东手机狂欢城助力
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -630,6 +633,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 	jd_ljd_xh.js			#领京豆
 	jd_wish.js			#众筹许愿池
+	jd_carnivalcity.js		#京东手机狂欢城
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
