@@ -307,7 +307,7 @@ done
 #cdle_carry
 cdle_carry_url="https://raw.githubusercontent.com/cdle/carry/main"
 cat >$dir_file/config/tmp/cdle_carry_url.txt <<EOF
-	#空.js
+	jd_hyj.js			#环游记
 EOF
 
 for script_name in `cat $dir_file/config/tmp/cdle_carry_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -593,7 +593,7 @@ EOF
 		$run_sleep
 	}&
 	done
-	$python3 $openwrt_script/JD_Script/js/d_hyj_help.py 			#环游记助力
+	$python3 $openwrt_script/JD_Script/js/jd_hyj_help.py 			#环游记助力
 }
 
 concurrent_js_run_07() {
