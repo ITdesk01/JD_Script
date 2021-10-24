@@ -477,6 +477,7 @@ done
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/utils/JDJRValidator_Pure.js -O $dir_file_js/JDJRValidator_Pure.js
+	wget https://raw.githubusercontent.com/curtinlv/JD-Script/main/jd_hyj_help.py -O $dir_file_js/jd_hyj_help.py #环游记助力
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -581,6 +582,9 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_fission.js			#东东超市限时抢京豆(多加一次领奖励)
 	jd_selectionOfficer.js		#美妆馆
 	jd_carnivalcity_help.js		#京东手机狂欢城助力
+	jd_jxlhb.js			#京喜领红包
+	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
+	gua_city.js			#城城分现金
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -589,15 +593,13 @@ EOF
 		$run_sleep
 	}&
 	done
+	$python3 $openwrt_script/JD_Script/js/d_hyj_help.py 			#环游记助力
 }
 
 concurrent_js_run_07() {
 #这里的也不会并发
 cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
-        jd_jxlhb.js			#京喜领红包
-	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_dreamFactory.js 		#京喜工厂
-	gua_city.js			#城城分现金
 EOF
 	for i in `cat /tmp/jd_tmp/concurrent_js_run_07 | grep -v "#.*js" | awk '{print $1}'`
 	do
