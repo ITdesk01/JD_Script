@@ -340,6 +340,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_ttpt.js			#天天拼图
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_lol.js			#电竞预言家,请在18点之前运行
+	jd_big_winner.js		#翻翻乐
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -701,6 +702,7 @@ cat >/tmp/jd_tmp/run_01 <<EOF
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	long_super_redrain.js		#整点红包雨
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
+	jd_big_winner.js		#翻翻乐
 EOF
 	echo -e "$green run_01$start_script_time $white"
 
