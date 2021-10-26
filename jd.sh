@@ -491,6 +491,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	rush_wxCollectionActivity.js 	#加购物车抽奖
 	jd_fission.js			#东东超市限时抢京豆
 	gua_city.js			#城城分现金
 	gua_UnknownTask2.js		#关注频道、抽奖(默认不运行)
@@ -643,6 +644,7 @@ EOF
 		$node $dir_file_js/$i
 		$run_sleep
 	done
+	$node $dir_file_js/rush_wxCollectionActivity.js & #加购物车抽奖
 	run_08_12_16
 	run_06_18
 	run_10_15_20
