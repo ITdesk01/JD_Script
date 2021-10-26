@@ -156,7 +156,7 @@ ds_setup() {
 }
 
 update() {
-	#ss_if
+	ss_if
 
 	cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | grep -v "//'" |grep -v "// '" > $openwrt_script_config/js_cookie.txt
 
@@ -3002,51 +3002,55 @@ kill_index() {
 
 
 ss_if() {
-	ss_server=$(grep "option global_server 'nil'" /etc/config/shadowsocksr | wc -l)
-	echo -e "$green开启检测github是否联通，请稍等。。$white"
-	if [ $ss_server == "0" ];then
-		wget -t 1 -T 20 https://raw.githubusercontent.com/ITdesk01/JD_Script/master/README.md -O /tmp/test_README.md
-		if [[ $? -eq 0 ]]; then
-			echo "github正常访问，不做任何操作"
-		else
-			ss_pid=$(ps -ww | grep "ssrplus" | grep -v grep | awk '{print $1}')
-			if [ $ss_pid == "2" ];then
-				echo "后台有ss进程，不做处理"
+	if [ ! -f /etc/config/shadowsocksr ];then
+		ss_server=$(grep "option global_server 'nil'" /etc/config/shadowsocksr | wc -l)
+		echo -e "$green开启检测github是否联通，请稍等。。$white"
+		if [ $ss_server == "0" ];then
+			wget -t 1 -T 20 https://raw.githubusercontent.com/ITdesk01/JD_Script/master/README.md -O /tmp/test_README.md
+			if [[ $? -eq 0 ]]; then
+				echo "github正常访问，不做任何操作"
 			else
-				echo "无法ping通Github,重新加载ss进程"
-				/etc/init.d/shadowsocksr stop
-				/etc/init.d/shadowsocksr start
-				echo "重启进程完成"
-				wget -t 1 -T 20 https://raw.githubusercontent.com/ITdesk01/JD_Script/master/README.md -O /tmp/test_README.md
-				if [[ $? -eq 0 ]]; then
-					echo -e "$green github正常访问，不做任何操作$white"
+				ss_pid=$(ps -ww | grep "ssrplus" | grep -v grep | awk '{print $1}')
+				if [ $ss_pid == "2" ];then
+					echo "后台有ss进程，不做处理"
 				else
-					echo "检测到ss服务器故障"
-					log_sort=$(echo "检测到ss故障，已经为你重启进程一次，但问题依旧，请手动检查，请尽快处理防止无法愉快跑脚本" |sed "s/$/$wrap$wrap_tab/" | sed ':t;N;s/\n//;b t' | sed "s/$wrap_tab####/####/g")
-					server_content=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
+					echo "无法ping通Github,重新加载ss进程"
+					/etc/init.d/shadowsocksr stop
+					/etc/init.d/shadowsocksr start
+					echo "重启进程完成"
+					wget -t 1 -T 20 https://raw.githubusercontent.com/ITdesk01/JD_Script/master/README.md -O /tmp/test_README.md
+					if [[ $? -eq 0 ]]; then
+						echo -e "$green github正常访问，不做任何操作$white"
+					else
+						echo "检测到ss服务器故障"
+						log_sort=$(echo "检测到ss故障，已经为你重启进程一次，但问题依旧，请手动检查，请尽快处理防止无法愉快跑脚本" |sed "s/$/$wrap$wrap_tab/" | sed ':t;N;s/\n//;b t' | sed "s/$wrap_tab####/####/g")
+						server_content=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
 
-					weixin_content_sort=$(echo  $log_sort |sed "s/####/<b>/g"   |sed "s/$line/<hr\/><\/b>/g" |sed "s/$wrap/<br>/g" |sed "s/<br>#//g"  | sed "s/$/<br>/" |sed "s/<hr\/><\/b><br>/<hr\/><\/b>/g" |sed "s/+/ /g"| sed "s/<br> <br>/<br>/g"|  sed ':t;N;s/\n//;b t' )
-					weixin_content=$(echo "$weixin_content_sort<br><b>$by")
-					weixin_desp=$(echo "$weixin_content" | sed "s/<hr\/><\/b><b>/$weixin_line\n/g" |sed "s/<hr\/><\/b>/\n$weixin_line\n/g"| sed "s/<b>/\n/g"| sed "s/<br>/\n/g" | sed "s/<br><br>/\n/g" | sed "s/#/\n/g" )
-					title="检测到ss服务器故障"
-					push_menu
-					echo -e "$red JD_Script 检测到ss故障，已经为你重启进程一次，但问题依旧，请手动检查$white"
-					exit 0
+						weixin_content_sort=$(echo  $log_sort |sed "s/####/<b>/g"   |sed "s/$line/<hr\/><\/b>/g" |sed "s/$wrap/<br>/g" |sed "s/<br>#//g"  | sed "s/$/<br>/" |sed "s/<hr\/><\/b><br>/<hr\/><\/b>/g" |sed "s/+/ /g"| sed "s/<br> <br>/<br>/g"|  sed ':t;N;s/\n//;b t' )
+						weixin_content=$(echo "$weixin_content_sort<br><b>$by")
+						weixin_desp=$(echo "$weixin_content" | sed "s/<hr\/><\/b><b>/$weixin_line\n/g" |sed "s/<hr\/><\/b>/\n$weixin_line\n/g"| sed "s/<b>/\n/g"| sed "s/<br>/\n/g" | sed "s/<br><br>/\n/g" | sed "s/#/\n/g" )
+						title="检测到ss服务器故障"
+						push_menu
+						echo -e "$red JD_Script 检测到ss故障，已经为你重启进程一次，但问题依旧，请手动检查$white"
+						exit 0
+					fi
 				fi
 			fi
+		else
+			echo "检测到ss没有选择服务器，发送通知"
+			log_sort=$(echo "检测到ss没有选择服务器.无法联通网络，请尽快处理防止无法愉快跑脚本" |sed "s/$/$wrap$wrap_tab/" | sed ':t;N;s/\n//;b t' | sed "s/$wrap_tab####/####/g")
+			server_content=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
+
+			weixin_content_sort=$(echo  $log_sort |sed "s/####/<b>/g"   |sed "s/$line/<hr\/><\/b>/g" |sed "s/$wrap/<br>/g" |sed "s/<br>#//g"  | sed "s/$/<br>/" |sed "s/<hr\/><\/b><br>/<hr\/><\/b>/g" |sed "s/+/ /g"| sed "s/<br> <br>/<br>/g"|  sed ':t;N;s/\n//;b t' )
+			weixin_content=$(echo "$weixin_content_sort<br><b>$by")
+			weixin_desp=$(echo "$weixin_content" | sed "s/<hr\/><\/b><b>/$weixin_line\n/g" |sed "s/<hr\/><\/b>/\n$weixin_line\n/g"| sed "s/<b>/\n/g"| sed "s/<br>/\n/g" | sed "s/<br><br>/\n/g" | sed "s/#/\n/g" )
+			title="检测到你的ss服务器没有启动"
+			push_menu
+			echo -e "$red JD_Script 检测到你的ss服务器没有启动,暂时不更新脚本$white"
+			exit 0
 		fi
 	else
-		echo "检测到ss没有选择服务器，发送通知"
-		log_sort=$(echo "检测到ss没有选择服务器.无法联通网络，请尽快处理防止无法愉快跑脚本" |sed "s/$/$wrap$wrap_tab/" | sed ':t;N;s/\n//;b t' | sed "s/$wrap_tab####/####/g")
-		server_content=$(echo "${log_sort}${by}" | sed "s/$wrap_tab####/####/g" )
-
-		weixin_content_sort=$(echo  $log_sort |sed "s/####/<b>/g"   |sed "s/$line/<hr\/><\/b>/g" |sed "s/$wrap/<br>/g" |sed "s/<br>#//g"  | sed "s/$/<br>/" |sed "s/<hr\/><\/b><br>/<hr\/><\/b>/g" |sed "s/+/ /g"| sed "s/<br> <br>/<br>/g"|  sed ':t;N;s/\n//;b t' )
-		weixin_content=$(echo "$weixin_content_sort<br><b>$by")
-		weixin_desp=$(echo "$weixin_content" | sed "s/<hr\/><\/b><b>/$weixin_line\n/g" |sed "s/<hr\/><\/b>/\n$weixin_line\n/g"| sed "s/<b>/\n/g"| sed "s/<br>/\n/g" | sed "s/<br><br>/\n/g" | sed "s/#/\n/g" )
-		title="检测到你的ss服务器没有启动"
-		push_menu
-		echo -e "$red JD_Script 检测到你的ss服务器没有启动,暂时不更新脚本$white"
-		exit 0
+		echo "在/etc/config没有找到shadowsocksr文件，不做任何操作"
 	fi
 }
 
