@@ -3002,7 +3002,7 @@ kill_index() {
 
 
 ss_if() {
-	if [ ! -f /etc/config/shadowsocksr ];then
+	if [ -f /etc/config/shadowsocksr ];then
 		ss_server=$(grep "option global_server 'nil'" /etc/config/shadowsocksr | wc -l)
 		echo -e "$green开启检测github是否联通，请稍等。。$white"
 		if [ $ss_server == "0" ];then
