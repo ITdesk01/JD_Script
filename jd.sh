@@ -374,7 +374,6 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_ccSign.js			#领券中心签到
 	jd_cash.js			#签到领现金，每日2毛～5毛长期
 	jd_jdzz.js			#京东赚赚长期活动
-	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 	jd_connoisseur.js		#内容鉴赏官
 	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
 	jd_ddworld.js			#东东世界
@@ -513,11 +512,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
-	zy_jxdzz.js			#惊喜大作战
-	jd_qycl.js			#企有此礼
-	jd_superBrand.js		#特物Z|万物皆可国创
-	gua_opencard41.js		#开卡默认不运行
-	gua_opencard42.js
+	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -581,7 +576,6 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_connoisseur.js		#内容鉴赏官
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 	jd_jdzz.js			#京东赚赚长期活动
-	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 	jd_ddworld.js			#东东世界
 	jd_fission.js			#东东超市限时抢京豆
 	jd_fission.js			#东东超市限时抢京豆(多加一次领奖励)
@@ -704,7 +698,6 @@ run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	long_super_redrain.js		#整点红包雨
-	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 	jd_big_winner.js		#翻翻乐
 EOF
 	echo -e "$green run_01$start_script_time $white"
