@@ -708,7 +708,7 @@ cat >/tmp/jd_tmp/run_01 <<EOF
 	jd_big_winner.js		#翻翻乐
 EOF
 	echo -e "$green run_01$start_script_time $white"
-
+	for i in `cat /tmp/jd_tmp/run_01 | grep -v "#.*js" | awk '{print $1}'`
 	do
 		$node $dir_file_js/$i
 		$run_sleep
