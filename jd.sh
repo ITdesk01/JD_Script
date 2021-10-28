@@ -280,7 +280,6 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard50.js		#开卡默认不运行
 	gua_opencard51.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
-	gua_1111RedEnvelope.js		#双十一无门槛红包
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -492,6 +491,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	gua_1111RedEnvelope.js		#双十一无门槛红包
 	rush_wxCollectionActivity.js 	#加购物车抽奖
 	jd_fission.js			#东东超市限时抢京豆
 	gua_city.js			#城城分现金
