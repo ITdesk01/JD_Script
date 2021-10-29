@@ -127,7 +127,7 @@ cat >>/etc/crontabs/root <<EOF
 0 10 */7 * * $node $dir_file_js/jd_price.js	>/tmp/jd_price.log	#价保脚本#100#
 0 0 * * * $python3 $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py >/tmp/jd_getFollowGift.log #关注有礼#100#
 0 8,15 * * * $python3 $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py  >/tmp/jd_OpenCard.log #开卡程序#100#
-#0 1 * * * $python3 $dir_file/git_clone/curtinlv_script/jd_qjd.py >/tmp/jd_qjd.log #抢京豆#100#
+0 0 * * * $python3 $dir_file/git_clone/curtinlv_script/jd_qjd.py >/tmp/jd_qjd.log #抢京豆#100#
 59 23 * * 0,1,2,5,6 sleep 57 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
 59 23 * * * sleep 50 && $dir_file/jd.sh run_jd_blueCoin >/tmp/jd_jd_blueCoin.log	#京东超市兑换#100#
 59 23,7,15 * * * sleep 50 && $dir_file/jd.sh run_jd_joy_reward >/tmp/jd_joy_reward.log	#汪汪兑换积分#100#
@@ -341,7 +341,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_qqxing.js			#QQ星系牧场
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_ttpt.js			#天天拼图
-	jd_jump.js			#跳跳乐瓜分京豆
 	jd_lol.js			#电竞预言家,请在18点之前运行
 	jd_big_winner.js		#翻翻乐
 EOF
@@ -427,7 +426,6 @@ done
 star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_jxmc.js			#京喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
-	jd_selectionOfficer.js		#美妆馆
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -514,6 +512,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_selectionOfficer.js		#美妆馆
+	jd_jump.js			#跳跳乐瓜分京豆
 	jd_zzt.js
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 EOF
@@ -582,7 +582,6 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_ddworld.js			#东东世界
 	jd_fission.js			#东东超市限时抢京豆
 	jd_fission.js			#东东超市限时抢京豆(多加一次领奖励)
-	jd_selectionOfficer.js		#美妆馆
 	jd_carnivalcity_help.js		#京东手机狂欢城助力
 	jd_jxlhb.js			#京喜领红包
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
@@ -618,7 +617,6 @@ EOF
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
-	jd_qjd.js			#抢京豆
 	jd_car.js 			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_cash.js 			#签到领现金，每日2毛～5毛长期
 	jd_sgmh.js 			#闪购盲盒长期活动
@@ -626,6 +624,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_market_lottery.js 		#幸运大转盘
 	jd_jin_tie_xh.js  		#领金贴
 	jd_dreamFactory.js 		#京喜工厂
+	jd_qjd.js			#抢京豆
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_sign_graphics.js		#京东签到图形验证
 	jd_dpqd.js			#店铺签到
@@ -770,7 +769,6 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_mf.js			#集魔方
 	jd_ttpt.js			#天天拼图
 	jd_ys.js			#预售福利机
-	jd_jump.js			#跳跳乐瓜分京豆
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
