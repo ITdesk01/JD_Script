@@ -490,6 +490,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_qjd.js			#抢京豆
 	gua_1111RedEnvelope.js		#双十一无门槛红包
 	rush_wxCollectionActivity.js 	#加购物车抽奖
 	jd_fission.js			#东东超市限时抢京豆
@@ -617,6 +618,7 @@ EOF
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
+	jd_qjd.js			#抢京豆
 	jd_car.js 			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_cash.js 			#签到领现金，每日2毛～5毛长期
 	jd_sgmh.js 			#闪购盲盒长期活动
