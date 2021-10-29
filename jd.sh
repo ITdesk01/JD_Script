@@ -595,7 +595,6 @@ EOF
 		$run_sleep
 	}&
 	done
-	$python3 $openwrt_script/JD_Script/js/jd_hyj_help.py 			#环游记助力
 }
 
 concurrent_js_run_07() {
@@ -717,7 +716,6 @@ run_02() {
 cat >/tmp/jd_tmp/run_02 <<EOF
 	jd_joy.js			#宠汪汪
 	jd_moneyTree.js 		#摇钱树
-	jd_hyj.js			#环游记
 EOF
 	echo -e "$green run_02$start_script_time $white"
 
