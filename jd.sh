@@ -397,7 +397,7 @@ done
 #Ariszy
 Ariszy_url="https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD"
 cat >$dir_file/config/tmp/Ariszy_url.txt <<EOF
-	#zy_jxdzz.js		#惊喜大作战
+	#zy_jxdzz.js		#京喜大作战
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Ariszy_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -426,7 +426,7 @@ done
 #star261
 star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
-	jd_jxmc.js			#惊喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
+	jd_jxmc.js			#京喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
 	jd_selectionOfficer.js		#美妆馆
 	jd_zzt.js			#潮玩儿制躁团
 EOF
@@ -661,7 +661,7 @@ run_030() {
 cat >/tmp/jd_tmp/run_030 <<EOF
 	gua_wealth_island.js 		#财富岛新版
 	jd_jdfactory.js 		#东东工厂，不是京喜工厂
-	jd_jxmc.js			#惊喜牧场
+	jd_jxmc.js			#京喜牧场
 	jd_health_collect.js		#健康社区-收能量
 	long_half_redrain.js		#半点红包雨
 	jd_dreamFactory.js 		#京喜工厂
@@ -1031,6 +1031,18 @@ EOF
 }
 
 concurrent_js_update() {
+	if [ "$ccr_if" == "yes" ];then
+		if [[ ! -d "$ccr_js_file" ]]; then
+			mkdir  $ccr_js_file
+		fi
+	else
+		if [[ ! -d "$ccr_js_file" ]]; then
+			echo ""
+		else
+			rm -rf $ccr_js_file
+		fi
+	fi
+
 	if [ "$ccr_if" == "yes" ];then
 		js_amount=$(cat $openwrt_script_config/js_cookie.txt |wc -l)
 		echo -e "$green>> 你有$js_amount个ck要创建并发文件夹$white"
@@ -2682,10 +2694,24 @@ additional_settings() {
 	done
 }
 
-if [ ! `cat /tmp/github.txt` == "ITdesk01" ];then 
-echo ""
-#exit 0
-fi
+del_jxdr() {
+	#检测变量删除对应并发文件夹的京喜工厂，达到不跑的目的，缺点run文件会出现找不到文件提示，无伤大雅
+	if [ ! $jx_dr ];then
+		echo "没有要删除的京喜工厂文件"
+	else
+		del_ck=$(echo $jx_dr | sed "s/@/ /g")
+		for i in `echo $del_ck`
+		do
+			jx_file=$(ls $ccr_js_file/js_$i | grep "jd_dreamFactory.js"  | wc -l)
+			if [ "$jx_file" == "1" ];then
+				echo "开始删除并发文件js_$i的京喜工厂文件"
+				rm -rf $ccr_js_file/js_$i/jd_dreamFactory.js
+			else
+				echo "并发文件js_$i的京喜工厂文件已经删除了"
+			fi
+		done
+	fi
+}
 
 share_code_generate() {
 	js_amount="10"
@@ -2898,34 +2924,6 @@ system_variable() {
 		fi
 	fi
 
-	jd_openwrt_config_version="1.4"
-	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
-		jd_openwrt_config="$openwrt_script_config/jd_openwrt_script_config.txt"
-		if [ ! -f "$jd_openwrt_config" ]; then
-			jd_openwrt_config_description
-		fi
-		#jd_openwrt_script_config用于升级以后恢复链接
-		if [ ! -L "$dir_file/config/jd_openwrt_script_config.txt" ]; then
-			rm rf $dir_file/config/jd_openwrt_script_config.txt
-			ln -s $jd_openwrt_config $dir_file/config/jd_openwrt_script_config.txt
-		fi
-	fi
-
-	if [ `grep "jd_openwrt_config $jd_openwrt_config_version" $jd_openwrt_config |wc -l` == "1"  ];then
-		jd_config_version="$green jd_config最新 $yellow$jd_openwrt_config$white"
-	else
-		jd_config_version="$red jd_config与新版不一致，请手动更新，更新办法，删除$green rm -rf $jd_openwrt_config$white然后更新一下脚本,再进去重新设置一下"
-	fi
-
-	ccr_if=$(grep "concurrent" $jd_openwrt_config | awk -F "'" '{print $2}')
-	jd_fruit=$(grep "jd_fruit" $jd_openwrt_config | awk -F "'" '{print $2}')
-	jd_joy_reward=$(grep "jd_joy_reward" $jd_openwrt_config | awk -F "'" '{print $2}')
-	jd_joy_feedPets=$(grep "jd_joy_feedPets" $jd_openwrt_config | awk -F "'" '{print $2}')
-	jd_joy_steal=$(grep "jd_joy_steal" $jd_openwrt_config | awk -F "'" '{print $2}')
-	jd_unsubscribe=$(grep "jd_unsubscribe" $jd_openwrt_config | awk -F "'" '{print $2}')
-	push_if=$(grep "push_if" $jd_openwrt_config | awk -F "'" '{print $2}')
-	weixin2=$(grep "weixin2" $jd_openwrt_config | awk -F "'" '{print $2}')
-
 	#添加系统变量
 	jd_script_path=$(cat /etc/profile | grep -o jd.sh | wc -l)
 	if [[ "$jd_script_path" == "0" ]]; then
@@ -2934,28 +2932,7 @@ system_variable() {
 		source /etc/profile
 	fi
 
-
-	cd $dir_file
-	if_git=$(git remote -v | grep -o "https:\/\/github.com\/ITdesk01\/JD_Script.git" | wc -l)
-	if [ "$if_git" == "2" ];then
-		echo ""
-	else
-		echo ""
-		#echo -e "$red检测到你的JD_Script的github地址错误，停止为你服务，省的老问我，为什么你更新了以后，没有我说的脚本,你用的都不是我的，怎么可能跟上我的更新！！！$white"
-		#echo -e "$green唯一的github地址：https://github.com/ITdesk01/JD_Script.git$white"
-		#exit 0
-	fi
-	if [ "$ccr_if" == "yes" ];then
-		if [[ ! -d "$ccr_js_file" ]]; then
-			mkdir  $ccr_js_file
-		fi
-	else
-		if [[ ! -d "$ccr_js_file" ]]; then
-			echo ""
-		else
-			rm -rf $ccr_js_file
-		fi
-	fi
+	jd_openwrt_config
 
 	index_js
 
@@ -2964,9 +2941,8 @@ system_variable() {
 
 	script_black
 
-	#清理一下之前的问题
-	rm -rf /root/README.*
-	rm -rf $dir_file/README.*.*
+	#删除并发的京喜文件
+	del_jxdr
 }
 
 index_js() {
@@ -3054,6 +3030,36 @@ ss_if() {
 	fi
 }
 
+jd_openwrt_config() {
+	jd_openwrt_config_version="1.5"
+	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
+		jd_openwrt_config="$openwrt_script_config/jd_openwrt_script_config.txt"
+		if [ ! -f "$jd_openwrt_config" ]; then
+			jd_openwrt_config_description
+		fi
+		#jd_openwrt_script_config用于升级以后恢复链接
+		if [ ! -L "$dir_file/config/jd_openwrt_script_config.txt" ]; then
+			rm rf $dir_file/config/jd_openwrt_script_config.txt
+			ln -s $jd_openwrt_config $dir_file/config/jd_openwrt_script_config.txt
+		fi
+	fi
+
+	if [ `grep "jd_openwrt_config $jd_openwrt_config_version" $jd_openwrt_config |wc -l` == "1"  ];then
+		jd_config_version="$green jd_config最新 $yellow$jd_openwrt_config$white"
+	else
+		jd_config_version="$red jd_config与新版不一致，请手动更新，更新办法，删除$green rm -rf $jd_openwrt_config$white然后更新一下脚本,再进去重新设置一下"
+	fi
+
+	ccr_if=$(grep "concurrent" $jd_openwrt_config | awk -F "'" '{print $2}')
+	jd_fruit=$(grep "jd_fruit" $jd_openwrt_config | awk -F "'" '{print $2}')
+	jd_joy_reward=$(grep "jd_joy_reward" $jd_openwrt_config | awk -F "'" '{print $2}')
+	jd_joy_feedPets=$(grep "jd_joy_feedPets" $jd_openwrt_config | awk -F "'" '{print $2}')
+	jd_joy_steal=$(grep "jd_joy_steal" $jd_openwrt_config | awk -F "'" '{print $2}')
+	jd_unsubscribe=$(grep "jd_unsubscribe" $jd_openwrt_config | awk -F "'" '{print $2}')
+	push_if=$(grep "push_if" $jd_openwrt_config | awk -F "'" '{print $2}')
+	weixin2=$(grep "weixin2" $jd_openwrt_config | awk -F "'" '{print $2}')
+	jx_dr=$(grep "jx_dr" $jd_openwrt_config | awk -F "'" '{print $2}')
+}
 
 jd_openwrt_config_description() {
 cat > $jd_openwrt_config <<EOF
@@ -3103,6 +3109,8 @@ JD_TRY_TRIALPRICE="10"
 #这里的变量都可以自己修改，按自己的想法来
 ------------------------------------------------------------------------------------------------------------
 
+#指定账号不跑京喜工厂，默认空全跑，指定格式1@2@3，这样子123账号就不跑了，只针对并发
+jx_dr=''
 
 #农场不浇水换豆 false关闭 true打开
 jd_fruit='false'
