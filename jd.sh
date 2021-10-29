@@ -286,8 +286,8 @@ for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js"
 do
 {
 	url="$smiek2221_url"
-	wget $smiek2221_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $smiek2221_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 }&
 done
 
@@ -2711,6 +2711,7 @@ del_jxdr() {
 			fi
 		done
 	fi
+	clear
 }
 
 share_code_generate() {
