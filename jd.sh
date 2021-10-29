@@ -428,7 +428,6 @@ star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_jxmc.js			#京喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
 	jd_selectionOfficer.js		#美妆馆
-	jd_zzt.js			#潮玩儿制躁团
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -514,6 +513,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_zzt.js
 	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 EOF
 
@@ -771,7 +771,6 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_ttpt.js			#天天拼图
 	jd_ys.js			#预售福利机
 	jd_jump.js			#跳跳乐瓜分京豆
-	jd_zzt.js			#潮玩儿制躁团
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
