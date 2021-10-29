@@ -890,6 +890,7 @@ curtinlv_script_setup() {
 	sed -i "/JD_COOKIE = ''/d" $dir_file/git_clone/curtinlv_script/OpenCard/OpenCardConfig.ini
 	sed -i "3a \JD_COOKIE = '$curtinlv_cookie'" $dir_file/git_clone/curtinlv_script/OpenCard/OpenCardConfig.ini
 	sed -i "s/sleepNum = 0/sleepNum = 0.5/g" $dir_file/git_clone/curtinlv_script/OpenCard/OpenCardConfig.ini
+	sed -i "s/openCardBean = 5/openCardBean = 20/g" $dir_file/git_clone/curtinlv_script/OpenCard/OpenCardConfig.ini
 	if [ ! -L "$dir_file_js/jd_OpenCard.py" ]; then
 		rm -rf $dir_file_js/jd_OpenCard.py
 		ln -s $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py $dir_file_js/jd_OpenCard.py
