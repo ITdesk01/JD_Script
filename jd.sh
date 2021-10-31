@@ -321,6 +321,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_lol.js			#电竞预言家,请在18点之前运行
 	jd_big_winner.js		#翻翻乐
 	jd_fcwb.js			#发财挖宝
+	jd_cjhz.js			#京东超级盒子
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -812,6 +813,7 @@ cat >/tmp/jd_tmp/run_10_15_20 <<EOF
 	jd_superMarket.js 		#东东超市,0 10 15 20四场补货加劵
 	jd_speed_sign.js 		#京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#极速版红包
+	jd_cjhz.js			#京东超级盒子
 EOF
 
 	echo -e "$green run_10_15_20$start_script_time $white"
