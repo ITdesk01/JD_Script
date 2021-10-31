@@ -174,16 +174,6 @@ update() {
 		git reset --hard origin/main
 	fi
 
-	if [ ! -d $dir_file/git_clone/JDHelloWorld ];then
-		echo ""
-		git clone https://github.com/JDHelloWorld/jd_scripts.git $dir_file/git_clone/JDHelloWorld
-
-	else
-		cd $dir_file/git_clone/JDHelloWorld
-		git fetch --all
-		git reset --hard origin/main
-	fi
-
 	if [ ! -d $dir_file/git_clone/curtinlv_script ];then
 		echo ""
 		git clone https://github.com/curtinlv/JD-Script.git $dir_file/git_clone/curtinlv_script
@@ -238,18 +228,6 @@ do
 	echo -e "$yellow copy $green$script_name$white"
 	cp  $dir_file/git_clone/lxk0301_back/$script_name  $dir_file_js/$script_name
 done
-
-#JDHelloWorld
-cat >$dir_file/config/tmp/JDHelloWorld_script.txt <<EOF
-	jd_joy_new.js			#宠汪汪二代目
-EOF
-
-for script_name in `cat $dir_file/config/tmp/JDHelloWorld_script.txt | grep -v "#.*js" | awk '{print $1}'`
-do
-	echo -e "$yellow copy $green$script_name$white"
-	cp  $dir_file/git_clone/JDHelloWorld/$script_name  $dir_file_js/$script_name
-done
-
 
 sleep 5
 
@@ -337,7 +315,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_superMarket.js		#东东超市
 	jd_unsubscriLive.js		#取关主播
 	jd_try.js 			#京东试用（默认不启用）
-	jd_nzmh.js			#新一期女装盲盒
 	jd_qqxing.js			#QQ星系牧场
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_ttpt.js			#天天拼图
@@ -769,7 +746,6 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_superMarket.js 		#东东超市,6点 18点多加两场用于收金币
 	jd_gold_creator.js		#金榜创造营
 	jd_goodMorning.js		#早起福利
-	jd_nzmh.js			#新一期女装盲盒
 	jd_dwapp.js			#积分换话费
 	jd_mf.js			#集魔方
 	jd_ttpt.js			#天天拼图
