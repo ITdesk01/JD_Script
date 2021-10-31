@@ -248,16 +248,16 @@ done
 #smiek2221
 smiek2221_url="https://raw.githubusercontent.com/smiek2221/scripts/master"
 cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
-	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
-	gua_MMdou.js                    #赚京豆MM豆
-	gua_opencard39.js		#开卡默认不运行
-	gua_opencard43.js		#开卡默认不运行
-	gua_opencard47.js		#开卡默认不运行
-	gua_opencard48.js		#开卡默认不运行
-	gua_opencard49.js		#开卡默认不运行
-	gua_opencard50.js		#开卡默认不运行
-	gua_opencard51.js		#开卡默认不运行
-	gua_UnknownTask3.js		#寻找内容鉴赏官
+	#jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
+	#gua_MMdou.js                    #赚京豆MM豆
+	#gua_opencard39.js		#开卡默认不运行
+	#gua_opencard43.js		#开卡默认不运行
+	#gua_opencard47.js		#开卡默认不运行
+	#gua_opencard48.js		#开卡默认不运行
+	#gua_opencard49.js		#开卡默认不运行
+	#gua_opencard50.js		#开卡默认不运行
+	#gua_opencard51.js		#开卡默认不运行
+	#gua_UnknownTask3.js		#寻找内容鉴赏官
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
