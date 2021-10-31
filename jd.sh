@@ -343,6 +343,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_ttpt.js			#天天拼图
 	jd_lol.js			#电竞预言家,请在18点之前运行
 	jd_big_winner.js		#翻翻乐
+	jd_fcwb.js			#发财挖宝
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -769,6 +770,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_mf.js			#集魔方
 	jd_ttpt.js			#天天拼图
 	jd_ys.js			#预售福利机
+	jd_fcwb.js			#发财挖宝
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
@@ -2690,6 +2692,9 @@ additional_settings() {
 		sed -i "$healthcode_rows a \ '$new_health_set', " $dir_file_js/jd_health.js
 		js_amount=$(($js_amount - 1))
 	done
+
+	#发财挖宝
+	sed -i "s/https:\/\/raw.fastgit.org\/zero205\/updateTeam\/main\/shareCodes\/fcwb.json//g" $dir_file_js/jd_fcwb.js
 }
 
 del_jxdr() {
