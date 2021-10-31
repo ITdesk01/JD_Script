@@ -385,6 +385,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_ys.js			#预售福利机
 	jd_wish.js			#众筹许愿池
 	jd_carnivalcity.js		#京东手机狂欢城
+	jd_jxmc.js			#京喜牧场
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -426,7 +427,7 @@ done
 #star261
 star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
-	jd_jxmc.js			#京喜牧场(先将新手任务做完，再执行本脚本，不然会出现未知错误)
+	#空.js
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -480,6 +481,7 @@ done
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/utils/JDJRValidator_Pure.js -O $dir_file_js/JDJRValidator_Pure.js
+	wget https://raw.githubusercontent.com/shufflewzc/faker3/main/jd_jxmc_hb.js -O $dir_file_js/jd_jxmc_hb.js #京喜牧场助力
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -489,6 +491,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_jxmc_hb.js 			#京喜牧场助力
 	jd_qjd.js			#抢京豆
 	gua_1111RedEnvelope.js		#双十一无门槛红包
 	rush_wxCollectionActivity.js 	#加购物车抽奖
@@ -588,6 +591,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	gua_city.js			#城城分现金
 	gua_1111RedEnvelope.js		#双十一无门槛红包
+	jd_jxmc_hb.js 			#京喜牧场助力
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
