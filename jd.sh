@@ -93,7 +93,7 @@ export guaopencard_draw="true"
 export FS_LEVEL="card开卡+加购"
 
 task() {
-	cron_version="3.67"
+	cron_version="3.68"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -123,7 +123,7 @@ cat >>/etc/crontabs/root <<EOF
 0 9 28 */1 * $node $dir_file_js/jd_all_bean_change.js >/tmp/jd_all_bean_change.log #每个月28号推送当月京豆资产变化#100#
 10-20/5 10,12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
 0 0,7 * * * $node $dir_file_js/jd_bean_sign.js >/tmp/jd_bean_sign.log #京东多合一签到#100#
-0 0 * * * $node $dir_file_js/star_dreamFactory_tuan.js	>/tmp/star_dreamFactory_tuan.log	#京喜开团#100#
+0 */4 * * * $node $dir_file_js/star_dreamFactory_tuan.js	>/tmp/star_dreamFactory_tuan.log	#京喜开团#100#
 0 10 */7 * * $node $dir_file_js/jd_price.js	>/tmp/jd_price.log	#价保脚本#100#
 0 0 * * * $python3 $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py >/tmp/jd_getFollowGift.log #关注有礼#100#
 0 8,15 * * * $python3 $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py  >/tmp/jd_OpenCard.log #开卡程序#100#
