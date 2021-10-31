@@ -321,6 +321,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_lol.js			#电竞预言家,请在18点之前运行
 	jd_big_winner.js		#翻翻乐
 	jd_fcwb.js			#发财挖宝
+	jd_hotNeight.js			#沸腾之夜
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -493,6 +494,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_joy_new.js
 	jd_selectionOfficer.js		#美妆馆
 	jd_jump.js			#跳跳乐瓜分京豆
 	jd_zzt.js
@@ -615,6 +617,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_ljd_xh.js			#领京豆
 	jd_wish.js			#众筹许愿池
 	jd_carnivalcity.js		#京东手机狂欢城
+	jd_hotNeight.js			#沸腾之夜
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -714,13 +717,13 @@ EOF
 run_03() {
 #这里不会并发
 cat >/tmp/jd_tmp/run_03 <<EOF
-	jd_joy_new.js 			#jd宠汪汪，零点开始，11.30-15:00 17-21点可以领狗粮
 	jd_speed.js 			#天天加速 3小时运行一次，打卡时间间隔是6小时
 	jd_health.js			#健康社区
 	jd_mohe.js			#5G超级盲盒
 	jd_dianjing.js			#电竞经理
 	jd_joy_park_help.js 		#汪汪乐园助力
 	jd_qqxing.js			#QQ星系牧场
+	jd_hotNeight.js			#沸腾之夜
 EOF
 	echo -e "$green run_03$start_script_time $white"
 
