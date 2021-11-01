@@ -357,7 +357,6 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_connoisseur.js		#内容鉴赏官
 	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
 	jd_ddworld.js			#东东世界
-	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_live.js			#京东直播
 	jd_mf.js			#集魔方
 	jd_price.js		        #价保脚本
@@ -470,6 +469,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_red.js			#双十一无门槛红包
 	jd_jxmc_hb.js 			#京喜牧场助力
 	jd_qjd.js			#抢京豆
