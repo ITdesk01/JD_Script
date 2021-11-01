@@ -254,7 +254,9 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard48.js		#开卡默认不运行
 	gua_opencard49.js		#开卡默认不运行
 	gua_opencard53.js		#开卡默认不运行
+	gua_opencard52.js		#开卡默认不运行
 	gua_opencard55.js		#开卡默认不运行
+	gua_opencard57.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 EOF
 
