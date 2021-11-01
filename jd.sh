@@ -318,7 +318,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_lol.js			#电竞预言家,请在18点之前运行
 	jd_big_winner.js		#翻翻乐
 	jd_fcwb.js			#发财挖宝
-	jd_hotNeight.js			#沸腾之夜
 	jd_cjhz.js			#京东超级盒子
 EOF
 
@@ -493,6 +492,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_hotNeight.js			#沸腾之夜
 	gua_opencard43.js		#开卡默认不运行
 	gua_opencard47.js		#开卡默认不运行
 	gua_opencard50.js		#开卡默认不运行
@@ -616,7 +616,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_ljd_xh.js			#领京豆
 	jd_wish.js			#众筹许愿池
 	jd_carnivalcity.js		#京东手机狂欢城
-	jd_hotNeight.js			#沸腾之夜
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -722,7 +721,6 @@ cat >/tmp/jd_tmp/run_03 <<EOF
 	jd_dianjing.js			#电竞经理
 	jd_joy_park_help.js 		#汪汪乐园助力
 	jd_qqxing.js			#QQ星系牧场
-	jd_hotNeight.js			#沸腾之夜
 EOF
 	echo -e "$green run_03$start_script_time $white"
 
