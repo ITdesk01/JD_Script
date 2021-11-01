@@ -470,12 +470,11 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_red.js			#双十一无门槛红包
 	jd_jxmc_hb.js 			#京喜牧场助力
 	jd_qjd.js			#抢京豆
-	gua_1111RedEnvelope.js		#双十一无门槛红包
 	rush_wxCollectionActivity.js 	#加购物车抽奖
 	jd_fission.js			#东东超市限时抢京豆
-	gua_city.js			#城城分现金
 	gua_UnknownTask2.js		#关注频道、抽奖(默认不运行)
 	jd_dianjing.js			#电竞经理
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
@@ -495,6 +494,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_city.js			#城城分现金
+	gua_1111RedEnvelope.js		#双十一无门槛红包
 	jd_joy_new.js
 	jd_selectionOfficer.js		#美妆馆
 	jd_jump.js			#跳跳乐瓜分京豆
@@ -560,6 +561,7 @@ update_script() {
 ccr_run() {
 #这里有的就不要加到concurrent_js_run_07
 cat >/tmp/jd_tmp/ccr_run <<EOF
+	jd_red.js			#双十一无门槛红包
 	jd_connoisseur.js		#内容鉴赏官
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 	jd_jdzz.js			#京东赚赚长期活动
@@ -569,8 +571,6 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_carnivalcity_help.js		#京东手机狂欢城助力
 	jd_jxlhb.js			#京喜领红包
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
-	gua_city.js			#城城分现金
-	gua_1111RedEnvelope.js		#双十一无门槛红包
 	jd_jxmc_hb.js 			#京喜牧场助力
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
