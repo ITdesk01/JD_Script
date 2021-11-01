@@ -246,26 +246,22 @@ do
 done
 
 #smiek2221
-smiek2221_url="https://raw.githubusercontent.com/smiek2221/scripts/master"
+smiek2221_url="https://raw.githubusercontent.com/smiek2121/scripts/master"
 cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
-	#jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
-	#gua_MMdou.js                    #赚京豆MM豆
-	#gua_opencard39.js		#开卡默认不运行
-	#gua_opencard43.js		#开卡默认不运行
-	#gua_opencard47.js		#开卡默认不运行
-	#gua_opencard48.js		#开卡默认不运行
-	#gua_opencard49.js		#开卡默认不运行
-	#gua_opencard50.js		#开卡默认不运行
-	#gua_opencard51.js		#开卡默认不运行
-	#gua_UnknownTask3.js		#寻找内容鉴赏官
+	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
+	gua_MMdou.js                    #赚京豆MM豆
+	gua_opencard39.js		#开卡默认不运行
+	gua_opencard48.js		#开卡默认不运行
+	gua_opencard49.js		#开卡默认不运行
+	gua_UnknownTask3.js		#寻找内容鉴赏官
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
 {
 	url="$smiek2221_url"
-	#wget $smiek2221_url/$script_name -O $dir_file_js/$script_name
-	#update_if
+	wget $smiek2221_url/$script_name -O $dir_file_js/$script_name
+	update_if
 }&
 done
 
@@ -494,13 +490,12 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_opencard43.js		#开卡默认不运行
+	gua_opencard47.js		#开卡默认不运行
+	gua_opencard50.js		#开卡默认不运行
+	gua_opencard51.js		#开卡默认不运行
 	gua_city.js			#城城分现金
 	gua_1111RedEnvelope.js		#双十一无门槛红包
-	jd_joy_new.js
-	jd_selectionOfficer.js		#美妆馆
-	jd_jump.js			#跳跳乐瓜分京豆
-	jd_zzt.js
-	jd_cfd_mooncake.js		#京喜财富岛合成月饼
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
