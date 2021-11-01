@@ -1838,9 +1838,6 @@ backnas() {
 		exit 0
 	fi
 
-	echo -e "$green >>先杀掉一下后台脚本，然后方便打包文件$white"
-	kill_ccr
-	sleep 5
 	echo -e "$green>> 开始备份到nas$white"
 	sleep 5
 
