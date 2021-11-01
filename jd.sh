@@ -1889,6 +1889,10 @@ backnas() {
 	echo -e "$green>> 清理tmp文件 $white"
 	rm -rf /tmp/*.tar.gz
 	sleep 5
+
+	echo -e "$green>> 开始更新脚本并恢复并发文件夹$white"
+	update
+	echo -e "$green>> 脚本更新完成$white"
 }
 
 backnas_config() {
