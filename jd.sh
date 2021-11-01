@@ -464,6 +464,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	rush_jinggengjcq_dapainew.js	#腿毛开卡，有水跑吧
 	jd_jxlhb.js			#京喜领红包
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_red.js			#双十一无门槛红包
