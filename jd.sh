@@ -460,6 +460,7 @@ done
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/utils/JDJRValidator_Pure.js -O $dir_file_js/JDJRValidator_Pure.js
 	wget https://raw.githubusercontent.com/shufflewzc/faker3/main/jd_jxmc_hb.js -O $dir_file_js/jd_jxmc_hb.js #京喜牧场助力
+	wget https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master/jd_xtgsign.js -O $dir_file_js/jd_xtgsign.js #星推官
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -469,6 +470,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_xtgsign.js 			#星推官
 	rush_jinggengjcq_dapainew.js	#腿毛开卡，有水跑吧
 	jd_jxlhb.js			#京喜领红包
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
@@ -587,6 +589,7 @@ EOF
 concurrent_js_run_07() {
 #这里的也不会并发
 cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
+	jd_xtgsign.js 			#星推官
 	jd_dreamFactory.js 		#京喜工厂
 EOF
 	for i in `cat /tmp/jd_tmp/concurrent_js_run_07 | grep -v "#.*js" | awk '{print $1}'`
@@ -604,6 +607,7 @@ EOF
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
+	jd_xtgsign.js 			#星推官
 	jd_car.js 			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_cash.js 			#签到领现金，每日2毛～5毛长期
 	jd_sgmh.js 			#闪购盲盒长期活动
