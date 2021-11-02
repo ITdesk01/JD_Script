@@ -379,6 +379,7 @@ done
 Ariszy_url="https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD"
 cat >$dir_file/config/tmp/Ariszy_url.txt <<EOF
 	#zy_jxdzz.js		#京喜大作战
+	zy_sjjc.js		#手机竞猜
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Ariszy_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -627,6 +628,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_ljd_xh.js			#领京豆
 	jd_wish.js			#众筹许愿池
 	jd_carnivalcity.js		#京东手机狂欢城
+	zy_sjjc.js			#手机竞猜
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
