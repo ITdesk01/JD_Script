@@ -584,6 +584,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_jxmc_hb.js 			#京喜牧场助力
 	jd_superBrand.js		#双11特务
+	jd_nnfls.js			#牛牛福利
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
