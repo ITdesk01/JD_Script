@@ -250,20 +250,20 @@ smiek2221_url="https://raw.githubusercontent.com/smiek2121/scripts/master"
 cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	jd_joy_steal.js			#宠汪汪偷好友积分与狗粮
 	gua_MMdou.js                    #赚京豆MM豆
-	gua_opencard39.js		#开卡默认不运行
-	gua_opencard48.js		#开卡默认不运行
-	gua_opencard49.js		#开卡默认不运行
+	gua_UnknownTask3.js		#寻找内容鉴赏官
 	gua_opencard53.js		#开卡默认不运行
 	gua_opencard52.js		#开卡默认不运行
+	gua_opencard54.js		#开卡默认不运行
 	gua_opencard55.js		#开卡默认不运行
+	gua_opencard56.js		#开卡默认不运行
 	gua_opencard57.js		#开卡默认不运行
 	gua_opencard58.js		#开卡默认不运行
 	gua_opencard59.js		#开卡默认不运行
 	gua_opencard60.js		#开卡默认不运行
+	gua_opencard61.js		#开卡默认不运行
 	gua_opencard62.js		#开卡默认不运行
 	gua_opencard63.js		#开卡默认不运行
 	gua_opencard64.js		#开卡默认不运行
-	gua_UnknownTask3.js		#寻找内容鉴赏官
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -504,6 +504,9 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	gua_opencard39.js		#开卡默认不运行
+	gua_opencard48.js		#开卡默认不运行
+	gua_opencard49.js		#开卡默认不运行
 	zy_sjjc.js			#手机竞猜
 	jd_hotNeight.js			#沸腾之夜
 	gua_opencard43.js		#开卡默认不运行
@@ -679,16 +682,16 @@ EOF
 
 opencard() {
 cat >/tmp/jd_tmp/opencard <<EOF
-	gua_opencard39.js		#开卡默认不运行
-	gua_opencard48.js		#开卡默认不运行
-	gua_opencard49.js		#开卡默认不运行
 	gua_opencard53.js		#开卡默认不运行
 	gua_opencard52.js		#开卡默认不运行
+	gua_opencard54.js		#开卡默认不运行
 	gua_opencard55.js		#开卡默认不运行
+	gua_opencard56.js		#开卡默认不运行
 	gua_opencard57.js		#开卡默认不运行
 	gua_opencard58.js		#开卡默认不运行
 	gua_opencard59.js		#开卡默认不运行
 	gua_opencard60.js		#开卡默认不运行
+	gua_opencard61.js		#开卡默认不运行
 	gua_opencard62.js		#开卡默认不运行
 	gua_opencard63.js		#开卡默认不运行
 	gua_opencard64.js		#开卡默认不运行
