@@ -261,6 +261,8 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard59.js		#开卡默认不运行
 	gua_opencard60.js		#开卡默认不运行
 	gua_opencard62.js		#开卡默认不运行
+	gua_opencard63.js		#开卡默认不运行
+	gua_opencard64.js		#开卡默认不运行
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 EOF
 
@@ -674,8 +676,19 @@ EOF
 
 opencard() {
 cat >/tmp/jd_tmp/opencard <<EOF
-	gua_opencard24.js		#开卡默认不运行
-	gua_opencard25.js		#开卡默认不运行
+	gua_opencard39.js		#开卡默认不运行
+	gua_opencard48.js		#开卡默认不运行
+	gua_opencard49.js		#开卡默认不运行
+	gua_opencard53.js		#开卡默认不运行
+	gua_opencard52.js		#开卡默认不运行
+	gua_opencard55.js		#开卡默认不运行
+	gua_opencard57.js		#开卡默认不运行
+	gua_opencard58.js		#开卡默认不运行
+	gua_opencard59.js		#开卡默认不运行
+	gua_opencard60.js		#开卡默认不运行
+	gua_opencard62.js		#开卡默认不运行
+	gua_opencard63.js		#开卡默认不运行
+	gua_opencard64.js		#开卡默认不运行
 EOF
 
 	echo -e "$green opencard$start_script_time $white"
@@ -1087,7 +1100,7 @@ concurrent_js_update() {
 concurrent_js_clean(){
 		if [ "$ccr_if" == "yes" ];then
 			echo -e "$yellow收尾一下$white"
-			for i in `ps -ww | grep "$action" | grep -v 'grep\|kill_ccr' | awk '{print $1}'`
+			for i in `ps -ww | grep "$action" | grep -v 'grep\|index.js\|jd_try.js\|ssrplus\|opencard' | awk '{print $1}'`
 			do
 				echo "开始kill $i"
 				kill -9 $i
@@ -1098,7 +1111,7 @@ concurrent_js_clean(){
 kill_ccr() {
 	if [ "$ccr_if" == "yes" ];then
 		echo -e "$green>>终止并发程序启动。请稍等。。。。$white"
-		if [ `ps -ww | grep "js$" | grep "JD_Script"| grep -v 'grep\|index.js\|jd_try.js\|ssrplus' | awk '{print $1}' |wc -l` == "0" ];then
+		if [ `ps -ww | grep "js$" | grep "JD_Script"| grep -v 'grep\|index.js\|jd_try.js\|ssrplus\|opencard' | awk '{print $1}' |wc -l` == "0" ];then
 			sleep 2
 			echo ""
 			echo -e "$green我曾经跨过山和大海，也穿过人山人海。。。$white"
@@ -1109,7 +1122,7 @@ kill_ccr() {
 			sleep 2
 			echo -e "$green后台都没有进程妹子，散了散了。。。$white"
 		else
-			for i in `ps -ww | grep "js$" | grep "JD_Script"| grep -v 'grep\|index.js\|jd_try.js\|ssrplus' | awk '{print $1}'`
+			for i in `ps -ww | grep "js$" | grep "JD_Script"| grep -v 'grep\|index.js\|jd_try.js\|ssrplus\|opencard' | awk '{print $1}'`
 			do
 				kill -9 $i
 				echo "kill $i"
@@ -1117,7 +1130,7 @@ kill_ccr() {
 			concurrent_js_clean
 			clear
 			echo -e "$green再次检测一下并发程序是否还有存在$white"
-			if [ `ps -ww | grep "js$" | grep "JD_Script"| grep -v 'grep\|index.js\|jd_try.js\|ssrplus' | awk '{print $1}' |wc -l` == "0" ];then
+			if [ `ps -ww | grep "js$" | grep "JD_Script"| grep -v 'grep\|index.js\|jd_try.js\|ssrplus\|opencard' | awk '{print $1}' |wc -l` == "0" ];then
 				echo -e "$yellow>>并发程序已经全部结束$white"
 			else
 				echo -e "$yellow！！！检测到并发程序还有存在，再继续杀，请稍等。。。$white"
@@ -1131,7 +1144,7 @@ kill_ccr() {
 }
 
 if_ps() {
-	ps_if=$(ps -ww | grep "js$" | grep "JD_Script"| grep -v 'grep\|index.js\|jd_try.js\|ssrplus' | awk '{print $1}' |wc -l)
+	ps_if=$(ps -ww | grep "js$" | grep "JD_Script"| grep -v 'grep\|index.js\|jd_try.js\|ssrplus\|opencard' | awk '{print $1}' |wc -l)
 	num1="20"
 
 	echo -e "$green>> $action并发程序还有$yellow$ps_if$green进程在后台，等待($num1秒)，后再检测一下$white"
