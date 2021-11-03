@@ -699,8 +699,9 @@ EOF
 	for i in `cat /tmp/jd_tmp/opencard | grep -v "#.*js" | awk '{print $1}'`
 	do
 	{
+		num=$(python $dir_file/jd_random.py 3000,1)
+		sleep $num
 		$node $dir_file_js/$i
-		$run_sleep
 	}&
 	done
 	wait
