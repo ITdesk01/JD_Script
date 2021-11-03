@@ -699,8 +699,10 @@ EOF
 	for i in `cat /tmp/jd_tmp/opencard | grep -v "#.*js" | awk '{print $1}'`
 	do
 	{
-		num=$(python $dir_file/jd_random.py 3000,1)
+		num=$(python $dir_file/jd_random.py 2000,1)
+		echo "$i脚本延迟$num秒以后再开始跑，请耐心等待"
 		sleep $num
+		
 		$node $dir_file_js/$i
 	}&
 	done
