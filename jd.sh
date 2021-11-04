@@ -263,7 +263,6 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard61.js		#开卡默认不运行
 	gua_opencard62.js		#开卡默认不运行
 	gua_opencard63.js		#开卡默认不运行
-	gua_opencard64.js		#开卡默认不运行
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -295,7 +294,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_ttpt.js			#天天拼图
 	jd_lol.js			#电竞预言家,请在18点之前运行
 	jd_big_winner.js		#翻翻乐
-	jd_fcwb.js			#发财挖宝
 	jd_cjhz.js			#京东超级盒子
 	jd_nnfls.js			#牛牛福利
 EOF
@@ -504,17 +502,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
-	gua_opencard39.js		#开卡默认不运行
-	gua_opencard48.js		#开卡默认不运行
-	gua_opencard49.js		#开卡默认不运行
-	zy_sjjc.js			#手机竞猜
-	jd_hotNeight.js			#沸腾之夜
-	gua_opencard43.js		#开卡默认不运行
-	gua_opencard47.js		#开卡默认不运行
-	gua_opencard50.js		#开卡默认不运行
-	gua_opencard51.js		#开卡默认不运行
-	gua_city.js			#城城分现金
-	gua_1111RedEnvelope.js		#双十一无门槛红包
+	jd_fcwb.js
+	gua_opencard64.js		#开卡默认不运行
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -700,7 +689,6 @@ cat >/tmp/jd_tmp/opencard <<EOF
 	gua_opencard61.js		#开卡默认不运行
 	gua_opencard62.js		#开卡默认不运行
 	gua_opencard63.js		#开卡默认不运行
-	gua_opencard64.js		#开卡默认不运行
 EOF
 
 	echo -e "$green opencard$start_script_time $white"
@@ -796,7 +784,6 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_mf.js			#集魔方
 	jd_ttpt.js			#天天拼图
 	jd_ys.js			#预售福利机
-	jd_fcwb.js			#发财挖宝
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
@@ -2732,9 +2719,6 @@ additional_settings() {
 		sed -i "$healthcode_rows a \ '$new_health_set', " $dir_file_js/jd_health.js
 		js_amount=$(($js_amount - 1))
 	done
-
-	#发财挖宝
-	sed -i "s/https:\/\/raw.fastgit.org\/zero205\/updateTeam\/main\/shareCodes\/fcwb.json//g" $dir_file_js/jd_fcwb.js
 }
 
 del_jxdr() {
