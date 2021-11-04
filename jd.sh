@@ -630,7 +630,7 @@ EOF
 
 	for i in `cat /tmp/jd_tmp/run_0 | grep -v "#.*js" | awk '{print $1}'`
 	do
-		num=$(python $dir_file/jd_random.py 200,1)
+		num=$(python $dir_file/jd_random.py 100,1)
 		echo "$i脚本延迟$num秒以后再开始跑，请耐心等待"
 		sleep $num
 		$node $dir_file_js/$i
@@ -665,7 +665,7 @@ EOF
 
 	for i in `cat /tmp/jd_tmp/run_030 | grep -v "#.*js" | awk '{print $1}'`
 	do
-		num=$(python $dir_file/jd_random.py 200,1)
+		num=$(python $dir_file/jd_random.py 100,1)
 		echo "$i脚本延迟$num秒以后再开始跑，请耐心等待"
 		sleep $num
 		$node $dir_file_js/$i
@@ -717,7 +717,7 @@ EOF
 	echo -e "$green run_01$start_script_time $white"
 	for i in `cat /tmp/jd_tmp/run_01 | grep -v "#.*js" | awk '{print $1}'`
 	do
-		num=$(python $dir_file/jd_random.py 200,1)
+		num=$(python $dir_file/jd_random.py 100,1)
 		echo "$i脚本延迟$num秒以后再开始跑，请耐心等待"
 		sleep $num
 		$node $dir_file_js/$i
@@ -736,7 +736,7 @@ EOF
 
 	for i in `cat /tmp/jd_tmp/run_02 | grep -v "#.*js" | awk '{print $1}'`
 	do
-		num=$(python $dir_file/jd_random.py 200,1)
+		num=$(python $dir_file/jd_random.py 100,1)
 		echo "$i脚本延迟$num秒以后再开始跑，请耐心等待"
 		sleep $num
 		$node $dir_file_js/$i
@@ -789,7 +789,7 @@ EOF
 
 	for i in `cat /tmp/jd_tmp/run_06_18 | grep -v "#.*js" | awk '{print $1}'`
 	do
-		num=$(python $dir_file/jd_random.py 200,1)
+		num=$(python $dir_file/jd_random.py 100,1)
 		echo "$i脚本延迟$num秒以后再开始跑，请耐心等待"
 		sleep $num
 		$node $dir_file_js/$i
@@ -820,7 +820,7 @@ EOF
 
 	for i in `cat /tmp/jd_tmp/run_07 | grep -v "#.*js" | awk '{print $1}'`
 	do
-		num=$(python $dir_file/jd_random.py 200,1)
+		num=$(python $dir_file/jd_random.py 100,1)
 		echo "$i脚本延迟$num秒以后再开始跑，请耐心等待"
 		sleep $num
 		$node $dir_file_js/$i
@@ -839,7 +839,7 @@ EOF
 
 	for i in `cat /tmp/jd_tmp/run_08_12_16 | grep -v "#.*js" | awk '{print $1}'`
 	do
-		num=$(python $dir_file/jd_random.py 200,1)
+		num=$(python $dir_file/jd_random.py 100,1)
 		echo "$i脚本延迟$num秒以后再开始跑，请耐心等待"
 		sleep $num
 		$node $dir_file_js/$i
@@ -861,7 +861,7 @@ EOF
 
 	for i in `cat /tmp/jd_tmp/run_10_15_20 | grep -v "#.*js" | awk '{print $1}'`
 	do
-		num=$(python $dir_file/jd_random.py 200,1)
+		num=$(python $dir_file/jd_random.py 100,1)
 		echo "$i脚本延迟$num秒以后再开始跑，请耐心等待"
 		sleep $num
 		$node $dir_file_js/$i
