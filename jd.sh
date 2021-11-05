@@ -236,6 +236,7 @@ fangpidedongsun_url="https://raw.githubusercontent.com/fangpidedongsun/jd_script
 cat >$dir_file/config/tmp/fangpidedongsun_qx.txt <<EOF
 	jd_xtgsign.js 			#星推官
 	jd_jingsubang.js 		#手机竞猜
+	jd_star.js			#星店长
 EOF
 
 for script_name in `cat $dir_file/config/tmp/fangpidedongsun_qx.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -263,6 +264,7 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_opencard61.js		#开卡默认不运行
 	gua_opencard62.js		#开卡默认不运行
 	gua_opencard63.js		#开卡默认不运行
+	gua_opencard65.js		#开卡默认不运行
 EOF
 
 for script_name in `cat $dir_file/config/tmp/smiek2221_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -296,6 +298,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_big_winner.js		#翻翻乐
 	jd_cjhz.js			#京东超级盒子
 	jd_nnfls.js			#牛牛福利
+	jd_jump.js			#跳跳乐瓜分京豆脚本
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -355,6 +358,7 @@ done
 star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_superBrand.js		#双11特务
+	jd_vivo.js			#热血心跳,狂解压
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -465,6 +469,7 @@ done
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/shufflewzc/faker3/main/jd_jxmc_hb.js -O $dir_file_js/jd_jxmc_hb.js #京喜牧场助力
 	wget https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/utils/JDJRValidator_Pure.js -O $dir_file_js/JDJRValidator_Pure.js #因为路径不同单独下载
+	wget https://raw.githubusercontent.com/asd920/Auto-jd/main/jd_dqmh.js -O $dir_file_js/jd_dqmh.js #京东电器盲盒
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -577,6 +582,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_jxmc_hb.js 			#京喜牧场助力
 	jd_superBrand.js		#双11特务
 	jd_nnfls.js			#牛牛福利
+	jd_vivo.js			#热血心跳,狂解压
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -625,6 +631,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_ljd_xh.js			#领京豆
 	jd_wish.js			#众筹许愿池
 	jd_carnivalcity.js		#京东手机狂欢城
+	jd_jump.js			#跳跳乐瓜分京豆脚本
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
@@ -689,6 +696,7 @@ cat >/tmp/jd_tmp/opencard <<EOF
 	gua_opencard61.js		#开卡默认不运行
 	gua_opencard62.js		#开卡默认不运行
 	gua_opencard63.js		#开卡默认不运行
+	gua_opencard65.js		#开卡默认不运行
 EOF
 
 	echo -e "$green opencard$start_script_time $white"
@@ -713,6 +721,7 @@ cat >/tmp/jd_tmp/run_01 <<EOF
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	raw_main_jd_super_redrain.js	#整点红包雨
 	jd_big_winner.js		#翻翻乐
+	jd_dqmh.js 			#京东电器盲盒
 EOF
 	echo -e "$green run_01$start_script_time $white"
 	for i in `cat /tmp/jd_tmp/run_01 | grep -v "#.*js" | awk '{print $1}'`
@@ -784,6 +793,7 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_mf.js			#集魔方
 	jd_ttpt.js			#天天拼图
 	jd_ys.js			#预售福利机
+	jd_star.js			#星店长
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
