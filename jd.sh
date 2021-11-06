@@ -359,6 +359,7 @@ star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_superBrand.js		#双11特务
 	jd_vivo.js			#热血心跳,狂解压
+        jd_travel_shop.js               #环游记
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -632,6 +633,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_wish.js			#众筹许愿池
 	jd_carnivalcity.js		#京东手机狂欢城
 	jd_jump.js			#跳跳乐瓜分京豆脚本
+	jd_travel_shop.js               #环游记
 EOF
 	echo -e "$green run_0$start_script_time $white"
 
