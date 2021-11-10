@@ -467,7 +467,7 @@ done
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/shufflewzc/faker3/main/jd_jxmc_hb.js -O $dir_file_js/jd_jxmc_hb.js #京喜牧场助力
 	wget https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/utils/JDJRValidator_Pure.js -O $dir_file_js/JDJRValidator_Pure.js #因为路径不同单独下载
-	wget https://raw.githubusercontent.com/asd920/Auto-jd/main/jd_dqmh.js -O $dir_file_js/jd_dqmh.js #京东电器盲盒
+
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -505,6 +505,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_dqmh.js 			#京东电器盲盒
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 	jd_lol.js			#电竞预言家,请在18点之前运行
 	gua_opencard52.js		#开卡默认不运行
@@ -724,7 +725,6 @@ cat >/tmp/jd_tmp/run_01 <<EOF
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	raw_main_jd_super_redrain.js	#整点红包雨
 	jd_big_winner.js		#翻翻乐
-	jd_dqmh.js 			#京东电器盲盒
 EOF
 	echo -e "$green run_01$start_script_time $white"
 	for i in `cat /tmp/jd_tmp/run_01 | grep -v "#.*js" | awk '{print $1}'`
