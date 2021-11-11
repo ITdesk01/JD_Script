@@ -480,7 +480,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_fcdyj.js			#发财大赢家
 	rush_jinggengjcq_dapainew.js	#腿毛开卡，有水跑吧
 	jd_jxlhb.js			#京喜领红包
-	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_red.js			#双十一无门槛红包
 	jd_jxmc_hb.js 			#京喜牧场助力
 	jd_qjd.js			#抢京豆
@@ -505,6 +504,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_dqmh.js 			#京东电器盲盒
 	gua_UnknownTask3.js		#寻找内容鉴赏官
 	jd_lol.js			#电竞预言家,请在18点之前运行
@@ -581,7 +581,6 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_fission.js			#东东超市限时抢京豆(多加一次领奖励)
 	jd_carnivalcity_help.js		#京东手机狂欢城助力
 	jd_jxlhb.js			#京喜领红包
-	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_jxmc_hb.js 			#京喜牧场助力
 	jd_nnfls.js			#牛牛福利
 	jd_vivo.js			#热血心跳,狂解压
