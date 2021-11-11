@@ -319,7 +319,6 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_live.js			#京东直播
 	jd_mf.js			#集魔方
 	jd_price.js		        #价保脚本
-	jd_ys.js			#预售福利机
 	jd_wish.js			#众筹许愿池
 	jd_carnivalcity.js		#京东手机狂欢城
 	jd_jxmc.js			#京喜牧场
@@ -503,6 +502,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_ys.js			#预售福利机
 	jd_star.js
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_dqmh.js 			#京东电器盲盒
@@ -794,7 +794,6 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_dwapp.js			#积分换话费
 	jd_mf.js			#集魔方
 	jd_ttpt.js			#天天拼图
-	jd_ys.js			#预售福利机
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
