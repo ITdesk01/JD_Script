@@ -236,7 +236,6 @@ fangpidedongsun_url="https://raw.githubusercontent.com/fangpidedongsun/jd_script
 cat >$dir_file/config/tmp/fangpidedongsun_qx.txt <<EOF
 	jd_xtgsign.js 			#星推官
 	jd_jingsubang.js 		#手机竞猜
-	jd_star.js			#星店长
 EOF
 
 for script_name in `cat $dir_file/config/tmp/fangpidedongsun_qx.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -504,6 +503,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_star.js
 	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
 	jd_dqmh.js 			#京东电器盲盒
 	gua_UnknownTask3.js		#寻找内容鉴赏官
@@ -795,7 +795,6 @@ cat >/tmp/jd_tmp/run_06_18 <<EOF
 	jd_mf.js			#集魔方
 	jd_ttpt.js			#天天拼图
 	jd_ys.js			#预售福利机
-	jd_star.js			#星店长
 EOF
 	echo -e "$green run_06_18$start_script_time $white"
 
