@@ -252,14 +252,9 @@ cat >$dir_file/config/tmp/smiek2221_url.txt <<EOF
 	gua_MMdou.js                    #赚京豆MM豆
 	gua_opencard53.js		#开卡默认不运行
 	gua_opencard54.js		#开卡默认不运行
-	gua_opencard55.js		#开卡默认不运行
 	gua_opencard56.js		#开卡默认不运行
 	gua_opencard57.js		#开卡默认不运行
-	gua_opencard58.js		#开卡默认不运行
 	gua_opencard59.js		#开卡默认不运行
-	gua_opencard60.js		#开卡默认不运行
-	gua_opencard61.js		#开卡默认不运行
-	gua_opencard62.js		#开卡默认不运行
 	gua_opencard63.js		#开卡默认不运行
 	gua_opencard65.js		#开卡默认不运行
 EOF
@@ -291,7 +286,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_ttpt.js			#天天拼图
 	jd_big_winner.js		#翻翻乐
-	jd_cjhz.js			#京东超级盒子
 	jd_nnfls.js			#牛牛福利
 	jd_jump.js			#跳跳乐瓜分京豆脚本
 	jd_fanli.js			#京东饭粒
@@ -321,7 +315,6 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_mf.js			#集魔方
 	jd_price.js		        #价保脚本
 	jd_wish.js			#众筹许愿池
-	jd_carnivalcity.js		#京东手机狂欢城
 	jd_jxmc.js			#京喜牧场
 	jx_sign.js			#京喜签到
 EOF
@@ -355,7 +348,6 @@ done
 star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_vivo.js			#热血心跳,狂解压
-        jd_travel_shop.js               #环游记
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -476,8 +468,6 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
-	jd_fcdyj.js			#发财大赢家
-	rush_jinggengjcq_dapainew.js	#腿毛开卡，有水跑吧
 	jd_jxlhb.js			#京喜领红包
 	jd_red.js			#双十一无门槛红包
 	jd_jxmc_hb.js 			#京喜牧场助力
@@ -503,17 +493,18 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_travel_shop.js               #环游记
+	jd_carnivalcity.js		#京东手机狂欢城
+	gua_opencard55.js		#开卡默认不运行
+	gua_opencard62.js		#开卡默认不运行
+	jd_cjhz.js			#京东超级盒子
+	gua_opencard60.js		#开卡默认不运行
+	rush_jinggengjcq_dapainew.js	#腿毛开卡，有水跑吧
+	jd_fcdyj.js			#发财大赢家
+	gua_opencard61.js		#开卡默认不运行
+	gua_opencard58.js		#开卡默认不运行
 	jd_ys.js			#预售福利机
 	jd_star.js
-	jd_redPacket.js			#京东全民开红包(活动入口：京东APP首页-领券-锦鲤红包)
-	jd_dqmh.js 			#京东电器盲盒
-	gua_UnknownTask3.js		#寻找内容鉴赏官
-	jd_lol.js			#电竞预言家,请在18点之前运行
-	gua_opencard52.js		#开卡默认不运行
-	jd_unsubscriLive.js
-	jd_superBrand.js
-	jd_fcwb.js
-	gua_opencard64.js		#开卡默认不运行
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -637,9 +628,7 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 	jd_ljd_xh.js			#领京豆
 	jd_wish.js			#众筹许愿池
-	jd_carnivalcity.js		#京东手机狂欢城
 	jd_jump.js			#跳跳乐瓜分京豆脚本
-	jd_travel_shop.js               #环游记
 	jd_fanli.js			#京东饭粒
 EOF
 	echo -e "$green run_0$start_script_time $white"
@@ -695,14 +684,9 @@ opencard() {
 cat >/tmp/jd_tmp/opencard <<EOF
 	gua_opencard53.js		#开卡默认不运行
 	gua_opencard54.js		#开卡默认不运行
-	gua_opencard55.js		#开卡默认不运行
 	gua_opencard56.js		#开卡默认不运行
 	gua_opencard57.js		#开卡默认不运行
-	gua_opencard58.js		#开卡默认不运行
 	gua_opencard59.js		#开卡默认不运行
-	gua_opencard60.js		#开卡默认不运行
-	gua_opencard61.js		#开卡默认不运行
-	gua_opencard62.js		#开卡默认不运行
 	gua_opencard63.js		#开卡默认不运行
 	gua_opencard65.js		#开卡默认不运行
 EOF
@@ -868,7 +852,6 @@ cat >/tmp/jd_tmp/run_10_15_20 <<EOF
 	jd_superMarket.js 		#东东超市,0 10 15 20四场补货加劵
 	jd_speed_sign.js 		#京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#极速版红包
-	jd_cjhz.js			#京东超级盒子
 EOF
 
 	echo -e "$green run_10_15_20$start_script_time $white"
