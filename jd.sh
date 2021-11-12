@@ -355,7 +355,6 @@ star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_vivo.js			#热血心跳,狂解压
         jd_travel_shop.js               #环游记
-	jd_travel.js			#双十一开奖
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
