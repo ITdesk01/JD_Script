@@ -469,7 +469,6 @@ done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_jxlhb.js			#京喜领红包
-	jd_red.js			#双十一无门槛红包
 	jd_jxmc_hb.js 			#京喜牧场助力
 	jd_qjd.js			#抢京豆
 	rush_wxCollectionActivity.js 	#加购物车抽奖
@@ -567,7 +566,6 @@ update_script() {
 ccr_run() {
 #这里有的就不要加到concurrent_js_run_07
 cat >/tmp/jd_tmp/ccr_run <<EOF
-	jd_red.js			#双十一无门槛红包
 	jd_connoisseur.js		#内容鉴赏官
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_ddworld.js			#东东世界
