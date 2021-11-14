@@ -455,8 +455,10 @@ done
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/shufflewzc/faker3/main/jd_jxmc_hb.js -O $dir_file_js/jd_jxmc_hb.js #京喜牧场助力
-	wget https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/utils/JDJRValidator_Pure.js -O $dir_file_js/JDJRValidator_Pure.js #因为路径不同单独下载
-
+	wget https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/utils/JDJRValidator_Pure.js -O $dir_file_js/JDJRValidator_Pure.js #因为路径不同单独下载.
+	wget https://raw.githubusercontent.com/curtinlv/JD-Script/main/jd_cookie.py -O $dir_file_js/jd_cookie.py
+	wget https://raw.githubusercontent.com/curtinlv/JD-Script/main/msg.py -O $dir_file_js/msg.py
+	wget https://raw.githubusercontent.com/curtinlv/JD-Script/main/sendNotify.py -O $dir_file_js/sendNotify.py
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -585,6 +587,7 @@ EOF
 		$run_sleep
 	}&
 	done
+	$python3  $openwrt_script/JD_Script/js/jd_zjd.py
 }
 
 concurrent_js_run_07() {
@@ -932,9 +935,18 @@ curtinlv_script_setup() {
 		ln -s $dir_file/git_clone/curtinlv_script/JDCookies.txt  $dir_file_js/JDCookies.txt
 	fi
 
+	#赚京豆
+	cat $openwrt_script_config/js_cookie.txt > $dir_file/git_clone/curtinlv_script/JDCookies.txt
+	if [ ! -L "$dir_file_js/jd_zjd.py" ]; then
+		rm -rf $dir_file_js/jd_zjd.py
+		ln -s $dir_file/git_clone/curtinlv_script/jd_zjd.py  $dir_file_js/jd_zjd.py
+	fi
 
 	#东东超市商品兑换
-	cp $dir_file/git_clone/curtinlv_script/jd_blueCoin.py $dir_file_js/jd_blueCoin.py
+	if [ ! -L "$dir_file_js/jd_blueCoin.py" ]; then
+		rm -rf $dir_file_js/jd_blueCoin.py
+		ln -s $dir_file/git_clone/curtinlv_script/jd_blueCoin.py  $dir_file_js/jd_blueCoin.py
+	fi
 }
 
 script_name() {
