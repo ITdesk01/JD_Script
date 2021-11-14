@@ -200,7 +200,6 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_car.js			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_club_lottery.js		#摇京豆
 	jd_shop.js			#进店领豆
-	jd_syj.js			#赚京豆
 	jd_kd.js			#京东快递签到 一天运行一次即可
 	jd_small_home.js		#东东小窝
 	jd_speed.js			#天天加速
@@ -308,6 +307,7 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_wish.js			#众筹许愿池
 	jd_jxmc.js			#京喜牧场
 	jx_sign.js			#京喜签到
+	jd_syj.js			#赚京豆
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
