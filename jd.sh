@@ -307,7 +307,6 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_wish.js			#众筹许愿池
 	jd_jxmc.js			#京喜牧场
 	jx_sign.js			#京喜签到
-	jd_syj.js			#赚京豆
 EOF
 
 for script_name in `cat $dir_file/config/tmp/Aaron_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -461,6 +460,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_syj.js			#赚京豆
 	jd_jxlhb.js			#京喜领红包
 	jd_jxmc_hb.js 			#京喜牧场助力
 	rush_wxCollectionActivity.js 	#加购物车抽奖
