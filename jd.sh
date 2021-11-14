@@ -579,6 +579,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jx_sign.js			#京喜签到
 	jd_travel.js			#双十一开奖
 	jd_superBrand.js		#特务Ｚ
+	jd_syj.js 			#赚京豆
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -613,7 +614,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_car.js 			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_cash.js 			#签到领现金，每日2毛～5毛长期
 	jd_sgmh.js 			#闪购盲盒长期活动
-	jd_syj.js 			#十元街签到,一天一次即可，一周30豆子
 	jd_market_lottery.js 		#幸运大转盘
 	jd_jin_tie_xh.js  		#领金贴
 	jd_dreamFactory.js 		#京喜工厂
