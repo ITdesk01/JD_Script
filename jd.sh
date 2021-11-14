@@ -277,7 +277,6 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_ttpt.js			#天天拼图
 	jd_big_winner.js		#翻翻乐
 	jd_nnfls.js			#牛牛福利
-	jd_jump.js			#跳跳乐瓜分京豆脚本
 	jd_fanli.js			#京东饭粒
 	jd_superBrand.js		#特务Ｚ
 EOF
@@ -484,6 +483,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_jump.js			#跳跳乐瓜分京豆脚本
 	gua_opencard53.js		#开卡默认不运行
 	gua_opencard54.js		#开卡默认不运行
 	gua_opencard56.js		#开卡默认不运行
@@ -496,14 +496,6 @@ cat >/tmp/del_js.txt <<EOF
 	jd_carnivalcity.js		#京东手机狂欢城
 	gua_opencard55.js		#开卡默认不运行
 	gua_opencard62.js		#开卡默认不运行
-	jd_cjhz.js			#京东超级盒子
-	gua_opencard60.js		#开卡默认不运行
-	rush_jinggengjcq_dapainew.js	#腿毛开卡，有水跑吧
-	jd_fcdyj.js			#发财大赢家
-	gua_opencard61.js		#开卡默认不运行
-	gua_opencard58.js		#开卡默认不运行
-	jd_ys.js			#预售福利机
-	jd_star.js
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -564,7 +556,7 @@ update_script() {
 }
 
 ccr_run() {
-#这里有的就不要加到concurrent_js_run_07
+#这里有的就不要加到concurrent_js_run_07,会导致跑多次
 cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_connoisseur.js		#内容鉴赏官
 	jd_jdzz.js			#京东赚赚长期活动
@@ -592,7 +584,7 @@ EOF
 }
 
 concurrent_js_run_07() {
-#这里的也不会并发
+#这里不会并发
 cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
 	jd_dreamFactory.js 		#京喜工厂
 EOF
@@ -624,7 +616,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_unsubscribe.js 		#取关店铺，没时间要求
 	jd_ljd_xh.js			#领京豆
 	jd_wish.js			#众筹许愿池
-	jd_jump.js			#跳跳乐瓜分京豆脚本
 	jd_fanli.js			#京东饭粒
 EOF
 	echo -e "$green run_0$start_script_time $white"
@@ -2846,11 +2837,9 @@ time() {
 npm_install() {
 	echo -e "$green 开始安装npm模块$white"
 	#安装js模块
-	cp $dir_file/git_clone/lxk0301_back/package.json $openwrt_script/package.json
-	cd $openwrt_script && npm -g install
-	npm install -g request http stream zlib vm png-js fs got tough-cookie audit date-fns ts-md5 md5 jsdom
+	cd $openwrt_script
+	npm install -g audit crypto crypto-js date-fns dotenv download fs got http js-base64 jsdom md5 png-js request requests set-cookie-parser stream tough-cookie ts-md5 vm zlib
 	npm install --save axios
-	cd $dir_file/cookies_web && npm -g install
 
 	#安装python模块
 	python_install
