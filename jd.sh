@@ -451,6 +451,8 @@ done
 	wget https://raw.githubusercontent.com/curtinlv/JD-Script/main/msg.py -O $dir_file_js/msg.py
 	wget https://raw.githubusercontent.com/curtinlv/JD-Script/main/sendNotify.py -O $dir_file_js/sendNotify.py
 
+	wget https://raw.githubusercontent.com/qiu-lzsnmb/jd_lzsnmb/jd/Evaluation.py -O $dir_file_js/Evaluation.py #自动评价
+
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
 for i in `ls  $dir_file/config/tmp`
@@ -459,6 +461,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	Evaluation.py 			#自动评价
 	jd_syj.js			#赚京豆
 	jd_jxlhb.js			#京喜领红包
 	jd_jxmc_hb.js 			#京喜牧场助力
@@ -556,6 +559,7 @@ update_script() {
 }
 
 ccr_run() {
+#这里不会并发
 #这里有的就不要加到concurrent_js_run_07,会导致跑多次
 cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_connoisseur.js		#内容鉴赏官
@@ -572,6 +576,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_travel.js			#双十一开奖
 	jd_superBrand.js		#特务Ｚ
 	jd_syj.js 			#赚京豆
+	Evaluation.py 			#自动评价
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
