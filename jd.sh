@@ -576,7 +576,6 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_travel.js			#双十一开奖
 	jd_superBrand.js		#特务Ｚ
 	jd_syj.js 			#赚京豆
-	Evaluation.py 			#自动评价
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
