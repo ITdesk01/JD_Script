@@ -2867,16 +2867,6 @@ system_variable() {
 		mkdir  /tmp/jd_tmp
 	fi
 
-	#判断参数
-	if [ ! -f /root/.ssh/test1 ];then
-		rm -rf /root/.ssh
-		cp -r $dir_file/.ssh /root/.ssh
-		chmod 600 /root/.ssh/lxk0301
-		sed -i "s/#   StrictHostKeyChecking ask/StrictHostKeyChecking no/g" /etc/ssh/ssh_config
-		echo > /root/.ssh/test1
-		update
-	fi
-
 	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 		#jdCookie.js
 		if [ ! -f "$openwrt_script_config/jdCookie.js" ]; then
