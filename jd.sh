@@ -93,7 +93,7 @@ export guaopencard_draw="true"
 export FS_LEVEL="card开卡+加购"
 
 task() {
-	cron_version="3.71"
+	cron_version="3.72"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -127,7 +127,6 @@ cat >>/etc/crontabs/root <<EOF
 0 10 */7 * * $node $dir_file_js/jd_price.js	>/tmp/jd_price.log	#价保脚本#100#
 0 0 * * * $python3 $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py >/tmp/jd_getFollowGift.log #关注有礼#100#
 0 8,15 * * * $python3 $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py  >/tmp/jd_OpenCard.log #开卡程序#100#
-0 0 * * * $python3 $dir_file/git_clone/curtinlv_script/jd_qjd.py >/tmp/jd_qjd.log #抢京豆#100#
 59 23 * * 0,1,2,5,6 sleep 57 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
 59 23 * * * sleep 50 && $dir_file/jd.sh run_jd_blueCoin >/tmp/jd_jd_blueCoin.log	#京东超市兑换#100#
 59 23,7,15 * * * sleep 50 && $dir_file/jd.sh run_jd_joy_reward >/tmp/jd_joy_reward.log	#汪汪兑换积分#100#
@@ -234,7 +233,6 @@ sleep 5
 #fangpidedongsun
 fangpidedongsun_url="https://raw.githubusercontent.com/fangpidedongsun/jd_scripts2/master"
 cat >$dir_file/config/tmp/fangpidedongsun_qx.txt <<EOF
-	jd_xtgsign.js 			#星推官
 	jd_jingsubang.js 		#手机竞猜
 EOF
 
@@ -470,7 +468,6 @@ done
 cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_jxlhb.js			#京喜领红包
 	jd_jxmc_hb.js 			#京喜牧场助力
-	jd_qjd.js			#抢京豆
 	rush_wxCollectionActivity.js 	#加购物车抽奖
 	jd_fission.js			#东东超市限时抢京豆
 	gua_UnknownTask2.js		#关注频道、抽奖(默认不运行)
@@ -492,6 +489,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_xtgsign.js 			#星推官
 	jd_travel_shop.js               #环游记
 	jd_carnivalcity.js		#京东手机狂欢城
 	gua_opencard55.js		#开卡默认不运行
@@ -592,7 +590,6 @@ EOF
 concurrent_js_run_07() {
 #这里的也不会并发
 cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
-	jd_xtgsign.js 			#星推官
 	jd_dreamFactory.js 		#京喜工厂
 EOF
 	for i in `cat /tmp/jd_tmp/concurrent_js_run_07 | grep -v "#.*js" | awk '{print $1}'`
@@ -610,7 +607,6 @@ EOF
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
-	jd_xtgsign.js 			#星推官
 	jd_car.js 			#京东汽车，签到满500赛点可兑换500京豆，一天运行一次即可
 	jd_cash.js 			#签到领现金，每日2毛～5毛长期
 	jd_sgmh.js 			#闪购盲盒长期活动
@@ -618,7 +614,6 @@ cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_market_lottery.js 		#幸运大转盘
 	jd_jin_tie_xh.js  		#领金贴
 	jd_dreamFactory.js 		#京喜工厂
-	jd_qjd.js			#抢京豆
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_sign_graphics.js		#京东签到图形验证
 	jd_dpqd.js			#店铺签到
@@ -929,13 +924,6 @@ curtinlv_script_setup() {
 	if [ ! -L "$dir_file_js/jd_getFollowGift.py" ]; then
 		rm -rf $dir_file_js/jd_getFollowGift.py
 		ln -s $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py  $dir_file_js/jd_getFollowGift.py
-	fi
-
-	#抢京豆
-	cat $openwrt_script_config/js_cookie.txt > $dir_file/git_clone/curtinlv_script/JDCookies.txt
-	if [ ! -L "$dir_file_js/jd_qjd.py" ]; then
-		rm -rf $dir_file_js/jd_qjd.py
-		ln -s $dir_file/git_clone/curtinlv_script/jd_qjd.py  $dir_file_js/jd_qjd.py
 	fi
 
 	#软连接
