@@ -745,6 +745,7 @@ cat >/tmp/jd_tmp/run_03 <<EOF
 	jd_dianjing.js			#电竞经理
 	jd_joy_park_help.js 		#汪汪乐园助力
 	jd_qqxing.js			#QQ星系牧场
+	jd_syj.js 			#赚京豆
 EOF
 	echo -e "$green run_03$start_script_time $white"
 
@@ -821,7 +822,7 @@ EOF
 
 run_08_12_16() {
 cat >/tmp/jd_tmp/run_08_12_16 <<EOF
-	jd_syj.js 			#赚京豆
+	#jd_syj.js 			#赚京豆
 EOF
 	echo -e "$green run_08_12_16$start_script_time $white"
 
