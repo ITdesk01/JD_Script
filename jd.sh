@@ -434,6 +434,7 @@ done
 	wget https://raw.githubusercontent.com/curtinlv/JD-Script/main/sendNotify.py -O $dir_file_js/sendNotify.py
 
 	wget https://raw.githubusercontent.com/qiu-lzsnmb/jd_lzsnmb/jd/Evaluation.py -O $dir_file_js/Evaluation.py #自动评价
+	wget https://raw.githubusercontent.com/ccwav/QLScript2/main/jd_bean_change.js -O $dir_file_js/jd_bean_change_ccwav.js		#资产变化强化版by-ccwav
 
 #将所有文本汇总
 echo > $dir_file/config/collect_script.txt
@@ -2675,6 +2676,9 @@ additional_settings() {
 		sed -i "$healthcode_rows a \ '$new_health_set', " $dir_file_js/jd_health.js
 		js_amount=$(($js_amount - 1))
 	done
+
+	#资产变化强化版by-ccwav
+	sed -i "s/sendNotify/sendNotify_ccwav/g"  $dir_file_js/jd_bean_change_ccwav.js
 }
 
 del_jxdr() {
@@ -2867,6 +2871,32 @@ system_variable() {
 		if [ ! -L "$dir_file_js/sendNotify.js" ]; then
 			rm -rf $dir_file_js/sendNotify.js  #临时删除，解决最近不推送问题
 			ln -s $openwrt_script_config/sendNotify.js $dir_file_js/sendNotify.js
+		fi
+
+		#sendNotify_ccwav.js
+		if [ ! -f "$openwrt_script_config/sendNotify_ccwav.js" ]; then
+			cp  $dir_file/JSON/sendNotify_ccwav.js $openwrt_script_config/sendNotify_ccwav.js
+			rm -rf $dir_file_js/sendNotify_ccwav.js  #用于删除旧的链接
+			ln -s $openwrt_script_config/sendNotify_ccwav.js $dir_file_js/sendNotify_ccwav.js
+		fi
+
+		#sendNotify_ccwav.js用于升级以后恢复链接
+		if [ ! -L "$dir_file_js/sendNotify_ccwav.js" ]; then
+			rm -rf $dir_file_js/sendNotify_ccwav.js  #临时删除，解决最近不推送问题
+			ln -s $openwrt_script_config/sendNotify_ccwav.js $dir_file_js/sendNotify_ccwav.js
+		fi
+
+		#CK_WxPusherUid.json
+		if [ ! -f "$openwrt_script_config/CK_WxPusherUid.json" ]; then
+			cp  $dir_file/JSON/CK_WxPusherUid.json $openwrt_script_config/CK_WxPusherUid.json
+			rm -rf $dir_file_js/CK_WxPusherUid.json  #用于删除旧的链接
+			ln -s $openwrt_script_config/CK_WxPusherUid.json $dir_file_js/CK_WxPusherUid.json
+		fi
+
+		#CK_WxPusherUid.json用于升级以后恢复链接
+		if [ ! -L "$dir_file_js/CK_WxPusherUid.json" ]; then
+			rm -rf $dir_file_js/CK_WxPusherUid.json  #临时删除，解决最近不推送问题
+			ln -s $openwrt_script_config/CK_WxPusherUid.json $dir_file_js/CK_WxPusherUid.json
 		fi
 
 		#USER_AGENTS.js
