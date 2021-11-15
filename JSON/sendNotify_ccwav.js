@@ -115,9 +115,8 @@ let Notify_NoCKFalse = "false";
 let Notify_NoLoginSuccess = "false";
 let UseGroupNotify = 1;
 let strAuthor = "";
-const {
-	getEnvs
-} = require('./ql');
+let getEnvs = "";
+
 const fs = require('fs');
 let strCKFile = './CKName_cache.json';
 let Fileexists = fs.existsSync(strCKFile);
