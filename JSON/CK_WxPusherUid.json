@@ -1,10 +1,14 @@
 [
   {
-	"pt_pin": "ccwav",
-	"Uid": "UID_AAAAAAAA"
+    "pt_pin": "ptpin1",
+    "Uid": "UID_AAAAAAAAAAAA"
   },
   {
-	"pt_pin": "中文名，需要填写转换以后，不能直接用",
-	"Uid": "BBBBBBBBBB"
+    "pt_pin": "ptpin2",
+    "Uid": "UID_BBBBBBBBBB"
+  },
+  {
+    "pt_pin": "ptpin3",
+    "Uid": "UID_CCCCCCCCC"
   }
 ]
