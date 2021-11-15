@@ -2678,7 +2678,7 @@ additional_settings() {
 	done
 
 	#资产变化强化版by-ccwav
-	sed -i "s/sendNotify/sendNotify_ccwav/g"  $dir_file_js/jd_bean_change_ccwav.js
+	sed -i "s/.\/sendNotify/.\/sendNotify_ccwav.js/g"  $dir_file_js/jd_bean_change_ccwav.js
 }
 
 del_jxdr() {
