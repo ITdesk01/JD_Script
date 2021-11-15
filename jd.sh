@@ -373,23 +373,6 @@ do
 	update_if
 done
 
-#cdle
-cdle_url="https://raw.githubusercontent.com/cdle/jd_study/main"
-cat >$dir_file/config/tmp/cdle_url.txt <<EOF
-	jd_morningSc.js			#早起赢现金
-	jd_angryKoi.js			#愤怒的锦鲤
-	jd_goodMorning.js		#早起福利
-	jd_joy_park_help.js 		#汪汪乐园助力
-	jd_cash_exchange.js		#签到领现金兑换
-EOF
-
-for script_name in `cat $dir_file/config/tmp/cdle_url.txt | grep -v "#.*js" | awk '{print $1}'`
-do
-	url="$cdle_url"
-	#wget $cdle_url/$script_name -O $dir_file_js/$script_name
-	#update_if
-done
-
 #cdle_carry
 cdle_carry_url="https://raw.githubusercontent.com/cdle/carry/main"
 cat >$dir_file/config/tmp/cdle_carry_url.txt <<EOF
@@ -460,14 +443,11 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_goodMorning.js		#早起福利
 	Evaluation.py 			#自动评价
 	jd_syj.js			#赚京豆
 	jd_jxlhb.js			#京喜领红包
 	jd_jxmc_hb.js 			#京喜牧场助力
-	rush_wxCollectionActivity.js 	#加购物车抽奖
-	jd_fission.js			#东东超市限时抢京豆
-	gua_UnknownTask2.js		#关注频道、抽奖(默认不运行)
-	jd_dianjing.js			#电竞经理
 	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
 	jd_OpenCard.py 			#开卡程序
 	jd_getFollowGift.py 		#关注有礼
@@ -565,15 +545,11 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_connoisseur.js		#内容鉴赏官
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_ddworld.js			#东东世界
-	jd_fission.js			#东东超市限时抢京豆
-	jd_fission.js			#东东超市限时抢京豆(多加一次领奖励)
-	jd_carnivalcity_help.js		#京东手机狂欢城助力
 	jd_jxlhb.js			#京喜领红包
 	jd_jxmc_hb.js 			#京喜牧场助力
 	jd_nnfls.js			#牛牛福利
 	jd_vivo.js			#热血心跳,狂解压
 	jx_sign.js			#京喜签到
-	jd_travel.js			#双十一开奖
 	jd_superBrand.js		#特务Ｚ
 	jd_syj.js 			#赚京豆
 EOF
@@ -632,7 +608,6 @@ EOF
 		$node $dir_file_js/$i
 		$run_sleep
 	done
-	$node $dir_file_js/rush_wxCollectionActivity.js & #加购物车抽奖
 	run_08_12_16
 	run_06_18
 	run_10_15_20
@@ -737,8 +712,6 @@ cat >/tmp/jd_tmp/run_03 <<EOF
 	jd_speed.js 			#天天加速 3小时运行一次，打卡时间间隔是6小时
 	jd_health.js			#健康社区
 	jd_mohe.js			#5G超级盲盒
-	jd_dianjing.js			#电竞经理
-	jd_joy_park_help.js 		#汪汪乐园助力
 	jd_qqxing.js			#QQ星系牧场
 	jd_syj.js 			#赚京豆
 EOF
@@ -786,7 +759,6 @@ EOF
 
 run_07() {
 cat >/tmp/jd_tmp/run_07 <<EOF
-	jd_morningSc.js			#早起赢现金
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_kd.js 			#京东快递签到 一天运行一次即可
 	jd_club_lottery.js 		#摇京豆，没时间要求
@@ -855,13 +827,12 @@ EOF
 
 run_jd_cash() {
 cat >/tmp/jd_tmp/run_jd_cash <<EOF
-	jd_cash_exchange.js #领现金兑换
 	jd_car_exchange_xh.js #京东汽车兑换
 EOF
-	jd_cash_num="30"
+	jd_cash_num="5"
 	while [[ ${jd_cash_num} -gt 0 ]]; do
-		$node $dir_file_js/jd_cash_exchange.js &
-		sleep 1
+		$node $dir_file_js/jd_car_exchange_xh.js &
+		sleep 2
 		jd_cash_num=$(($jd_cash_num - 1))
 	done
 }
