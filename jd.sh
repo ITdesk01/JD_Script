@@ -2761,6 +2761,18 @@ del_jxdr() {
 				fi
 			done
 		;;
+		all)
+			for i in `ls $ccr_js_file`
+			do
+				jx_file=$(ls $ccr_js_file/$i | grep "jd_dreamFactory.js"  | wc -l)
+				if [ "$jx_file" == "1" ];then
+					echo "开始删除并发文件js_$i的京喜工厂文件"
+					rm -rf $ccr_js_file/$i/jd_dreamFactory.js
+				else
+					echo "并发文件$i的京喜工厂文件已经删除了"
+				fi
+			done
+		;;
 		*)
 			for i in `echo $del_ck`
 			do
@@ -3183,7 +3195,7 @@ JD_TRY_TRIALPRICE="10"
 #这里的变量都可以自己修改，按自己的想法来
 ------------------------------------------------------------------------------------------------------------
 
-#指定账号不跑京喜工厂，默认空全跑，指定格式1@2@3，这样子123账号就不跑了，只针对并发，支持数字指定账号或者用户名
+#指定账号不跑京喜工厂，默认空全跑，指定格式1@2@3，这样子123账号就不跑了，只针对并发，支持数字指定账号或者用户名,all删除全部
 jx_dr=''
 
 #农场不浇水换豆 false关闭 true打开
