@@ -1,0 +1,124 @@
+# JD_Script 简单说明
+##  1.目录结构
+/usr/share/jd_openwrt_script/JD_Script/                     #JD_Script仓库
+
+          |-- ccr_js                        # 并发文件夹，开启需要到jd_openwrt_script_config.txt
+          |-- config                        # 没啥大用（之前单独安装留下的，但不能删）
+          |-- cookies_web                   # 网页扫码代码（暂时没人修）
+          |-- doc                           # 编译说明文档和简单使用说明
+          |-- git_clone                     # 存放个别库文件
+          |-- git_log                       # 记录log文件夹（用于推送）
+          |-- jd_try_file                   # 多账号试用文件夹，开启需要到jd_openwrt_script_config.txt
+          |-- JSON                          # 存放一些未修改的重要文件
+          |-- js *                          # 所有js脚本存放地方，可以cd $jd_file/js到达（重要）
+          |
+          |-- jd.sh *                       # 核心脚本
+          |-- get-pip.py                    # 辅助安装python
+          |
+          |-- jd_random.py                  # 生成随机数
+          |-- LICENSE                       
+          |-- README.md                 
+          |-- Explain.md                    # 说明文档
+    
+
+/usr/share/jd_openwrt_script/script_config/                  #JD_Script配置文件存放
+   
+          |-- jd_openwrt_script_config.txt  # 重要的配置文件
+          |-- jdCookie.js                   # cookie填写到此
+          |-- sendNotify.js                 # node推送脚本（用于填写推送key）
+          |   
+          |-- backnas_config.txt            # 将文件备份到nas需要填写的
+          |-- Script_blacklist.txt          # 脚本黑名单（后面可能会合并）
+          | 
+          |-- sendNotify.py                 # python的推送脚本
+          |-- CK_WxPusherUid.json           # 一对一推送需要的文件                ----- | 号少忽略
+          |-- sendNotify_ccwav.js           # 一对一推送脚本（用于填写推送key）   ----- | 号少忽略
+          |-- ql.js                         # 一对一推送依赖                      ----- | 号少忽略
+          | 
+          |-- JS_USER_AGENTS.js             # JS_UA文件
+          |-- USER_AGENTS.js                # UA文件
+    
+/usr/share/jd_openwrt_script/node_modules node模块存放的文件夹
+
+
+##  2.代码使用
+    sh $jd run_0  run_07                  #运行全部脚本(除个别脚本不运行）
+
+    sh $jd npm_install                    #安装 npm 模块
+
+    sh $jd zcbh                           #资产变化一对一
+
+    sh $jd opencard                       #开卡(默认不执行，你可以执行这句跑)
+
+    sh $jd jx                             #查询京喜商品生产使用时间
+
+    sh $jd jd_sharecode                   #查询京东所有助力码
+
+    sh $jd checklog                       #检测log日志是否有错误并推送
+
+    sh $jd that_day                       #检测JD_script仓库今天更新了什么
+
+    sh $jd check_cookie_push              #推送cookie大概到期时间和是否有效
+
+    sh $jd script_name                    #显示所有JS脚本名称与作用
+
+    sh $jd backnas                        #备份脚本到NAS存档
+
+    sh $jd stop_script                    #删除定时任务停用所用脚本
+
+    sh $jd kill_ccr                       #终止并发
+
+    sh $jd checktool                      #检测后台进程，方便排除问题
+    
+    如果不喜欢这样，你也可以直接 cd $jd_file/js,然后用 node 脚本名字.js
+    
+##  3.cookie，推送填写位置
+1.cookie填写
+
+    /usr/share/jd_openwrt_script/script_config/jdCookie.js  在此脚本内填写JD Cookie 脚本内有说明
+    
+2.推送填写
+
+    /usr/share/jd_openwrt_script/script_config/sendNotify.js  在此脚本内填写推送服务的KEY，可以不填
+   
+3.UA文件自定义
+
+    /usr/share/jd_openwrt_script/script_config/USER_AGENTS.js  京东UA文件可以自定义也可以默认
+  
+    /usr/share/jd_openwrt_script/script_config/JS_USER_AGENTS.js  京东极速版UA文件可以自定义也可以默认
+    
+如果不理解请查阅 JD_Script使用方法（入门版）
+
+#### 4.报错排查口诀
+
+  遇事不决重启一下（尤其是变量问题尤其有效）
+
+  重启不行，更新一下
+
+    sh $jd update_script && sh $jd update && source /etc/profile && sh $jd
+
+模块报错一律 
+
+    sh $jd npm_install 下载不下来就是你网络问题
+
+#### 以上操作不行
+
+    将/usr/share/jd_openwrt_script/script_config/整个文件夹备份
+
+    /etc/init.d/jd_openwrt_script stop   #删除所有脚本文件
+
+    /etc/init.d/jd_openwrt_script start  #重新下载安装脚本 （网络一定要好，能够wget下载github文件，不然一定报错）
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+     
