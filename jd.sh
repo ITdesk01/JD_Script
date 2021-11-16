@@ -2695,16 +2695,36 @@ del_jxdr() {
 		echo "没有要删除的京喜工厂文件"
 	else
 		del_ck=$(echo $jx_dr | sed "s/@/ /g")
-		for i in `echo $del_ck`
-		do
-			jx_file=$(ls $ccr_js_file/js_$i | grep "jd_dreamFactory.js"  | wc -l)
-			if [ "$jx_file" == "1" ];then
-				echo "开始删除并发文件js_$i的京喜工厂文件"
-				rm -rf $ccr_js_file/js_$i/jd_dreamFactory.js
-			else
-				echo "并发文件js_$i的京喜工厂文件已经删除了"
-			fi
-		done
+		case `$del_ck` in
+		1-999)
+			for i in `echo $del_ck`
+			do
+				jx_file=$(ls $ccr_js_file/js_$i | grep "jd_dreamFactory.js"  | wc -l)
+				if [ "$jx_file" == "1" ];then
+					echo "开始删除并发文件js_$i的京喜工厂文件"
+					rm -rf $ccr_js_file/js_$i/jd_dreamFactory.js
+				else
+					echo "并发文件js_$i的京喜工厂文件已经删除了"
+				fi
+			done
+		;;
+		*)
+			for i in `echo $del_ck`
+			do
+				jx_site=$(cat $openwrt_script_config/js_cookie.txt  | grep -n  "$i"  | awk '{print $1}' |sed "s/://g")
+				if [ ! $jx_site ];then
+					echo "填写的用户名找不到，不删除京喜工厂文件"
+				else
+					jx_file=$(ls $ccr_js_file/js_$jx_site | grep "jd_dreamFactory.js"  | wc -l)
+					if [ "$jx_file" == "1" ];then
+						echo "开始删除并发文件js_$i的京喜工厂文件"
+						rm -rf $ccr_js_file/js_$jx_site/jd_dreamFactory.js
+					else
+						echo "并发文件js_$jx_site的京喜工厂文件已经删除了"
+					fi
+				fi
+			done
+		;;
 	fi
 	clear
 }
@@ -3109,7 +3129,7 @@ JD_TRY_TRIALPRICE="10"
 #这里的变量都可以自己修改，按自己的想法来
 ------------------------------------------------------------------------------------------------------------
 
-#指定账号不跑京喜工厂，默认空全跑，指定格式1@2@3，这样子123账号就不跑了，只针对并发
+#指定账号不跑京喜工厂，默认空全跑，指定格式1@2@3，这样子123账号就不跑了，只针对并发，支持数字指定账号或者用户名
 jx_dr=''
 
 #农场不浇水换豆 false关闭 true打开
