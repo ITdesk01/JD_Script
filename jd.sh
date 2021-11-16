@@ -2770,7 +2770,7 @@ del_jxdr() {
 				else
 					jx_file=$(ls $ccr_js_file/js_$jx_site | grep "jd_dreamFactory.js"  | wc -l)
 					if [ "$jx_file" == "1" ];then
-						echo "开始删除并发文件js_$i的京喜工厂文件"
+						echo "开始删除并发文件js_$jx_site的京喜工厂文件"
 						rm -rf $ccr_js_file/js_$jx_site/jd_dreamFactory.js
 					else
 						echo "并发文件js_$jx_site的京喜工厂文件已经删除了"
