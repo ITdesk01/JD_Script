@@ -298,7 +298,6 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_cash.js			#签到领现金，每日2毛～5毛长期
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_connoisseur.js		#内容鉴赏官
-	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
 	jd_ddworld.js			#东东世界
 	jd_live.js			#京东直播
 	jd_mf.js			#集魔方
@@ -429,7 +428,7 @@ done
 	wget https://raw.githubusercontent.com/jiulan/platypus/main/scripts/jd_all_bean_change.js -O $dir_file_js/jd_all_bean_change.js #京东月资产变动通知
 	wget https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_products_detail.js -O $dir_file_js/jx_products_detail.js #京喜工厂商品列表详情
 	wget https://raw.githubusercontent.com/shufflewzc/faker3/0bc2fef31fbb3a39de0c2613fdb66d3ae2e7d48a/jd_jxmc_hb.js -O $dir_file_js/jd_jxmc_hb.js #京喜牧场助力
-	wget https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/utils/JDJRValidator_Pure.js -O $dir_file_js/JDJRValidator_Pure.js #因为路径不同单独下载.
+	wget https://raw.githubusercontent.com/ccwav/QLScript2/main/utils/JDJRValidator_Pure.js -O $dir_file_js/JDJRValidator_Pure.js #因为路径不同单独下载.
 	wget https://raw.githubusercontent.com/curtinlv/JD-Script/main/jd_cookie.py -O $dir_file_js/jd_cookie.py
 	wget https://raw.githubusercontent.com/curtinlv/JD-Script/main/msg.py -O $dir_file_js/msg.py
 	wget https://raw.githubusercontent.com/curtinlv/JD-Script/main/sendNotify.py -O $dir_file_js/sendNotify.py
@@ -467,6 +466,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_joy_reward.js
 	jd_joy_park_newtask.js		# 汪汪乐园过新手任务，有火爆账号的可以手动运行一次（默认不运行）
 	jd_jump.js			#跳跳乐瓜分京豆脚本
 	gua_opencard53.js		#开卡默认不运行
@@ -841,12 +841,9 @@ EOF
 }
 
 run_jd_joy_reward() {
-cat >/tmp/jd_tmp/run_jd_joy_reward <<EOF
-	jd_joy_reward.js		#宠汪汪积分兑换奖品脚本
-EOF
-	jd_joy_reward_num="5"
+	jd_joy_reward_num="3"
 	while [[ ${jd_joy_reward_num} -gt 0 ]]; do
-		$node $dir_file_js/jd_joy_reward.js &
+		$node $dir_file_js/jd_joy_reward_Mod.js  &
 		sleep 2
 		jd_joy_reward_num=$(($jd_joy_reward_num - 1))
 	done
@@ -857,7 +854,7 @@ run_jd_blueCoin() {
 cat >/tmp/jd_tmp/run_jd_blueCoin <<EOF
 	jd_blueCoin.py	#东东超市兑换
 EOF
-	jd_blueCoin_num="30"
+	jd_blueCoin_num="5"
 	while [[ ${jd_blueCoin_num} -gt 0 ]]; do
 		$python3 $dir_file_js/jd_blueCoin.py &
 		sleep 1
@@ -2140,8 +2137,8 @@ additional_settings() {
 
 	#宠汪汪兑换
 	sed -i "s/..\/USER_AGENTS.js/.\/USER_AGENTS.js/g" $dir_file_js/JDJRValidator_Pure.js
-	sed -i "s/.\/utils\/JDJRValidator_Pure/.\/JDJRValidator_Pure/g" $dir_file_js/jd_joy_reward.js
-	sed -i "s/joyRewardName = 0/joyRewardName = $jd_joy_reward/g" $dir_file_js/jd_joy_reward.js
+	sed -i "s/.\/utils\/JDJRValidator_Pure/.\/JDJRValidator_Pure/g" $dir_file_js/jd_joy_reward_Mod.js
+	sed -i "s/joyRewardName = 0/joyRewardName = $jd_joy_reward/g" $dir_file_js/jd_joy_reward_Mod.js
 
 
 
