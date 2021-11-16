@@ -2054,7 +2054,7 @@ help() {
 	echo ""
 	echo -e "$green  sh \$jd npm_install $white  			#安装 npm 模块"
 	echo ""
-	echo -e "$green  sh \$jd zcbh $white  				#资产变化一对一"
+	echo -e "$green  sh \$jd zcbh $white  			  	#资产变化一对一"
 	echo ""
 	echo -e "$green  sh \$jd opencard $white  			#开卡(默认不执行，你可以执行这句跑)"
 	echo ""
