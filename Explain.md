@@ -1,4 +1,4 @@
-# JD_Script 简单说明
+# JD_Script 简单说明（2021.11.16编辑，by：ITdesk）
 ##  1.目录结构
 /usr/share/jd_openwrt_script/JD_Script/                     #JD_Script仓库
 
@@ -87,7 +87,7 @@
   
     /usr/share/jd_openwrt_script/script_config/JS_USER_AGENTS.js  京东极速版UA文件可以自定义也可以默认
     
-如果不理解请查阅 JD_Script使用方法（入门版）
+如果不理解请查阅 [JD_Script使用方法（入门版）.pdf](https://github.com/ITdesk01/JD_Script/blob/main/doc/JD_Script%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%88%E5%85%A5%E9%97%A8%E7%89%88%EF%BC%89.pdf)
 
 #### 4.报错排查口诀
 
