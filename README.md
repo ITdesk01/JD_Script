@@ -67,27 +67,13 @@ NANOPI R4S (群友snow测试)
 
 
 
-## 已知问题!!!
+## 使用说明文档!!!
 
-1.下载下来的js都是空的，
-   
-		强制代理raw.githubusercontent.com
-		rm -rf /root/.ssh && sh $jd update
-
-2.互助码怎么找
-
-		sh $jd jd_sharecode
-         
-3.如何获取cookie
-
-		sh $jd getcookie #扫码自动填cookie
-
-
-**问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)**
+[Explain.md](Explain.md)
 
 
 
-## 你们可以不好好看安装依赖，我也可以拒绝回答任何问题。
+
 
 
 ## 特别声明:
