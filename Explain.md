@@ -87,6 +87,18 @@
   
     /usr/share/jd_openwrt_script/script_config/JS_USER_AGENTS.js  京东极速版UA文件可以自定义也可以默认
     
+4.资产变化一对一填写
+
+    1.先网页搞定WxPusher，详细教程有人写了，不知道是幸运还是不幸: https://www.kejiwanjia.com/jiaocheng/27909.html
+    2.更新到最新脚本
+    3.填好/usr/share/jd_openwrt_script/script_config/CK_WxPusherUid.json
+    4.将WxPusher的token填入/usr/share/jd_openwrt_script/script_config/sendNotify_ccwav.js 中的WP_APP_TOKEN_ONE
+    5.重启路由
+    6.sh $jd zcbh #测试
+
+    定时任务我已经设置好，每天早上十点推送，不喜欢可以复制单独推
+
+    
 如果不理解请查阅 [JD_Script使用方法（入门版）.pdf](https://github.com/ITdesk01/JD_Script/blob/main/doc/JD_Script%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%88%E5%85%A5%E9%97%A8%E7%89%88%EF%BC%89.pdf)
 
 #### 4.报错排查口诀
