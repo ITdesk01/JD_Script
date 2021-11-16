@@ -2748,49 +2748,51 @@ del_jxdr() {
 		echo "没有要删除的京喜工厂文件"
 	else
 		del_ck=$(echo $jx_dr | sed "s/@/ /g")
-		case `$del_ck` in
-		1-999)
-			for i in `echo $del_ck`
-			do
-				jx_file=$(ls $ccr_js_file/js_$i | grep "jd_dreamFactory.js"  | wc -l)
-				if [ "$jx_file" == "1" ];then
-					echo "开始删除并发文件js_$i的京喜工厂文件"
-					rm -rf $ccr_js_file/js_$i/jd_dreamFactory.js
-				else
-					echo "并发文件js_$i的京喜工厂文件已经删除了"
-				fi
-			done
-		;;
-		all)
-			for i in `ls $ccr_js_file`
-			do
-				jx_file=$(ls $ccr_js_file/$i | grep "jd_dreamFactory.js"  | wc -l)
-				if [ "$jx_file" == "1" ];then
-					echo "开始删除并发文件js_$i的京喜工厂文件"
-					rm -rf $ccr_js_file/$i/jd_dreamFactory.js
-				else
-					echo "并发文件$i的京喜工厂文件已经删除了"
-				fi
-			done
-		;;
-		*)
-			for i in `echo $del_ck`
-			do
-				jx_site=$(cat $openwrt_script_config/js_cookie.txt  | grep -n  "$i"  | awk '{print $1}' |sed "s/://g")
-				if [ ! $jx_site ];then
-					echo "填写的用户名找不到，不删除京喜工厂文件"
-				else
-					jx_file=$(ls $ccr_js_file/js_$jx_site | grep "jd_dreamFactory.js"  | wc -l)
+		del_ck_if=$(echo $del_ck | awk '{print $1}')
+		case "$del_ck_if" in
+			[1-999])
+				for i in `echo $del_ck`
+				do
+					jx_file=$(ls $ccr_js_file/js_$i | grep "jd_dreamFactory.js"  | wc -l)
 					if [ "$jx_file" == "1" ];then
-						echo "开始删除并发文件js_$jx_site的京喜工厂文件"
-						rm -rf $ccr_js_file/js_$jx_site/jd_dreamFactory.js
+						echo "开始删除并发文件js_$i的京喜工厂文件"
+						rm -rf $ccr_js_file/js_$i/jd_dreamFactory.js
 					else
-						echo "并发文件js_$jx_site的京喜工厂文件已经删除了"
+						echo "并发文件js_$i的京喜工厂文件已经删除了"
 					fi
-				fi
-			done
-		;;
+				done
+			;;
+			all)
+				for i in `ls $ccr_js_file`
+				do
+					jx_file=$(ls $ccr_js_file/$i | grep "jd_dreamFactory.js"  | wc -l)
+					if [ "$jx_file" == "1" ];then
+						echo "开始删除并发文件js_$i的京喜工厂文件"
+						rm -rf $ccr_js_file/$i/jd_dreamFactory.js
+					else
+						echo "并发文件$i的京喜工厂文件已经删除了"
+					fi
+				done
+			;;
+			*)
+				for i in `echo $del_ck`
+				do
+					jx_site=$(cat $openwrt_script_config/js_cookie.txt  | grep -n  "$i"  | awk '{print $1}' |sed "s/://g")
+					if [ ! $jx_site ];then
+						echo "填写的用户名找不到，不删除京喜工厂文件"
+					else
+						jx_file=$(ls $ccr_js_file/js_$jx_site | grep "jd_dreamFactory.js"  | wc -l)
+						if [ "$jx_file" == "1" ];then
+							echo "开始删除并发文件js_$jx_site的京喜工厂文件"
+							rm -rf $ccr_js_file/js_$jx_site/jd_dreamFactory.js
+						else
+							echo "并发文件js_$jx_site的京喜工厂文件已经删除了"
+						fi
+					fi
+				done
+			;;
 		esac
+
 	fi
 	clear
 }
