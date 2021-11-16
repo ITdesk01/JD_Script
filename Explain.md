@@ -103,15 +103,21 @@
 
 ## 4.报错排查口诀
 
-  遇事不决重启一下（尤其是变量问题尤其有效）
+遇事不决重启一下（尤其是变量问题尤其有效）
 
-  重启不行，更新一下
+重启不行，更新一下
 
     sh $jd update_script && sh $jd update && source /etc/profile && sh $jd
 
 模块报错一律 
 
     sh $jd npm_install 下载不下来就是你网络问题
+
+下载下来的js都是空的
+
+    强制代理raw.githubusercontent.com
+
+**问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)**
 
 #### 以上操作不行
 
