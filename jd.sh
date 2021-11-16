@@ -93,7 +93,7 @@ export guaopencard_draw="true"
 export FS_LEVEL="card开卡+加购"
 
 task() {
-	cron_version="3.76"
+	cron_version="3.77"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -130,6 +130,7 @@ cat >>/etc/crontabs/root <<EOF
 59 23 * * 0,1,2,5,6 sleep 57 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
 59 23 * * * sleep 50 && $dir_file/jd.sh run_jd_blueCoin >/tmp/jd_jd_blueCoin.log	#京东超市兑换#100#
 59 23,7,15 * * * sleep 58 && $dir_file/jd.sh run_jd_joy_reward >/tmp/jd_joy_reward.log	#汪汪兑换积分#100#
+58 */1 * * * $dir_file/jd.sh jd_time >/tmp/jd_time.log	#同步京东时间#100#
 0 10 * * * $dir_file/jd.sh zcbh	>/tmp/jd_bean_change_ccwav.log	#资产变化一对一#100#
 50 6,11,15,23 * * * $dir_file/jd.sh kill_ccr #杀掉所有并发进程，为零点准备#100#
 46 23 * * * rm -rf /tmp/*.log #删掉所有log文件，为零点准备#100#
@@ -1017,6 +1018,58 @@ EOF
 	else
 		echo -e "$red >> 试用脚本开关没有打开$white"
 	fi
+}
+
+jd_time()  {
+TimeError=2
+#copy SuperManito
+ local Interface="https://api.m.jd.com/client.action?functionId=queryMaterialProducts&client=wh5"
+    if [[ $(echo $(($(curl -sSL "${Interface}" | awk -F '\"' '{print$8}') - $(eval echo "$(date +%s)$(date +%N | cut -c1-3)"))) | sed "s|\-||g") -lt 10 ]]; then
+        echo -e "\n\033[32m------------ 检测到当前本地时间与京东服务器的时间差小于 10ms 因此不同步 ------------\033[0m\n"
+    else
+        echo -e "\n❖ 同步京东服务器时间"
+        echo -en "\n当前设置的允许误差时间为 ${TimeError}m，脚本将在 3s 后开始运行..."
+        sleep 3
+        echo -e ''
+        while true; do
+            ## 先同步京东服务器时间
+            date -s $(date -d @$(curl -sSL "${Interface}" | awk -F '\"' '{print$8}' | cut -c1-10) "+%H:%M:%S") >/dev/null
+            sleep 1
+            ## 定义当前系统本地时间戳
+            local LocalTimeStamp="$(date +%s)$(date +%N | cut -c1-3)"
+            ## 定义当前京东服务器时间戳
+            local JDTimeStamp="$(curl -sSL "${Interface}" | awk -F '\"' '{print$8}' | cut -c1-10)"
+            ## 定义当前时间差
+            local TimeDifference=$(echo $((${JDTimeStamp} - ${LocalTimeStamp})) | sed "s|\-||g")
+            ## 输出时间
+            echo -e "\n京东时间戳：\033[34m${JDTimeStamp}\033[0m"
+            echo -e "本地时间戳：\033[34m${LocalTimeStamp}\033[0m"
+            if [[ ${TimeDifference} -lt ${TimeError} ]]; then
+                echo -e "\n\033[32m------------ 同步完成 ------------\033[0m\n"
+                if [ -s /etc/apt/sources.list ]; then
+                    #apt-get install -y figlet toilet >/dev/null
+                    local ExitStatus=$?
+                else
+                    local ExitStatus=1
+                fi
+                if [ $ExitStatus -eq 0 ]; then
+                    echo -e "$(toilet -f slant -F border --gay SuperManito)\n"
+                else
+                    echo -e '\033[35m    _____                       __  ___            _ __       \033[0m'
+                    echo -e '\033[31m   / ___/__  ______  ___  _____/  |/  /___ _____  (_) /_____  \033[0m'
+                    echo -e '\033[33m   \__ \/ / / / __ \/ _ \/ ___/ /|_/ / __ `/ __ \/ / __/ __ \ \033[0m'
+                    echo -e '\033[32m  ___/ / /_/ / /_/ /  __/ /  / /  / / /_/ / / / / / /_/ /_/ / \033[0m'
+                    echo -e '\033[36m /____/\__,_/ .___/\___/_/  /_/  /_/\__,_/_/ /_/_/\__/\____/  \033[0m'
+                    echo -e '\033[34m           /_/                                                \033[0m\n'
+                fi
+                break
+            else
+                sleep 1s
+                echo -e "\n未达到允许误差范围设定值，继续同步..."
+            fi
+        done
+    fi
+
 }
 
 concurrent_js_update() {
@@ -3162,7 +3215,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|opencard|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie|jd_try|ss_if|zcbh)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie|jd_try|ss_if|zcbh|jd_time)
 		$action1
 		;;
 		kill_ccr)
@@ -3181,7 +3234,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|opencard|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie|jd_try|ss_if|zcbh)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie|jd_try|ss_if|zcbh|jd_time)
 		$action2
 		;;
 		kill_ccr)
