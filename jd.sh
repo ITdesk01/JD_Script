@@ -93,7 +93,7 @@ export guaopencard_draw="true"
 export FS_LEVEL="card开卡+加购"
 
 task() {
-	cron_version="3.74"
+	cron_version="3.75"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -123,7 +123,7 @@ cat >>/etc/crontabs/root <<EOF
 0 9 28 */1 * $node $dir_file_js/jd_all_bean_change.js >/tmp/jd_all_bean_change.log #每个月28号推送当月京豆资产变化#100#
 10-20/5 10,12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
 0 0,7 * * * $node $dir_file_js/jd_bean_sign.js >/tmp/jd_bean_sign.log #京东多合一签到#100#
-0 */4 * * * $node $dir_file_js/star_dreamFactory_tuan.js	>/tmp/star_dreamFactory_tuan.log	#京喜开团#100#
+0 */4 * * * $node $dir_file_js/jd_dreamFactory_tuan.js	>/tmp/jd_dreamFactory_tuan.log	#京喜开团#100#
 0 10 */7 * * $node $dir_file_js/jd_price.js	>/tmp/jd_price.log	#价保脚本#100#
 0 0 * * * $python3 $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py >/tmp/jd_getFollowGift.log #关注有礼#100#
 0 8,15 * * * $python3 $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py  >/tmp/jd_OpenCard.log #开卡程序#100#
@@ -336,6 +336,7 @@ done
 star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	jd_vivo.js			#热血心跳,狂解压
+	jd_dreamFactory_tuan.js 	#京喜开团　star261脚本
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -449,7 +450,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_syj.js			#赚京豆
 	jd_jxlhb.js			#京喜领红包
 	jd_jxmc_hb.js 			#京喜牧场助力
-	star_dreamFactory_tuan.js 	#京喜开团　star261脚本
 	jd_OpenCard.py 			#开卡程序
 	jd_getFollowGift.py 		#关注有礼
 	jd_all_bean_change.js 		#京东月资产变动通知
@@ -2517,7 +2517,7 @@ additional_settings() {
 
 
 	#京喜开团
-	sed -i "s/helpFlag = true/helpFlag = false/g" $dir_file_js/star_dreamFactory_tuan.js
+	sed -i "s/helpFlag = true/helpFlag = false/g" $dir_file_js/jd_dreamFactory_tuan.js
 
 	#东东工厂
 	new_ddgc="T0225KkcRxoZ9AfVdB7wxvRcIQCjVWnYaS5kRrbA@T0225KkcRUhP9FCEKR79xaZYcgCjVWnYaS5kRrbA@T0205KkcH0RYsTOkY2iC8I10CjVWnYaS5kRrbA@T0205KkcJEZAjD2vYGGG4Ip0CjVWnYaS5kRrbA"
