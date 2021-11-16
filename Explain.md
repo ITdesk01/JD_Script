@@ -42,33 +42,33 @@
 
 
 ##  2.代码使用
-    sh $jd run_0  run_07                  #运行全部脚本(除个别脚本不运行）
+          sh $jd run_0  run_07                  #运行全部脚本(除个别脚本不运行）
 
-    sh $jd npm_install                    #安装 npm 模块
+          sh $jd npm_install                    #安装 npm 模块
 
-    sh $jd zcbh                           #资产变化一对一
+          sh $jd zcbh                           #资产变化一对一
 
-    sh $jd opencard                       #开卡(默认不执行，你可以执行这句跑)
+          sh $jd opencard                       #开卡(默认不执行，你可以执行这句跑)
 
-    sh $jd jx                             #查询京喜商品生产使用时间
+          sh $jd jx                             #查询京喜商品生产使用时间
 
-    sh $jd jd_sharecode                   #查询京东所有助力码
+          sh $jd jd_sharecode                   #查询京东所有助力码
 
-    sh $jd checklog                       #检测log日志是否有错误并推送
+          sh $jd checklog                       #检测log日志是否有错误并推送
 
-    sh $jd that_day                       #检测JD_script仓库今天更新了什么
+          sh $jd that_day                       #检测JD_script仓库今天更新了什么
 
-    sh $jd check_cookie_push              #推送cookie大概到期时间和是否有效
+          sh $jd check_cookie_push              #推送cookie大概到期时间和是否有效
 
-    sh $jd script_name                    #显示所有JS脚本名称与作用
+          sh $jd script_name                    #显示所有JS脚本名称与作用
 
-    sh $jd backnas                        #备份脚本到NAS存档
+          sh $jd backnas                        #备份脚本到NAS存档
 
-    sh $jd stop_script                    #删除定时任务停用所用脚本
+          sh $jd stop_script                    #删除定时任务停用所用脚本
 
-    sh $jd kill_ccr                       #终止并发
+          sh $jd kill_ccr                       #终止并发
 
-    sh $jd checktool                      #检测后台进程，方便排除问题
+          sh $jd checktool                      #检测后台进程，方便排除问题
     
     如果不喜欢这样，你也可以直接 cd $jd_file/js,然后用 node 脚本名字.js
     
