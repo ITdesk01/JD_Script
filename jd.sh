@@ -377,7 +377,7 @@ done
 #cdle_carry
 cdle_carry_url="https://raw.githubusercontent.com/cdle/carry/main"
 cat >$dir_file/config/tmp/cdle_carry_url.txt <<EOF
-	#空.js
+	jd_angryKoi.js		#愤怒的锦鲤
 EOF
 
 for script_name in `cat $dir_file/config/tmp/cdle_carry_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -554,6 +554,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jx_sign.js			#京喜签到
 	jd_superBrand.js		#特务Ｚ
 	jd_syj.js 			#赚京豆
+	jd_angryKoi.js			#愤怒的锦鲤
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -869,7 +870,8 @@ EOF
 zcbh() {
 	zcbh_token=$(cat /usr/share/jd_openwrt_script/script_config/sendNotify_ccwav.js | grep "let WP_APP_TOKEN_ONE" | awk -F "\"" '{print $2}')
 	export WP_APP_TOKEN_ONE="$zcbh_token"
-	$node $dir_file_js/jd_bean_change_ccwav.js
+	cd $dir_file_js
+	$node jd_bean_change_ccwav.js
 }
 
 
@@ -2054,6 +2056,8 @@ help() {
 	echo -e "$yellow个别脚本有以下："
 	echo ""
 	echo -e "$green  sh \$jd npm_install $white  			#安装 npm 模块"
+	echo ""
+	echo -e "$green  sh \$jd zcbh $white  				#资产变化一对一"
 	echo ""
 	echo -e "$green  sh \$jd opencard $white  			#开卡(默认不执行，你可以执行这句跑)"
 	echo ""
