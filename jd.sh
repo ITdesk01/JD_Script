@@ -497,8 +497,8 @@ done
 		update
 	fi
 	chmod 755 $dir_file_js/*
-	kill_index
-	index_js
+	#kill_index
+	#index_js
 	#删除重复的文件
 	rm -rf $dir_file_js/*.js.*
 	additional_settings
@@ -2947,7 +2947,8 @@ system_variable() {
 
 	jd_openwrt_config
 
-	index_js
+	#index_js
+	index_num="$yellow 8.网页扫码功能已关闭，没人修暂时就这样了$white"
 
 	#农场萌宠关闭通知
 	close_notification
