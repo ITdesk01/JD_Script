@@ -101,7 +101,7 @@
     
 如果不理解请查阅 [JD_Script使用方法（入门版）.pdf](https://github.com/ITdesk01/JD_Script/blob/main/doc/JD_Script%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%88%E5%85%A5%E9%97%A8%E7%89%88%EF%BC%89.pdf)
 
-#### 4.报错排查口诀
+## 4.报错排查口诀
 
   遇事不决重启一下（尤其是变量问题尤其有效）
 
