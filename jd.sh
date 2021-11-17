@@ -829,6 +829,35 @@ EOF
 	echo -e "$green run_10_15_20$stop_script_time $white"
 }
 
+run_jsqd(){
+#极速版签到定制安排
+#允许10个任务一起跑，做个测试，看看403不
+ck_num="10"
+file_num=$(ls $ccr_js_file | wc -l)
+
+	while [ ${file_num} -gt 0 ]; do
+		ps_speed=$(ps -ww |grep "jd_speed_sign.js" | grep -v grep | wc -l)
+		if [ "$ps_speed" -gt "$ck_num" ];then
+			echo -e "${green}jd_speed_sign.js后台进程一共有${yellows}${ps_speed}${green}个，${white}已满$ck_num个暂时不跑了"
+			while true; do
+				if [ "$ps_speed" -gt "$ck_num" ];then
+					echo "开始休息60秒以后再干活"
+					sleep 60
+				else
+					echo "休息结束开始干活"
+					break
+				fi
+			done
+		else
+			echo -e "$green开始跑${yellow}js_${file_num}${green}文件里的jd_speed_sign.js$white"
+			$node $ccr_js_file/js_$file_num/jd_speed_sign.js &
+			sleep 10
+			echo -e "${green}jd_speed_sign.js后台进程一共有${yellows}${ps_speed}${green}个"
+		fi
+		file_num=$(($file_num - 1))
+	done
+}
+
 run_jd_cash() {
 cat >/tmp/jd_tmp/run_jd_cash <<EOF
 	jd_car_exchange_xh.js #京东汽车兑换
@@ -3050,7 +3079,7 @@ jd_sharecode_pet=''
 #种豆（助力码1@助力码2）
 jd_sharecode_pb=''
 
-#工厂（助力码1@助力码2）
+#京喜工厂（助力码1@助力码2）
 jd_sharecode_df=''
 
 ------------------------------------------------------------------------------------------------------------
@@ -3090,7 +3119,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|opencard|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie|jd_try|ss_if|zcbh|jd_time)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie|jd_try|ss_if|zcbh|jd_time|run_jsqd)
 		$action1
 		;;
 		kill_ccr)
@@ -3109,7 +3138,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|opencard|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie|jd_try|ss_if|zcbh|jd_time)
+		system_variable|update|update_script|task|jx|additional_settings|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_black|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_cash|run_jd_blueCoin|run_jd_joy_reward|del_expired_cookie|jd_try|ss_if|zcbh|jd_time|run_jsqd)
 		$action2
 		;;
 		kill_ccr)
