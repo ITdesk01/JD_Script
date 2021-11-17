@@ -1,4 +1,4 @@
-# JD_Script 简单说明（2021.11.16编辑，by：ITdesk）
+# JD_Script 简单说明（2021.11.17编辑，by：ITdesk）
 ##  1.目录结构
 /usr/share/jd_openwrt_script/JD_Script/                     #JD_Script仓库
 
