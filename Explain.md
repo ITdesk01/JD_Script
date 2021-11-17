@@ -131,6 +131,18 @@
 5.如何杀掉后台进程
 
      sh $jd kill_ccr
+     
+6.如何本地账号互相助力（现支持农场，萌宠，种豆，京喜工厂）
+
+    1.更新到最新版本
+    
+    2.sh $jd jd_sharecode                   #查询京东所有助力码
+    
+    3.将获取到的助力码填入/usr/share/jd_openwrt_script/script_config/jd_openwrt_script_config.txt
+    
+    4.sh $jd script_name | grep "农场"       #这是一个例子
+    
+    5.node $jd_file/js/jd_fruit.js           #运行东东农场，测试一下是否正常
 
 如果不理解请查阅 [JD_Script使用方法（入门版）.pdf](https://github.com/ITdesk01/JD_Script/blob/main/doc/JD_Script%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%88%E5%85%A5%E9%97%A8%E7%89%88%EF%BC%89.pdf)，跟着教程走一次，就行了
 
