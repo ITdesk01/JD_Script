@@ -2958,7 +2958,7 @@ ss_if() {
 }
 
 jd_openwrt_config() {
-	jd_openwrt_config_version="1.5"
+	jd_openwrt_config_version="1.6"
 	if [ "$dir_file" == "$openwrt_script/JD_Script" ];then
 		jd_openwrt_config="$openwrt_script_config/jd_openwrt_script_config.txt"
 		if [ ! -f "$jd_openwrt_config" ]; then
@@ -2974,7 +2974,7 @@ jd_openwrt_config() {
 	if [ `grep "jd_openwrt_config $jd_openwrt_config_version" $jd_openwrt_config |wc -l` == "1"  ];then
 		jd_config_version="$green jd_config最新 $yellow$jd_openwrt_config$white"
 	else
-		jd_config_version="$red jd_config与新版不一致，请手动更新，更新办法，删除$green rm -rf $jd_openwrt_config$white然后更新一下脚本,再进去重新设置一下"
+		jd_config_version="$red jd_config与新版不一致，请手动更新，更新办法先备份旧的jd_openwrt_config.txt/n，删除$green rm -rf $jd_openwrt_config$white然后更新一下脚本,再进去重新设置一下"
 	fi
 
 	ccr_if=$(grep "concurrent" $jd_openwrt_config | awk -F "'" '{print $2}')
