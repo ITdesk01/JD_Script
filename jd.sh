@@ -457,12 +457,6 @@ cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 	jx_products_detail.js		#京喜工厂商品列表详情
-	jdDreamFactoryShareCodes.js	#京喜工厂ShareCodes
-	jdFruitShareCodes.js		#东东农场ShareCodes
-	jdPetShareCodes.js		#东东萌宠ShareCodes
-	jdPlantBeanShareCodes.js	#种豆得豆ShareCodes
-	jdFactoryShareCodes.js		#东东工厂ShareCodes
-	jdJxncShareCodes.js		#京喜农场ShareCodes
 EOF
 
 #删掉过期脚本
