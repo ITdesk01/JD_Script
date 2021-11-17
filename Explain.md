@@ -41,7 +41,7 @@
 /usr/share/jd_openwrt_script/node_modules node模块存放的文件夹
 
 
-##  2.代码使用
+##  2.可用命令
           sh $jd run_0  run_07                  #运行全部脚本(除个别脚本不运行）
 
           sh $jd npm_install                    #安装 npm 模块
@@ -98,10 +98,43 @@
 
     定时任务我已经设置好，每天早上十点推送，不喜欢可以复制单独推
 
-    
-如果不理解请查阅 [JD_Script使用方法（入门版）.pdf](https://github.com/ITdesk01/JD_Script/blob/main/doc/JD_Script%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%88%E5%85%A5%E9%97%A8%E7%89%88%EF%BC%89.pdf)
+## 4.新手常见疑问
 
-## 4.报错排查口诀
+1.如何获取cookie(温馨提醒请勿泄露ck给不认识的人，尤其是代挂，ck等于你的账号密码)
+
+   [获取CK教程](https://github.com/ITdesk01/script_back/blob/main/backUp/GetJdCookie.md)
+
+2.填好cookie和推送以后如何测试
+
+    sh $jd run_0  #查看是否运行正常
+   
+    node $jd_file/js/jd_bean_change.js  #或者执行单个脚本测试
+   
+3.如何查看定时任务是否正常运行
+
+    sh $jd checktool                      #查看后台进程，方便排除问题 
+    
+    ps -ww | grep "脚本名"                #ps查询
+    
+4.当前可用脚本有那些
+
+    sh $jd script_name                    #显示所有JS脚本名称与作用
+    
+    sh $jd script_name | grep "查询关键字" #用于快速查找某些脚本，比如你可以输入开卡，签到等等
+    
+5.多账号如何并发
+
+    前提你有不低于5个号，太少了，并发不并发都一样
+   
+    开启并发需要去到/usr/share/jd_openwrt_script/script_config/jd_openwrt_script_config.txt 打开
+    
+5.如何杀掉后台进程
+
+     sh $jd kill_ccr
+
+如果不理解请查阅 [JD_Script使用方法（入门版）.pdf](https://github.com/ITdesk01/JD_Script/blob/main/doc/JD_Script%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%88%E5%85%A5%E9%97%A8%E7%89%88%EF%BC%89.pdf)，跟着教程走一次，就行了
+
+## 5.报错排查口诀
 
 遇事不决重启一下（尤其是变量问题尤其有效）
 
@@ -117,7 +150,6 @@
 
     强制代理raw.githubusercontent.com
 
-**问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)**
 
 #### 以上操作不行
 
@@ -128,7 +160,7 @@
     /etc/init.d/jd_openwrt_script start  #重新下载安装脚本 （网络一定要好，能够wget下载github文件，不然一定报错）
 
 
-
+**问题反馈：https://github.com/ITdesk01/JD_Script/issues (描述清楚问题或者上图片，不然可能没有人理)**
 
 
 
