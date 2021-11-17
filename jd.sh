@@ -2990,7 +2990,7 @@ jd_openwrt_config() {
 	jd_sharecode_fr=$(grep "jd_sharecode_fr" $jd_openwrt_config | awk -F "'" '{print $2}')
 	jd_sharecode_pet=$(grep "jd_sharecode_pet" $jd_openwrt_config | awk -F "'" '{print $2}')
 	jd_sharecode_pb=$(grep "jd_sharecode_pb" $jd_openwrt_config | awk -F "'" '{print $2}')
-	jd_sharecode_dr=$(grep "jd_sharecode_dr" $jd_openwrt_config | awk -F "'" '{print $2}')
+	jd_sharecode_df=$(grep "jd_sharecode_df" $jd_openwrt_config | awk -F "'" '{print $2}')
 }
 
 jd_openwrt_config_description() {
@@ -3051,7 +3051,7 @@ jd_sharecode_pet=''
 jd_sharecode_pb=''
 
 #工厂（助力码1@助力码2）
-jd_sharecode_dr=''
+jd_sharecode_df=''
 
 ------------------------------------------------------------------------------------------------------------
 #京东试用 true开启  默认false(更多详细内容请查看/usr/share/jd_openwrt_script/JD_Script/js/jd_try.js)
