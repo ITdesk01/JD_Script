@@ -93,7 +93,7 @@ export guaopencard_draw="true"
 export FS_LEVEL="card开卡+加购"
 
 task() {
-	cron_version="3.77"
+	cron_version="3.78"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -124,7 +124,6 @@ cat >>/etc/crontabs/root <<EOF
 10-20/5 10,12 * * * $node $dir_file_js/jd_live.js	>/tmp/jd_live.log #京东直播#100#
 0 0,7 * * * $node $dir_file_js/jd_bean_sign.js >/tmp/jd_bean_sign.log #京东多合一签到#100#
 0 */4 * * * $node $dir_file_js/jd_dreamFactory_tuan.js	>/tmp/jd_dreamFactory_tuan.log	#京喜开团#100#
-0 10 */7 * * $node $dir_file_js/jd_price.js	>/tmp/jd_price.log	#价保脚本#100#
 0 0 * * * $python3 $dir_file/git_clone/curtinlv_script/getFollowGifts/jd_getFollowGift.py >/tmp/jd_getFollowGift.log #关注有礼#100#
 0 8,15 * * * $python3 $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py  >/tmp/jd_OpenCard.log #开卡程序#100#
 59 23 * * 0,1,2,5,6 sleep 57 && $dir_file/jd.sh run_jd_cash >/tmp/jd_cash_exchange.log	#签到领现金兑换#100#
@@ -273,13 +272,13 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	JDJRValidator_Aaron.js		#京东多合一签到依赖2
 	jd_superMarket.js		#东东超市
 	jd_try.js 			#京东试用（默认不启用）
-	jd_qqxing.js			#QQ星系牧场
 	jd_get_share_code.js		#获取jd所有助力码脚本
 	jd_ttpt.js			#天天拼图
 	jd_big_winner.js		#翻翻乐
 	jd_nnfls.js			#牛牛福利
 	jd_fanli.js			#京东饭粒
 	jd_superBrand.js		#特务Ｚ
+	jd_ddly.js			#勋章点亮(没有开启的手动开启吧，活动入口：东东农场->水车)
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -302,7 +301,6 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_ddworld.js			#东东世界
 	jd_live.js			#京东直播
 	jd_mf.js			#集魔方
-	jd_price.js		        #价保脚本
 	jd_wish.js			#众筹许愿池
 	jd_jxmc.js			#京喜牧场
 	jx_sign.js			#京喜签到
@@ -336,7 +334,6 @@ done
 #star261
 star261_url="https://raw.githubusercontent.com/star261/jd/main/scripts"
 cat >$dir_file/config/tmp/star261_url.txt <<EOF
-	jd_vivo.js			#热血心跳,狂解压
 	jd_dreamFactory_tuan.js 	#京喜开团　star261脚本
 EOF
 
@@ -461,21 +458,11 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_qqxing.js			#QQ星系牧场
+	jd_price.js		        #价保脚本
+	jd_vivo.js			#热血心跳,狂解压
 	jd_joy_reward.js
 	jd_joy_park_newtask.js		# 汪汪乐园过新手任务，有火爆账号的可以手动运行一次（默认不运行）
-	jd_jump.js			#跳跳乐瓜分京豆脚本
-	gua_opencard53.js		#开卡默认不运行
-	gua_opencard54.js		#开卡默认不运行
-	gua_opencard56.js		#开卡默认不运行
-	gua_opencard57.js		#开卡默认不运行
-	gua_opencard59.js		#开卡默认不运行
-	gua_opencard63.js		#开卡默认不运行
-	gua_opencard65.js		#开卡默认不运行
-	jd_xtgsign.js 			#星推官
-	jd_travel_shop.js               #环游记
-	jd_carnivalcity.js		#京东手机狂欢城
-	gua_opencard55.js		#开卡默认不运行
-	gua_opencard62.js		#开卡默认不运行
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -545,11 +532,11 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_jxlhb.js			#京喜领红包
 	jd_jxmc_hb.js 			#京喜牧场助力
 	jd_nnfls.js			#牛牛福利
-	jd_vivo.js			#热血心跳,狂解压
 	jx_sign.js			#京喜签到
 	jd_superBrand.js		#特务Ｚ
 	jd_syj.js 			#赚京豆
 	jd_angryKoi.js			#愤怒的锦鲤
+	jd_ddly.js			#勋章点亮(没有开启的手动开启吧，活动入口：东东农场->水车)
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -710,7 +697,6 @@ cat >/tmp/jd_tmp/run_03 <<EOF
 	jd_speed.js 			#天天加速 3小时运行一次，打卡时间间隔是6小时
 	jd_health.js			#健康社区
 	jd_mohe.js			#5G超级盲盒
-	jd_qqxing.js			#QQ星系牧场
 	jd_syj.js 			#赚京豆
 EOF
 	echo -e "$green run_03$start_script_time $white"
