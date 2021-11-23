@@ -278,6 +278,7 @@ cat >$dir_file/config/tmp/zero205_url.txt <<EOF
 	jd_fanli.js			#京东饭粒
 	jd_superBrand.js		#特务Ｚ
 	jd_ddly.js			#勋章点亮(没有开启的手动开启吧，活动入口：东东农场->水车)
+	jd_cfd_fresh.js			#京喜财富岛合成生鲜
 EOF
 
 for script_name in `cat $dir_file/config/tmp/zero205_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -535,6 +536,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_syj.js 			#赚京豆
 	jd_angryKoi.js			#愤怒的锦鲤
 	jd_ddly.js			#勋章点亮(没有开启的手动开启吧，活动入口：东东农场->水车)
+	jd_cfd_fresh.js			#京喜财富岛合成生鲜
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
