@@ -1,4 +1,4 @@
-# JD_Script 简单说明（2021.11.17编辑，by：ITdesk）
+# JD_Script 简单说明（2021.11.24编辑，by：ITdesk）
 ##  1.目录结构
 /usr/share/jd_openwrt_script/JD_Script/                     #JD_Script仓库
 
@@ -132,7 +132,34 @@
 
      sh $jd kill_ccr
      
-6.如何本地账号互相助力（现支持农场，萌宠，种豆，京喜工厂）
+6.查询日志文件（比如查看run_0每天的运行情况）
+
+     cd /tmp
+     ls 
+     
+     你就会发现很多这种前面jd 后面log的日志文件，自己打开可以看下运行情况
+     
+     jd_run_0.log
+     
+     jd_run_01.log
+     
+     jd_run_02.log
+     
+     jd_run_03.log
+     
+     jd_run_030.log
+     
+     jd_run_06_18.log
+     
+     jd_run_07.log
+     
+     jd_run_08_12_16.log
+     
+     
+#### 解释一下这里的run_0  ，run_01， run_02 ，   这里分别代表时间段，run_0 代表0点运行的脚本日志，jd.sh有很多模块，我把同一个时间要跑的脚本都扔到了一起，所以你在里面会看到很多脚本的日志，会有点乱。
+ 
+     
+7.如何本地账号互相助力（现支持农场，萌宠，种豆，京喜工厂）
 
     1.更新到最新版本
     
