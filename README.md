@@ -92,5 +92,5 @@ NANOPI R4S (群友snow测试)
 > ***您使用或者复制了本仓库且本人制作的任何脚本，则视为`已接受`此声明，请仔细阅读***
 
 ## 如果这个项目帮助了你，你可以扫一下支付宝一起领红包
-![zhifubao](doc/zhifubao.jpg)
+![zhifubao](doc/zhifubao1.jpg)
 
