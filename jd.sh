@@ -377,6 +377,7 @@ done
 cdle_carry_url="https://raw.githubusercontent.com/cdle/carry/main"
 cat >$dir_file/config/tmp/cdle_carry_url.txt <<EOF
 	jd_angryKoi.js		#愤怒的锦鲤
+	jd_zhanianshou.js		#炸年兽
 EOF
 
 for script_name in `cat $dir_file/config/tmp/cdle_carry_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -528,6 +529,7 @@ ccr_run() {
 #这里有的就不要加到concurrent_js_run_07,会导致跑多次
 cat >/tmp/jd_tmp/ccr_run <<EOF
 	gua_city.js			#城城分现金
+	jd_zhanianshou.js		#炸年兽
 	jd_connoisseur.js		#内容鉴赏官
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_ddworld.js			#东东世界
