@@ -377,7 +377,6 @@ done
 cdle_carry_url="https://raw.githubusercontent.com/cdle/carry/main"
 cat >$dir_file/config/tmp/cdle_carry_url.txt <<EOF
 	jd_angryKoi.js		#愤怒的锦鲤
-	jd_zhanianshou.js		#炸年兽
 EOF
 
 for script_name in `cat $dir_file/config/tmp/cdle_carry_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -444,6 +443,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_zhanianshou.js		#炸年兽(需要手动点开活动，不然火爆)
 	gua_city.js			#城城分现金
 	jd_goodMorning.js		#早起福利
 	Evaluation.py 			#自动评价
