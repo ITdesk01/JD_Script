@@ -86,7 +86,7 @@ async function getShareCode () {
       // 获取随机助力码
   let HELP_HW = 'true';
   if (HELP_HW === 'true') {
-    let resultsX = await getAuthorShareCode("https://raw.githubusercontent.com/lllrrr3/cfd/main/cfd.json")
+    let resultsX = await getAuthorShareCode("https://raw.githubusercontent.com/lllrrr3/cfd/main/cfd.json");
     if(resultsX == '') {
       resultsX = await getAuthorShareCode("http://cfd.212618.xyz/cfd.php")
     }
@@ -164,6 +164,8 @@ async function run() {
 
     // 寻宝
     await XBDetail()
+    // 加速卡
+    await GetProp()
     // 故事会
     await StoryInfo()
     // 建筑升级
@@ -172,21 +174,23 @@ async function run() {
     await sign()
     // 签到-小程序
     await signs()
+    // 清理背包
+    await cleanbag()
     // 捡垃圾
     await pickshell(1)
     // 热气球接客
-    await service(serviceNum)
+    // await service(serviceNum)
     // 倒垃圾
     await RubbishOper()
     // 导游
     await Guide()
+    // 撸珍珠
+    await Pearl()
     // 牛牛任务
     await ActTask()
     await getShareCode()
     // 日常任务、成就任务
     await UserTask()
-    // 撸珍珠
-    await Pearl()
 
   }
   catch (e) {
@@ -232,6 +236,32 @@ async function GetHomePageInfo() {
     }
   }
 }
+
+async function cleanbag (){
+        // 清空背包
+    res = await taskGet('story/querystorageroom', '_cfd_t,bizCode,dwEnv,ptag,source,strZone')
+    let bags = []
+    for (let s of res.Data.Office) {
+      console.log(s.dwCount, s.dwType)
+      bags.push(s.dwType)
+      bags.push(s.dwCount)
+    }
+    await $.wait(1000)
+    let strTypeCnt = ''
+    for (let n = 0; n < bags.length; n++) {
+      if (n % 2 === 0)
+        strTypeCnt += `${bags[n]}:`
+      else
+        strTypeCnt += `${bags[n]}|`
+    }
+    if (bags.length !== 0) {
+      res = await taskGet('story/sellgoods', '_cfd_t,bizCode,dwEnv,dwSceneId,ptag,source,strTypeCnt,strZone',`&dwSceneId=1&strTypeCnt=${strTypeCnt}`)
+      console.log(res.Data)
+      console.log(`卖贝壳收入 ${res.Data.ddwCoin}, ${res.Data.ddwMoney}`)
+    }
+}
+
+
 // 寻宝
 async function XBDetail(){
   try{
@@ -262,6 +292,90 @@ async function XBDetail(){
     }
   }catch (e) {
     $.logErr(e);
+  }
+}
+// 加速卡任务
+async function GetProp(){
+  try{
+    console.log('\n加速卡任务')
+    await $.wait(2000)
+    $.propTask = await taskGet(`story/GetPropTask`, '_cfd_t,bizCode,dwEnv,ptag,source,strZone', '&ptag=')
+    if($.propTask && $.propTask.Data && $.propTask.Data.TaskList){
+      for(let t of $.propTask.Data.TaskList || []){
+        let res = ''
+        if(t.dwCompleteNum < t.dwTargetNum){
+          if([9,11].includes(t.dwPointType)) continue
+          res = await taskGet('DoTask2', '_cfd_t,bizCode,configExtra,dwEnv,ptag,source,strZone,taskId', `&ptag=&taskId=${t.ddwTaskId}&configExtra=`)
+          if (res.ret === 0) {
+            console.log(`[${t.strTaskName}]加速卡任务完成`)
+          } else {
+            console.log(`[${t.strTaskName}]加速卡任务失败`, $.toStr(res,res))
+            await $.wait(2000)
+            continue
+          }
+          await $.wait(2000)
+        }
+        if(t.dwAwardStatus == 2){
+          res = await taskGet('Award2', '_cfd_t,bizCode,dwEnv,ptag,source,strZone,taskId', `&ptag=&taskId=${t.ddwTaskId}`)
+          if (res.ret === 0) {
+            console.log(`[${t.strTaskName}]加速卡领取成功`)
+            if(res.data.prizeInfo){
+              let task = $.toObj(res.data.prizeInfo,res.data.prizeInfo)
+              let msg = []
+              for(let card of task.CardInfo.CardList || []){
+                msg.push(card.strCardName)
+              }
+              console.log(`获得[${msg.join(',')}]加速卡`)
+            }
+          } else {
+            console.log(`[${t.strTaskName}]加速卡领取失败`, $.toStr(res,res))
+            await $.wait(2000)
+            continue
+          }
+          await $.wait(2000)
+        }
+      }
+    }
+    await $.wait(2000)
+    $.propInfo = await taskGet(`user/GetPropCardCenterInfo`, '_cfd_t,bizCode,dwEnv,ptag,source,strZone', '&ptag=')
+    console.log('\n加速卡使用')
+    if($.propInfo && $.propInfo.cardInfo){
+      let flag = $.propInfo.cardInfo.dwWorkingType || 0
+      let res = ''
+      for (let card of $.propInfo.cardInfo.coincard || []) {
+        if(card.ddwCardTargetTm > 0 ) console.log(`[金币卡]结束时间:${$.time('yyyy-MM-dd HH:mm:ss',card.ddwCardTargetTm*1000)}`)
+        // if(flag == 1 || flag == 3) break
+        if (card.dwCardNums !== 0 && (flag == 0 || flag == 2)) {
+          res = await taskGet('user/UsePropCard', '_cfd_t,bizCode,dwCardType,dwEnv,ptag,source,strCardTypeIndex,strZone', `&ptag=&dwCardType=1&strCardTypeIndex=${encodeURIComponent(card.strCardTypeIndex)}`)
+          if (res.iRet === 0) {
+            console.log(`[${card.strCardName}]金币卡使用成功`)
+            if(res.ddwCardTargetTm > 0 ) console.log(`[金币卡]结束时间:${$.time('yyyy-MM-dd HH:mm:ss',res.ddwCardTargetTm*1000)}`)
+            flag += 1
+          } else {
+            console.log(`[${card.strCardName}]金币卡使用失败`, $.toStr(res,res))
+          }
+          await $.wait(2000)
+        }
+      }
+      for (let card of $.propInfo.cardInfo.richcard || []) {
+        if(card.ddwCardTargetTm > 0 ) console.log(`[财富卡]结束时间:${$.time('yyyy-MM-dd HH:mm:ss',card.ddwCardTargetTm*1000)}`)
+        // if(flag == 2 || flag == 3) break
+        if (card.dwCardNums !== 0 && (flag == 0 || flag == 1)) {
+          res = await taskGet('user/UsePropCard', '_cfd_t,bizCode,dwCardType,dwEnv,ptag,source,strCardTypeIndex,strZone', `&ptag=&dwCardType=2&strCardTypeIndex=${encodeURIComponent(card.strCardTypeIndex)}`)
+          if (res.iRet === 0) {
+            console.log(`[${card.strCardName}]财富卡使用成功`)
+            if(res.ddwCardTargetTm > 0 ) console.log(`[财富卡]结束时间:${$.time('yyyy-MM-dd HH:mm:ss',res.ddwCardTargetTm*1000)}`)
+            flag += 2
+          } else {
+            console.log(`[${card.strCardName}]财富卡使用失败`, $.toStr(res,res))
+          }
+          await $.wait(2000)
+        }
+      }
+
+    }
+  }catch (e) {
+    console.log(e);
   }
 }
 // 故事会
@@ -360,7 +474,7 @@ async function StoryInfo(){
 async function buildList(){
   try{
     await $.wait(2000)
-    console.log(`\n升级房屋、收集金币`)
+    console.log(`\n升级房屋、收集金币\n(升级：需要当前金币大于升级金币的3.5倍)`)
     if($.buildList){
       for(let i in $.buildList){
         let item = $.buildList[i]
@@ -386,7 +500,7 @@ async function buildList(){
           if(item.dwLvl == 0){
             await taskGet(`user/createbuilding`, stk, additional)
           }else{
-            if(GetBuildInfo){
+            if(GetBuildInfo && GetBuildInfo.ddwNextLvlCostCoin * 3.5 < parseInt($.HomeInfo.ddwCoinBalance,10)){
               additional = `&strBuildIndex=${GetBuildInfo.strBuildIndex}&ddwCostCoin=${GetBuildInfo.ddwNextLvlCostCoin}`
               stk = `_cfd_t,bizCode,ddwCostCoin,dwEnv,ptag,source,strBuildIndex,strZone`
               let update = await taskGet(`user/BuildLvlUp`, stk, additional)
@@ -462,7 +576,7 @@ async function sign(){
         }
       }
     }
-
+    
     if($.Aggrtask && $.Aggrtask.Data && $.Aggrtask.Data.Employee && $.Aggrtask.Data.Employee.EmployeeList){
         if($.Aggrtask.Data && $.Aggrtask.Data.Employee && $.Aggrtask.Data.Employee.EmployeeList){
         console.log(`\n领取邀请奖励(${$.Aggrtask.Data.Employee.EmployeeList.length || 0}/${$.Aggrtask.Data.Employee.dwNeedTotalPeople || 0})`)
@@ -542,9 +656,7 @@ async function pickshell(num = 1){
             await $.wait(200)
             if(!res || res.iRet != 0){
               break
-            }else{
-         	 console.log(JSON.stringify(res))
-      		 }
+            }
           }while (o < 20)
         }
       }
@@ -653,7 +765,7 @@ async function Guide(){
         }
       }
     }
-
+    
   }catch (e) {
     $.logErr(e);
   }
@@ -663,7 +775,7 @@ async function Pearl(){
   try{
     await $.wait(2000)
     $.ComposeGameState = await taskGet(`user/ComposePearlState`, '', '&dwGetType=0')
-    console.log(`\n当前有${$.ComposeGameState.dwCurProgress}个月饼${$.ComposeGameState.ddwVirHb && ' '+$.ComposeGameState.ddwVirHb/100+"红包" || ''}`)
+    console.log(`\n当前有${$.ComposeGameState.dwCurProgress}个珍珠${$.ComposeGameState.ddwVirHb && ' '+$.ComposeGameState.ddwVirHb/100+"红包" || ''}`)
     if($.ComposeGameState.dayDrawInfo.dwIsDraw == 0){
       let res = ''
       res = await taskGet(`user/GetPearlDailyReward`, '__t,strZone', ``)
@@ -684,7 +796,7 @@ async function Pearl(){
     }
     if (($.ComposeGameState.dwCurProgress < 8 || true) && $.ComposeGameState.strDT) {
       let b = 1
-      console.log(`合月饼${b}次 `)
+      console.log(`合珍珠${b}次 `)
       // b = 8-$.ComposeGameState.dwCurProgress
       for(i=1;b--;i++){
         let n = Math.ceil(Math.random()*12+12)
@@ -705,11 +817,11 @@ async function Pearl(){
             }
           }
         }
-        console.log("合成月饼")
+        console.log("合成珍珠")
         let strLT = ($.ComposeGameState.oPT || [])[$.ComposeGameState.ddwCurTime % ($.ComposeGameState.oPT || []).length]
         let res = await taskGet(`user/ComposePearlAddProcess`, '__t,strBT,strLT,strZone', `&strBT=${$.ComposeGameState.strDT}&strLT=${strLT}`)
         if(res && res.iRet == 0){
-          console.log(`合成成功:${res.ddwAwardHb && '获得'+res.ddwAwardHb/100+"红包 " || ''}当前有${res.dwCurProgress}个月饼${res.ddwVirHb && ' '+res.ddwVirHb/100+"红包" || ''}`)
+          console.log(`合成成功:${res.ddwAwardHb && '获得'+res.ddwAwardHb/100+"红包 " || ''}当前有${res.dwCurProgress}个珍珠${res.ddwVirHb && ' '+res.ddwVirHb/100+"红包" || ''}`)
         }else{
           console.log(JSON.stringify(res))
         }
@@ -720,7 +832,7 @@ async function Pearl(){
       if (i.dwIsAward == 0 && $.ComposeGameState.dwCurProgress >= i.dwCurStageEndCnt) {
         await $.wait(2000)
         let res = await taskGet(`user/ComposeGameAward`, '__t,dwCurStageEndCnt,strZone', `&dwCurStageEndCnt=${i.dwCurStageEndCnt}`)
-        await printRes(res,'月饼领奖')
+        await printRes(res,'珍珠领奖')
       }
     }
   }catch (e) {
@@ -826,8 +938,8 @@ async function UserTask(){
           await $.wait(1000)
         }
         if(item.dateType == 2){
-          if(item.completedTimes < item.targetTimes && ![6,7,8,9,10].includes(item.orderId)){
-            if(item.taskName.indexOf('捡贝壳') >-1 || item.taskName.indexOf('赚京币任务') >-1) continue
+          if(item.completedTimes < item.targetTimes && ![7,8,9,10].includes(item.orderId)){
+            if(item.taskName.indexOf('捡贝壳') >-1 || item.taskName.indexOf('赚京币任务') >-1 || item.taskName.indexOf('升级') >-1) continue
             let b = (item.targetTimes-item.completedTimes)
             for(i=1;b--;i++){
               console.log(`第${i}次`)
@@ -960,6 +1072,15 @@ function taskGet(type, stk, additional){
 function getGetRequest(type, stk='', additional='') {
   let url = ``;
   let dwEnv = 7;
+  let types = {
+    'GetUserTaskStatusList':['GetUserTaskStatusList','jxbfd'],
+    'Award':['Award','jxbfd'],
+    'Award1':['Award','jxbfddch'],
+    'Award2':['Award','jxbfdprop'],
+    'DoTask':['DoTask','jxbfd'],
+    'DoTask1':['DoTask','jxbfddch'],
+    'DoTask2':['DoTask','jxbfdprop'],
+  }
   if(type == 'user/ComposeGameState'){
     url = `https://m.jingxi.com/jxbfd/${type}?__t=${Date.now()}&strZone=jxbfd${additional}&_=${Date.now()}&sceneval=2`
   }else if(type == 'user/RealTmReport'){
@@ -970,16 +1091,8 @@ function getGetRequest(type, stk='', additional='') {
     if(type == 'story/GetTakeAggrPages' || type == 'story/RewardSigns') dwEnv = 6
     if(type == 'story/GetTakeAggrPages') type = 'story/GetTakeAggrPage'
     if(type == 'story/RewardSigns') type = 'story/RewardSign'
-    if(type == 'GetUserTaskStatusList' || type == 'Award' || type == 'Award1' || type == 'DoTask' || type == 'DoTask1'){
-      let bizCode = 'jxbfd'
-      if(type == 'Award1'){
-        bizCode = 'jxbfddch'
-        type = 'Award'
-      }else if(type == 'DoTask1'){
-        bizCode = 'jxbfddch'
-        type = 'DoTask'
-      }
-      url = `https://m.jingxi.com/newtasksys/newtasksys_front/${type}?strZone=jxbfd&bizCode=${bizCode}&source=jxbfd&dwEnv=${dwEnv}&_cfd_t=${Date.now()}${additional}${stks}&_ste=1&_=${Date.now()}&sceneval=2&g_login_type=1`
+    if(types[type]){
+      url = `https://m.jingxi.com/newtasksys/newtasksys_front/${types[type][0]}?strZone=jxbfd&bizCode=${types[type][1]}&source=jxbfd&dwEnv=${dwEnv}&_cfd_t=${Date.now()}${additional}${stks}&_ste=1&_=${Date.now()}&sceneval=2&g_login_type=1`
     }else if(type == 'user/ComposeGameAddProcess' || type == 'user/ComposeGameAward'){
       url = `https://m.jingxi.com/jxbfd/${type}?strZone=jxbfd&__t=${Date.now()}${additional}${stks}&_=${Date.now()}&sceneval=2`;
     }else{
@@ -1333,3 +1446,4 @@ function MD5() {
   //创建并实例化MD5对象并让他可以调用自身方法
   function MD5(n){return this._this=this,this}this.MD5=new MD5,MD5.prototype.createMD5String=function(n){var r,d,e,t,o,i,a,H,F,G=Array(),I=7,g=12,u=17,f=22,s=5,c=9,U=14,h=20,C=4,v=11,S=16,T=23,w=6,x=10,m=15,A=21;for(n=uTF8Encode(n),G=convertToWordArray(n),i=1732584193,a=4023233417,H=2562383102,F=271733878,r=0;r<G.length;r+=16)d=i,e=a,t=H,o=F,i=FF(i,a,H,F,G[r+0],I,3614090360),F=FF(F,i,a,H,G[r+1],g,3905402710),H=FF(H,F,i,a,G[r+2],u,606105819),a=FF(a,H,F,i,G[r+3],f,3250441966),i=FF(i,a,H,F,G[r+4],I,4118548399),F=FF(F,i,a,H,G[r+5],g,1200080426),H=FF(H,F,i,a,G[r+6],u,2821735955),a=FF(a,H,F,i,G[r+7],f,4249261313),i=FF(i,a,H,F,G[r+8],I,1770035416),F=FF(F,i,a,H,G[r+9],g,2336552879),H=FF(H,F,i,a,G[r+10],u,4294925233),a=FF(a,H,F,i,G[r+11],f,2304563134),i=FF(i,a,H,F,G[r+12],I,1804603682),F=FF(F,i,a,H,G[r+13],g,4254626195),H=FF(H,F,i,a,G[r+14],u,2792965006),a=FF(a,H,F,i,G[r+15],f,1236535329),i=GG(i,a,H,F,G[r+1],s,4129170786),F=GG(F,i,a,H,G[r+6],c,3225465664),H=GG(H,F,i,a,G[r+11],U,643717713),a=GG(a,H,F,i,G[r+0],h,3921069994),i=GG(i,a,H,F,G[r+5],s,3593408605),F=GG(F,i,a,H,G[r+10],c,38016083),H=GG(H,F,i,a,G[r+15],U,3634488961),a=GG(a,H,F,i,G[r+4],h,3889429448),i=GG(i,a,H,F,G[r+9],s,568446438),F=GG(F,i,a,H,G[r+14],c,3275163606),H=GG(H,F,i,a,G[r+3],U,4107603335),a=GG(a,H,F,i,G[r+8],h,1163531501),i=GG(i,a,H,F,G[r+13],s,2850285829),F=GG(F,i,a,H,G[r+2],c,4243563512),H=GG(H,F,i,a,G[r+7],U,1735328473),a=GG(a,H,F,i,G[r+12],h,2368359562),i=HH(i,a,H,F,G[r+5],C,4294588738),F=HH(F,i,a,H,G[r+8],v,2272392833),H=HH(H,F,i,a,G[r+11],S,1839030562),a=HH(a,H,F,i,G[r+14],T,4259657740),i=HH(i,a,H,F,G[r+1],C,2763975236),F=HH(F,i,a,H,G[r+4],v,1272893353),H=HH(H,F,i,a,G[r+7],S,4139469664),a=HH(a,H,F,i,G[r+10],T,3200236656),i=HH(i,a,H,F,G[r+13],C,681279174),F=HH(F,i,a,H,G[r+0],v,3936430074),H=HH(H,F,i,a,G[r+3],S,3572445317),a=HH(a,H,F,i,G[r+6],T,76029189),i=HH(i,a,H,F,G[r+9],C,3654602809),F=HH(F,i,a,H,G[r+12],v,3873151461),H=HH(H,F,i,a,G[r+15],S,530742520),a=HH(a,H,F,i,G[r+2],T,3299628645),i=II(i,a,H,F,G[r+0],w,4096336452),F=II(F,i,a,H,G[r+7],x,1126891415),H=II(H,F,i,a,G[r+14],m,2878612391),a=II(a,H,F,i,G[r+5],A,4237533241),i=II(i,a,H,F,G[r+12],w,1700485571),F=II(F,i,a,H,G[r+3],x,2399980690),H=II(H,F,i,a,G[r+10],m,4293915773),a=II(a,H,F,i,G[r+1],A,2240044497),i=II(i,a,H,F,G[r+8],w,1873313359),F=II(F,i,a,H,G[r+15],x,4264355552),H=II(H,F,i,a,G[r+6],m,2734768916),a=II(a,H,F,i,G[r+13],A,1309151649),i=II(i,a,H,F,G[r+4],w,4149444226),F=II(F,i,a,H,G[r+11],x,3174756917),H=II(H,F,i,a,G[r+2],m,718787259),a=II(a,H,F,i,G[r+9],A,3951481745),i=addUnsigned(i,d),a=addUnsigned(a,e),H=addUnsigned(H,t),F=addUnsigned(F,o);return(wordToHex(i)+wordToHex(a)+wordToHex(H)+wordToHex(F)).toLowerCase()};var rotateLeft=function(n,r){return n<<r|n>>>32-r},addUnsigned=function(n,r){var d,e,t,o,i;return t=2147483648&n,o=2147483648&r,i=(1073741823&n)+(1073741823&r),(d=1073741824&n)&(e=1073741824&r)?2147483648^i^t^o:d|e?1073741824&i?3221225472^i^t^o:1073741824^i^t^o:i^t^o},F=function(n,r,d){return n&r|~n&d},G=function(n,r,d){return n&d|r&~d},H=function(n,r,d){return n^r^d},I=function(n,r,d){return r^(n|~d)},FF=function(n,r,d,e,t,o,i){return n=addUnsigned(n,addUnsigned(addUnsigned(F(r,d,e),t),i)),addUnsigned(rotateLeft(n,o),r)},GG=function(n,r,d,e,t,o,i){return n=addUnsigned(n,addUnsigned(addUnsigned(G(r,d,e),t),i)),addUnsigned(rotateLeft(n,o),r)},HH=function(n,r,d,e,t,o,i){return n=addUnsigned(n,addUnsigned(addUnsigned(H(r,d,e),t),i)),addUnsigned(rotateLeft(n,o),r)},II=function(n,r,d,e,t,o,i){return n=addUnsigned(n,addUnsigned(addUnsigned(I(r,d,e),t),i)),addUnsigned(rotateLeft(n,o),r)},convertToWordArray=function(n){for(var r,d=n.length,e=d+8,t=16*((e-e%64)/64+1),o=Array(t-1),i=0,a=0;a<d;)i=a%4*8,o[r=(a-a%4)/4]=o[r]|n.charCodeAt(a)<<i,a++;return i=a%4*8,o[r=(a-a%4)/4]=o[r]|128<<i,o[t-2]=d<<3,o[t-1]=d>>>29,o},wordToHex=function(n){var r,d="",e="";for(r=0;r<=3;r++)d+=(e="0"+(n>>>8*r&255).toString(16)).substr(e.length-2,2);return d},uTF8Encode=function(n){n=n.toString().replace(/\x0d\x0a/g,"\n");for(var r="",d=0;d<n.length;d++){var e=n.charCodeAt(d);e<128?r+=String.fromCharCode(e):e>127&&e<2048?(r+=String.fromCharCode(e>>6|192),r+=String.fromCharCode(63&e|128)):(r+=String.fromCharCode(e>>12|224),r+=String.fromCharCode(e>>6&63|128),r+=String.fromCharCode(63&e|128))}return r};
 }
+

@@ -443,6 +443,7 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	gua_city.js			#城城分现金
 	jd_goodMorning.js		#早起福利
 	Evaluation.py 			#自动评价
 	jd_syj.js			#赚京豆
@@ -526,6 +527,7 @@ ccr_run() {
 #这里不会并发
 #这里有的就不要加到concurrent_js_run_07,会导致跑多次
 cat >/tmp/jd_tmp/ccr_run <<EOF
+	gua_city.js			#城城分现金
 	jd_connoisseur.js		#内容鉴赏官
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_ddworld.js			#东东世界
