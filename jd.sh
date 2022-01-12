@@ -445,7 +445,7 @@ done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
 	gua_nhjRed.js			#年货红红包有返利
-	jd_zhanianshou.js		#炸年兽(需要手动点开活动，不然火爆)
+	#jd_zhanianshou.js		#炸年兽(需要手动点开活动，不然火爆)
 	gua_city.js			#城城分现金
 	jd_goodMorning.js		#早起福利
 	Evaluation.py 			#自动评价
@@ -531,7 +531,7 @@ ccr_run() {
 #这里有的就不要加到concurrent_js_run_07,会导致跑多次
 cat >/tmp/jd_tmp/ccr_run <<EOF
 	gua_city.js			#城城分现金
-	jd_zhanianshou.js		#炸年兽
+	#jd_zhanianshou.js		#炸年兽
 	jd_connoisseur.js		#内容鉴赏官
 	jd_jdzz.js			#京东赚赚长期活动
 	jd_ddworld.js			#东东世界
