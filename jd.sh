@@ -430,7 +430,6 @@ done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_enen.js			#嗯嗯（尚方宝剑，一波流）
-	jd_zjd.js			#赚京豆
 	jd_cjzdgf.js 			#CJ组队瓜分京豆
 	jd_wxCollectionActivity.js 	#加购物车抽奖
 	jd_price.js 			#京东价保
@@ -447,6 +446,7 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_zjd.js			#赚京豆
 	jd_syj.js			#赚京豆
 	jd_health_plant.py
 	jd_wq_wxsign.js 		#微信签到领红包
@@ -468,7 +468,7 @@ done
 		update
 	fi
 	chmod 755 $dir_file_js/*
-	kill_index
+	#kill_index
 	#index_js
 	#删除重复的文件
 	rm -rf $dir_file_js/*.js.*
@@ -528,9 +528,6 @@ update_script() {
 }
 
 ccr_run() {
-#赚京豆-瓜分京豆脚本变量
-export JD_SYJ=true
-
 #这里不会并发
 cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_connoisseur.js		#内容鉴赏官
@@ -715,7 +712,6 @@ run_03() {
 #这里不会并发
 cat >/tmp/jd_tmp/run_03 <<EOF
 	jd_joy_park_task.js		#汪汪乐园
-	jd_zjd.js			#赚京豆
 	#jd_jdzz.js			#京东赚赚
 EOF
 	echo -e "${green} run_03$start_script_time ${white}"
@@ -905,13 +901,6 @@ curtinlv_script_setup() {
 	if [ ! -L "$dir_file_js/JDCookies.txt" ]; then
 		rm -rf $dir_file_js/JDCookies.txt
 		ln -s $dir_file/git_clone/curtinlv_script/JDCookies.txt  $dir_file_js/JDCookies.txt
-	fi
-
-	#赚京豆
-	cat $openwrt_script_config/js_cookie.txt > $dir_file/git_clone/curtinlv_script/JDCookies.txt
-	if [ ! -L "$dir_file_js/jd_zjd.py" ]; then
-		rm -rf $dir_file_js/jd_zjd.py
-		ln -s $dir_file/git_clone/curtinlv_script/jd_zjd.py  $dir_file_js/jd_zjd.py
 	fi
 
 	#东东超市商品兑换
@@ -2927,8 +2916,8 @@ system_variable() {
 
 	jd_openwrt_config
 
-	index_js
-	#index_num="${yellow} 8.网页获取CK功能已关闭，没人修暂时就这样了${white}"
+	#index_js
+	index_num="${yellow} 8.网页获取CK功能已关闭，没人修暂时就这样了${white}"
 
 	#农场萌宠关闭通知
 	close_notification
