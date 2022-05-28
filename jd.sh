@@ -37,7 +37,7 @@ fi
 ccr_js_file="$dir_file/ccr_js"
 run_sleep=$(sleep 1)
 
-version="2.5"
+version="2.3"
 cron_file="/etc/crontabs/root"
 node="/usr/bin/node"
 tsnode="/usr/bin/ts-node"
@@ -91,10 +91,10 @@ export guaopencardRun_All="true"
 export guaopencard_draw="true"
 
 #资产变化，不推送以下内容变化
-export BEANCHANGE_DISABLELIST="汪汪乐园&金融养猪"
+export BEANCHANGE_DISABLELIST="汪汪乐园&金融养猪＆喜豆查询"
 
 task() {
-	cron_version="4.02"
+	cron_version="4.05"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
@@ -126,6 +126,7 @@ cat >>/etc/crontabs/root <<EOF
 0 8,15 * * * $python3 $dir_file/git_clone/curtinlv_script/OpenCard/jd_OpenCard.py  >/tmp/jd_OpenCard.log #开卡程序#100#
 59 23 * * * sleep 50 && $dir_file/jd.sh run_jd_blueCoin >/tmp/jd_jd_blueCoin.log	#京东超市兑换#100#
 59 */1 * * * $dir_file/jd.sh jd_time >/tmp/jd_time.log	#同步京东时间#100#
+0 */1 * * * $node $dir_file_js/jd_super_redrain.js >/tmp/jd_super_redrain.log #整点京豆雨#100#
 0 10 * * * $dir_file/jd.sh zcbh	>/tmp/jd_bean_change_ccwav.log	#资产变化一对一#100#
 50 23 * * * $dir_file/jd.sh kill_ccr #杀掉所有并发进程，为零点准备#100#
 46 23 * * * rm -rf /tmp/*.log #删掉所有log文件，为零点准备#100#
@@ -193,6 +194,7 @@ cat >$dir_file/config/tmp/lxk0301_script.txt <<EOF
 	jd_fruit.js			#东东农场
 	jd_pet.js			#东东萌宠
 	jd_dreamFactory.js		#京喜工厂
+	jd_plantBean.js			#种豆得豆
 	jd_delCoupon.js			#删除优惠券（默认不运行，有需要手动运行）
 	jd_unsubscribe.js		#取关京东店铺和商品
 	jdPetShareCodes.js
@@ -250,8 +252,6 @@ cat >$dir_file/config/tmp/Aaron_url.txt <<EOF
 	jd_club_lottery.js		#摇京豆
 	jd_kd.js			#京东快递签到 一天运行一次即可
 	jd_speed_sign.js		#京东极速版签到+赚现金任务
-	jd_exchangejxbeans.js		#过期京豆兑换为喜豆
-	jd_plantBean.js			#种豆得豆
 	jd_jxlhb.js			#惊喜领红包
 	jd_bean_home.js			#领京豆额外奖励&抢京豆
 EOF
@@ -285,6 +285,11 @@ github_6dylan6_url_url="https://raw.githubusercontent.com/6dylan6/jdpro/main"
 cat >$dir_file/config/tmp/github_6dylan6_url_url.txt <<EOF
 	jd_price.js			#京东价保
 	jd_wdz.js			#微定制瓜分京豆
+	jd_speed_signred.js		#京东极速版签到红包
+	jd_super_redrain.js		#整点京豆雨
+	jd_zxqyxd.js			#5.1-5.31 植选轻饮小店
+	jd_joypark_task.js		#汪汪乐园每日任务,只做部分任务
+	jd_jmofang.js			#京东集魔方
 EOF
 
 for script_name in `cat $dir_file/config/tmp/github_6dylan6_url_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -316,18 +321,13 @@ KingRan_url="https://raw.githubusercontent.com/KingRan/KR/main"
 cat >$dir_file/config/tmp/KingRan_url.txt <<EOF
 	jd_cjzdgf.js			#CJ组队瓜分京豆
 	jd_zdjr.js			#组队瓜分
-	jd_29_8.js			#极速版抢29-8优惠券
-	jd_5_2.js			#极速版抢5-2优惠券
-	jd_19_6.js			#极速版抢19-6优惠券
-	jd_nzmh.js			#女装盲盒
 	jd_mpdzcar.js			#头文字Ｊ
 	jd_mpdzcar_game.js		#头文字Ｊ游戏
 	jd_mpdzcar_help.js		#头文字Ｊ助力
-	jd_fanli.js			#京东饭粒
-	jd_daily_lottery.js		#小鸽有礼 - 每日抽奖
-	jd_anjia.js			#组队分豆-安佳（加密脚本慎用）
-	jd_mengniu.js			#组队分豆-蒙牛（加密脚本慎用）
 	jd_cash.js			#签到领现金，每日2毛～5毛
+	jd_superBrandStar.js		#特务之明星送好礼
+	jd_superBrandJK.js		#特务集卡
+	jd_qqxing.js			#星系牧场
 EOF
 
 for script_name in `cat $dir_file/config/tmp/KingRan_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -360,6 +360,7 @@ cat >$dir_file/config/tmp/star261_url.txt <<EOF
 	#jd_dreamFactory_tuan.js 	#京喜开团　star261脚本
 	jd_fan.js			#粉丝互动
 	jd_productZ4Brand.js		#特务Z
+	jd_618dfw.js			#618大富翁
 EOF
 
 for script_name in `cat $dir_file/config/tmp/star261_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -391,8 +392,8 @@ EOF
 for script_name in `cat $dir_file/config/tmp/ccwav_url.txt | grep -v "#.*js" | awk '{print $1}'`
 do
 	url="$ccwav_url"
-	wget $ccwav_url/$script_name -O $dir_file_js/$script_name
-	update_if
+	#wget $ccwav_url/$script_name -O $dir_file_js/$script_name
+	#update_if
 done
 
 #cdle_carry
@@ -418,7 +419,7 @@ done
 	wget https://raw.githubusercontent.com/curtinlv/JD-Script/main/jd_getFollowGift.py -O $dir_file_js/jd_getFollowGift.py #关注有礼
 
 	wget https://raw.githubusercontent.com/qiu-lzsnmb/jd_lzsnmb/jd/Evaluation.py -O $dir_file_js/Evaluation.py #自动评价
-	wget https://raw.githubusercontent.com/ccwav/QLScript2/main/jd_bean_change.js -O $dir_file_js/jd_bean_change_ccwav.js		#资产变化强化版by-ccwav
+	#wget https://raw.githubusercontent.com/ccwav/QLScript2/main/jd_bean_change.js -O $dir_file_js/jd_bean_change_ccwav.js		#资产变化强化版by-ccwav
 
 
 #将所有文本汇总
@@ -429,10 +430,14 @@ do
 done
 
 cat >>$dir_file/config/collect_script.txt <<EOF
+	jd_19E.js			#热爱奇旅
+	jd_19E_help.js			#热爱奇旅互助
+	jd_19EPZ_help.js		#热爱奇旅膨胀
 	jd_enen.js			#嗯嗯（尚方宝剑，一波流）
 	jd_cjzdgf.js 			#CJ组队瓜分京豆
 	jd_wxCollectionActivity.js 	#加购物车抽奖
 	jd_price.js 			#京东价保
+	jd_bean_change.js		#资产变化强化版by-ccwav
 	jd_bean_change_ccwav.js		#资产变化强化版by-ccwav
 	jd_tyt.js			#极速版赚金币推一推
 	jd_dpqd.js			#店铺签到
@@ -446,12 +451,9 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
-	jd_zjd.js			#赚京豆
-	jd_syj.js			#赚京豆
-	jd_health_plant.py
-	jd_wq_wxsign.js 		#微信签到领红包
-	gua_cleancart_ddo.js		#清空购物车(需要设置)
-	jd_computer.js			#电脑配件ID任务
+	jd_jxzzl.js 			#京享周周乐
+	jd_520mzcj.js			#520美妆抽奖机活动
+	jd_exchangejxbeans.js		#过期京豆兑换为喜豆
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -538,12 +540,17 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_joy_park_task.js		#汪汪乐园
 	jd_babel_sign.js		#通天塔签到
 	jd_fan.js			#粉丝互动
-	jd_nzmh.js			#女装盲盒
-	jd_fanli.js			#京东饭粒
 	jd_bean_home.js			#领京豆额外奖励&抢京豆
-	jd_daily_lottery.js		#小鸽有礼 - 每日抽奖
 	jd_productZ4Brand.js		#特务Z
 	jd_cash.js			#签到领现金，每日2毛～5毛
+	jd_speed_signred.js		#京东极速版签到红包
+	jd_zxqyxd.js			#5.1-5.31 植选轻饮小店
+	jd_superBrandStar.js		#特务之明星送好礼
+	jd_superBrandJK.js		#特务集卡
+	jd_joypark_task.js		#汪汪乐园每日任务,只做部分任务
+	jd_qqxing.js			#星系牧场
+	jd_618dfw.js			#618大富翁
+	jd_jmofang.js			#京东集魔方
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -553,7 +560,7 @@ EOF
 	}&
 	done
 
-	sleep 3600
+	sleep 1200
 	$node $openwrt_script/JD_Script/js/jd_fruit.js & #东东水果，6-9点 11-14点 17-21点可以领水滴
 	$node $openwrt_script/JD_Script/js/jd_jxlhb.js & #惊喜领红包
 	$node $openwrt_script/JD_Script/js/jd_mpdzcar.js			#头文字Ｊ
@@ -565,10 +572,14 @@ concurrent_js_run_07() {
 #这里不会并发
 cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
 	jd_dreamFactory.js 		#京喜工厂
-	＃jd_angryKoi.js			#愤怒的锦鲤
+	＃jd_angryKoi.js		#愤怒的锦鲤
 	jd_club_lottery.js 		#摇京豆，没时间要求
 	jd_price.js 			#京东价保
 	jd_productZ4Brand.js		#特务Z
+	jd_speed_signred.js		#京东极速版签到红包
+	jd_qqxing.js			#星系牧场
+	jd_superBrandStar.js		#特务之明星送好礼
+	jd_superBrandJK.js		#特务集卡
 EOF
 	for i in `cat /tmp/jd_tmp/concurrent_js_run_07 | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -578,6 +589,7 @@ EOF
 	}&
 	done
 	wait
+	$node $openwrt_script/JD_Script/js/jd_fruit.js & 
 	$node $openwrt_script/JD_Script/js/jd_bean_change.js 	#资产变动强化版
 	checklog #检测log日志是否有错误并推送
 }
@@ -585,7 +597,7 @@ EOF
 
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
-        jd_dpqd.js			#店铺签到
+	jd_dpqd.js			#店铺签到
 	jd_jin_tie_xh.js  		#领金贴
 	jd_ddnc_farmpark.js		#东东乐园
 	jd_club_lottery.js 		#摇京豆，没时间要求
@@ -673,9 +685,6 @@ cat >/tmp/jd_tmp/run_01 <<EOF
 	raw_main_jd_super_redrain.js	#整点红包雨
 	jd_dreamFactory.js 		#京喜工厂
 	gua_wealth_island.js		#京东财富岛
-	jd_29_8.js			#极速版抢29-8优惠券
-	jd_5_2.js			#极速版抢5-2优惠券
-	jd_19_6.js			#极速版抢19-6优惠券
 EOF
 	echo -e "${green} run_01$start_script_time ${white}"
 	for i in `cat /tmp/jd_tmp/run_01 | grep -v "#.*js" | awk '{print $1}'`
@@ -691,6 +700,8 @@ EOF
 }
 
 run_02() {
+#19E变量
+export JD_19E="true"
 cat >/tmp/jd_tmp/run_02 <<EOF
 	#空.js
 EOF
@@ -705,6 +716,8 @@ EOF
 		$run_sleep
 	done
 
+	$node $openwrt_script/JD_Script/js/jd_19E.js			#热爱奇旅
+	#$node $openwrt_script/JD_Script/js/jd_19E_help.js			#热爱奇旅互助
 	echo -e "${green} run_02$stop_script_time ${white}"
 }
 
@@ -733,11 +746,8 @@ EOF
 
 
 run_06_18() {
-#过期京豆兑换为喜豆变量
-export exjxbeans="true"
 cat >/tmp/jd_tmp/run_06_18 <<EOF
-	jd_exchangejxbeans.js		#过期京豆兑换为喜豆
-	jd_fruit.js 			#东东水果，6-9点 11-14点 17-21点可以领水滴
+	#jd_fruit.js 			#东东水果，6-9点 11-14点 17-21点可以领水滴
 	jd_pet.js 			#东东萌宠，跟手机商城同一时间
 	jd_goodMorning.js		#早起福利
 	jd_dwapp.js			#积分换话费
@@ -1247,7 +1257,7 @@ concurrent_js_if() {
 		case "$action1" in
 		run_0)
 			action="$action1"
-			ccr_run
+			ccr_run &
 			concurrent_js && if_ps
 			if [ ! $action2 ];then
 				if_ps
@@ -1288,11 +1298,11 @@ concurrent_js_if() {
 	else
 		case "$action1" in
 			run_0)
-			ccr_run
+			ccr_run &
 			$action1
 			;;
 			run_07)
-			ccr_run
+			ccr_run &
 			$action1
 			concurrent_js_run_07
 			;;
@@ -1306,11 +1316,11 @@ concurrent_js_if() {
 		else
 			case "$action2" in
 			run_0)
-			ccr_run
+			ccr_run &
 			$action2
 			;;
 			run_07)
-			ccr_run
+			ccr_run &
 			$action2
 			concurrent_js_run_07
 			;;
@@ -2185,7 +2195,7 @@ additional_settings() {
 	
 
 	#东东农场
-ITdesk_fr="6632c8135d5c4e2c9ad7f4aa964d4d11@f0319fde539a485abcf782197b1b919c@31a2097b10db48429013103077f2f037@5aa64e466c0e43a98cbfbbafcc3ecd02@bf0cbdb0083d443499a571796af20896"
+ITdesk_fr="6632c8135d5c4e2c9ad7f4aa964d4d11@f0319fde539a485abcf782197b1b919c@21d98686048c4e6a9ac94a5cbe9cdeb3@d76a052300b8431bb0e3047e92579bb5@31a2097b10db48429013103077f2f037@5aa64e466c0e43a98cbfbbafcc3ecd02@bf0cbdb0083d443499a571796af20896"
 ITdesk_random_fr="4a75d8a6233344b1965857ae23831ce7@392acd7b14d9476bb48ebf2ac171cffc@e1625e7dae2c4dfa9124f5371d72d723@d093cbe35e0e47e68195c8d2cde12d06@c38428e6a9d14a3c9af202fddd27e831@3c3b3e3738694355bb0307764a2fa692@9bd54e69fb174a5fa188961ec17dd931@10cae0f60a43485c9920943f22c44b3d@91f4dbb39a4346b39126786a3a5d3383@0282b62c955349bc80c67dca4e85d6b5@2879a2162d744572889098827b49165e@1b20a9b3d7004d179fd6a1031553b017@529972002f044c6ca466e8998ab5ba6b@60d5528a7d004692a5516094d3c7afd6@b1e184275cc24382a606dada8df0a3b2@f1d4e4d5a5324cb08784dc4afde19513@5e54362c4a294f66853d14e777584598@f0f5edad899947ac9195bf7319c18c7f@52f4e9bdc02b44e98d34c2df77bf4aae"
 	
 zuoyou_20190516_fr="367e024351fe49acaafec9ee705d3836@3040465d701c4a4d81347bc966725137@82c164278e934d5aaeb1cf19027a88a3@a2504cd52108495496460fc8624ae6d4@4eb7542e28714d6e86739151f8aadc6e"
@@ -2213,7 +2223,7 @@ baipiaoguai_fr="456e5601548642a5a9bcc86a54085154@61f21ef708c948568854ec50c362708
 		new_fruit1="$jd_sharecode_fr@$ITdesk_fr"
 	fi
 
-	random_fruit="$ITdesk_random_fr@$zuoyou_20190516_random_fr@$Javon_random_fr@$xiaodengzi_random_20190516_fr"
+	random_fruit="$ITdesk_random_fr@$zuoyou_20190516_random_fr@$Javon_random_fr@$xiaodengzi_random_20190516_fr@$baipiaoguai_fr"
 	random="$random_fruit"
 	random_array
 	new_fruit_set="'$new_fruit1@$zuoyou_20190516_fr@$Javon_20201224_fr@$jidiyangguang_20190516_fr@$ashou_20210516_fr@$xiaodengzi_20190516_fr@$xiaobandeng_fr@$chiyu_fr@$random_set',"
@@ -2235,10 +2245,9 @@ baipiaoguai_fr="456e5601548642a5a9bcc86a54085154@61f21ef708c948568854ec50c362708
 	sed -i "s/dFruitBeanCard = false/dFruitBeanCard = $jd_fruit/g" $dir_file_js/jd_fruit.js #农场不浇水开始换豆
 
 	#萌宠
-ITdesk_pet="MTE1NDAxNzcwMDAwMDAwMzk1OTQ4Njk=@MTAxNzIxMDc1MTAwMDAwMDA1NTg4ODM0OQ==@MTE1NDQ5OTUwMDAwMDAwMzk3NDgyMDE=@MTAxODEyOTI4MDAwMDAwMDQwMTIzMzcx@MTEzMzI0OTE0NTAwMDAwMDA0MzI3NzE3MQ=="
+ITdesk_pet="MTE1NDAxNzcwMDAwMDAwMzk1OTQ4Njk=@MTAxNzIxMDc1MTAwMDAwMDA1NTg4ODM0OQ==@MTE1NDY3NTMwMDAwMDAwODQxMTc2NTk=@MTExMjUxMTM0MDAwMDAwMDg0MjgyODc3@MTE1NDQ5OTUwMDAwMDAwMzk3NDgyMDE=@MTAxODEyOTI4MDAwMDAwMDQwMTIzMzcx@MTEzMzI0OTE0NTAwMDAwMDA0MzI3NzE3MQ=="
 
-ITdesk_random_pet="MTEzMzI1MTE4NDAwMDAwMDA1NDk0NzY0OQ==@MTEzMzI1MTE4NTAwMDAwMDA1NDk0NzYxMQ==@MTE1NDQ5OTIwMDAwMDAwNDQzNjYzMTE=@MTE1NDUwMTI0MDAwMDAwMDQ0MzY2NDMx@MTE0MDE2NjI5MDAwMDAwMDQ3MDYzMzk5@MTEzMzI1MTE4NDAwMDAwMDA1MDI4MjgyMw==@MTE1NDY3NTIwMDAwMDAwNTk0NjY5MDU=@MTEzMzI1MTE4NTAwMDAwMDA1OTQ2NjI2MQ=="
-
+ITdesk_random_pet="MTEzMzI1MTE4NDAwMDAwMDA1NDk0NzY0OQ==@MTEzMzI1MTE4NTAwMDAwMDA1NDk0NzYxMQ==@MTE1NDY3NTIwMDAwMDAwNTk0NjY5MDU=@MTEzMzI1MTE4NTAwMDAwMDA1OTQ2NjI2MQ==@MTEzMzI1MTE4NDAwMDAwMDA3MDk5NDQ1Nw==@MTAxNzIxMDc1MTAwMDAwMDA1MTk2NjQ4NQ==@MTEzMzI1MTE4NTAwMDAwMDA1MTgzMjM4MQ==@MTE1NDQ5MzYwMDAwMDAwNDUzMDI4NjM=@MTE0MDkyMjIwMDAwMDAwNDc4MzYyOTM=@MTE1NDUwMTI0MDAwMDAwMDQ1MzAyNjI5@MTE0MDkyMjEwMDAwMDAwNDg5MTA4MTE=@MTEyNzEzMjc0MDAwMDAwMDQ5OTA5Njg1@MTE1NDQ5OTIwMDAwMDAwNDUzMDYzMDc=@MTE5MzEwNTEzODAwMDAwMDA1MzIyNDQ1OQ==@MTAxODc2NTEzMTAwMDAwMDAwNjQ4MzU4NQ==@MTE5MzEwNTEzODAwMDAwMDA1NjQ5NjQ4Nw==@MTE1NDQ5OTUwMDAwMDAwNDAyNTYyMjM=@MTE1NDAxNzcwMDAwMDAwNDA4MzcyOTU=@MTEyNzEzMjc0MDAwMDAwMDQ4NjY4NjY3"
 zuoyou_20190516_pet="MTEzMzI0OTE0NTAwMDAwMDAzODYzNzU1NQ==@MTE1NDAxNzgwMDAwMDAwMzg2Mzc1Nzc=@MTE1NDAxNzgwMDAwMDAwMzg4MzI1Njc=@MTE1NDQ5OTIwMDAwMDAwNDM3MTM3ODc=@MTAxNzIyNTU1NDAwMDAwMDA1MDIyMjIwMQ=="
 	
 zuoyou_20190516_random_pet="MTAxNzIxMDc1MTAwMDAwMDA1MDIyMjE2OQ==@MTEzMzI1MTE4NDAwMDAwMDA1MDA5Nzg4MQ==@MTAxNzIxMDc1MTAwMDAwMDA1MDA5NzczOQ==@MTEzMzI1MTE4NDAwMDAwMDA1MDExNTc2MQ==@MTEzMzI1MTE4NDAwMDAwMDA1MDEyMzYxNw=="
@@ -2285,7 +2294,7 @@ baipiaoguai_pet="MTE1NDQ5OTUwMDAwMDAwNDUyNzA4NDc=@MTEzMzI0OTE0NTAwMDAwMDA0NTIxOT
 	done
 
 	#种豆
-		  ITdesk_pb="4npkonnsy7xi3n46rivf5vyrszud7yvj7hcdr5a@fn5sjpg5zdejm2ebnsce2wsjvtu5xkzq4dvbdti@mlrdw3aw26j3xeqso5asaq6zechwcl76uojnpha@nkvdrkoit5o65lgaousaj4dqrfmnij2zyntizsa@u5lnx42k5ifivyrtqhfjikhl56zsnbmk6v66uzi"
+		  ITdesk_pb="4npkonnsy7xi3n46rivf5vyrszud7yvj7hcdr5a@fn5sjpg5zdejm2ebnsce2wsjvtu5xkzq4dvbdti@suqg5cye47cqngnqbudul6toucmr32r5nqw6hlq@4vvbjlml6tdfcbisdohaimuxzjin3vviavyubwq@mlrdw3aw26j3xeqso5asaq6zechwcl76uojnpha@nkvdrkoit5o65lgaousaj4dqrfmnij2zyntizsa@u5lnx42k5ifivyrtqhfjikhl56zsnbmk6v66uzi"
 ITdesk_random_pb="tnmcphpjys5icix3quq2q2em3bzzciltix2t6nq@u5lnx42k5ifiu6wgvad764nzeefohexgwsutp4y@e7lhibzb3zek3aczhci5fim2fjpypbw5y3pr3ky@l4ex6vx6yynovth6gd6nesvnkeimph3kozmj77i@mlrdw3aw26j3xv3imelq2znbjo2ksxcb5nyjsma@4npkonnsy7xi3fp63qlbql2mfudjnwmsbpc4egy@mlrdw3aw26j3xn447fyzg7h4kzlmyasgniqj4eq@aogye6x4cnc3pjc7clkvzuymko5xo6gnii54lua@e7lhibzb3zek2zfhyssxpnduf3vlv7xpfwbe3fq@llc3cyki3azsjryv3ovhiqpxtut2lkuv6hpeepa@bfgnkjwsawrkv7cnuqwybfujye3h7wlwy7o5jii@zalmhfy34qahymizttjksjba3bjixbgi6x2h7uy@olmijoxgmjutzy3d472v6l6xqdtegx4v4dpjo7q@mlrdw3aw26j3xwrjvz73nn6h3jwvnfsqe766zly@e7lhibzb3zek3giovoz45el7ymgcpt7ng5qq3ni@mlrdw3aw26j3xqggsyegc2itcc2h5yfpxyhctgq@e7lhibzb3zek234ckc2fm2yvkj5cbsdpe7y6p2a@u72q4vdn3zes24pmx6lh34pdcinjjexdfljybvi@bctcuetamr6idcvkftgulawwxu"
 
 zuoyou_20190516_pb="sz5infcskhz3woqbns6eertieu@mxskszygpa3kaouswi7rele2ji@4npkonnsy7xi3vk7khql3p7gkpodivnbwjoziga@cq7ylqusen234wdwxxbkf23g6y@iu237u55hwjio2j4q6dveezrcun6yqgyh6iyj7a"
@@ -2496,7 +2505,7 @@ COMMENT
 	done
 
 	#资产变化强化版by-ccwav
-	sed -i "s/.\/sendNotify/.\/sendNotify_ccwav.js/g"  $dir_file_js/jd_bean_change_ccwav.js
+	#sed -i "s/.\/sendNotify/.\/sendNotify_ccwav.js/g"  $dir_file_js/jd_bean_change_ccwav.js
 }
 
 del_if() {
@@ -2700,13 +2709,13 @@ close_notification() {
 					sed -i "s/jdNotify = true/jdNotify = false/g" $ccr_js_file/$i/jd_pet.js
 				}&
 				done
-				ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
-				ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
-				while [ $ps_fr -gt 0 ] && [ $ps_pet -gt 0 ];do
-					sleep 1
-					ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
-					ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
-				done
+				#ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
+				#ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
+				#while [ $ps_fr -gt 0 ] && [ $ps_pet -gt 0 ];do
+				#	sleep 1
+				#	ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
+				#	ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
+				#done
 			fi
 
 			sed -i "s/jdNotify = true/jdNotify = false/g" $dir_file_js/jd_fruit.js
@@ -2724,13 +2733,13 @@ close_notification() {
 				}&
 				done
 
-				ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
-				ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
-				while [ $ps_fr -gt 0 ] && [ $ps_pet -gt 0 ];do
-					sleep 1
-					ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
-					ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
-				done
+				#ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
+				#ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
+				#while [ $ps_fr -gt 0 ] && [ $ps_pet -gt 0 ];do
+				#	sleep 1
+				#	ps_fr=$(ps -ww | grep "jd_fruit.js" | grep -v grep | wc -l)
+				#	ps_pet=$(ps -ww | grep "jd_pet.js" | grep -v grep | wc -l)
+				#done
 			fi
 
 			sed -i "s/jdNotify = false/jdNotify = true/g" $dir_file_js/jd_fruit.js
@@ -2784,7 +2793,7 @@ npm_install() {
 	cd $openwrt_script
 	npm install -g npm@8.3.0
 	npm install got@11.5.1 -g
-	npm install -g audit crypto crypto-js date-fns dotenv download fs http js-base64 jsdom md5 png-js request requests set-cookie-parser stream tough-cookie ts-md5 vm zlib iconv-lite qrcode-terminal ws
+	npm install -g audit crypto crypto-js date-fns dotenv download fs http js-base64 jsdom md5 png-js request requests set-cookie-parser stream tough-cookie ts-md5 vm zlib iconv-lite qrcode-terminal ws express@4.17.1 body-parser@1.19.2
 	npm install --save axios
 
 	#安装python模块
