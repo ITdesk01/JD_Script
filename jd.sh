@@ -94,7 +94,7 @@ export guaopencard_draw="true"
 export BEANCHANGE_DISABLELIST="汪汪乐园&金融养猪＆喜豆查询"
 
 task() {
-	cron_version="4.05"
+	cron_version="4.06"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		task_delete
