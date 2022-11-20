@@ -2893,6 +2893,26 @@ system_variable() {
 	del_if
 }
 
+pj() {
+	pj_ck_num=$(cat /usr/share/jd_openwrt_script/script_config/js_cookie.txt |wc -l)
+	pj_ck=$(cat /usr/share/jd_openwrt_script/script_config/js_cookie.txt | awk -F "'," '{print $1}' | sed "s/'//g" |sed "s/$/\&/g" | sed 's/[[:space:]]//g' | sed ':t;N;s/\n//;b t' | sed "s/&$//")
+	if [ -f $dir_file/js/pinjia-amd64 ];then
+		clear
+		echo -e "$green开始进行评价,你一共有$pj_ck_num个账号$white"
+		export JD_COOKIE="$pj_ck"
+		$dir_file/js/pinjia-amd64
+	else
+		clear
+		echo -e "$yellow没有发现评价程序开始下载$white"
+		wget https://raw.githubusercontent.com/chendianwu0828/jd_pinjia/main/pinjia-amd64 -O $dir_file/js/pinjia-amd64
+		chmod +x $dir_file/js/pinjia-amd64
+		export JD_COOKIE="pj_ck"
+		echo -e "$green开始进行评价,你一共有$pj_ck_num个账号$white"
+		$dir_file/js/pinjia-amd64
+	fi
+}
+
+
 index_js() {
 #后台默认运行index.js
 	openwrt_ip=$(ubus call network.interface.lan status | grep address  | grep -oE '([0-9]{1,3}.){3}[0-9]{1,3}')
@@ -3168,7 +3188,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|opencard|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_blueCoin|del_expired_cookie|jd_try|ss_if|zcbh|jd_time|run_jsqd|Tjs|test)
+		pj|system_variable|update|update_script|task|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_blueCoin|del_expired_cookie|jd_try|ss_if|zcbh|jd_time|run_jsqd|Tjs|test)
 		$action1
 		;;
 		kill_ccr)
@@ -3187,7 +3207,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|opencard|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		system_variable|update|update_script|task|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_blueCoin|del_expired_cookie|jd_try|ss_if|zcbh|jd_time|run_jsqd|Tjs|test)
+		pj|system_variable|update|update_script|task|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|run_jd_blueCoin|del_expired_cookie|jd_try|ss_if|zcbh|jd_time|run_jsqd|Tjs|test)
 		$action2
 		;;
 		kill_ccr)
