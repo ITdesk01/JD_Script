@@ -480,6 +480,7 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_qqxing.js			#QQ星儿童牛奶京东自营旗舰店->品牌会员->星系牧场
 	jd_nzjcj.js			#年终奖补贴抽奖
 	jd_nzjbtzl.js 			#年终奖补贴助力
+	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -519,6 +520,7 @@ cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
 	jd_qqxing.js			#QQ星儿童牛奶京东自营旗舰店->品牌会员->星系牧场
 	jd_nzjcj.js			#年终奖补贴抽奖
 	jd_nzjbtzl.js 			#年终奖补贴助力
+	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 EOF
 	for i in `cat /tmp/jd_tmp/concurrent_js_run_07 | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -592,7 +594,6 @@ EOF
 
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
-	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	jd_dreamFactory.js 		#京喜工厂
 	gua_wealth_island.js		#京东财富岛
 	jd_live.js			#京东直播
