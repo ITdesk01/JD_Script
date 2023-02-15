@@ -97,7 +97,7 @@ export BEANCHANGE_DISABLELIST="汪汪乐园&金融养猪＆喜豆查询"
 export DO_TEN_WATER_AGAIN="false"
 
 task() {
-	cron_version="4.21"
+	cron_version="4.23"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		sed -i '/京享周周乐/d' /etc/crontabs/root >/dev/null 2>&1
@@ -124,12 +124,10 @@ cat >>/etc/crontabs/root <<EOF
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本#100#
 0 12,18 * * * $node $dir_file_js/jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴#100#
 45 6 * * * $dir_file/jd.sh pj >/tmp/jd_pj.log	#每周五自动评价一次#100#
-2 6 * * 5 $node $dir_file_js/jd_xs_zzl.js >/tmp/jd_xs_zzl.log	#京享周周乐#100#
 3 6 * * 5 $node $dir_file_js/jd_vipgrowth.js >/tmp/jd_vipgrowth.log #京享值任务领豆，每周一次#100#
 0 10 * * * $dir_file/jd.sh zcbh	>/tmp/jd_bean_change_ccwav.log	#资产变化一对一#100#
 50 23 * * * $dir_file/jd.sh kill_ccr #杀掉所有并发进程，为零点准备#100#
 46 23 * * * rm -rf /tmp/*.log #删掉所有log文件，为零点准备#100#
-0 10 */7 * * $dir_file/jd.sh check_cookie_push >/tmp/check_cookie_push.log 2>&1 #每个7天推送cookie相关信息#100#
 20 12,22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点20更新JD_Script脚本#100#
 5 11,19,22 * * * $dir_file/jd.sh update >/tmp/jd_update.log 2>&1 && source /etc/profile #9,11,19,22点05分更新lxk0301脚本#100#
 ###########100##########请将其他定时任务放到底下###############
@@ -231,19 +229,24 @@ done
 #KingRan
 KingRan_url="https://raw.githubusercontent.com/KingRan/KR/main"
 cat >$dir_file/config/tmp/KingRan_url.txt <<EOF
+	jd_xm.js			#2.6-2.28 小米浏览商品赢大奖
+	jd_supermarket_dh.js		#京东超市兑换
+	jd_supermarket1.js		#京东超市任
+	jd_sk2.js			#2.1-2.28 SK2互动抽奖，至高赢经典神仙水
+	jd_jj.js			#2.12-2.28 家居开卡抽奖2期
+	jd_a2.js			#2.1-2.28 a2集成长值赢千元礼包
 	jd_cjzdgf.js			#CJ组队瓜分京豆
 	jd_zdjr.js			#组队瓜分
 	jd_try.js 			#京东试用（默认不启用）
-	jd_supermarket.js		#京东超市游戏
-	jd_TreasureRank.js		#排行榜-宝藏榜
 	jd_jxmc.js			#京喜牧场
 	jd_jdzz.js			#京东赚赚
 	jd_dwapp.js			#积分换话费
 	jd_fruit_watering.js		#东东农场快速浇水,成熟了自动收取红包和种植新的水果
 	jx_sign_help.js			#京喜签到助力
-	jd_bean_sign.js			#京东多合一签到
 	jd_speed_sign.js		#京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#京东极速版领红包
+	jd_tj_sign.js			#京东特价版签到提现
+	jd_lotty2.js			#购物抵现金
 EOF
 
 for script_name in `cat $dir_file/config/tmp/KingRan_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -258,12 +261,15 @@ cp -r $dir_file/git_clone/KingRan_script/utils $dir_file_js/
 #6dylan6
 github_6dylan6_url_url="https://raw.githubusercontent.com/6dylan6/jdpro/main"
 cat >$dir_file/config/tmp/github_6dylan6_url_url.txt <<EOF
+	jd_car_play_exchange.js		#头文字J兑换
+	jd_mpdz_carv.js			#头文字J
+	jd_marketxxl.js			#超市消消乐游戏
+	jd_AJMH.js			#2.1-2.28 安佳做任务开盲盒，赢好礼
+	jd_bean_sign.js			#签到
 	jd_farm_automation.js		#农场自动种植兑换(根据自己需要安排)
-	jd_plus2bean.js                 #plus专属礼
 	jd_vipgrowth.js			#京享值任务领豆，每周一次
 	jd_price.js			#京东价保
 	jd_joypark_task.js		#汪汪乐园每日任务,只做部分任务
-	jd_ms.js			#秒秒币
 	jd_comment.js			#自动评价带图
 	jd_qqxing.js			#QQ星儿童牛奶京东自营旗舰店->品牌会员->星系牧场
 EOF
@@ -297,7 +303,6 @@ done
 okyyds_url="https://raw.githubusercontent.com/okyyds/yyds/master"
 cat >$dir_file/config/tmp/okyyds_url.txt <<EOF
 	#空.js
-	jd_xs_zzl.js			#京享周周乐
 EOF
 
 for script_name in `cat $dir_file/config/tmp/okyyds_url.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -367,21 +372,12 @@ done
 cat >>$dir_file/config/collect_script.txt <<EOF
 	jd_enen.js			#嗯嗯（尚方宝剑，一波流）
 	jd_dpqd.js			#店铺签到
-	jd_check_cookie.js		#检测cookie是否存活（暂时不能看到还有几天到期）
 	getJDCookie.js			#扫二维码获取cookie有效时间可以90天
 EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
-	jd_nzjcj.js                     #年终奖补贴抽奖
-	jd_nzjbtzl.js                   #年终奖补贴助力
-	jd_speed_signred.js		#京东极速版签到红包
-	jd_yili.js			#11.21-12.30 邀您参与伊利足球游戏
-	jd_mndt.js			#10.25-12.30 蒙牛世界杯答题赢好礼
-	jd_joy_park_task.js		#汪汪乐园
-	jd_live.js			#京东直播
-	jd_sk2.js			#11.1-11.31 SK2互动抽奖，至高赢经典神仙水
-	jd_TheWorldcup.js		#京彩足球预测任务(需要手动设置变量)
+	jd_TreasureRank.js		#排行榜-宝藏榜
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -397,18 +393,13 @@ done
 		echo "脚本下载没有成功，重新执行代码"
 		update
 	fi
-	chmod 755 $dir_file_js/*
+	#chmod 755 $dir_file_js/*
 	#kill_index
 	#index_js
 	#删除重复的文件
 	rm -rf $dir_file_js/*.js.*
 	rm -rf $dir_file_js/*.py.*
 	rm -rf $openwrt_script_config/check_cookie.txt
-	
-	#删除之前的黑名单
-	if [ -f $dir_file/config/tmp/wget_eeror.txt ];then
-		rm　-rf $openwrt_script_config/Script_blacklist.txt
-	fi
 
 	additional_settings
 	concurrent_js_update
@@ -468,14 +459,23 @@ update_script() {
 
 
 ccr_run() {
+#头文字Ｊ
+export car_addsku='true'
+export jd_car_play_exchangeid="10082bd15b4703"
 #这里不会并发
 cat >/tmp/jd_tmp/ccr_run <<EOF
+	jd_mpdz_carv.js			#头文字J
+	jd_car_play_exchange.js		#头文字J兑换
+	jd_marketxxl.js			#超市消消乐游戏
+	jd_AJMH.js			#2.1-2.28 安佳做任务开盲盒，赢好礼
+	jd_xm.js			#2.6-2.28 小米浏览商品赢大奖
+	jd_supermarket_dh.js		#京东超市兑换
+	jd_supermarket1.js		#京东超市任
+	jd_sk2.js			#2.1-2.28 SK2互动抽奖，至高赢经典神仙水
+	jd_jj.js			#2.12-2.28 家居开卡抽奖2期
+	jd_a2.js			#2.1-2.28 a2集成长值赢千元礼包
 	jd_bean_sign.js			#京东多合一签到
-	jd_ms.js			#秒秒币
-	jd_plus2bean.js                 #plus专属礼
-	jd_supermarket.js		#京东超市游戏
 	jd_joypark_task.js		#汪汪乐园每日任务,只做部分任务
-	jd_TreasureRank.js		#排行榜-宝藏榜
 	jd_fruit_help.js		#东东农场助力
 	jd_fruit_friend.js		#东东农场好友删减奖励
 	jd_fruit.js			#东东水果，6-9点 11-14点 17-21点可以领水滴
@@ -484,6 +484,8 @@ cat >/tmp/jd_tmp/ccr_run <<EOF
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	jx_sign_help.js			#京喜签到助力
 	jd_speed_redpocke.js		#京东极速版领红包
+	jd_tj_sign.js			#京东特价版签到提现
+	jd_lotty2.js			#购物抵现金
 EOF
 	for i in `cat /tmp/jd_tmp/ccr_run | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -502,10 +504,22 @@ if [  -z "$gua_cleancart_products" ];then
 	export gua_cleancart_products="*@&@"
 fi
 
+#头文字Ｊ
+export car_addsku='true'
+export jd_car_play_exchangeid="10082bd15b4703"
 #这里不会并发
 cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
+	jd_mpdz_carv.js			#头文字J
+	jd_car_play_exchange.js		#头文字J兑换
+	jd_marketxxl.js			#超市消消乐游戏
+	jd_AJMH.js			#2.1-2.28 安佳做任务开盲盒，赢好礼
+	jd_xm.js			#2.6-2.28 小米浏览商品赢大奖
+	jd_supermarket_dh.js		#京东超市兑换
+	jd_supermarket1.js		#京东超市任
+	jd_sk2.js			#2.1-2.28 SK2互动抽奖，至高赢经典神仙水
+	jd_jj.js			#2.12-2.28 家居开卡抽奖2期
+	jd_a2.js			#2.1-2.28 a2集成长值赢千元礼包
 	jd_bean_sign.js			#京东多合一签到
-	jd_ms.js			#秒秒币
 	jd_dreamFactory.js 		#京喜工厂
 	jx_sign.js			#京喜签到
 	jd_club_lottery.js 		#摇京豆，没时间要求
@@ -519,6 +533,7 @@ cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
 	jd_qqxing.js			#QQ星儿童牛奶京东自营旗舰店->品牌会员->星系牧场
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
 	jd_speed_redpocke.js		#京东极速版领红包
+	jd_lotty2.js			#购物抵现金
 EOF
 	for i in `cat /tmp/jd_tmp/concurrent_js_run_07 | grep -v "#.*js" | awk '{print $1}'`
 	do
@@ -776,7 +791,7 @@ script_name() {
 
 Tjs()	{
 	#测试模块
-	for i in `cat $jd_file/config/collect_script.txt | grep -v "#.*js" | grep -Ev "jd_enen.js|jd_delCoupon.js|jd_unsubscribe.js|sign_graphics_validate.js|JDSignValidator.js|JDJRValidator_Aaron.js|jd_get_share_code.js|jd_bean_sign.js|jd_check_cookie.js|getJDCookie.js|.*py|jdPetShareCodes.js|jdJxncShareCodes.js|jdFruitShareCodes.js|jdFactoryShareCodes.js|jdPlantBeanShareCodes.js|jdDreamFactoryShareCodes.js|jd_try.js" | awk '{print $1}' |grep -v "#"`;do
+	for i in `cat $jd_file/config/collect_script.txt | grep -v "#.*js" | grep -Ev "jd_enen.js|jd_delCoupon.js|jd_unsubscribe.js|sign_graphics_validate.js|JDSignValidator.js|JDJRValidator_Aaron.js|jd_get_share_code.js|jd_bean_sign.js|getJDCookie.js|.*py|jdPetShareCodes.js|jdJxncShareCodes.js|jdFruitShareCodes.js|jdFactoryShareCodes.js|jdPlantBeanShareCodes.js|jdDreamFactoryShareCodes.js|jd_try.js" | awk '{print $1}' |grep -v "#"`;do
 		echo -e "${green}>>>开始执行${yellow}$i${white}"
 		if [ `echo "$i" | grep -o "py"| wc -l` == "1" ];then
 			$python3 $jd_file/ccr_js/js_1/$i &
@@ -1429,40 +1444,6 @@ check_cooike() {
 	echo "$pt_pin     $Current_date      $Expiration_date     $remark" >> $openwrt_script_config/check_cookie.txt
 }
 
-check_cookie_push() {
-	echo "----------------------------------------------"
-	cat $openwrt_script_config/check_cookie.txt
-	echo "----------------------------------------------"
-	echo "$line#### cookie数量:`cat $openwrt_script_config/jdCookie.js | sed -e "s/pt_key=XXX;pt_pin=XXX//g" -e "s/pt_pin=(//g" -e "s/pt_key=xxx;pt_pin=xxx//g"| grep "pt_pin" | wc -l`$line" >/tmp/jd_check_cookie.txt
-	cat $openwrt_script_config/check_cookie.txt |sed "s/备注/$wrap$wrap_tab\# 备注/"  >>/tmp/jd_check_cookie.txt
-	$node $dir_file_js/jd_check_cookie1.js | grep "京东账号" >/tmp/jd_check_cookie_sort.txt
-
-	effective_cookie=$(cat /tmp/jd_check_cookie_sort.txt | grep "有效" )
-	Invalid_cookie=$(cat /tmp/jd_check_cookie_sort.txt | grep "失效" )
-	echo "$line#### cookie有效数量:`cat /tmp/jd_check_cookie_sort.txt | grep "有效"| wc -l`$line" >>/tmp/jd_check_cookie.txt
-
-	echo "$effective_cookie"　>>/tmp/jd_check_cookie.txt
-
-	if [ `echo $Invalid_cookie | wc -l` -ge "1" ];then
-		echo "$line#### cookie失效数量:`cat /tmp/jd_check_cookie_sort.txt | grep "失效"| wc -l`$line" >>/tmp/jd_check_cookie.txt
-		echo "$Invalid_cookie"　>>/tmp/jd_check_cookie.txt
-	else
-		echo "没有失效cookie"
-	fi
-
-	cookie_content=$(cat /tmp/jd_check_cookie.txt |sed "s/ /+/g"| sed "s/$/$wrap$wrap_tab/g" |  sed ':t;N;s/\n//;b t' )
-
-	server_content=$(echo "${cookie_content}${by}" | sed "s/$wrap_tab####/####/g" )
-
-	weixin_content_sort=$(cat /tmp/jd_check_cookie.txt |sed "s/####/<b>/g"   |sed "s/$line/<hr\/><\/b>/g" |sed "s/$wrap$wrap_tab/<br>/g" |sed "s/<br>#//g"  | sed "s/$/<br>/" |sed "s/<hr\/><\/b><br>/<hr\/><\/b>/g" |  sed ':t;N;s/\n//;b t' )
-	weixin_content=$(echo "$weixin_content_sort<br><b>$by")
-	weixin_desp=$(echo "$weixin_content" | sed "s/<hr\/><\/b><b>/$weixin_line\n/g" |sed "s/<hr\/><\/b>/\n$weixin_line\n/g"| sed "s/<b>/\n/g"| sed "s/<br>/\n/g" | sed "s/<br><br>/\n/g" | sed "s/#/\n/g" )
-
-	title="JD Cookie状态"
-	push_menu
-}
-
-
 push_menu() {
 case "$push_if" in
 		0)
@@ -1797,8 +1778,8 @@ backnas() {
 	echo -e "${green}>> 删除完成${white}"
 	sleep 5
 
-	echo -e "${green}>> 复制/etc/profile到$back_file_patch/JD_Script/profile${white}"
-	cp /etc/profile $back_file_patch/JD_Script/profile
+	echo -e "${green}>> 复制/etc/profile到$back_file_patch/profile${white}"
+	cp /etc/profile $back_file_patch/profile
 	echo "复制完成"
 	sleep 5
 
@@ -1819,10 +1800,10 @@ backnas() {
 			read a
 			backnas
 		else
-			sshpass -p "$nas_pass" scp -P $nas_prot -r /tmp/$back_file_name $nas_user@$nas_ip:$nas_file
+			sshpass -p "$nas_pass" scp -P $nas_prot -O /tmp/$back_file_name $nas_user@$nas_ip:$nas_file
 		fi
 	else
-		scp -P $nas_prot -i $nas_secret_key -r /tmp/$back_file_name $nas_user@$nas_ip:$nas_file
+		scp -P $nas_prot -i $nas_secret_key -O /tmp/$back_file_name $nas_user@$nas_ip:$nas_file
 	fi
 
 	if [ $? -eq 0 ]; then
@@ -1939,8 +1920,6 @@ help() {
 	echo -e "${green}  sh \$jd checklog ${white}  			#检测log日志是否有错误并推送"
 	echo ""
 	echo -e "${green}  sh \$jd that_day ${white}  			#检测JD_script仓库今天更新了什么"
-	echo ""
-	echo -e "${green}  sh \$jd check_cookie_push ${white}  		#推送cookie大概到期时间和是否有效"
 	echo ""
 	echo -e "${green}  sh \$jd script_name ${white}  			#显示所有JS脚本名称与作用"
 	echo ""
@@ -2551,7 +2530,7 @@ npm_install() {
 	cd $openwrt_script
 	npm install -g npm@8.3.0
 	npm install got@11.5.1 -g
-	npm install -g ds audit crypto crypto-js date-fns dotenv download fs http js-base64 jsdom md5 png-js request requests set-cookie-parser stream tough-cookie ts-md5 vm zlib iconv-lite qrcode-terminal ws express@4.17.1 body-parser@1.19.2 moment
+	npm install -g tough-cookie ds audit crypto crypto-js date-fns dotenv download fs http js-base64 jsdom md5 png-js request requests set-cookie-parser stream tough-cookie ts-md5 vm zlib iconv-lite qrcode-terminal ws express@4.17.1 body-parser@1.19.2 moment
 	npm install --save axios
 
 	#安装python模块
@@ -2648,7 +2627,7 @@ system_variable() {
 
 		#USER_AGENTS.js
 		if [ ! -f "$openwrt_script_config/USER_AGENTS.js" ]; then
-			cp  $dir_file/git_clone/lxk0301_back/USER_AGENTS.js $openwrt_script_config/USER_AGENTS.js
+			cp  $dir_file/JSON/USER_AGENTS.js $openwrt_script_config/USER_AGENTS.js
 			rm -rf $dir_file_js/USER_AGENTS.js #用于删除旧的链接
 			ln -s $openwrt_script_config/USER_AGENTS.js $dir_file_js/USER_AGENTS.js
 		fi
@@ -3013,7 +2992,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		wskey|checkjs|checkjs_tg|pj|system_variable|update|update_script|task|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|del_expired_cookie|jd_try|ss_if|zcbh|jd_time|run_jsqd|Tjs|test)
+		wskey|checkjs|checkjs_tg|pj|system_variable|update|update_script|task|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|python_install|concurrent_js_update|kill_index|del_expired_cookie|jd_try|ss_if|zcbh|jd_time|run_jsqd|Tjs|test)
 		$action1
 		;;
 		kill_ccr)
@@ -3032,7 +3011,7 @@ else
 		run_0|run_01|run_06_18|run_10_15_20|run_02|run_03|run_08_12_16|run_07|run_030|run_020)
 		concurrent_js_if
 		;;
-		wskey|checkjs|checkjs_tg|pj|system_variable|update|update_script|task|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|check_cookie_push|python_install|concurrent_js_update|kill_index|del_expired_cookie|jd_try|ss_if|zcbh|jd_time|run_jsqd|Tjs|test)
+		wskey|checkjs|checkjs_tg|pj|system_variable|update|update_script|task|jd_sharecode|ds_setup|checklog|that_day|stop_script|script_name|backnas|npm_install|checktool|concurrent_js_clean|if_ps|getcookie|addcookie|delcookie|python_install|concurrent_js_update|kill_index|del_expired_cookie|jd_try|ss_if|zcbh|jd_time|run_jsqd|Tjs|test)
 		$action2
 		;;
 		kill_ccr)
