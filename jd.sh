@@ -97,7 +97,7 @@ export BEANCHANGE_DISABLELIST="汪汪乐园&金融养猪＆喜豆查询"
 export DO_TEN_WATER_AGAIN="false"
 
 task() {
-	cron_version="4.23"
+	cron_version="4.25"
 	if [[ `grep -o "JD_Script的定时任务$cron_version" $cron_file |wc -l` == "0" ]]; then
 		echo "不存在计划任务开始设置"
 		sed -i '/京享周周乐/d' /etc/crontabs/root >/dev/null 2>&1
@@ -122,10 +122,11 @@ cat >>/etc/crontabs/root <<EOF
 10 2-22/3 * * * $dir_file/jd.sh run_03 >/tmp/jd_run_03.log 2>&1 #天天加速 3小时运行一次，打卡时间间隔是6小时#100#
 40 6-18/6 * * * $dir_file/jd.sh run_06_18 >/tmp/jd_run_06_18.log 2>&1 #不是很重要的，错开运行#100#
 5 7 * * * $dir_file/jd.sh run_07 >/tmp/jd_run_07.log 2>&1 #不需要在零点运行的脚本#100#
-0 12,18 * * * $node $dir_file_js/jd_fruit.js #东东水果，6-9点 11-14点 17-21点可以领水滴#100#
-45 6 * * * $dir_file/jd.sh pj >/tmp/jd_pj.log	#每周五自动评价一次#100#
+0 12,18 * * * $node $dir_file_js/jd_fruit.js #东东农场，6-9点 11-14点 17-21点可以领水滴#100#
+45 6 * * 5 $dir_file/jd.sh pj >/tmp/jd_pj.log	#每周五自动评价一次#100#
 3 6 * * 5 $node $dir_file_js/jd_vipgrowth.js >/tmp/jd_vipgrowth.log #京享值任务领豆，每周一次#100#
 0 10 * * * $dir_file/jd.sh zcbh	>/tmp/jd_bean_change_ccwav.log	#资产变化一对一#100#
+5 10 * * 1 $node $dir_file_js/jd_plantBean.js >/tmp/jd_plantBean.log	#每周一10点5分收奖励#100#
 50 23 * * * $dir_file/jd.sh kill_ccr #杀掉所有并发进程，为零点准备#100#
 46 23 * * * rm -rf /tmp/*.log #删掉所有log文件，为零点准备#100#
 20 12,22 * * * $dir_file/jd.sh update_script that_day >/tmp/jd_update_script.log 2>&1 #22点20更新JD_Script脚本#100#
@@ -377,6 +378,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
+	jd_ddnc_farmpark.js		#东东乐园
+	gua_wealth_island.js		#京东财富岛
 	jd_TreasureRank.js		#排行榜-宝藏榜
 EOF
 
@@ -528,7 +531,7 @@ cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
 	gua_cleancart.js		#清空购物车
 	jd_fruit_help.js		#东东农场助力
 	jd_fruit_friend.js		#东东农场好友删减奖励
-	jd_fruit.js			#东东水果，6-9点 11-14点 17-21点可以领水滴
+	jd_fruit.js			#东东农场，6-9点 11-14点 17-21点可以领水滴
 	jd_plantBean_help.js		#种豆得豆助力
 	jd_qqxing.js			#QQ星儿童牛奶京东自营旗舰店->品牌会员->星系牧场
 	jd_plantBean.js 		#种豆得豆，没时间要求，一个小时收一次瓶子
@@ -551,7 +554,6 @@ EOF
 run_0() {
 cat >/tmp/jd_tmp/run_0 <<EOF
 	jd_dpqd.js			#店铺签到
-	jd_ddnc_farmpark.js		#东东乐园
 	jd_club_lottery.js 		#摇京豆，没时间要求
 EOF
 	echo -e "${green} run_0$start_script_time ${white}"
@@ -608,7 +610,6 @@ EOF
 run_01() {
 cat >/tmp/jd_tmp/run_01 <<EOF
 	jd_dreamFactory.js 		#京喜工厂
-	gua_wealth_island.js		#京东财富岛
 EOF
 	echo -e "${green} run_01$start_script_time ${white}"
 	for i in `cat /tmp/jd_tmp/run_01 | grep -v "#.*js" | awk '{print $1}'`
@@ -2029,7 +2030,7 @@ chiyu_fr="f227e8bb1ea3419e9253682b60e17ae5"
 	ashou_20210516_fr="9046fbd8945f48cb8e36a17fff9b0983@72abb03ca91a4569933c6c8a62a5622c@5e567ba1b9bd4389ae19fa09ca276f33@82b1494663f9484baa176589298ca4b3@616382e94efa476c90f241c1897742f1@d4e3080b06ed47d884e4ef9852cad568@ed2b2d28151a482eae49dff2e5a588f8@a8b204ae2a7541a18e54f5bfb7dcb04b"
 
 xiaodengzi_20190516_fr="e24edc5de45341dd98f352533e23f83a@8284c080686b45c89a6c6f7d1ea7baac@8dda5802f0d54f38af48c4059c591007"
-xiaodengzi_random_20190516_fr="e004a4244e244863b14d7210f8513113@f69821dde34540d39f95315c5290eb88@5e753c671d0644c7bb418523d3452975@c6f859ec57d74dda9dafc6b3c2af0a0f	"
+xiaodengzi_random_20190516_fr="e004a4244e244863b14d7210f8513113@f69821dde34540d39f95315c5290eb88@5e753c671d0644c7bb418523d3452975@c6f859ec57d74dda9dafc6b3c2af0a0f"
 	
 jidiyangguang_20190516_fr="3e6f0b7a2d054331a0b5b956f36645a9@304b39f17d6c4dac87933882d4dec6bc"
 
@@ -2046,7 +2047,7 @@ baipiaoguai_fr="456e5601548642a5a9bcc86a54085154@61f21ef708c948568854ec50c362708
 	random_fruit="$ITdesk_random_fr@$zuoyou_20190516_random_fr@$Javon_random_fr@$xiaodengzi_random_20190516_fr@$baipiaoguai_fr"
 	random="$random_fruit"
 	random_array
-	new_fruit_set="'$new_fruit1@$zuoyou_20190516_fr@$Javon_20201224_fr@$jidiyangguang_20190516_fr@$ashou_20210516_fr@$xiaodengzi_20190516_fr@$xiaobandeng_fr@$chiyu_fr@$random_set',"
+	new_fruit_set="'$new_fruit1@$chiyu_fr@$zuoyou_20190516_fr@$Javon_20201224_fr@$jidiyangguang_20190516_fr@$ashou_20210516_fr@$xiaodengzi_20190516_fr@$xiaobandeng_fr@$random_set',"
 
 	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
 	fr_rows=$(grep -n "shareCodes =" $dir_file_js/jd_fruit_help.js | awk -F ":" '{print $1}')
@@ -2096,7 +2097,7 @@ baipiaoguai_pb="nkiu2rskjyetbvmij6cinz4yh4gslwkrlieu3ki@uwgpfl3hsfqp3b4zn67l245x
 	random_plantBean="$ITdesk_random_pb@$zuoyou_20190516_random_pb@$Javon_random_pb@$baipiaoguai_pb"
 	random="$random_plantBean"
 	random_array
-	new_plantBean_set="'$new_plantBean1@$zuoyou_20190516_pb@$Javon_20201224_pb@$jidiyangguang_20190516_pb@$chiyu_pb@$ashou_20210516_pb@$random_set',"
+	new_plantBean_set="'$new_plantBean1@$chiyu_pb@$zuoyou_20190516_pb@$Javon_20201224_pb@$jidiyangguang_20190516_pb@$ashou_20210516_pb@$random_set',"
 
 	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
 	pb_rows=$(grep -n "shareCodes =" $dir_file_js/jd_plantBean_help.js | awk -F ":" '{print $1}')
@@ -2143,7 +2144,7 @@ baipiaoguai_pb="nkiu2rskjyetbvmij6cinz4yh4gslwkrlieu3ki@uwgpfl3hsfqp3b4zn67l245x
 	random_dreamFactory="$ITdesk_random_df@$zuoyou_20190516_random_df@$Javon_20201224_random_df"
 	random="$random_dreamFactory"
 	random_array
-	new_dreamFactory_set="'$new_dreamFactory@$zuoyou_20190516_df@$Javon_20201224_df@$jidiyangguang_20190516_df@$ashou_20210516_df@$Jhone_Potte_20200824_df@$chiyu_df@$random_set',"
+	new_dreamFactory_set="'$new_dreamFactory@$chiyu_df@$zuoyou_20190516_df@$Javon_20201224_df@$jidiyangguang_20190516_df@$ashou_20210516_df@$Jhone_Potte_20200824_df@$random_set',"
 
 	df_rows=$(grep -n "inviteCodes =" $dir_file_js/jd_dreamFactory.js | awk -F ":" '{print $1}')
 	while [[ ${js_amount} -gt 0 ]]; do
@@ -2261,7 +2262,7 @@ COMMENT
 	chiyu_jdzz="S7aUqCVsc91U"
 	ashou_20210516_jdzz="Sv_V1RRgf_VPSJhyb1A@Sa0DkmLenrwOA@S5KkcRRtN8wCBdUimlqVbJw@S5KkcRkoboVKEJRr3xvINdQ@S_aIzGEdFoAGJdw@S5KkcRhpI8VfXcR79wqVcIA@S5KkcRk1P8VTSdUmixvUIfQ@S-acrCh8Q_VE"
 	
-	new_jdzz_set="$new_jdzz@$zuoyou_20190516_jdzz@$jidiyangguang_20190516_jdzz@$chiyu_jdzz@$ashou_20210516_jdzz"
+	new_jdzz_set="$new_jdzz@$chiyu_jdzz@$zuoyou_20190516_jdzz@$jidiyangguang_20190516_jdzz@$ashou_20210516_jdzz"
 
 	js_amount=$(cat $openwrt_script_config/js_cookie.txt | wc -l)
 	jdzzcode_rows=$(grep -n "inviteCodes = \[" $dir_file_js/jd_jdzz.js | awk -F ":" '{print $1}')
@@ -2335,17 +2336,6 @@ del_if() {
 		js_name="京喜牧场"
 		jd_num="$jx_ddmc"
 		js_file="jd_jxmc.js"
-		del_js
-		echo ""
-	fi
-
-	#不跑京喜财富岛
-	if [ ! $jx_ddcfd ];then
-		echo "没有要删除的京喜财富岛文件"
-	else
-		js_name="京喜财富岛"
-		jd_num="$jx_ddcfd"
-		js_file="gua_wealth_island.js"
 		del_js
 		echo ""
 	fi
@@ -2672,17 +2662,6 @@ system_variable() {
 	del_if
 }
 
-wskey() {
-	if [ -z "$wskey" ];then
-		echo -e "${red}wskey脚本为空,$white请检查${green}/usr/share/jd_openwrt_script/script_config/wskey/wskey.sh${white}　是否存在"
-		echo "如果存在,请重启路由使全局变量生效"
-		echo "如果不存在请去https://github.com/xdhgsq/wskey_convert.git下载"
-	else
-		sh $wskey
-	fi
-
-}
-
 checkjs() {
 	if [ -z "$checkjs" ];then
 		echo -e "${red}checkjs脚本为空,$white请检查${green}/usr/share/jd_openwrt_script/Checkjs/checkjs.sh${white}　是否存在"
@@ -2855,9 +2834,6 @@ jd_openwrt_config() {
 	#不跑京喜牧场
 	jx_ddmc=$(grep "jx_ddmc" $jd_openwrt_config | awk -F "'" '{print $2}')
 
-	#不跑京喜财富岛
-	jx_ddcfd=$(grep "jx_ddcfd" $jd_openwrt_config | awk -F "'" '{print $2}')
-
 	#脚本黑名单
 	script_black=$(grep "script_black" $jd_openwrt_config | awk -F "'" '{print $2}')
 
@@ -2933,9 +2909,6 @@ jx_dddr=''
 
 #指定账号不跑京喜牧场，默认空全跑，指定格式1@2@3，这样子123账号就不跑了，只针对并发，支持数字指定账号或者用户名,all删除全部
 jx_ddmc=''
-
-#指定账号不跑京喜财富岛，默认空全跑，指定格式1@2@3，这样子123账号就不跑了，只针对并发，支持数字指定账号或者用户名,all删除全部
-jx_ddcfd=''
 
 ******************----------------------------------------------------****************************
 
