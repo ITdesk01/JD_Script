@@ -234,7 +234,11 @@ done
 #KingRan
 KingRan_url="https://raw.githubusercontent.com/KingRan/KR/main"
 cat >$dir_file/config/tmp/KingRan_url.txt <<EOF
-	jd_xm.js			#预约抽奖赢新品
+	jd_618_Red.js			#618红包助力
+	jd_cdj.js			#京东邀您抽大奖
+	jd_tj_cxjhelp.js		#特价版-幸运抽奖
+	jd_sk.js			#解锁心动时刻
+	jd_20zn.js			#京东20周年
 	jd_car_play.js			#头文字J
 	jd_car_play_exchange.js		#头文字J兑换
 	jd_supermarket_dh.js		#京东超市兑换
@@ -244,7 +248,6 @@ cat >$dir_file/config/tmp/KingRan_url.txt <<EOF
 	jd_dwapp.js			#积分换话费
 	jd_fruit_watering.js		#东东农场快速浇水,成熟了自动收取红包和种植新的水果
 	jx_sign_help.js			#京喜签到助力
-	jd_speed_sign.js		#京东极速版签到+赚现金任务
 	jd_speed_redpocke.js		#京东极速版领红包
 	jd_tj_sign.js			#京东特价版签到提现
 	jd_lotty2.js			#购物抵现金
@@ -262,9 +265,13 @@ cp -r $dir_file/git_clone/KingRan_script/utils $dir_file_js/
 #6dylan6
 github_6dylan6_url_url="https://raw.githubusercontent.com/6dylan6/jdpro/main"
 cat >$dir_file/config/tmp/github_6dylan6_url_url.txt <<EOF
+	jd_sghelp.js			#数钱助力
+	jd_ttqdlxj.js			#天天签到礼享金
+	jd_ttlhb.js			#天天领红包
+	jd_hdcheck.js			#互动消息检测
+	jd_gwfd.js			#非plus购物返豆领取
 	jd_signbeanact.js		#签到领京豆
 	jd_jdzz_dh.js			#京东赚赚兑换
-	jd_cxjhelp.js			#京喜特价抽现金
 	jd_cashsign.js			#领现金
 	jd_marketxxl.js			#超市消消乐游戏
 	jd_farm_automation.js		#农场自动种植兑换(根据自己需要安排)
@@ -281,6 +288,7 @@ do
 	cp  $dir_file/git_clone/6dylan6_script/$script_name  $dir_file_js/$script_name
 	cp_if
 done
+	cp  $dir_file/git_clone/6dylan6_script/jd_speed_sign.js.js  $dir_file_js/jd_speed_sign.js
 
 sleep 5
 
@@ -378,11 +386,8 @@ EOF
 
 #删掉过期脚本
 cat >/tmp/del_js.txt <<EOF
-	jd_qbyql.js
-	jd_AJMH.js
-	jd_yy.js
-	jd_gy.js
-	jd_try.js
+	jd_jdcxjhelp.js			#京东app抽现金
+	jd_cxjhelp.js			#京喜特价抽现金
 EOF
 
 for script_name in `cat /tmp/del_js.txt | grep -v "#.*js" | awk '{print $1}'`
@@ -464,15 +469,32 @@ update_script() {
 
 
 ccr_run() {
+
+if [ -z "$CODE618" ];then
+	export CODE618="OsFOB4e"
+else
+	echo "CODE618不为空"
+fi
+
+
 #头文字Ｊ
 export car_addsku='true'
 export jd_car_play_exchangeid="10082bd15b4703"
 #这里不会并发
 cat >/tmp/jd_tmp/ccr_run <<EOF
-	jd_xm.js			#预约抽奖赢新品
+	jd_618_Red.js			#618红包助力
+	jd_cdj.js			#京东邀您抽大奖
+	jd_tj_cxjhelp.js		#特价版-幸运抽奖
+	jd_sghelp.js			#数钱助力
+	jd_sk.js			#解锁心动时刻
+	jd_20zn.js			#京东20周年
+	jd_ttqdlxj.js			#天天签到礼享金
+	jd_ttlhb.js			#天天领红包
+	jd_hdcheck.js			#互动消息检测
+	jd_speed_sign.js		#京东极速版签到+赚现金任务
+	jd_gwfd.js			#非plus购物返豆领取
 	jd_signbeanact.js		#签到领京豆
 	jd_jdzz_dh.js			#京东赚赚兑换
-	jd_cxjhelp.js			#京喜特价抽现金
 	jd_cashsign.js			#领现金
 	jd_car_play.js			#头文字J
 	jd_car_play_exchange.js		#头文字J兑换
@@ -500,6 +522,12 @@ EOF
 }
 
 concurrent_js_run_07() {
+if [ -z "$CODE618" ];then
+	export CODE618="OsFOB4e"
+else
+	echo "CODE618不为空"
+fi
+
 #清空购物车变量
 export gua_cleancart_Run="true"
 export gua_cleancart_SignUrl="https://jd.smiek.tk/jdcleancatr_21102717" # 算法url
@@ -512,10 +540,19 @@ export car_addsku='true'
 export jd_car_play_exchangeid="10082bd15b4703"
 #这里不会并发
 cat >/tmp/jd_tmp/concurrent_js_run_07 <<EOF
-	jd_xm.js			#预约抽奖赢新品
+	jd_618_Red.js			#618红包助力
+	jd_cdj.js			#京东邀您抽大奖
+	jd_tj_cxjhelp.js		#特价版-幸运抽奖
+	jd_sghelp.js			#数钱助力
+	jd_sk.js			#解锁心动时刻
+	jd_20zn.js			#京东20周年
+	jd_ttqdlxj.js			#天天签到礼享金
+	jd_ttlhb.js			#天天领红包
+	jd_hdcheck.js			#互动消息检测
+	jd_speed_sign.js		#京东极速版签到+赚现金任务
+	jd_gwfd.js			#非plus购物返豆领取
 	jd_signbeanact.js		#签到领京豆
 	jd_jdzz_dh.js			#京东赚赚兑换
-	jd_cxjhelp.js			#京喜特价抽现金
 	jd_cashsign.js			#领现金
 	jd_car_play.js			#头文字J
 	jd_car_play_exchange.js		#头文字J兑换
@@ -656,7 +693,7 @@ EOF
 	wait
 
 	#极速版签到
-	run_jsqd
+	#run_jsqd
 
 	echo -e "${green} run_03$stop_script_time ${white}"
 }
